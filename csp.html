@@ -125,6 +125,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   font-size:11.5px;color:var(--text-3);display:flex;align-items:center;gap:5px}
 .lv-card .ft b{color:var(--brand);font-weight:700}
 
+/* 首页专用：一行 8 个窄卡 */
+.lv-mini{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.lv-mini a{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:14px 12px 13px;box-shadow:var(--shadow-sm);transition:.2s;position:relative;
+  overflow:hidden;display:block}
+.lv-mini a::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--bar,var(--brand))}
+.lv-mini a:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:var(--shadow-lg)}
+.lv-mini .no{font-size:11.5px;font-weight:700;color:var(--text-3);letter-spacing:.08em}
+.lv-mini .lv{font-size:19px;font-weight:800;line-height:1.2;margin:3px 0 2px}
+.lv-mini .lbl{font-size:11.5px;color:var(--text-2)}
+.lv-mini .desc{font-size:11px;color:var(--text-3);margin:8px 0 0;line-height:1.55;
+  border-top:1px solid var(--line);padding-top:7px;min-height:52px}
+
 /* 知识大纲四列 */
 .outline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .outline-col{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -162,9 +175,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   display:flex;align-items:center;gap:5px}
 
 /* 空状态卡 */
+.empty-wrap{display:flex;justify-content:center}
 .empty-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow-sm);padding:30px 34px;display:flex;gap:30px;align-items:center;
-  max-width:760px;margin:0 auto}
+  width:100%;max-width:760px}
 .empty-card .num{font-size:52px;font-weight:800;color:var(--brand);line-height:1;
   font-variant-numeric:tabular-nums}
 .empty-card .num small{display:block;font-size:12px;font-weight:500;color:var(--text-3);margin-top:6px}
@@ -218,7 +232,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 
 /* 等级页 */
 .layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
-.side{position:sticky;top:78px}
+.side{position:sticky;top:78px;align-self:start}
 .side-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow-sm);overflow:hidden}
 .side-h{padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;

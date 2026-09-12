@@ -125,6 +125,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   font-size:11.5px;color:var(--text-3);display:flex;align-items:center;gap:5px}
 .lv-card .ft b{color:var(--brand);font-weight:700}
 
+/* 首页专用：一行 8 个窄卡 */
+.lv-mini{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.lv-mini a{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:14px 12px 13px;box-shadow:var(--shadow-sm);transition:.2s;position:relative;
+  overflow:hidden;display:block}
+.lv-mini a::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--bar,var(--brand))}
+.lv-mini a:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:var(--shadow-lg)}
+.lv-mini .no{font-size:11.5px;font-weight:700;color:var(--text-3);letter-spacing:.08em}
+.lv-mini .lv{font-size:19px;font-weight:800;line-height:1.2;margin:3px 0 2px}
+.lv-mini .lbl{font-size:11.5px;color:var(--text-2)}
+.lv-mini .desc{font-size:11px;color:var(--text-3);margin:8px 0 0;line-height:1.55;
+  border-top:1px solid var(--line);padding-top:7px;min-height:52px}
+
 /* 知识大纲四列 */
 .outline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .outline-col{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -162,9 +175,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   display:flex;align-items:center;gap:5px}
 
 /* 空状态卡 */
+.empty-wrap{display:flex;justify-content:center}
 .empty-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow-sm);padding:30px 34px;display:flex;gap:30px;align-items:center;
-  max-width:760px;margin:0 auto}
+  width:100%;max-width:760px}
 .empty-card .num{font-size:52px;font-weight:800;color:var(--brand);line-height:1;
   font-variant-numeric:tabular-nums}
 .empty-card .num small{display:block;font-size:12px;font-weight:500;color:var(--text-3);margin-top:6px}
@@ -218,7 +232,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 
 /* 等级页 */
 .layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
-.side{position:sticky;top:78px}
+.side{position:sticky;top:78px;align-self:start}
 .side-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow-sm);overflow:hidden}
 .side-h{padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;
@@ -392,54 +406,54 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <p class="sec-sub">GESP 按当前等级学习；CSP 按考试阶段准备。</p>
       <div class="sec-head"><h3>GESP 一级至八级</h3>
         <span class="hint">按等级查询，不设访问门槛</span></div>
-      <div class="lv-grid">
-        <a class="lv-card" href="gesp/level1.html" style="--bar:#5b8def">
+      <div class="lv-mini">
+        <a href="gesp/level1.html" style="--bar:#5b8def">
           <div class="no">01</div>
-          <div class="nm">一级</div>
-          <div class="ds">输入输出、变量、分支与循环，写出第一个完整程序。</div>
-          <div class="ft"><b>10</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#5b8def">一级</div>
+          <div class="lbl">10 个知识点</div>
+          <div class="desc">输入输出、变量、分支与循环，写出第一个完整程序。</div>
         </a>
-        <a class="lv-card" href="gesp/level2.html" style="--bar:#7c6bf0">
+        <a href="gesp/level2.html" style="--bar:#7c6bf0">
           <div class="no">02</div>
-          <div class="nm">二级</div>
-          <div class="ds">存储与网络、编译过程、流程图与代码互译。</div>
-          <div class="ft"><b>8</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#7c6bf0">二级</div>
+          <div class="lbl">8 个知识点</div>
+          <div class="desc">存储与网络、编译过程、流程图与代码互译。</div>
         </a>
-        <a class="lv-card" href="gesp/level3.html" style="--bar:#a56bf0">
+        <a href="gesp/level3.html" style="--bar:#a56bf0">
           <div class="no">03</div>
-          <div class="nm">三级</div>
-          <div class="ds">进制转换、位运算、数组字符串与枚举模拟。</div>
-          <div class="ft"><b>8</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#a56bf0">三级</div>
+          <div class="lbl">8 个知识点</div>
+          <div class="desc">进制转换、位运算、数组字符串与枚举模拟。</div>
         </a>
-        <a class="lv-card" href="gesp/level4.html" style="--bar:#d86bc8">
+        <a href="gesp/level4.html" style="--bar:#d86bc8">
           <div class="no">04</div>
-          <div class="nm">四级</div>
-          <div class="ds">函数、作用域、指针引用、结构体与排序。</div>
-          <div class="ft"><b>10</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#d86bc8">四级</div>
+          <div class="lbl">10 个知识点</div>
+          <div class="desc">函数、作用域、指针引用、结构体与排序。</div>
         </a>
-        <a class="lv-card" href="gesp/level5.html" style="--bar:#ef6b9c">
+        <a href="gesp/level5.html" style="--bar:#ef6b9c">
           <div class="no">05</div>
-          <div class="nm">五级</div>
-          <div class="ds">数论、高精度、链表、二分、贪心与分治。</div>
-          <div class="ft"><b>12</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#ef6b9c">五级</div>
+          <div class="lbl">12 个知识点</div>
+          <div class="desc">数论、高精度、链表、二分、贪心与分治。</div>
         </a>
-        <a class="lv-card" href="gesp/level6.html" style="--bar:#ef7b6b">
+        <a href="gesp/level6.html" style="--bar:#ef7b6b">
           <div class="no">06</div>
-          <div class="nm">六级</div>
-          <div class="ds">树的遍历、哈夫曼编码、格雷码与回溯搜索。</div>
-          <div class="ft"><b>10</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#ef7b6b">六级</div>
+          <div class="lbl">10 个知识点</div>
+          <div class="desc">树的遍历、哈夫曼编码、格雷码与回溯搜索。</div>
         </a>
-        <a class="lv-card" href="gesp/level7.html" style="--bar:#ef9d6b">
+        <a href="gesp/level7.html" style="--bar:#ef9d6b">
           <div class="no">07</div>
-          <div class="nm">七级</div>
-          <div class="ds">数学函数、动态规划、图论基础与哈希表。</div>
-          <div class="ft"><b>10</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#ef9d6b">七级</div>
+          <div class="lbl">10 个知识点</div>
+          <div class="desc">数学函数、动态规划、图论基础与哈希表。</div>
         </a>
-        <a class="lv-card" href="gesp/level8.html" style="--bar:#d9a441">
+        <a href="gesp/level8.html" style="--bar:#d9a441">
           <div class="no">08</div>
-          <div class="nm">八级</div>
-          <div class="ds">计数原理、组合数、倍增、生成树与最短路。</div>
-          <div class="ft"><b>12</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:#d9a441">八级</div>
+          <div class="lbl">12 个知识点</div>
+          <div class="desc">计数原理、组合数、倍增、生成树与最短路。</div>
         </a></div>
     </section>
 

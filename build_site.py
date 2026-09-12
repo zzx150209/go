@@ -145,6 +145,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   font-size:11.5px;color:var(--text-3);display:flex;align-items:center;gap:5px}
 .lv-card .ft b{color:var(--brand);font-weight:700}
 
+/* 首页专用：一行 8 个窄卡 */
+.lv-mini{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.lv-mini a{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:14px 12px 13px;box-shadow:var(--shadow-sm);transition:.2s;position:relative;
+  overflow:hidden;display:block}
+.lv-mini a::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--bar,var(--brand))}
+.lv-mini a:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:var(--shadow-lg)}
+.lv-mini .no{font-size:11.5px;font-weight:700;color:var(--text-3);letter-spacing:.08em}
+.lv-mini .lv{font-size:19px;font-weight:800;line-height:1.2;margin:3px 0 2px}
+.lv-mini .lbl{font-size:11.5px;color:var(--text-2)}
+.lv-mini .desc{font-size:11px;color:var(--text-3);margin:8px 0 0;line-height:1.55;
+  border-top:1px solid var(--line);padding-top:7px;min-height:52px}
+
 /* 知识大纲四列 */
 .outline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .outline-col{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -182,9 +195,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   display:flex;align-items:center;gap:5px}
 
 /* 空状态卡 */
+.empty-wrap{display:flex;justify-content:center}
 .empty-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow-sm);padding:30px 34px;display:flex;gap:30px;align-items:center;
-  max-width:760px;margin:0 auto}
+  width:100%;max-width:760px}
 .empty-card .num{font-size:52px;font-weight:800;color:var(--brand);line-height:1;
   font-variant-numeric:tabular-nums}
 .empty-card .num small{display:block;font-size:12px;font-weight:500;color:var(--text-3);margin-top:6px}
@@ -238,7 +252,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 
 /* 等级页 */
 .layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
-.side{position:sticky;top:78px}
+.side{position:sticky;top:78px;align-self:start}
 .side-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow-sm);overflow:hidden}
 .side-h{padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;
@@ -446,11 +460,11 @@ def build_home():
     for i in range(1, 9):
         n = len(LEVELS[i][3])
         lv_cards += f"""
-        <a class="lv-card" href="gesp/level{i}.html" style="--bar:{BAR_COLORS[i-1]}">
+        <a href="gesp/level{i}.html" style="--bar:{BAR_COLORS[i-1]}">
           <div class="no">{i:02d}</div>
-          <div class="nm">{CN_NUM[i-1]}级</div>
-          <div class="ds">{E(LEVELS[i][2])}</div>
-          <div class="ft"><b>{n}</b> 个知识点 · 可直接进入</div>
+          <div class="lv" style="color:{BAR_COLORS[i-1]}">{CN_NUM[i-1]}级</div>
+          <div class="lbl">{n} 个知识点</div>
+          <div class="desc">{E(LEVELS[i][2][:26])}</div>
         </a>"""
 
     body = f"""
@@ -500,7 +514,7 @@ def build_home():
       <p class="sec-sub">GESP 按当前等级学习；CSP 按考试阶段准备。</p>
       <div class="sec-head"><h3>GESP 一级至八级</h3>
         <span class="hint">按等级查询，不设访问门槛</span></div>
-      <div class="lv-grid">{lv_cards}</div>
+      <div class="lv-mini">{lv_cards}</div>
     </section>
 
     <section class="sec">
@@ -947,12 +961,14 @@ def build_solutions():
   </section>
 
   <section class="sec">
+    <div class="empty-wrap">
     <div class="empty-card">
       <div class="num">00<small>篇已发布题解</small></div>
       <div class="bd">
         <h3>目前还没有发布具体题解</h3>
         <p>GESP 一级至四级往年真题解析会在知识目录构建完成后另建阶段。现在可以先按上面的卡点去查知识、找模板或继续练习。</p>
       </div>
+    </div>
     </div>
   </section>
 

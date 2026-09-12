@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Showball 信息学 | GESP · CSP-J/S</title>
-<meta name="description" content="面向 GESP、CSP-J/S 学生的学习工作台，按等级整理学习路线、程序模板、题解与 OJ 资源。">
+<title>题解 | Showball 信息学</title>
+<meta name="description" content="信息学竞赛题解与解题思路整理。">
 <meta name="theme-color" content="#faf7f2">
 <script>
 (function(){try{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();
@@ -115,11 +115,11 @@ footer a:hover{color:#fff}
       </div>
     </a>
     <nav>
-      <a href="index.html" class="active">首页</a>
+      <a href="index.html">首页</a>
       <a href="gesp.html">GESP 1–8 级</a>
       <a href="csp.html">CSP-J/S</a>
       <a href="templates.html">程序模板</a>
-      <a href="solutions.html">题解</a>
+      <a href="solutions.html" class="active">题解</a>
       <a href="resources.html">OJ 与资源</a>
     </nav>
     <div class="bar-right">
@@ -285,264 +285,81 @@ main.wide{max-width:var(--maxw);margin:0 auto;padding:0 20px 60px}
 }
 </style>
 
-<main>
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="pill"><i></i>Showball 信息学 · C++ 学习词典</div>
-      <h1>今天想解决什么？</h1>
-      <p class="sub">继续当前学习，或者先把一道题卡住的地方解决掉。</p>
-      <div class="big-search" id="bigSearchWrap">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <b>搜索全站</b>
-        <input id="search" type="search" placeholder="搜索知识点、题目、模板……" autocomplete="off">
-        <span class="kbd">ctrl K</span>
+<main class="wrap" style="padding-top:52px">
+  <div class="crumb"><a href="index.html">Showball 信息学</a> · 题解 · 读题、思路与代码映射</div>
+  <section class="sec">
+    <h1 style="font-size:clamp(30px,5vw,44px);font-weight:800;margin:0 0 14px;letter-spacing:-.02em">
+      学习读题、思路与代码的映射</h1>
+    <p class="sec-sub" style="max-width:640px">
+      按题型整理，重点是「怎么想到的」，而不只是「代码怎么写」。</p>
+  </section>
+
+  <section class="sec">
+    <h2>按题型查看</h2>
+    <p class="sec-sub">先确认题型，再对照该题型的常见突破点。</p>
+    <div class="two">
+      <div class="tool-card">
+        <h4>模拟 · 按题意直接实现</h4>
+        <p>重点在边界处理与细节检查，先把题意翻译成清晰的步骤。</p>
+        <span class="link-red">查看题解 →</span>
       </div>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="gesp.html">开始学习 →</a>
-        <a class="btn btn-ghost" href="#stuck">解决做题卡点</a>
+      <div class="tool-card">
+        <h4>搜索 · DFS / BFS</h4>
+        <p>状态如何设计、何时剪枝、如何去重，是搜索题的核心。</p>
+        <span class="link-red">查看题解 →</span>
       </div>
-      <p class="hero-note">从 GESP 学习路线选择当前级别</p>
+      <div class="tool-card">
+        <h4>贪心 · 排序与选择</h4>
+        <p>构造贪心策略，并用交换论证或反例检验正确性。</p>
+        <span class="link-red">查看题解 →</span>
+      </div>
+      <div class="tool-card">
+        <h4>动态规划 · 状态与转移</h4>
+        <p>确定状态含义、转移方程、初始化与遍历顺序。</p>
+        <span class="link-red">查看题解 →</span>
+      </div>
+      <div class="tool-card">
+        <h4>图论 · 最短路与生成树</h4>
+        <p>识别是单源还是多源、有无负权，再选择合适算法。</p>
+        <span class="link-red">查看题解 →</span>
+      </div>
+      <div class="tool-card">
+        <h4>数论 · 质数与同余</h4>
+        <p>筛法、快速幂、逆元与同余方程的处理方法。</p>
+        <span class="link-red">查看题解 →</span>
+      </div></div>
+  </section>
+
+  <section class="sec">
+    <h2>读题四步</h2>
+    <p class="sec-sub">遇到读不懂的题，按这个顺序过一遍。</p>
+    <div class="rows">
+      <div class="row"><span class="tag">01</span><span class="t">找输入输出</span>
+        <span class="d">先明确要读什么、要输出什么格式</span></div>
+      <div class="row"><span class="tag">02</span><span class="t">看数据范围</span>
+        <span class="d">数据范围决定算法复杂度上限，这一步最容易被跳过</span></div>
+      <div class="row"><span class="tag">03</span><span class="t">手算样例</span>
+        <span class="d">用小样例手动推一遍，确认自己理解了规则</span></div>
+      <div class="row"><span class="tag">04</span><span class="t">找边界情况</span>
+        <span class="d">最小值、最大值、空数据、重复元素往往是失分点</span></div>
     </div>
   </section>
 
-  <div id="results"></div>
-
-  <div class="wrap">
-    <div class="panel lastvisit">
-      <div class="lv-left"><b>上次访问</b><span>只记录在这台设备上。</span></div>
-      <div class="lv-mid" id="lastVisitText">还没有最近访问。先选择一条路线，之后可以从这里返回。</div>
-      <div class="lv-right">
-        <a class="link-red" href="gesp.html">从 GESP 开始 →</a>
-        <a class="link-red" href="csp.html">查看 CSP 路线</a>
-      </div>
+  <section class="sec">
+    <h2>常见卡点</h2>
+    <p class="sec-sub">对照检查自己的程序。</p>
+    <div class="two">
+      <div class="tool-card"><h4>程序出错</h4>
+        <p>编译错误看第一行报错信息；运行错误先检查数组越界与除以零。</p></div>
+      <div class="tool-card"><h4>运行超时</h4>
+        <p>先算复杂度是否超过范围，再考虑优化或换算法。</p></div>
+      <div class="tool-card"><h4>答案错误</h4>
+        <p>用小样例和边界数据对拍，逐个排除逻辑分支。</p></div>
+      <div class="tool-card"><h4>格式错误</h4>
+        <p>检查空格、换行与末尾多余字符，注意浮点精度。</p></div>
     </div>
-
-    <section class="sec" id="levels">
-      <h2>选择学习路线</h2>
-      <p class="sec-sub">GESP 按当前等级学习；CSP 按考试阶段准备。</p>
-      <div class="sec-head"><h3>GESP 一级至八级</h3><span class="hint">按等级查询，不设访问门槛</span></div>
-      <div class="levels">
-        <a class="lv-card" href="gesp/level1.html" style="--bar:#5b8def">
-          <div class="no">01</div>
-          <div class="lv" style="color:#5b8def">1级</div>
-          <div class="lbl">GESP 1 级</div>
-          <div class="desc">认识计算机的发展、组成、软硬件、操作系统与文</div>
-        </a>
-        <a class="lv-card" href="gesp/level2.html" style="--bar:#7c6bf0">
-          <div class="no">02</div>
-          <div class="lv" style="color:#7c6bf0">2级</div>
-          <div class="lbl">GESP 2 级</div>
-          <div class="desc">了解存储单位换算，认识网络协议与常见网络概念</div>
-        </a>
-        <a class="lv-card" href="gesp/level3.html" style="--bar:#a56bf0">
-          <div class="no">03</div>
-          <div class="lv" style="color:#a56bf0">3级</div>
-          <div class="lbl">GESP 3 级</div>
-          <div class="desc">确认每个数使用的二进制位数，判断能表示的整数</div>
-        </a>
-        <a class="lv-card" href="gesp/level4.html" style="--bar:#d86bc8">
-          <div class="no">04</div>
-          <div class="lv" style="color:#d86bc8">4级</div>
-          <div class="lbl">GESP 4 级</div>
-          <div class="desc">掌握函数声明与定义、调用与返回值，把重复任务</div>
-        </a>
-        <a class="lv-card" href="gesp/level5.html" style="--bar:#ef6b9c">
-          <div class="no">05</div>
-          <div class="lv" style="color:#ef6b9c">5级</div>
-          <div class="lbl">GESP 5 级</div>
-          <div class="desc">掌握整除与约数、素数与互质、同余与余数。</div>
-        </a>
-        <a class="lv-card" href="gesp/level6.html" style="--bar:#ef7b6b">
-          <div class="no">06</div>
-          <div class="lv" style="color:#ef7b6b">6级</div>
-          <div class="lbl">GESP 6 级</div>
-          <div class="desc">理解结点、边、根、子树、深度与度的概念。</div>
-        </a>
-        <a class="lv-card" href="gesp/level7.html" style="--bar:#ef9d6b">
-          <div class="no">07</div>
-          <div class="lv" style="color:#ef9d6b">7级</div>
-          <div class="lbl">GESP 7 级</div>
-          <div class="desc">处理角度与弧度换算，检查函数定义域，按题意处</div>
-        </a>
-        <a class="lv-card" href="gesp/level8.html" style="--bar:#d9a441">
-          <div class="no">08</div>
-          <div class="lv" style="color:#d9a441">8级</div>
-          <div class="lbl">GESP 8 级</div>
-          <div class="desc">掌握加法原理与乘法原理，区分分类与分步。</div>
-        </a></div>
-    </section>
-
-    <section class="sec" id="csp">
-      <div class="sec-head"><h3>CSP-J/S</h3><a class="link-red" href="csp.html">查看 CSP 学习路线 →</a></div>
-      <div class="rows">
-        <a class="row" href="csp.html">
-          <span class="tag">J</span>
-          <span class="t">CSP-J 初赛</span>
-          <span class="d">计算机基础、C++ 语法、算法阅读与选择填空。</span>
-          <span class="go">→</span>
-        </a>
-        <a class="row" href="csp.html">
-          <span class="tag">J</span>
-          <span class="t">CSP-J 复赛</span>
-          <span class="d">模拟、枚举、排序、搜索、简单动态规划与代码规范。</span>
-          <span class="go">→</span>
-        </a>
-        <a class="row" href="csp.html">
-          <span class="tag">S</span>
-          <span class="t">CSP-S 进阶</span>
-          <span class="d">图论、树结构、数论、复杂动态规划与复杂度控制。</span>
-          <span class="go">→</span>
-        </a></div>
-    </section>
-
-    <section class="sec" id="stuck">
-      <h2>这道题卡在哪里？</h2>
-      <p class="sec-sub">先判断卡点，再进入对应内容。</p>
-      <div class="two">
-        <div class="rows">
-          <a class="row" href="solutions.html">
-            <span class="tag">01</span><span class="t">看不懂题意</span>
-            <span class="d">先看清样例，把题意转化成条件、目标和边界</span><span class="go">→</span></a>
-          <a class="row" href="solutions.html">
-            <span class="tag">02</span><span class="t">不知道思路</span>
-            <span class="d">对照题型清单确认已经见过的模式</span><span class="go">→</span></a>
-          <a class="row" href="templates.html">
-            <span class="tag">03</span><span class="t">不会写代码</span>
-            <span class="d">从可以修改的程序模板开始</span><span class="go">→</span></a>
-        </div>
-        <div>
-          <div class="code"><span class="c">// 二分答案：先确定单调性，再缩小范围</span>
-<span class="k">int</span> <span class="f">check</span>(<span class="k">int</span> x) { <span class="k">return</span> x &gt;= target; }
-
-<span class="k">int</span> l = <span class="t">0</span>, r = n, ans = -<span class="t">1</span>;
-<span class="k">while</span> (l &lt;= r) {
-    <span class="k">int</span> mid = l + (r - l) / <span class="t">2</span>;
-    <span class="k">if</span> (<span class="f">check</span>(mid)) { ans = mid; r = mid - <span class="t">1</span>; }
-    <span class="k">else</span> l = mid + <span class="t">1</span>;
-}</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <h2>常用工具</h2>
-      <p class="sec-sub">知道自己需要什么时，直接进入对应工具。</p>
-      <div class="two">
-        <div>
-        <a class="tool-card" href="templates.html">
-          <h4>基础框架</h4>
-          <p>C++ 程序基本框架与快读快写，适合大数据量输入。</p>
-          <span class="link-red">打开模板 →</span>
-        </a>
-        <a class="tool-card" href="templates.html">
-          <h4>数据结构</h4>
-          <p>并查集（路径压缩 + 按秩合并）、树状数组、线段树区间查询。</p>
-          <span class="link-red">打开模板 →</span>
-        </a>
-        <a class="tool-card" href="templates.html">
-          <h4>图论</h4>
-          <p>邻接表存图、Dijkstra 堆优化、SPFA、拓扑排序。</p>
-          <span class="link-red">打开模板 →</span>
-        </a>
-        <a class="tool-card" href="templates.html">
-          <h4>动态规划</h4>
-          <p>01 背包、完全背包、最长上升子序列与滚动数组优化。</p>
-          <span class="link-red">打开模板 →</span>
-        </a></div>
-        <div>
-          <div class="code"><span class="c">// 快读快写（大数据量必备）</span>
-<span class="k">inline int</span> <span class="f">read</span>() {
-    <span class="k">int</span> x = <span class="t">0</span>, f = <span class="t">1</span>; <span class="k">char</span> c = <span class="f">getchar</span>();
-    <span class="k">while</span> (c &lt; <span class="t">'0'</span> || c &gt; <span class="t">'9'</span>) {
-        <span class="k">if</span> (c == <span class="t">'-'</span>) f = -<span class="t">1</span>; c = <span class="f">getchar</span>();
-    }
-    <span class="k">while</span> (c &gt;= <span class="t">'0'</span> &amp;&amp; c &lt;= <span class="t">'9'</span>) {
-        x = x * <span class="t">10</span> + c - <span class="t">'0'</span>; c = <span class="f">getchar</span>();
-    }
-    <span class="k">return</span> x * f;
-}</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec" id="resources">
-      <h2>OJ 与学习资源</h2>
-      <p class="sec-sub">返回题库练习，或查看权威资料。</p>
-      <div class="rows">
-        <a class="row" href="https://www.luogu.com.cn/" target="_blank" rel="noopener">
-          <span class="tag">OJ</span>
-          <span class="t">洛谷</span>
-          <span class="d">国内主流题库，题目与题解丰富</span>
-          <span class="go">↗</span>
-        </a>
-        <a class="row" href="https://oi-wiki.org/" target="_blank" rel="noopener">
-          <span class="tag">百科</span>
-          <span class="t">OI Wiki</span>
-          <span class="d">算法竞赛知识百科，查算法与证明</span>
-          <span class="go">↗</span>
-        </a>
-        <a class="row" href="https://www.noi.cn/" target="_blank" rel="noopener">
-          <span class="tag">官方</span>
-          <span class="t">NOI 官网</span>
-          <span class="d">赛事通知、大纲与政策</span>
-          <span class="go">↗</span>
-        </a>
-        <a class="row" href="https://codeforces.com/" target="_blank" rel="noopener">
-          <span class="tag">比赛</span>
-          <span class="t">Codeforces</span>
-          <span class="d">国际比赛与高质量题目</span>
-          <span class="go">↗</span>
-        </a></div>
-    </section>
-  </div>
+  </section>
 </main>
-
-<script>
-(function(){
-  "use strict";
-  var INDEX = [
-    {t:"GESP 分级总览", d:"八级学习路线", h:"gesp.html"},
-    {t:"CSP-J/S", d:"初赛、复赛与进阶", h:"csp.html"},
-    {t:"程序模板", d:"可修改的 C++ 代码框架", h:"templates.html"},
-    {t:"题解", d:"读题、思路与代码映射", h:"solutions.html"},
-    {t:"OJ 与资源", d:"题库与学习资料", h:"resources.html"}
-  ];
-  var LV = ["计算机基础","集成开发环境","程序基本结构","输入输出","基本数据类型","基本运算","顺序结构","分支结构","循环结构","存储与网络","流程图","类型转换","数组","字符串","枚举","模拟","函数","指针","结构体","二维数组","排序","递推","数论","素数筛","高精度","链表","二分","贪心","分治","递归","树","遍历","哈夫曼","格雷码","回溯","搜索","动态规划","图论","最短路","最小生成树","哈希表","计数原理","排列组合","倍增","复杂度"];
-  for (var i = 1; i <= 8; i++) {
-    INDEX.push({t:"GESP " + i + " 级", d:"第 " + i + " 级知识点", h:"gesp/level" + i + ".html"});
-  }
-  LV.forEach(function(k){ INDEX.push({t:k, d:"知识点查询", h:"gesp.html"}); });
-
-  var input = document.getElementById("search"), box = document.getElementById("results");
-  function render(kw){
-    var q = kw.trim().toLowerCase();
-    if(!q){ box.className=""; box.innerHTML=""; return; }
-    var hit = INDEX.filter(function(it){ return (it.t+" "+it.d).toLowerCase().indexOf(q)!==-1; }).slice(0,8);
-    box.innerHTML = hit.length ? hit.map(function(it){
-      return '<a href="'+it.h+'"><b>'+it.t+'</b> <span>'+it.d+'</span></a>';
-    }).join("") : '<div class="empty">没有找到「'+kw.replace(/[<>&]/g,"")+'」，换个关键词试试</div>';
-    box.className = "on";
-  }
-  input.addEventListener("input", function(){ render(this.value); });
-  input.addEventListener("keydown", function(e){
-    if(e.key==="Enter"){ var f=box.querySelector("a"); if(f)f.click(); }
-    if(e.key==="Escape"){ box.className=""; input.blur(); }
-  });
-  document.addEventListener("click", function(e){
-    if(!e.target.closest("#bigSearchWrap") && !e.target.closest("#results")) box.className="";
-  });
-  document.addEventListener("keydown", function(e){
-    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="k"){
-      e.preventDefault(); window.scrollTo({top:0,behavior:"smooth"});
-      setTimeout(function(){input.focus();},200);
-    }
-  });
-
-  var lv; try{ lv = localStorage.getItem("lastLevel"); }catch(e){}
-  if(lv) document.getElementById("lastVisitText").innerHTML = "上次学到 <b>GESP " + lv + " 级</b>，可以从这里继续。";
-})();
-</script>
 
 
 <footer>

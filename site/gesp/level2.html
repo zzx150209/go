@@ -278,6 +278,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp .tags span{font-size:10.5px;color:var(--text-3);background:var(--bg-2);
   border-radius:4px;padding:2px 8px}
 
+/* 知识点详细内容（可展开） */
+.kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.kp-detail.open{max-height:1200px}
+.kp-detail-body{padding-top:4px;border-top:1px solid var(--line);margin-top:4px}
+.kp-section{margin:14px 0 0}
+.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--brand)}
+.kp-pts,.kp-tips{margin:0;padding-left:18px;font-size:12.5px;color:var(--text-2);line-height:1.75}
+.kp-pts li,.kp-tips li{margin-bottom:4px}
+.kp-tips li{color:var(--accent-text)}
+.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:12px 14px;margin:12px 0 0;overflow-x:auto}
+.kp-code pre{margin:0;font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;
+  font-size:12px;line-height:1.7;color:#c9d1d9;white-space:pre}
+.kp-toggle{width:100%;margin-top:12px;padding:8px;border:1px solid var(--line-2);
+  border-radius:8px;background:var(--bg-2);color:var(--brand);font-size:13px;
+  font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+.kp-toggle:hover{border-color:var(--brand);color:var(--brand-2)}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -399,7 +417,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>计算机存储与网络</h4>
         <p>了解存储单位换算，认识网络协议与常见网络概念。</p>
         <div class="tags"><span>存储与单位</span><span>网络与协议</span></div>
-        <a class="link-red" href="#kp1">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>存储单位：1 Byte = 8 bit，1 KB = 1024 B，1 MB = 1024 KB，1 GB = 1024 MB。</li><li>内存是临时存储（断电丢失），硬盘/SSD 是永久存储（断电保留）。</li><li>网络中数据通过协议传输，常见协议 HTTP/HTTPS 用于网页，TCP 用于可靠传输。</li><li>IP 地址标识网络中的设备，域名便于记忆，DNS 将域名解析为 IP。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>换算时注意 1024 而不是 1000，存储容量厂商常用 1000。</li><li>bit 是最小单位（0或1），Byte 是基本寻址单位。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp2">
         <div class="kp-top"><span class="no">02</span>
@@ -407,7 +432,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>程序设计语言</h4>
         <p>区分机器语言、汇编语言与高级语言，了解编译与运行过程。</p>
         <div class="tags"><span>语言分类</span><span>编译过程</span></div>
-        <a class="link-red" href="#kp2">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>机器语言由 0 和 1 组成，CPU 直接执行，但人很难读写。</li><li>汇编语言用助记符表示指令，需要汇编器翻译为机器码。</li><li>高级语言（C++、Python）接近自然语言，需要编译器或解释器翻译。</li><li>编译型语言（C++）先整体翻译为可执行文件再运行；解释型语言（Python）逐行翻译执行。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>C++ 是编译型语言，运行前需要编译，编译后运行速度快。</li><li>编译器报错信息中的行号对应源文件，不是翻译后的机器码。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp3">
         <div class="kp-top"><span class="no">03</span>
@@ -415,7 +447,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>流程图</h4>
         <p>识别流程图符号，追踪流程走向，并在流程图与代码之间互相翻译。</p>
         <div class="tags"><span>符号辨认</span><span>流程追踪</span></div>
-        <a class="link-red" href="#kp3">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>流程图用标准符号表示算法步骤：椭圆表示开始/结束，矩形表示处理，菱形表示判断，平行四边形表示输入输出。</li><li>箭头表示执行方向，从开始符号出发，沿箭头执行直到结束符号。</li><li>流程图与代码可以互相翻译：顺序对应顺序结构，菱形对应 if 判断，回箭头对应循环。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>判断框有两个出口（是/否），不要漏掉任何一条路径。</li><li>循环体在流程图中表现为从判断框回到上方的箭头。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp4">
         <div class="kp-top"><span class="no">04</span>
@@ -423,7 +462,17 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>数据类型转换</h4>
         <p>掌握隐式转换与强制转换，注意整数除法与精度丢失。</p>
         <div class="tags"><span>隐式转换</span><span>强制转换</span></div>
-        <a class="link-red" href="#kp4">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>隐式转换：小类型自动转大类型，如 int 转 double，不丢失精度。</li><li>强制转换：(double)a 把 a 当 double 处理，(int)3.14 得到 3（截断小数）。</li><li>整数除法问题：7/2=3，要得到 3.5 需要写成 7.0/2 或 (double)7/2。</li><li>字符与整数互转：char 本质是 ASCII 码，&#x27;A&#x27;+1 得到 &#x27;B&#x27;。</li></ul></div>
+            <div class="kp-code"><pre>int a = 7, b = 2;
+double c = (double)a / b;  // 3.5（先转a再除）
+int x = (int)3.99;         // 3（截断，不是四舍五入）
+char ch = &#x27;A&#x27; + 1;          // &#x27;B&#x27;</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>强制转换是截断不是四舍五入，3.99 转 int 是 3 不是 4。</li><li>混合运算时 int 和 double 一起计算，int 自动提升为 double。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp5">
         <div class="kp-top"><span class="no">05</span>
@@ -431,7 +480,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>多分支判断</h4>
         <p>处理分支嵌套与条件边界，避免遗漏情况。</p>
         <div class="tags"><span>分支嵌套</span><span>条件边界</span></div>
-        <a class="link-red" href="#kp5">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>if-else if-else 链从上到下判断，满足第一个就执行对应块并跳出。</li><li>分支嵌套：if 里面再写 if，注意 else 与最近的未配对 if 结合。</li><li>处理区间判断时要注意边界，分数 60 分及格不能写成 score&gt;60。</li><li>多分支用 switch 时表达式必须是整数或字符类型。</li></ul></div>
+            <div class="kp-code"><pre>int x;
+cin &gt;&gt; x;
+if (x &gt; 0) {
+    if (x &gt;= 100) cout &lt;&lt; &quot;大数&quot; &lt;&lt; endl;
+    else cout &lt;&lt; &quot;正数&quot; &lt;&lt; endl;
+} else if (x == 0) {
+    cout &lt;&lt; &quot;零&quot; &lt;&lt; endl;
+} else {
+    cout &lt;&lt; &quot;负数&quot; &lt;&lt; endl;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>嵌套 if 的 else 属于最近的 if，加括号明确逻辑更安全。</li><li>区间判断用 &gt;= 和 &lt;= 时注意不要漏掉边界值。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp6">
         <div class="kp-top"><span class="no">06</span>
@@ -439,7 +504,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>循环嵌套</h4>
         <p>用双重循环处理行列、图形与枚举问题，控制内层跳转。</p>
         <div class="tags"><span>行列问题</span><span>内层跳转</span></div>
-        <a class="link-red" href="#kp6">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>双重循环：外层循环控制行，内层循环控制列，常用于输出图形和枚举。</li><li>外层每执行一次，内层完整执行一遍。</li><li>内层循环的 break 只跳出内层，不影响外层。</li><li>注意循环变量不要同名，避免互相覆盖。</li></ul></div>
+            <div class="kp-code"><pre>// 输出九九乘法表
+for (int i = 1; i &lt;= 9; i++) {
+    for (int j = 1; j &lt;= i; j++) {
+        cout &lt;&lt; j &lt;&lt; &quot;*&quot; &lt;&lt; i &lt;&lt; &quot;=&quot; &lt;&lt; i*j &lt;&lt; &quot;\t&quot;;
+    }
+    cout &lt;&lt; endl;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>双重循环总次数是外层次数乘以内层次数，数据量大时会很慢。</li><li>输出图形时注意每行末尾要换行。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp7">
         <div class="kp-top"><span class="no">07</span>
@@ -447,7 +525,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>常用数学函数</h4>
         <p>使用绝对值、平方根、最大最小值与随机数，注意取值范围。</p>
         <div class="tags"><span>绝对值平方根</span><span>最大最小值</span></div>
-        <a class="link-red" href="#kp7">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>abs(x) 求整数绝对值，fabs(x) 求浮点数绝对值，需要 #include &lt;cmath&gt;。</li><li>sqrt(x) 求平方根，pow(a,b) 求 a 的 b 次方。</li><li>max(a,b) 和 min(a,b) 求最大最小值，C++11 起支持。</li><li>rand() 生成伪随机数，需要 srand(time(0)) 设置种子。</li></ul></div>
+            <div class="kp-code"><pre>#include &lt;cmath&gt;
+double a = -3.14;
+cout &lt;&lt; fabs(a) &lt;&lt; endl;    // 3.14
+cout &lt;&lt; sqrt(16) &lt;&lt; endl;   // 4
+cout &lt;&lt; pow(2, 10) &lt;&lt; endl; // 1024
+int r = rand() % 100;       // 0到99的随机数</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>sqrt 参数必须非负，负数会返回 NaN。</li><li>rand() 范围是 0 到 RAND_MAX，%n 得到 0 到 n-1。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp8">
         <div class="kp-top"><span class="no">08</span>
@@ -455,7 +545,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>程序调试</h4>
         <p>根据编译信息与运行结果定位错误，学会输出中间变量。</p>
         <div class="tags"><span>编译信息</span><span>中间输出</span></div>
-        <a class="link-red" href="#kp8">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>编译错误：语法不对，编译器给出行号和原因，逐条修改。</li><li>运行时错误：程序崩溃，常见原因是数组越界、除零、死递归。</li><li>逻辑错误：程序能运行但结果不对，需要输出中间变量排查。</li><li>常用调试方法：在关键位置插入 cout 输出变量值，对比预期结果。</li></ul></div>
+            <div class="kp-code"><pre>// 调试：输出中间值
+int sum = 0;
+for (int i = 1; i &lt;= n; i++) {
+    sum += i;
+    cout &lt;&lt; &quot;i=&quot; &lt;&lt; i &lt;&lt; &quot; sum=&quot; &lt;&lt; sum &lt;&lt; endl;  // 追踪
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>先修第一个编译错误，后面的错误可能是它引起的连锁反应。</li><li>运行超时通常是死循环或算法复杂度太高。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div></div>
 
     <section class="sec" style="margin-top:46px">
@@ -513,7 +615,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   }catch(e){}
   var kps=[].slice.call(document.querySelectorAll(".kp"));
   kps.forEach(function(el){
-    el.addEventListener("click",function(){
+    el.addEventListener("click",function(e){
+      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
       var st=el.querySelector(".state");
       st.textContent="已复习"; st.style.color="var(--brand)";
       try{
@@ -523,6 +626,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
         document.getElementById("p1").textContent=arr.length+"/"+total;
       }catch(e){}
+    });
+  });
+  document.querySelectorAll(".kp-toggle").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var detail=this.previousElementSibling;
+      var open=detail.classList.toggle("open");
+      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
     });
   });
 })();

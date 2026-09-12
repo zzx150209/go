@@ -278,6 +278,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp .tags span{font-size:10.5px;color:var(--text-3);background:var(--bg-2);
   border-radius:4px;padding:2px 8px}
 
+/* 知识点详细内容（可展开） */
+.kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.kp-detail.open{max-height:1200px}
+.kp-detail-body{padding-top:4px;border-top:1px solid var(--line);margin-top:4px}
+.kp-section{margin:14px 0 0}
+.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--brand)}
+.kp-pts,.kp-tips{margin:0;padding-left:18px;font-size:12.5px;color:var(--text-2);line-height:1.75}
+.kp-pts li,.kp-tips li{margin-bottom:4px}
+.kp-tips li{color:var(--accent-text)}
+.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:12px 14px;margin:12px 0 0;overflow-x:auto}
+.kp-code pre{margin:0;font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;
+  font-size:12px;line-height:1.7;color:#c9d1d9;white-space:pre}
+.kp-toggle{width:100%;margin-top:12px;padding:8px;border:1px solid var(--line-2);
+  border-radius:8px;background:var(--bg-2);color:var(--brand);font-size:13px;
+  font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+.kp-toggle:hover{border-color:var(--brand);color:var(--brand-2)}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -399,7 +417,22 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>函数基础</h4>
         <p>掌握函数声明与定义、调用与返回值，把重复任务拆分成函数。</p>
         <div class="tags"><span>声明定义</span><span>返回值</span></div>
-        <a class="link-red" href="#kp1">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>函数是完成特定任务的一段代码，有返回值类型、函数名、参数列表和函数体。</li><li>函数先声明（原型）再调用，或把定义放在调用之前。</li><li>return 值; 把结果返回给调用处，void 函数不需要 return 值。</li><li>把重复出现的代码写成函数，减少重复、方便修改。</li></ul></div>
+            <div class="kp-code"><pre>int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    cout &lt;&lt; add(3, 5) &lt;&lt; endl;  // 8
+    cout &lt;&lt; add(10, 20) &lt;&lt; endl; // 30
+    return 0;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>函数名和变量名命名规则相同，不能与关键字冲突。</li><li>return 后的表达式类型要与函数返回值类型匹配。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp2">
         <div class="kp-top"><span class="no">02</span>
@@ -407,7 +440,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>参数与作用域</h4>
         <p>区分形参与实参，理解局部与全局变量、作用域与遮蔽。</p>
         <div class="tags"><span>形参实参</span><span>作用域</span></div>
-        <a class="link-red" href="#kp2">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>形参是函数定义中的变量，实参是调用时传入的值。</li><li>值传递：形参是实参的副本，函数内修改不影响外部变量。</li><li>局部变量在函数内定义，函数结束后销毁；全局变量在所有函数外定义。</li><li>同名局部变量会遮蔽全局变量，使用 :: 可访问全局变量。</li></ul></div>
+            <div class="kp-code"><pre>int x = 10;  // 全局变量
+
+void func(int a) {
+    a = 20;      // 修改的是形参副本
+    int x = 5;   // 局部x遮蔽全局x
+    cout &lt;&lt; x;   // 5
+}
+
+int main() {
+    func(x);
+    cout &lt;&lt; x;   // 仍然是10
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>值传递不会改变实参，想改变实参要用引用传递。</li><li>尽量少用全局变量，避免不同函数互相干扰。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp3">
         <div class="kp-top"><span class="no">03</span>
@@ -415,7 +466,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>指针基础</h4>
         <p>获取变量地址、解引用指针，并做空指针检查。</p>
         <div class="tags"><span>取地址</span><span>解引用</span></div>
-        <a class="link-red" href="#kp3">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>指针是存储内存地址的变量，int* p 表示 p 指向一个 int。</li><li>&amp; 变量 取变量地址，* 指针 取指针指向的值（解引用）。</li><li>指针必须初始化后才能使用，空指针用 nullptr 表示。</li><li>数组名就是首元素的地址，int a[5]; a 等价于 &amp;a[0]。</li></ul></div>
+            <div class="kp-code"><pre>int x = 42;
+int* p = &amp;x;    // p 指向 x
+cout &lt;&lt; *p;     // 42（解引用）
+*p = 100;       // 通过指针修改 x
+cout &lt;&lt; x;      // 100
+
+int* q = nullptr; // 空指针，不能解引用</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>未初始化的指针值是随机的，解引用会崩溃。</li><li>指针类型要匹配，int* 不能指向 double。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp4">
         <div class="kp-top"><span class="no">04</span>
@@ -423,7 +487,28 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>引用与参数传递</h4>
         <p>区分值传递与引用传递，掌握数组作为参数的行为。</p>
         <div class="tags"><span>值传递</span><span>引用参数</span></div>
-        <a class="link-red" href="#kp4">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>引用是变量的别名，int&amp; r = x; r 和 x 代表同一变量。</li><li>引用传递：函数参数用引用类型，函数内修改会影响实参。</li><li>数组作为参数时自动退化为指针，函数内不知道数组长度。</li><li>const 引用可以避免拷贝大对象，同时防止修改。</li></ul></div>
+            <div class="kp-code"><pre>void swap(int&amp; a, int&amp; b) {
+    int t = a; a = b; b = t;
+}
+
+int main() {
+    int x = 3, y = 5;
+    swap(x, y);  // x=5, y=3
+}
+
+// 数组参数：长度需要额外传入
+int sum(int a[], int n) {
+    int s = 0;
+    for (int i = 0; i &lt; n; i++) s += a[i];
+    return s;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>引用必须在定义时初始化，不能事后更改引用对象。</li><li>值传递适合小数据，引用传递适合大数据或需要修改实参。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp5">
         <div class="kp-top"><span class="no">05</span>
@@ -431,7 +516,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>结构体</h4>
         <p>定义结构体类型与对象，访问成员，使用结构体数组。</p>
         <div class="tags"><span>成员访问</span><span>结构体数组</span></div>
-        <a class="link-red" href="#kp5">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>struct 把不同类型的数据组合成一个新类型，如学生（姓名、年龄、成绩）。</li><li>定义结构体后，可以声明变量、数组和指针。</li><li>访问成员用 .（结构体变量）或 -&gt;（结构体指针）。</li><li>结构体数组适合存储多条记录，如全班学生信息。</li></ul></div>
+            <div class="kp-code"><pre>struct Student {
+    string name;
+    int age;
+    double score;
+};
+
+Student s;
+cin &gt;&gt; s.name &gt;&gt; s.age &gt;&gt; s.score;
+
+Student cls[50];
+for (int i = 0; i &lt; n; i++) {
+    cin &gt;&gt; cls[i].name &gt;&gt; cls[i].score;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>结构体定义末尾的分号不能漏。</li><li>结构体可以嵌套，如学生里包含出生日期结构体。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp6">
         <div class="kp-top"><span class="no">06</span>
@@ -439,7 +543,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>二维数组</h4>
         <p>定义二维数组，完成行列遍历与矩阵基本操作。</p>
         <div class="tags"><span>行列遍历</span><span>矩阵操作</span></div>
-        <a class="link-red" href="#kp6">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>二维数组 int a[m][n] 表示 m 行 n 列，a[i][j] 访问第 i 行第 j 列。</li><li>内存中按行存储，第一维可以省略（初始化时），第二维不能省略。</li><li>常用操作：行列遍历、矩阵加法/转置、按行/列求和、找最值。</li><li>作为函数参数时，第二维必须指定大小。</li></ul></div>
+            <div class="kp-code"><pre>int a[105][105], m, n;
+cin &gt;&gt; m &gt;&gt; n;
+for (int i = 0; i &lt; m; i++)
+    for (int j = 0; j &lt; n; j++)
+        cin &gt;&gt; a[i][j];
+
+// 按行求和
+for (int i = 0; i &lt; m; i++) {
+    int rowSum = 0;
+    for (int j = 0; j &lt; n; j++) rowSum += a[i][j];
+    cout &lt;&lt; rowSum &lt;&lt; endl;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>二维数组下标都是从 0 开始，注意行列不要搞反。</li><li>大二维数组建议定义为全局变量，避免栈溢出。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp7">
         <div class="kp-top"><span class="no">07</span>
@@ -447,7 +569,22 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>递推</h4>
         <p>确定初始状态与递推关系，按顺序计算得到结果。</p>
         <div class="tags"><span>初始状态</span><span>递推关系</span></div>
-        <a class="link-red" href="#kp7">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>递推：从已知的初始条件出发，按固定关系逐步推出结果。</li><li>关键是找到递推公式和初始条件。</li><li>经典例子：斐波那契数列 f(n)=f(n-1)+f(n-2)，f(1)=f(2)=1。</li><li>递推用循环实现，从小到大计算，避免重复计算。</li></ul></div>
+            <div class="kp-code"><pre>// 斐波那契数列
+long long f[100];
+f[1] = f[2] = 1;
+for (int i = 3; i &lt;= 90; i++) {
+    f[i] = f[i-1] + f[i-2];
+}
+
+// 爬楼梯：每次走1或2步，到第n阶有几种走法
+// f(n) = f(n-1) + f(n-2), f(1)=1, f(2)=2</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>数据增长快时用 long long 防止溢出。</li><li>递推方向要对：从已知推向未知，不要倒着算。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp8">
         <div class="kp-top"><span class="no">08</span>
@@ -455,7 +592,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>排序算法</h4>
         <p>掌握冒泡、插入、选择排序的过程与稳定性。</p>
         <div class="tags"><span>冒泡排序</span><span>选择排序</span></div>
-        <a class="link-red" href="#kp8">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>冒泡排序：相邻元素比较交换，每轮把最大值冒到末尾，O(n²)。</li><li>选择排序：每轮选最小值放到前面，O(n²)。</li><li>插入排序：把当前元素插入前面已排好序的部分，O(n²)，接近有序时很快。</li><li>稳定性：相等元素排序后相对位置不变，冒泡和插入稳定，选择不稳定。</li></ul></div>
+            <div class="kp-code"><pre>// 冒泡排序
+for (int i = 0; i &lt; n-1; i++) {
+    for (int j = 0; j &lt; n-1-i; j++) {
+        if (a[j] &gt; a[j+1]) swap(a[j], a[j+1]);
+    }
+}
+
+// C++ 自带排序
+#include &lt;algorithm&gt;
+sort(a, a + n);  // 升序
+sort(a, a + n, greater&lt;int&gt;());  // 降序</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>实际竞赛直接用 sort()，O(n log n)，比手写 O(n²) 快得多。</li><li>结构体排序用自定义比较函数。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp9">
         <div class="kp-top"><span class="no">09</span>
@@ -463,7 +617,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>复杂度估算</h4>
         <p>估算操作次数，理解时间复杂度与空间复杂度的含义。</p>
         <div class="tags"><span>时间复杂度</span><span>空间复杂度</span></div>
-        <a class="link-red" href="#kp9">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>时间复杂度用大 O 表示，描述操作次数随 n 增长的趋势。</li><li>常见：O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2ⁿ)。</li><li>循环嵌套层数决定复杂度：一层 O(n)，两层 O(n²)，三层 O(n³)。</li><li>根据数据范围判断：n≤10⁶ 可用 O(n log n)，n≤100 可用 O(n³)。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>1 秒大约能处理 10⁷~10⁸ 次基本操作。</li><li>n=100000 时 O(n²) 是 10¹⁰，会超时，必须优化。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp10">
         <div class="kp-top"><span class="no">10</span>
@@ -471,7 +632,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>文件与异常</h4>
         <p>完成文件重定向与文件流读写，处理输入校验与异常捕获。</p>
         <div class="tags"><span>文件流</span><span>异常处理</span></div>
-        <a class="link-red" href="#kp10">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>freopen(&#x27;input.txt&#x27;,&#x27;r&#x27;,stdin) 把标准输入重定向到文件。</li><li>fstream 库支持文件读写：ifstream 读，ofstream 写。</li><li>输入校验：读取数据前检查是否成功打开。</li><li>try-catch 用于捕获异常，GESP 阶段了解基本写法即可。</li></ul></div>
+            <div class="kp-code"><pre>#include &lt;fstream&gt;
+ifstream fin(&quot;input.txt&quot;);
+ofstream fout(&quot;output.txt&quot;);
+int x;
+fin &gt;&gt; x;
+fout &lt;&lt; x * 2 &lt;&lt; endl;
+fin.close();
+fout.close();
+
+// 或用 freopen
+freopen(&quot;input.txt&quot;, &quot;r&quot;, stdin);
+freopen(&quot;output.txt&quot;, &quot;w&quot;, stdout);</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>文件名注意路径和拼写，文件不存在会导致读入失败。</li><li>竞赛中在线评测不用文件操作，直接用 cin/cout。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div></div>
 
     <section class="sec" style="margin-top:46px">
@@ -529,7 +708,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   }catch(e){}
   var kps=[].slice.call(document.querySelectorAll(".kp"));
   kps.forEach(function(el){
-    el.addEventListener("click",function(){
+    el.addEventListener("click",function(e){
+      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
       var st=el.querySelector(".state");
       st.textContent="已复习"; st.style.color="var(--brand)";
       try{
@@ -539,6 +719,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
         document.getElementById("p1").textContent=arr.length+"/"+total;
       }catch(e){}
+    });
+  });
+  document.querySelectorAll(".kp-toggle").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var detail=this.previousElementSibling;
+      var open=detail.classList.toggle("open");
+      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
     });
   });
 })();

@@ -6,7 +6,8 @@ Showball 信息学 —— 站点生成器 v2
 """
 import os, io, html, shutil
 from site_data import (SITE_NAME, SITE_SUB, LEVELS, CSP, TEMPLATE_CATS,
-                       COMMON_TEMPLATES, SOLUTION_STEPS, RESOURCE_GROUPS)
+                       COMMON_TEMPLATES, SOLUTION_STEPS, RESOURCE_GROUPS,
+                       KP_DETAILS)
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT  = os.path.join(ROOT, "site")
@@ -297,6 +298,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
 .kp .tags span{font-size:10.5px;color:var(--text-3);background:var(--bg-2);
   border-radius:4px;padding:2px 8px}
+
+/* 知识点详细内容（可展开） */
+.kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.kp-detail.open{max-height:1200px}
+.kp-detail-body{padding-top:4px;border-top:1px solid var(--line);margin-top:4px}
+.kp-section{margin:14px 0 0}
+.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--brand)}
+.kp-pts,.kp-tips{margin:0;padding-left:18px;font-size:12.5px;color:var(--text-2);line-height:1.75}
+.kp-pts li,.kp-tips li{margin-bottom:4px}
+.kp-tips li{color:var(--accent-text)}
+.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:12px 14px;margin:12px 0 0;overflow-x:auto}
+.kp-code pre{margin:0;font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;
+  font-size:12px;line-height:1.7;color:#c9d1d9;white-space:pre}
+.kp-toggle{width:100%;margin-top:12px;padding:8px;border:1px solid var(--line-2);
+  border-radius:8px;background:var(--bg-2);color:var(--brand);font-size:13px;
+  font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+.kp-toggle:hover{border-color:var(--brand);color:var(--brand-2)}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -724,6 +743,12 @@ def build_level(n):
     grid = ""
     for i, (t, d, tags) in enumerate(kps, 1):
         tg = "".join(f"<span>{E(x)}</span>" for x in tags)
+        det = KP_DETAILS.get(t, {"points": [], "code": None, "tips": []})
+        pts = "".join(f"<li>{E(p)}</li>" for p in det["points"])
+        tips = "".join(f"<li>{E(tp)}</li>" for tp in det["tips"])
+        code_block = ""
+        if det.get("code"):
+            code_block = (f'<div class="kp-code"><pre>{E(det["code"])}</pre></div>')
         grid += f"""
       <div class="kp" id="kp{i}">
         <div class="kp-top"><span class="no">{i:02d}</span>
@@ -731,7 +756,14 @@ def build_level(n):
         <h4>{E(t)}</h4>
         <p>{E(d)}</p>
         <div class="tags">{tg}</div>
-        <a class="link-red" href="#kp{i}">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts">{pts}</ul></div>
+            {code_block}
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips">{tips}</ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>"""
 
     others = ""
@@ -796,7 +828,8 @@ def build_level(n):
   }}catch(e){{}}
   var kps=[].slice.call(document.querySelectorAll(".kp"));
   kps.forEach(function(el){{
-    el.addEventListener("click",function(){{
+    el.addEventListener("click",function(e){{
+      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
       var st=el.querySelector(".state");
       st.textContent="已复习"; st.style.color="var(--brand)";
       try{{
@@ -806,6 +839,13 @@ def build_level(n):
         seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
         document.getElementById("p1").textContent=arr.length+"/"+total;
       }}catch(e){{}}
+    }});
+  }});
+  document.querySelectorAll(".kp-toggle").forEach(function(btn){{
+    btn.addEventListener("click",function(){{
+      var detail=this.previousElementSibling;
+      var open=detail.classList.toggle("open");
+      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
     }});
   }});
 }})();

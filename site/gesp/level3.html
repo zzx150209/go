@@ -278,6 +278,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp .tags span{font-size:10.5px;color:var(--text-3);background:var(--bg-2);
   border-radius:4px;padding:2px 8px}
 
+/* 知识点详细内容（可展开） */
+.kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.kp-detail.open{max-height:1200px}
+.kp-detail-body{padding-top:4px;border-top:1px solid var(--line);margin-top:4px}
+.kp-section{margin:14px 0 0}
+.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--brand)}
+.kp-pts,.kp-tips{margin:0;padding-left:18px;font-size:12.5px;color:var(--text-2);line-height:1.75}
+.kp-pts li,.kp-tips li{margin-bottom:4px}
+.kp-tips li{color:var(--accent-text)}
+.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:12px 14px;margin:12px 0 0;overflow-x:auto}
+.kp-code pre{margin:0;font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;
+  font-size:12px;line-height:1.7;color:#c9d1d9;white-space:pre}
+.kp-toggle{width:100%;margin-top:12px;padding:8px;border:1px solid var(--line-2);
+  border-radius:8px;background:var(--bg-2);color:var(--brand);font-size:13px;
+  font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+.kp-toggle:hover{border-color:var(--brand);color:var(--brand-2)}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -399,7 +417,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>数据编码</h4>
         <p>确认每个数使用的二进制位数，判断能表示的整数范围。</p>
         <div class="tags"><span>二进制位数</span><span>整数范围</span></div>
-        <a class="link-red" href="#kp1">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>n 位二进制能表示 2^n 个不同状态，范围是 0 到 2^n-1。</li><li>有符号整数用最高位表示符号（0正1负），n 位有符号数范围是 -2^(n-1) 到 2^(n-1)-1。</li><li>字符编码：ASCII 用 7 位表示 128 个字符，&#x27;0&#x27;=48，&#x27;A&#x27;=65，&#x27;a&#x27;=97。</li><li>中文在 Unicode/UTF-8 中占多个字节，GESP 阶段不深入。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>8 位无符号数范围 0~255，8 位有符号数范围 -128~127。</li><li>不要搞混 ASCII 值和字符：&#x27;0&#x27; 不是数字 0，而是 48。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp2">
         <div class="kp-top"><span class="no">02</span>
@@ -407,7 +432,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>进制转换</h4>
         <p>掌握任意进制与十进制之间的转换方法，并检查数字合法性。</p>
         <div class="tags"><span>按权展开</span><span>除基取余</span></div>
-        <a class="link-red" href="#kp2">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>R 进制转十进制：按权展开求和，每一位乘以 R 的幂次。</li><li>十进制转 R 进制：除 R 取余，直到商为 0，余数逆序排列。</li><li>二进制与八进制：每 3 位二进制对应 1 位八进制。</li><li>二进制与十六进制：每 4 位二进制对应 1 位十六进制（0-9, A-F）。</li></ul></div>
+            <div class="kp-code"><pre>// 十进制转二进制（短除法）
+int n = 13;
+string s;
+while (n &gt; 0) {
+    s = char(&#x27;0&#x27; + n % 2) + s;
+    n /= 2;
+}
+// s = &quot;1101&quot;
+
+// 二进制转十进制
+int dec = 0;
+for (char c : s) dec = dec * 2 + (c - &#x27;0&#x27;);</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>除基取余时先得到的是低位，结果要逆序排列。</li><li>十六进制中 A=10, B=11, ..., F=15，不区分大小写。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp3">
         <div class="kp-top"><span class="no">03</span>
@@ -415,7 +458,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>位运算</h4>
         <p>掌握与、或、异或、取反和移位，安全地进行位操作。</p>
         <div class="tags"><span>按位运算</span><span>移位</span></div>
-        <a class="link-red" href="#kp3">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>&amp; 按位与：两位都为 1 结果才为 1；| 按位或：有一个为 1 就为 1。</li><li>^ 按位异或：两位不同为 1，相同为 0；~ 按位取反：0 变 1，1 变 0。</li><li>&lt;&lt; 左移：左移 n 位等于乘以 2^n；&gt;&gt; 右移 n 位等于除以 2^n（整数）。</li><li>常用技巧：x &amp; (x-1) 去掉最低位的 1，可用于统计二进制中 1 的个数。</li></ul></div>
+            <div class="kp-code"><pre>int a = 5;   // 101
+int b = 3;   // 011
+a &amp; b        // 001 = 1
+a | b        // 111 = 7
+a ^ b        // 110 = 6
+a &lt;&lt; 1       // 1010 = 10（乘2）
+a &gt;&gt; 1       // 10 = 2（除2）</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>异或同一个数两次等于原值：a ^ b ^ b = a。</li><li>位运算优先级低于加减乘除，建议加括号。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp4">
         <div class="kp-top"><span class="no">04</span>
@@ -423,7 +479,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>算法的概念与描述</h4>
         <p>判断步骤是否明确且能结束，按接近代码的步骤推断输出。</p>
         <div class="tags"><span>步骤明确</span><span>结果推断</span></div>
-        <a class="link-red" href="#kp4">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>算法是解决问题的一系列明确步骤，具有有穷性、确定性、可行性、输入和输出。</li><li>有穷性：算法必须在有限步后结束。</li><li>确定性：每一步都有明确含义，不能有二义性。</li><li>常用自然语言、流程图或伪代码描述算法，再翻译成程序。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>判断算法是否正确，要检查边界情况和特殊输入。</li><li>好的算法不仅要正确，还要效率高、容易理解。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp5">
         <div class="kp-top"><span class="no">05</span>
@@ -431,7 +494,22 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>一维数组</h4>
         <p>按位置编号访问元素，完成统计、查找和最值更新，并检查下标范围。</p>
         <div class="tags"><span>下标访问</span><span>范围检查</span></div>
-        <a class="link-red" href="#kp5">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>数组是相同类型数据的集合，下标从 0 开始，定义 int a[100] 表示 100 个 int。</li><li>访问元素 a[i]，注意下标范围 0 到 n-1，越界会导致未定义行为。</li><li>常用操作：遍历统计、查找特定值、求最大值/最小值并记录位置。</li><li>数组名是首元素地址，sizeof(a)/sizeof(a[0]) 得到元素个数。</li></ul></div>
+            <div class="kp-code"><pre>int a[1005], n;
+cin &gt;&gt; n;
+for (int i = 0; i &lt; n; i++) cin &gt;&gt; a[i];
+
+int mx = a[0], pos = 0;
+for (int i = 1; i &lt; n; i++) {
+    if (a[i] &gt; mx) { mx = a[i]; pos = i; }
+}
+cout &lt;&lt; mx &lt;&lt; &quot; &quot; &lt;&lt; pos &lt;&lt; endl;</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>数组越界是常见错误，定义大一点（如 1005 防止越界 1 个）。</li><li>全局数组默认初始化为 0，局部数组需要手动初始化。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp6">
         <div class="kp-top"><span class="no">06</span>
@@ -439,7 +517,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>字符串处理</h4>
         <p>按位置访问字符，查找与截取连续子串，完成连接与替换。</p>
         <div class="tags"><span>字符访问</span><span>子串截取</span></div>
-        <a class="link-red" href="#kp6">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>C++ 中 string 类型存储字符串，s.length() 或 s.size() 获取长度。</li><li>s[i] 访问第 i 个字符，下标从 0 开始。</li><li>substr(pos, len) 截取子串，find() 查找子串位置。</li><li>字符串比较直接用 &lt; &gt; ==，按字典序比较。</li></ul></div>
+            <div class="kp-code"><pre>string s;
+cin &gt;&gt; s;
+cout &lt;&lt; s.length() &lt;&lt; endl;     // 长度
+cout &lt;&lt; s[0] &lt;&lt; endl;           // 第一个字符
+cout &lt;&lt; s.substr(0, 3) &lt;&lt; endl; // 前3个字符
+int p = s.find(&quot;abc&quot;);          // 查找位置，找不到返回 string::npos
+string t = s + &quot;!&quot;;             // 拼接</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>cin &gt;&gt; s 遇到空格就停止，读整行用 getline(cin, s)。</li><li>下标越界同样危险，s.length() 是长度，最后一个字符下标是 length()-1。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp7">
         <div class="kp-top"><span class="no">07</span>
@@ -447,7 +538,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>枚举算法</h4>
         <p>确定枚举范围与判断条件，逐个检查并统计或更新最优解。</p>
         <div class="tags"><span>枚举范围</span><span>条件判断</span></div>
-        <a class="link-red" href="#kp7">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>枚举法：把所有可能的情况逐一列举，逐个检查是否满足条件。</li><li>关键是确定枚举范围和判断条件，范围不能太大导致超时。</li><li>常见枚举：枚举数字、枚举位置、枚举选择（是/否）。</li><li>优化枚举范围：利用数学性质缩小上下界，减少不必要的情况。</li></ul></div>
+            <div class="kp-code"><pre>// 找出 1 到 n 中所有能被 3 整除的数
+int n;
+cin &gt;&gt; n;
+for (int i = 1; i &lt;= n; i++) {
+    if (i % 3 == 0) cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+}
+
+// 百钱百鸡
+for (int x = 0; x &lt;= 20; x++)
+    for (int y = 0; y &lt;= 33; y++) {
+        int z = 100 - x - y;
+        if (5*x + 3*y + z/3 == 100 &amp;&amp; z % 3 == 0)
+            cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; z &lt;&lt; endl;
+    }</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>枚举范围要算好上界，太大可能超时。</li><li>枚举时注意题目是否要求去重或顺序。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp8">
         <div class="kp-top"><span class="no">08</span>
@@ -455,7 +566,29 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>模拟算法</h4>
         <p>按题目规则保存状态并逐步推进，得到最终结果。</p>
         <div class="tags"><span>状态保存</span><span>规则推进</span></div>
-        <a class="link-red" href="#kp8">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>模拟法：按照题目描述的规则，一步一步模拟过程，保存状态变化。</li><li>关键是用变量保存当前状态，每一步按规则更新。</li><li>常见模拟：日期推算、排队过程、游戏规则、字符替换。</li><li>注意边界条件和循环终止条件。</li></ul></div>
+            <div class="kp-code"><pre>// 约瑟夫问题：n个人报数，数到3出列
+int n, k = 3;
+cin &gt;&gt; n;
+bool out[1005] = {false};
+int cnt = 0, cur = 0, num = 0;
+while (cnt &lt; n) {
+    if (!out[cur]) {
+        num++;
+        if (num == k) {
+            out[cur] = true;
+            cout &lt;&lt; cur+1 &lt;&lt; &quot; &quot;;
+            cnt++; num = 0;
+        }
+    }
+    cur = (cur + 1) % n;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>模拟题代码通常较长，注意分步写函数。</li><li>方向变化、边界折返等细节要仔细读题。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div></div>
 
     <section class="sec" style="margin-top:46px">
@@ -513,7 +646,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   }catch(e){}
   var kps=[].slice.call(document.querySelectorAll(".kp"));
   kps.forEach(function(el){
-    el.addEventListener("click",function(){
+    el.addEventListener("click",function(e){
+      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
       var st=el.querySelector(".state");
       st.textContent="已复习"; st.style.color="var(--brand)";
       try{
@@ -523,6 +657,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
         document.getElementById("p1").textContent=arr.length+"/"+total;
       }catch(e){}
+    });
+  });
+  document.querySelectorAll(".kp-toggle").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var detail=this.previousElementSibling;
+      var open=detail.classList.toggle("open");
+      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
     });
   });
 })();

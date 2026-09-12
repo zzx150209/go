@@ -278,6 +278,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp .tags span{font-size:10.5px;color:var(--text-3);background:var(--bg-2);
   border-radius:4px;padding:2px 8px}
 
+/* 知识点详细内容（可展开） */
+.kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.kp-detail.open{max-height:1200px}
+.kp-detail-body{padding-top:4px;border-top:1px solid var(--line);margin-top:4px}
+.kp-section{margin:14px 0 0}
+.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--brand)}
+.kp-pts,.kp-tips{margin:0;padding-left:18px;font-size:12.5px;color:var(--text-2);line-height:1.75}
+.kp-pts li,.kp-tips li{margin-bottom:4px}
+.kp-tips li{color:var(--accent-text)}
+.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:12px 14px;margin:12px 0 0;overflow-x:auto}
+.kp-code pre{margin:0;font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;
+  font-size:12px;line-height:1.7;color:#c9d1d9;white-space:pre}
+.kp-toggle{width:100%;margin-top:12px;padding:8px;border:1px solid var(--line-2);
+  border-radius:8px;background:var(--bg-2);color:var(--brand);font-size:13px;
+  font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+.kp-toggle:hover{border-color:var(--brand);color:var(--brand-2)}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -399,7 +417,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>树的基础知识</h4>
         <p>理解结点、边、根、子树、深度与度的概念。</p>
         <div class="tags"><span>结点关系</span><span>树的术语</span></div>
-        <a class="link-red" href="#kp1">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>树是 n 个结点的有限集合，有且仅有一个根结点，其余结点分成若干子树。</li><li>结点的度：子树个数；树的度：最大结点度。</li><li>深度：从根到该结点的层数；高度：结点到最远叶结点的路径长度。</li><li>叶结点：度为 0 的结点；父结点/子结点/兄弟结点按层次关系命名。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>树中 n 个结点有 n-1 条边。</li><li>根结点没有父结点，叶结点没有子结点。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp2">
         <div class="kp-top"><span class="no">02</span>
@@ -407,7 +432,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>树的构造与遍历</h4>
         <p>根据输入构造树，掌握先序、中序、后序遍历。</p>
         <div class="tags"><span>构造树</span><span>三种遍历</span></div>
-        <a class="link-red" href="#kp2">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>先序遍历：根 → 左 → 右；中序：左 → 根 → 右；后序：左 → 右 → 根。</li><li>根据输入构造二叉树：常见格式有括号表示法、层序数组。</li><li>遍历用递归实现最简洁，也可以用栈模拟迭代版本。</li><li>已知先序+中序可以唯一确定二叉树，后序+中序也可以。</li></ul></div>
+            <div class="kp-code"><pre>struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int v) : val(v), left(nullptr), right(nullptr) {}
+};
+
+void preorder(TreeNode* root) {
+    if (!root) return;
+    cout &lt;&lt; root-&gt;val;
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+
+void inorder(TreeNode* root) {
+    if (!root) return;
+    inorder(root-&gt;left);
+    cout &lt;&lt; root-&gt;val;
+    inorder(root-&gt;right);
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>先序+后序不能唯一确定一棵二叉树。</li><li>空指针要判断，递归函数首先 if(!root) return。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp3">
         <div class="kp-top"><span class="no">03</span>
@@ -415,7 +465,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>层序遍历</h4>
         <p>用队列按层访问结点，处理按层统计问题。</p>
         <div class="tags"><span>队列实现</span><span>按层访问</span></div>
-        <a class="link-red" href="#kp3">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>层序遍历按从上到下、从左到右顺序访问，用队列实现。</li><li>根入队，每次出队一个结点并访问，把它的左右孩子入队。</li><li>层序遍历可用来按层统计结点数、求树的宽度。</li><li>每次处理一层时记录当前队列大小，可以逐层处理。</li></ul></div>
+            <div class="kp-code"><pre>#include &lt;queue&gt;
+void levelOrder(TreeNode* root) {
+    if (!root) return;
+    queue&lt;TreeNode*&gt; q;
+    q.push(root);
+    while (!q.empty()) {
+        TreeNode* node = q.front();
+        q.pop();
+        cout &lt;&lt; node-&gt;val;
+        if (node-&gt;left) q.push(node-&gt;left);
+        if (node-&gt;right) q.push(node-&gt;right);
+    }
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>层序遍历必用队列，不是栈。</li><li>求深度可以在每层处理时计数。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp4">
         <div class="kp-top"><span class="no">04</span>
@@ -423,7 +492,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>遍历序列还原</h4>
         <p>根据两种遍历序列还原二叉树，并推断第三种序列。</p>
         <div class="tags"><span>序列还原</span><span>结构推断</span></div>
-        <a class="link-red" href="#kp4">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>先序第一个元素是根，中序中根左边是左子树、右边是右子树。</li><li>递归地对左右子树重复此过程，即可还原整棵树。</li><li>同理，后序最后一个元素是根。</li><li>还原后可以推出第三种遍历序列。</li></ul></div>
+            <div class="kp-code"><pre>// 先序+中序还原（简述）
+TreeNode* build(int preL, int preR, int inL, int inR,
+                vector&lt;int&gt;&amp; pre, vector&lt;int&gt;&amp; in) {
+    if (preL &gt; preR) return nullptr;
+    int rootVal = pre[preL];
+    int k = inL;
+    while (in[k] != rootVal) k++;
+    int leftSize = k - inL;
+    TreeNode* node = new TreeNode(rootVal);
+    node-&gt;left = build(preL+1, preL+leftSize, inL, k-1, pre, in);
+    node-&gt;right = build(preL+leftSize+1, preR, k+1, inR, pre, in);
+    return node;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>注意计算左右子树大小的偏移量，这是最容易出错的地方。</li><li>元素必须互不相同，否则中序中找不到唯一位置。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp5">
         <div class="kp-top"><span class="no">05</span>
@@ -431,7 +519,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>特殊二叉树</h4>
         <p>掌握二叉搜索树、完全二叉树与满二叉树的性质。</p>
         <div class="tags"><span>二叉搜索树</span><span>完全二叉树</span></div>
-        <a class="link-red" href="#kp5">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>二叉搜索树（BST）：左子树所有结点 &lt; 根 &lt; 右子树所有结点。</li><li>BST 的中序遍历是升序序列。</li><li>完全二叉树：除最后一层外全满，最后一层靠左排列。</li><li>满二叉树：所有层都满，结点数 2^h - 1。</li></ul></div>
+            
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>完全二叉树用数组存储：i 的左孩子是 2i，右孩子是 2i+1。</li><li>BST 查找时间平均 O(log n)，最坏 O(n)（链状）。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp6">
         <div class="kp-top"><span class="no">06</span>
@@ -439,7 +534,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>哈夫曼编码</h4>
         <p>构造哈夫曼树，计算带权路径长度并生成编码。</p>
         <div class="tags"><span>哈夫曼树</span><span>带权路径</span></div>
-        <a class="link-red" href="#kp6">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>哈夫曼树：带权路径长度（WPL）最小的二叉树。</li><li>构造：每次选两个权值最小的结点合并，新结点权值为两者之和。</li><li>哈夫曼编码：左分支 0 右分支 1，频率高的字符编码短。</li><li>WPL = Σ(字符频率 × 编码长度)，也等于所有非叶结点权值之和。</li></ul></div>
+            <div class="kp-code"><pre>// 用优先队列构造哈夫曼树（简述）
+priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; pq;
+for (int w : weights) pq.push(w);
+int wpl = 0;
+while (pq.size() &gt; 1) {
+    int a = pq.top(); pq.pop();
+    int b = pq.top(); pq.pop();
+    wpl += a + b;
+    pq.push(a + b);
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>哈夫曼树不唯一（等权结点合并顺序不同），但 WPL 唯一。</li><li>哈夫曼编码是前缀编码，不会一个编码是另一个的前缀。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp7">
         <div class="kp-top"><span class="no">07</span>
@@ -447,7 +558,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>格雷码</h4>
         <p>理解格雷码的生成规则与相邻码字只差一位的性质。</p>
         <div class="tags"><span>生成规则</span><span>相邻码字</span></div>
-        <a class="link-red" href="#kp7">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>格雷码：相邻两个数的二进制表示只有一位不同。</li><li>n 位格雷码有 2^n 个编码。</li><li>构造方法：n 位格雷码 = (n-1)位格雷码正序 + (n-1)位格雷码逆序，前面补 0/1。</li><li>二进制转格雷码：g = b ^ (b &gt;&gt; 1)。</li></ul></div>
+            <div class="kp-code"><pre>// 二进制转格雷码
+int binaryToGray(int b) {
+    return b ^ (b &gt;&gt; 1);
+}
+
+// 生成 n 位格雷码序列（简述）
+vector&lt;int&gt; gray(int n) {
+    if (n == 1) return {0, 1};
+    vector&lt;int&gt; v = gray(n-1), r;
+    for (int x : v) r.push_back(x);
+    for (int i = v.size()-1; i &gt;= 0; i--)
+        r.push_back((1 &lt;&lt; (n-1)) | v[i]);
+    return r;
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>格雷码首尾两个编码也只差一位（循环格雷码）。</li><li>常用于电机控制和错误校正。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp8">
         <div class="kp-top"><span class="no">08</span>
@@ -455,7 +586,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>路径枚举与回溯</h4>
         <p>在迷宫中枚举路径，处理状态标记与撤销。</p>
         <div class="tags"><span>状态标记</span><span>回溯撤销</span></div>
-        <a class="link-red" href="#kp8">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>回溯：按决策树深度优先搜索，走不通就回退，撤销选择继续试。</li><li>在迷宫中：标记访问过的格子，DFS 搜索，递归返回后取消标记。</li><li>回溯三步：做选择 → 递归 → 撤销选择。</li><li>适用于：全排列、子集、迷宫路径、N 皇后等。</li></ul></div>
+            <div class="kp-code"><pre>int maze[15][15];
+bool visited[15][15];
+int dx[] = {0, 1, 0, -1};
+int dy[] = {1, 0, -1, 0};
+
+void dfs(int x, int y, int n, int m) {
+    if (x &lt; 0 || x &gt;= n || y &lt; 0 || y &gt;= m) return;
+    if (maze[x][y] == 1 || visited[x][y]) return;
+    visited[x][y] = true;
+    // 到达终点处理
+    for (int d = 0; d &lt; 4; d++)
+        dfs(x+dx[d], y+dy[d], n, m);
+    visited[x][y] = false;  // 撤销
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>回溯必须撤销选择（恢复现场），否则其他路径会误判。</li><li>方向数组简化四方向扩展。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp9">
         <div class="kp-top"><span class="no">09</span>
@@ -463,7 +614,28 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>深度优先搜索</h4>
         <p>用递归实现 DFS，处理连通性与路径问题。</p>
         <div class="tags"><span>递归搜索</span><span>连通性</span></div>
-        <a class="link-red" href="#kp9">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>DFS：一条路走到黑，走不通就回溯，用递归或栈实现。</li><li>连通性问题：从一个点出发 DFS，能到达的所有点在同一连通分量。</li><li>路径问题：记录当前路径，到达目标时处理。</li><li>visited 数组防止重复访问。</li></ul></div>
+            <div class="kp-code"><pre>vector&lt;int&gt; adj[100005];
+bool vis[100005];
+
+void dfs(int u) {
+    vis[u] = true;
+    for (int v : adj[u]) {
+        if (!vis[v]) dfs(v);
+    }
+}
+
+// 统计连通分量数
+int cnt = 0;
+for (int i = 1; i &lt;= n; i++) {
+    if (!vis[i]) { dfs(i); cnt++; }
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>DFS 递归深度不能太大，可能爆栈。</li><li>无向图 DFS 不需要记录父结点来避免走回去。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div>
       <div class="kp" id="kp10">
         <div class="kp-top"><span class="no">10</span>
@@ -471,7 +643,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         <h4>广度优先搜索</h4>
         <p>用队列实现 BFS，求最短步数与层次信息。</p>
         <div class="tags"><span>队列搜索</span><span>最短步数</span></div>
-        <a class="link-red" href="#kp10">查看知识点 →</a>
+        <div class="kp-detail">
+          <div class="kp-detail-body">
+            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>BFS：按层扩展，用队列实现，第一次到达目标时步数最少。</li><li>求最短路径（边权为 1）：BFS 天然保证最短。</li><li>BFS 用 dist 数组记录距离，初始 -1 表示未访问。</li><li>每层处理完后步数加一。</li></ul></div>
+            <div class="kp-code"><pre>int dist[100005];
+memset(dist, -1, sizeof(dist));
+queue&lt;int&gt; q;
+dist[start] = 0;
+q.push(start);
+while (!q.empty()) {
+    int u = q.front(); q.pop();
+    for (int v : adj[u]) {
+        if (dist[v] == -1) {
+            dist[v] = dist[u] + 1;
+            q.push(v);
+        }
+    }
+}</pre></div>
+            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>BFS 求最短路只适用于边权相同（或为1）的图。</li><li>网格 BFS 同样用队列和方向数组。</li></ul></div>
+          </div>
+        </div>
+        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
       </div></div>
 
     <section class="sec" style="margin-top:46px">
@@ -529,7 +721,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   }catch(e){}
   var kps=[].slice.call(document.querySelectorAll(".kp"));
   kps.forEach(function(el){
-    el.addEventListener("click",function(){
+    el.addEventListener("click",function(e){
+      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
       var st=el.querySelector(".state");
       st.textContent="已复习"; st.style.color="var(--brand)";
       try{
@@ -539,6 +732,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
         seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
         document.getElementById("p1").textContent=arr.length+"/"+total;
       }catch(e){}
+    });
+  });
+  document.querySelectorAll(".kp-toggle").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var detail=this.previousElementSibling;
+      var open=detail.classList.toggle("open");
+      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
     });
   });
 })();

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Never Gonna Give You Up</title>
+<meta name="description" content="Never Gonna Give You Up">
+<meta property="og:title" content="Never Gonna Give You Up">
+<meta property="og:description" content="Never Gonna Give You Up">
+
+<!-- 落地即跳转：B站 Rickroll -->
+<script>
+  var TARGET = "https://www.bilibili.com/video/BV1GJ411x7h7/";
+  // 用 replace 而不是 assign，避免用户按返回键又被弹回来
+  try { window.location.replace(TARGET); } catch (e) {}
+</script>
+
+<!-- 兜底：万一 JS 被禁用，用 meta 再跳一次 -->
+<noscript>
+  <meta http-equiv="refresh" content="0; url=https://www.bilibili.com/video/BV1GJ411x7h7/">
+</noscript>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+  }
+  /* 自动跳转被浏览器/微信拦截时，用户能看到并手动点 */
+  .fallback {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #555;
+    font-size: 15px;
+    text-decoration: none;
+    background: #000;
+  }
+  .fallback span { border-bottom: 1px solid #444; padding-bottom: 2px; }
+</style>
+</head>
+<body>
+  <a class="fallback" href="https://www.bilibili.com/video/BV1GJ411x7h7/">
+    <span>点击继续</span>
+  </a>
+</body>
+</html>

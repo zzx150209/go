@@ -311,7 +311,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-tips li{margin-bottom:8px}
 .kp-nav-row{display:flex;justify-content:space-between;gap:12px;
   margin-top:40px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
-.kp-nav{font-size:13px;color:var(--brand);text-decoration:none}
+.kp-nav{font-size:13px;color:var(--brand);text-decoration:none;white-space:nowrap}
 .kp-nav:hover{text-decoration:underline}
 .side-h{display:flex;justify-content:space-between;align-items:center;
   font-size:13px;font-weight:700;padding:8px 18px;
@@ -582,28 +582,46 @@ addBonus(score);</code></pre><label class="astro-h6wltfcv"><input type="radio" n
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
   // 选择题交互
-  document.querySelectorAll('.q-title').forEach(function(title){
-    var ans=title.nextElementSibling;
+  document.querySelectorAll('.q-opts').forEach(function(opts){
+    var title=opts.previousElementSibling;
+    while(title && !title.classList.contains('q-title')) title=opts.previousElementSibling;
+    var ans=opts.nextElementSibling;
     while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
-    if(!ans) return;
+    if(!title || !ans) return;
     var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
-    var opts=title.parentElement.querySelectorAll('.q-opt');
-    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+    
+    // 加提交按钮
+    var btn=document.createElement('button');
+    btn.type='button';
+    btn.textContent='提交答案';
+    btn.style.cssText='margin:8px 0 0;padding:6px 18px;background:var(--brand);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px';
+    opts.appendChild(btn);
+    
+    var selected=null;
+    opts.querySelectorAll('input[type=radio]').forEach(function(r){
       r.addEventListener('change',function(){
-        // 找到同组的选项
-        var group=r.closest('.q-opts');
-        if(!group) return;
-        group.querySelectorAll('.q-opt').forEach(function(o){
-          o.style.background='';o.style.borderLeft='';
-        });
-        var lbl=r.closest('.q-opt');
-        if(r.value===answer){
-          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
-        } else {
-          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
-        }
-        ans.style.display='block';
+        selected=r.value;
       });
+    });
+    btn.addEventListener('click',function(){
+      if(!selected){btn.textContent='请先选择一个答案';return;}
+      opts.querySelectorAll('.q-opt').forEach(function(o){
+        o.style.background='';o.style.borderLeft='';
+        o.style.opacity='0.6';
+      });
+      var chosen=opts.querySelector('input[value="'+selected+'"]').closest('.q-opt');
+      if(selected===answer){
+        chosen.style.background='#dcfce7';chosen.style.borderLeft='3px solid #16a34a';chosen.style.opacity='1';
+      } else {
+        chosen.style.background='#fee2e2';chosen.style.borderLeft='3px solid #dc2626';chosen.style.opacity='1';
+        // 标出正确答案
+        var correct=opts.querySelector('input[value="'+answer+'"]').closest('.q-opt');
+        correct.style.background='#dcfce7';correct.style.borderLeft='3px solid #16a34a';correct.style.opacity='1';
+      }
+      ans.style.display='block';
+      btn.disabled=true;
+      btn.style.opacity='0.5';
+      btn.textContent='已提交';
     });
   });
 })();

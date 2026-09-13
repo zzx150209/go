@@ -31,7 +31,7 @@ E = html.escape
 # ============================== 样式 ==============================
 CSS = """<style>
 :root{
-  --bg:#f8fafc;--bg-2:#f1f5f9;--card:#fff;--card-2:#f8fafc;
+  --bg:#faf8f4;--bg-2:#f3efe8;--card:#fff;--card-2:#f8f5f0;
   --line:#e2e8f0;--line-2:#cbd5e1;
   --text:#1e293b;--text-2:#64748b;--text-3:#94a3b8;
   --brand:#6366f1;--brand-2:#4f46e5;--brand-soft:#eef2ff;--navy:#6366f1;
@@ -737,8 +737,8 @@ def build_gesp():
     for i in range(1, 9):
         n = len(LEVELS[i][3])
         cards += f"""
-      <a class="lv-card" href="gesp/level{i}.html" style="--bar:{BAR_COLORS[i-1]}">
-        <div class="no">{i:02d}</div>
+      <a class="lv-card" href="gesp/level{i}.html">
+        <div class="no" style="color:{BAR_COLORS[i-1]}">{i:02d}</div>
         <div class="nm">{CN_NUM[i-1]}级</div>
         <div class="ds">{E(LEVELS[i][2])}</div>
         <div class="ft"><b>{n}</b> 个知识点，可直接进入</div>
@@ -775,7 +775,8 @@ def build_gesp():
 
   <section class="sec">
     <div class="sec-head"><h2 style="margin:0">一级至八级</h2>
-      <span class="hint">按当学习阶段自由查看</span></div>
+      <span class="hint">按当前学习级别直接查阅</span></div>
+    <div style="height:3px;background:linear-gradient(90deg,#5b8def,#7c6bf0,#a56bf0,#d86bc8);border-radius:2px;margin:0 0 18px"></div>
     <div class="lv-grid">{cards}</div>
   </section>
 

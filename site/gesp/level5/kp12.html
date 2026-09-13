@@ -234,7 +234,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -346,6 +347,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -372,6 +383,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -431,7 +446,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </div>
 </header>
 
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -442,13 +457,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">Showball 信息学</a> · <a href="../gesp.html">GESP</a> · 5级 · 复杂度与数据范围</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">复杂度与数据范围</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">12</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP 5级知识字典 · 知识点 12</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP 5级知识字典 · 知识点 12</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">根据数据范围判断算法是否可行，选择合适复杂度。</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：<span>数据范围</span><span>复杂度判断</span></div>
       </div>
@@ -666,6 +680,7 @@ int main() {    int n;    cin &gt;&gt; n;    if (n &lt; 1 || n &gt; 12) {       
       
     </div>
   </div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#从同样很快到差距巨大">从同样很快到差距巨大</a></li><li><a href="#01-输入规模与基本操作">01 输入规模与基本操作</a></li><li><a href="#k1先确定-n再选择要数的操作" class="lvl3">K1：先确定 n，再选择要数的操作</a></li><li><a href="#从次数表达式得到-o" class="lvl3">从次数表达式得到 O</a></li><li><a href="#02-从程序结构判断增长">02 从程序结构判断增长</a></li><li><a href="#k2顺序相加独立嵌套相乘" class="lvl3">K2：顺序相加，独立嵌套相乘</a></li><li><a href="#每轮减半olog-n" class="lvl3">每轮减半：O(log n)</a></li><li><a href="#二叉分支o2n" class="lvl3">二叉分支：O(2^n)</a></li><li><a href="#03-七种次数放到同一个输入中">03 七种次数放到同一个输入中</a></li><li><a href="#04-用程序真实计数">04 用程序真实计数</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#样例输入" class="lvl3">样例输入</a></li><li><a href="#样例输出" class="lvl3">样例输出</a></li><li><a href="#05-时间空间与数据范围">05 时间、空间与数据范围</a></li><li><a href="#k3时间和额外空间分开检查" class="lvl3">K3：时间和额外空间分开检查</a></li><li><a href="#用-n100000-做粗略判断" class="lvl3">用 n=100000 做粗略判断</a></li><li><a href="#把数组换算成近似字节数" class="lvl3">把数组换算成近似字节数</a></li><li><a href="#常见错误怎样改正">常见错误怎样改正</a></li><li><a href="#练习与答案">练习与答案</a></li><li><a href="#引导练习顺序还是相乘" class="lvl3">引导练习：顺序还是相乘</a></li><li><a href="#独立练习改变内层结构" class="lvl3">独立练习：改变内层结构</a></li><li><a href="#迁移练习为十万规模选方案" class="lvl3">迁移练习：为十万规模选方案</a></li><li><a href="#空间练习数量级和-mib-都要会说" class="lvl3">空间练习：数量级和 MiB 都要会说</a></li></ul></div>
 </div>
 </main>
 

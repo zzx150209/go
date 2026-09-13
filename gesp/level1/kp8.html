@@ -234,7 +234,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -346,6 +347,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -372,6 +383,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -431,7 +446,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </div>
 </header>
 
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -442,13 +457,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">Showball 信息学</a> · <a href="../gesp.html">GESP</a> · 1级 · 顺序结构</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">顺序结构</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">08</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 08</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 08</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">按顺序完成输入、计算和输出，并通过变量变化检查。</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：<span>顺序执行</span><span>变量追踪</span></div>
       </div>
@@ -967,6 +981,7 @@ int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width;
       <a class="kp-nav" href="kp9.html">下一个：分支结构 →</a>
     </div>
   </div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-从上到下执行">01 从上到下执行</a></li><li><a href="#顺序结构是一条连续路线" class="lvl3">顺序结构是一条连续路线</a></li><li><a href="#三条语句不能同时计算" class="lvl3">三条语句不能同时计算</a></li><li><a href="#一条语句完成后状态才交给下一条" class="lvl3">一条语句完成后，状态才交给下一条</a></li><li><a href="#02-变量变化追踪">02 变量变化追踪</a></li><li><a href="#状态表记录每行执行后的快照" class="lvl3">状态表记录每行执行后的快照</a></li><li><a href="#多个变量怎样记录" class="lvl3">多个变量怎样记录</a></li><li><a href="#画状态表的固定步骤" class="lvl3">画状态表的固定步骤</a></li><li><a href="#03-输入计算输出">03 输入、计算、输出</a></li><li><a href="#顺序程序常见的三段职责" class="lvl3">顺序程序常见的三段职责</a></li><li><a href="#从题意写成语句" class="lvl3">从题意写成语句</a></li><li><a href="#先核对范围和中间结果" class="lvl3">先核对范围和中间结果</a></li><li><a href="#输出也有执行时刻" class="lvl3">输出也有执行时刻</a></li><li><a href="#04-临时变量交换">04 临时变量交换</a></li><li><a href="#为什么直接互相赋值会丢数据" class="lvl3">为什么直接互相赋值会丢数据</a></li><li><a href="#用临时变量保住即将被覆盖的旧值" class="lvl3">用临时变量保住即将被覆盖的旧值</a></li><li><a href="#05-单位换算">05 单位换算</a></li><li><a href="#除法取完整单位取余保留剩余量" class="lvl3">除法取完整单位，取余保留剩余量</a></li><li><a href="#为什么分钟要从-rest-中计算" class="lvl3">为什么分钟要从 rest 中计算</a></li><li><a href="#用自测数据快速验证" class="lvl3">用自测数据快速验证</a></li><li><a href="#写顺序程序的统一方法">写顺序程序的统一方法</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#第一步先手算期望输出" class="lvl3">第一步：先手算期望输出</a></li><li><a href="#第二步画状态表" class="lvl3">第二步：画状态表</a></li><li><a href="#第三步运行并逐字比较" class="lvl3">第三步：运行并逐字比较</a></li><li><a href="#顺序程序的验证清单">顺序程序的验证清单</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#把多条赋值当成同时成立的方程" class="lvl3">把多条赋值当成同时成立的方程</a></li><li><a href="#输入变量还没准备好就开始计算" class="lvl3">输入变量还没准备好就开始计算</a></li><li><a href="#面积公式或赋值方向写错" class="lvl3">面积公式或赋值方向写错</a></li><li><a href="#交换时先覆盖旧值" class="lvl3">交换时先覆盖旧值</a></li><li><a href="#单位拆分重复计算大单位" class="lvl3">单位拆分重复计算大单位</a></li><li><a href="#公式正确输出顺序或格式错误" class="lvl3">公式正确，输出顺序或格式错误</a></li><li><a href="#只测普通样例不估算最大中间结果" class="lvl3">只测普通样例，不估算最大中间结果</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-sequential">关联知识与资源</a></li></ul></div>
 </div>
 </main>
 

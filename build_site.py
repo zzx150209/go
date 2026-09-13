@@ -256,7 +256,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -368,6 +369,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -394,6 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -910,6 +925,20 @@ def build_kp_page(n, kp_idx):
     if n in REF_KP and kp_idx <= len(REF_KP[n]):
         ref_html = REF_KP[n][kp_idx - 1]
 
+    # 从内容提取h2/h3生成右侧目录
+    import re as _re
+    toc_items = []
+    for m in _re.finditer(r'<h([23])[^>]*id="([^"]*)"[^>]*>(.*?)</h\1>', ref_html):
+        lvl = int(m.group(1))
+        hid = m.group(2)
+        txt = _re.sub(r'<[^>]+>', '', m.group(3)).strip()
+        toc_items.append((lvl, hid, txt))
+    toc_html = '<div class="toc"><div class="toc-title">本页内容</div><ul>'
+    for lvl, hid, txt in toc_items:
+        cls = ' class="lvl3"' if lvl == 3 else ''
+        toc_html += f'<li><a href="#{hid}"{cls}>{E(txt)}</a></li>'
+    toc_html += '</ul></div>'
+
     # 上一个/下一个
     prev_link = next_link = ""
     if kp_idx > 1:
@@ -920,7 +949,7 @@ def build_kp_page(n, kp_idx):
         next_link = f'<a class="kp-nav" href="kp{kp_idx+1}.html">下一个：{E(nt)} →</a>'
 
     body = f"""
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -931,13 +960,12 @@ def build_kp_page(n, kp_idx):
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">{SITE_NAME}</a> · <a href="../gesp.html">GESP</a> · {n}级 · {E(title)}</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">{E(title)}</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">{kp_idx:02d}</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP {n}级知识字典 · 知识点 {kp_idx:02d}</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP {n}级知识字典 · 知识点 {kp_idx:02d}</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">{E(desc)}</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：{tags_html}</div>
       </div>
@@ -953,6 +981,7 @@ def build_kp_page(n, kp_idx):
       {next_link}
     </div>
   </div>
+  {toc_html}
 </div>
 </main>
 

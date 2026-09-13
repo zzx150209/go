@@ -234,7 +234,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -346,6 +347,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -372,6 +383,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -431,7 +446,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </div>
 </header>
 
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -442,13 +457,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">Showball 信息学</a> · <a href="../gesp.html">GESP</a> · 1级 · 基本数据类型</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">基本数据类型</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">06</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 06</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 06</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">认识整型、浮点、字符和布尔类型的范围与选择方法。</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：<span>int-double</span><span>char-bool</span></div>
       </div>
@@ -882,6 +896,7 @@ int main() {    int activeStudents; // 当前活跃人数是普通范围内的�
       <a class="kp-nav" href="kp7.html">下一个：基本运算 →</a>
     </div>
   </div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-整数类型">01 整数类型</a></li><li><a href="#常见大小和范围" class="lvl3">常见大小和范围</a></li><li><a href="#普通整数为什么优先用-int" class="lvl3">普通整数为什么优先用 int</a></li><li><a href="#什么时候需要-long-long" class="lvl3">什么时候需要 long long</a></li><li><a href="#怎样验证整数类型是否合适" class="lvl3">怎样验证整数类型是否合适</a></li><li><a href="#02-浮点类型与有效精度">02 浮点类型与有效精度</a></li><li><a href="#范围和精度是两件事" class="lvl3">范围和精度是两件事</a></li><li><a href="#什么是有效数字" class="lvl3">什么是有效数字</a></li><li><a href="#为什么小数有时不是完全精确" class="lvl3">为什么小数有时不是完全精确</a></li><li><a href="#怎样验证浮点类型是否合适" class="lvl3">怎样验证浮点类型是否合适</a></li><li><a href="#03-char-字符类型">03 char 字符类型</a></li><li><a href="#04-bool-与逻辑值">04 bool 与逻辑值</a></li><li><a href="#05-类型转换">05 类型转换</a></li><li><a href="#浮点数转整数向-0-截去小数部分" class="lvl3">浮点数转整数：向 0 截去小数部分</a></li><li><a href="#整数除法和浮点除法" class="lvl3">整数除法和浮点除法</a></li><li><a href="#取余只用于整数" class="lvl3">取余只用于整数</a></li><li><a href="#怎样选择类型">怎样选择类型</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-data-types">关联知识与资源</a></li></ul></div>
 </div>
 </main>
 

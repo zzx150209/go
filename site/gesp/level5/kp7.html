@@ -234,7 +234,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -346,6 +347,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -372,6 +383,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -431,7 +446,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </div>
 </header>
 
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -442,13 +457,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">Showball 信息学</a> · <a href="../gesp.html">GESP</a> · 5级 · 顺序查找</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">顺序查找</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">07</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP 5级知识字典 · 知识点 07</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP 5级知识字典 · 知识点 07</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">实现精确查找与左右边界查找，统计出现次数。</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：<span>精确查找</span><span>左右边界</span></div>
       </div>
@@ -515,6 +529,7 @@ while (left &lt;= right) {</code></pre><p class="astro-c5eeuzv2"><strong class="
       <a class="kp-nav" href="kp8.html">下一个：二分答案 →</a>
     </div>
   </div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#问题和范围">问题和范围</a></li><li><a href="#binary-search-problem" class="lvl3">要解决的问题</a></li><li><a href="#binary-search-scope" class="lvl3">本课范围</a></li><li><a href="#共同基础">共同基础</a></li><li><a href="#方法对比">方法对比</a></li><li><a href="#binary-search-comparison-0" class="lvl3">精确查找</a></li><li><a href="#binary-search-comparison-1" class="lvl3">左边界</a></li><li><a href="#binary-search-comparison-2" class="lvl3">右边界</a></li><li><a href="#算法怎样形成">算法怎样形成</a></li><li><a href="#自然语言步骤">自然语言步骤</a></li><li><a href="#执行账本">执行账本</a></li><li><a href="#完整程序">完整程序</a></li><li><a href="#复杂度">复杂度</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#binary-search-error-0" class="lvl3">没有有序前提就直接排除一段</a></li><li><a href="#binary-search-error-1" class="lvl3">混用闭区间与半开区间</a></li><li><a href="#binary-search-error-2" class="lvl3">更新后没有排除 middle</a></li><li><a href="#binary-search-error-3" class="lvl3">把任意命中当成第一个或最后一个</a></li><li><a href="#binary-search-error-4" class="lvl3">把不存在位置直接当数组下标</a></li><li><a href="#binary-search-error-5" class="lvl3">把额外空间 O(1) 说成整个程序只占 O(1)</a></li><li><a href="#练习与自检">练习与自检</a></li><li><a href="#binary-search-practice-0" class="lvl3">练习一：先选对模型</a></li><li><a href="#binary-search-practice-1" class="lvl3">练习二：只更新一轮</a></li><li><a href="#binary-search-practice-2" class="lvl3">练习三：找出不停止的原因</a></li><li><a href="#binary-search-practice-3" class="lvl3">练习四：出现次数去哪里学</a></li><li><a href="#下一步">下一步</a></li><li><a href="#选择子知识点">选择子知识点</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li></ul></div>
 </div>
 </main>
 

@@ -234,7 +234,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -346,6 +347,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -372,6 +383,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -431,7 +446,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </div>
 </header>
 
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -442,13 +457,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">Showball 信息学</a> · <a href="../gesp.html">GESP</a> · 3级 · 位运算</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">位运算</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">03</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP 3级知识字典 · 知识点 03</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP 3级知识字典 · 知识点 03</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">掌握与、或、异或、取反和移位，安全地进行位操作。</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：<span>按位运算</span><span>移位</span></div>
       </div>
@@ -575,6 +589,7 @@ int main() {    unsigned int value; // 保存要读取或修改的非负整数  
       <a class="kp-nav" href="kp4.html">下一个：算法的概念与描述 →</a>
     </div>
   </div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与使用边界">知识范围与使用边界</a></li><li><a href="#kp-01">01 六种位运算</a></li><li><a href="#核心一固定位宽下逐位计算" class="lvl3">核心一：固定位宽下逐位计算</a></li><li><a href="#核心二安全左移与右移" class="lvl3">核心二：安全左移与右移</a></li><li><a href="#kp-02">02 判断第 k 位</a></li><li><a href="#核心三用掩码读取目标位" class="lvl3">核心三：用掩码读取目标位</a></li><li><a href="#安全读取第-k-位" class="lvl3">安全读取第 k 位</a></li><li><a href="#kp-03">03 设置、清除与翻转第 k 位</a></li><li><a href="#kp-04">04 位段拆分与合并</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#本课小结" class="lvl3">本课小结</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
 </div>
 </main>
 

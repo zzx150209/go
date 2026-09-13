@@ -234,7 +234,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -346,6 +347,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -372,6 +383,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -431,7 +446,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </div>
 </header>
 
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -442,13 +457,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">Showball 信息学</a> · <a href="../gesp.html">GESP</a> · 1级 · 基本运算</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">基本运算</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">07</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 07</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 07</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">掌握算术、关系、逻辑、赋值、自增自减及优先级规则。</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：<span>运算符</span><span>优先级</span></div>
       </div>
@@ -1188,6 +1202,7 @@ int main() {    int n;    int k; // 题目保证 k 是正整数，可以作为�
       <a class="kp-nav" href="kp8.html">下一个：顺序结构 →</a>
     </div>
   </div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-算术运算">01 算术运算</a></li><li><a href="#五种基本算术运算" class="lvl3">五种基本算术运算</a></li><li><a href="#加号减号也能表示正负" class="lvl3">加号、减号也能表示正负</a></li><li><a href="#02-关系运算">02 关系运算</a></li><li><a href="#赋值等号和相等比较不是一回事" class="lvl3">赋值等号和相等比较不是一回事</a></li><li><a href="#c-不能照写数学中的链式比较" class="lvl3">C++ 不能照写数学中的链式比较</a></li><li><a href="#03-整数除法与取余">03 整数除法与取余</a></li><li><a href="#两个整数相除得到整数商" class="lvl3">两个整数相除得到整数商</a></li><li><a href="#取余得到没有分完的部分" class="lvl3">取余得到没有分完的部分</a></li><li><a href="#除法和取余的使用条件" class="lvl3">除法和取余的使用条件</a></li><li><a href="#04-赋值与复合赋值">04 赋值与复合赋值</a></li><li><a href="#复合赋值把计算和写回合在一起" class="lvl3">复合赋值把计算和写回合在一起</a></li><li><a href="#连续赋值从右向左执行" class="lvl3">连续赋值从右向左执行</a></li><li><a href="#05-自增与自减">05 自增与自减</a></li><li><a href="#单独使用时前置和后置结果相同" class="lvl3">单独使用时，前置和后置结果相同</a></li><li><a href="#放进表达式时取得的值不同" class="lvl3">放进表达式时，取得的值不同</a></li><li><a href="#06-逻辑运算">06 逻辑运算</a></li><li><a href="#真假表" class="lvl3">真假表</a></li><li><a href="#短路决定右侧是否执行" class="lvl3">短路决定右侧是否执行</a></li><li><a href="#07-条件运算符">07 条件运算符</a></li><li><a href="#08-优先级与结合方向">08 优先级与结合方向</a></li><li><a href="#一级常用优先级" class="lvl3">一级常用优先级</a></li><li><a href="#同级算术运算通常从左到右" class="lvl3">同级算术运算通常从左到右</a></li><li><a href="#一步一步计算混合表达式" class="lvl3">一步一步计算混合表达式</a></li><li><a href="#比较先算赋值最后发生" class="lvl3">比较先算，赋值最后发生</a></li><li><a href="#做运算题的统一检查顺序">做运算题的统一检查顺序</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-operations">关联知识与资源</a></li></ul></div>
 </div>
 </main>
 

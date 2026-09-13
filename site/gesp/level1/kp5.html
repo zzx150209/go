@@ -234,7 +234,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
-.layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
+.layout{display:grid;grid-template-columns:250px 1fr 200px;gap:38px;align-items:start;
+  max-width:1280px;margin:0 auto;padding:24px 32px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -346,6 +347,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
 
+/* 右侧目录 */
+.toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
+.toc-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.toc ul{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:block;padding:4px 0 4px 10px;color:var(--text-3);text-decoration:none;
+  border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{color:var(--text)}
+.toc a.lvl3{padding-left:22px;font-size:12px}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -372,6 +383,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 #results .empty{padding:16px 18px;color:var(--text-3);font-size:13.5px}
 
 /* 响应式 */
+@media (max-width:1200px){
+  .layout{grid-template-columns:250px 1fr}
+  .toc{display:none}
+}
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
   .outline{grid-template-columns:repeat(2,1fr)}
@@ -431,7 +446,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </div>
 </header>
 
-<main class="wrap" style="padding-top:40px">
+<main class="wrap">
 <div class="layout">
   <aside class="side">
     <div class="side-box">
@@ -442,13 +457,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   </aside>
 
   <div class="kp-content">
-    <div class="crumb"><a href="../../index.html">Showball 信息学</a> · <a href="../gesp.html">GESP</a> · 1级 · 程序基本概念</div>
     <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">程序基本概念</h1>
 
     <div class="kp-summary">
       <div class="kp-summary-no">05</div>
       <div>
-        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 05</div>
+        <div style="font-size:12px;color:var(--brand);font-weight:600;margin-bottom:4px">GESP 1级知识字典 · 知识点 05</div>
         <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">掌握标识符、关键字、常量、变量、赋值与表达式。</p>
         <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：<span>变量常量</span><span>标识符表达式</span></div>
       </div>
@@ -1168,6 +1182,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
       <a class="kp-nav" href="kp6.html">下一个：基本数据类型 →</a>
     </div>
   </div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-标识符">01 标识符</a></li><li><a href="#标识符是程序中的名字" class="lvl3">标识符是程序中的名字</a></li><li><a href="#三步判断一个名称是否合法" class="lvl3">三步判断一个名称是否合法</a></li><li><a href="#合法还不够名字还要能表达用途" class="lvl3">合法还不够，名字还要能表达用途</a></li><li><a href="#02-关键字">02 关键字</a></li><li><a href="#关键字已经由-c-规定用途" class="lvl3">关键字已经由 C++ 规定用途</a></li><li><a href="#常见名称不一定是关键字" class="lvl3">常见名称不一定是关键字</a></li><li><a href="#03-常量">03 常量</a></li><li><a href="#字面量把固定值直接写进代码" class="lvl3">字面量把固定值直接写进代码</a></li><li><a href="#用-const-给固定值起名字" class="lvl3">用 const 给固定值起名字</a></li><li><a href="#什么时候用字面量什么时候用具名常量" class="lvl3">什么时候用字面量，什么时候用具名常量</a></li><li><a href="#04-变量与初始化">04 变量与初始化</a></li><li><a href="#变量由名字类型和当前值组成" class="lvl3">变量由名字、类型和当前值组成</a></li><li><a href="#声明定义和初始化的区别" class="lvl3">声明、定义和初始化的区别</a></li><li><a href="#为什么不能读取未初始化的普通局部变量" class="lvl3">为什么不能读取未初始化的普通局部变量</a></li><li><a href="#05-赋值与连续赋值">05 赋值与连续赋值</a></li><li><a href="#赋值先算右边再写左边" class="lvl3">赋值先算右边，再写左边</a></li><li><a href="#赋值复制当前值不会建立自动连接" class="lvl3">赋值复制当前值，不会建立自动连接</a></li><li><a href="#连续赋值从右边开始" class="lvl3">连续赋值从右边开始</a></li><li><a href="#-和--的职责不同" class="lvl3">= 和 == 的职责不同</a></li><li><a href="#06-表达式">06 表达式</a></li><li><a href="#表达式会产生一个结果" class="lvl3">表达式会产生一个结果</a></li><li><a href="#从当前值到结果再保存" class="lvl3">从当前值到结果，再保存</a></li><li><a href="#变量变化后旧结果不会自动重算" class="lvl3">变量变化后，旧结果不会自动重算</a></li><li><a href="#括号和优先级决定计算顺序" class="lvl3">括号和优先级决定计算顺序</a></li><li><a href="#建立变量时的统一检查顺序">建立变量时的统一检查顺序</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#变量名不符合规则" class="lvl3">变量名不符合规则</a></li><li><a href="#读取未初始化的普通局部变量" class="lvl3">读取未初始化的普通局部变量</a></li><li><a href="#把初始化和赋值混成一件事" class="lvl3">把初始化和赋值混成一件事</a></li><li><a href="#把--当成数学等号" class="lvl3">把 = 当成数学等号</a></li><li><a href="#认为赋值会让两个变量永久联动" class="lvl3">认为赋值会让两个变量永久联动</a></li><li><a href="#从左向右误读连续赋值" class="lvl3">从左向右误读连续赋值</a></li><li><a href="#只改公式里的变量却忘了重新计算结果" class="lvl3">只改公式里的变量，却忘了重新计算结果</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-variables-expressions">关联知识与资源</a></li></ul></div>
 </div>
 </main>
 

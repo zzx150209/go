@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,27 +489,28 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 邻接矩阵</a><a href="#kp-02" class="astro-obblnf2s">02 邻接表</a><a href="#kp-03" class="astro-obblnf2s">03 链式前向星</a><a href="#kp-04" class="astro-obblnf2s">04 存储选择与建图</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心检查</a><a href="#page-test" class="astro-obblnf2s">综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方七级大纲要求掌握图的存储。存储方式不会改变图本身，但会改变判断一条边、枚举相邻点和占用空间的代价。本页覆盖邻接矩阵、邻接表和链式前向星入门。</p>
 <h2 id="kp-01">01 邻接矩阵</h2>
-<p>用 <code>edge[u][v]</code> 表示 <code>u</code> 到 <code>v</code> 是否有边。无向图要同时设置 <code>edge[u][v]</code> 与 <code>edge[v][u]</code>。邻接矩阵判断两点是否直接相连很方便，空间复杂度为 <code>O(n^2)</code>，适合顶点较少或较稠密的图。</p>
-<p><strong>具体推演：</strong> 无向图有边 <code>1—3</code> 时，把 <code>edge[1][3]</code> 和 <code>edge[3][1]</code> 都设为 <code>1</code>。随后查询 <code>1</code> 与 <code>3</code> 是否直接相连，只需读取一个数组位置；查询 <code>1</code> 与 <code>2</code> 得到 <code>0</code>，表示没有直接边，但不能据此断言两点之间一定不存在经过其他顶点的路径。</p>
+<p>用 <code dir="auto">edge[u][v]</code> 表示 <code dir="auto">u</code> 到 <code dir="auto">v</code> 是否有边。无向图要同时设置 <code dir="auto">edge[u][v]</code> 与 <code dir="auto">edge[v][u]</code>。邻接矩阵判断两点是否直接相连很方便，空间复杂度为 <code dir="auto">O(n^2)</code>，适合顶点较少或较稠密的图。</p>
+<p><strong>具体推演：</strong> 无向图有边 <code dir="auto">1—3</code> 时，把 <code dir="auto">edge[1][3]</code> 和 <code dir="auto">edge[3][1]</code> 都设为 <code dir="auto">1</code>。随后查询 <code dir="auto">1</code> 与 <code dir="auto">3</code> 是否直接相连，只需读取一个数组位置；查询 <code dir="auto">1</code> 与 <code dir="auto">2</code> 得到 <code dir="auto">0</code>，表示没有直接边，但不能据此断言两点之间一定不存在经过其他顶点的路径。</p>
 <h2 id="kp-02">02 邻接表</h2>
-<p><code>vector&lt;int&gt; graph[N]</code> 中，<code>graph[u]</code> 保存 <code>u</code> 的所有相邻点。存储无向边也要加入两个方向。邻接表空间通常为 <code>O(n+m)</code>，枚举某个顶点的邻边只访问实际存在的边，适合稀疏图。</p>
-<p><strong>具体推演：</strong> 依次加入无向边 <code>1—2</code>、<code>1—3</code> 后，<code>graph[1]=[2,3]</code>、<code>graph[2]=[1]</code>、<code>graph[3]=[1]</code>。枚举顶点 <code>1</code> 只访问两个真实邻点，不必扫描所有顶点；若漏存反向边，枚举顶点 <code>2</code> 时就会错误地看不到顶点 <code>1</code>。</p>
+<p><code dir="auto">vector&lt;int&gt; graph[N]</code> 中，<code dir="auto">graph[u]</code> 保存 <code dir="auto">u</code> 的所有相邻点。存储无向边也要加入两个方向。邻接表空间通常为 <code dir="auto">O(n+m)</code>，枚举某个顶点的邻边只访问实际存在的边，适合稀疏图。</p>
+<p><strong>具体推演：</strong> 依次加入无向边 <code dir="auto">1—2</code>、<code dir="auto">1—3</code> 后，<code dir="auto">graph[1]=[2,3]</code>、<code dir="auto">graph[2]=[1]</code>、<code dir="auto">graph[3]=[1]</code>。枚举顶点 <code dir="auto">1</code> 只访问两个真实邻点，不必扫描所有顶点；若漏存反向边，枚举顶点 <code dir="auto">2</code> 时就会错误地看不到顶点 <code dir="auto">1</code>。</p>
 <h2 id="kp-03">03 链式前向星入门</h2>
 <p>链式前向星使用数组模拟邻接表，四个常见数组各有明确职责：</p>
 <ul>
-<li><code>head[u]</code>：顶点 <code>u</code> 当前第一条出边的编号，没有出边时为 <code>-1</code>；</li>
-<li><code>to[index]</code>：编号为 <code>index</code> 的边到达哪个顶点；</li>
-<li><code>next[index]</code>：同一起点的下一条边编号；</li>
-<li><code>w[index]</code>：这条边的权值；无权图可以不使用。</li>
+<li><code dir="auto">head[u]</code>：顶点 <code dir="auto">u</code> 当前第一条出边的编号，没有出边时为 <code dir="auto">-1</code>；</li>
+<li><code dir="auto">to[index]</code>：编号为 <code dir="auto">index</code> 的边到达哪个顶点；</li>
+<li><code dir="auto">next[index]</code>：同一起点的下一条边编号；</li>
+<li><code dir="auto">w[index]</code>：这条边的权值；无权图可以不使用。</li>
 </ul>
-<p>加入有向边 <code>u -&gt; v</code> 时，先令 <code>to[index] = v</code>、<code>next[index] = head[u]</code>，再令 <code>head[u] = index</code>。枚举 <code>u</code> 的出边时，从 <code>head[u]</code> 开始不断跳到 <code>next[index]</code>，直到 <code>-1</code>。无向边仍要调用两次加边过程。</p>
-<p><strong>具体推演：</strong> 初始 <code>head[1]=-1</code>。加入编号 <code>0</code> 的边 <code>1→2</code> 后，<code>to[0]=2</code>、<code>next[0]=-1</code>、<code>head[1]=0</code>；再加入编号 <code>1</code> 的边 <code>1→3</code> 后，<code>to[1]=3</code>、<code>next[1]=0</code>、<code>head[1]=1</code>。从边号 <code>1</code> 开始沿 <code>next</code> 走到 <code>0</code>，枚举顺序就是 <code>3、2</code>。</p>
+<p>加入有向边 <code dir="auto">u -&gt; v</code> 时，先令 <code dir="auto">to[index] = v</code>、<code dir="auto">next[index] = head[u]</code>，再令 <code dir="auto">head[u] = index</code>。枚举 <code dir="auto">u</code> 的出边时，从 <code dir="auto">head[u]</code> 开始不断跳到 <code dir="auto">next[index]</code>，直到 <code dir="auto">-1</code>。无向边仍要调用两次加边过程。</p>
+<p><strong>具体推演：</strong> 初始 <code dir="auto">head[1]=-1</code>。加入编号 <code dir="auto">0</code> 的边 <code dir="auto">1→2</code> 后，<code dir="auto">to[0]=2</code>、<code dir="auto">next[0]=-1</code>、<code dir="auto">head[1]=0</code>；再加入编号 <code dir="auto">1</code> 的边 <code dir="auto">1→3</code> 后，<code dir="auto">to[1]=3</code>、<code dir="auto">next[1]=0</code>、<code dir="auto">head[1]=1</code>。从边号 <code dir="auto">1</code> 开始沿 <code dir="auto">next</code> 走到 <code dir="auto">0</code>，枚举顺序就是 <code dir="auto">3、2</code>。</p>
 <h2 id="kp-04">04 存储选择与建图规则</h2>
-<p>频繁判断任意两点是否有边可考虑邻接矩阵；稀疏图中枚举邻点可用邻接表或链式前向星；只按输入顺序枚举全部边时也可直接保存边集。建图前还要确认顶点编号范围、图是否有向、是否带权、是否可能有重边或自环。带权邻接矩阵的“没有边”不能总用 <code>0</code> 表示，因为合法边权也可能为 <code>0</code>。</p>
-<p><strong>具体推演：</strong> <code>n=1000、m=1200</code> 时，邻接矩阵需要约一百万个位置，而邻接表只保存表头和约 <code>2400</code> 条无向邻接记录，后者更合适。若输入是一条权值为 <code>0</code> 的边 <code>1—2</code>，再用矩阵值 <code>0</code> 表示“无边”，就无法区分这条合法零权边，因此必须另设存在标记或哨兵。</p>
+<p>频繁判断任意两点是否有边可考虑邻接矩阵；稀疏图中枚举邻点可用邻接表或链式前向星；只按输入顺序枚举全部边时也可直接保存边集。建图前还要确认顶点编号范围、图是否有向、是否带权、是否可能有重边或自环。带权邻接矩阵的“没有边”不能总用 <code dir="auto">0</code> 表示，因为合法边权也可能为 <code dir="auto">0</code>。</p>
+<p><strong>具体推演：</strong> <code dir="auto">n=1000、m=1200</code> 时，邻接矩阵需要约一百万个位置，而邻接表只保存表头和约 <code dir="auto">2400</code> 条无向邻接记录，后者更合适。若输入是一条权值为 <code dir="auto">0</code> 的边 <code dir="auto">1—2</code>，再用矩阵值 <code dir="auto">0</code> 表示“无边”，就无法区分这条合法零权边，因此必须另设存在标记或哨兵。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -503,31 +523,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>邻接矩阵</td>
-<td><code>O(n^2)</code></td>
+<td><code dir="auto">O(n^2)</code></td>
 <td>快速判断两点是否直接相连</td>
 </tr>
 <tr>
 <td>邻接表</td>
-<td><code>O(n+m)</code></td>
+<td><code dir="auto">O(n+m)</code></td>
 <td>枚举某个顶点的实际邻边</td>
 </tr>
 <tr>
 <td>链式前向星</td>
-<td><code>O(n+m)</code></td>
+<td><code dir="auto">O(n+m)</code></td>
 <td>用固定数组枚举顶点出边</td>
 </tr>
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="基础例题">基础例题</h3>
-<p>无向图只有一条边 <code>1—2</code>。使用邻接矩阵时设置 <code>edge[1][2] = edge[2][1] = 1</code>；使用邻接表时把 <code>2</code> 加入 <code>graph[1]</code>，同时把 <code>1</code> 加入 <code>graph[2]</code>。两种结构表示的是同一张图，只是查询方式和空间不同。</p>
+<p>无向图只有一条边 <code dir="auto">1—2</code>。使用邻接矩阵时设置 <code dir="auto">edge[1][2] = edge[2][1] = 1</code>；使用邻接表时把 <code dir="auto">2</code> 加入 <code dir="auto">graph[1]</code>，同时把 <code dir="auto">1</code> 加入 <code dir="auto">graph[2]</code>。两种结构表示的是同一张图，只是查询方式和空间不同。</p>
 <h3 id="典型应用例题">典型应用例题</h3>
 <p>读入无向图并输出每个顶点的相邻点：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; graph[1005];    // 无向边必须在两个端点的邻接表中各保存一次。    for (int i = 1; i &lt;= m; i++) {        int u, v;        cin &gt;&gt; u &gt;&gt; v;        graph[u].push_back(v);        graph[v].push_back(u);    }    // 逐个顶点枚举邻接表，只访问真实存在的邻接记录。    for (int u = 1; u &lt;= n; u++) {        cout &lt;&lt; u &lt;&lt; ":";        for (int i = 0; i &lt; graph[u].size(); i++) {            cout &lt;&lt; " " &lt;&lt; graph[u][i];        }        cout &lt;&lt; endl;    }    return 0;}</code></pre>
-<p>建图与枚举总时间复杂度为 <code>O(n+m)</code>，空间复杂度为 <code>O(n+m)</code>。</p>
+<p>建图与枚举总时间复杂度为 <code dir="auto">O(n+m)</code>，空间复杂度为 <code dir="auto">O(n+m)</code>。</p>
 <h3 id="加边追踪">加边追踪</h3>
-<p>依次加入无向边 <code>(1,2)</code>、<code>(1,3)</code>，邻接表和链式前向星的变化如下：</p>
+<p>依次加入无向边 <code dir="auto">(1,2)</code>、<code dir="auto">(1,3)</code>，邻接表和链式前向星的变化如下：</p>
 <table>
 <thead>
 <tr>
@@ -539,22 +559,22 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; gra
 <tbody>
 <tr>
 <td>初始</td>
-<td><code>graph[1]</code> 为空</td>
-<td><code>head[1] = -1</code></td>
+<td><code dir="auto">graph[1]</code> 为空</td>
+<td><code dir="auto">head[1] = -1</code></td>
 </tr>
 <tr>
-<td>加入 <code>(1,2)</code> 的 <code>1 → 2</code></td>
-<td><code>graph[1] = [2]</code></td>
-<td><code>to[0] = 2</code>，<code>next[0] = -1</code>，<code>head[1] = 0</code></td>
+<td>加入 <code dir="auto">(1,2)</code> 的 <code dir="auto">1 → 2</code></td>
+<td><code dir="auto">graph[1] = [2]</code></td>
+<td><code dir="auto">to[0] = 2</code>，<code dir="auto">next[0] = -1</code>，<code dir="auto">head[1] = 0</code></td>
 </tr>
 <tr>
-<td>加入 <code>(1,3)</code> 的 <code>1 → 3</code></td>
-<td><code>graph[1] = [2,3]</code></td>
-<td><code>to[2] = 3</code>，<code>next[2] = 0</code>，<code>head[1] = 2</code></td>
+<td>加入 <code dir="auto">(1,3)</code> 的 <code dir="auto">1 → 3</code></td>
+<td><code dir="auto">graph[1] = [2,3]</code></td>
+<td><code dir="auto">to[2] = 3</code>，<code dir="auto">next[2] = 0</code>，<code dir="auto">head[1] = 2</code></td>
 </tr>
 </tbody>
 </table>
-<p>链式前向星采用头插法，所以从 <code>head[1]</code> 枚举时会先看到新加入的 <code>3</code>，再沿 <code>next</code> 看到 <code>2</code>。无向边的反向记录也要分别加入对应端点。</p>
+<p>链式前向星采用头插法，所以从 <code dir="auto">head[1]</code> 枚举时会先看到新加入的 <code dir="auto">3</code>，再沿 <code dir="auto">next</code> 看到 <code dir="auto">2</code>。无向边的反向记录也要分别加入对应端点。</p>
 <h3 id="建议测试案例">建议测试案例</h3>
 <table>
 <thead>
@@ -567,18 +587,18 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; gra
 <tbody>
 <tr>
 <td>基础</td>
-<td><code>n = 3</code>，边为 <code>1 2</code>、<code>1 3</code></td>
+<td><code dir="auto">n = 3</code>，边为 <code dir="auto">1 2</code>、<code dir="auto">1 3</code></td>
 <td>顶点 1 的邻点包含 2 和 3</td>
 </tr>
 <tr>
 <td>边界</td>
-<td><code>n = 1, m = 0</code></td>
+<td><code dir="auto">n = 1, m = 0</code></td>
 <td>唯一顶点的邻接表为空</td>
 </tr>
 <tr>
 <td>易错</td>
-<td>有向边 <code>1 → 2</code></td>
-<td>只存一个方向，不能自动加入 <code>2 → 1</code></td>
+<td>有向边 <code dir="auto">1 → 2</code></td>
+<td>只存一个方向，不能自动加入 <code dir="auto">2 → 1</code></td>
 </tr>
 </tbody>
 </table>
@@ -595,27 +615,27 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; gra
 <tr>
 <td>无向边只存一个方向</td>
 <td>从另一端遍历时会漏边</td>
-<td>分别保存 <code>u → v</code> 和 <code>v → u</code></td>
+<td>分别保存 <code dir="auto">u → v</code> 和 <code dir="auto">v → u</code></td>
 </tr>
 <tr>
-<td>顶点使用 1 下标，数组只开到 <code>n</code></td>
-<td>下标 <code>n</code> 会越界</td>
-<td>数组至少开到 <code>n + 1</code></td>
+<td>顶点使用 1 下标，数组只开到 <code dir="auto">n</code></td>
+<td>下标 <code dir="auto">n</code> 会越界</td>
+<td>数组至少开到 <code dir="auto">n + 1</code></td>
 </tr>
 <tr>
 <td>稀疏大图仍使用邻接矩阵</td>
-<td><code>O(n^2)</code> 空间可能无法容纳</td>
+<td><code dir="auto">O(n^2)</code> 空间可能无法容纳</td>
 <td>改用邻接表或链式前向星</td>
 </tr>
 <tr>
-<td>忘记把 <code>head</code> 初始化为 <code>-1</code></td>
+<td>忘记把 <code dir="auto">head</code> 初始化为 <code dir="auto">-1</code></td>
 <td>无法正确识别边链结束</td>
-<td>建图前统一初始化 <code>head</code></td>
+<td>建图前统一初始化 <code dir="auto">head</code></td>
 </tr>
 <tr>
-<td>先覆盖 <code>head[u]</code> 再保存旧表头</td>
+<td>先覆盖 <code dir="auto">head[u]</code> 再保存旧表头</td>
 <td>原有出边会丢失</td>
-<td>先令 <code>next[index] = head[u]</code>，最后更新 <code>head[u]</code></td>
+<td>先令 <code dir="auto">next[index] = head[u]</code>，最后更新 <code dir="auto">head[u]</code></td>
 </tr>
 <tr>
 <td>用合法边权表示“没有边”</td>
@@ -625,10 +645,28 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; gra
 </tbody>
 </table>
 <h3 id="错误反例推演">错误反例推演</h3>
-<p>初始 <code>head[1]=0</code>，表示顶点 <code>1</code> 已有一条边。新增边号 <code>1</code> 时若先写 <code>head[1]=1</code>，再写 <code>next[1]=head[1]</code>，就会得到 <code>next[1]=1</code>，边链永远指向自己，旧边号 <code>0</code> 也丢失。正确顺序先保存 <code>next[1]=0</code>，再更新 <code>head[1]=1</code>，枚举才能得到新边和旧边。</p>
+<p>初始 <code dir="auto">head[1]=0</code>，表示顶点 <code dir="auto">1</code> 已有一条边。新增边号 <code dir="auto">1</code> 时若先写 <code dir="auto">head[1]=1</code>，再写 <code dir="auto">next[1]=head[1]</code>，就会得到 <code dir="auto">next[1]=1</code>，边链永远指向自己，旧边号 <code dir="auto">0</code> 也丢失。正确顺序先保存 <code dir="auto">next[1]=0</code>，再更新 <code dir="auto">head[1]=1</code>，枚举才能得到新边和旧边。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>图的遍历通常使用邻接表枚举相邻点；选择存储结构时要同时考虑后续算法的访问方式。</p>
-<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能为无向边存入两个方向</label><label class="q-check"><input type="checkbox"> 能说明 head、to、next、w 的职责</label><label class="q-check"><input type="checkbox"> 能根据访问任务选择邻接矩阵、邻接表或链式前向星</label><span>6 题</span>
+<p class="q-title">第 1 题图用邻接矩阵 matrix 存储时，判断顶点 u 与 v 之间是否有边，通常读取哪个位置？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题图用邻接矩阵 matrix 存" value="A"><b>A.</b> matrix[u][v]</label><label class="q-opt"><input type="radio" name="第 1 题图用邻接矩阵 matrix 存" value="B"><b>B.</b> matrix[u + v][0]</label><label class="q-opt"><input type="radio" name="第 1 题图用邻接矩阵 matrix 存" value="C"><b>C.</b> matrix[0][u - v]</label><label class="q-opt"><input type="radio" name="第 1 题图用邻接矩阵 matrix 存" value="D"><b>D.</b> matrix[v][v + 1]</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 01：邻接矩阵的行、列分别对应两个顶点，matrix[u][v] 直接记录 u 与 v 的邻接关系，因此一次数组访问就能完成边查询。</p>
+<p class="q-title">第 2 题邻接表 adj[u] 通常保存什么内容？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题邻接表 adj[u] 通常保存" value="A"><b>A.</b> 与顶点 u 直接相邻的顶点</label><label class="q-opt"><input type="radio" name="第 2 题邻接表 adj[u] 通常保存" value="B"><b>B.</b> 图中所有不相邻的顶点</label><label class="q-opt"><input type="radio" name="第 2 题邻接表 adj[u] 通常保存" value="C"><b>C.</b> 只有顶点 u 自身</label><label class="q-opt"><input type="radio" name="第 2 题邻接表 adj[u] 通常保存" value="D"><b>D.</b> 整个邻接矩阵的每个元素</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：邻接表为每个顶点单独保存它的相邻点列表。遍历 adj[u] 就能枚举从 u 出发可直接到达的顶点，而不必扫描全部顶点。</p>
+<p class="q-title">第 3 题含 n 个顶点、m 条边的稀疏图使用邻接表存储，空间复杂度通常写作什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题含 n 个顶点、m 条边的稀疏" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 3 题含 n 个顶点、m 条边的稀疏" value="B"><b>B.</b> O(log n)</label><label class="q-opt"><input type="radio" name="第 3 题含 n 个顶点、m 条边的稀疏" value="C"><b>C.</b> O(n + m)</label><label class="q-opt"><input type="radio" name="第 3 题含 n 个顶点、m 条边的稀疏" value="D"><b>D.</b> O(n² + m²)</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 02：邻接表需要 n 个表头，并为边保存邻接记录，所以空间与顶点数和边数之和同阶，即 O(n+m)。无向边虽保存两次，但常数 2 不改变复杂度。</p>
+<p class="q-title">第 4 题顶点数不大、图很稠密，并且需要频繁判断任意两点是否直接相连时，通常优先选择哪种存储？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题顶点数不大、图很稠密，并且需要" value="A"><b>A.</b> 邻接矩阵</label><label class="q-opt"><input type="radio" name="第 4 题顶点数不大、图很稠密，并且需要" value="B"><b>B.</b> 只保存顶点名称</label><label class="q-opt"><input type="radio" name="第 4 题顶点数不大、图很稠密，并且需要" value="C"><b>C.</b> 一个普通整数变量</label><label class="q-opt"><input type="radio" name="第 4 题顶点数不大、图很稠密，并且需要" value="D"><b>D.</b> 不保存边</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04：稠密图的边数接近 n²，邻接矩阵的 O(n²) 空间较容易接受，并能用 O(1) 时间查询任意一对顶点是否有边。邻接表更适合边较少并常枚举邻点的场景。</p>
+<p class="q-title">第 5 题链式前向星中，head[u] 通常保存什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题链式前向星中，head[u] " value="A"><b>A.</b> 顶点 u 当前第一条出边的编号</label><label class="q-opt"><input type="radio" name="第 5 题链式前向星中，head[u] " value="B"><b>B.</b> 整张图的顶点总数</label><label class="q-opt"><input type="radio" name="第 5 题链式前向星中，head[u] " value="C"><b>C.</b> 任意一条边的权值</label><label class="q-opt"><input type="radio" name="第 5 题链式前向星中，head[u] " value="D"><b>D.</b> 顶点 u 的坐标</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：head[u] 是顶点 u 的边链入口，to 保存终点，next 连接同一起点的下一条边，w 保存可选权值；没有出边时 head[u] 通常为 -1。</p>
+<p class="q-title">第 6 题使用邻接表存储无向边 u—v 时，应怎样加入？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="A"><b>A.</b> 只加入 u 到 v</label><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="B"><b>B.</b> 只加入 v 到 u</label><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="C"><b>C.</b> 两个方向都加入</label><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="D"><b>D.</b> 不保存端点</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 04：无向边可从任一端走向另一端，因此邻接表必须同时保存 u 到 v 和 v 到 u。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level7-pager" aria-label="七级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level7-pager__link gesp-level7-pager__link--previous" href="/gesp/level7/graph-basics/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 05</small><strong>图的定义</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level7-pager__link gesp-level7-pager__link--next" href="/gesp/level7/graph-traversal/" rel="next"><span><small>下一知识点 · 07</small><strong>图的遍历</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -637,7 +675,7 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; gra
       <a class="kp-nav" href="kp7.html">下一个：图的遍历 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 邻接矩阵</a></li><li><a href="#kp-02">02 邻接表</a></li><li><a href="#kp-03">03 链式前向星入门</a></li><li><a href="#kp-04">04 存储选择与建图规则</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#加边追踪" class="lvl3">加边追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 邻接矩阵</a></li><li><a href="#kp-02">02 邻接表</a></li><li><a href="#kp-03">03 链式前向星入门</a></li><li><a href="#kp-04">04 存储选择与建图规则</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#加边追踪" class="lvl3">加边追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -649,6 +687,31 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; gra
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

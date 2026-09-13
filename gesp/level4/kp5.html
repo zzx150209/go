@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,16 +489,79 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">结构体把同一个对象的不同类型数据组合在一起。例如管理学生、图书或比赛记录时，可以把姓名、编号和成绩等相关数据放进一个整体。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">结构体先定义“一个对象有哪些字段”，再创建对象；对象用点访问成员，结构体指针用箭头访问成员。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">struct Student { // 开始定义学生这种新类型
+    <article class="level4-dictionary-article"><p class="level4-dictionary-article__intro">结构体把同一个对象的不同类型数据组合在一起。例如管理学生、图书或比赛记录时，可以把姓名、编号和成绩等相关数据放进一个整体。</p><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">结构体先定义“一个对象有哪些字段”，再创建对象；对象用点访问成员，结构体指针用箭头访问成员。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">struct Student { // 开始定义学生这种新类型
     string name; // 声明姓名成员
     int score; // 声明分数成员
 }; // 结束类型定义，分号不可省略</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">Student student = {&quot;Alice&quot;, 90}; // 按成员声明顺序创建并初始化对象
-cout &lt;&lt; student.score; // 用点运算符读取该对象的 score 成员</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">定义结构体后忘记创建对象</li><li class="astro-e22r5uwj">对象使用 -&gt; 或指针使用 .</li><li class="astro-e22r5uwj">大括号初始化顺序与成员声明顺序不一致</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：把同一对象的相关字段组织成类型；沿“对象/下标—成员”准确访问数据；理解结构体对象、数组、指针和函数参数在内存中的关系。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">一份学生档案不能只放一个整数：它还要记录姓名、年龄和成绩。结构体像一个贴好字段标签的档案袋，把属于同一对象的不同数据装在一起。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握结构体类型和对象的定义、成员访问、结构体数组、结构体指针、嵌套结构以及结构体参数的基本使用。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 定义类型与对象</h2><p class="astro-e22r5uwj">`struct Student { ... };` 定义的是一种新类型，说明每名学生对象包含哪些成员；它像统一的档案格式，本身还不是某名学生的数据。右大括号后的分号属于类型定义，不能省略。</p><p class="astro-e22r5uwj">写 `Student student;` 才创建具体对象。两个 Student 对象会分别拥有自己的 name 和 score，修改一个对象的成员不会自动改变另一个对象。</p><p class="astro-e22r5uwj">一个结构体对象要为所有成员保存数据，但 `sizeof(Student)` 不保证等于各成员 sizeof 的简单相加：编译器可能为对齐加入填充，不同平台、编译器和标准库实现也可能不同。需要真实字节数时在目标环境使用 sizeof 实测，不背固定结论。</p><pre class="astro-e22r5uwj"><code class="language-cpp">struct Student { // 定义一种包含姓名与分数的新类型
+cout &lt;&lt; student.score; // 用点运算符读取该对象的 score 成员</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">定义结构体后忘记创建对象</li><li class="astro-e22r5uwj">对象使用 -&gt; 或指针使用 .</li><li class="astro-e22r5uwj">大括号初始化顺序与成员声明顺序不一致</li></ul></article><nav class="dictionary-page-quick-nav" aria-labelledby="dictionary-page-quick-nav-title"><h2 id="dictionary-page-quick-nav-title" class="astro-nnvy3ny7">本页速查</h2><a href="#topic-01" class="astro-nnvy3ny7">01 定义类型与对象</a><a href="#topic-02" class="astro-nnvy3ny7">02 成员访问与初始化</a><a href="#topic-03" class="astro-nnvy3ny7">03 结构体数组</a><a href="#topic-04" class="astro-nnvy3ny7">04 结构体指针与复合成员</a><a href="#topic-05" class="astro-nnvy3ny7">05 结构体作为函数参数</a><a href="#examples" class="astro-nnvy3ny7">典型例题</a><a href="#practice" class="astro-nnvy3ny7">分层练习</a><a href="#mistakes" class="astro-nnvy3ny7">常见错误</a><a href="#core-check" class="astro-nnvy3ny7">核心内容检查</a><a href="#test" class="astro-nnvy3ny7">整页综合测试</a><a href="#page-top" class="astro-nnvy3ny7">返回本页顶部</a></nav><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：把同一对象的相关字段组织成类型；沿“对象/下标—成员”准确访问数据；理解结构体对象、数组、指针和函数参数在内存中的关系。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">一份学生档案不能只放一个整数：它还要记录姓名、年龄和成绩。结构体像一个贴好字段标签的档案袋，把属于同一对象的不同数据装在一起。</p><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握结构体类型和对象的定义、成员访问、结构体数组、结构体指针、嵌套结构以及结构体参数的基本使用。</p><h2 id="topic-01" class="astro-e22r5uwj">01 定义类型与对象</h2><p class="astro-e22r5uwj">`struct Student { ... };` 定义的是一种新类型，说明每名学生对象包含哪些成员；它像统一的档案格式，本身还不是某名学生的数据。右大括号后的分号属于类型定义，不能省略。</p><p class="astro-e22r5uwj">写 `Student student;` 才创建具体对象。两个 Student 对象会分别拥有自己的 name 和 score，修改一个对象的成员不会自动改变另一个对象。</p><p class="astro-e22r5uwj">一个结构体对象要为所有成员保存数据，但 `sizeof(Student)` 不保证等于各成员 sizeof 的简单相加：编译器可能为对齐加入填充，不同平台、编译器和标准库实现也可能不同。需要真实字节数时在目标环境使用 sizeof 实测，不背固定结论。</p><pre class="astro-e22r5uwj"><code class="language-cpp">struct Student { // 定义一种包含姓名与分数的新类型
     string name; // 每个 Student 对象各自拥有一个姓名成员
     int score; // 每个 Student 对象各自拥有一个分数成员
 }; // 完成类型定义，末尾必须写分号
 
-Student student; // 根据 Student 类型创建一个具体对象</code></pre><aside
+Student student; // 根据 Student 类型创建一个具体对象</code></pre><aside class="level4-dictionary-article__warning"><strong class="astro-e22r5uwj">关键提醒：</strong>结构体定义末尾的分号不能遗漏；结构体大小受成员类型、对齐和环境影响，不能只把成员字节数机械相加。</aside><h2 id="topic-02" class="astro-e22r5uwj">02 成员访问与初始化</h2><p class="astro-e22r5uwj">结构体对象使用点运算符访问成员：先确定左边是哪一个对象，再在这个对象内部选择右边的字段。`student.score` 与另一个对象的 `other.score` 是不同存储位置。</p><p class="astro-e22r5uwj">大括号初始化按成员声明顺序逐项对应。`Student student = {&quot;Xiao Ming&quot;, 92}` 先给 name，再给 score；若顺序与类型不匹配会报错或表达错误含义。</p><p class="astro-e22r5uwj">本课使用按声明顺序的大括号初始化，不使用更高标准才提供的指定成员初始化。初始化后仍可用点运算符单独读取或修改成员。</p><pre class="astro-e22r5uwj"><code class="language-cpp">Student student = {&quot;Xiao Ming&quot;, 92}; // 按 name、score 的声明顺序初始化对象
+cout &lt;&lt; student.name &lt;&lt; &#39; &#39;; // 先读取并输出姓名成员
+cout &lt;&lt; student.score &lt;&lt; &#39;\n&#39;; // 再读取并输出同一对象的分数成员</code></pre><h2 id="topic-03" class="astro-e22r5uwj">03 结构体数组</h2><p class="astro-e22r5uwj">同一类对象可以放入结构体数组。`students[i].score` 分两步理解：先用合法下标 i 选中第 i 个 Student 对象，再用点运算符读取它的 score。</p><p class="astro-e22r5uwj">若按 1 下标保存 n 名学生，数组容量必须至少为 n+1，students[0] 留作占位；若按 0 下标，合法范围是 0 到 n-1。下面片段明确采用 1 下标。</p><p class="astro-e22r5uwj">找最高分时保存学生下标 best，而不只保存一个分数，这样姓名、分数等成员始终来自同一对象。相同最高分时不更新，可保留最先出现的学生。</p><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">输入 Alice 88、Bob 95、Carol 91，best 初始指向 Alice</li><li class="astro-e22r5uwj">读到 Bob 95 后 best 改为 Bob 的下标，Carol 91 不更新</li><li class="astro-e22r5uwj">最后通过同一个 best 同时取姓名和成绩，输出 Bob 95</li></ul><pre class="astro-e22r5uwj"><code class="language-cpp">int best = 1; // 采用 1 下标，并把第 1 名学生设为初始候选
+for (int i = 2; i &lt;= n; i++) { // 从第 2 名遍历到第 n 名学生
+    if (students[i].score &gt; students[best].score) { // 比较当前学生与候选人的分数
+        best = i; // 只在严格更高时更新，平分保留先出现者
+    } // 结束是否更新最高分下标的判断
+} // 结束全部学生遍历
+cout &lt;&lt; students[best].name &lt;&lt; &#39; &#39;; // 用 best 读取最高分学生姓名
+cout &lt;&lt; students[best].score &lt;&lt; &#39;\n&#39;; // 用同一 best 读取对应分数</code></pre><h2 id="topic-04" class="astro-e22r5uwj">04 结构体指针与复合成员</h2><p class="astro-e22r5uwj">指向结构体对象的指针用箭头运算符访问成员，`pointer-&gt;score` 等价于 `(*pointer).score`。箭头左侧必须是指向有效结构体对象的指针。</p><p class="astro-e22r5uwj">结构体成员还可以是另一个结构体，这叫结构体嵌套。`pointer-&gt;birthday.month` 从左向右分层定位：先沿指针找到 Student，再取其中的 Date 对象，最后取 month。</p><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">先由 pointer-&gt;birthday 找到 student 内部的 Date 对象</li><li class="astro-e22r5uwj">再用 .month 找到月份成员，读出 5</li><li class="astro-e22r5uwj">pointer 必须先指向仍然有效的 Student 对象</li></ul><pre class="astro-e22r5uwj"><code class="language-cpp">struct Date { // 定义表示日期的内层结构体类型
+    int month; // 保存月份成员
+    int day; // 保存日期成员
+}; // 结束 Date 类型定义
+
+struct Student { // 定义包含嵌套日期的学生类型
+    string name; // 保存学生姓名
+    Date birthday; // 用一个完整 Date 对象保存生日
+}; // 结束 Student 类型定义
+
+Student student = {&quot;Xiao Ming&quot;, {5, 20}}; // 按层次初始化姓名和生日
+Student* pointer = &amp;student; // 让结构体指针指向仍然存在的 student 对象
+cout &lt;&lt; pointer-&gt;birthday.month &lt;&lt; &#39;\n&#39;; // 先经箭头找到 birthday，再读取其中的 month</code></pre><h2 id="topic-05" class="astro-e22r5uwj">05 结构体作为函数参数</h2><p class="astro-e22r5uwj">值传递会创建整个结构体的副本，函数内修改副本不影响原对象；引用参数直接操作原对象；指针参数通过地址访问对象并可以用 nullptr 表示缺少对象。</p><p class="astro-e22r5uwj">只读结构体时使用 `const Student&amp;`，既避免复制，又禁止函数误改成员。需要加分时才使用 `Student&amp;`，函数名和接口共同告诉调用者“原档案会改变”。</p><p class="astro-e22r5uwj">结构体若含数组或嵌套结构，这些成员仍属于整个对象。传值时复制的是整个对象内容，传引用时不创建完整副本。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addPoint(Student&amp; student) { // 用引用接收并准备修改原学生对象
+    student.score = student.score + 1; // 直接把原对象的分数增加 1
+} // 函数结束后，调用处学生对象保留新分数</code></pre><h2 id="quick-table" class="astro-e22r5uwj">知识点速查表</h2><table class="astro-e22r5uwj"><thead class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><th class="astro-e22r5uwj">项目</th><th class="astro-e22r5uwj">含义</th><th class="astro-e22r5uwj">检查重点</th></tr></thead><tbody class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">object.member</td><td class="astro-e22r5uwj">对象访问成员</td><td class="astro-e22r5uwj">左侧是结构体对象</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">pointer-&gt;member</td><td class="astro-e22r5uwj">指针访问成员</td><td class="astro-e22r5uwj">指针有效</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">objects[i].member</td><td class="astro-e22r5uwj">结构体数组成员</td><td class="astro-e22r5uwj">i 在边界内</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">const Type&amp;</td><td class="astro-e22r5uwj">只读传入大对象</td><td class="astro-e22r5uwj">函数内不能修改成员</td></tr></tbody></table>
+<h2 id="examples" class="astro-e22r5uwj">典型例题</h2><h3 class="astro-e22r5uwj">找出最高分学生</h3><p class="astro-e22r5uwj">固定输入 3 名学生；姓名不含空格，分数在 int 范围内，程序输出最高分学生。</p><h3 class="astro-e22r5uwj">完成程序</h3><pre class="astro-e22r5uwj"><code class="language-cpp">#include &lt;bits/stdc++.h&gt; // 引入本程序需要的标准库
+using namespace std; // 允许直接使用 cin、cout、string 等标准库名称
+
+struct Student { // 定义描述一名学生的结构体类型
+    string name; // 保存学生姓名
+    int score; // 保存学生分数
+}; // 结束 Student 类型定义，末尾分号不可省略
+
+int main() { // 主函数是程序的入口
+    Student students[3]; // 创建包含 3 名学生的结构体数组
+    for (int i = 0; i &lt; 3; i++) { // 依次访问每个合法数组元素
+        cin &gt;&gt; students[i].name &gt;&gt; students[i].score; // 读入并保存同一学生的姓名和分数
+    } // 结束学生信息输入循环
+
+    int best = 0; // 用下标 0 的学生作为当前最高分候选
+    for (int i = 1; i &lt; 3; i++) { // 从第二名学生开始比较分数
+        if (students[i].score &gt; students[best].score) { // 判断当前学生是否超过候选学生
+            best = i; // 保存新的最高分学生下标
+        } // 结束是否更新候选人的判断
+    } // 结束最高分学生查找循环
+
+    cout &lt;&lt; students[best].name &lt;&lt; &#39; &#39; &lt;&lt; students[best].score &lt;&lt; &#39;\n&#39;; // 用同一下标输出姓名和分数
+    return 0; // 返回 0，表示程序正常结束
+} // 结束 main 函数</code></pre><strong class="astro-e22r5uwj">示例输入</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">Alice 88
+Bob 95
+Carol 91</code></pre><strong class="astro-e22r5uwj">示例输出</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">Bob 95</code></pre>
+<h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">输入阶段依次创建并填写 3 个 Student 对象，结构体数组保持每名学生的 name 与 score 对应。</li><li class="astro-e22r5uwj">best 初始为 0，表示当前候选对象是 Alice 88。</li><li class="astro-e22r5uwj">访问 students[i].score 比较成员；读到 Bob 95 时把 best 改为 1，Carol 91 不再更新。</li><li class="astro-e22r5uwj">最后通过同一个下标 best 访问姓名和分数，输出 Bob 95。</li></ol><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">设计坐标结构体</h3><p class="astro-e22r5uwj">定义 Point，包含整数 x 和 y，并创建点 (3, 5)。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">先写 struct 类型，再按成员声明顺序初始化对象。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">统计及格人数</h3><p class="astro-e22r5uwj">读入 n 个 Student，统计 score 不低于 60 的人数。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">使用结构体数组保存对象，循环中访问 students[i].score。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">嵌套日期</h3><p class="astro-e22r5uwj">为 Student 增加 Date birthday，输出某个学生的出生月份。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">先访问 student.birthday，再访问其中的 month。</p></details></article>
+<h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><h3 class="astro-e22r5uwj">结构体定义末尾漏分号</h3><p class="astro-e22r5uwj">错误写法：struct Student { ... }。原因：结构体类型定义结束后必须有分号。正确写法：struct Student { ... };。</p><h3 class="astro-e22r5uwj">混用点和箭头</h3><p class="astro-e22r5uwj">错误写法：对象 student 写成 student-&gt;score，或指针 pointer 写成 pointer.score。原因：左侧类型不同。正确写法：对象用 student.score，指针用 pointer-&gt;score。</p><h3 class="astro-e22r5uwj">结构体数组越界</h3><p class="astro-e22r5uwj">错误写法：Student students[3] 却访问 students[3]。原因：合法下标只有 0、1、2。正确写法：先检查对象下标，再访问成员。</p><h3 class="astro-e22r5uwj">把类型名当成对象名</h3><p class="astro-e22r5uwj">错误写法：定义 Student 类型后直接写 Student.score。原因：类型本身不是具体对象。正确写法：先创建 Student student，再使用 student.score。</p><h3 class="astro-e22r5uwj">比较后丢失对象对应关系</h3><p class="astro-e22r5uwj">错误写法：只保存最高分数，最后无法确定对应姓名。原因：相关成员没有一起定位。正确写法：保存结构体对象下标，再通过该下标访问所有成员。</p>
+<h2 id="related-learning" class="astro-e22r5uwj">关联学习</h2><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj"><a href="/gesp/level4/sorting/" class="astro-e22r5uwj">排序算法</a>：可按结构体某个成员比较并排序，前提是先掌握基础排序过程。</li></ul><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="structures" data-progress-event="xdz:gesp-level4-progress"><fieldset class="astro-l37rdmqc"><legend class="astro-l37rdmqc">完成全部核心内容检查，再记录本页已经复习</legend><label class="astro-l37rdmqc"><input type="checkbox" value="0" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能定义结构体类型并创建对象</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="1" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能正确使用点和箭头访问成员</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="2" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能遍历结构体数组并保持成员对应关系</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="3" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能选择合适的结构体参数传递方式</span></label></fieldset><button type="button" disabled data-review-button class="astro-l37rdmqc">标记为已复习</button><span aria-live="polite" data-review-status class="astro-l37rdmqc">勾选全部检查项后即可标记。</span></gesp-dictionary-review><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="structures" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 7 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><fieldset class="dictionary-test__question" data-question-id="l4-structures-01"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">01</span>【基础测试】已定义结构体变量 Student student;，其中有 int score; 成员。哪条语句能把该成员设为 90？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-01" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> student.score = 90;</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-01" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> student-&gt;score = 90;</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-01" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> score.student = 90;</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-01" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> Student.score = 90;</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">四级：结构体定义与成员使用（概念改编）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-structures-02"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">02</span>【基础测试】运行下列程序片段后，total 的值是多少？</legend><pre class="astro-h6wltfcv"><code class="astro-h6wltfcv">struct Student {
+    int score;
+};
+
+Student students[2] = {{85}, {92}};
+int total = students[0].score + students[1].score;</code></pre><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-02" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 7</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-02" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> 85</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-02" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 92</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-02" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 177</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级结构体数组读程条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-structures-03"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">03</span>【边界测试】运行下列程序片段后，student.score 的值是多少？</legend><pre class="astro-h6wltfcv"><code class="astro-h6wltfcv">struct Student {
+    int score;
+};
+
+Student student{80};
+Student* pointer = &amp;student;
+pointer-&gt;score += 5;</code></pre><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-03" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 5</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-03" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> 75</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-03" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 80</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-03" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 85</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级结构体指针追踪条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-structures-04"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">04</span>【易错测试】函数只需要读取 Student 对象的多个成员，不应修改调用者对象。哪种形参形式最能表达这一要求？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-04" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> void printStudent(const Student&amp; student)</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-04" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> void printStudent(Student&amp; student)</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-04" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> void printStudent(Student* student)</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-04" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> void printStudent(Student student, int unused)</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">结构体参数与 const 场景改编</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-review-01"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">05</span>【易错测试】若 `Student student; Student* pointer = &amp;student;`，访问 student 的 score 成员可写成哪一项？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-review-01" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> pointer-&gt;score</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-review-01" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> pointer.score</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-review-01" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> *pointer.score</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-review-01" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> &amp;pointer-&gt;score</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级结构体指针条目；由旧综合复习题迁移）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-structures-06"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">06</span>【综合测试】结构体成员依次为 `string name; int score;`，哪项能按声明顺序初始化 Alice 和 90 分？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-06" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> Student student = {&quot;Alice&quot;, 90};</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-06" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> Student student = {90, &quot;Alice&quot;};</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-06" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> Student.name = &quot;Alice&quot;;</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-06" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> student-&gt;score = 90;</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级结构体初始化条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-structures-07"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">07</span>【综合测试】已知 Student 中有 Date birthday 成员，student 是对象。访问生日月份应写成哪一项？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-07" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> student.birthday.month</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-07" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> student-&gt;birthday-&gt;month</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-07" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> Student.birthday.month</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-structures-07" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> student.month.birthday</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级结构体嵌套成员条目）</a></p></fieldset><button type="button" data-submit-test class="astro-h6wltfcv">提交答案</button><button type="button" data-retry-test hidden class="astro-h6wltfcv">重新测试</button><span data-test-status aria-live="polite" class="astro-h6wltfcv">尚未提交。本页测试只保留最近一次有效结果。</span></gesp-dictionary-test><nav class="dictionary-lesson-pager" aria-label="知识点翻页"><a href="/gesp/level4/parameter-passing/" rel="prev" class="astro-hl664apc"><span class="astro-hl664apc">上一知识点</span><strong class="astro-hl664apc">参数传递</strong></a><a href="/gesp/level4/multidimensional-arrays/" rel="next" class="astro-hl664apc"><span class="astro-hl664apc">下一知识点</span><strong class="astro-hl664apc">二维与多维数组</strong></a></nav></article><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -488,7 +570,7 @@ Student student; // 根据 Student 类型创建一个具体对象</code></pre><a
       <a class="kp-nav" href="kp6.html">下一个：二维数组 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#quick-review-title">本课先记住</a></li><li><a href="#learning-goal">这节课要会什么</a></li><li><a href="#knowledge-range">知识范围与官方定位</a></li><li><a href="#topic-01">01 定义类型与对象</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#quick-review-title">本课先记住</a></li><li><a href="#dictionary-page-quick-nav-title">本页速查</a></li><li><a href="#learning-goal">这节课要会什么</a></li><li><a href="#knowledge-range">知识范围与官方定位</a></li><li><a href="#topic-01">01 定义类型与对象</a></li><li><a href="#topic-02">02 成员访问与初始化</a></li><li><a href="#topic-03">03 结构体数组</a></li><li><a href="#topic-04">04 结构体指针与复合成员</a></li><li><a href="#topic-05">05 结构体作为函数参数</a></li><li><a href="#quick-table">知识点速查表</a></li><li><a href="#examples">典型例题</a></li><li><a href="#practice">分层练习</a></li><li><a href="#mistakes">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#test">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -500,6 +582,31 @@ Student student; // 根据 Student 类型创建一个具体对象</code></pre><a
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

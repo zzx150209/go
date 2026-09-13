@@ -4,7 +4,7 @@
 Showball 信息学 —— 站点生成器 v2
 生成：首页 + GESP总览 + 8 等级页 + CSP + 程序模板 + 题解 + OJ资源
 """
-import os, io, html, shutil
+import os, io, html, shutil, re
 from site_data import (SITE_NAME, SITE_SUB, LEVELS, CSP, TEMPLATE_CATS,
                        COMMON_TEMPLATES, SOLUTION_STEPS, RESOURCE_GROUPS,
                        KP_DETAILS)
@@ -343,6 +343,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -369,6 +370,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -973,7 +992,7 @@ def build_kp_page(n, kp_idx):
     </div>
 
     <article class="article-body">
-    {ref_html}
+    {re.sub(r'((?:<label class="q-opt">.*?</label>\s*)+)', r'<div class="q-opts">\1</div>', ref_html, flags=re.DOTALL)}
     </article>
 
     <div class="kp-nav-row">
@@ -994,6 +1013,31 @@ def build_kp_page(n, kp_idx):
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){{arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}}
   }}catch(e){{}}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){{
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){{
+      r.addEventListener('change',function(){{
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){{
+          o.style.background='';o.style.borderLeft='';
+        }});
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){{
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        }} else {{
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }}
+        ans.style.display='block';
+      }});
+    }});
+  }});
 }})();
 </script>
 """

@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,13 +489,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级官方大纲“树的基础知识”：树的定义、基本属性和树的存储。重点是先建立准确术语，再为后续建树、遍历和搜索准备数据表示；本页不提前展开遍历算法。</p><h2 id="kp-01">01 树的定义与关系</h2><p>线性结构适合表达“前一个、后一个”的顺序关系，例如排队名单；当一个对象下面可能分出多个对象时，就需要树来表达层次关系，例如学校—年级—班级、文件夹—子文件夹。树由结点和连接结点的边组成。非空树有且只有一个根结点；根没有父结点；根以外每个结点恰好有一个父结点；沿父子关系不能绕一圈回到原结点。没有结点的树叫空树。</p><ul>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 树的定义与关系</a><a href="#kp-02" class="astro-obblnf2s">02 深度、高度与度</a><a href="#kp-03" class="astro-obblnf2s">03 树的常见存储</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级官方大纲“树的基础知识”：树的定义、基本属性和树的存储。重点是先建立准确术语，再为后续建树、遍历和搜索准备数据表示；本页不提前展开遍历算法。</p><h2 id="kp-01">01 树的定义与关系</h2><p>线性结构适合表达“前一个、后一个”的顺序关系，例如排队名单；当一个对象下面可能分出多个对象时，就需要树来表达层次关系，例如学校—年级—班级、文件夹—子文件夹。树由结点和连接结点的边组成。非空树有且只有一个根结点；根没有父结点；根以外每个结点恰好有一个父结点；沿父子关系不能绕一圈回到原结点。没有结点的树叫空树。</p><ul>
 <li>父结点与孩子结点：一条向下的边连接的直接关系。</li>
 <li>兄弟结点：拥有同一个父结点。</li>
 <li>叶结点：没有孩子的结点；单结点树的根也同时是叶结点。</li>
 <li>祖先与后代：从某结点沿父子关系向上或向下能够到达的结点。</li>
 <li>子树：某个结点以及它的全部后代组成的树。</li>
-</ul><h2 id="kp-02">02 深度、高度与度</h2><p>本字典统一采用：根深度为 <code>0</code>，孩子深度等于父结点深度加 <code>1</code>；叶结点高度为 <code>0</code>，非叶结点高度等于孩子高度最大值加 <code>1</code>；树高等于根结点高度。若题目把根深度记为 <code>1</code>，必须按题目口径重新计算。</p><p>结点的度是孩子数量，树的度是所有结点度的最大值。叶结点度为 <code>0</code>。二叉树只表示每个结点至多有两个孩子，不代表每个结点一定有两个孩子。</p><div tabindex="0" role="region"><table>
+</ul><h2 id="kp-02">02 深度、高度与度</h2><p>本字典统一采用：根深度为 <code dir="auto">0</code>，孩子深度等于父结点深度加 <code dir="auto">1</code>；叶结点高度为 <code dir="auto">0</code>，非叶结点高度等于孩子高度最大值加 <code dir="auto">1</code>；树高等于根结点高度。若题目把根深度记为 <code dir="auto">1</code>，必须按题目口径重新计算。</p><p>结点的度是孩子数量，树的度是所有结点度的最大值。叶结点度为 <code dir="auto">0</code>。二叉树只表示每个结点至多有两个孩子，不代表每个结点一定有两个孩子。</p><table>
 <thead>
 <tr>
 <th>术语</th>
@@ -506,7 +525,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>不是树高</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p><h2 id="kp-03">03 树的常见存储</h2><p>父亲数组用 <code>father[child] = parent</code> 保存每个非根结点的父亲，适合向上查询；孩子列表为每个父结点保存全部直接孩子，适合向下遍历。孩子列表也叫树的邻接表：例如边为 <code>1→2、1→3、2→4</code> 时，可写成 <code>children[1] = {2, 3}</code>、<code>children[2] = {4}</code>，3 和 4 的列表为空。读入一对 <code>parent child</code>，就把 <code>child</code> 加到 <code>children[parent]</code> 末尾；这里存的是直接孩子，不能把孙结点 4 直接放进 1 的列表。</p><p>普通树还可以用“左孩子右兄弟”表示：<code>leftChild[u]</code> 指向第一个孩子，<code>rightSibling[u]</code> 指向下一个兄弟。这样每个结点只保留两个位置，却仍能依次找到全部孩子。这里要求能读懂关系，不要求把它当作二叉排序树。</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>已知 <code>father[2]=1、father[3]=1、father[4]=2、father[5]=2</code>。根是 1；2 和 3 是兄弟；4 和 5 是兄弟；1 的度为 2，2 的度也为 2，树的度为 2。按根深度为 0，4 的深度为 2；4 是叶结点，高度为 0；2 的高度为 1；整棵树高度为 2。</p><div tabindex="0" role="region"><table><caption>从根向下统计结点和叶结点</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本步观察</th><th scope="col">累计结点数</th><th scope="col">累计叶结点数</th></tr></thead><tbody><tr><th scope="row">访问 1</th><td>有孩子 2、3，不是叶结点</td><td>1</td><td>0</td></tr><tr><th scope="row">访问 2</th><td>有孩子 4、5，不是叶结点</td><td>2</td><td>0</td></tr><tr><th scope="row">访问 4、5</th><td>都没有孩子，各计一个叶结点</td><td>4</td><td>2</td></tr><tr><th scope="row">访问 3</th><td>没有孩子，计一个叶结点</td><td>5</td><td>3</td></tr></tbody></table></div><h3 id="典型应用">典型应用</h3><p>文件目录就是树：总文件夹是根，直接包含的文件夹是孩子，同一文件夹下的项目互为兄弟。若要找到某个文件的完整路径，就从该结点沿父亲数组不断向上，直到根；若要列出一个文件夹内的全部内容，则从它向下访问各棵子树。</p><h3 id="测试案例">测试案例</h3><table>
+</table><p class="gesp-course-teaching-table__hint">横向滑动查看完整表格</p><h2 id="kp-03">03 树的常见存储</h2><p>父亲数组用 <code dir="auto">father[child] = parent</code> 保存每个非根结点的父亲，适合向上查询；孩子列表为每个父结点保存全部直接孩子，适合向下遍历。孩子列表也叫树的邻接表：例如边为 <code dir="auto">1→2、1→3、2→4</code> 时，可写成 <code dir="auto">children[1] = {2, 3}</code>、<code dir="auto">children[2] = {4}</code>，3 和 4 的列表为空。读入一对 <code dir="auto">parent child</code>，就把 <code dir="auto">child</code> 加到 <code dir="auto">children[parent]</code> 末尾；这里存的是直接孩子，不能把孙结点 4 直接放进 1 的列表。</p><p>普通树还可以用“左孩子右兄弟”表示：<code dir="auto">leftChild[u]</code> 指向第一个孩子，<code dir="auto">rightSibling[u]</code> 指向下一个兄弟。这样每个结点只保留两个位置，却仍能依次找到全部孩子。这里要求能读懂关系，不要求把它当作二叉排序树。</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>已知 <code dir="auto">father[2]=1、father[3]=1、father[4]=2、father[5]=2</code>。根是 1；2 和 3 是兄弟；4 和 5 是兄弟；1 的度为 2，2 的度也为 2，树的度为 2。按根深度为 0，4 的深度为 2；4 是叶结点，高度为 0；2 的高度为 1；整棵树高度为 2。</p><table><caption>从根向下统计结点和叶结点</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本步观察</th><th scope="col">累计结点数</th><th scope="col">累计叶结点数</th></tr></thead><tbody><tr><th scope="row">访问 1</th><td>有孩子 2、3，不是叶结点</td><td>1</td><td>0</td></tr><tr><th scope="row">访问 2</th><td>有孩子 4、5，不是叶结点</td><td>2</td><td>0</td></tr><tr><th scope="row">访问 4、5</th><td>都没有孩子，各计一个叶结点</td><td>4</td><td>2</td></tr><tr><th scope="row">访问 3</th><td>没有孩子，计一个叶结点</td><td>5</td><td>3</td></tr></tbody></table>
+<h3 id="典型应用">典型应用</h3><p>文件目录就是树：总文件夹是根，直接包含的文件夹是孩子，同一文件夹下的项目互为兄弟。若要找到某个文件的完整路径，就从该结点沿父亲数组不断向上，直到根；若要列出一个文件夹内的全部内容，则从它向下访问各棵子树。</p><h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -531,7 +551,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>只有结点 4 是叶结点，树高 3，不能误判成四层高度 4</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>把深度和高度当成同一个方向</h3><div><div><strong><span>×</span> 错误写法</strong><code>结点越靠近根，高度和深度就同时越小</code></div><div><strong><span>✓</span> 正确写法</strong><code>先画出根到结点、结点到最深叶子的两条路径，再分别数边</code></div></div><p><strong>原因：</strong>深度从根向下数，高度从当前结点向最深叶子数，两者方向相反。</p><p><strong>检查方法：</strong>做题第一行写清根深度和叶高度的口径。</p></section><section><h3>把相邻结点都当成孩子</h3><div><div><strong><span>×</span> 错误写法</strong><code>结点 2 与父结点 1 相连，因此计算 2 的度时把 1 也算进去</code></div><div><strong><span>✓</span> 正确写法</strong><code>先确定边的父子方向，再只数从当前结点向下连接的孩子</code></div></div><p><strong>原因：</strong>树中结点的度只统计直接孩子数量，不统计父结点。</p><p><strong>检查方法：</strong>叶结点虽然与父结点相连，但它的度仍然是 0。</p></section><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>把深度和高度当成同一个方向</h3><p><strong>原因：</strong>深度从根向下数，高度从当前结点向最深叶子数，两者方向相反。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>做题第一行写清根深度和叶高度的口径。</p><h3>把相邻结点都当成孩子</h3><p><strong>原因：</strong>树中结点的度只统计直接孩子数量，不统计父结点。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>叶结点虽然与父结点相连，但它的度仍然是 0。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能指出根、父子、兄弟、叶结点和子树</label><label class="q-check"><input type="checkbox"> 能按题目口径计算深度、高度和结点的度</label><label class="q-check"><input type="checkbox"> 能读懂父亲数组、孩子列表和左孩子右兄弟表示</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题关于一棵非空树，哪项一定正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题关于一棵非空树，哪项一定正确？" value="A"><b>A.</b> 根结点没有父结点</label><label class="q-opt"><input type="radio" name="第 1 题关于一棵非空树，哪项一定正确？" value="B"><b>B.</b> 每个结点都有两个孩子</label><label class="q-opt"><input type="radio" name="第 1 题关于一棵非空树，哪项一定正确？" value="C"><b>C.</b> 叶结点不能是根</label><label class="q-opt"><input type="radio" name="第 1 题关于一棵非空树，哪项一定正确？" value="D"><b>D.</b> 一个结点可以有两个父结点</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>非空树有且只有一个根，根没有父结点；单结点树的根也同时是叶结点。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题结点 A 是 B 和 C 的父结点，那么 B 与 C 的关系是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题结点 A 是 B 和 C 的父" value="A"><b>A.</b> 祖先</label><label class="q-opt"><input type="radio" name="第 2 题结点 A 是 B 和 C 的父" value="B"><b>B.</b> 兄弟</label><label class="q-opt"><input type="radio" name="第 2 题结点 A 是 B 和 C 的父" value="C"><b>C.</b> 根</label><label class="q-opt"><input type="radio" name="第 2 题结点 A 是 B 和 C 的父" value="D"><b>D.</b> 子树</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>B 和 C 拥有同一个父结点 A，因此互为兄弟结点，与它们是否有孩子无关。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 3 题约定根深度为 0，根的孩子深度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题约定根深度为 0，根的孩子深度" value="A"><b>A.</b> -1</label><label class="q-opt"><input type="radio" name="第 3 题约定根深度为 0，根的孩子深度" value="B"><b>B.</b> 0</label><label class="q-opt"><input type="radio" name="第 3 题约定根深度为 0，根的孩子深度" value="C"><b>C.</b> 1</label><label class="q-opt"><input type="radio" name="第 3 题约定根深度为 0，根的孩子深度" value="D"><b>D.</b> 2</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>孩子比父结点深度大 1，所以根的直接孩子深度为 1；做题前要先确认口径。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题叶结点的度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题叶结点的度是多少？" value="A"><b>A.</b> 0</label><label class="q-opt"><input type="radio" name="第 4 题叶结点的度是多少？" value="B"><b>B.</b> 1</label><label class="q-opt"><input type="radio" name="第 4 题叶结点的度是多少？" value="C"><b>C.</b> 2</label><label class="q-opt"><input type="radio" name="第 4 题叶结点的度是多少？" value="D"><b>D.</b> 由深度决定</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>结点的度是孩子数量，叶结点没有孩子，因此度为 0，而不是由深度决定。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 5 题father[6] = 2 表示什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题father[6] = 2 表" value="A"><b>A.</b> 6 是 2 的父结点</label><label class="q-opt"><input type="radio" name="第 5 题father[6] = 2 表" value="B"><b>B.</b> 2 是 6 的父结点</label><label class="q-opt"><input type="radio" name="第 5 题father[6] = 2 表" value="C"><b>C.</b> 2 与 6 是兄弟</label><label class="q-opt"><input type="radio" name="第 5 题father[6] = 2 表" value="D"><b>D.</b> 6 一定是根</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>父亲数组用 father[child] 保存 parent，所以该式表示结点 6 的父结点是 2。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">返回</small><strong class="astro-23ojxnem">六级总览</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/tree-traversal/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 02</small><strong class="astro-23ojxnem">树的构造与遍历</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -540,7 +576,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp2.html">下一个：树的构造与遍历 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#kp-01">01 树的定义与关系</a></li><li><a href="#kp-02">02 深度、高度与度</a></li><li><a href="#kp-03">03 树的常见存储</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础示例" class="lvl3">基础示例</a></li><li><a href="#典型应用" class="lvl3">典型应用</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#kp-01">01 树的定义与关系</a></li><li><a href="#kp-02">02 深度、高度与度</a></li><li><a href="#kp-03">03 树的常见存储</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础示例" class="lvl3">基础示例</a></li><li><a href="#典型应用" class="lvl3">典型应用</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -552,6 +588,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

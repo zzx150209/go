@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,22 +489,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 顶点与边</a><a href="#kp-02" class="astro-obblnf2s">02 有向与无向</a><a href="#kp-03" class="astro-obblnf2s">03 度、路径与环</a><a href="#kp-04" class="astro-obblnf2s">04 连通性</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心检查</a><a href="#page-test" class="astro-obblnf2s">综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>图的定义是七级图论内容的起点。官方大纲要求理解图的基本概念，为后续存储、遍历和泛洪算法建立统一语言。本页主要是概念判断，不强行加入程序。</p>
 <p>地图中的城市与道路、计算机网络中的设备与连接、社交关系中的用户与关注，都可以抽象成图。看到“对象之间存在关系、能否到达、经过哪些连接”等描述时，先判断顶点代表什么、边代表什么，再决定方向和权值。</p>
 <h2 id="kp-01">01 图、顶点与边</h2>
-<p>图由顶点集合和边集合组成，常写作 <code>G = (V, E)</code>。顶点表示对象，边表示两个对象之间的关系。例如城市是顶点，道路是边。边数为零的图仍然是图，只是顶点之间没有连接。</p>
-<p><strong>具体推演：</strong> 三座城市 <code>A、B、C</code> 中只有 <code>A</code> 与 <code>B</code> 之间有道路，可以写成 <code>V={A,B,C}</code>、<code>E={(A,B)}</code>。顶点数是 <code>3</code>，边数是 <code>1</code>；<code>C</code> 虽然没有相连道路，仍是图中的顶点。这个例子说明“没有边”不等于“对象不存在”。</p>
+<p>图由顶点集合和边集合组成，常写作 <code dir="auto">G = (V, E)</code>。顶点表示对象，边表示两个对象之间的关系。例如城市是顶点，道路是边。边数为零的图仍然是图，只是顶点之间没有连接。</p>
+<p><strong>具体推演：</strong> 三座城市 <code dir="auto">A、B、C</code> 中只有 <code dir="auto">A</code> 与 <code dir="auto">B</code> 之间有道路，可以写成 <code dir="auto">V={A,B,C}</code>、<code dir="auto">E={(A,B)}</code>。顶点数是 <code dir="auto">3</code>，边数是 <code dir="auto">1</code>；<code dir="auto">C</code> 虽然没有相连道路，仍是图中的顶点。这个例子说明“没有边”不等于“对象不存在”。</p>
 <h2 id="kp-02">02 图的类型与权值</h2>
-<p>无向边 <code>{u,v}</code> 没有方向，<code>u</code> 与 <code>v</code> 相互连接；有向边 <code>&lt;u,v&gt;</code> 表示从 <code>u</code> 指向 <code>v</code>，反方向不一定存在。边上带有距离、费用等数值时称为带权图，否则是无权图。方向与权值是两个不同属性，所以既可以有带权有向图，也可以有带权无向图。</p>
+<p>无向边 <code dir="auto">{u,v}</code> 没有方向，<code dir="auto">u</code> 与 <code dir="auto">v</code> 相互连接；有向边 <code dir="auto">&lt;u,v&gt;</code> 表示从 <code dir="auto">u</code> 指向 <code dir="auto">v</code>，反方向不一定存在。边上带有距离、费用等数值时称为带权图，否则是无权图。方向与权值是两个不同属性，所以既可以有带权有向图，也可以有带权无向图。</p>
 <p>边数远少于顶点对数量的图通常称为稀疏图，边很多、接近能容纳的顶点对数量时称为稠密图。这种分类会影响存储选择，但不会改变路径、环、连通等定义。</p>
-<p><strong>具体推演：</strong> 道路 <code>A—B</code> 长 <code>5</code> 千米表示一条带权无向边，从两端都能通行；关注关系 <code>A→B</code> 表示无权有向边，只能说明 <code>A</code> 关注 <code>B</code>。若 4 个顶点只有 2 条边，它较稀疏；若几乎每对顶点都有边，它较稠密。判断顺序应是先看方向，再看权值，最后结合边数判断稀疏或稠密。</p>
+<p><strong>具体推演：</strong> 道路 <code dir="auto">A—B</code> 长 <code dir="auto">5</code> 千米表示一条带权无向边，从两端都能通行；关注关系 <code dir="auto">A→B</code> 表示无权有向边，只能说明 <code dir="auto">A</code> 关注 <code dir="auto">B</code>。若 4 个顶点只有 2 条边，它较稀疏；若几乎每对顶点都有边，它较稠密。判断顺序应是先看方向，再看权值，最后结合边数判断稀疏或稠密。</p>
 <h2 id="kp-03">03 度、路径与环</h2>
-<p>无向图中，顶点的度是与它相连的边数，每条边为两个端点的度数和贡献 <code>2</code>。有向图要区分入度与出度。路径是首尾相接的一串边；起点与终点相同且形成闭合的路径可构成环。</p>
-<p><strong>具体推演：</strong> 对有向边 <code>1→2</code>、<code>3→2</code>、<code>2→3</code>，顶点 <code>2</code> 的入度是 <code>2</code>，出度是 <code>1</code>；路线 <code>1→2→3</code> 是从 <code>1</code> 到 <code>3</code> 的路径，而 <code>2→3→2</code> 回到起点，构成环。逐条数“箭头进入”和“箭头离开”，就不会把入度、出度混成一个数。</p>
+<p>无向图中，顶点的度是与它相连的边数，每条边为两个端点的度数和贡献 <code dir="auto">2</code>。有向图要区分入度与出度。路径是首尾相接的一串边；起点与终点相同且形成闭合的路径可构成环。</p>
+<p><strong>具体推演：</strong> 对有向边 <code dir="auto">1→2</code>、<code dir="auto">3→2</code>、<code dir="auto">2→3</code>，顶点 <code dir="auto">2</code> 的入度是 <code dir="auto">2</code>，出度是 <code dir="auto">1</code>；路线 <code dir="auto">1→2→3</code> 是从 <code dir="auto">1</code> 到 <code dir="auto">3</code> 的路径，而 <code dir="auto">2→3→2</code> 回到起点，构成环。逐条数“箭头进入”和“箭头离开”，就不会把入度、出度混成一个数。</p>
 <h2 id="kp-04">04 连通性与连通分量</h2>
 <p>无向图中两个顶点之间存在路径，则它们连通。任意两个顶点都连通的图称为连通图。非连通图可分成若干个极大的连通部分，每一部分称为一个连通分量。</p>
-<p><strong>具体推演：</strong> 无向边只有 <code>(1,2)</code>、<code>(2,3)</code>、<code>(4,5)</code> 时，<code>1</code> 可以经过 <code>2</code> 到达 <code>3</code>，所以 <code>{1,2,3}</code> 是一个连通分量；<code>4</code> 与 <code>5</code> 构成另一个分量。两组之间没有路径，整张图不连通，连通分量数为 <code>2</code>。</p>
+<p><strong>具体推演：</strong> 无向边只有 <code dir="auto">(1,2)</code>、<code dir="auto">(2,3)</code>、<code dir="auto">(4,5)</code> 时，<code dir="auto">1</code> 可以经过 <code dir="auto">2</code> 到达 <code dir="auto">3</code>，所以 <code dir="auto">{1,2,3}</code> 是一个连通分量；<code dir="auto">4</code> 与 <code dir="auto">5</code> 构成另一个分量。两组之间没有路径，整张图不连通，连通分量数为 <code dir="auto">2</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -519,17 +539,17 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="基础例题">基础例题</h3>
-<p>无向图有边 <code>(1,2)</code>、<code>(2,3)</code>、<code>(3,1)</code>、<code>(3,4)</code>。顶点 <code>3</code> 的度为 <code>3</code>；前三个顶点构成一个环；四个顶点都在同一个连通分量中。所有顶点度数和为 <code>8</code>，等于边数 <code>4</code> 的两倍。</p>
+<p>无向图有边 <code dir="auto">(1,2)</code>、<code dir="auto">(2,3)</code>、<code dir="auto">(3,1)</code>、<code dir="auto">(3,4)</code>。顶点 <code dir="auto">3</code> 的度为 <code dir="auto">3</code>；前三个顶点构成一个环；四个顶点都在同一个连通分量中。所有顶点度数和为 <code dir="auto">8</code>，等于边数 <code dir="auto">4</code> 的两倍。</p>
 <h3 id="典型应用例题">典型应用例题</h3>
-<p>把四座城市记为顶点 <code>1</code> 到 <code>4</code>。道路可以双向通行，长度分别为 <code>(1,2,5)</code>、<code>(2,3,4)</code>、<code>(1,3,8)</code>，城市 <code>4</code> 暂无道路。</p>
+<p>把四座城市记为顶点 <code dir="auto">1</code> 到 <code dir="auto">4</code>。道路可以双向通行，长度分别为 <code dir="auto">(1,2,5)</code>、<code dir="auto">(2,3,4)</code>、<code dir="auto">(1,3,8)</code>，城市 <code dir="auto">4</code> 暂无道路。</p>
 <ul>
 <li>道路双向通行，所以这是无向图；</li>
 <li>道路带长度，所以还是带权图；</li>
-<li>顶点 <code>1</code>、<code>2</code>、<code>3</code> 连通，顶点 <code>4</code> 单独构成一个连通分量；</li>
+<li>顶点 <code dir="auto">1</code>、<code dir="auto">2</code>、<code dir="auto">3</code> 连通，顶点 <code dir="auto">4</code> 单独构成一个连通分量；</li>
 <li>整张图有两个连通分量，因此不是连通图。</li>
 </ul>
 <h3 id="关系推演">关系推演</h3>
-<p>对无向边 <code>(1,2)</code>、<code>(2,3)</code>、<code>(3,1)</code>、<code>(3,4)</code> 逐条加入：</p>
+<p>对无向边 <code dir="auto">(1,2)</code>、<code dir="auto">(2,3)</code>、<code dir="auto">(3,1)</code>、<code dir="auto">(3,4)</code> 逐条加入：</p>
 <table>
 <thead>
 <tr>
@@ -540,23 +560,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>(1,2)</code></td>
-<td><code>degree[1]=1</code>，<code>degree[2]=1</code></td>
-<td><code>1</code> 与 <code>2</code> 连通</td>
+<td><code dir="auto">(1,2)</code></td>
+<td><code dir="auto">degree[1]=1</code>，<code dir="auto">degree[2]=1</code></td>
+<td><code dir="auto">1</code> 与 <code dir="auto">2</code> 连通</td>
 </tr>
 <tr>
-<td><code>(2,3)</code></td>
-<td><code>degree[2]=2</code>，<code>degree[3]=1</code></td>
-<td><code>1、2、3</code> 连通</td>
+<td><code dir="auto">(2,3)</code></td>
+<td><code dir="auto">degree[2]=2</code>，<code dir="auto">degree[3]=1</code></td>
+<td><code dir="auto">1、2、3</code> 连通</td>
 </tr>
 <tr>
-<td><code>(3,1)</code></td>
-<td><code>degree[3]=2</code>，<code>degree[1]=2</code></td>
-<td>出现环 <code>1-2-3-1</code></td>
+<td><code dir="auto">(3,1)</code></td>
+<td><code dir="auto">degree[3]=2</code>，<code dir="auto">degree[1]=2</code></td>
+<td>出现环 <code dir="auto">1-2-3-1</code></td>
 </tr>
 <tr>
-<td><code>(3,4)</code></td>
-<td><code>degree[3]=3</code>，<code>degree[4]=1</code></td>
+<td><code dir="auto">(3,4)</code></td>
+<td><code dir="auto">degree[3]=3</code>，<code dir="auto">degree[4]=1</code></td>
 <td>四个顶点全部连通</td>
 </tr>
 </tbody>
@@ -573,8 +593,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>基础</td>
-<td>3 个顶点，边 <code>(1,2)</code>、<code>(2,3)</code></td>
-<td>度数为 <code>1,2,1</code>，图连通</td>
+<td>3 个顶点，边 <code dir="auto">(1,2)</code>、<code dir="auto">(2,3)</code></td>
+<td>度数为 <code dir="auto">1,2,1</code>，图连通</td>
 </tr>
 <tr>
 <td>边界</td>
@@ -583,8 +603,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 <tr>
 <td>易错</td>
-<td>只有有向边 <code>1→2</code></td>
-<td>不能自动认为存在 <code>2→1</code></td>
+<td>只有有向边 <code dir="auto">1→2</code></td>
+<td>不能自动认为存在 <code dir="auto">2→1</code></td>
 </tr>
 </tbody>
 </table>
@@ -599,9 +619,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td>把 <code>u→v</code> 当作双向通行</td>
-<td>有向边只保证从 <code>u</code> 到 <code>v</code></td>
-<td>只有真实存在 <code>v→u</code> 时才能反向走</td>
+<td>把 <code dir="auto">u→v</code> 当作双向通行</td>
+<td>有向边只保证从 <code dir="auto">u</code> 到 <code dir="auto">v</code></td>
+<td>只有真实存在 <code dir="auto">v→u</code> 时才能反向走</td>
 </tr>
 <tr>
 <td>把权值理解成方向</td>
@@ -626,10 +646,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <h3 id="错误反例推演">错误反例推演</h3>
-<p>有向图只有 <code>1→2</code>、<code>2→3</code>。若把有向边误当成双向边，会错误断言 <code>3</code> 能沿 <code>3→2→1</code> 到达 <code>1</code>；实际上图中没有 <code>3→2</code> 或 <code>2→1</code>，从 <code>3</code> 一步也走不出去。画出箭头并按箭头方向逐步检查，就能发现这条“反向路径”根本不存在。</p>
+<p>有向图只有 <code dir="auto">1→2</code>、<code dir="auto">2→3</code>。若把有向边误当成双向边，会错误断言 <code dir="auto">3</code> 能沿 <code dir="auto">3→2→1</code> 到达 <code dir="auto">1</code>；实际上图中没有 <code dir="auto">3→2</code> 或 <code dir="auto">2→1</code>，从 <code dir="auto">3</code> 一步也走不出去。画出箭头并按箭头方向逐步检查，就能发现这条“反向路径”根本不存在。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>图的存储把这些抽象关系放进数组或容器；图的遍历用于实际判断可达性和连通分量。</p>
-<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能区分无向边、有向边和权值</label><label class="q-check"><input type="checkbox"> 能计算顶点的度并识别路径与环</label><label class="q-check"><input type="checkbox"> 能解释连通图和连通分量</label><span>5 题</span>
+<p class="q-title">第 1 题一个无向图有 4 条边，所有顶点的度数之和是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题一个无向图有 4 条边，所有顶" value="A"><b>A.</b> 4</label><label class="q-opt"><input type="radio" name="第 1 题一个无向图有 4 条边，所有顶" value="B"><b>B.</b> 6</label><label class="q-opt"><input type="radio" name="第 1 题一个无向图有 4 条边，所有顶" value="C"><b>C.</b> 8</label><label class="q-opt"><input type="radio" name="第 1 题一个无向图有 4 条边，所有顶" value="D"><b>D.</b> 16</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 01：每条无向边分别连接两个端点，会给两个端点的度数各贡献 1。因此所有顶点度数之和等于边数的 2 倍，即 2×4=8。</p>
+<p class="q-title">第 2 题关于有向边 u→v，下面哪项说法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题关于有向边 u→v，下面哪项说" value="A"><b>A.</b> 它同时自动表示 v→u</label><label class="q-opt"><input type="radio" name="第 2 题关于有向边 u→v，下面哪项说" value="B"><b>B.</b> 它只表示从 u 指向 v，不自动包含反向边</label><label class="q-opt"><input type="radio" name="第 2 题关于有向边 u→v，下面哪项说" value="C"><b>C.</b> 它不连接任何顶点</label><label class="q-opt"><input type="radio" name="第 2 题关于有向边 u→v，下面哪项说" value="D"><b>D.</b> 它只能出现在无向图中</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 02：有向边具有方向，u→v 表示从 u 到 v 的关系。除非图中另有 v→u，否则不能沿反方向使用这条边；无向边才不区分两个端点的方向。</p>
+<p class="q-title">第 3 题下面哪项最准确地描述图中的“环”？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题下面哪项最准确地描述图中的“环" value="A"><b>A.</b> 从某个顶点出发，途中顶点不重复，沿边行走后回到起点</label><label class="q-opt"><input type="radio" name="第 3 题下面哪项最准确地描述图中的“环" value="B"><b>B.</b> 只含一个顶点且没有边</label><label class="q-opt"><input type="radio" name="第 3 题下面哪项最准确地描述图中的“环" value="C"><b>C.</b> 任意两个不相邻顶点</label><label class="q-opt"><input type="radio" name="第 3 题下面哪项最准确地描述图中的“环" value="D"><b>D.</b> 所有顶点度数都为 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：环从起点出发并最终回到该起点，除起点与终点重合外，途中顶点不重复。普通路径不要求回到起点，而孤立顶点或零度顶点本身不构成这里描述的环。</p>
+<p class="q-title">第 4 题一个无向图称为连通图，需要满足什么条件？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题一个无向图称为连通图，需要满足" value="A"><b>A.</b> 任意两个顶点之间都存在路径</label><label class="q-opt"><input type="radio" name="第 4 题一个无向图称为连通图，需要满足" value="B"><b>B.</b> 边数必须等于顶点数</label><label class="q-opt"><input type="radio" name="第 4 题一个无向图称为连通图，需要满足" value="C"><b>C.</b> 每个顶点度数都相同</label><label class="q-opt"><input type="radio" name="第 4 题一个无向图称为连通图，需要满足" value="D"><b>D.</b> 图中必须没有环</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04：无向图连通的定义是任意选择两个顶点，都能找到一条路径把它们连接起来。边数、各点度数是否相同以及是否有环，都不能单独决定图是否连通。</p>
+<p class="q-title">第 5 题一个无向图中任意两个顶点之间都存在路径，这个图称为什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题一个无向图中任意两个顶点之间都" value="A"><b>A.</b> 完全图</label><label class="q-opt"><input type="radio" name="第 5 题一个无向图中任意两个顶点之间都" value="B"><b>B.</b> 连通图</label><label class="q-opt"><input type="radio" name="第 5 题一个无向图中任意两个顶点之间都" value="C"><b>C.</b> 有向图</label><label class="q-opt"><input type="radio" name="第 5 题一个无向图中任意两个顶点之间都" value="D"><b>D.</b> 带权图</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 04：无向图中任意两个顶点之间都有路径时，整张图只有一个连通分量，称为连通图。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level7-pager" aria-label="七级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level7-pager__link gesp-level7-pager__link--previous" href="/gesp/level7/dp-optimization/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 04</small><strong>动态规划最优解优化</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level7-pager__link gesp-level7-pager__link--next" href="/gesp/level7/graph-storage/" rel="next"><span><small>下一知识点 · 06</small><strong>图的存储</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -638,7 +673,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp6.html">下一个：图的存储 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 图、顶点与边</a></li><li><a href="#kp-02">02 图的类型与权值</a></li><li><a href="#kp-03">03 度、路径与环</a></li><li><a href="#kp-04">04 连通性与连通分量</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#关系推演" class="lvl3">关系推演</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 图、顶点与边</a></li><li><a href="#kp-02">02 图的类型与权值</a></li><li><a href="#kp-03">03 度、路径与环</a></li><li><a href="#kp-04">04 连通性与连通分量</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#关系推演" class="lvl3">关系推演</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -650,6 +685,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

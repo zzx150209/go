@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,80 +489,81 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 最大连续和</a><a href="#kp-02" class="astro-obblnf2s">02 最长上升子序列</a><a href="#kp-03" class="astro-obblnf2s">03 背包与候选优化</a><a href="#kp-04" class="astro-obblnf2s">04 空间优化</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心检查</a><a href="#page-test" class="astro-obblnf2s">综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方七级大纲要求掌握动态规划最优解优化。本页从“为什么可以从子问题最优解得到当前最优解”出发，整理最长上升子序列、候选最值比较和空间压缩。优化必须保持原状态含义与依赖关系，不能只追求数组更小。</p>
 <p>当题目要求连续区间或子序列的最优值时，先写出能说明答案的基础状态；当基础写法已经正确、但重复枚举候选或保存了不再需要的旧阶段时，再考虑时间或空间优化。优化的判断依据是依赖关系，不是代码看起来更短。</p>
 <h2 id="kp-01">01 最优状态与最大连续和</h2>
-<p>若一个问题的最优解能由若干更小问题的最优解组合得到，就具有最优子结构。状态转移要枚举所有合法前驱，再取 <code>min</code> 或 <code>max</code>。求最小值时初值应足够大，求最大值时则应结合题意设为合法下界。</p>
-<p>最大连续和是典型的一维最值状态。设 <code>dp[i]</code> 表示<strong>必须以第 <code>i</code> 个数结尾</strong>的最大连续子段和，则 <code>dp[i] = max(a[i], dp[i - 1] + a[i])</code>：要么从当前数重新开始，要么接到前一段后面。最终答案是所有 <code>dp[i]</code> 的最大值；全负序列不能强行选择不存在的空子段 <code>0</code>。</p>
-<p><strong>具体推演：</strong> 对序列 <code>-2, 3, -1</code>，<code>dp[1] = -2</code>；到 <code>3</code> 时比较“单独从 <code>3</code> 开始”和“接在 <code>-2</code> 后得到 <code>1</code>”，选择 <code>3</code>；到 <code>-1</code> 时比较 <code>-1</code> 与 <code>3 + (-1) = 2</code>，选择 <code>2</code>。三个结尾状态为 <code>-2,3,2</code>，最终答案取最大值 <code>3</code>。</p>
+<p>若一个问题的最优解能由若干更小问题的最优解组合得到，就具有最优子结构。状态转移要枚举所有合法前驱，再取 <code dir="auto">min</code> 或 <code dir="auto">max</code>。求最小值时初值应足够大，求最大值时则应结合题意设为合法下界。</p>
+<p>最大连续和是典型的一维最值状态。设 <code dir="auto">dp[i]</code> 表示<strong>必须以第 <code dir="auto">i</code> 个数结尾</strong>的最大连续子段和，则 <code dir="auto">dp[i] = max(a[i], dp[i - 1] + a[i])</code>：要么从当前数重新开始，要么接到前一段后面。最终答案是所有 <code dir="auto">dp[i]</code> 的最大值；全负序列不能强行选择不存在的空子段 <code dir="auto">0</code>。</p>
+<p><strong>具体推演：</strong> 对序列 <code dir="auto">-2, 3, -1</code>，<code dir="auto">dp[1] = -2</code>；到 <code dir="auto">3</code> 时比较“单独从 <code dir="auto">3</code> 开始”和“接在 <code dir="auto">-2</code> 后得到 <code dir="auto">1</code>”，选择 <code dir="auto">3</code>；到 <code dir="auto">-1</code> 时比较 <code dir="auto">-1</code> 与 <code dir="auto">3 + (-1) = 2</code>，选择 <code dir="auto">2</code>。三个结尾状态为 <code dir="auto">-2,3,2</code>，最终答案取最大值 <code dir="auto">3</code>。</p>
 <h2 id="kp-02">02 最长上升子序列 LIS</h2>
-<p>设 <code>dp[i]</code> 表示<strong>以第 <code>i</code> 个数结尾</strong>的最长严格上升子序列长度。初值为 <code>1</code>；枚举 <code>j &lt; i</code>，若 <code>a[j] &lt; a[i]</code>，可以转移：</p>
-<p><code>dp[i] = max(dp[i], dp[j] + 1)</code></p>
-<p>最终答案是所有 <code>dp[i]</code> 的最大值，而不一定是 <code>dp[n]</code>。严格上升使用 <code>&lt;</code>，若题目说“不下降”才使用 <code>&lt;=</code>。</p>
-<p><strong>具体推演：</strong> 对序列 <code>3,1,2</code>，初值都是 <code>1</code>。<code>3</code> 不能接到任何更早元素后；<code>1</code> 也不能接在 <code>3</code> 后；处理 <code>2</code> 时，<code>1 &lt; 2</code>，所以由 <code>dp[2] + 1</code> 得到 <code>dp[3] = 2</code>。最终状态为 <code>1,1,2</code>，最长严格上升子序列是 <code>1,2</code>。</p>
+<p>设 <code dir="auto">dp[i]</code> 表示<strong>以第 <code dir="auto">i</code> 个数结尾</strong>的最长严格上升子序列长度。初值为 <code dir="auto">1</code>；枚举 <code dir="auto">j &lt; i</code>，若 <code dir="auto">a[j] &lt; a[i]</code>，可以转移：</p>
+<p><code dir="auto">dp[i] = max(dp[i], dp[j] + 1)</code></p>
+<p>最终答案是所有 <code dir="auto">dp[i]</code> 的最大值，而不一定是 <code dir="auto">dp[n]</code>。严格上升使用 <code dir="auto">&lt;</code>，若题目说“不下降”才使用 <code dir="auto">&lt;=</code>。</p>
+<p><strong>具体推演：</strong> 对序列 <code dir="auto">3,1,2</code>，初值都是 <code dir="auto">1</code>。<code dir="auto">3</code> 不能接到任何更早元素后；<code dir="auto">1</code> 也不能接在 <code dir="auto">3</code> 后；处理 <code dir="auto">2</code> 时，<code dir="auto">1 &lt; 2</code>，所以由 <code dir="auto">dp[2] + 1</code> 得到 <code dir="auto">dp[3] = 2</code>。最终状态为 <code dir="auto">1,1,2</code>，最长严格上升子序列是 <code dir="auto">1,2</code>。</p>
 <h2 id="kp-03">03 01 背包与候选最值优化</h2>
-<p><code>01 背包</code> 的二维状态压成一维后，每件物品最多选一次，因此容量必须从大到小倒序更新。正序会读到本轮刚写入的新状态，造成同一物品被重复选择。</p>
-<p>当多个状态反复枚举同一批候选值时，还可以思考是否能维护前缀最值或其他汇总量。但必须先写出正确的基础转移，证明汇总量正好覆盖相同候选集合，不能因为变量更少就认为更优。网格最值也遵循同一原则：从可达的上方、左方等合法来源中取 <code>max</code> 或 <code>min</code>。</p>
-<p><strong>具体推演：</strong> 背包容量为 <code>4</code>，当前只有一件重量 <code>2</code>、价值 <code>3</code> 的物品。倒序先算容量 <code>4</code>，读取旧的 <code>dp[2] = 0</code>，得到 <code>3</code>；再算容量 <code>2</code>，得到 <code>3</code>，最终同一物品只用一次。若正序先把 <code>dp[2]</code> 改成 <code>3</code>，再算 <code>dp[4]</code> 就会读到这个本轮新值并得到 <code>6</code>，等于把唯一物品选了两次。</p>
+<p><code dir="auto">01 背包</code> 的二维状态压成一维后，每件物品最多选一次，因此容量必须从大到小倒序更新。正序会读到本轮刚写入的新状态，造成同一物品被重复选择。</p>
+<p>当多个状态反复枚举同一批候选值时，还可以思考是否能维护前缀最值或其他汇总量。但必须先写出正确的基础转移，证明汇总量正好覆盖相同候选集合，不能因为变量更少就认为更优。网格最值也遵循同一原则：从可达的上方、左方等合法来源中取 <code dir="auto">max</code> 或 <code dir="auto">min</code>。</p>
+<p><strong>具体推演：</strong> 背包容量为 <code dir="auto">4</code>，当前只有一件重量 <code dir="auto">2</code>、价值 <code dir="auto">3</code> 的物品。倒序先算容量 <code dir="auto">4</code>，读取旧的 <code dir="auto">dp[2] = 0</code>，得到 <code dir="auto">3</code>；再算容量 <code dir="auto">2</code>，得到 <code dir="auto">3</code>，最终同一物品只用一次。若正序先把 <code dir="auto">dp[2]</code> 改成 <code dir="auto">3</code>，再算 <code dir="auto">dp[4]</code> 就会读到这个本轮新值并得到 <code dir="auto">6</code>，等于把唯一物品选了两次。</p>
 <h2 id="kp-04">04 空间优化与更新方向</h2>
 <p>如果当前阶段只依赖上一阶段，可以使用滚动数组；若压成一维数组，更新方向必须避免覆盖仍要读取的旧状态。依赖“上一行左侧旧值”的问题往往需要倒序，依赖“当前行左侧新值”的问题往往需要正序，最终以原转移为准。</p>
-<p><strong>具体推演：</strong> 网格路径压成一维后，处理第二行时 <code>dp[j]</code> 原本保存上方路径数，<code>dp[j - 1]</code> 已更新为当前行左方路径数，因此要从左到右。若上一行是 <code>1,1,1</code>，第二行依次更新为 <code>1,2,3</code>；反向更新会在计算右侧时读不到当前行已经得到的左方状态，结果不再对应原二维转移。</p>
+<p><strong>具体推演：</strong> 网格路径压成一维后，处理第二行时 <code dir="auto">dp[j]</code> 原本保存上方路径数，<code dir="auto">dp[j - 1]</code> 已更新为当前行左方路径数，因此要从左到右。若上一行是 <code dir="auto">1,1,1</code>，第二行依次更新为 <code dir="auto">1,2,3</code>；反向更新会在计算右侧时读不到当前行已经得到的左方状态，结果不再对应原二维转移。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <p>先确认状态含义不变，再比较时间和空间。LIS 的状态以位置结尾；候选最值必须全部合法；滚动数组需要区分上一阶段与当前阶段；一维更新方向由依赖关系决定。</p>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="基础例题">基础例题</h3>
-<p>序列 <code>-2 3 -1 4 -5</code> 的最大连续子段和可以逐项计算：</p>
+<p>序列 <code dir="auto">-2 3 -1 4 -5</code> 的最大连续子段和可以逐项计算：</p>
 <table>
 <thead>
 <tr>
-<th><code>i</code></th>
-<th><code>a[i]</code></th>
-<th><code>dp[i] = max(a[i], dp[i-1] + a[i])</code></th>
+<th><code dir="auto">i</code></th>
+<th><code dir="auto">a[i]</code></th>
+<th><code dir="auto">dp[i] = max(a[i], dp[i-1] + a[i])</code></th>
 <th>当前答案</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td><code>-2</code></td>
-<td><code>-2</code></td>
-<td><code>-2</code></td>
+<td><code dir="auto">-2</code></td>
+<td><code dir="auto">-2</code></td>
+<td><code dir="auto">-2</code></td>
 </tr>
 <tr>
 <td>2</td>
-<td><code>3</code></td>
-<td><code>3</code></td>
-<td><code>3</code></td>
+<td><code dir="auto">3</code></td>
+<td><code dir="auto">3</code></td>
+<td><code dir="auto">3</code></td>
 </tr>
 <tr>
 <td>3</td>
-<td><code>-1</code></td>
-<td><code>2</code></td>
-<td><code>3</code></td>
+<td><code dir="auto">-1</code></td>
+<td><code dir="auto">2</code></td>
+<td><code dir="auto">3</code></td>
 </tr>
 <tr>
 <td>4</td>
-<td><code>4</code></td>
-<td><code>6</code></td>
-<td><code>6</code></td>
+<td><code dir="auto">4</code></td>
+<td><code dir="auto">6</code></td>
+<td><code dir="auto">6</code></td>
 </tr>
 <tr>
 <td>5</td>
-<td><code>-5</code></td>
-<td><code>1</code></td>
-<td><code>6</code></td>
+<td><code dir="auto">-5</code></td>
+<td><code dir="auto">1</code></td>
+<td><code dir="auto">6</code></td>
 </tr>
 </tbody>
 </table>
-<p>最优连续子段是 <code>3 -1 4</code>，答案为 <code>6</code>。状态强调“必须以当前位置结尾”，最终答案再取所有状态的最大值。</p>
+<p>最优连续子段是 <code dir="auto">3 -1 4</code>，答案为 <code dir="auto">6</code>。状态强调“必须以当前位置结尾”，最终答案再取所有状态的最大值。</p>
 <h3 id="典型应用例题">典型应用例题</h3>
-<p>求长度为 <code>n</code> 的序列的 LIS 长度：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<p>求长度为 <code dir="auto">n</code> 的序列的 LIS 长度：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int n;    int a[1005] = {};    int dp[1005] = {};    cin &gt;&gt; n;    for (int i = 1; i &lt;= n; i++) {        cin &gt;&gt; a[i];        // dp[i] 初始为 1：只选择 a[i] 自身也是合法上升子序列。        dp[i] = 1;    }    int answer = 0;    // 按结尾位置从左到右计算，当前状态只读取更早的 j。    for (int i = 1; i &lt;= n; i++) {        for (int j = 1; j &lt; i; j++) {            if (a[j] &lt; a[i]) {                // 把 a[i] 接到以 j 结尾的严格上升子序列后面。                dp[i] = max(dp[i], dp[j] + 1);            }        }        // 最优结尾不一定是 n，所以每个 dp[i] 都要参与答案比较。        answer = max(answer, dp[i]);    }    cout &lt;&lt; answer &lt;&lt; endl;    return 0;}</code></pre>
-<p>输入 <code>6</code> 和 <code>3 1 2 5 4 6</code>，输出 <code>4</code>。时间复杂度为 <code>O(n^2)</code>，空间复杂度为 <code>O(n)</code>。</p>
+<p>输入 <code dir="auto">6</code> 和 <code dir="auto">3 1 2 5 4 6</code>，输出 <code dir="auto">4</code>。时间复杂度为 <code dir="auto">O(n^2)</code>，空间复杂度为 <code dir="auto">O(n)</code>。</p>
 <h3 id="状态追踪">状态追踪</h3>
-<p>以容量为 <code>4</code>、只有一件重量 <code>2</code>、价值 <code>3</code> 的 01 背包为例：</p>
+<p>以容量为 <code dir="auto">4</code>、只有一件重量 <code dir="auto">2</code>、价值 <code dir="auto">3</code> 的 01 背包为例：</p>
 <table>
 <thead>
 <tr>
@@ -555,22 +575,22 @@ int main() {    int n;    int a[1005] = {};    int dp[1005] = {};    cin &gt;&gt
 </thead>
 <tbody>
 <tr>
-<td>优化前：二维 <code>dp[item][capacity]</code></td>
+<td>优化前：二维 <code dir="auto">dp[item][capacity]</code></td>
 <td>从上一行读取</td>
-<td>选一次得到 <code>3</code></td>
-<td>仍只能选一次，得到 <code>3</code></td>
+<td>选一次得到 <code dir="auto">3</code></td>
+<td>仍只能选一次，得到 <code dir="auto">3</code></td>
 </tr>
 <tr>
-<td>优化后：一维 <code>dp[capacity]</code> 倒序</td>
-<td><code>4 → 2</code></td>
-<td>得到 <code>3</code></td>
-<td>先更新容量 4，读取的仍是上一轮 <code>dp[2] = 0</code>，得到 <code>3</code></td>
+<td>优化后：一维 <code dir="auto">dp[capacity]</code> 倒序</td>
+<td><code dir="auto">4 → 2</code></td>
+<td>得到 <code dir="auto">3</code></td>
+<td>先更新容量 4，读取的仍是上一轮 <code dir="auto">dp[2] = 0</code>，得到 <code dir="auto">3</code></td>
 </tr>
 <tr>
 <td>错误的一维正序</td>
-<td><code>2 → 4</code></td>
-<td>先得到 <code>3</code></td>
-<td>又读取本轮的新 <code>dp[2] = 3</code>，错误得到 <code>6</code></td>
+<td><code dir="auto">2 → 4</code></td>
+<td>先得到 <code dir="auto">3</code></td>
+<td>又读取本轮的新 <code dir="auto">dp[2] = 3</code>，错误得到 <code dir="auto">6</code></td>
 </tr>
 </tbody>
 </table>
@@ -587,18 +607,18 @@ int main() {    int n;    int a[1005] = {};    int dp[1005] = {};    cin &gt;&gt
 <tbody>
 <tr>
 <td>基础</td>
-<td>LIS：<code>3 1 2 5 4 6</code></td>
-<td>长度为 <code>4</code></td>
+<td>LIS：<code dir="auto">3 1 2 5 4 6</code></td>
+<td>长度为 <code dir="auto">4</code></td>
 </tr>
 <tr>
 <td>边界</td>
-<td>LIS 只有一个数 <code>7</code></td>
-<td>长度为 <code>1</code></td>
+<td>LIS 只有一个数 <code dir="auto">7</code></td>
+<td>长度为 <code dir="auto">1</code></td>
 </tr>
 <tr>
 <td>易错</td>
-<td>最大连续和：<code>-5 -2 -8</code></td>
-<td>输出 <code>-2</code>，不能输出空子段的 <code>0</code></td>
+<td>最大连续和：<code dir="auto">-5 -2 -8</code></td>
+<td>输出 <code dir="auto">-2</code>，不能输出空子段的 <code dir="auto">0</code></td>
 </tr>
 </tbody>
 </table>
@@ -613,22 +633,22 @@ int main() {    int n;    int a[1005] = {};    int dp[1005] = {};    cin &gt;&gt
 </thead>
 <tbody>
 <tr>
-<td>把 <code>dp[i]</code> 写成前 <code>i</code> 个数的统一答案，却使用“以 <code>i</code> 结尾”的转移</td>
+<td>把 <code dir="auto">dp[i]</code> 写成前 <code dir="auto">i</code> 个数的统一答案，却使用“以 <code dir="auto">i</code> 结尾”的转移</td>
 <td>状态含义和转移不一致</td>
-<td>明确 <code>dp[i]</code> 是否必须以第 <code>i</code> 个数结尾</td>
+<td>明确 <code dir="auto">dp[i]</code> 是否必须以第 <code dir="auto">i</code> 个数结尾</td>
 </tr>
 <tr>
-<td>LIS 只输出 <code>dp[n]</code></td>
+<td>LIS 只输出 <code dir="auto">dp[n]</code></td>
 <td>最优子序列不一定在最后一个位置结束</td>
-<td>取所有 <code>dp[i]</code> 的最大值</td>
+<td>取所有 <code dir="auto">dp[i]</code> 的最大值</td>
 </tr>
 <tr>
-<td>严格上升使用 <code>&lt;=</code></td>
+<td>严格上升使用 <code dir="auto">&lt;=</code></td>
 <td>相等元素会被错误接入</td>
-<td>严格上升用 <code>&lt;</code>，不下降才用 <code>&lt;=</code></td>
+<td>严格上升用 <code dir="auto">&lt;</code>，不下降才用 <code dir="auto">&lt;=</code></td>
 </tr>
 <tr>
-<td>最大连续和把答案初始化为 <code>0</code></td>
+<td>最大连续和把答案初始化为 <code dir="auto">0</code></td>
 <td>全负序列会错误选择空子段</td>
 <td>用第一个合法状态初始化答案</td>
 </tr>
@@ -645,10 +665,40 @@ int main() {    int n;    int a[1005] = {};    int dp[1005] = {};    cin &gt;&gt
 </tbody>
 </table>
 <h3 id="错误反例推演">错误反例推演</h3>
-<p>全负序列 <code>-5,-2,-8</code> 若把最大连续和答案初始化为 <code>0</code>，每个合法非空子段都小于 <code>0</code>，程序最终会保留 <code>0</code>；但题目要求非空子段，真实候选中最大的是只选 <code>-2</code>。把答案改为第一个合法状态 <code>-5</code>，再依次比较，才会更新到正确结果 <code>-2</code>。</p>
+<p>全负序列 <code dir="auto">-5,-2,-8</code> 若把最大连续和答案初始化为 <code dir="auto">0</code>，每个合法非空子段都小于 <code dir="auto">0</code>，程序最终会保留 <code dir="auto">0</code>；但题目要求非空子段，真实候选中最大的是只选 <code dir="auto">-2</code>。把答案改为第一个合法状态 <code dir="auto">-5</code>，再依次比较，才会更新到正确结果 <code dir="auto">-2</code>。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>二维动态规划与复杂动态规划提供基础状态；本页关注保持答案正确的优化。若无法证明覆盖相同候选集合，应保留清晰的基础写法。</p>
-<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能解释 LIS 状态为何强调以 i 结尾</label><label class="q-check"><input type="checkbox"> 能列出所有合法候选后取最值</label><label class="q-check"><input type="checkbox"> 能根据依赖关系判断空间优化方向</label><span>10 题</span>
+<p class="q-title">第 1 题序列 1，2，2，3 的最长严格上升子序列长度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题序列 1，2，2，3 的最长严" value="A"><b>A.</b> 2</label><label class="q-opt"><input type="radio" name="第 1 题序列 1，2，2，3 的最长严" value="B"><b>B.</b> 3</label><label class="q-opt"><input type="radio" name="第 1 题序列 1，2，2，3 的最长严" value="C"><b>C.</b> 4</label><label class="q-opt"><input type="radio" name="第 1 题序列 1，2，2，3 的最长严" value="D"><b>D.</b> 5</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 02：严格上升要求后一个选中元素必须大于前一个，两个相等的 2 不能同时选入。可以选择 1，2，3，长度为 3；不存在长度 4 的严格上升子序列。</p>
+<p class="q-title">第 2 题使用 O(n²) 动态规划求 LIS 时，dp[i] 通常表示什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题使用 O(n²) 动态规划求 " value="A"><b>A.</b> 以第 i 个元素结尾的最长严格上升子序列长度</label><label class="q-opt"><input type="radio" name="第 2 题使用 O(n²) 动态规划求 " value="B"><b>B.</b> 前 i 个元素的总和</label><label class="q-opt"><input type="radio" name="第 2 题使用 O(n²) 动态规划求 " value="C"><b>C.</b> 从第 i 个元素开始的连续上升段长度</label><label class="q-opt"><input type="radio" name="第 2 题使用 O(n²) 动态规划求 " value="D"><b>D.</b> 第 i 个元素出现的次数</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：把结尾固定在 i，才能枚举所有 j<i 且 a[j]<a[i] 的前驱，并由 dp[j]+1 更新 dp[i]。最终答案再从所有结尾状态 dp[i] 中取最大值。</p>
+<p class="q-title">第 3 题若 dp[i] 表示以 a[i] 结尾的最长严格上升子序列长度，哪个条件允许从 j 转移到 i？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题若 dp[i] 表示以 a[i" value="A"><b>A.</b> j &lt; i 且 a[j] &lt; a[i]</label><label class="q-opt"><input type="radio" name="第 3 题若 dp[i] 表示以 a[i" value="B"><b>B.</b> j &gt; i 且 a[j] &lt; a[i]</label><label class="q-opt"><input type="radio" name="第 3 题若 dp[i] 表示以 a[i" value="C"><b>C.</b> j &lt; i 且 a[j] &gt;= a[i]</label><label class="q-opt"><input type="radio" name="第 3 题若 dp[i] 表示以 a[i" value="D"><b>D.</b> 只要 j 和 i 相邻</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：子序列必须保持原下标顺序，所以 j<i；严格上升还要求前一个值 a[j] 小于当前值 a[i]。两个条件同时成立时，才能用 dp[j]+1 更新 dp[i]。</p>
+<p class="q-title">第 4 题对每个 i 都枚举全部 j&lt;i 来更新 dp[i]，该 LIS 算法的时间复杂度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题对每个 i 都枚举全部 j&l" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 4 题对每个 i 都枚举全部 j&l" value="B"><b>B.</b> O(log n)</label><label class="q-opt"><input type="radio" name="第 4 题对每个 i 都枚举全部 j&l" value="C"><b>C.</b> O(n)</label><label class="q-opt"><input type="radio" name="第 4 题对每个 i 都枚举全部 j&l" value="D"><b>D.</b> O(n²)</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>对应本页 02：外层枚举 n 个结尾位置，内层最多检查 i 个前驱，总检查次数约为 1+2+…+(n-1)，数量级为 n²，因此时间复杂度是 O(n²)。</p>
+<p class="q-title">第 5 题把二维 DP 压缩成一维数组前，最需要确认哪项条件？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题把二维 DP 压缩成一维数组前" value="A"><b>A.</b> 被覆盖的旧状态以后不再被当前轮转移需要</label><label class="q-opt"><input type="radio" name="第 5 题把二维 DP 压缩成一维数组前" value="B"><b>B.</b> 数组下标必须都是偶数</label><label class="q-opt"><input type="radio" name="第 5 题把二维 DP 压缩成一维数组前" value="C"><b>C.</b> 所有状态值必须相等</label><label class="q-opt"><input type="radio" name="第 5 题把二维 DP 压缩成一维数组前" value="D"><b>D.</b> 转移中不能出现加法</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04：空间压缩会复用存储位置。只有在写入新状态后，后续计算不再需要该位置的旧值，覆盖才是安全的；其余条件与能否复用空间无关。</p>
+<p class="q-title">第 6 题01 背包把二维状态压缩成一维后，处理每件物品时容量应按什么方向更新？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题01 背包把二维状态压缩成一维" value="A"><b>A.</b> 从小到大</label><label class="q-opt"><input type="radio" name="第 6 题01 背包把二维状态压缩成一维" value="B"><b>B.</b> 从大到小</label><label class="q-opt"><input type="radio" name="第 6 题01 背包把二维状态压缩成一维" value="C"><b>C.</b> 只更新奇数容量</label><label class="q-opt"><input type="radio" name="第 6 题01 背包把二维状态压缩成一维" value="D"><b>D.</b> 方向任意</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 03：容量倒序时，dp[capacity-weight] 仍是处理当前物品之前的旧状态，保证当前物品最多选一次。若正序更新，刚写入的状态可能再次被读取，等价于重复选择当前物品。</p>
+<p class="q-title">第 7 题序列全为负数时求非空最大连续和，为什么不能把答案初始为 0？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题序列全为负数时求非空最大连续和" value="A"><b>A.</b> 0 对应不存在的空子段，会错误大于所有合法负数答案</label><label class="q-opt"><input type="radio" name="第 7 题序列全为负数时求非空最大连续和" value="B"><b>B.</b> 负数不能相加</label><label class="q-opt"><input type="radio" name="第 7 题序列全为负数时求非空最大连续和" value="C"><b>C.</b> 数组不能保存负数</label><label class="q-opt"><input type="radio" name="第 7 题序列全为负数时求非空最大连续和" value="D"><b>D.</b> 最大连续和只能用于正数</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 01：最大连续和要求选择非空连续子段。全负序列的正确答案是其中最大的负数；若答案从 0 开始，就等于允许选择题目没有提供的空子段，从而得到错误结果。</p>
+<p class="q-title">第 8 题网格最大路径和中，到达 (i,j) 只能来自上方或左方。当前格权值为 value，正确转移思想是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 8 题网格最大路径和中，到达 (i," value="A"><b>A.</b> 从两个可达来源取较大值再加 value</label><label class="q-opt"><input type="radio" name="第 8 题网格最大路径和中，到达 (i," value="B"><b>B.</b> 把两个来源路径数相加</label><label class="q-opt"><input type="radio" name="第 8 题网格最大路径和中，到达 (i," value="C"><b>C.</b> 始终只选上方</label><label class="q-opt"><input type="radio" name="第 8 题网格最大路径和中，到达 (i," value="D"><b>D.</b> 把当前状态固定为 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：网格最值要在全部合法来源中选择最优候选，再加当前格权值；路径数量才把不同来源方案数相加。若某来源不可达，还必须先排除它。</p>
+<p class="q-title">第 9 题动态规划求最优值时，正确的基本做法是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 9 题动态规划求最优值时，正确的基本" value="A"><b>A.</b> 只取第一个前驱</label><label class="q-opt"><input type="radio" name="第 9 题动态规划求最优值时，正确的基本" value="B"><b>B.</b> 枚举全部合法前驱并取 min 或 max</label><label class="q-opt"><input type="radio" name="第 9 题动态规划求最优值时，正确的基本" value="C"><b>C.</b> 忽略状态含义</label><label class="q-opt"><input type="radio" name="第 9 题动态规划求最优值时，正确的基本" value="D"><b>D.</b> 所有状态设成答案</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 01：最优值转移要覆盖所有合法候选，再按题意取最小值或最大值。</p>
+<p class="q-title">第 10 题想用前缀最大值代替反复枚举时，必须先证明什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 10 题想用前缀最大值代替反复枚举时" value="A"><b>A.</b> 变量名更短</label><label class="q-opt"><input type="radio" name="第 10 题想用前缀最大值代替反复枚举时" value="B"><b>B.</b> 汇总量与原转移覆盖相同候选</label><label class="q-opt"><input type="radio" name="第 10 题想用前缀最大值代替反复枚举时" value="C"><b>C.</b> 数组一定一维</label><label class="q-opt"><input type="radio" name="第 10 题想用前缀最大值代替反复枚举时" value="D"><b>D.</b> 答案一定为正</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 03：新汇总量只有与原转移覆盖同一批合法候选时，才能保持答案正确。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level7-pager" aria-label="七级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level7-pager__link gesp-level7-pager__link--previous" href="/gesp/level7/two-dimensional-grid-dp/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 03</small><strong>二维动态规划</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level7-pager__link gesp-level7-pager__link--next" href="/gesp/level7/graph-basics/" rel="next"><span><small>下一知识点 · 05</small><strong>图的定义</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -657,7 +707,7 @@ int main() {    int n;    int a[1005] = {};    int dp[1005] = {};    cin &gt;&gt
       <a class="kp-nav" href="kp5.html">下一个：图的基本概念 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 最优状态与最大连续和</a></li><li><a href="#kp-02">02 最长上升子序列 LIS</a></li><li><a href="#kp-03">03 01 背包与候选最值优化</a></li><li><a href="#kp-04">04 空间优化与更新方向</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#状态追踪" class="lvl3">状态追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 最优状态与最大连续和</a></li><li><a href="#kp-02">02 最长上升子序列 LIS</a></li><li><a href="#kp-03">03 01 背包与候选最值优化</a></li><li><a href="#kp-04">04 空间优化与更新方向</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#状态追踪" class="lvl3">状态追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -669,6 +719,31 @@ int main() {    int n;    int a[1005] = {};    int dp[1005] = {};    cin &gt;&gt
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

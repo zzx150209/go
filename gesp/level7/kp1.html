@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,18 +489,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 三角函数</a><a href="#kp-02" class="astro-obblnf2s">02 对数与指数</a><a href="#kp-03" class="astro-obblnf2s">03 平方根、绝对值与取整</a><a href="#kp-04" class="astro-obblnf2s">04 浮点结果</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心检查</a><a href="#page-test" class="astro-obblnf2s">综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方七级大纲要求掌握数学库中的三角函数、对数函数、指数函数、平方根、绝对值和取整函数。本页只讨论常见 OJ 输入范围内的安全调用、定义域和返回值，不研究函数内部实现。完整程序使用 C++ 标准数学函数，页面不要求记忆某个平台的近似常数。</p>
 <p>当题目出现角度、距离、增长倍数、数量级估算或误差要求时，应先判断所需函数，再检查单位、定义域和输出精度。数学库函数解决的是“已有数学模型怎样可靠计算”，不能代替建模本身。</p>
 <h2 id="kp-01">01 三角函数与弧度</h2>
-<p><code>sin(x)</code>、<code>cos(x)</code>、<code>tan(x)</code> 的参数是<strong>弧度</strong>。角度 <code>degree</code> 要先换算：</p>
-<pre><code>double radian = degree * acos(-1.0) / 180.0;double answer = sin(radian);</code></pre>
-<p><code>acos(-1.0)</code> 得到圆周率 π。以 <code>90°</code> 为例，换算后是 <code>π/2</code>，正弦约为 <code>1</code>。<code>asin</code>、<code>acos</code> 的输入必须在 <code>[-1, 1]</code> 内，返回的也是弧度。</p>
-<p><strong>具体推演：</strong> 输入 <code>degree = 30</code> 时，先算 <code>radian = 30 × π / 180 = π/6</code>，再调用 <code>sin(π/6)</code>，得到约 <code>0.5</code>。如果误写成 <code>sin(30)</code>，函数会把 <code>30</code> 当成弧度，结果约为 <code>-0.988</code>，并不是 <code>30°</code> 的正弦值。结论是：只要题目给的是角度，就必须先换成弧度。</p>
+<p><code dir="auto">sin(x)</code>、<code dir="auto">cos(x)</code>、<code dir="auto">tan(x)</code> 的参数是<strong>弧度</strong>。角度 <code dir="auto">degree</code> 要先换算：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>double radian = degree * acos(-1.0) / 180.0;double answer = sin(radian);</code></pre>
+<p><code dir="auto">acos(-1.0)</code> 得到圆周率 π。以 <code dir="auto">90°</code> 为例，换算后是 <code dir="auto">π/2</code>，正弦约为 <code dir="auto">1</code>。<code dir="auto">asin</code>、<code dir="auto">acos</code> 的输入必须在 <code dir="auto">[-1, 1]</code> 内，返回的也是弧度。</p>
+<p><strong>具体推演：</strong> 输入 <code dir="auto">degree = 30</code> 时，先算 <code dir="auto">radian = 30 × π / 180 = π/6</code>，再调用 <code dir="auto">sin(π/6)</code>，得到约 <code dir="auto">0.5</code>。如果误写成 <code dir="auto">sin(30)</code>，函数会把 <code dir="auto">30</code> 当成弧度，结果约为 <code dir="auto">-0.988</code>，并不是 <code dir="auto">30°</code> 的正弦值。结论是：只要题目给的是角度，就必须先换成弧度。</p>
 <h2 id="kp-02">02 对数函数与指数函数</h2>
-<p><code>log(x)</code> 表示以 <code>e</code> 为底的自然对数，<code>log10(x)</code> 表示以 <code>10</code> 为底的常用对数，<code>log2(x)</code> 表示以 <code>2</code> 为底的对数；三者都要求 <code>x &gt; 0</code>。<code>exp(x)</code> 表示 <code>e</code> 的 <code>x</code> 次幂，<code>pow(a, b)</code> 表示 <code>a</code> 的 <code>b</code> 次幂。调用对数函数前必须先判断定义域，较大的 <code>x</code> 传给 <code>exp</code> 还可能溢出。</p>
-<p>例如 <code>log(1.0)</code> 为 <code>0</code>，<code>log10(1000.0)</code> 为 <code>3</code>，<code>log2(8.0)</code> 为 <code>3</code>；而 <code>log(0.0)</code> 在实数范围内没有定义。不能先调用函数再检查结果。</p>
-<p><strong>具体推演：</strong> 若一个数量每轮翻倍，从 <code>1</code> 增长到 <code>32</code>，需要的轮数可以用 <code>log2(32) = 5</code> 判断，因为 <code>2⁵ = 32</code>。调用顺序是先检查 <code>32 &gt; 0</code>，再调用 <code>log2</code>，最后按题意取用结果；若输入改为 <code>0</code>，定义域检查失败，应直接报告无定义，而不是继续计算。</p>
+<p><code dir="auto">log(x)</code> 表示以 <code dir="auto">e</code> 为底的自然对数，<code dir="auto">log10(x)</code> 表示以 <code dir="auto">10</code> 为底的常用对数，<code dir="auto">log2(x)</code> 表示以 <code dir="auto">2</code> 为底的对数；三者都要求 <code dir="auto">x &gt; 0</code>。<code dir="auto">exp(x)</code> 表示 <code dir="auto">e</code> 的 <code dir="auto">x</code> 次幂，<code dir="auto">pow(a, b)</code> 表示 <code dir="auto">a</code> 的 <code dir="auto">b</code> 次幂。调用对数函数前必须先判断定义域，较大的 <code dir="auto">x</code> 传给 <code dir="auto">exp</code> 还可能溢出。</p>
+<p>例如 <code dir="auto">log(1.0)</code> 为 <code dir="auto">0</code>，<code dir="auto">log10(1000.0)</code> 为 <code dir="auto">3</code>，<code dir="auto">log2(8.0)</code> 为 <code dir="auto">3</code>；而 <code dir="auto">log(0.0)</code> 在实数范围内没有定义。不能先调用函数再检查结果。</p>
+<p><strong>具体推演：</strong> 若一个数量每轮翻倍，从 <code dir="auto">1</code> 增长到 <code dir="auto">32</code>，需要的轮数可以用 <code dir="auto">log2(32) = 5</code> 判断，因为 <code dir="auto">2⁵ = 32</code>。调用顺序是先检查 <code dir="auto">32 &gt; 0</code>，再调用 <code dir="auto">log2</code>，最后按题意取用结果；若输入改为 <code dir="auto">0</code>，定义域检查失败，应直接报告无定义，而不是继续计算。</p>
 <h2 id="kp-03">03 平方根、绝对值、幂与取整</h2>
 <table>
 <thead>
@@ -493,57 +513,57 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>sqrt(x)</code></td>
+<td><code dir="auto">sqrt(x)</code></td>
 <td>非负平方根</td>
-<td><code>x &gt;= 0</code></td>
+<td><code dir="auto">x &gt;= 0</code></td>
 </tr>
 <tr>
-<td><code>fabs(x)</code></td>
+<td><code dir="auto">fabs(x)</code></td>
 <td>浮点数绝对值</td>
 <td>返回非负值</td>
 </tr>
 <tr>
-<td><code>pow(a, b)</code></td>
-<td><code>a</code> 的 <code>b</code> 次幂</td>
+<td><code dir="auto">pow(a, b)</code></td>
+<td><code dir="auto">a</code> 的 <code dir="auto">b</code> 次幂</td>
 <td>注意范围与浮点结果</td>
 </tr>
 <tr>
-<td><code>ceil(x)</code></td>
-<td>不小于 <code>x</code> 的最小整数值</td>
+<td><code dir="auto">ceil(x)</code></td>
+<td>不小于 <code dir="auto">x</code> 的最小整数值</td>
 <td>向正无穷方向</td>
 </tr>
 <tr>
-<td><code>floor(x)</code></td>
-<td>不大于 <code>x</code> 的最大整数值</td>
+<td><code dir="auto">floor(x)</code></td>
+<td>不大于 <code dir="auto">x</code> 的最大整数值</td>
 <td>向负无穷方向</td>
 </tr>
 </tbody>
 </table>
-<p>因此 <code>ceil(-2.3) == -2</code>，<code>floor(-2.3) == -3</code>。两者都不是“简单删除小数部分”。</p>
-<p><strong>具体推演：</strong> 对 <code>x = -2.3</code>，数轴上不小于它的整数有 <code>-2、-1、0……</code>，其中最小的是 <code>-2</code>，所以 <code>ceil(x) = -2</code>；不大于它的整数有 <code>……-4、-3</code>，其中最大的是 <code>-3</code>，所以 <code>floor(x) = -3</code>。同一数据同时推演两种方向，就不会把它们误解成“去掉小数”。</p>
+<p>因此 <code dir="auto">ceil(-2.3) == -2</code>，<code dir="auto">floor(-2.3) == -3</code>。两者都不是“简单删除小数部分”。</p>
+<p><strong>具体推演：</strong> 对 <code dir="auto">x = -2.3</code>，数轴上不小于它的整数有 <code dir="auto">-2、-1、0……</code>，其中最小的是 <code dir="auto">-2</code>，所以 <code dir="auto">ceil(x) = -2</code>；不大于它的整数有 <code dir="auto">……-4、-3</code>，其中最大的是 <code dir="auto">-3</code>，所以 <code dir="auto">floor(x) = -3</code>。同一数据同时推演两种方向，就不会把它们误解成“去掉小数”。</p>
 <h2 id="kp-04">04 浮点结果与允许误差</h2>
-<p><code>double</code> 保存近似值，数学上的 <code>0</code> 可能算成极小数。判断两个浮点结果是否足够接近时，可写：</p>
+<p><code dir="auto">double</code> 保存近似值，数学上的 <code dir="auto">0</code> 可能算成极小数。判断两个浮点结果是否足够接近时，可写：</p>
 <pre><code>const double EPS = 1e-9;if (fabs(calculated - expected) &lt; EPS) {    cout &lt;&lt; "equal" &lt;&lt; endl;}</code></pre>
-<p><code>fixed &lt;&lt; setprecision(6)</code> 只控制显示为小数点后 6 位，不会提高计算精度。</p>
-<p><strong>具体推演：</strong> 假设计算得到 <code>calculated = 0.30000000000000004</code>，期望值是 <code>0.3</code>，两者直接用 <code>==</code> 可能判为不等；差值绝对值约为 <code>4 × 10⁻¹⁷</code>，小于 <code>1e-9</code>，因此允许误差判断得到“足够接近”。随后用 <code>setprecision(2)</code> 输出为 <code>0.30</code>，只是改变显示结果，内存中的近似值并未变成精确的 <code>0.3</code>。</p>
+<p><code dir="auto">fixed &lt;&lt; setprecision(6)</code> 只控制显示为小数点后 6 位，不会提高计算精度。</p>
+<p><strong>具体推演：</strong> 假设计算得到 <code dir="auto">calculated = 0.30000000000000004</code>，期望值是 <code dir="auto">0.3</code>，两者直接用 <code dir="auto">==</code> 可能判为不等；差值绝对值约为 <code dir="auto">4 × 10⁻¹⁷</code>，小于 <code dir="auto">1e-9</code>，因此允许误差判断得到“足够接近”。随后用 <code dir="auto">setprecision(2)</code> 输出为 <code dir="auto">0.30</code>，只是改变显示结果，内存中的近似值并未变成精确的 <code dir="auto">0.3</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
-<p>先检查单位和定义域，再调用函数；最后按题目误差要求比较或输出。<code>sqrt</code> 允许零，<code>log</code> 不允许零；三角函数使用弧度；<code>ceil</code> 与 <code>floor</code> 在负数处最容易混淆。</p>
+<p>先检查单位和定义域，再调用函数；最后按题目误差要求比较或输出。<code dir="auto">sqrt</code> 允许零，<code dir="auto">log</code> 不允许零；三角函数使用弧度；<code dir="auto">ceil</code> 与 <code dir="auto">floor</code> 在负数处最容易混淆。</p>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="基础例题">基础例题</h3>
-<p>计算 <code>sin(30°)</code>、<code>log10(1000)</code> 和 <code>ceil(-2.3)</code>：</p>
+<p>计算 <code dir="auto">sin(30°)</code>、<code dir="auto">log10(1000)</code> 和 <code dir="auto">ceil(-2.3)</code>：</p>
 <ol>
-<li><code>30°</code> 先换成 <code>π/6</code>，所以 <code>sin(π/6)</code> 约为 <code>0.5</code>；</li>
-<li><code>10³ = 1000</code>，所以 <code>log10(1000) = 3</code>；</li>
-<li>不小于 <code>-2.3</code> 的最小整数是 <code>-2</code>，所以 <code>ceil(-2.3) = -2</code>。</li>
+<li><code dir="auto">30°</code> 先换成 <code dir="auto">π/6</code>，所以 <code dir="auto">sin(π/6)</code> 约为 <code dir="auto">0.5</code>；</li>
+<li><code dir="auto">10³ = 1000</code>，所以 <code dir="auto">log10(1000) = 3</code>；</li>
+<li>不小于 <code dir="auto">-2.3</code> 的最小整数是 <code dir="auto">-2</code>，所以 <code dir="auto">ceil(-2.3) = -2</code>。</li>
 </ol>
 <p>这类题先判断单位和定义域，再代入函数，不需要编写复杂程序。</p>
 <h3 id="典型应用例题">典型应用例题</h3>
 <p>读入角度与实数，输出正弦、平方根或未定义：</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    double degree = 0.0;    double x = 0.0;    cin &gt;&gt; degree &gt;&gt; x;    // 标准三角函数接收弧度，先把输入的角度转换为弧度。    double radian = degree * acos(-1.0) / 180.0;    // fixed 与 setprecision 只控制输出格式，不改变 double 的计算精度。    cout &lt;&lt; fixed &lt;&lt; setprecision(6) &lt;&lt; sin(radian) &lt;&lt; endl;    // sqrt 的实数定义域要求 x &gt;= 0，必须在调用前完成判断。    if (x &gt;= 0.0) {        cout &lt;&lt; sqrt(x) &lt;&lt; endl;    } else {        cout &lt;&lt; "undefined" &lt;&lt; endl;    }    return 0;}</code></pre>
-<p>输入 <code>90 4</code> 时输出约为 <code>1.000000</code> 和 <code>2.000000</code>。程序只做常数次计算，时间和额外空间复杂度均为 <code>O(1)</code>。</p>
+<p>输入 <code dir="auto">90 4</code> 时输出约为 <code dir="auto">1.000000</code> 和 <code dir="auto">2.000000</code>。程序只做常数次计算，时间和额外空间复杂度均为 <code dir="auto">O(1)</code>。</p>
 <h3 id="调用过程">调用过程</h3>
-<p>输入 <code>90 4</code> 时，程序依次完成：</p>
+<p>输入 <code dir="auto">90 4</code> 时，程序依次完成：</p>
 <table>
 <thead>
 <tr>
@@ -555,32 +575,32 @@ int main() {    double degree = 0.0;    double x = 0.0;    cin &gt;&gt; degree &
 <tbody>
 <tr>
 <td>读取输入</td>
-<td><code>degree=90</code>，<code>x=4</code></td>
+<td><code dir="auto">degree=90</code>，<code dir="auto">x=4</code></td>
 <td>等待检查与换算</td>
 </tr>
 <tr>
 <td>角度转弧度</td>
-<td><code>90 × π / 180</code></td>
-<td><code>radian=π/2</code></td>
+<td><code dir="auto">90 × π / 180</code></td>
+<td><code dir="auto">radian=π/2</code></td>
 </tr>
 <tr>
 <td>调用三角函数</td>
-<td><code>sin(π/2)</code></td>
-<td>约为 <code>1</code></td>
+<td><code dir="auto">sin(π/2)</code></td>
+<td>约为 <code dir="auto">1</code></td>
 </tr>
 <tr>
 <td>检查平方根定义域</td>
-<td><code>4 &gt;= 0</code></td>
-<td>可以调用 <code>sqrt(4)</code></td>
+<td><code dir="auto">4 &gt;= 0</code></td>
+<td>可以调用 <code dir="auto">sqrt(4)</code></td>
 </tr>
 <tr>
 <td>格式化输出</td>
 <td>保留 6 位小数</td>
-<td><code>1.000000</code>、<code>2.000000</code></td>
+<td><code dir="auto">1.000000</code>、<code dir="auto">2.000000</code></td>
 </tr>
 </tbody>
 </table>
-<p>如果输入为 <code>0 -1</code>，正弦仍可计算，但 <code>-1</code> 不满足平方根的实数定义域，第二行应输出 <code>undefined</code>。</p>
+<p>如果输入为 <code dir="auto">0 -1</code>，正弦仍可计算，但 <code dir="auto">-1</code> 不满足平方根的实数定义域，第二行应输出 <code dir="auto">undefined</code>。</p>
 <h3 id="建议测试案例">建议测试案例</h3>
 <table>
 <thead>
@@ -593,18 +613,18 @@ int main() {    double degree = 0.0;    double x = 0.0;    cin &gt;&gt; degree &
 <tbody>
 <tr>
 <td>基础</td>
-<td><code>90 4</code></td>
-<td>正弦为 <code>1.000000</code>，平方根为 <code>2.000000</code></td>
+<td><code dir="auto">90 4</code></td>
+<td>正弦为 <code dir="auto">1.000000</code>，平方根为 <code dir="auto">2.000000</code></td>
 </tr>
 <tr>
 <td>边界</td>
-<td><code>0 0</code></td>
-<td>正弦与平方根都为 <code>0.000000</code></td>
+<td><code dir="auto">0 0</code></td>
+<td>正弦与平方根都为 <code dir="auto">0.000000</code></td>
 </tr>
 <tr>
 <td>易错</td>
-<td><code>180 -1</code></td>
-<td>角度先转弧度；平方根输出 <code>undefined</code></td>
+<td><code dir="auto">180 -1</code></td>
+<td>角度先转弧度；平方根输出 <code dir="auto">undefined</code></td>
 </tr>
 </tbody>
 </table>
@@ -619,37 +639,58 @@ int main() {    double degree = 0.0;    double x = 0.0;    cin &gt;&gt; degree &
 </thead>
 <tbody>
 <tr>
-<td><code>sin(90)</code> 直接把角度传入</td>
-<td>标准三角函数把 <code>90</code> 当作弧度</td>
-<td>先计算 <code>90 × π / 180</code></td>
+<td><code dir="auto">sin(90)</code> 直接把角度传入</td>
+<td>标准三角函数把 <code dir="auto">90</code> 当作弧度</td>
+<td>先计算 <code dir="auto">90 × π / 180</code></td>
 </tr>
 <tr>
-<td>认为 <code>x &gt;= 0</code> 就能调用 <code>log(x)</code></td>
-<td>对数要求参数严格大于 <code>0</code></td>
-<td>调用前检查 <code>x &gt; 0</code></td>
+<td>认为 <code dir="auto">x &gt;= 0</code> 就能调用 <code dir="auto">log(x)</code></td>
+<td>对数要求参数严格大于 <code dir="auto">0</code></td>
+<td>调用前检查 <code dir="auto">x &gt; 0</code></td>
 </tr>
 <tr>
-<td>用 <code>calculated == expected</code> 比较计算结果</td>
+<td>用 <code dir="auto">calculated == expected</code> 比较计算结果</td>
 <td>浮点运算可能产生微小舍入误差</td>
-<td>比较 <code>fabs(calculated-expected) &lt; EPS</code></td>
+<td>比较 <code dir="auto">fabs(calculated-expected) &lt; EPS</code></td>
 </tr>
 <tr>
-<td>认为 <code>ceil(-2.3)=-3</code></td>
-<td><code>ceil</code> 朝正无穷方向取整</td>
-<td>区分 <code>ceil(-2.3)=-2</code> 与 <code>floor(-2.3)=-3</code></td>
+<td>认为 <code dir="auto">ceil(-2.3)=-3</code></td>
+<td><code dir="auto">ceil</code> 朝正无穷方向取整</td>
+<td>区分 <code dir="auto">ceil(-2.3)=-2</code> 与 <code dir="auto">floor(-2.3)=-3</code></td>
 </tr>
 <tr>
-<td>认为 <code>setprecision</code> 提升计算精度</td>
+<td>认为 <code dir="auto">setprecision</code> 提升计算精度</td>
 <td>它只改变显示格式</td>
-<td>用 <code>double</code> 计算，再按题意格式化输出</td>
+<td>用 <code dir="auto">double</code> 计算，再按题意格式化输出</td>
 </tr>
 </tbody>
 </table>
 <h3 id="错误反例推演">错误反例推演</h3>
-<p>把 <code>90°</code> 直接写成 <code>sin(90)</code> 时，程序计算的是 <code>90</code> 弧度，输出约 <code>0.894</code>，而正确过程是先算 <code>90 × π / 180 = π/2</code>，再得到 <code>sin(π/2) = 1</code>。同一个输入产生明显不同结果，说明“角度未转弧度”不是格式问题，而是传给函数的数据含义已经错了。</p>
+<p>把 <code dir="auto">90°</code> 直接写成 <code dir="auto">sin(90)</code> 时，程序计算的是 <code dir="auto">90</code> 弧度，输出约 <code dir="auto">0.894</code>，而正确过程是先算 <code dir="auto">90 × π / 180 = π/2</code>，再得到 <code dir="auto">sin(π/2) = 1</code>。同一个输入产生明显不同结果，说明“角度未转弧度”不是格式问题，而是传给函数的数据含义已经错了。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>数学函数常用于几何计算和数值处理；动态规划与图论页面只有在题目确实需要时才调用它们，不能为了使用函数而强行套入算法。</p>
-<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能先检查角度单位和函数定义域</label><label class="q-check"><input type="checkbox"> 能说明 ceil 与 floor 在负数上的区别</label><label class="q-check"><input type="checkbox"> 能使用允许误差比较浮点结果</label><span>7 题</span>
+<p class="q-title">第 1 题C++ 的 sin 函数接收弧度。把 180° 转成弧度后，结果应为多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题C++ 的 sin 函数接收弧" value="A"><b>A.</b> π / 2</label><label class="q-opt"><input type="radio" name="第 1 题C++ 的 sin 函数接收弧" value="B"><b>B.</b> π</label><label class="q-opt"><input type="radio" name="第 1 题C++ 的 sin 函数接收弧" value="C"><b>C.</b> 2π</label><label class="q-opt"><input type="radio" name="第 1 题C++ 的 sin 函数接收弧" value="D"><b>D.</b> 180π</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 01：角度转弧度使用“角度 × π / 180”。代入 180 得 180 × π / 180 = π，因此 180° 对应 π 弧度。</p>
+<p class="q-title">第 2 题在实数范围内，下面哪个函数调用满足定义域要求？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题在实数范围内，下面哪个函数调用" value="A"><b>A.</b> sqrt(-1.0)</label><label class="q-opt"><input type="radio" name="第 2 题在实数范围内，下面哪个函数调用" value="B"><b>B.</b> log(0.0)</label><label class="q-opt"><input type="radio" name="第 2 题在实数范围内，下面哪个函数调用" value="C"><b>C.</b> sqrt(0.0)</label><label class="q-opt"><input type="radio" name="第 2 题在实数范围内，下面哪个函数调用" value="D"><b>D.</b> log(-2.0)</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 02：实数平方根要求参数不小于 0，所以 sqrt(0.0) 有定义；实数对数要求参数严格大于 0，而 log(0.0) 和 log(-2.0) 都不满足，sqrt(-1.0) 也不满足。</p>
+<p class="q-title">第 3 题表达式 ceil(2.3) + floor(2.8) 的值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题表达式 ceil(2.3) +" value="A"><b>A.</b> 4</label><label class="q-opt"><input type="radio" name="第 3 题表达式 ceil(2.3) +" value="B"><b>B.</b> 5</label><label class="q-opt"><input type="radio" name="第 3 题表达式 ceil(2.3) +" value="C"><b>C.</b> 6</label><label class="q-opt"><input type="radio" name="第 3 题表达式 ceil(2.3) +" value="D"><b>D.</b> 5.1</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 03：ceil(2.3) 返回不小于 2.3 的最小整数值 3，floor(2.8) 返回不大于 2.8 的最大整数值 2，两者相加得到 5。</p>
+<p class="q-title">第 4 题计算得到两个 double 变量 x 和 y 后，哪种写法更适合判断它们在允许误差 1e-9 内相等？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题计算得到两个 double 变" value="A"><b>A.</b> x == y</label><label class="q-opt"><input type="radio" name="第 4 题计算得到两个 double 变" value="B"><b>B.</b> fabs(x - y) &lt; 1e-9</label><label class="q-opt"><input type="radio" name="第 4 题计算得到两个 double 变" value="C"><b>C.</b> x - y == 1</label><label class="q-opt"><input type="radio" name="第 4 题计算得到两个 double 变" value="D"><b>D.</b> int(x) == int(y)</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 04：浮点运算可能产生微小舍入误差，因此通常比较差值的绝对值是否小于容许误差。直接使用 == 可能漏掉数学上应视为相等的结果，转成 int 又会丢失小数信息。</p>
+<p class="q-title">第 5 题程序需要判断 double 类型的 x 是否接近 0。下面哪种写法更稳妥？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题程序需要判断 double 类" value="A"><b>A.</b> x == 0</label><label class="q-opt"><input type="radio" name="第 5 题程序需要判断 double 类" value="B"><b>B.</b> fabs(x) &lt; 1e-9</label><label class="q-opt"><input type="radio" name="第 5 题程序需要判断 double 类" value="C"><b>C.</b> x = 0</label><label class="q-opt"><input type="radio" name="第 5 题程序需要判断 double 类" value="D"><b>D.</b> floor(x) == 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 04：浮点计算可能产生很小的舍入误差，比较绝对值是否小于允许误差通常比直接判断相等更稳妥。</p>
+<p class="q-title">第 6 题关于 log、log10 和 log2，下面哪项说法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题关于 log、log10 和 " value="A"><b>A.</b> 三者参数都必须大于 0，只是底数不同</label><label class="q-opt"><input type="radio" name="第 6 题关于 log、log10 和 " value="B"><b>B.</b> log2 可以接收任意负数</label><label class="q-opt"><input type="radio" name="第 6 题关于 log、log10 和 " value="C"><b>C.</b> log10(1000) 等于 100</label><label class="q-opt"><input type="radio" name="第 6 题关于 log、log10 和 " value="D"><b>D.</b> 三者都表示平方根</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：log、log10、log2 分别使用 e、10、2 为底，在实数范围内都要求参数严格大于 0；例如 log10(1000)=3，log2(8)=3。</p>
+<p class="q-title">第 7 题执行 cout &lt;&lt; fixed &lt;&lt; setprecision(3) &lt;&lt; 2.0 / 3.0;，最符合输出结果的是哪一项？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题执行 cout &lt;&lt" value="A"><b>A.</b> 0.667</label><label class="q-opt"><input type="radio" name="第 7 题执行 cout &lt;&lt" value="B"><b>B.</b> 0.666666 且不会舍入</label><label class="q-opt"><input type="radio" name="第 7 题执行 cout &lt;&lt" value="C"><b>C.</b> 2/3</label><label class="q-opt"><input type="radio" name="第 7 题执行 cout &lt;&lt" value="D"><b>D.</b> 程序因此获得无限计算精度</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04：fixed 配合 setprecision(3) 表示小数点后保留 3 位，2/3 的显示结果会舍入为 0.667；它只改变输出格式，不提高变量内部精度。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level7-pager" aria-label="七级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level7-pager__link gesp-level7-pager__link--previous" href="/gesp/level7/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>返回</small><strong>七级总览</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level7-pager__link gesp-level7-pager__link--next" href="/gesp/level7/complex-dp/" rel="next"><span><small>下一知识点 · 02</small><strong>复杂动态规划</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -658,7 +699,7 @@ int main() {    double degree = 0.0;    double x = 0.0;    cin &gt;&gt; degree &
       <a class="kp-nav" href="kp2.html">下一个：复杂动态规划 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 三角函数与弧度</a></li><li><a href="#kp-02">02 对数函数与指数函数</a></li><li><a href="#kp-03">03 平方根、绝对值、幂与取整</a></li><li><a href="#kp-04">04 浮点结果与允许误差</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#调用过程" class="lvl3">调用过程</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 三角函数与弧度</a></li><li><a href="#kp-02">02 对数函数与指数函数</a></li><li><a href="#kp-03">03 平方根、绝对值、幂与取整</a></li><li><a href="#kp-04">04 浮点结果与允许误差</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#调用过程" class="lvl3">调用过程</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -670,6 +711,31 @@ int main() {    double degree = 0.0;    double x = 0.0;    cin &gt;&gt; degree &
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

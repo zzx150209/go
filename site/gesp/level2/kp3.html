@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,14 +489,15 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <div data-gesp-level2-ui data-gesp-level2-detail></div>
-<h2 id="本课先记住">本课先记住</h2>
+    <h2 id="本课先记住">本课先记住</h2>
 <ul>
 <li><strong>核心结论：</strong> 起止框、输入输出框、处理框、判断框和箭头各有固定职责；顺序、分支、循环都要沿箭头执行，判断框必须算出真或假。</li>
 <li><strong>常用语法：</strong> 读图时把图形职责与控制方向一一对应：平行四边形表示输入或输出，矩形表示处理，菱形表示判断，箭头表示下一步方向。</li>
-<li><strong>最小示例：</strong> 循环追踪要记录状态变化，并补上最后一次失败判断：<code>i = 1</code> 且 <code>i &lt;= 3</code> 为真时输出并更新；到 <code>i = 4</code> 时条件为假，沿出口结束。</li>
+<li><strong>最小示例：</strong> 循环追踪要记录状态变化，并补上最后一次失败判断：<code dir="auto">i = 1</code> 且 <code dir="auto">i &lt;= 3</code> 为真时输出并更新；到 <code dir="auto">i = 4</code> 时条件为假，沿出口结束。</li>
 <li><strong>关键易错点：</strong> 不要凭感觉选分支，要代入条件；不要漏掉循环更新；不要漏写最后一次为假的判断。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-reading" class="astro-6dte4xza">01 流程图的作用与读法</a></li><li class="astro-6dte4xza"><a href="#02-symbols" class="astro-6dte4xza">02 常用流程图符号</a></li><li class="astro-6dte4xza"><a href="#03-sequence" class="astro-6dte4xza">03 顺序结构流程图</a></li><li class="astro-6dte4xza"><a href="#04-branch" class="astro-6dte4xza">04 分支结构流程图</a></li><li class="astro-6dte4xza"><a href="#05-loop" class="astro-6dte4xza">05 循环结构流程图</a></li><li class="astro-6dte4xza"><a href="#06-conversion" class="astro-6dte4xza">06 流程图与代码互译</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>本页对应二级大纲中的流程图：认识开始结束、输入输出、处理、判断和流程线等常用表示，能够读懂并描述顺序、分支、循环三种基本结构。</p>
 <p>流程图用统一图形和箭头描述程序步骤。读图时沿箭头逐步追踪，遇到判断框先计算条件，再选择对应路径。</p>
@@ -534,32 +554,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <thead>
 <tr>
 <th>输入</th>
-<th><code>x &gt;= 0</code></th>
+<th><code dir="auto">x &gt;= 0</code></th>
 <th>选择出口</th>
 <th>执行结果</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>x = 5</code></td>
+<td><code dir="auto">x = 5</code></td>
 <td>真</td>
 <td>是</td>
-<td>输出 <code>non-negative</code></td>
+<td>输出 <code dir="auto">non-negative</code></td>
 </tr>
 <tr>
-<td><code>x = -2</code></td>
+<td><code dir="auto">x = -2</code></td>
 <td>假</td>
 <td>否</td>
-<td>输出 <code>negative</code></td>
+<td>输出 <code dir="auto">negative</code></td>
 </tr>
 </tbody>
 </table>
 <p>判断框只选择其中一条路径，不会把两个输出都执行。</p>
-<p>循环流程“<code>i=1</code> → 判断 <code>i&lt;=3</code> → 输出 <code>i</code> → <code>i=i+1</code> → 返回判断”可以写成：</p>
+<p>循环流程“<code dir="auto">i=1</code> → 判断 <code dir="auto">i&lt;=3</code> → 输出 <code dir="auto">i</code> → <code dir="auto">i=i+1</code> → 返回判断”可以写成：</p>
 <pre><code>int i = 1;while (i &lt;= 3) {  // 判断框先检查当前 i 是否仍在范围内    cout &lt;&lt; i &lt;&lt; endl;    i++;  // 更新后返回判断，避免停在同一个状态}</code></pre>
-<p>也可以把初始化、条件和更新集中写成 <code>for (int i = 1; i &lt;= 3; i++)</code>。互译时不是看到返回箭头就固定写某一种循环，而是确认初始化、判断、循环体和更新分别在哪里。</p>
+<p>也可以把初始化、条件和更新集中写成 <code dir="auto">for (int i = 1; i &lt;= 3; i++)</code>。互译时不是看到返回箭头就固定写某一种循环，而是确认初始化、判断、循环体和更新分别在哪里。</p>
 <h3 id="从代码反推流程图">从代码反推流程图</h3>
-<p>先看一段“计算 1 到 <code>n</code> 的和”的局部代码：</p>
+<p>先看一段“计算 1 到 <code dir="auto">n</code> 的和”的局部代码：</p>
 <pre><code>int i = 1;int sum = 0;while (i &lt;= n) {  // 判断为真才进入本轮    sum = sum + i;  // 保存加入当前 i 后的新结果    i++;}cout &lt;&lt; sum &lt;&lt; endl;</code></pre>
 <p>反推时不要一行代码随意画一个框，而要先判断每行承担什么职责：</p>
 <table>
@@ -571,42 +591,42 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>i=1、sum=0</code></td>
+<td><code dir="auto">i=1、sum=0</code></td>
 <td>一个或两个处理框</td>
 </tr>
 <tr>
-<td><code>i&lt;=n</code></td>
+<td><code dir="auto">i&lt;=n</code></td>
 <td>有“是/否”两个出口的判断框</td>
 </tr>
 <tr>
-<td><code>sum=sum+i、i++</code></td>
+<td><code dir="auto">sum=sum+i、i++</code></td>
 <td>“是”出口上的处理框</td>
 </tr>
 <tr>
 <td>循环体末尾</td>
-<td>返回 <code>i&lt;=n</code> 判断框的箭头</td>
+<td>返回 <code dir="auto">i&lt;=n</code> 判断框的箭头</td>
 </tr>
 <tr>
-<td><code>cout&lt;&lt;sum</code></td>
+<td><code dir="auto">cout&lt;&lt;sum</code></td>
 <td>“否”出口之后的输入输出框</td>
 </tr>
 </tbody>
 </table>
-<p>完整流程是“开始 → 初始化 → 判断 <code>i&lt;=n</code> → 是：累加、更新、返回判断；否：输出 <code>sum</code> → 结束”。最后一次失败判断也必须画出来，否则“什么时候离开循环”没有图形依据。</p>
+<p>完整流程是“开始 → 初始化 → 判断 <code dir="auto">i&lt;=n</code> → 是：累加、更新、返回判断；否：输出 <code dir="auto">sum</code> → 结束”。最后一次失败判断也必须画出来，否则“什么时候离开循环”没有图形依据。</p>
 <h3 id="从题意设计流程图">从题意设计流程图</h3>
-<p>题目要求“输入成绩 <code>score</code>，达到 60 输出通过，否则输出继续练习”时，可以按五步设计：先圈出输入 <code>score</code> 和两种输出；再把 <code>score&gt;=60</code> 写进判断菱形；给真出口连接“输出通过”，给假出口连接“输出继续练习”；让两条路径都通向结束；最后代入 59、60 两个边界值沿箭头检查。也就是先从题意提取“输入—判断—输出”，再选择图形和连接顺序，不要先画形状再猜每个框里写什么。</p>
+<p>题目要求“输入成绩 <code dir="auto">score</code>，达到 60 输出通过，否则输出继续练习”时，可以按五步设计：先圈出输入 <code dir="auto">score</code> 和两种输出；再把 <code dir="auto">score&gt;=60</code> 写进判断菱形；给真出口连接“输出通过”，给假出口连接“输出继续练习”；让两条路径都通向结束；最后代入 59、60 两个边界值沿箭头检查。也就是先从题意提取“输入—判断—输出”，再选择图形和连接顺序，不要先画形状再猜每个框里写什么。</p>
 <h2 id="典型例题">典型例题</h2>
-<p>**题目：**流程为“输入 <code>x、y</code> → 判断 <code>x&gt;y</code> → 是：<code>a=x,b=y</code>；否：<code>a=y,b=x</code> → 输出 <code>a、b</code>”。输入 <code>x=7、y=5</code> 时输出什么？</p>
+<p>**题目：**流程为“输入 <code dir="auto">x、y</code> → 判断 <code dir="auto">x&gt;y</code> → 是：<code dir="auto">a=x,b=y</code>；否：<code dir="auto">a=y,b=x</code> → 输出 <code dir="auto">a、b</code>”。输入 <code dir="auto">x=7、y=5</code> 时输出什么？</p>
 <p><strong>推演：</strong></p>
 <ol>
-<li>输入后变量表为 <code>x=7、y=5</code>；</li>
-<li>判断 <code>7&gt;5</code>，结果为真；</li>
-<li>沿“是”出口执行 <code>a=x</code>，得到 <code>a=7</code>；</li>
-<li>再执行 <code>b=y</code>，得到 <code>b=5</code>；</li>
-<li>两条分支汇合后输出 <code>7 5</code>，没有执行“否”路径。</li>
+<li>输入后变量表为 <code dir="auto">x=7、y=5</code>；</li>
+<li>判断 <code dir="auto">7&gt;5</code>，结果为真；</li>
+<li>沿“是”出口执行 <code dir="auto">a=x</code>，得到 <code dir="auto">a=7</code>；</li>
+<li>再执行 <code dir="auto">b=y</code>，得到 <code dir="auto">b=5</code>；</li>
+<li>两条分支汇合后输出 <code dir="auto">7 5</code>，没有执行“否”路径。</li>
 </ol>
-<p>**结论：**输出 <code>7 5</code>。读分支流程图必须先代入具体值判断真假，再沿唯一一条路径更新变量。</p>
-<p>**引导练习：**请把“输入 <code>n</code>，计算 1 到 <code>n</code> 的和并输出”补成完整流程。纸上已经有“开始 → 输入 <code>n</code> → <code>i=1,sum=0</code>”以及判断框 <code>i&lt;=n</code>，你需要补出“是”出口上的两个处理步骤、返回箭头和“否”出口。提示：每轮既要累加也要更新 <code>i</code>。用 <code>n=3</code> 核对时，<code>sum</code> 应依次变为 1、3、6，随后在 <code>i=4</code> 时判断为假并输出 6；若缺少 <code>i=i+1</code> 或最后一次失败判断，就还没有完成。</p>
+<p>**结论：**输出 <code dir="auto">7 5</code>。读分支流程图必须先代入具体值判断真假，再沿唯一一条路径更新变量。</p>
+<p>**引导练习：**请把“输入 <code dir="auto">n</code>，计算 1 到 <code dir="auto">n</code> 的和并输出”补成完整流程。纸上已经有“开始 → 输入 <code dir="auto">n</code> → <code dir="auto">i=1,sum=0</code>”以及判断框 <code dir="auto">i&lt;=n</code>，你需要补出“是”出口上的两个处理步骤、返回箭头和“否”出口。提示：每轮既要累加也要更新 <code dir="auto">i</code>。用 <code dir="auto">n=3</code> 核对时，<code dir="auto">sum</code> 应依次变为 1、3、6，随后在 <code dir="auto">i=4</code> 时判断为假并输出 6；若缺少 <code dir="auto">i=i+1</code> 或最后一次失败判断，就还没有完成。</p>
 <a id="常见错误"></a>
 <h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
 <ul>
@@ -619,16 +639,18 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>把只执行一次的分支误认成循环；</li>
 <li>互译时遗漏输入、输出或结束位置。</li>
 </ul>
-<p>**错误写法：**判断框写 <code>x &gt;= 0</code>，却把“是”箭头连到输出 <code>negative</code>。</p>
-<p>**错误原因：**条件成立时选择“是”出口。<code>x &gt;= 0</code> 为真表示非负数，出口含义与输出内容相反。</p>
-<p><strong>正确写法：</strong>“是”出口连接 <code>non-negative</code>，“否”出口连接 <code>negative</code>；再分别用 <code>x=5</code> 和 <code>x=-2</code> 追踪一次。</p>
-<p>**错误写法：**循环流程只有“判断 → 输出 → 返回判断”，没有 <code>i=i+1</code>，也没有条件为假时的出口。</p>
+<p>**错误写法：**判断框写 <code dir="auto">x &gt;= 0</code>，却把“是”箭头连到输出 <code dir="auto">negative</code>。</p>
+<p>**错误原因：**条件成立时选择“是”出口。<code dir="auto">x &gt;= 0</code> 为真表示非负数，出口含义与输出内容相反。</p>
+<p><strong>正确写法：</strong>“是”出口连接 <code dir="auto">non-negative</code>，“否”出口连接 <code dir="auto">negative</code>；再分别用 <code dir="auto">x=5</code> 和 <code dir="auto">x=-2</code> 追踪一次。</p>
+<p>**错误写法：**循环流程只有“判断 → 输出 → 返回判断”，没有 <code dir="auto">i=i+1</code>，也没有条件为假时的出口。</p>
 <p>**错误原因：**变量不变化会让条件一直成立；没有“否”出口也无法表示离开循环。</p>
-<p>**正确写法：**返回判断之前先更新 <code>i</code>，并让条件为假的箭头指向循环后的步骤或结束框。</p>
+<p>**正确写法：**返回判断之前先更新 <code dir="auto">i</code>，并让条件为假的箭头指向循环后的步骤或结束框。</p>
 <h2 id="本节总结">本节总结</h2>
 <p>读流程图始终遵守四步：确认当前框的作用，执行框内操作，记录变量或输出，再沿唯一箭头前进。分支要写出条件实际值和未执行路径；循环要记录初始化、每轮判断、循环体、更新以及最后一次失败判断。流程图与代码互译时，结构和执行顺序必须一一对应。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>多层分支和多层循环页面会把更复杂代码还原为执行路径；流程图是检查这些路径是否完整的直观工具。</p>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能说出常用流程图图形的作用。</label><label class="q-check"><input type="checkbox"> 我能沿箭头追踪顺序、分支和循环。</label><label class="q-check"><input type="checkbox"> 我能把简单 if 或 while 代码对应到流程图步骤。</label><span>7 题</span><gesp-comprehensive-test class="gesp-comprehensive-test gesp-level2-comprehensive-test" data-level="2" data-progress-event="xdz:gesp-level2-progress" data-lesson-id="flowcharts"><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-flowcharts-01"><fieldset><legend><span>第 1 题</span>某流程用文字表示为：开始 → 输入 score → 判断“score ≥ 60？”；是则输出“通过”，否则输出“继续练习” → 结束。它主要属于哪种结构？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>判断框产生“是”和“否”两条不同路径，程序根据条件选择其中一条执行，因此是分支结构。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-flowcharts-02"><fieldset><legend><span>第 2 题</span>某流程先判断“任务已经完成？”：若为是就离开循环；若为否则执行一次操作，再回到判断。下列伪代码与它等价的是哪一项？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>D</p><p>只有“尚未完成”时才执行操作并再次判断，所以循环条件应写成 not 已完成；已完成时结束循环。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-flowcharts-03"><fieldset><legend><span>第 3 题</span>按以下流程执行：令 x=7、y=14；判断 x&gt;y。若是，则 a=x、b=y；若否，则 a=y、b=x；最后输出 a 和 b。输出是什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>7&gt;14 为假，应沿“否”分支执行 a=y、b=x，所以 a=14、b=7。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-flowcharts-04"><fieldset><legend><span>第 4 题</span>流程图输入年份 yr；当菱形中的条件为真时输出“闰年”，否则输出“平年”。菱形中应填写哪个完整条件？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>公历闰年规则是：能被 400 整除，或者能被 4 整除但不能被 100 整除。B 恰好表达这两个条件。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-flowcharts-05"><fieldset><legend><span>第 5 题</span>标准流程图中，通常用哪种图形表示“输入数据或输出结果”？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>平行四边形通常表示输入或输出；菱形表示判断，矩形表示处理，圆角矩形常表示开始或结束。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-flowcharts-06"><fieldset><legend><span>第 6 题</span>阅读流程图时，最可靠的第一步是什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>流程图表示有方向的执行过程，应从开始框出发，沿箭头依次处理输入、计算和判断，并记录必要的变量变化。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-flowcharts-07"><fieldset><legend><span>第 7 题</span>流程依次执行“输入 a、b → area=a×b → 输出 area”。下列哪段处理步骤与它等价？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>这是顺序结构：先得到 a、b，再计算面积，最后输出结果。B 保持了相同执行顺序，也完整对应输入、处理和输出三个步骤。</p></article><button type="button" data-test-submit>提交全部答案</button><button type="button" class="secondary" hidden data-test-retry>重新测试</button><p aria-live="polite" data-test-status>共 7 题，请全部作答后提交。</p></gesp-comprehensive-test><nav class="gesp-course-pager gesp-level2-pager" aria-label="二级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level2-pager__link gesp-level2-pager__link--previous" href="/gesp/level2/programming-languages/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 02</small><strong>程序设计语言</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level2-pager__link gesp-level2-pager__link--next" href="/gesp/level2/ascii/" rel="next"><span><small>下一知识点 · 04</small><strong>ASCII 与字符</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -637,7 +659,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp4.html">下一个：数据类型转换 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#先认识符号与三种结构">先认识符号与三种结构</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#从符号顺序到分支" class="lvl3">从符号、顺序到分支</a></li><li><a href="#从循环追踪到嵌套与综合" class="lvl3">从循环追踪到嵌套与综合</a></li><li><a href="#从代码反推流程图" class="lvl3">从代码反推流程图</a></li><li><a href="#从题意设计流程图" class="lvl3">从题意设计流程图</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#先认识符号与三种结构">先认识符号与三种结构</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#从符号顺序到分支" class="lvl3">从符号、顺序到分支</a></li><li><a href="#从循环追踪到嵌套与综合" class="lvl3">从循环追踪到嵌套与综合</a></li><li><a href="#从代码反推流程图" class="lvl3">从代码反推流程图</a></li><li><a href="#从题意设计流程图" class="lvl3">从题意设计流程图</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -649,6 +671,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

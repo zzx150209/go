@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,48 +489,49 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 排列与组合的区别</a><a href="#kp-02" class="astro-obblnf2s">02 阶乘与全排列</a><a href="#kp-03" class="astro-obblnf2s">03 部分排列</a><a href="#kp-04" class="astro-obblnf2s">04 DFS 生成排列</a><a href="#kp-05" class="astro-obblnf2s">05 组合数与性质</a><a href="#kp-06" class="astro-obblnf2s">06 DFS 生成组合</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方八级要求掌握排列、组合、阶乘、排列数与组合数，并能用 DFS 完成基础排列、组合枚举。本页只处理互不相同元素；含重复元素的去重排列不作为本页核心。</p>
 <h2 id="kp-01">01 排列与组合的区别</h2>
 <p>从若干元素中选出一些元素，若交换顺序会产生新方案，就是排列；若只关心选了哪些元素，交换顺序仍是同一方案，就是组合。</p>
 <p>从 5 人中选班长和副班长，职位有顺序，是排列；从 5 人中选 2 人参赛，不分角色，是组合。先问“交换两个人后是否算新方案”，通常就能判断。</p>
 <h2 id="kp-02">02 阶乘与全排列</h2>
-<p><code>n! = n × (n-1) × ... × 2 × 1</code>，并规定 <code>0! = 1</code>。<code>n</code> 个互不相同元素的全排列有 <code>n!</code> 种。例如 1、2、3 的全排列共有 <code>3! = 6</code> 种。</p>
-<p>阶乘增长非常快：<code>10! = 3628800</code>。枚举全排列时不仅要考虑计算时间，还要考虑输出本身已经有 <code>n!</code> 组。</p>
+<p><code dir="auto">n! = n × (n-1) × ... × 2 × 1</code>，并规定 <code dir="auto">0! = 1</code>。<code dir="auto">n</code> 个互不相同元素的全排列有 <code dir="auto">n!</code> 种。例如 1、2、3 的全排列共有 <code dir="auto">3! = 6</code> 种。</p>
+<p>阶乘增长非常快：<code dir="auto">10! = 3628800</code>。枚举全排列时不仅要考虑计算时间，还要考虑输出本身已经有 <code dir="auto">n!</code> 组。</p>
 <h2 id="kp-03">03 部分排列</h2>
-<p>从 <code>n</code> 个不同元素中选 <code>m</code> 个并安排顺序，排列数为：</p>
-<p><code>A(n,m) = n × (n-1) × ... × (n-m+1) = n! / (n-m)!</code></p>
-<p>从 5 人中选班长和副班长，班长有 5 种选择，副班长剩 4 种，共 <code>5 × 4 = 20</code> 种。</p>
+<p>从 <code dir="auto">n</code> 个不同元素中选 <code dir="auto">m</code> 个并安排顺序，排列数为：</p>
+<p><code dir="auto">A(n,m) = n × (n-1) × ... × (n-m+1) = n! / (n-m)!</code></p>
+<p>从 5 人中选班长和副班长，班长有 5 种选择，副班长剩 4 种，共 <code dir="auto">5 × 4 = 20</code> 种。</p>
 <h2 id="kp-04">04 DFS 生成排列</h2>
-<p>DFS 逐个填写位置，<code>used[value]</code> 表示数字是否已在当前排列中。递归返回后必须撤销标记，才能尝试其他方案。下面输出 <code>1..n</code> 的全排列，约定 <code>1 &lt;= n &lt;= 9</code>。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<p>DFS 逐个填写位置，<code dir="auto">used[value]</code> 表示数字是否已在当前排列中。递归返回后必须撤销标记，才能尝试其他方案。下面输出 <code dir="auto">1..n</code> 的全排列，约定 <code dir="auto">1 &lt;= n &lt;= 9</code>。</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int n;int path[10];bool used[10];
 void generatePermutation(int position) {    if (position &gt; n) {        for (int i = 1; i &lt;= n; i++) {            cout &lt;&lt; path[i] &lt;&lt; (i == n ? '\n' : ' ');        }        return;    }
     // 当前层选择还没有出现在排列中的数字。    for (int value = 1; value &lt;= n; value++) {        if (used[value]) {            continue;        }        path[position] = value;        used[value] = true;        generatePermutation(position + 1);        // 回到当前层后恢复现场，继续尝试其他数字。        used[value] = false;    }}
 int main() {    cin &gt;&gt; n;    generatePermutation(1);    return 0;}</code></pre>
-<p>时间复杂度为 <code>O(n × n!)</code>，数组和递归栈使用 <code>O(n)</code> 额外空间。</p>
+<p>时间复杂度为 <code dir="auto">O(n × n!)</code>，数组和递归栈使用 <code dir="auto">O(n)</code> 额外空间。</p>
 <h2 id="kp-05">05 组合数与基本性质</h2>
-<p><code>C(n,m)</code> 表示从 <code>n</code> 个不同元素中选 <code>m</code> 个且不考虑顺序的方案数：</p>
-<p><code>C(n,m) = n! / (m!(n-m)!)</code></p>
-<p>边界为 <code>C(n,0)=C(n,n)=1</code>，对称性为 <code>C(n,m)=C(n,n-m)</code>。直接使用阶乘公式时，中间乘积可能先溢出，较大范围应使用下一页的递推预处理。</p>
+<p><code dir="auto">C(n,m)</code> 表示从 <code dir="auto">n</code> 个不同元素中选 <code dir="auto">m</code> 个且不考虑顺序的方案数：</p>
+<p><code dir="auto">C(n,m) = n! / (m!(n-m)!)</code></p>
+<p>边界为 <code dir="auto">C(n,0)=C(n,n)=1</code>，对称性为 <code dir="auto">C(n,m)=C(n,n-m)</code>。直接使用阶乘公式时，中间乘积可能先溢出，较大范围应使用下一页的递推预处理。</p>
 <h2 id="kp-06">06 DFS 生成组合</h2>
-<p>组合枚举让所选数字严格递增。参数 <code>start</code> 表示本层允许选择的最小数字，因此会生成 <code>1,3</code>，不会再生成顺序不同但集合相同的 <code>3,1</code>。</p>
+<p>组合枚举让所选数字严格递增。参数 <code dir="auto">start</code> 表示本层允许选择的最小数字，因此会生成 <code dir="auto">1,3</code>，不会再生成顺序不同但集合相同的 <code dir="auto">3,1</code>。</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int n, m;int selected[25];
 void choose(int position, int start) {    if (position &gt; m) {        for (int i = 1; i &lt;= m; i++) {            cout &lt;&lt; selected[i] &lt;&lt; (i == m ? '\n' : ' ');        }        return;    }
     int remaining = m - position + 1;    int largestStart = n - remaining + 1;    // 只从 start 往后选，保证组合递增且不重复。    for (int value = start; value &lt;= largestStart; value++) {        selected[position] = value;        choose(position + 1, value + 1);    }}
 int main() {    cin &gt;&gt; n &gt;&gt; m;    choose(1, 1);    return 0;}</code></pre>
-<p>程序约定 <code>1 &lt;= m &lt;= n &lt;= 20</code> 且输出规模可接受。时间复杂度为 <code>O(C(n,m) × m)</code>，额外空间为 <code>O(m)</code>。</p>
-<p><strong>位置填写追踪。</strong> 从 <code>A、B、C</code> 中选 2 个按顺序站到第 1、2 个位置：第 1 个位置有 3 种选择；选定后，第 2 个位置只剩 2 种，共 <code>3×2=6</code> 种。<code>AB</code> 与 <code>BA</code> 是不同方案，所以这是排列。</p>
-<p><strong>选与不选追踪。</strong> 从 <code>A、B、C</code> 中选 2 人组队，可按是否选择 <code>A</code> 分类：选择 <code>A</code> 时，还需从 <code>B、C</code> 中选 1 人，共 2 种；不选 <code>A</code> 时，只能选择 <code>B、C</code>，共 1 种，因此 <code>C(3,2)=2+1=3</code>。这正对应组合数递推中的两部分。</p>
-<p>边界要单独核对：<code>n=1</code> 时全排列只有 1 种；<code>m=0</code> 时“一个也不选”仍是一种合法组合；<code>m=n</code> 时只能全部选中。若 <code>m&gt;n</code>，题目输入本身不合法，不能继续套公式或进入 DFS。</p>
+<p>程序约定 <code dir="auto">1 &lt;= m &lt;= n &lt;= 20</code> 且输出规模可接受。时间复杂度为 <code dir="auto">O(C(n,m) × m)</code>，额外空间为 <code dir="auto">O(m)</code>。</p>
+<p><strong>位置填写追踪。</strong> 从 <code dir="auto">A、B、C</code> 中选 2 个按顺序站到第 1、2 个位置：第 1 个位置有 3 种选择；选定后，第 2 个位置只剩 2 种，共 <code dir="auto">3×2=6</code> 种。<code dir="auto">AB</code> 与 <code dir="auto">BA</code> 是不同方案，所以这是排列。</p>
+<p><strong>选与不选追踪。</strong> 从 <code dir="auto">A、B、C</code> 中选 2 人组队，可按是否选择 <code dir="auto">A</code> 分类：选择 <code dir="auto">A</code> 时，还需从 <code dir="auto">B、C</code> 中选 1 人，共 2 种；不选 <code dir="auto">A</code> 时，只能选择 <code dir="auto">B、C</code>，共 1 种，因此 <code dir="auto">C(3,2)=2+1=3</code>。这正对应组合数递推中的两部分。</p>
+<p>边界要单独核对：<code dir="auto">n=1</code> 时全排列只有 1 种；<code dir="auto">m=0</code> 时“一个也不选”仍是一种合法组合；<code dir="auto">m=n</code> 时只能全部选中。若 <code dir="auto">m&gt;n</code>，题目输入本身不合法，不能继续套公式或进入 DFS。</p>
 <p><strong>逐段具体推演（对应 01—06）。</strong></p>
-<p><strong>01 判断模型。</strong> 从甲、乙、丙中选两人：若担任班长和副班长，<code>甲乙</code> 与 <code>乙甲</code> 职位不同，所以是排列；若只是组成两人小组，交换后成员没变，所以是组合。</p>
-<p><strong>02 全排列。</strong> 3 人排队时，第 1 位有 3 种选择；假设先放甲，第 2 位只剩 2 种，第 3 位被唯一确定，因此共 <code>3×2×1=6</code>。<code>n=1</code> 时只有排列 <code>1</code>，所以 <code>1!=1</code>，递归应输出一次。</p>
-<p><strong>03 部分排列。</strong> 5 人选班长和副班长：班长 5 种，副班长不能重复，只剩 4 种，中间结果是 <code>5×4=20</code>。只填两个职位，不再乘剩余的 3、2、1。</p>
-<p><strong>04 排列 DFS。</strong> <code>n=3</code> 时先选 1，状态变为 <code>path=[1]、used[1]=true</code>；再选 2、3 后输出 <code>123</code>。返回上一层时先弹出 3 并令 <code>used[3]=false</code>，才可能继续得到 <code>132</code>。</p>
-<p><strong>05 组合数。</strong> 从 5 人选 2 人，先按排列得到 <code>5×4=20</code>；每组如 <code>{甲,乙}</code> 被 <code>甲乙、乙甲</code> 算两次，所以 <code>20÷2=10</code>。<code>C(5,0)=1</code> 表示一人也不选这一种方案。</p>
-<p><strong>06 组合 DFS。</strong> 从 <code>{1,2,3,4}</code> 选 2 个：先选 1 后只尝试 2、3、4，得到 <code>12、13、14</code>；先选 2 后只尝试 3、4，得到 <code>23、24</code>；最后是 <code>34</code>，共 6 个，不会再生成 <code>21</code>。</p>
+<p><strong>01 判断模型。</strong> 从甲、乙、丙中选两人：若担任班长和副班长，<code dir="auto">甲乙</code> 与 <code dir="auto">乙甲</code> 职位不同，所以是排列；若只是组成两人小组，交换后成员没变，所以是组合。</p>
+<p><strong>02 全排列。</strong> 3 人排队时，第 1 位有 3 种选择；假设先放甲，第 2 位只剩 2 种，第 3 位被唯一确定，因此共 <code dir="auto">3×2×1=6</code>。<code dir="auto">n=1</code> 时只有排列 <code dir="auto">1</code>，所以 <code dir="auto">1!=1</code>，递归应输出一次。</p>
+<p><strong>03 部分排列。</strong> 5 人选班长和副班长：班长 5 种，副班长不能重复，只剩 4 种，中间结果是 <code dir="auto">5×4=20</code>。只填两个职位，不再乘剩余的 3、2、1。</p>
+<p><strong>04 排列 DFS。</strong> <code dir="auto">n=3</code> 时先选 1，状态变为 <code dir="auto">path=[1]、used[1]=true</code>；再选 2、3 后输出 <code dir="auto">123</code>。返回上一层时先弹出 3 并令 <code dir="auto">used[3]=false</code>，才可能继续得到 <code dir="auto">132</code>。</p>
+<p><strong>05 组合数。</strong> 从 5 人选 2 人，先按排列得到 <code dir="auto">5×4=20</code>；每组如 <code dir="auto">{甲,乙}</code> 被 <code dir="auto">甲乙、乙甲</code> 算两次，所以 <code dir="auto">20÷2=10</code>。<code dir="auto">C(5,0)=1</code> 表示一人也不选这一种方案。</p>
+<p><strong>06 组合 DFS。</strong> 从 <code dir="auto">{1,2,3,4}</code> 选 2 个：先选 1 后只尝试 2、3、4，得到 <code dir="auto">12、13、14</code>；先选 2 后只尝试 3、4，得到 <code dir="auto">23、24</code>；最后是 <code dir="auto">34</code>，共 6 个，不会再生成 <code dir="auto">21</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -525,37 +545,67 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    choose(1, 1);    return 0;}</code>
 <tr>
 <td>全排列</td>
 <td>是</td>
-<td><code>n!</code></td>
+<td><code dir="auto">n!</code></td>
 </tr>
 <tr>
 <td>从 n 个选 m 个并安排</td>
 <td>是</td>
-<td><code>A(n,m)</code></td>
+<td><code dir="auto">A(n,m)</code></td>
 </tr>
 <tr>
 <td>从 n 个选 m 个组成集合</td>
 <td>否</td>
-<td><code>C(n,m)</code></td>
+<td><code dir="auto">C(n,m)</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>从 6 人中选 3 人，分别担任队长、记录员和联络员。三个职位不同，交换人员会产生新方案，因此是部分排列：<code>A(6,3)=6×5×4=120</code>。若只是组成 3 人小组，则是组合：<code>C(6,3)=20</code>。</p>
+<p>从 6 人中选 3 人，分别担任队长、记录员和联络员。三个职位不同，交换人员会产生新方案，因此是部分排列：<code dir="auto">A(6,3)=6×5×4=120</code>。若只是组成 3 人小组，则是组合：<code dir="auto">C(6,3)=20</code>。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>回溯恢复反例。</strong> 第一次输出 <code>123</code> 后若只弹出 3，却忘记把 <code>used[3]</code> 改回 <code>false</code>，后面的分支会一直认为 3 已被占用，<code>132、213</code> 等答案都会丢失。正确顺序是“递归返回 → 弹出本次选择 → 恢复访问标记”。</p>
+<p><strong>回溯恢复反例。</strong> 第一次输出 <code dir="auto">123</code> 后若只弹出 3，却忘记把 <code dir="auto">used[3]</code> 改回 <code dir="auto">false</code>，后面的分支会一直认为 3 已被占用，<code dir="auto">132、213</code> 等答案都会丢失。正确顺序是“递归返回 → 弹出本次选择 → 恢复访问标记”。</p>
 <ul>
 <li>只看到“选人”就使用组合；应先检查角色和顺序。</li>
-<li>忘记 <code>0! = 1</code> 或 <code>C(n,0)=1</code>；这些是公式和递推边界。</li>
-<li>排列 DFS 返回后没有恢复 <code>used</code>；会遗漏后续方案。</li>
+<li>忘记 <code dir="auto">0! = 1</code> 或 <code dir="auto">C(n,0)=1</code>；这些是公式和递推边界。</li>
+<li>排列 DFS 返回后没有恢复 <code dir="auto">used</code>；会遗漏后续方案。</li>
 <li>组合 DFS 每层都从 1 开始；会产生重复选择和重复组合。</li>
-<li>忽略 <code>n!</code>、<code>C(n,m)</code> 的输出规模与整数溢出。</li>
+<li>忽略 <code dir="auto">n!</code>、<code dir="auto">C(n,m)</code> 的输出规模与整数溢出。</li>
 </ul>
 <h2 id="关联学习">关联学习</h2>
 <ul>
 <li><a href="/gesp/level8/pascal-triangle/">杨辉三角</a>：不用阶乘也能递推组合数。</li>
 <li><a href="/template/search/dfs-permutation/">DFS 程序模板</a>：查看排列搜索的标准框架。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能用顺序是否影响方案区分排列与组合</label><label class="q-check"><input type="checkbox"> 能计算阶乘、排列数和基础组合数</label><label class="q-check"><input type="checkbox"> 能解释排列 used 回溯与组合 start 去重</label><span>10 题</span>
+<p class="q-title">第 1 题3 名同学站成一排，共有多少种不同站法？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题3 名同学站成一排，共有多少种" value="A"><b>A.</b> 3</label><label class="q-opt"><input type="radio" name="第 1 题3 名同学站成一排，共有多少种" value="B"><b>B.</b> 6</label><label class="q-opt"><input type="radio" name="第 1 题3 名同学站成一排，共有多少种" value="C"><b>C.</b> 8</label><label class="q-opt"><input type="radio" name="第 1 题3 名同学站成一排，共有多少种" value="D"><b>D.</b> 9</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>第一个位置有 3 人可选，第二个位置剩 2 人，第三个位置剩 1 人。根据乘法原理，排列数是 3 × 2 × 1 = 3! = 6。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 2 题从 5 人中选 2 人分别担任班长和副班长，共有多少种安排？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题从 5 人中选 2 人分别担任" value="A"><b>A.</b> 10</label><label class="q-opt"><input type="radio" name="第 2 题从 5 人中选 2 人分别担任" value="B"><b>B.</b> 15</label><label class="q-opt"><input type="radio" name="第 2 题从 5 人中选 2 人分别担任" value="C"><b>C.</b> 20</label><label class="q-opt"><input type="radio" name="第 2 题从 5 人中选 2 人分别担任" value="D"><b>D.</b> 25</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>两个职位不同，交换人选会得到不同方案。班长有 5 种选择，副班长剩 4 种，因此共有 5 × 4 = 20 种。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 3 题DFS 生成 1 到 n 的全排列时，used[x] 通常表示什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题DFS 生成 1 到 n 的全" value="A"><b>A.</b> 数字 x 是否已经放入当前排列</label><label class="q-opt"><input type="radio" name="第 3 题DFS 生成 1 到 n 的全" value="B"><b>B.</b> 数字 x 出现了多少次</label><label class="q-opt"><input type="radio" name="第 3 题DFS 生成 1 到 n 的全" value="C"><b>C.</b> 当前排列长度是否为 x</label><label class="q-opt"><input type="radio" name="第 3 题DFS 生成 1 到 n 的全" value="D"><b>D.</b> 答案总数是否为 x</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>当前排列中每个数字只能使用一次。used[x] 记录数字 x 是否已经被选择，递归返回时再恢复为未选择，以便尝试其他位置。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 4 题4 个互不相同元素的全排列数量是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题4 个互不相同元素的全排列数量" value="A"><b>A.</b> 8</label><label class="q-opt"><input type="radio" name="第 4 题4 个互不相同元素的全排列数量" value="B"><b>B.</b> 12</label><label class="q-opt"><input type="radio" name="第 4 题4 个互不相同元素的全排列数量" value="C"><b>C.</b> 16</label><label class="q-opt"><input type="radio" name="第 4 题4 个互不相同元素的全排列数量" value="D"><b>D.</b> 24</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>全排列数量为 4!。逐步计算 4 × 3 × 2 × 1 = 24，因此答案是 24。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 5 题从 5 人中选 2 人参加比赛，不区分先后顺序，共有多少种选法？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题从 5 人中选 2 人参加比赛" value="A"><b>A.</b> 5</label><label class="q-opt"><input type="radio" name="第 5 题从 5 人中选 2 人参加比赛" value="B"><b>B.</b> 10</label><label class="q-opt"><input type="radio" name="第 5 题从 5 人中选 2 人参加比赛" value="C"><b>C.</b> 20</label><label class="q-opt"><input type="radio" name="第 5 题从 5 人中选 2 人参加比赛" value="D"><b>D.</b> 25</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>先按顺序选择会得到 5 × 4 = 20 种，但每组两人会因交换顺序被计算 2 次，所以组合数为 20 ÷ 2 = 10。<br><span class="q-kp">对应知识点：05</span></p>
+<p class="q-title">第 6 题DFS 枚举组合时，让下一次只从当前数字之后开始选择，主要作用是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题DFS 枚举组合时，让下一次只" value="A"><b>A.</b> 让输出从大到小</label><label class="q-opt"><input type="radio" name="第 6 题DFS 枚举组合时，让下一次只" value="B"><b>B.</b> 避免同一组元素因顺序不同被重复输出</label><label class="q-opt"><input type="radio" name="第 6 题DFS 枚举组合时，让下一次只" value="C"><b>C.</b> 保证一定选到最大数字</label><label class="q-opt"><input type="radio" name="第 6 题DFS 枚举组合时，让下一次只" value="D"><b>D.</b> 把组合问题变成排列问题</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>组合不区分选择顺序。下一层从当前数字之后开始，使所选数字严格递增，例如只产生 1,3 而不再产生 3,1，从而避免重复。<br><span class="q-kp">对应知识点：06</span></p>
+<p class="q-title">第 7 题C(6, 0) 的值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题C(6, 0) 的值是多少？" value="A"><b>A.</b> 0</label><label class="q-opt"><input type="radio" name="第 7 题C(6, 0) 的值是多少？" value="B"><b>B.</b> 1</label><label class="q-opt"><input type="radio" name="第 7 题C(6, 0) 的值是多少？" value="C"><b>C.</b> 6</label><label class="q-opt"><input type="radio" name="第 7 题C(6, 0) 的值是多少？" value="D"><b>D.</b> 不存在</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>从 6 个元素中选择 0 个，只有“一个也不选”这一种方案，因此 C(6, 0) = 1。这也是组合数递推的边界。<br><span class="q-kp">对应知识点：05</span></p>
+<p class="q-title">第 8 题下面哪一项正确体现了组合数的对称性？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 8 题下面哪一项正确体现了组合数的对" value="A"><b>A.</b> C(n, k) = C(k, n)</label><label class="q-opt"><input type="radio" name="第 8 题下面哪一项正确体现了组合数的对" value="B"><b>B.</b> C(n, k) = C(n, n-k)</label><label class="q-opt"><input type="radio" name="第 8 题下面哪一项正确体现了组合数的对" value="C"><b>C.</b> C(n, k) = n + k</label><label class="q-opt"><input type="radio" name="第 8 题下面哪一项正确体现了组合数的对" value="D"><b>D.</b> C(n, k) = n-k</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>选择 k 个元素后，剩下的 n-k 个元素也随之唯一确定，所以“选 k 个”和“确定不选的 n-k 个”方案一一对应，即 C(n,k)=C(n,n-k)。<br><span class="q-kp">对应知识点：05</span></p>
+<p class="q-title">第 9 题从 8 名同学中选出 3 人组成不分职位的小组，应优先使用哪类计数？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 9 题从 8 名同学中选出 3 人组" value="A"><b>A.</b> 排列</label><label class="q-opt"><input type="radio" name="第 9 题从 8 名同学中选出 3 人组" value="B"><b>B.</b> 组合</label><label class="q-opt"><input type="radio" name="第 9 题从 8 名同学中选出 3 人组" value="C"><b>C.</b> 最短路</label><label class="q-opt"><input type="radio" name="第 9 题从 8 名同学中选出 3 人组" value="D"><b>D.</b> 最小生成树</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>小组内没有不同职位，交换三人的选择顺序不会产生新方案，因此顺序不影响结果，应使用组合数 C(8,3) 而不是排列数。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 10 题只有 1 个互不相同的元素时，它的全排列数量和唯一排列分别是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="A"><b>A.</b> 0，没有排列</label><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="B"><b>B.</b> 1，排列为 1</label><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="C"><b>C.</b> 1，排列为空</label><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="D"><b>D.</b> 2，排列为 1 和 11</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>唯一元素只能放在唯一位置，因此 1!=1，唯一排列就是 1。DFS 放入这个元素后达到递归终点，应恰好输出一次。对应页内知识点 02。<br><span class="q-kp">对应知识点：02</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/counting-principles/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 01</small><strong>计数原理</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/gesp/level8/pascal-triangle/" rel="next"><span><small>下一知识点 · 03</small><strong>杨辉三角</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -564,7 +614,7 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    choose(1, 1);    return 0;}</code>
       <a class="kp-nav" href="kp3.html">下一个：杨辉三角 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 排列与组合的区别</a></li><li><a href="#kp-02">02 阶乘与全排列</a></li><li><a href="#kp-03">03 部分排列</a></li><li><a href="#kp-04">04 DFS 生成排列</a></li><li><a href="#kp-05">05 组合数与基本性质</a></li><li><a href="#kp-06">06 DFS 生成组合</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 排列与组合的区别</a></li><li><a href="#kp-02">02 阶乘与全排列</a></li><li><a href="#kp-03">03 部分排列</a></li><li><a href="#kp-04">04 DFS 生成排列</a></li><li><a href="#kp-05">05 组合数与基本性质</a></li><li><a href="#kp-06">06 DFS 生成组合</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -576,6 +626,31 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    choose(1, 1);    return 0;}</code>
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

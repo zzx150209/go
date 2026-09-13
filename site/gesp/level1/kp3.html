@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -472,11 +491,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <article class="article-body">
     <h2 id="本课先记住">本课先记住</h2>
 <ul>
-<li><strong>核心结论：</strong> 一份一级 C++ 完整程序通常由头文件、命名空间和 <code>main</code> 代码块组成；运行从 <code>main</code> 开始，普通语句按顺序执行。</li>
-<li><strong>常用骨架：</strong> <code>#include &lt;bits/stdc++.h&gt;</code> 提供常用声明，下一行写 <code>using namespace std;</code>，再用 <code>int main() { ... return 0; }</code> 放置主程序。</li>
-<li><strong>最小示例：</strong> <code>int main() { cout &lt;&lt; "Hello" &lt;&lt; endl; return 0; }</code> 从输出语句执行到 <code>return 0;</code> 后正常结束。</li>
+<li><strong>核心结论：</strong> 一份一级 C++ 完整程序通常由头文件、命名空间和 <code dir="auto">main</code> 代码块组成；运行从 <code dir="auto">main</code> 开始，普通语句按顺序执行。</li>
+<li><strong>常用骨架：</strong> <code dir="auto">#include &lt;bits/stdc++.h&gt;</code> 提供常用声明，下一行写 <code dir="auto">using namespace std;</code>，再用 <code dir="auto">int main() { ... return 0; }</code> 放置主程序。</li>
+<li><strong>最小示例：</strong> <code dir="auto">int main() { cout &lt;&lt; "Hello" &lt;&lt; endl; return 0; }</code> 从输出语句执行到 <code dir="auto">return 0;</code> 后正常结束。</li>
 <li><strong>关键易错点：</strong> 预处理指令后不写分号，普通语句通常要用分号结束；大括号必须按层配对，未结束的多行注释会遮住后续代码。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-头文件与命名空间" class="astro-6dte4xza">01 头文件与命名空间</a></li><li class="astro-6dte4xza"><a href="#02-关键字与基本组成" class="astro-6dte4xza">02 基本组成</a></li><li class="astro-6dte4xza"><a href="#03-main-函数与执行顺序" class="astro-6dte4xza">03 main 函数</a></li><li class="astro-6dte4xza"><a href="#04-语句分号与代码块" class="astro-6dte4xza">04 语句与代码块</a></li><li class="astro-6dte4xza"><a href="#05-注释" class="astro-6dte4xza">05 注释</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>本页对应 GESP C++ 一级大纲中的“C++ 程序基本结构”。前一页已经走过编辑、保存、编译、运行的开发流程；这一页要看懂编译器正在处理的源代码由哪些部分组成。</p>
 <p>学完本页，你应当能解决三个核心问题：</p>
@@ -487,26 +508,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <p>本页只讲一级完整程序的公共骨架，不展开自定义函数、类、头文件内部实现等内容。输入输出语句会出现在代表程序中，但它怎样读取和组织数据，留到下一页专门讲。</p>
 <p>先看一张职责图：</p>
-<pre><code>源文件顶部：准备编译需要的声明与名称规则        ↓int main()：标出程序运行入口        ↓main 的 { }：装入真正依次执行的语句        ↓return 0;：正常结束 main</code></pre>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>源文件顶部：准备编译需要的声明与名称规则        ↓int main()：标出程序运行入口        ↓main 的 { }：装入真正依次执行的语句        ↓return 0;：正常结束 main</code></pre>
 <p>这几层缺一处关键结构，编译器就可能无法把源文件正确分段。</p>
 <h2 id="01-头文件与命名空间">01 头文件与命名空间</h2>
 <h3 id="为什么使用头文件">为什么使用头文件</h3>
 <p>C++ 标准库已经准备了许多常用工具。使用这些工具前，源文件需要引入相应的<strong>声明</strong>，让编译器知道名称和基本用法。</p>
 <p>一级完整程序在本站统一写：</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;</code></pre>
-<p>第一行是预处理指令。<code>#include</code> 表示引入头文件，尖括号中是头文件名。这一行从 <code>#</code> 开始，行末<strong>不写分号</strong>。</p>
-<p><code>&lt;bits/stdc++.h&gt;</code> 汇集了许多常用标准库头文件，在常见 GCC 和在线评测环境中通常可用。它不是 C++ 标准规定每个编译器都必须提供的头文件；换到不支持它的环境时，需要改用实际需要的标准头文件。</p>
-<p>例如，标准头文件 <code>&lt;iostream&gt;</code> 提供 <code>cin</code>、<code>cout</code>、<code>endl</code> 等输入输出工具所需的声明：</p>
+<p>第一行是预处理指令。<code dir="auto">#include</code> 表示引入头文件，尖括号中是头文件名。这一行从 <code dir="auto">#</code> 开始，行末<strong>不写分号</strong>。</p>
+<p><code dir="auto">&lt;bits/stdc++.h&gt;</code> 汇集了许多常用标准库头文件，在常见 GCC 和在线评测环境中通常可用。它不是 C++ 标准规定每个编译器都必须提供的头文件；换到不支持它的环境时，需要改用实际需要的标准头文件。</p>
+<p>例如，标准头文件 <code dir="auto">&lt;iostream&gt;</code> 提供 <code dir="auto">cin</code>、<code dir="auto">cout</code>、<code dir="auto">endl</code> 等输入输出工具所需的声明：</p>
 <pre><code>#include &lt;iostream&gt;</code></pre>
-<p>因此，自测题中看到 <code>#include &lt;iostream&gt;</code> 时，应判断它是在引入输入输出相关声明，而不是在定义 <code>main</code> 或创建循环。本站完整程序继续按照项目约定使用 <code>&lt;bits/stdc++.h&gt;</code>。</p>
-<h3 id="using-namespace-std-解决什么问题"><code>using namespace std;</code> 解决什么问题</h3>
-<p>标准库中的名称位于名为 <code>std</code> 的命名空间中。命名空间可以把不同来源的名称分开，减少重名冲突。</p>
+<p>因此，自测题中看到 <code dir="auto">#include &lt;iostream&gt;</code> 时，应判断它是在引入输入输出相关声明，而不是在定义 <code dir="auto">main</code> 或创建循环。本站完整程序继续按照项目约定使用 <code dir="auto">&lt;bits/stdc++.h&gt;</code>。</p>
+<h3 id="using-namespace-std-解决什么问题"><code dir="auto">using namespace std;</code> 解决什么问题</h3>
+<p>标准库中的名称位于名为 <code dir="auto">std</code> 的命名空间中。命名空间可以把不同来源的名称分开，减少重名冲突。</p>
 <p>写上：</p>
 <pre><code>using namespace std;</code></pre>
-<p>以后就可以在本页程序里直接写 <code>cout</code>、<code>endl</code> 等标准库名称。这一行属于 using 指令，末尾<strong>需要分号</strong>。</p>
-<p>如果省略这行，标准库并没有消失，只是通常要在名称前写出 <code>std::</code>。一级主教学先统一保留 <code>using namespace std;</code>，不展开命名空间的更多用法。</p>
+<p>以后就可以在本页程序里直接写 <code dir="auto">cout</code>、<code dir="auto">endl</code> 等标准库名称。这一行属于 using 指令，末尾<strong>需要分号</strong>。</p>
+<p>如果省略这行，标准库并没有消失，只是通常要在名称前写出 <code dir="auto">std::</code>。一级主教学先统一保留 <code dir="auto">using namespace std;</code>，不展开命名空间的更多用法。</p>
 <h3 id="两行的位置和执行边界">两行的位置和执行边界</h3>
-<p>头文件与命名空间相关内容写在 <code>main</code> 之前，因为编译器需要先认识这些声明和名称规则，再检查后面的代码。</p>
+<p>头文件与命名空间相关内容写在 <code dir="auto">main</code> 之前，因为编译器需要先认识这些声明和名称规则，再检查后面的代码。</p>
 <p>它们参与源文件的处理，却不是“运行后从上到下打印到屏幕的两条语句”：</p>
 <table>
 <thead>
@@ -518,26 +539,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>#include &lt;...&gt;</code></td>
+<td><code dir="auto">#include &lt;...&gt;</code></td>
 <td>预处理阶段，引入头文件内容</td>
 <td>不会</td>
 </tr>
 <tr>
-<td><code>using namespace std;</code></td>
+<td><code dir="auto">using namespace std;</code></td>
 <td>编译时帮助查找名称</td>
 <td>不会</td>
 </tr>
 <tr>
-<td><code>main</code> 代码块内的输出语句</td>
+<td><code dir="auto">main</code> 代码块内的输出语句</td>
 <td>程序运行阶段</td>
 <td>会按语句要求输出</td>
 </tr>
 </tbody>
 </table>
-<p>这就解释了一个常见误会：源文件的第一行是 <code>#include</code>，不表示程序运行时先“执行一次 include”。程序真正开始运行的位置是 <code>main</code>。</p>
+<p>这就解释了一个常见误会：源文件的第一行是 <code dir="auto">#include</code>，不表示程序运行时先“执行一次 include”。程序真正开始运行的位置是 <code dir="auto">main</code>。</p>
 <h2 id="02-关键字与基本组成">02 关键字与基本组成</h2>
 <h3 id="关键字和普通名称要分开">关键字和普通名称要分开</h3>
-<p><strong>关键字</strong>是 C++ 语言已经规定用途的单词，不能拿来给变量随意命名。一级常见关键字有 <code>int</code>、<code>double</code>、<code>char</code>、<code>bool</code>、<code>if</code>、<code>else</code>、<code>while</code>、<code>for</code>、<code>using</code>、<code>namespace</code>、<code>return</code>。</p>
+<p><strong>关键字</strong>是 C++ 语言已经规定用途的单词，不能拿来给变量随意命名。一级常见关键字有 <code dir="auto">int</code>、<code dir="auto">double</code>、<code dir="auto">char</code>、<code dir="auto">bool</code>、<code dir="auto">if</code>、<code dir="auto">else</code>、<code dir="auto">while</code>、<code dir="auto">for</code>、<code dir="auto">using</code>、<code dir="auto">namespace</code>、<code dir="auto">return</code>。</p>
 <p>有些常见单词不是关键字：</p>
 <table>
 <thead>
@@ -549,30 +570,30 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>main</code></td>
+<td><code dir="auto">main</code></td>
 <td>有特殊规则的程序入口名称</td>
 <td>每个普通 C++ 程序都会看到它</td>
 </tr>
 <tr>
-<td><code>cout</code></td>
+<td><code dir="auto">cout</code></td>
 <td>标准库提供的名称</td>
 <td>经常与输出语句一起出现</td>
 </tr>
 <tr>
-<td><code>endl</code></td>
+<td><code dir="auto">endl</code></td>
 <td>标准库提供的输出操纵符</td>
 <td>看起来像语言命令，其实不是关键字</td>
 </tr>
 <tr>
-<td><code>number</code></td>
+<td><code dir="auto">number</code></td>
 <td>程序员可以选择的标识符</td>
 <td>只在当前程序中承担约定的含义</td>
 </tr>
 </tbody>
 </table>
-<p>所以，在 <code>double</code>、<code>else</code>、<code>while</code>、<code>endl</code> 四个选项中，<code>endl</code> 不是 C++ 关键字。</p>
-<h3 id="从外到内拆开-int-main">从外到内拆开 <code>int main()</code></h3>
-<p>看到 <code>int main()</code> 时，不要把它背成一串不能拆开的字符。每个部分都有职责：</p>
+<p>所以，在 <code dir="auto">double</code>、<code dir="auto">else</code>、<code dir="auto">while</code>、<code dir="auto">endl</code> 四个选项中，<code dir="auto">endl</code> 不是 C++ 关键字。</p>
+<h3 id="从外到内拆开-int-main">从外到内拆开 <code dir="auto">int main()</code></h3>
+<p>看到 <code dir="auto">int main()</code> 时，不要把它背成一串不能拆开的字符。每个部分都有职责：</p>
 <table>
 <thead>
 <tr>
@@ -583,29 +604,29 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>int</code></td>
-<td><code>main</code> 结束时交回一个整数状态码</td>
+<td><code dir="auto">int</code></td>
+<td><code dir="auto">main</code> 结束时交回一个整数状态码</td>
 <td>必须小写</td>
 </tr>
 <tr>
-<td><code>main</code></td>
+<td><code dir="auto">main</code></td>
 <td>程序规定的入口名称</td>
-<td>必须写成小写 <code>main</code>，不能写成 <code>Main</code> 或 <code>mian</code></td>
+<td>必须写成小写 <code dir="auto">main</code>，不能写成 <code dir="auto">Main</code> 或 <code dir="auto">mian</code></td>
 </tr>
 <tr>
-<td><code>()</code></td>
-<td><code>main</code> 名称后的参数列表，本页保持空</td>
+<td><code dir="auto">()</code></td>
+<td><code dir="auto">main</code> 名称后的参数列表，本页保持空</td>
 <td>左右圆括号必须成对</td>
 </tr>
 <tr>
-<td><code>{}</code></td>
-<td><code>main</code> 的函数体，也就是一个代码块</td>
+<td><code dir="auto">{}</code></td>
+<td><code dir="auto">main</code> 的函数体，也就是一个代码块</td>
 <td>左右大括号必须成对，内部统一缩进</td>
 </tr>
 </tbody>
 </table>
-<p><code>int</code> 与代码块末尾的 <code>return 0;</code> 前后呼应：<code>return 0;</code> 把整数 0 作为结束状态交回运行环境，通常表示程序正常结束。</p>
-<p>C++ 允许 <code>main</code> 执行到末尾时省略显式的 <code>return 0;</code>，其效果仍按正常返回 0 处理。不过一级学习阶段建议把它完整写出，这样入口、执行语句和结束位置更容易辨认。</p>
+<p><code dir="auto">int</code> 与代码块末尾的 <code dir="auto">return 0;</code> 前后呼应：<code dir="auto">return 0;</code> 把整数 0 作为结束状态交回运行环境，通常表示程序正常结束。</p>
+<p>C++ 允许 <code dir="auto">main</code> 执行到末尾时省略显式的 <code dir="auto">return 0;</code>，其效果仍按正常返回 0 处理。不过一级学习阶段建议把它完整写出，这样入口、执行语句和结束位置更容易辨认。</p>
 <h3 id="一份完整程序有哪些层">一份完整程序有哪些层</h3>
 <p>可以把一级程序分成三层：</p>
 <table>
@@ -619,27 +640,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>编译准备层</td>
-<td><code>#include &lt;bits/stdc++.h&gt;</code></td>
+<td><code dir="auto">#include &lt;bits/stdc++.h&gt;</code></td>
 <td>提供标准库声明</td>
 </tr>
 <tr>
 <td>名称规则层</td>
-<td><code>using namespace std;</code></td>
+<td><code dir="auto">using namespace std;</code></td>
 <td>允许直接使用标准库名称</td>
 </tr>
 <tr>
 <td>程序主体层</td>
-<td><code>int main() { ... }</code></td>
+<td><code dir="auto">int main() { ... }</code></td>
 <td>给出运行入口和实际执行内容</td>
 </tr>
 </tbody>
 </table>
-<p>“完整”并不等于代码很长。只要必要结构齐全，即使 <code>main</code> 中只有 <code>return 0;</code>，也可以编译和正常结束；只是它没有安排任何屏幕输出。</p>
+<p>“完整”并不等于代码很长。只要必要结构齐全，即使 <code dir="auto">main</code> 中只有 <code dir="auto">return 0;</code>，也可以编译和正常结束；只是它没有安排任何屏幕输出。</p>
 <h2 id="03-main-函数与执行顺序">03 main 函数与执行顺序</h2>
-<h3 id="main-是运行入口"><code>main</code> 是运行入口</h3>
-<p>编译器检查的是整个源文件，而运行环境启动程序时会寻找 <code>main</code>，进入它的大括号，再按照控制结构规定的顺序执行其中的语句。</p>
-<p>一级程序中，普通执行语句都应写在 <code>main</code> 的代码块内。把一条输出或计算语句随意放在 <code>main</code> 外面，编译器不会把它当成“提前执行的一步”，通常会报告结构错误。</p>
-<h3 id="从源代码到-main-经历了什么">从源代码到 <code>main</code> 经历了什么</h3>
+<h3 id="main-是运行入口"><code dir="auto">main</code> 是运行入口</h3>
+<p>编译器检查的是整个源文件，而运行环境启动程序时会寻找 <code dir="auto">main</code>，进入它的大括号，再按照控制结构规定的顺序执行其中的语句。</p>
+<p>一级程序中，普通执行语句都应写在 <code dir="auto">main</code> 的代码块内。把一条输出或计算语句随意放在 <code dir="auto">main</code> 外面，编译器不会把它当成“提前执行的一步”，通常会报告结构错误。</p>
+<h3 id="从源代码到-main-经历了什么">从源代码到 <code dir="auto">main</code> 经历了什么</h3>
 <p>上一页学过“保存 → 编译 → 运行”，现在把程序结构放进这条链：</p>
 <table>
 <thead>
@@ -647,19 +668,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <th>阶段</th>
 <th>处理对象</th>
 <th>发生的事</th>
-<th>是否已经在执行 <code>main</code></th>
+<th>是否已经在执行 <code dir="auto">main</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>保存</td>
 <td>编辑器中的内容</td>
-<td>写入 <code>.cpp</code> 源文件</td>
+<td>写入 <code dir="auto">.cpp</code> 源文件</td>
 <td>否</td>
 </tr>
 <tr>
 <td>预处理</td>
-<td><code>#include</code> 等预处理指令</td>
+<td><code dir="auto">#include</code> 等预处理指令</td>
 <td>处理头文件相关内容</td>
 <td>否</td>
 </tr>
@@ -677,35 +698,35 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 <tr>
 <td>执行主体</td>
-<td><code>main</code> 的代码块</td>
+<td><code dir="auto">main</code> 的代码块</td>
 <td>按顺序执行其中的语句</td>
 <td>是</td>
 </tr>
 <tr>
 <td>正常结束</td>
-<td><code>return 0;</code> 或到达 <code>main</code> 末尾</td>
-<td>结束 <code>main</code> 并交回状态</td>
+<td><code dir="auto">return 0;</code> 或到达 <code dir="auto">main</code> 末尾</td>
+<td>结束 <code dir="auto">main</code> 并交回状态</td>
 <td>已结束</td>
 </tr>
 </tbody>
 </table>
 <p>实际开发工具可能把“预处理、编译、链接”合并显示为一次“构建”或“编译”。一级只需掌握它们都发生在运行之前；编译成功后，才有本次源代码对应的新程序可运行。</p>
 <h3 id="怎样追踪一次运行">怎样追踪一次运行</h3>
-<p>追踪程序时，先把不会作为普通语句执行的部分排除，再看 <code>main</code> 内部：</p>
+<p>追踪程序时，先把不会作为普通语句执行的部分排除，再看 <code dir="auto">main</code> 内部：</p>
 <ol>
-<li><code>#include</code> 为编译准备声明，不会在运行窗口显示文字。</li>
-<li><code>using namespace std;</code> 帮助编译器查找名称，也不会产生输出。</li>
-<li>运行从 <code>main</code> 的左大括号进入。</li>
+<li><code dir="auto">#include</code> 为编译准备声明，不会在运行窗口显示文字。</li>
+<li><code dir="auto">using namespace std;</code> 帮助编译器查找名称，也不会产生输出。</li>
+<li>运行从 <code dir="auto">main</code> 的左大括号进入。</li>
 <li>注释只给读者看，不作为普通语句执行。</li>
-<li><code>main</code> 内的普通语句按顺序执行。</li>
-<li>执行 <code>return 0;</code> 后，<code>main</code> 结束；写在它后面的普通语句不会再执行。</li>
+<li><code dir="auto">main</code> 内的普通语句按顺序执行。</li>
+<li>执行 <code dir="auto">return 0;</code> 后，<code dir="auto">main</code> 结束；写在它后面的普通语句不会再执行。</li>
 </ol>
-<p>因此，追踪输出顺序时，应先找到 <code>main</code>，再沿着它的实际执行路径检查。</p>
+<p>因此，追踪输出顺序时，应先找到 <code dir="auto">main</code>，再沿着它的实际执行路径检查。</p>
 <h2 id="04-语句分号与代码块">04 语句、分号与代码块</h2>
 <h3 id="分号结束一条普通语句">分号结束一条普通语句</h3>
-<p>语句描述程序要完成的一项操作。很多简单语句以分号 <code>;</code> 结束，例如：</p>
+<p>语句描述程序要完成的一项操作。很多简单语句以分号 <code dir="auto">;</code> 结束，例如：</p>
 <pre><code>int age = 12;return 0;</code></pre>
-<p>第一行定义一个整数并保存 12，第二行结束 <code>main</code> 并交回状态 0。两个分号都表示对应语句已经结束。</p>
+<p>第一行定义一个整数并保存 12，第二行结束 <code dir="auto">main</code> 并交回状态 0。两个分号都表示对应语句已经结束。</p>
 <p>但不能总结成“C++ 每一行都写分号”。是否需要分号取决于这段内容的语法职责：</p>
 <table>
 <thead>
@@ -717,50 +738,50 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>#include &lt;bits/stdc++.h&gt;</code></td>
+<td><code dir="auto">#include &lt;bits/stdc++.h&gt;</code></td>
 <td>不写</td>
 <td>它是预处理指令，不是普通语句</td>
 </tr>
 <tr>
-<td><code>using namespace std;</code></td>
+<td><code dir="auto">using namespace std;</code></td>
 <td>要写</td>
 <td>using 指令以分号结束</td>
 </tr>
 <tr>
-<td><code>int main()</code></td>
+<td><code dir="auto">int main()</code></td>
 <td>此处不写</td>
 <td>后面紧跟函数体代码块</td>
 </tr>
 <tr>
-<td><code>cout &lt;&lt; ...;</code></td>
+<td><code dir="auto">cout &lt;&lt; ...;</code></td>
 <td>要写</td>
 <td>这是一条输出语句</td>
 </tr>
 <tr>
-<td><code>return 0;</code></td>
+<td><code dir="auto">return 0;</code></td>
 <td>要写</td>
 <td>这是一条返回语句</td>
 </tr>
 <tr>
-<td>单独的 <code>{</code> 或 <code>}</code></td>
+<td>单独的 <code dir="auto">{</code> 或 <code dir="auto">}</code></td>
 <td>通常不写</td>
 <td>大括号负责围成代码块</td>
 </tr>
 </tbody>
 </table>
-<p>如果 <code>return 0</code> 后漏写分号，编译器可能在下一行或右大括号附近才确定结构不完整。仍应沿用上一页的方法：先看第一条错误，再检查提示行和上一行。</p>
+<p>如果 <code dir="auto">return 0</code> 后漏写分号，编译器可能在下一行或右大括号附近才确定结构不完整。仍应沿用上一页的方法：先看第一条错误，再检查提示行和上一行。</p>
 <h3 id="大括号围成代码块">大括号围成代码块</h3>
-<p>左大括号 <code>{</code> 表示代码块开始，右大括号 <code>}</code> 表示代码块结束。当前最重要的代码块是 <code>main</code> 的函数体。</p>
+<p>左大括号 <code dir="auto">{</code> 表示代码块开始，右大括号 <code dir="auto">}</code> 表示代码块结束。当前最重要的代码块是 <code dir="auto">main</code> 的函数体。</p>
 <pre><code>int main() {    这里写属于 main 的语句}</code></pre>
-<p>左右大括号必须配对。漏写右大括号会让 <code>main</code> 的代码块结构不完整；多写一个右大括号，也会让编译器找不到与它配对的开始位置。</p>
-<p>缩进不改变 C++ 的执行结果，但能把从属关系显示出来。本站代码统一使用 4 个空格缩进：<code>main</code> 内的语句向右缩进一级，左右大括号保持对齐。这样检查配对时，比把所有内容挤在一列更可靠。</p>
+<p>左右大括号必须配对。漏写右大括号会让 <code dir="auto">main</code> 的代码块结构不完整；多写一个右大括号，也会让编译器找不到与它配对的开始位置。</p>
+<p>缩进不改变 C++ 的执行结果，但能把从属关系显示出来。本站代码统一使用 4 个空格缩进：<code dir="auto">main</code> 内的语句向右缩进一级，左右大括号保持对齐。这样检查配对时，比把所有内容挤在一列更可靠。</p>
 <h3 id="用结构配对检查编译错误">用“结构配对”检查编译错误</h3>
 <p>遇到程序结构相关报错时，可以从外到内检查：</p>
 <ol>
-<li><code>#include</code> 的 <code>#</code>、尖括号和头文件名是否完整；</li>
-<li><code>using namespace std;</code> 是否拼写正确并写了分号；</li>
-<li><code>int main()</code> 的大小写与圆括号是否正确；</li>
-<li><code>main</code> 的左右大括号是否配对；</li>
+<li><code dir="auto">#include</code> 的 <code dir="auto">#</code>、尖括号和头文件名是否完整；</li>
+<li><code dir="auto">using namespace std;</code> 是否拼写正确并写了分号；</li>
+<li><code dir="auto">int main()</code> 的大小写与圆括号是否正确；</li>
+<li><code dir="auto">main</code> 的左右大括号是否配对；</li>
 <li>块内需要分号的普通语句是否写全；</li>
 <li>注释标记是否正确结束，是否意外遮住了代码。</li>
 </ol>
@@ -770,13 +791,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>注释用于给读代码的人补充说明，不作为普通语句执行。C++ 常见两种注释：</p>
 <pre><code>// 单行注释：从双斜杠开始，到这一行末尾结束
 /* 多行注释：从斜杠星号开始，   到星号斜杠结束 */</code></pre>
-<p>单行注释适合说明一行代码或一个短步骤。多行注释可以跨越多行，但必须同时有开始标记 <code>/*</code> 和结束标记 <code>*/</code>，而且不能随意嵌套另一组多行注释。</p>
+<p>单行注释适合说明一行代码或一个短步骤。多行注释可以跨越多行，但必须同时有开始标记 <code dir="auto">/*</code> 和结束标记 <code dir="auto">*/</code>，而且不能随意嵌套另一组多行注释。</p>
 <p>注释行末不因为“像一句话”就补分号。若注释写在一条语句后面，需要分号的是前面的语句本身：</p>
 <pre><code>int age = 12; // age 保存学生年龄，初始值是 12</code></pre>
 <h3 id="注释不会执行但会影响代码边界">注释不会执行，但会影响代码边界</h3>
 <p>编译器不会把注释内容当作普通 C++ 语句执行。因此，注释里写“输出答案”，屏幕不会真的出现答案。</p>
 <p>反过来，如果把真正需要执行的代码放进注释，它也不会执行。例如临时注释掉一条输出语句后，程序可能正常结束，却没有预期输出。</p>
-<p>多行注释忘记写 <code>*/</code> 时，后面一大片代码都可能被继续当作注释，报错位置也可能远离真正遗漏标记的地方。检查时应先找到最近的 <code>/*</code>，确认它是否有对应的 <code>*/</code>。</p>
+<p>多行注释忘记写 <code dir="auto">*/</code> 时，后面一大片代码都可能被继续当作注释，报错位置也可能远离真正遗漏标记的地方。检查时应先找到最近的 <code dir="auto">/*</code>，确认它是否有对应的 <code dir="auto">*/</code>。</p>
 <h3 id="注释应解释为什么或这一步做什么">注释应解释“为什么”或“这一步做什么”</h3>
 <p>好的注释帮助读者理解关键职责，例如“输出问候，确认程序已经进入 main”。如果注释只是把代码逐字重复一遍，就没有增加信息。</p>
 <p>调试时可以暂时注释某一行，但要注意两点：</p>
@@ -786,12 +807,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <h2 id="把各部分合成一个完整程序">把各部分合成一个完整程序</h2>
 <h3 id="完成程序">完成程序</h3>
-<p>下面是本页唯一的完整程序。它的任务很简单：在屏幕上输出一行问候，用来验证程序骨架能够正常编译、进入 <code>main</code>、执行语句并结束。</p>
+<p>下面是本页唯一的完整程序。它的任务很简单：在屏幕上输出一行问候，用来验证程序骨架能够正常编译、进入 <code dir="auto">main</code>、执行语句并结束。</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    // 输出一句问候，确认程序已经进入 main    cout &lt;&lt; "Hello, C++!" &lt;&lt; endl;    return 0;}</code></pre>
 <p>运行时不需要输入。输出为：</p>
 <pre><code>Hello, C++!</code></pre>
-<p>这里先把 <code>cout &lt;&lt; "Hello, C++!" &lt;&lt; endl;</code> 整体看作“一条输出语句”：它把问候文字送到屏幕并换行，末尾分号结束这条语句。<code>cout</code> 从左到右怎样连接内容、<code>endl</code> 为什么换行，会在下一页详细讲解。</p>
+<p>这里先把 <code dir="auto">cout &lt;&lt; "Hello, C++!" &lt;&lt; endl;</code> 整体看作“一条输出语句”：它把问候文字送到屏幕并换行，末尾分号结束这条语句。<code dir="auto">cout</code> 从左到右怎样连接内容、<code dir="auto">endl</code> 为什么换行，会在下一页详细讲解。</p>
 <h3 id="从编译到结束逐步追踪">从编译到结束逐步追踪</h3>
 <table>
 <thead>
@@ -805,54 +826,54 @@ int main() {    // 输出一句问候，确认程序已经进入 main    cout &l
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>#include &lt;bits/stdc++.h&gt;</code></td>
+<td><code dir="auto">#include &lt;bits/stdc++.h&gt;</code></td>
 <td>在运行前准备常用标准库声明</td>
 <td>无</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>using namespace std;</code></td>
+<td><code dir="auto">using namespace std;</code></td>
 <td>让编译器能直接查找标准库名称</td>
 <td>无</td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td><code>int main() {</code></td>
-<td>程序运行时进入 <code>main</code> 代码块</td>
+<td><code dir="auto">int main() {</code></td>
+<td>程序运行时进入 <code dir="auto">main</code> 代码块</td>
 <td>无</td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td><code>// ...</code></td>
+<td><code dir="auto">// ...</code></td>
 <td>注释只供读者理解</td>
 <td>无</td>
 </tr>
 <tr>
 <td style="text-align: right">5</td>
-<td><code>cout &lt;&lt; ...;</code></td>
+<td><code dir="auto">cout &lt;&lt; ...;</code></td>
 <td>执行输出语句</td>
-<td>出现 <code>Hello, C++!</code> 并换行</td>
+<td>出现 <code dir="auto">Hello, C++!</code> 并换行</td>
 </tr>
 <tr>
 <td style="text-align: right">6</td>
-<td><code>return 0;</code></td>
-<td>立即结束 <code>main</code>，交回状态 0，程序结束</td>
+<td><code dir="auto">return 0;</code></td>
+<td>立即结束 <code dir="auto">main</code>，交回状态 0，程序结束</td>
 <td>不再新增文字，也不再执行后续语句</td>
 </tr>
 </tbody>
 </table>
-<p>这张表同时验证了三个结论：运行入口是 <code>main</code>，注释不作为普通语句执行，<code>return 0;</code> 后本程序正常结束。</p>
-<p>表中的右大括号 <code>}</code> 是源代码里标记函数体结束的边界，不是 <code>return 0;</code> 后还会继续执行的一条语句。</p>
+<p>这张表同时验证了三个结论：运行入口是 <code dir="auto">main</code>，注释不作为普通语句执行，<code dir="auto">return 0;</code> 后本程序正常结束。</p>
+<p>表中的右大括号 <code dir="auto">}</code> 是源代码里标记函数体结束的边界，不是 <code dir="auto">return 0;</code> 后还会继续执行的一条语句。</p>
 <h3 id="怎样验证这份骨架">怎样验证这份骨架</h3>
 <p>不要只看代码“长得像示例”，要真正走一遍开发流程：</p>
 <ol>
-<li>把完整代码保存为 <code>.cpp</code> 文件；</li>
+<li>把完整代码保存为 <code dir="auto">.cpp</code> 文件；</li>
 <li>使用 C++14 编译，确认没有编译错误；</li>
 <li>运行时不输入任何数据；</li>
-<li>检查屏幕是否只有 <code>Hello, C++!</code> 和行末换行；</li>
+<li>检查屏幕是否只有 <code dir="auto">Hello, C++!</code> 和行末换行；</li>
 <li>再检查程序是否正常结束，没有额外调试文字。</li>
 </ol>
-<p>如果漏写输出语句末尾的分号，应该在编译阶段发现；如果把输出语句放到 <code>return 0;</code> 后面，结构可能仍能编译，但那条语句不会执行。两种现象分别说明“语法结构”和“执行顺序”是不同问题。</p>
+<p>如果漏写输出语句末尾的分号，应该在编译阶段发现；如果把输出语句放到 <code dir="auto">return 0;</code> 后面，结构可能仍能编译，但那条语句不会执行。两种现象分别说明“语法结构”和“执行顺序”是不同问题。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -864,42 +885,42 @@ int main() {    // 输出一句问候，确认程序已经进入 main    cout &l
 </thead>
 <tbody>
 <tr>
-<td><code>#include &lt;bits/stdc++.h&gt;</code></td>
+<td><code dir="auto">#include &lt;bits/stdc++.h&gt;</code></td>
 <td>在常见 GCC/OJ 环境引入常用标准库声明</td>
 <td>行末不写分号；有的编译器不提供</td>
 </tr>
 <tr>
-<td><code>#include &lt;iostream&gt;</code></td>
+<td><code dir="auto">#include &lt;iostream&gt;</code></td>
 <td>引入标准输入输出相关声明</td>
 <td>C++ 标准头文件，行末不写分号</td>
 </tr>
 <tr>
-<td><code>using namespace std;</code></td>
+<td><code dir="auto">using namespace std;</code></td>
 <td>允许本页直接使用标准库名称</td>
 <td>行末写分号</td>
 </tr>
 <tr>
-<td><code>int main()</code></td>
+<td><code dir="auto">int main()</code></td>
 <td>定义程序运行入口</td>
-<td><code>main</code> 小写，圆括号成对</td>
+<td><code dir="auto">main</code> 小写，圆括号成对</td>
 </tr>
 <tr>
-<td><code>{ }</code></td>
-<td>围成 <code>main</code> 的代码块</td>
+<td><code dir="auto">{ }</code></td>
+<td>围成 <code dir="auto">main</code> 的代码块</td>
 <td>左右大括号成对，内部缩进 4 个空格</td>
 </tr>
 <tr>
-<td><code>return 0;</code></td>
-<td>正常结束 <code>main</code></td>
+<td><code dir="auto">return 0;</code></td>
+<td>正常结束 <code dir="auto">main</code></td>
 <td>是普通语句，末尾写分号</td>
 </tr>
 <tr>
-<td><code>//</code></td>
+<td><code dir="auto">//</code></td>
 <td>注释到当前行末</td>
 <td>下一行恢复为普通代码</td>
 </tr>
 <tr>
-<td><code>/* */</code></td>
+<td><code dir="auto">/* */</code></td>
 <td>注释两个标记之间的内容</td>
 <td>必须闭合，不随意嵌套</td>
 </tr>
@@ -917,9 +938,9 @@ int main() {    // 输出一句问候，确认程序已经进入 main    cout &l
 </thead>
 <tbody>
 <tr>
-<td>编译器提示 <code>main</code> 附近结构不完整</td>
-<td><code>main</code> 的圆括号、大括号和拼写</td>
-<td>入口结构必须完整，<code>main</code> 必须小写</td>
+<td>编译器提示 <code dir="auto">main</code> 附近结构不完整</td>
+<td><code dir="auto">main</code> 的圆括号、大括号和拼写</td>
+<td>入口结构必须完整，<code dir="auto">main</code> 必须小写</td>
 </tr>
 <tr>
 <td>第一条错误出现在右大括号附近</td>
@@ -928,7 +949,7 @@ int main() {    // 输出一句问候，确认程序已经进入 main    cout &l
 </tr>
 <tr>
 <td>程序成功运行但没有问候文字</td>
-<td>输出语句是否被注释，或是否写在 <code>return 0;</code> 后</td>
+<td>输出语句是否被注释，或是否写在 <code dir="auto">return 0;</code> 后</td>
 <td>注释不执行，返回后也不继续执行后续语句</td>
 </tr>
 <tr>
@@ -940,32 +961,50 @@ int main() {    // 输出一句问候，确认程序已经进入 main    cout &l
 </table>
 <p>解决这类题的顺序是：先找程序入口与代码块，再查普通语句边界，最后判断注释和执行顺序。不要只凭报错数量猜程序“全都写错了”。</p>
 <h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
-<p>检查这段骨架中的三个位置：头文件行后是否误写分号、<code>cout</code> 普通语句是否有分号、<code>main</code> 的左右大括号是否成对。按“预处理 → <code>main</code> 入口 → 语句 → 正常结束”顺序逐项打勾，再编译验证。</p>
-<p><strong>成功标准：</strong> 修正后的程序能够编译，运行时只输出预定文字，并从 <code>return 0;</code> 正常结束。完成后不看提示独立完成页末“整页综合测试”；提交后用首条报错和结构配对规则复核错题。</p>
+<p>检查这段骨架中的三个位置：头文件行后是否误写分号、<code dir="auto">cout</code> 普通语句是否有分号、<code dir="auto">main</code> 的左右大括号是否成对。按“预处理 → <code dir="auto">main</code> 入口 → 语句 → 正常结束”顺序逐项打勾，再编译验证。</p>
+<p><strong>成功标准：</strong> 修正后的程序能够编译，运行时只输出预定文字，并从 <code dir="auto">return 0;</code> 正常结束。完成后不看提示独立完成页末“整页综合测试”；提交后用首条报错和结构配对规则复核错题。</p>
 <h2 id="常见错误">常见错误</h2>
-<h3 id="把-main-写成近似拼法">把 <code>main</code> 写成近似拼法</h3>
-<p><strong>错误：</strong> 写成 <code>Main</code>、<code>mian</code>，或者漏掉一边圆括号。</p>
+<h3 id="把-main-写成近似拼法">把 <code dir="auto">main</code> 写成近似拼法</h3>
+<p><strong>错误：</strong> 写成 <code dir="auto">Main</code>、<code dir="auto">mian</code>，或者漏掉一边圆括号。</p>
 <p><strong>原因：</strong> C++ 区分大小写，程序入口的名称和结构必须准确。</p>
-<p><strong>检查：</strong> 对照 <code>int main()</code> 逐字符确认，并配对左右圆括号。</p>
+<p><strong>检查：</strong> 对照 <code dir="auto">int main()</code> 逐字符确认，并配对左右圆括号。</p>
 <h3 id="认为每一行末尾都要分号">认为每一行末尾都要分号</h3>
-<p><strong>错误：</strong> 不分结构地逐行补分号，或者因为 <code>int main()</code> 后没有分号就认定它错误。</p>
+<p><strong>错误：</strong> 不分结构地逐行补分号，或者因为 <code dir="auto">int main()</code> 后没有分号就认定它错误。</p>
 <p><strong>原因：</strong> 预处理指令、函数头、代码块和普通语句的职责不同。</p>
-<p><strong>检查：</strong> 先判断这一段属于哪种结构；普通语句和 using 指令要分号，<code>#include</code> 与紧跟代码块的 <code>int main()</code> 不这样写。</p>
+<p><strong>检查：</strong> 先判断这一段属于哪种结构；普通语句和 using 指令要分号，<code dir="auto">#include</code> 与紧跟代码块的 <code dir="auto">int main()</code> 不这样写。</p>
 <h3 id="大括号数量相同却配对层次错误">大括号数量相同，却配对层次错误</h3>
 <p><strong>错误：</strong> 只数左、右大括号个数，不看它们围住了哪些语句。</p>
 <p><strong>原因：</strong> 大括号的数量和闭合层次都必须正确。</p>
-<p><strong>检查：</strong> 从 <code>main</code> 的左大括号开始向下追踪，使用统一缩进，让配对关系可见。</p>
+<p><strong>检查：</strong> 从 <code dir="auto">main</code> 的左大括号开始向下追踪，使用统一缩进，让配对关系可见。</p>
 <h3 id="把注释当成待执行的说明">把注释当成待执行的说明</h3>
 <p><strong>错误：</strong> 在注释里写“输出答案”，却没有真正的输出语句。</p>
 <p><strong>原因：</strong> 注释只供读者阅读，不作为普通语句执行。</p>
-<p><strong>检查：</strong> 暂时忽略注释文字，沿 <code>main</code> 内真正的语句重新追踪执行路径。</p>
+<p><strong>检查：</strong> 暂时忽略注释文字，沿 <code dir="auto">main</code> 内真正的语句重新追踪执行路径。</p>
 <h3 id="多行注释没有结束">多行注释没有结束</h3>
-<p><strong>错误：</strong> 写了 <code>/*</code>，忘记补上 <code>*/</code>。</p>
+<p><strong>错误：</strong> 写了 <code dir="auto">/*</code>，忘记补上 <code dir="auto">*/</code>。</p>
 <p><strong>原因：</strong> 后续内容可能继续被当作注释，真正原因与报错行相距很远。</p>
-<p><strong>检查：</strong> 为每个 <code>/*</code> 找到对应的 <code>*/</code>，并避免嵌套多行注释。</p>
+<p><strong>检查：</strong> 为每个 <code dir="auto">/*</code> 找到对应的 <code dir="auto">*/</code>，并避免嵌套多行注释。</p>
 <h2 id="关联学习">关联学习</h2>
-<p>上一页<a href="/gesp/level1/ide/">集成开发环境</a>说明了怎样保存、编译、运行和调试这份源代码。下一页<a href="/gesp/level1/input-output/">输入输出语句</a>会拆解代表程序中的 <code>cout</code> 和 <code>endl</code>，并加入从外部读取数据的方法。</p>
-<section aria-labelledby="related-knowledge-program-structure"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-program-structure" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/ide/" class="astro-mkwt4ymd">开发环境</a></li></ul></section></div></section>
+<p>上一页<a href="/gesp/level1/ide/">集成开发环境</a>说明了怎样保存、编译、运行和调试这份源代码。下一页<a href="/gesp/level1/input-output/">输入输出语句</a>会拆解代表程序中的 <code dir="auto">cout</code> 和 <code dir="auto">endl</code>，并加入从外部读取数据的方法。</p>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能写出含头文件、命名空间、main 和 return 0 的完整 C++ 程序骨架。</label><label class="q-check"><input type="checkbox"> 我能从 main 入口开始追踪语句，并说明分号和代码块各自负责什么。</label><label class="q-check"><input type="checkbox"> 我能区分关键字与库名称，并正确书写单行注释和多行注释。</label>
+<h2 id="整页综合测试">整页综合测试</h2>
+<span>5 题</span>
+<p class="q-title">第 1 题下面哪一个不是 C++ 关键字？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题下面哪一个不是 C++ 关键字" value="A"><b>A.</b> double</label><label class="q-opt"><input type="radio" name="第 1 题下面哪一个不是 C++ 关键字" value="B"><b>B.</b> else</label><label class="q-opt"><input type="radio" name="第 1 题下面哪一个不是 C++ 关键字" value="C"><b>C.</b> while</label><label class="q-opt"><input type="radio" name="第 1 题下面哪一个不是 C++ 关键字" value="D"><b>D.</b> endl</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>endl 是标准库提供的输出操纵符，不是语言关键字。<br><span class="q-kp">对应知识点：02 关键字与基本组成</span></p>
+<p class="q-title">第 2 题一个标准 C++ 程序从哪个函数开始执行？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题一个标准 C++ 程序从哪个函" value="A"><b>A.</b> main 函数</label><label class="q-opt"><input type="radio" name="第 2 题一个标准 C++ 程序从哪个函" value="B"><b>B.</b> cout 函数</label><label class="q-opt"><input type="radio" name="第 2 题一个标准 C++ 程序从哪个函" value="C"><b>C.</b> include 函数</label><label class="q-opt"><input type="radio" name="第 2 题一个标准 C++ 程序从哪个函" value="D"><b>D.</b> int 函数</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>main 是 C++ 程序的入口函数，程序运行时从 main 函数开始执行。<br><span class="q-kp">对应知识点：03 main 函数与执行顺序</span></p>
+<p class="q-title">第 3 题#include &lt;iostream&gt; 在程序中的主要作用是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题#include &lt;io" value="A"><b>A.</b> 引入输入输出相关声明</label><label class="q-opt"><input type="radio" name="第 3 题#include &lt;io" value="B"><b>B.</b> 定义 main 函数</label><label class="q-opt"><input type="radio" name="第 3 题#include &lt;io" value="C"><b>C.</b> 创建循环</label><label class="q-opt"><input type="radio" name="第 3 题#include &lt;io" value="D"><b>D.</b> 结束程序</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>iostream 头文件提供 cin、cout 等标准输入输出工具所需的声明。<br><span class="q-kp">对应知识点：01 头文件与命名空间</span></p>
+<p class="q-title">第 4 题下面哪种情况会使 main 的代码块结构不完整？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题下面哪种情况会使 main 的" value="A"><b>A.</b> 漏写与左大括号配对的右大括号</label><label class="q-opt"><input type="radio" name="第 4 题下面哪种情况会使 main 的" value="B"><b>B.</b> 使用 4 个空格缩进</label><label class="q-opt"><input type="radio" name="第 4 题下面哪种情况会使 main 的" value="C"><b>C.</b> 把 main 写成小写</label><label class="q-opt"><input type="radio" name="第 4 题下面哪种情况会使 main 的" value="D"><b>D.</b> 在 return 0 后写分号</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04 语句、分号与代码块。大括号必须成对出现；漏写右大括号会使代码块无法正确结束，而缩进本身不改变程序结构。<br><span class="q-kp">对应知识点：04 语句、分号与代码块</span></p>
+<p class="q-title">第 5 题下面哪种注释写法可以跨越多行？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题下面哪种注释写法可以跨越多行？" value="A"><b>A.</b> /* 内容 */</label><label class="q-opt"><input type="radio" name="第 5 题下面哪种注释写法可以跨越多行？" value="B"><b>B.</b> // 内容 //</label><label class="q-opt"><input type="radio" name="第 5 题下面哪种注释写法可以跨越多行？" value="C"><b>C.</b> # 内容 #</label><label class="q-opt"><input type="radio" name="第 5 题下面哪种注释写法可以跨越多行？" value="D"><b>D.</b> &lt;!-- 内容 --&gt;</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>C++ 多行注释从 /* 开始，到 */ 结束。<br><span class="q-kp">对应知识点：05 注释</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/ide/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 02</small><strong>开发环境</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/input-output/" rel="next"><span><small>下一知识点 · 04</small><strong>输入输出</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -974,7 +1013,7 @@ int main() {    // 输出一句问候，确认程序已经进入 main    cout &l
       <a class="kp-nav" href="kp4.html">下一个：输入输出语句 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-头文件与命名空间">01 头文件与命名空间</a></li><li><a href="#为什么使用头文件" class="lvl3">为什么使用头文件</a></li><li><a href="#using-namespace-std-解决什么问题" class="lvl3">using namespace std; 解决什么问题</a></li><li><a href="#两行的位置和执行边界" class="lvl3">两行的位置和执行边界</a></li><li><a href="#02-关键字与基本组成">02 关键字与基本组成</a></li><li><a href="#关键字和普通名称要分开" class="lvl3">关键字和普通名称要分开</a></li><li><a href="#从外到内拆开-int-main" class="lvl3">从外到内拆开 int main()</a></li><li><a href="#一份完整程序有哪些层" class="lvl3">一份完整程序有哪些层</a></li><li><a href="#03-main-函数与执行顺序">03 main 函数与执行顺序</a></li><li><a href="#main-是运行入口" class="lvl3">main 是运行入口</a></li><li><a href="#从源代码到-main-经历了什么" class="lvl3">从源代码到 main 经历了什么</a></li><li><a href="#怎样追踪一次运行" class="lvl3">怎样追踪一次运行</a></li><li><a href="#04-语句分号与代码块">04 语句、分号与代码块</a></li><li><a href="#分号结束一条普通语句" class="lvl3">分号结束一条普通语句</a></li><li><a href="#大括号围成代码块" class="lvl3">大括号围成代码块</a></li><li><a href="#用结构配对检查编译错误" class="lvl3">用“结构配对”检查编译错误</a></li><li><a href="#05-注释">05 注释</a></li><li><a href="#两种基本注释" class="lvl3">两种基本注释</a></li><li><a href="#注释不会执行但会影响代码边界" class="lvl3">注释不会执行，但会影响代码边界</a></li><li><a href="#注释应解释为什么或这一步做什么" class="lvl3">注释应解释“为什么”或“这一步做什么”</a></li><li><a href="#把各部分合成一个完整程序">把各部分合成一个完整程序</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#从编译到结束逐步追踪" class="lvl3">从编译到结束逐步追踪</a></li><li><a href="#怎样验证这份骨架" class="lvl3">怎样验证这份骨架</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#把-main-写成近似拼法" class="lvl3">把 main 写成近似拼法</a></li><li><a href="#认为每一行末尾都要分号" class="lvl3">认为每一行末尾都要分号</a></li><li><a href="#大括号数量相同却配对层次错误" class="lvl3">大括号数量相同，却配对层次错误</a></li><li><a href="#把注释当成待执行的说明" class="lvl3">把注释当成待执行的说明</a></li><li><a href="#多行注释没有结束" class="lvl3">多行注释没有结束</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-program-structure">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-头文件与命名空间">01 头文件与命名空间</a></li><li><a href="#为什么使用头文件" class="lvl3">为什么使用头文件</a></li><li><a href="#using-namespace-std-解决什么问题" class="lvl3">using namespace std; 解决什么问题</a></li><li><a href="#两行的位置和执行边界" class="lvl3">两行的位置和执行边界</a></li><li><a href="#02-关键字与基本组成">02 关键字与基本组成</a></li><li><a href="#关键字和普通名称要分开" class="lvl3">关键字和普通名称要分开</a></li><li><a href="#从外到内拆开-int-main" class="lvl3">从外到内拆开 int main()</a></li><li><a href="#一份完整程序有哪些层" class="lvl3">一份完整程序有哪些层</a></li><li><a href="#03-main-函数与执行顺序">03 main 函数与执行顺序</a></li><li><a href="#main-是运行入口" class="lvl3">main 是运行入口</a></li><li><a href="#从源代码到-main-经历了什么" class="lvl3">从源代码到 main 经历了什么</a></li><li><a href="#怎样追踪一次运行" class="lvl3">怎样追踪一次运行</a></li><li><a href="#04-语句分号与代码块">04 语句、分号与代码块</a></li><li><a href="#分号结束一条普通语句" class="lvl3">分号结束一条普通语句</a></li><li><a href="#大括号围成代码块" class="lvl3">大括号围成代码块</a></li><li><a href="#用结构配对检查编译错误" class="lvl3">用“结构配对”检查编译错误</a></li><li><a href="#05-注释">05 注释</a></li><li><a href="#两种基本注释" class="lvl3">两种基本注释</a></li><li><a href="#注释不会执行但会影响代码边界" class="lvl3">注释不会执行，但会影响代码边界</a></li><li><a href="#注释应解释为什么或这一步做什么" class="lvl3">注释应解释“为什么”或“这一步做什么”</a></li><li><a href="#把各部分合成一个完整程序">把各部分合成一个完整程序</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#从编译到结束逐步追踪" class="lvl3">从编译到结束逐步追踪</a></li><li><a href="#怎样验证这份骨架" class="lvl3">怎样验证这份骨架</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#把-main-写成近似拼法" class="lvl3">把 main 写成近似拼法</a></li><li><a href="#认为每一行末尾都要分号" class="lvl3">认为每一行末尾都要分号</a></li><li><a href="#大括号数量相同却配对层次错误" class="lvl3">大括号数量相同，却配对层次错误</a></li><li><a href="#把注释当成待执行的说明" class="lvl3">把注释当成待执行的说明</a></li><li><a href="#多行注释没有结束" class="lvl3">多行注释没有结束</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -986,6 +1025,31 @@ int main() {    // 输出一句问候，确认程序已经进入 main    cout &l
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

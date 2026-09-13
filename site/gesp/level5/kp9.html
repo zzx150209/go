@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,7 +489,103 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <article id="top"><p>贪心算法会在每一步先作出一个当前选择，再继续处理剩余部分。关键不在“挑最大的或最小的”，而在于找到能够证明安全的选择标准。本课只围绕活动选择，学习怎样从冲突区间中选出尽量多的活动。</p><h2 id="知识范围与官方定位" class="astro-2i3ys3wc">知识范围与官方定位</h2><p class="astro-2i3ys3wc">对应五级大纲“贪心算法”：理解局部最优与全局最优的区别，能设计并检验贪心策略，并能说明一个局部选择为什么不会破坏整体最优。</p><p>本页只使用一级至五级已经学习的语法和能力；小知识点按页内编号连续查询，不设置前置完成门槛。</p><dl><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">是什么</dt><dd class="astro-2i3ys3wc">贪心算法每一步确定一个不再撤销的选择，再在剩余候选中重复同样动作；每一步都必须有安全依据。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">解决什么问题</dt><dd class="astro-2i3ys3wc">本课用它解决活动选择：从若干半开区间中挑出尽量多的互不重叠活动，只输出最大数量。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">什么时候使用</dt><dd class="astro-2i3ys3wc">只有当选择标准明确，并且能证明当前选择可以换进某个最优方案而不使答案变差时，才使用贪心。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">核心思想</dt><dd class="astro-2i3ys3wc">先按 finish 升序、同 finish 时 start 升序得到完整候选顺序，再用交换论证证明这一步安全，最后在剩余活动中重复选择。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">C++ 实现方法</dt><dd class="astro-2i3ys3wc">用 Activity 数组保存开始、结束时间；比较函数先比较 finish，同 finish 时比较 start，随后顺序扫描，start&gt;=lastEnd 时选择并更新状态。</dd></div></dl><section aria-labelledby="01-贪心思想与适用条件"><h2 id="01-贪心思想与适用条件" class="astro-2i3ys3wc">01 贪心思想与适用条件</h2><p class="astro-2i3ys3wc">有 n 个活动，每个活动占用半开区间 [start, finish)。半开区间不包含右端点；本题把“互不重叠”定义为所选活动按执行先后排列后，每个后续活动都满足 start≥前一个活动的 finish，所以 [1,3) 与 [3,5) 可以首尾相接。目标是选择尽量多的活动。</p><p class="astro-2i3ys3wc">本教学程序支持 0≤n≤1000、-10^9≤start≤finish≤10^9，只输出最多活动数，答案在 0 到 n 之间。输入允许 start=finish，这种活动仍按同一先后关系参加判断，不另设特殊规则。数组容量是 1005，n=1000 时实际使用下标 0 到 999，不会越界。</p><p class="astro-2i3ys3wc">主样例按 [6,8)、[2,5)、[1,3)、[4,6) 的乱序输入。若直接沿用输入顺序，先选 [6,8) 会失去前面三个可用活动；若先选“开始最早”的 [1,10)，又会挡住 [2,3)、[3,4)、[4,5)。输入顺序和开始得早都不是可靠依据。真正要保留的是后续可用时间：当前活动结束得越早，留给后面的时间越多。</p><div><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>主样例输入顺序为 [6,8)、[2,5)、[1,3)、[4,6)，目标是选择最多个互不重叠活动。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">如果只按输入顺序先选 [6,8)，前面的三个活动都会被浪费，所以输入顺序没有提供可靠信息。</li><li class="astro-2i3ys3wc">再看短反例 [1,10)、[2,3)、[3,4)、[4,5)：若先选开始最早的 [1,10)，只能得到 1 个活动；这条规则也不可靠。</li><li class="astro-2i3ys3wc">把候选按结束时间观察，最早结束的是 [1,3)；选它以后，从时刻 3 起仍有 [4,6)、[6,8) 可以继续选择。</li><li class="astro-2i3ys3wc">较早结束不会占用更多后续时间，由此先得到 finish 从小到大的主顺序；输入允许零长度活动，所以 finish 相同时还必须按 start 从小到大排列，完整顺序缺一不可。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>贪心规则必须来自题目目标与样例观察。本题要最大化活动数，所以每一步优先保留后续时间，而不是优先开始早、持续短或沿用输入顺序。</p><aside
+    <article class="gesp-level5-dictionary-page" id="top">09<p class="gesp-level5-dictionary-page__intro">贪心算法会在每一步先作出一个当前选择，再继续处理剩余部分。关键不在“挑最大的或最小的”，而在于找到能够证明安全的选择标准。本课只围绕活动选择，学习怎样从冲突区间中选出尽量多的活动。</p><nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#01-贪心思想与适用条件" class="astro-obblnf2s">01 贪心思想与适用条件</a><a href="#02-策略设计与正确性" class="astro-obblnf2s">02 策略设计与正确性</a><a href="#03-排序后选择" class="astro-obblnf2s">03 排序后选择</a><a href="#04-反例与适用边界" class="astro-obblnf2s">04 反例与适用边界</a><a href="#典型例题" class="astro-obblnf2s">典型例题</a><a href="#常见错误" class="astro-obblnf2s">常见错误</a><a href="#核心内容检查" class="astro-obblnf2s">核心内容检查</a><a href="#整页综合测试" class="astro-obblnf2s">整页综合测试</a><a href="#top" class="astro-obblnf2s">返回顶部</a></nav><h2 id="知识范围与官方定位" class="astro-2i3ys3wc">知识范围与官方定位</h2><p class="astro-2i3ys3wc">对应五级大纲“贪心算法”：理解局部最优与全局最优的区别，能设计并检验贪心策略，并能说明一个局部选择为什么不会破坏整体最优。</p><p class="gesp-level5-dictionary-page__scope-note">本页只使用一级至五级已经学习的语法和能力；小知识点按页内编号连续查询，不设置前置完成门槛。</p><dl class="gesp-level5-dictionary-page__guide"><dt class="astro-2i3ys3wc">是什么</dt><dd class="astro-2i3ys3wc">贪心算法每一步确定一个不再撤销的选择，再在剩余候选中重复同样动作；每一步都必须有安全依据。</dd><dt class="astro-2i3ys3wc">解决什么问题</dt><dd class="astro-2i3ys3wc">本课用它解决活动选择：从若干半开区间中挑出尽量多的互不重叠活动，只输出最大数量。</dd><dt class="astro-2i3ys3wc">什么时候使用</dt><dd class="astro-2i3ys3wc">只有当选择标准明确，并且能证明当前选择可以换进某个最优方案而不使答案变差时，才使用贪心。</dd><dt class="astro-2i3ys3wc">核心思想</dt><dd class="astro-2i3ys3wc">先按 finish 升序、同 finish 时 start 升序得到完整候选顺序，再用交换论证证明这一步安全，最后在剩余活动中重复选择。</dd><dt class="astro-2i3ys3wc">C++ 实现方法</dt><dd class="astro-2i3ys3wc">用 Activity 数组保存开始、结束时间；比较函数先比较 finish，同 finish 时比较 start，随后顺序扫描，start&gt;=lastEnd 时选择并更新状态。</dd></dl><h2 id="01-贪心思想与适用条件" class="astro-2i3ys3wc">01 贪心思想与适用条件</h2><p class="astro-2i3ys3wc">有 n 个活动，每个活动占用半开区间 [start, finish)。半开区间不包含右端点；本题把“互不重叠”定义为所选活动按执行先后排列后，每个后续活动都满足 start≥前一个活动的 finish，所以 [1,3) 与 [3,5) 可以首尾相接。目标是选择尽量多的活动。</p><p class="astro-2i3ys3wc">本教学程序支持 0≤n≤1000、-10^9≤start≤finish≤10^9，只输出最多活动数，答案在 0 到 n 之间。输入允许 start=finish，这种活动仍按同一先后关系参加判断，不另设特殊规则。数组容量是 1005，n=1000 时实际使用下标 0 到 999，不会越界。</p><p class="astro-2i3ys3wc">主样例按 [6,8)、[2,5)、[1,3)、[4,6) 的乱序输入。若直接沿用输入顺序，先选 [6,8) 会失去前面三个可用活动；若先选“开始最早”的 [1,10)，又会挡住 [2,3)、[3,4)、[4,5)。输入顺序和开始得早都不是可靠依据。真正要保留的是后续可用时间：当前活动结束得越早，留给后面的时间越多。</p><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>主样例输入顺序为 [6,8)、[2,5)、[1,3)、[4,6)，目标是选择最多个互不重叠活动。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">如果只按输入顺序先选 [6,8)，前面的三个活动都会被浪费，所以输入顺序没有提供可靠信息。</li><li class="astro-2i3ys3wc">再看短反例 [1,10)、[2,3)、[3,4)、[4,5)：若先选开始最早的 [1,10)，只能得到 1 个活动；这条规则也不可靠。</li><li class="astro-2i3ys3wc">把候选按结束时间观察，最早结束的是 [1,3)；选它以后，从时刻 3 起仍有 [4,6)、[6,8) 可以继续选择。</li><li class="astro-2i3ys3wc">较早结束不会占用更多后续时间，由此先得到 finish 从小到大的主顺序；输入允许零长度活动，所以 finish 相同时还必须按 start 从小到大排列，完整顺序缺一不可。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>贪心规则必须来自题目目标与样例观察。本题要最大化活动数，所以每一步优先保留后续时间，而不是优先开始早、持续短或沿用输入顺序。</p><aside class="gesp-level5-dictionary-page__pitfall" aria-label="01 贪心思想与适用条件 错误反例"><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误反例：</strong><code class="astro-2i3ys3wc">看到区间题就直接按开始时间排序。</code></p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">为什么错：</strong>[1,10) 开始最早，却会挡住 [2,3)、[3,4)、[4,5)；按开始时间选择只能得到 1 个，最优可以得到 3 个。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">怎样改：</strong>先用短反例排除错误规则，再从“为后面留下更多时间”推出结束时间优先。</p></aside>
+<h2 id="02-策略设计与正确性" class="astro-2i3ys3wc">02 策略设计与正确性</h2><p class="astro-2i3ys3wc">完整的候选顺序是：先按 finish 从小到大排列，finish 相同时再按 start 从小到大排列。每次查看当前尚未处理的活动；若它的 start≥lastEnd，就选择它并把 lastEnd 更新为它的 finish，否则跳过。第二个排序条件不是为了好看：若合法输入依次是 [2,2)、[1,2)，只比较 finish 可能先扫描零长度活动 [2,2)，选中后 lastEnd=2，[1,2) 因 1&lt;2 被跳过，只选到 1 个；按 start 升序会先扫描 [1,2)，再扫描 [2,2)，两个都能选中。</p><p class="astro-2i3ys3wc">为什么完整顺序安全？先固定当前边界 L，只看 start≥L 的可接活动。取一个活动数最多的方案，设它的第一个活动是 B；完整顺序排第一的可接活动是 A。若 A.finish&lt;B.finish，把 B 换成 A 后，原来能接在 B 后面的活动仍能接在 A 后面，活动数不会减少。若两者都在时刻 f 结束，就单独看这一组：两个 start&lt;f 的活动会重叠，最多选一个；任意个零长度活动 [f,f) 都可以排在它后面。start 升序会先放置可接且开始更早的普通活动，再放置 [f,f)，既不会减少这一组能选的数量，处理完后边界仍是 f，也不会减少未来可接活动。</p><p class="astro-2i3ys3wc">这种把最优方案中的选择换成贪心选择且答案不变差的说明叫交换论证。完整顺序同时处理了结束时间更早的交换和同结束时间的正确扫描次序；选定当前活动后，只处理 start≥它的 finish 的剩余活动，并重复同一理由。仅有局部最优不足以保证贪心正确；还必须证明这个局部选择能够安全地进入某个全局最优方案。仅有最优子结构不足以保证贪心正确；剩余问题仍是同类问题，并不能单独说明当前选择一定安全。</p><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>设 A 是当前可接活动中按“finish 升序、同 finish 时 start 升序”排第一的活动，用交换论证检查“先选 A”是否安全。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">先看完整顺序为什么不能少第二关键字：合法输入按 [2,2)、[1,2) 给出时，只比较 finish 可能先选 [2,2)，令 lastEnd=2，再因 1&lt;2 跳过 [1,2)，只能选 1 个。</li><li class="astro-2i3ys3wc">同 finish 时按 start 升序后，先选 [1,2)，再由 2≥2 选 [2,2)，一共选 2 个；同结束时先选开始更早的活动不会推迟结束时刻，还为同结束的零长度活动留下正确扫描顺序。</li><li class="astro-2i3ys3wc">固定当前边界 L，取一个活动数最多的方案，设第一个活动为 B。若 A.finish&lt;B.finish，把 B 换成 A 后，原来接在 B 后面的活动仍能接在 A 后面，活动数量不减。</li><li class="astro-2i3ys3wc">若 A 与 B 都在时刻 f 结束，就检查整个同结束组：start&lt;f 的活动彼此重叠，最多选一个；零长度活动 [f,f) 可以全部接在它后面。start 升序会先处理可接且开始更早的普通活动，再处理 [f,f)，这一组不会少选，处理后的边界仍是 f。</li><li class="astro-2i3ys3wc">因此完整顺序既不会减少同结束组的数量，也不会推迟未来活动的可用起点。选定当前活动后，只处理 start≥它的 finish 的剩余活动，并重复同一完整顺序和同一交换论证。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>交换论证必须绑定完整顺序：finish 决定不会推迟后续起点，同 finish 时的 start 升序保证零长度活动不会反过来挡住同结束的普通活动；同结束组和未来候选都不变差，才能安全确定当前选择。</p><aside class="gesp-level5-dictionary-page__pitfall" aria-label="02 策略设计与正确性 错误反例"><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误反例：</strong><code class="astro-2i3ys3wc">剩余问题形式相同，所以当前随便选择一个活动也会最优。</code></p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">为什么错：</strong>剩余问题形式相同只说明可以继续求解；它没有证明当前选择不会挡住更好的方案。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">怎样改：</strong>先证明当前选择能换进某个最优方案，再在同类剩余问题上重复选择。</p></aside>
+<h2 id="03-排序后选择" class="astro-2i3ys3wc">03 排序后选择</h2><p class="astro-2i3ys3wc">先把算法写成不依赖代码的完整步骤：①读入活动；②按 finish 从小到大排序，同 finish 时按 start 从小到大排序；③令 selected=0，并把 lastEnd 设成比所有合法开始时间都小的值；④逐个检查排序后的活动；⑤start≥lastEnd 时选择它，同时更新 selected 和 lastEnd，否则保持状态并跳过；⑥扫描完 n 个活动后返回 selected。</p><p class="astro-2i3ys3wc">程序先定义 struct Activity，其中 start 保存开始时间，finish 保存结束时间；Activity activities[1005] 保存输入的 n 个活动。compareByFinish(left, right) 是命名比较函数：先比较 finish，结束时间相同时再比较 start；返回 true 表示 left 应排在 right 前面。这个第二关键字会把 [1,2) 排在 [2,2) 前面，是允许零长度活动时保证正确扫描顺序的一部分。</p><p class="astro-2i3ys3wc">调用 sort(activities, activities + n, compareByFinish) 时，activities 表示数组开头，activities+n 表示前 n 项之后的位置。sort 会直接改变数组前 n 项的顺序，不会生成副本；排序完成后，主样例的乱序活动变为 [1,3)、[2,5)、[4,6)、[6,8)，而 [2,2)、[1,2) 会变为 [1,2)、[2,2)。</p><p class="astro-2i3ys3wc">selectMaximumActivities(Activity activities[], int n) 接收活动数组和数量。selected 表示已经选择的活动数，初值为 0；lastEnd 表示上一个已选活动的结束时间。合法开始时间最小为 -1000000000，所以用更小 1 的 -1000000001 作哨兵，能保证第一个候选按真实条件判断，也能让 n=0 时直接返回 0。</p><p class="astro-2i3ys3wc">扫描时先取当前活动的 start 和 finish。条件 start≥lastEnd 成立，说明当前活动可以接在已选安排后面，于是 selected++ 并令 lastEnd=finish；条件不成立就跳过，两个状态都不变。输入即使满足 start=finish，也继续使用这一个判断，不另开特殊分支。</p><p class="astro-2i3ys3wc">排序耗时 O(n log n)，扫描耗时 O(n)，总时间复杂度为 O(n log n)。活动数组保存 n 个记录，占 O(n) 规模的存储；常见 GCC/OJ 环境中的 sort 还会使用 O(log n) 级调用栈，整体存储仍由活动数组主导为 O(n)。答案最大为 1000，时间与哨兵都在 int 范围内。</p><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>按最终程序的完整顺序执行主样例：先按 finish 升序，同 finish 时按 start 升序；本例排序后为 [1,3)、[2,5)、[4,6)、[6,8)。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">初始化 selected=0、lastEnd=-1000000001，下一步检查 [1,3)。</li><li class="astro-2i3ys3wc">当前 selected=0、lastEnd=-1000000001；[1,3) 满足 1≥-1000000001，选择后 selected=1、lastEnd=3，下一步检查 [2,5)。</li><li class="astro-2i3ys3wc">当前 selected=1、lastEnd=3；[2,5) 的开始时间 2&lt;3，与已选活动冲突，所以跳过，状态不变，下一步检查 [4,6)。</li><li class="astro-2i3ys3wc">当前 selected=1、lastEnd=3；[4,6) 满足 4≥3，选择后 selected=2、lastEnd=6，下一步检查 [6,8)。</li><li class="astro-2i3ys3wc">当前 selected=2、lastEnd=6；[6,8) 满足 6≥6，半开区间允许端点相接，选择后 selected=3、lastEnd=8。</li><li class="astro-2i3ys3wc">所有 4 个候选已经检查完毕，循环停止，函数返回 selected=3，main 输出 3。正确性仍由上一节的交换论证保证。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>每轮只根据 start≥lastEnd 判断当前活动；选择时同时更新 selected 和 lastEnd，跳过时两个状态都不变，扫描完全部候选后答案就在 selected 中。</p><aside class="gesp-level5-dictionary-page__pitfall" aria-label="03 排序后选择 错误反例"><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误反例：</strong><code class="astro-2i3ys3wc">比较函数返回 left.start&lt;right.start，把活动按开始时间排。</code></p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">为什么错：</strong>开始最早不是已经证明安全的策略；程序顺序一变，执行账本和交换论证都无法支持代码。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">怎样改：</strong>先比较 left.finish 与 right.finish；只有结束时间相同时才比较 start，并用 [2,2)、[1,2) 核对它们必须排成 [1,2)、[2,2)。</p></aside>
+<h2 id="04-反例与适用边界" class="astro-2i3ys3wc">04 反例与适用边界</h2><p class="astro-2i3ys3wc">交换论证只证明“活动数量最大”这个模型中的最早结束策略，不能把“每次挑眼前最大或最小”机械搬到别的问题。面值为 1、3、4，要凑出 6 时，每次取不超过余额的最大面值会得到 4+1+1，共 3 枚；真正的最优方案是 3+3，只要 2 枚。这个反例说明未经证明的局部选择可能破坏全局最优。</p><p class="astro-2i3ys3wc">一个成功样例只能帮助检查执行过程，不能代替一般正确性证明；一个合法反例却足以否定声称“对所有输入都正确”的策略。面对新的贪心题，要重新写清候选顺序、可行条件、状态更新和安全理由。</p><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>检验“凑金额时每次取不超过余额的最大面值”这个看似合理的局部策略。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">硬币面值为 1、3、4，目标金额为 6；第一步取最大面值 4，余额变成 2。</li><li class="astro-2i3ys3wc">余额 2 只能再取 1 和 1，于是得到 4+1+1，共 3 枚。</li><li class="astro-2i3ys3wc">直接选择 3+3 只用 2 枚，因此“每次取最大”在这个合法输入上不是全局最优。</li><li class="astro-2i3ys3wc">这个反例否定的是未经证明的通用策略，不影响已经通过交换论证证明的活动选择策略。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>贪心策略不能按关键词套用。先写出局部选择，再用证明检查它是否安全；找出一个合法反例时，就应停止使用该规则。</p><aside class="gesp-level5-dictionary-page__pitfall" aria-label="04 反例与适用边界 错误反例"><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误反例：</strong><code class="astro-2i3ys3wc">主样例输出 3，所以任何按结束时间排序的区间题都能直接套用。</code></p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">为什么错：</strong>本课证明依赖“目标是活动数量最大、区间按时间冲突”这些条件；目标或约束改变后，原交换步骤可能不再成立。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">怎样改：</strong>回到新题的目标和限制，重新检查候选顺序、可行条件、状态更新与交换理由。</p></aside>
+<h2 id="典型例题" class="astro-2i3ys3wc">典型例题</h2><h3 class="astro-2i3ys3wc">基础例题：选择最多不重叠活动</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">题意：</strong>输入 n 个活动。每行按 start、finish 给出半开区间 [start, finish)，满足 0≤n≤1000、-10^9≤start≤finish≤10^9，输出最多可选活动数。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">示例输入：</strong></p><pre class="astro-2i3ys3wc"><code class="astro-2i3ys3wc">4
+6 8
+2 5
+1 3
+4 6</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">示例输出：</strong></p><pre class="astro-2i3ys3wc"><code class="astro-2i3ys3wc">3</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">说明：</strong>排序后依次得到 [1,3)、[2,5)、[4,6)、[6,8)。程序选择第 1、3、4 个候选，跳过与 [1,3) 重叠的 [2,5)，最终输出 3。前文已经先讲清结构体字段、比较函数、数组排序、哨兵、判断和完整执行；下面是与该过程一致的唯一完整程序。</p><pre class="astro-2i3ys3wc"><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int TIME_BEFORE_ALL = -1000000001; // 比最小合法开始时间小 1
+
+struct Activity {
+    int start;
+    int finish;
+};
+
+Activity activities[1005]; // n 最大为 1000，下标 0 到 999 都安全
+
+bool compareByFinish(Activity left, Activity right) {
+    if (left.finish != right.finish) {
+        return left.finish &lt; right.finish;
+    }
+    return left.start &lt; right.start;
+}
+
+int selectMaximumActivities(Activity activities[], int n) {
+    sort(activities, activities + n, compareByFinish);
+
+    int selected = 0;
+    int lastEnd = TIME_BEFORE_ALL;
+
+    for (int index = 0; index &lt; n; index++) {
+        int start = activities[index].start;
+        int finish = activities[index].finish;
+
+        if (start &gt;= lastEnd) { // 半开区间允许当前活动与上一活动首尾相接
+            selected++;
+            lastEnd = finish;
+        }
+    }
+
+    return selected;
+}
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+
+    for (int index = 0; index &lt; n; index++) {
+        cin &gt;&gt; activities[index].start &gt;&gt; activities[index].finish;
+    }
+
+    cout &lt;&lt; selectMaximumActivities(activities, n) &lt;&lt; &#39;\n&#39;;
+    return 0;
+}</code></pre><h3 class="astro-2i3ys3wc">典型应用：用短反例排除开始最早策略</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">题意：</strong>仍然选择最多活动，比较“开始时间最早”和“结束时间最早”两种规则。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">示例输入：</strong></p><pre class="astro-2i3ys3wc"><code class="astro-2i3ys3wc">4
+1 10
+2 3
+3 4
+4 5</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">示例输出：</strong></p><pre class="astro-2i3ys3wc"><code class="astro-2i3ys3wc">3</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">解题说明：</strong>先选开始最早的 [1,10) 只能得到 1 个活动；按结束时间依次选择 [2,3)、[3,4)、[4,5)，可以得到 3 个。这个反例只排除错误规则，正确策略仍要靠交换论证说明。</p><h3 class="astro-2i3ys3wc">执行追踪：用四个边界场景复核排序、哨兵与相接判断</h3><table class="astro-2i3ys3wc"><thead class="astro-2i3ys3wc"><tr class="astro-2i3ys3wc"><th class="astro-2i3ys3wc">输入场景</th><th class="astro-2i3ys3wc">关键判断</th><th class="astro-2i3ys3wc">状态变化</th><th class="astro-2i3ys3wc">最终结果</th></tr></thead><tbody class="astro-2i3ys3wc"><tr class="astro-2i3ys3wc"><td class="astro-2i3ys3wc">n=0</td><td class="astro-2i3ys3wc">没有候选，不进入扫描</td><td class="astro-2i3ys3wc">selected 保持 0，lastEnd 保持 -1000000001</td><td class="astro-2i3ys3wc">输出 0</td></tr><tr class="astro-2i3ys3wc"><td class="astro-2i3ys3wc">只有 [-5,-2)</td><td class="astro-2i3ys3wc">-5&gt;=-1000000001，成立</td><td class="astro-2i3ys3wc">selected: 0→1，lastEnd=-2</td><td class="astro-2i3ys3wc">输出 1</td></tr><tr class="astro-2i3ys3wc"><td class="astro-2i3ys3wc">[-5,0) 与 [0,2)</td><td class="astro-2i3ys3wc">第二个活动 0&gt;=0，成立</td><td class="astro-2i3ys3wc">selected: 1→2，lastEnd=2</td><td class="astro-2i3ys3wc">输出 2</td></tr><tr class="astro-2i3ys3wc"><td class="astro-2i3ys3wc">输入顺序为 [2,2)、[1,2)</td><td class="astro-2i3ys3wc">同 finish 时按 start 升序，先检查 [1,2) 再检查 [2,2)</td><td class="astro-2i3ys3wc">先选 [1,2) 得 lastEnd=2；再由 2&gt;=2 选 [2,2)，selected: 0→1→2</td><td class="astro-2i3ys3wc">输出 2；反向输入也相同</td></tr></tbody></table><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">追踪结论：</strong>哨兵严格小于最小合法开始时间，能接住负时间；半开区间允许端点相接，所以判断必须保留等号。允许零长度活动时，同 finish 按 start 升序也是正确性所需规则，不能省略。</p><h3 class="astro-2i3ys3wc">测试案例</h3><table class="astro-2i3ys3wc"><thead class="astro-2i3ys3wc"><tr class="astro-2i3ys3wc"><th class="astro-2i3ys3wc">类型</th><th class="astro-2i3ys3wc">输入 / 场景</th><th class="astro-2i3ys3wc">预期结果</th><th class="astro-2i3ys3wc">检查目的</th></tr></thead><tbody class="astro-2i3ys3wc"><tr class="astro-2i3ys3wc"><td class="astro-2i3ys3wc">基础测试</td><td class="astro-2i3ys3wc"><code class="astro-2i3ys3wc">[1,3) [2,5) [4,6) [6,8)</code></td><td class="astro-2i3ys3wc">选择 3 个：[1,3)、[4,6)、[6,8)</td><td class="astro-2i3ys3wc">同时验证一次冲突跳过、一次普通选择和一次端点相接。</td></tr><tr class="astro-2i3ys3wc"><td class="astro-2i3ys3wc">边界测试</td><td class="astro-2i3ys3wc"><code class="astro-2i3ys3wc">n=0；只有 [-5,-2)；[-5,0) [0,2)；以及按两种输入顺序给出的 [2,2) [1,2)</code></td><td class="astro-2i3ys3wc">前三组分别输出 0、1、2；同结束零长度活动的两种输入都输出 2，实际扫描顺序都是 [1,2)、[2,2)</td><td class="astro-2i3ys3wc">验证空集合、负时间安全哨兵、端点相接，以及同 finish 时必须按 start 升序。</td></tr><tr class="astro-2i3ys3wc"><td class="astro-2i3ys3wc">反例测试</td><td class="astro-2i3ys3wc"><code class="astro-2i3ys3wc">[1,10) [2,3) [3,4) [4,5)</code></td><td class="astro-2i3ys3wc">开始最早只能选 1 个，结束最早可选 3 个</td><td class="astro-2i3ys3wc">用可复算结果否定错误的开始时间优先策略。</td></tr></tbody></table>
+<h2 id="常见错误" class="astro-2i3ys3wc">常见错误</h2><ul class="gesp-level5-dictionary-page__errors"><li class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">把局部直觉当作证明：</strong>先写清交换或替换理由；一个样例不能证明所有输入都正确。</li><li class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">比较函数按开始时间排序：</strong>本题已经证明安全的是结束时间最早；主关键字写错会使候选顺序和证明脱节。</li><li class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">同结束时不比较开始时间：</strong>输入允许零长度活动；[2,2) 若排在 [1,2) 前面只能选 1 个。完整规则必须在 finish 相同时按 start 升序，使两个活动都能选中。</li><li class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">把 lastEnd 初始化为 0：</strong>开始时间可以为负数，这会错误跳过所有在 0 之前开始的首个候选。</li><li class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">选择后忘记更新 lastEnd：</strong>只有选中活动时才令 lastEnd=finish，否则后续判断会沿用旧边界。</li><li class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">把端点相接判为冲突：</strong>半开区间中 start==lastEnd 可以选择，条件应写成 start&gt;=lastEnd。</li></ul><h3 class="astro-2i3ys3wc">比较函数按开始时间排序</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误代码：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">return left.start &lt; right.start;</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误原因：</strong>开始最早的长活动可能挡住多个短活动；排序关键字一变，交换论证就不再支持程序。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">正确写法：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">if (left.finish != right.finish) {
+    return left.finish &lt; right.finish;
+}
+return left.start &lt; right.start;</code></pre><h3 class="astro-2i3ys3wc">结束时间相同就直接判为同序</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误代码：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">return left.finish &lt; right.finish;</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误原因：</strong>输入允许零长度活动；若 [2,2) 在 [1,2) 前面，前者会把 lastEnd 设为 2，后者随即因 1&lt;2 被跳过，答案从 2 变成 1。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">正确写法：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">if (left.finish != right.finish) {
+    return left.finish &lt; right.finish;
+}
+return left.start &lt; right.start;</code></pre><h3 class="astro-2i3ys3wc">选择后没有更新结束边界</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误代码：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">if (start &gt;= lastEnd) {
+    selected++;
+}</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误原因：</strong>lastEnd 仍是旧值，后面的活动可能与刚选中的活动重叠，却被程序错误选入。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">正确写法：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">if (start &gt;= lastEnd) {
+    selected++;
+    lastEnd = finish;
+}</code></pre><h3 class="astro-2i3ys3wc">把结束边界从 0 开始</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误代码：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">int lastEnd = 0;</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误原因：</strong>本题允许负时间，例如 [-5,-2) 本应可选，却会因为 -5&lt;0 被错误跳过。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">正确写法：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">int lastEnd = -1000000001;</code></pre><h3 class="astro-2i3ys3wc">把端点相接写成严格大于</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误代码：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">if (start &gt; lastEnd) {
+    selected++;
+}</code></pre><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">错误原因：</strong>半开区间 [a,b) 不占用 b 时刻；start==lastEnd 的活动能够衔接，严格大于会少选合法活动。</p><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">正确写法：</strong></p><pre class="astro-2i3ys3wc"><code class="language-cpp">if (start &gt;= lastEnd) {
+    selected++;
+    lastEnd = finish;
+}</code></pre><h2 id="关联学习" class="astro-2i3ys3wc">关联学习</h2><ul class="astro-2i3ys3wc"><li class="astro-2i3ys3wc"><a href="/gesp/level5/binary-answer/" class="astro-2i3ys3wc">二分答案</a>：有些判定函数内部可使用已证明的贪心。</li><li class="astro-2i3ys3wc"><a href="/gesp/level5/complexity-analysis/" class="astro-2i3ys3wc">复杂度分析</a>：排序与扫描的总复杂度需要分别估算。</li></ul><h2 id="核心内容检查" class="astro-2i3ys3wc">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 不看代码，能写出“finish 升序、同 finish 时 start 升序”的完整候选顺序，以及可接条件、状态更新和停止位置</label><label class="q-check"><input type="checkbox"> 能用 [2,2)、[1,2) 说明同结束时 start 升序是允许零长度活动时的必要规则，并用交换论证说明完整顺序排第一的活动为什么可以进入某个最优方案</label><label class="q-check"><input type="checkbox"> 能按主样例复现 selected 与 lastEnd 的完整变化，并用 4+1+1 与 3+3 说明错误策略边界；完成自测后，下一步复习复杂度分析</label>
+<h2 id="整页综合测试" class="astro-2i3ys3wc">整页综合测试</h2><span>6 题</span>
+<p class="q-title">第 1 题贪心算法每一步通常选择什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题贪心算法每一步通常选择什么？" value="A"><b>A.</b> 当前看起来最优且可证明安全的选择</label><label class="q-opt"><input type="radio" name="第 1 题贪心算法每一步通常选择什么？" value="B"><b>B.</b> 所有可能方案</label><label class="q-opt"><input type="radio" name="第 1 题贪心算法每一步通常选择什么？" value="C"><b>C.</b> 随机方案</label><label class="q-opt"><input type="radio" name="第 1 题贪心算法每一步通常选择什么？" value="D"><b>D.</b> 最慢的选择</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>贪心不回退，因此局部选择必须能导向全局最优。 因此“当前看起来最优且可证明安全的选择”正确，其余选项混淆了定义、条件或边界。<br><span class="q-kp">对应知识点：01 贪心思想与适用条件</span></p>
+<p class="q-title">第 2 题判断一个贪心策略可靠，至少需要什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题判断一个贪心策略可靠，至少需要" value="A"><b>A.</b> 只测一个样例</label><label class="q-opt"><input type="radio" name="第 2 题判断一个贪心策略可靠，至少需要" value="B"><b>B.</b> 代码短</label><label class="q-opt"><input type="radio" name="第 2 题判断一个贪心策略可靠，至少需要" value="C"><b>C.</b> 使用排序函数</label><label class="q-opt"><input type="radio" name="第 2 题判断一个贪心策略可靠，至少需要" value="D"><b>D.</b> 证明或交换论证</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>少量样例不能替代正确性理由。 因此“证明或交换论证”正确，其余选项混淆了定义、条件或边界。<br><span class="q-kp">对应知识点：02 策略设计与正确性</span></p>
+<p class="q-title">第 3 题区间选择问题常按什么排序？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题区间选择问题常按什么排序？" value="A"><b>A.</b> 区间长度随机</label><label class="q-opt"><input type="radio" name="第 3 题区间选择问题常按什么排序？" value="B"><b>B.</b> 输入顺序</label><label class="q-opt"><input type="radio" name="第 3 题区间选择问题常按什么排序？" value="C"><b>C.</b> 结束时间从小到大</label><label class="q-opt"><input type="radio" name="第 3 题区间选择问题常按什么排序？" value="D"><b>D.</b> 开始时间从大到小且不证明</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>优先结束早的区间给后续留下最大空间。 因此“结束时间从小到大”正确，其余选项混淆了定义、条件或边界。<br><span class="q-kp">对应知识点：03 排序后选择</span></p>
+<p class="q-title">第 4 题硬币面值为 1、3、4，凑 6 时“每次取最大”得到？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题硬币面值为 1、3、4，凑 6" value="A"><b>A.</b> 只需一枚硬币</label><label class="q-opt"><input type="radio" name="第 4 题硬币面值为 1、3、4，凑 6" value="B"><b>B.</b> 4+1+1，不如 3+3</label><label class="q-opt"><input type="radio" name="第 4 题硬币面值为 1、3、4，凑 6" value="C"><b>C.</b> 一定得到 3+3</label><label class="q-opt"><input type="radio" name="第 4 题硬币面值为 1、3、4，凑 6" value="D"><b>D.</b> 无法凑出 6</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>这个反例说明直觉贪心不一定全局最优。 因此“4+1+1，不如 3+3”正确，其余选项混淆了定义、条件或边界。<br><span class="q-kp">对应知识点：04 反例与适用边界</span></p>
+<p class="q-title">第 5 题活动选择中选定一个活动后，下一个活动需满足？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题活动选择中选定一个活动后，下一" value="A"><b>A.</b> 开始时间不早于上一个结束时间</label><label class="q-opt"><input type="radio" name="第 5 题活动选择中选定一个活动后，下一" value="B"><b>B.</b> 结束时间更早</label><label class="q-opt"><input type="radio" name="第 5 题活动选择中选定一个活动后，下一" value="C"><b>C.</b> 编号相邻</label><label class="q-opt"><input type="radio" name="第 5 题活动选择中选定一个活动后，下一" value="D"><b>D.</b> 长度相同</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>不重叠条件决定可继续选择的活动。 因此“开始时间不早于上一个结束时间”正确，其余选项混淆了定义、条件或边界。<br><span class="q-kp">对应知识点：03 排序后选择</span></p>
+<p class="q-title">第 6 题贪心与枚举的主要区别是？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题贪心与枚举的主要区别是？" value="A"><b>A.</b> 贪心检查全部方案</label><label class="q-opt"><input type="radio" name="第 6 题贪心与枚举的主要区别是？" value="B"><b>B.</b> 枚举永不循环</label><label class="q-opt"><input type="radio" name="第 6 题贪心与枚举的主要区别是？" value="C"><b>C.</b> 二者完全相同</label><label class="q-opt"><input type="radio" name="第 6 题贪心与枚举的主要区别是？" value="D"><b>D.</b> 贪心只保留可证明安全的局部选择</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>枚举系统检查候选，贪心基于性质直接作选择。 因此“贪心只保留可证明安全的局部选择”正确，其余选项混淆了定义、条件或边界。<br><span class="q-kp">对应知识点：02 策略设计与正确性</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level5-pager" aria-label="五级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level5-pager__link gesp-level5-pager__link--previous" href="/gesp/level5/binary-answer/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点</small><strong>二分答案</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level5-pager__link gesp-level5-pager__link--next" href="/gesp/level5/divide-conquer-sorting/" rel="next"><span><small>下一知识点</small><strong>分治算法</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav></article><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -479,7 +594,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp10.html">下一个：分治与排序 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-贪心思想与适用条件">01 贪心思想与适用条件</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-贪心思想与适用条件">01 贪心思想与适用条件</a></li><li><a href="#02-策略设计与正确性">02 策略设计与正确性</a></li><li><a href="#03-排序后选择">03 排序后选择</a></li><li><a href="#04-反例与适用边界">04 反例与适用边界</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -491,6 +606,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

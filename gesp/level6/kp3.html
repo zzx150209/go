@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,9 +489,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“特殊二叉树”，把三类结构放在一个大知识点中比较。这里只讲结构性质；二叉排序树的查找与插入算法集中在“二叉树搜索”，哈夫曼编码放在“编码知识”。</p><h2 id="kp-01">01 完全二叉树</h2><p>完全二叉树除最后一层外每层都满，最后一层结点从左到右连续。满二叉树一定是完全二叉树，完全二叉树不一定满。按 1 下标连续存入数组时，结点 <code>i</code> 的左孩子候选为 <code>2*i</code>，右孩子为 <code>2*i+1</code>，父结点为 <code>i/2</code>；访问孩子前必须检查候选下标不超过 <code>n</code>。</p><h2 id="kp-02">02 二叉排序树</h2><p>本页采用严格规则：每个结点左子树所有值小于当前值，右子树所有值大于当前值，重复值不插入。中序遍历会得到严格递增序列。这个结构性质是下一页查找与插入方向的依据。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 完全二叉树</a><a href="#kp-02" class="astro-obblnf2s">02 二叉排序树</a><a href="#kp-03" class="astro-obblnf2s">03 哈夫曼树</a><a href="#quick-table" class="astro-obblnf2s">特殊二叉树速查</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“特殊二叉树”，把三类结构放在一个大知识点中比较。这里只讲结构性质；二叉排序树的查找与插入算法集中在“二叉树搜索”，哈夫曼编码放在“编码知识”。</p><h2 id="kp-01">01 完全二叉树</h2><p>完全二叉树除最后一层外每层都满，最后一层结点从左到右连续。满二叉树一定是完全二叉树，完全二叉树不一定满。按 1 下标连续存入数组时，结点 <code dir="auto">i</code> 的左孩子候选为 <code dir="auto">2*i</code>，右孩子为 <code dir="auto">2*i+1</code>，父结点为 <code dir="auto">i/2</code>；访问孩子前必须检查候选下标不超过 <code dir="auto">n</code>。</p><h2 id="kp-02">02 二叉排序树</h2><p>本页采用严格规则：每个结点左子树所有值小于当前值，右子树所有值大于当前值，重复值不插入。中序遍历会得到严格递增序列。这个结构性质是下一页查找与插入方向的依据。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int n = 0;    cin &gt;&gt; n;    long long weight[2005] = {};    bool used[2005] = {};    for (int i = 1; i &lt;= n; i++) {  // 读入每个叶结点的权值        cin &gt;&gt; weight[i];    }
-    long long wpl = 0;    int total = n;    for (int round = 1; round &lt; n; round++) {  // 每轮合并当前最小的两个权值        int first = 0;        int second = 0;        for (int i = 1; i &lt;= total; i++) {            if (used[i]) continue;  // 已经被合并的结点不再参与选择            if (first == 0 || weight[i] &lt; weight[first]) {  // 当前权值成为新的最小值                second = first;                first = i;            } else if (second == 0 || weight[i] &lt; weight[second]) {  // 更新第二小值                second = i;            }        }        used[first] = true;        used[second] = true;        total++;        weight[total] = weight[first] + weight[second];        wpl = wpl + weight[total];    }    cout &lt;&lt; wpl &lt;&lt; '\n';    return 0;}</code></pre><p>每轮扫描当前全部权值，时间复杂度 <code>O(n²)</code>，数组空间 <code>O(n)</code>。若只有一个叶结点，不发生合并，WPL 为 0。</p><h3 id="测试案例">测试案例</h3><table>
+    long long wpl = 0;    int total = n;    for (int round = 1; round &lt; n; round++) {  // 每轮合并当前最小的两个权值        int first = 0;        int second = 0;        for (int i = 1; i &lt;= total; i++) {            if (used[i]) continue;  // 已经被合并的结点不再参与选择            if (first == 0 || weight[i] &lt; weight[first]) {  // 当前权值成为新的最小值                second = first;                first = i;            } else if (second == 0 || weight[i] &lt; weight[second]) {  // 更新第二小值                second = i;            }        }        used[first] = true;        used[second] = true;        total++;        weight[total] = weight[first] + weight[second];        wpl = wpl + weight[total];    }    cout &lt;&lt; wpl &lt;&lt; '\n';    return 0;}</code></pre><p>每轮扫描当前全部权值，时间复杂度 <code dir="auto">O(n²)</code>，数组空间 <code dir="auto">O(n)</code>。若只有一个叶结点，不发生合并，WPL 为 0。</p><h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -484,7 +503,7 @@ int main() {    int n = 0;    cin &gt;&gt; n;    long long weight[2005] = {};   
 <tr>
 <td>基础</td>
 <td>二叉排序树依次插入 5、3、8</td>
-<td>根为 5，左孩子 3，右孩子 8，中序为 <code>3 5 8</code></td>
+<td>根为 5，左孩子 3，右孩子 8，中序为 <code dir="auto">3 5 8</code></td>
 </tr>
 <tr>
 <td>边界</td>
@@ -502,7 +521,23 @@ int main() {    int n = 0;    cin &gt;&gt; n;    long long weight[2005] = {};   
 <td>合并值为 5、12、21，WPL 为 38</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>把三类树的条件混在一起</h3><div><div><strong><span>×</span> 错误写法</strong><code>完全二叉树一定满足左小右大</code></div><div><strong><span>✓</span> 正确写法</strong><code>先辨认题目问位置、大小关系还是权值合并</code></div></div><p><strong>原因：</strong>完全性约束结点位置，排序性约束结点值，两者是不同维度。</p><p><strong>检查方法：</strong>为每类树只抓住一条核心条件，再判断应用。</p></section><section><h3>哈夫曼合并后丢掉新权值</h3><div><div><strong><span>×</span> 错误写法</strong><code>合并 2 和 3 后，下一轮仍只在原来的 7、9 中选择</code></div><div><strong><span>✓</span> 正确写法</strong><code>每轮执行“取出两个最小值 → 求和 → 把和放回”</code></div></div><p><strong>原因：</strong>新结点权值 5 代表刚形成的子树，必须放回集合继续比较。</p><p><strong>检查方法：</strong>把每轮的新集合完整写出来，再进入下一轮。</p></section><h2 id="related-learning">关联学习</h2><p>二叉排序树的查找与插入见“07 二叉树搜索”；从哈夫曼树生成字符编码见“04 编码知识”。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>把三类树的条件混在一起</h3><p><strong>原因：</strong>完全性约束结点位置，排序性约束结点值，两者是不同维度。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>为每类树只抓住一条核心条件，再判断应用。</p><h3>哈夫曼合并后丢掉新权值</h3><p><strong>原因：</strong>新结点权值 5 代表刚形成的子树，必须放回集合继续比较。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>把每轮的新集合完整写出来，再进入下一轮。</p><h2 id="related-learning">关联学习</h2><p>二叉排序树的查找与插入见“07 二叉树搜索”；从哈夫曼树生成字符编码见“04 编码知识”。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能判断完全二叉树并使用 1 下标父子公式</label><label class="q-check"><input type="checkbox"> 能说明二叉排序树左小右大与中序有序</label><label class="q-check"><input type="checkbox"> 能逐轮合并最小权值并计算 WPL</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题哪项符合完全二叉树定义？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题哪项符合完全二叉树定义？" value="A"><b>A.</b> 最后一层可以在中间留空</label><label class="q-opt"><input type="radio" name="第 1 题哪项符合完全二叉树定义？" value="B"><b>B.</b> 最后一层结点从左到右连续</label><label class="q-opt"><input type="radio" name="第 1 题哪项符合完全二叉树定义？" value="C"><b>C.</b> 每个结点必须有两个孩子</label><label class="q-opt"><input type="radio" name="第 1 题哪项符合完全二叉树定义？" value="D"><b>D.</b> 所有叶结点同层</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>完全二叉树除最后一层外均满，最后一层已有结点必须从左到右连续排列。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题1 下标、n=10 时，下标 5 的右孩子是否存在？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题1 下标、n=10 时，下标 " value="A"><b>A.</b> 存在，下标 10</label><label class="q-opt"><input type="radio" name="第 2 题1 下标、n=10 时，下标 " value="B"><b>B.</b> 存在，下标 11</label><label class="q-opt"><input type="radio" name="第 2 题1 下标、n=10 时，下标 " value="C"><b>C.</b> 不存在，因为候选 11 超过 n</label><label class="q-opt"><input type="radio" name="第 2 题1 下标、n=10 时，下标 " value="D"><b>D.</b> 不存在，因为 5 是叶结点</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>右孩子候选下标为 2×5+1=11，超过结点总数 10，因此不存在。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 3 题严格左小右大且不插入重复值的二叉排序树，中序遍历结果怎样？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题严格左小右大且不插入重复值的二" value="A"><b>A.</b> 严格递增</label><label class="q-opt"><input type="radio" name="第 3 题严格左小右大且不插入重复值的二" value="B"><b>B.</b> 严格递减</label><label class="q-opt"><input type="radio" name="第 3 题严格左小右大且不插入重复值的二" value="C"><b>C.</b> 层序递增</label><label class="q-opt"><input type="radio" name="第 3 题严格左小右大且不插入重复值的二" value="D"><b>D.</b> 没有固定关系</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>中序遍历按左、根、右访问，严格左小右大且去重时会得到严格递增序列。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题构造哈夫曼树时，每一轮选择什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题构造哈夫曼树时，每一轮选择什么" value="A"><b>A.</b> 当前最大的两个权值</label><label class="q-opt"><input type="radio" name="第 4 题构造哈夫曼树时，每一轮选择什么" value="B"><b>B.</b> 当前最小的两个权值</label><label class="q-opt"><input type="radio" name="第 4 题构造哈夫曼树时，每一轮选择什么" value="C"><b>C.</b> 最先输入的两个权值</label><label class="q-opt"><input type="radio" name="第 4 题构造哈夫曼树时，每一轮选择什么" value="D"><b>D.</b> 任意两个权值</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>哈夫曼构造每轮重新选择当前最小的两个权值合并，合并值还要放回集合。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 5 题权值 2、3、7、9 的哈夫曼树 WPL 是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题权值 2、3、7、9 的哈夫曼" value="A"><b>A.</b> 21</label><label class="q-opt"><input type="radio" name="第 5 题权值 2、3、7、9 的哈夫曼" value="B"><b>B.</b> 33</label><label class="q-opt"><input type="radio" name="第 5 题权值 2、3、7、9 的哈夫曼" value="C"><b>C.</b> 38</label><label class="q-opt"><input type="radio" name="第 5 题权值 2、3、7、9 的哈夫曼" value="D"><b>D.</b> 42</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>依次合并 2+3=5、5+7=12、9+12=21，WPL 等于合并值之和 5+12+21=38。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/tree-traversal/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">上一父知识点 · 02</small><strong class="astro-23ojxnem">树的构造与遍历</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/coding/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 04</small><strong class="astro-23ojxnem">编码知识</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -511,7 +546,7 @@ int main() {    int n = 0;    cin &gt;&gt; n;    long long weight[2005] = {};   
       <a class="kp-nav" href="kp4.html">下一个：遍历序列还原 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#kp-01">01 完全二叉树</a></li><li><a href="#kp-02">02 二叉排序树</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#kp-01">01 完全二叉树</a></li><li><a href="#kp-02">02 二叉排序树</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -523,6 +558,31 @@ int main() {    int n = 0;    cin &gt;&gt; n;    long long weight[2005] = {};   
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

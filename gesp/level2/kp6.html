@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,32 +489,33 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <div data-gesp-level2-ui data-gesp-level2-detail></div>
-<h2 id="本课先记住">本课先记住</h2>
+    <h2 id="本课先记住">本课先记住</h2>
 <ul>
-<li><strong>核心结论：</strong> 嵌套分支先走外层再决定是否进入内层；<code>else</code> 与最近的未配对 <code>if</code> 结合；<code>else if</code> 只执行第一条成立分支，<code>switch</code> 从匹配 <code>case</code> 开始并由 <code>break</code> 停止。</li>
-<li><strong>常用语法：</strong> 用大括号标清层次，并把更严格的 <code>else if</code> 条件放在前面：<code>if (...) { ... } else if (...) { ... } else { ... }</code>；固定值分支写成 <code>case value: ...; break;</code>。</li>
-<li><strong>最小示例：</strong> 分数判断先经过外层有效范围，再进入从严格到宽松的等级分支；<code>score = 90</code> 时，<code>score &gt;= 90</code> 为真，输出 A，后续条件不再检查。</li>
-<li><strong>关键易错点：</strong> 省略大括号容易误判悬空 <code>else</code>；宽条件放在严格条件前会挡住后者；<code>switch</code> 漏写 <code>break</code> 会继续落入后续 <code>case</code>。</li>
+<li><strong>核心结论：</strong> 嵌套分支先走外层再决定是否进入内层；<code dir="auto">else</code> 与最近的未配对 <code dir="auto">if</code> 结合；<code dir="auto">else if</code> 只执行第一条成立分支，<code dir="auto">switch</code> 从匹配 <code dir="auto">case</code> 开始并由 <code dir="auto">break</code> 停止。</li>
+<li><strong>常用语法：</strong> 用大括号标清层次，并把更严格的 <code dir="auto">else if</code> 条件放在前面：<code dir="auto">if (...) { ... } else if (...) { ... } else { ... }</code>；固定值分支写成 <code dir="auto">case value: ...; break;</code>。</li>
+<li><strong>最小示例：</strong> 分数判断先经过外层有效范围，再进入从严格到宽松的等级分支；<code dir="auto">score = 90</code> 时，<code dir="auto">score &gt;= 90</code> 为真，输出 A，后续条件不再检查。</li>
+<li><strong>关键易错点：</strong> 省略大括号容易误判悬空 <code dir="auto">else</code>；宽条件放在严格条件前会挡住后者；<code dir="auto">switch</code> 漏写 <code dir="auto">break</code> 会继续落入后续 <code dir="auto">case</code>。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-nested-if" class="astro-6dte4xza">01 嵌套 if 与配对规则</a></li><li class="astro-6dte4xza"><a href="#02-conditions" class="astro-6dte4xza">02 多条件与 else if</a></li><li class="astro-6dte4xza"><a href="#03-switch" class="astro-6dte4xza">03 switch、case 与 break</a></li><li class="astro-6dte4xza"><a href="#04-boundary" class="astro-6dte4xza">04 条件顺序与边界</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
-<p>本页对应二级大纲中的多层分支结构：掌握 <code>if</code>、<code>if-else</code> 和 <code>switch</code> 的嵌套或组合，能够追踪执行路径，并正确处理条件顺序、边界和 <code>break</code>。</p>
+<p>本页对应二级大纲中的多层分支结构：掌握 <code dir="auto">if</code>、<code dir="auto">if-else</code> 和 <code dir="auto">switch</code> 的嵌套或组合，能够追踪执行路径，并正确处理条件顺序、边界和 <code dir="auto">break</code>。</p>
 <p>多层分支用于“先判断一层，再根据结果继续细分”的问题。读代码时先确定外层路径，再进入对应内层，不能把所有条件同时执行。</p>
-<p>本页从外层条件开始逐层追踪嵌套 <code>if</code>，理解 <code>else</code> 与最近未配对 <code>if</code> 的关系；再比较 <code>else if</code> 条件顺序和 <code>switch</code> 固定值分支，最后用 59、60、89、90 以及非法分数检查所有边界。</p>
-<p><strong>分支</strong>是根据条件只选择某条执行路径；<strong>多层分支</strong>是在已经选择的路径中继续判断。它与一串彼此独立的 <code>if</code> 不同：独立 <code>if</code> 可能有多项同时执行，<code>if ... else if ... else</code> 只进入第一个成立分支，嵌套 <code>if</code> 则要求先进入外层路径，内层判断才有机会执行。</p>
+<p>本页从外层条件开始逐层追踪嵌套 <code dir="auto">if</code>，理解 <code dir="auto">else</code> 与最近未配对 <code dir="auto">if</code> 的关系；再比较 <code dir="auto">else if</code> 条件顺序和 <code dir="auto">switch</code> 固定值分支，最后用 59、60、89、90 以及非法分数检查所有边界。</p>
+<p><strong>分支</strong>是根据条件只选择某条执行路径；<strong>多层分支</strong>是在已经选择的路径中继续判断。它与一串彼此独立的 <code dir="auto">if</code> 不同：独立 <code dir="auto">if</code> 可能有多项同时执行，<code dir="auto">if ... else if ... else</code> 只进入第一个成立分支，嵌套 <code dir="auto">if</code> 则要求先进入外层路径，内层判断才有机会执行。</p>
 <a id="01-nested-if"></a>
 <h2 id="01-嵌套-if-与配对规则">01 嵌套 if 与配对规则</h2>
-<p>当第二个判断只在第一个条件成立后才有意义，可以把 <code>if</code> 放进另一个 <code>if</code>：</p>
-<pre><code>if (score &gt;= 60) {  // 外层决定能否进入及格后的细分    if (score &gt;= 90) {        cout &lt;&lt; "pass and excellent" &lt;&lt; endl;    } else {  // 已及格但未达到 90        cout &lt;&lt; "pass" &lt;&lt; endl;    }} else {  // 外层为假时，内层完全不执行    cout &lt;&lt; "not pass" &lt;&lt; endl;}</code></pre>
-<p>这段语法可以拆成“外层条件、外层真分支、内层条件、内层两条路径、外层假分支”。缩进帮助阅读，但真正决定范围的是大括号。二级主代码始终保留大括号，避免仅靠缩进猜测 <code>else</code> 属于哪一层。</p>
-<p>大括号明确了层次。没有大括号时，<code>else</code> 与前面最近且尚未配对的 <code>if</code> 配对，容易看错，因此二级主代码应保留完整大括号。</p>
+<p>当第二个判断只在第一个条件成立后才有意义，可以把 <code dir="auto">if</code> 放进另一个 <code dir="auto">if</code>：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>if (score &gt;= 60) {  // 外层决定能否进入及格后的细分    if (score &gt;= 90) {        cout &lt;&lt; "pass and excellent" &lt;&lt; endl;    } else {  // 已及格但未达到 90        cout &lt;&lt; "pass" &lt;&lt; endl;    }} else {  // 外层为假时，内层完全不执行    cout &lt;&lt; "not pass" &lt;&lt; endl;}</code></pre>
+<p>这段语法可以拆成“外层条件、外层真分支、内层条件、内层两条路径、外层假分支”。缩进帮助阅读，但真正决定范围的是大括号。二级主代码始终保留大括号，避免仅靠缩进猜测 <code dir="auto">else</code> 属于哪一层。</p>
+<p>大括号明确了层次。没有大括号时，<code dir="auto">else</code> 与前面最近且尚未配对的 <code dir="auto">if</code> 配对，容易看错，因此二级主代码应保留完整大括号。</p>
 <p>对输入 95、75、50 分别追踪：</p>
 <table>
 <thead>
 <tr>
-<th><code>score</code></th>
-<th>外层 <code>score&gt;=60</code></th>
-<th>内层 <code>score&gt;=90</code></th>
+<th><code dir="auto">score</code></th>
+<th>外层 <code dir="auto">score&gt;=60</code></th>
+<th>内层 <code dir="auto">score&gt;=90</code></th>
 <th>输出</th>
 </tr>
 </thead>
@@ -504,19 +524,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>95</td>
 <td>真，进入内层</td>
 <td>真</td>
-<td><code>pass and excellent</code></td>
+<td><code dir="auto">pass and excellent</code></td>
 </tr>
 <tr>
 <td>75</td>
 <td>真，进入内层</td>
 <td>假</td>
-<td><code>pass</code></td>
+<td><code dir="auto">pass</code></td>
 </tr>
 <tr>
 <td>50</td>
 <td>假，不进入内层</td>
 <td>不检查</td>
-<td><code>not pass</code></td>
+<td><code dir="auto">not pass</code></td>
 </tr>
 </tbody>
 </table>
@@ -531,8 +551,8 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <tr>
 <th>输入</th>
 <th>外层非法判断</th>
-<th>内层 <code>score&gt;=90</code></th>
-<th>内层 <code>score&gt;=60</code></th>
+<th>内层 <code dir="auto">score&gt;=90</code></th>
+<th>内层 <code dir="auto">score&gt;=60</code></th>
 <th>输出</th>
 <th>未执行分支</th>
 </tr>
@@ -543,7 +563,7 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <td>真</td>
 <td>不检查</td>
 <td>不检查</td>
-<td><code>invalid</code></td>
+<td><code dir="auto">invalid</code></td>
 <td>A、B、C</td>
 </tr>
 <tr>
@@ -551,7 +571,7 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <td>假，进入合法路径</td>
 <td>假</td>
 <td>假</td>
-<td><code>C</code></td>
+<td><code dir="auto">C</code></td>
 <td>无</td>
 </tr>
 <tr>
@@ -559,7 +579,7 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <td>假，进入合法路径</td>
 <td>假</td>
 <td>真</td>
-<td><code>B</code></td>
+<td><code dir="auto">B</code></td>
 <td>C</td>
 </tr>
 <tr>
@@ -567,7 +587,7 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <td>假，进入合法路径</td>
 <td>假</td>
 <td>真</td>
-<td><code>B</code></td>
+<td><code dir="auto">B</code></td>
 <td>C</td>
 </tr>
 <tr>
@@ -575,7 +595,7 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <td>假，进入合法路径</td>
 <td>真</td>
 <td>不检查</td>
-<td><code>A</code></td>
+<td><code dir="auto">A</code></td>
 <td>B、C</td>
 </tr>
 <tr>
@@ -583,18 +603,18 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <td>真</td>
 <td>不检查</td>
 <td>不检查</td>
-<td><code>invalid</code></td>
+<td><code dir="auto">invalid</code></td>
 <td>A、B、C</td>
 </tr>
 </tbody>
 </table>
-<p>例如输入 90，先得到外层非法判断为假，进入合法路径后，内层 <code>score&gt;=90</code> 才为真并输出 A。这正是“先选择外层，再执行内层”，不是一条平铺的四分支链。</p>
+<p>例如输入 90，先得到外层非法判断为假，进入合法路径后，内层 <code dir="auto">score&gt;=90</code> 才为真并输出 A。这正是“先选择外层，再执行内层”，不是一条平铺的四分支链。</p>
 <a id="02-conditions"></a>
 <h2 id="02-多条件与-else-if">02 多条件与 else if</h2>
-<p>一组互斥区间常用 <code>if ... else if ... else</code>。程序从上到下检查，遇到第一个为真的条件后执行对应分支，其余分支跳过。</p>
+<p>一组互斥区间常用 <code dir="auto">if ... else if ... else</code>。程序从上到下检查，遇到第一个为真的条件后执行对应分支，其余分支跳过。</p>
 <pre><code>if (score &gt;= 90) {  // 从最严格条件开始    cout &lt;&lt; "A";} else if (score &gt;= 80) {    cout &lt;&lt; "B";} else if (score &gt;= 60) {    cout &lt;&lt; "C";} else {  // 接住前面条件都不满足的剩余区间    cout &lt;&lt; "D";}</code></pre>
-<p>条件要从更严格到更宽松排列。若先写 <code>score &gt;= 60</code>，90 分也会提前进入该分支。</p>
-<p>输入 <code>score = 75</code> 时，程序按顺序追踪如下：</p>
+<p>条件要从更严格到更宽松排列。若先写 <code dir="auto">score &gt;= 60</code>，90 分也会提前进入该分支。</p>
+<p>输入 <code dir="auto">score = 75</code> 时，程序按顺序追踪如下：</p>
 <table>
 <thead>
 <tr>
@@ -605,50 +625,50 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 </thead>
 <tbody>
 <tr>
-<td><code>score &gt;= 90</code></td>
+<td><code dir="auto">score &gt;= 90</code></td>
 <td>假</td>
 <td>继续检查下一项</td>
 </tr>
 <tr>
-<td><code>score &gt;= 80</code></td>
+<td><code dir="auto">score &gt;= 80</code></td>
 <td>假</td>
 <td>继续检查下一项</td>
 </tr>
 <tr>
-<td><code>score &gt;= 60</code></td>
+<td><code dir="auto">score &gt;= 60</code></td>
 <td>真</td>
-<td>输出 <code>C</code>，停止检查</td>
+<td>输出 <code dir="auto">C</code>，停止检查</td>
 </tr>
 </tbody>
 </table>
-<p>第三个条件成立后，后面的 <code>else</code> 不再执行。<code>else if</code> 链只会进入第一个满足条件的分支。</p>
+<p>第三个条件成立后，后面的 <code dir="auto">else</code> 不再执行。<code dir="auto">else if</code> 链只会进入第一个满足条件的分支。</p>
 <a id="03-switch"></a>
 <h2 id="03-switchcase-与-break">03 switch、case 与 break</h2>
-<p>当一个整数或字符要与若干固定值比较时，可以使用 <code>switch</code>：</p>
+<p>当一个整数或字符要与若干固定值比较时，可以使用 <code dir="auto">switch</code>：</p>
 <pre><code>switch (month) {  // 从匹配的固定 case 位置开始执行    case 2:        cout &lt;&lt; "February";        break;  // 离开 switch，防止继续贯穿    case 4:        cout &lt;&lt; "April";        break;    default:  // 没有 case 匹配时进入        cout &lt;&lt; "other";}</code></pre>
-<p><code>switch (month)</code> 中圆括号里的内容叫<strong>选择表达式</strong>，它通常得到整数或字符值；<code>case 2</code>、<code>case 4</code> 是互不重复的固定常量入口；<code>default</code> 是没有匹配项时的可选入口。<code>case</code> 只决定“从哪里开始”，不会自动决定“在哪里停止”，所以通常需要 <code>break</code>。</p>
-<p>匹配某个 <code>case</code> 后从该位置继续执行，直到遇到 <code>break</code> 或离开 <code>switch</code>。遗漏 <code>break</code> 会继续执行后面的 <code>case</code>，叫作贯穿。题目可能专门考查贯穿，但日常代码若不需要贯穿，应写清 <code>break</code>。</p>
-<h3 id="if-与-switch-组合"><code>if</code> 与 <code>switch</code> 组合</h3>
-<p>当一个范围条件成立后，还要比较若干固定值，可以先用 <code>if</code>，再在它内部使用 <code>switch</code>：</p>
+<p><code dir="auto">switch (month)</code> 中圆括号里的内容叫<strong>选择表达式</strong>，它通常得到整数或字符值；<code dir="auto">case 2</code>、<code dir="auto">case 4</code> 是互不重复的固定常量入口；<code dir="auto">default</code> 是没有匹配项时的可选入口。<code dir="auto">case</code> 只决定“从哪里开始”，不会自动决定“在哪里停止”，所以通常需要 <code dir="auto">break</code>。</p>
+<p>匹配某个 <code dir="auto">case</code> 后从该位置继续执行，直到遇到 <code dir="auto">break</code> 或离开 <code dir="auto">switch</code>。遗漏 <code dir="auto">break</code> 会继续执行后面的 <code dir="auto">case</code>，叫作贯穿。题目可能专门考查贯穿，但日常代码若不需要贯穿，应写清 <code dir="auto">break</code>。</p>
+<h3 id="if-与-switch-组合"><code dir="auto">if</code> 与 <code dir="auto">switch</code> 组合</h3>
+<p>当一个范围条件成立后，还要比较若干固定值，可以先用 <code dir="auto">if</code>，再在它内部使用 <code dir="auto">switch</code>：</p>
 <pre><code>if (type == 2) {  // 外层决定内层 switch 是否执行    switch (month) {        case 6:            cout &lt;&lt; "summer";            break;        case 12:            cout &lt;&lt; "winter";            break;        default:            cout &lt;&lt; "other month";    }} else {    cout &lt;&lt; "other type";}</code></pre>
-<p>输入 <code>2 6</code> 时，先检查 <code>type==2</code> 为真，才进入 <code>switch</code>；<code>month</code> 匹配 <code>case 6</code>，输出 <code>summer</code>，随后 <code>break</code> 只结束 <code>switch</code>。输入 <code>1 6</code> 时外层条件为假，整个 <code>switch</code> 都不执行，输出 <code>other type</code>。<code>if</code> 和 <code>switch</code> 的大括号都不能省略，否则层次和作用范围会难以辨认。</p>
-<p>反过来，也可以先由 <code>switch</code> 选中固定类别，再在某个 <code>case</code> 内用 <code>if</code> 判断范围：</p>
+<p>输入 <code dir="auto">2 6</code> 时，先检查 <code dir="auto">type==2</code> 为真，才进入 <code dir="auto">switch</code>；<code dir="auto">month</code> 匹配 <code dir="auto">case 6</code>，输出 <code dir="auto">summer</code>，随后 <code dir="auto">break</code> 只结束 <code dir="auto">switch</code>。输入 <code dir="auto">1 6</code> 时外层条件为假，整个 <code dir="auto">switch</code> 都不执行，输出 <code dir="auto">other type</code>。<code dir="auto">if</code> 和 <code dir="auto">switch</code> 的大括号都不能省略，否则层次和作用范围会难以辨认。</p>
+<p>反过来，也可以先由 <code dir="auto">switch</code> 选中固定类别，再在某个 <code dir="auto">case</code> 内用 <code dir="auto">if</code> 判断范围：</p>
 <pre><code>switch (type) {  // 外层先选择固定类别    case 1:        if (score &gt;= 60) {  // case 内再判断范围            cout &lt;&lt; "pass";        } else {            cout &lt;&lt; "not pass";        }        break;  // 离开外层 switch    default:        cout &lt;&lt; "other type";}</code></pre>
-<p>两个 <code>switch</code> 也可以嵌套。下面先选组别，再在组别 1 内选择代码：</p>
+<p>两个 <code dir="auto">switch</code> 也可以嵌套。下面先选组别，再在组别 1 内选择代码：</p>
 <pre><code>switch (group) {    case 1:        switch (code) {  // 只有外层选中组别 1 才进入            case 2:                cout &lt;&lt; "A";                break;  // 只结束最近的内层 switch            default:                cout &lt;&lt; "B";                break;        }        break;  // 再结束外层 switch    default:        cout &lt;&lt; "other";        break;}</code></pre>
-<p>输入 <code>group=1、code=2</code> 时，内层 <code>break</code> 只离开内层 <code>switch</code>，随后仍会执行外层 <code>case 1</code> 末尾的第二个 <code>break</code>。两层 <code>break</code> 各管最近的一层，不能用一个内层 <code>break</code> 同时结束两层选择。</p>
-<p>无论是哪一种组合，都先执行外层选择，再看是否能到达内层。<code>break</code> 在上例中结束的是它所在的 <code>switch</code>，不会像 <code>return</code> 那样直接结束整个程序。</p>
+<p>输入 <code dir="auto">group=1、code=2</code> 时，内层 <code dir="auto">break</code> 只离开内层 <code dir="auto">switch</code>，随后仍会执行外层 <code dir="auto">case 1</code> 末尾的第二个 <code dir="auto">break</code>。两层 <code dir="auto">break</code> 各管最近的一层，不能用一个内层 <code dir="auto">break</code> 同时结束两层选择。</p>
+<p>无论是哪一种组合，都先执行外层选择，再看是否能到达内层。<code dir="auto">break</code> 在上例中结束的是它所在的 <code dir="auto">switch</code>，不会像 <code dir="auto">return</code> 那样直接结束整个程序。</p>
 <a id="04-boundary"></a>
 <h2 id="04-条件顺序与边界">04 条件顺序与边界</h2>
-<p>边界值要逐一代入。例如“0 到 100 分”通常包含 0 和 100；区间 <code>80—89</code> 可写 <code>score &gt;= 80 &amp;&amp; score &lt; 90</code>。多个条件组合时先确认每个比较，再看 <code>&amp;&amp;</code> 或 <code>||</code>。</p>
+<p>边界值要逐一代入。例如“0 到 100 分”通常包含 0 和 100；区间 <code dir="auto">80—89</code> 可写 <code dir="auto">score &gt;= 80 &amp;&amp; score &lt; 90</code>。多个条件组合时先确认每个比较，再看 <code dir="auto">&amp;&amp;</code> 或 <code dir="auto">||</code>。</p>
 <p>处理年份、票价、分段收费等问题时，先在纸上列出互不重叠的区间，再按顺序写分支。这样能避免一个值同时符合多段或没有任何分支接住。</p>
 <p>例如规则是“90 分及以上优秀，60—89 分及格，其余不及格”，把 59、60、89、90 逐个代入：</p>
 <table>
 <thead>
 <tr>
 <th>分数</th>
-<th><code>&gt;=90</code></th>
-<th><code>&gt;=60</code></th>
+<th><code dir="auto">&gt;=90</code></th>
+<th><code dir="auto">&gt;=60</code></th>
 <th>结果</th>
 </tr>
 </thead>
@@ -679,7 +699,7 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 </tr>
 </tbody>
 </table>
-<p>如果第二个条件误写成 <code>score&gt;60</code>，60 会掉进“不及格”；若优秀条件误写成 <code>score&gt;90</code>，90 会被分到“及格”。边界题必须实际代入等号两侧检查。</p>
+<p>如果第二个条件误写成 <code dir="auto">score&gt;60</code>，60 会掉进“不及格”；若优秀条件误写成 <code dir="auto">score&gt;90</code>，90 会被分到“及格”。边界题必须实际代入等号两侧检查。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -691,55 +711,116 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
 <tbody>
 <tr>
 <td>条件成立后继续细分</td>
-<td>嵌套 <code>if</code></td>
+<td>嵌套 <code dir="auto">if</code></td>
 </tr>
 <tr>
 <td>多个互斥区间</td>
-<td><code>if ... else if ... else</code></td>
+<td><code dir="auto">if ... else if ... else</code></td>
 </tr>
 <tr>
 <td>与多个固定值比较</td>
-<td><code>switch</code></td>
+<td><code dir="auto">switch</code></td>
 </tr>
 <tr>
 <td>防止 case 继续向下执行</td>
-<td><code>break</code></td>
+<td><code dir="auto">break</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="典型例题">典型例题</h2>
-<p>**题目：**一个 <code>switch</code> 在 <code>case 1</code> 输出 <code>A</code> 后没有 <code>break</code>，紧接的 <code>case 2</code> 输出 <code>B</code> 后才 <code>break</code>。输入 1 时输出什么？</p>
+<p>**题目：**一个 <code dir="auto">switch</code> 在 <code dir="auto">case 1</code> 输出 <code dir="auto">A</code> 后没有 <code dir="auto">break</code>，紧接的 <code dir="auto">case 2</code> 输出 <code dir="auto">B</code> 后才 <code dir="auto">break</code>。输入 1 时输出什么？</p>
 <p><strong>推演：</strong></p>
 <ol>
-<li><code>switch</code> 的值为 1，从 <code>case 1</code> 开始执行；</li>
-<li>先输出 <code>A</code>；</li>
-<li>当前分支末尾没有 <code>break</code>，所以不会重新匹配，而是直接继续向下执行；</li>
-<li>到达 <code>case 2</code> 的语句并输出 <code>B</code>；</li>
-<li>随后遇到 <code>break</code>，离开 <code>switch</code>。</li>
+<li><code dir="auto">switch</code> 的值为 1，从 <code dir="auto">case 1</code> 开始执行；</li>
+<li>先输出 <code dir="auto">A</code>；</li>
+<li>当前分支末尾没有 <code dir="auto">break</code>，所以不会重新匹配，而是直接继续向下执行；</li>
+<li>到达 <code dir="auto">case 2</code> 的语句并输出 <code dir="auto">B</code>；</li>
+<li>随后遇到 <code dir="auto">break</code>，离开 <code dir="auto">switch</code>。</li>
 </ol>
-<p>**结论：**连续输出 <code>AB</code>。<code>case</code> 负责确定开始位置，<code>break</code> 才负责在需要的位置停止。</p>
-<p>**引导练习：**把合法成绩分成“90—100 为 A、60—89 为 B、0—59 为 C”，范围外输出 <code>invalid</code>。请先在纸上写外层合法性条件，再写内层两个条件，并用 <code>-1、59、60、89、90、101</code> 逐个走路径。提示：外层只负责合法/非法，内层从严格条件向宽条件检查。核对输出依次应为 <code>invalid、C、B、B、A、invalid</code>，而且 <code>-1</code> 和 <code>101</code> 都不应执行任何内层条件。</p>
+<p>**结论：**连续输出 <code dir="auto">AB</code>。<code dir="auto">case</code> 负责确定开始位置，<code dir="auto">break</code> 才负责在需要的位置停止。</p>
+<p>**引导练习：**把合法成绩分成“90—100 为 A、60—89 为 B、0—59 为 C”，范围外输出 <code dir="auto">invalid</code>。请先在纸上写外层合法性条件，再写内层两个条件，并用 <code dir="auto">-1、59、60、89、90、101</code> 逐个走路径。提示：外层只负责合法/非法，内层从严格条件向宽条件检查。核对输出依次应为 <code dir="auto">invalid、C、B、B、A、invalid</code>，而且 <code dir="auto">-1</code> 和 <code dir="auto">101</code> 都不应执行任何内层条件。</p>
 <a id="常见错误"></a>
 <h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
 <ul>
 <li>忽略外层条件，直接进入内层分支；</li>
-<li>不写大括号，误判 <code>else</code> 的配对对象；</li>
+<li>不写大括号，误判 <code dir="auto">else</code> 的配对对象；</li>
 <li>把宽条件放在严格条件之前；</li>
-<li>忘记 <code>switch</code> 中的 <code>break</code>；</li>
-<li>用 <code>=</code> 代替 <code>==</code>，或遗漏边界等号。</li>
+<li>忘记 <code dir="auto">switch</code> 中的 <code dir="auto">break</code>；</li>
+<li>用 <code dir="auto">=</code> 代替 <code dir="auto">==</code>，或遗漏边界等号。</li>
 </ul>
-<p>**错误写法：**先写 <code>if (score &gt;= 60)</code>，后写 <code>else if (score &gt;= 90)</code>。</p>
-<p>**错误原因：**90 分先满足较宽的 <code>score &gt;= 60</code>，后面的优秀分支永远没有机会执行。</p>
-<p>**正确写法：**先判断 <code>score &gt;= 90</code>，再判断 <code>score &gt;= 60</code>，最后用 <code>else</code> 接住不及格情况。</p>
-<p><strong>错误写法：</strong><code>if (score = 90)</code></p>
-<p>**错误原因：**单个 <code>=</code> 是赋值，不是判断相等；它还会修改 <code>score</code>。</p>
-<p>**正确写法：**相等比较使用 <code>if (score == 90)</code>。若判断分数段，使用 <code>score &gt;= 90</code>。</p>
-<p>**修正后复演：**假设输入原本是 50。错误写法 <code>score = 90</code> 会先把变量改成 90，条件又因非零而成立；改成 <code>score == 90</code> 后，50 与 90 比较为假，<code>score</code> 仍保持 50。检查“变量值没有被条件修改”就是修正成功的标准。</p>
-<p><code>switch</code> 中也要逐个检查 <code>case</code> 后是否需要 <code>break</code>；只有题目明确要求贯穿时才故意省略。</p>
+<p>**错误写法：**先写 <code dir="auto">if (score &gt;= 60)</code>，后写 <code dir="auto">else if (score &gt;= 90)</code>。</p>
+<p>**错误原因：**90 分先满足较宽的 <code dir="auto">score &gt;= 60</code>，后面的优秀分支永远没有机会执行。</p>
+<p>**正确写法：**先判断 <code dir="auto">score &gt;= 90</code>，再判断 <code dir="auto">score &gt;= 60</code>，最后用 <code dir="auto">else</code> 接住不及格情况。</p>
+<p><strong>错误写法：</strong><code dir="auto">if (score = 90)</code></p>
+<p>**错误原因：**单个 <code dir="auto">=</code> 是赋值，不是判断相等；它还会修改 <code dir="auto">score</code>。</p>
+<p>**正确写法：**相等比较使用 <code dir="auto">if (score == 90)</code>。若判断分数段，使用 <code dir="auto">score &gt;= 90</code>。</p>
+<p>**修正后复演：**假设输入原本是 50。错误写法 <code dir="auto">score = 90</code> 会先把变量改成 90，条件又因非零而成立；改成 <code dir="auto">score == 90</code> 后，50 与 90 比较为假，<code dir="auto">score</code> 仍保持 50。检查“变量值没有被条件修改”就是修正成功的标准。</p>
+<p><code dir="auto">switch</code> 中也要逐个检查 <code dir="auto">case</code> 后是否需要 <code dir="auto">break</code>；只有题目明确要求贯穿时才故意省略。</p>
 <h2 id="本节总结">本节总结</h2>
-<p>多层分支先走外层，再决定是否进入内层；没有走到的条件属于未执行分支。<code>else if</code> 从上到下只进入第一个成立分支，因此严格条件应放在宽松条件之前。<code>switch</code> 从匹配的 <code>case</code> 开始，通常用 <code>break</code> 停止；所有结构都要用边界值逐一验证。</p>
+<p>多层分支先走外层，再决定是否进入内层；没有走到的条件属于未执行分支。<code dir="auto">else if</code> 从上到下只进入第一个成立分支，因此严格条件应放在宽松条件之前。<code dir="auto">switch</code> 从匹配的 <code dir="auto">case</code> 开始，通常用 <code dir="auto">break</code> 停止；所有结构都要用边界值逐一验证。</p>
 <h2 id="关联学习">关联学习</h2>
-<p>流程图可以把多层条件画成清晰路径；多层循环中也会在循环体内使用分支控制计数、<code>break</code> 和 <code>continue</code>。</p>
+<p>流程图可以把多层条件画成清晰路径；多层循环中也会在循环体内使用分支控制计数、<code dir="auto">break</code> 和 <code dir="auto">continue</code>。</p>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能从外到内追踪嵌套 if。</label><label class="q-check"><input type="checkbox"> 我能按严格到宽松排列互斥条件并检查边界。</label><label class="q-check"><input type="checkbox"> 我能解释 switch 的匹配、贯穿和 break。</label><span>8 题</span><gesp-comprehensive-test class="gesp-comprehensive-test gesp-level2-comprehensive-test" data-level="2" data-progress-event="xdz:gesp-level2-progress" data-lesson-id="nested-branches"><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-01"><fieldset><legend><span>第 1 题</span>下面程序统计字符 grade 满足的条件个数。grade 为 E 时输出什么？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    char grade = &#39;E&#39;;
+    int count = 0;
+    if (grade &gt;= &#39;B&#39;) {
+        count++;
+    }
+    if (grade &gt;= &#39;C&#39;) {
+        count++;
+    }
+    if (grade &gt;= &#39;D&#39;) {
+        count++;
+    }
+    if (grade &gt;= &#39;F&#39;) {
+        count++;
+    }
+    if (count == 1) {
+        cout &lt;&lt; &#39;A&#39;;
+    } else if (count == 2) {
+        cout &lt;&lt; &#39;B&#39;;
+    } else if (count == 3) {
+        cout &lt;&lt; &#39;C&#39;;
+    } else {
+        cout &lt;&lt; &#39;D&#39;;
+    }
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>E 同时满足前三个比较条件，但不满足 grade &gt;= F，所以 count 为 3，进入第三个分支并输出 C。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-02"><fieldset><legend><span>第 2 题</span>程序读入两个温度值 p、q，并根据 p &gt; q 是否成立输出其中较高者。核心步骤最适合采用哪种结构？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>比较结果有真、假两种情况，程序要据此选择输出 p 或 q，因此核心步骤应使用分支结构。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-03"><fieldset><legend><span>第 3 题</span>输入 2 后，下面程序输出什么？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int month;
+    cin &gt;&gt; month;
+    switch (month) {
+        case 2:
+            cout &lt;&lt; &quot;Feb &quot;;
+        case 4:
+            cout &lt;&lt; &quot;Apr &quot;;
+            break;
+        default:
+            break;
+    }
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>case 2 后没有 break，输出 Feb 后会继续贯穿到 case 4，再输出 Apr，随后遇到 break。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-04"><fieldset><legend><span>第 4 题</span>x 等于 1 时，下面程序输出什么？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int x = 1;
+    switch (x) {
+        case 1:
+            cout &lt;&lt; &#39;A&#39;;
+        case 2:
+            cout &lt;&lt; &#39;B&#39;;
+            break;
+        default:
+            cout &lt;&lt; &#39;C&#39;;
+    }
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>case 1 没有 break，会继续执行 case 2，依次输出 A、B；case 2 的 break 随后结束 switch。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-05"><fieldset><legend><span>第 5 题</span>要先判断“是否及格”，及格后再判断“是否优秀”，最适合使用哪种写法？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>第二个判断只在第一个条件成立时才有意义，因此可以把“是否优秀”的 if 放在“是否及格”的 if 内部。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-06"><fieldset><legend><span>第 6 题</span>按顺序判断成绩等级时，为什么通常要先判断 score &gt;= 90，再判断 score &gt;= 60？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>在 if…else if 结构中，遇到第一个为真的条件后就跳过后续分支。若先写 score&gt;=60，90 分以上也会提前进入及格分支。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-07"><fieldset><legend><span>第 7 题</span>程序按“score &gt;= 90 输出优秀；否则 score &gt;= 60 输出及格；否则输出不及格”判断。输入 59、60、90 时，输出依次是什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>59 不满足 60 分边界，输出不及格；60 恰好满足 score&gt;=60，输出及格；90 先满足最严格的 score&gt;=90，输出优秀。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-branches-08"><fieldset><legend><span>第 8 题</span>程序先判断 type == 2，成立后才进入 switch(month)。输入 type=1、month=6 时会怎样？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>嵌套或组合分支要先取得外层路径。type==2 为假时，整个 switch 都不会执行；month 的值不会绕过外层条件，应进入外层 else。</p></article><button type="button" data-test-submit>提交全部答案</button><button type="button" class="secondary" hidden data-test-retry>重新测试</button><p aria-live="polite" data-test-status>共 8 题，请全部作答后提交。</p></gesp-comprehensive-test><nav class="gesp-course-pager gesp-level2-pager" aria-label="二级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level2-pager__link gesp-level2-pager__link--previous" href="/gesp/level2/type-conversion/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 05</small><strong>类型转换</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level2-pager__link gesp-level2-pager__link--next" href="/gesp/level2/nested-loops/" rel="next"><span><small>下一知识点 · 07</small><strong>多层循环</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -748,7 +829,7 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
       <a class="kp-nav" href="kp7.html">下一个：常用数学函数 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-嵌套-if-与配对规则">01 嵌套 if 与配对规则</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#02-多条件与-else-if">02 多条件与 else if</a></li><li><a href="#03-switchcase-与-break">03 switch、case 与 break</a></li><li><a href="#if-与-switch-组合" class="lvl3">if 与 switch 组合</a></li><li><a href="#04-条件顺序与边界">04 条件顺序与边界</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-嵌套-if-与配对规则">01 嵌套 if 与配对规则</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#02-多条件与-else-if">02 多条件与 else if</a></li><li><a href="#03-switchcase-与-break">03 switch、case 与 break</a></li><li><a href="#if-与-switch-组合" class="lvl3">if 与 switch 组合</a></li><li><a href="#04-条件顺序与边界">04 条件顺序与边界</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -760,6 +841,31 @@ int main() {    int score;    cin &gt;&gt; score;    if (score &lt; 0 || score &
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

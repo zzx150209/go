@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,19 +489,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 变量与一维数组</a><a href="#kp-02" class="astro-obblnf2s">02 二维数组与状态表</a><a href="#kp-03" class="astro-obblnf2s">03 图的存储空间</a><a href="#kp-04" class="astro-obblnf2s">04 递归调用栈</a><a href="#kp-05" class="astro-obblnf2s">05 空间优化</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方八级要求理解算法的空间效率，能够估算变量、数组、递归栈等占用的空间，并结合内存限制判断方案是否可行。空间复杂度关注随输入规模增长而增加的存储量，通常记额外空间，不把程序代码本身机械地算进去。</p>
 <h2 id="kp-01">01 变量与一维数组</h2>
-<p>少量固定变量占用 <code>O(1)</code> 空间；长度与 <code>n</code> 成正比的一维数组占用 <code>O(n)</code> 空间。在常见 GCC/OJ 环境中，<code>int</code> 通常占 4 字节，<code>long long</code> 通常占 8 字节，但实际字节数仍以编译器和平台为准。</p>
-<p>例如 <code>int a[1000000]</code> 通常约占 <code>4,000,000</code> 字节，约为 <code>3.8 MiB</code>。估算时既要写复杂度，也要把字节数与题目的内存限制比较。</p>
+<p>少量固定变量占用 <code dir="auto">O(1)</code> 空间；长度与 <code dir="auto">n</code> 成正比的一维数组占用 <code dir="auto">O(n)</code> 空间。在常见 GCC/OJ 环境中，<code dir="auto">int</code> 通常占 4 字节，<code dir="auto">long long</code> 通常占 8 字节，但实际字节数仍以编译器和平台为准。</p>
+<p>例如 <code dir="auto">int a[1000000]</code> 通常约占 <code dir="auto">4,000,000</code> 字节，约为 <code dir="auto">3.8 MiB</code>。估算时既要写复杂度，也要把字节数与题目的内存限制比较。</p>
 <h2 id="kp-02">02 二维数组与状态表</h2>
-<p><code>n×n</code> 的二维数组占用 <code>O(n²)</code> 空间。若 <code>n=10000</code>，一个 <code>int</code> 矩阵约需 400 MB，可能超过内存限制；这也是大规模稀疏图不宜使用邻接矩阵的原因。</p>
+<p><code dir="auto">n×n</code> 的二维数组占用 <code dir="auto">O(n²)</code> 空间。若 <code dir="auto">n=10000</code>，一个 <code dir="auto">int</code> 矩阵约需 400 MB，可能超过内存限制；这也是大规模稀疏图不宜使用邻接矩阵的原因。</p>
 <p>动态规划状态表也常占二维空间。若当前行只依赖上一行，就不必保留所有历史行，可以只保留两行或一行。</p>
 <h2 id="kp-03">03 图的存储空间</h2>
-<p>邻接矩阵占用 <code>O(n²)</code>；邻接表占用 <code>O(n+m)</code>，其中 <code>m</code> 是边数。对于边很少的稀疏图，邻接表通常节省大量空间；对于顶点少、边很密且需要频繁查询边的图，邻接矩阵可能更直接。</p>
-<p>无向图用邻接表存储时，每条无向边通常会保存两个方向，因此实际记录数约为 <code>2m</code>，但空间复杂度仍是 <code>O(n+m)</code>。</p>
+<p>邻接矩阵占用 <code dir="auto">O(n²)</code>；邻接表占用 <code dir="auto">O(n+m)</code>，其中 <code dir="auto">m</code> 是边数。对于边很少的稀疏图，邻接表通常节省大量空间；对于顶点少、边很密且需要频繁查询边的图，邻接矩阵可能更直接。</p>
+<p>无向图用邻接表存储时，每条无向边通常会保存两个方向，因此实际记录数约为 <code dir="auto">2m</code>，但空间复杂度仍是 <code dir="auto">O(n+m)</code>。</p>
 <h2 id="kp-04">04 递归调用栈</h2>
-<p>递归每深入一层，都要保存参数、局部变量和返回位置。递归深度为 <code>n</code> 时，调用栈空间通常为 <code>O(n)</code>。即使没有显式创建大数组，过深递归也可能造成栈溢出。</p>
+<p>递归每深入一层，都要保存参数、局部变量和返回位置。递归深度为 <code dir="auto">n</code> 时，调用栈空间通常为 <code dir="auto">O(n)</code>。即使没有显式创建大数组，过深递归也可能造成栈溢出。</p>
 <p>分析递归空间时看“同时存在的调用层数”，不是总调用次数。二叉递归可能调用很多次，但某一时刻调用栈深度仍由最长路径决定。</p>
 <h2 id="kp-05">05 空间优化</h2>
 <p>常见方法包括：</p>
@@ -493,19 +513,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>在递归过深时，评估能否改用显式队列或栈。</li>
 </ul>
 <p>空间优化不能破坏依赖关系。把二维状态压成一维时，要特别检查更新顺序，避免本轮新值覆盖本轮仍要读取的旧值。</p>
-<p><strong>内存估算追踪。</strong> <code>long long table[2000][2000]</code> 在常见环境中每个元素约 8 字节：</p>
+<p><strong>内存估算追踪。</strong> <code dir="auto">long long table[2000][2000]</code> 在常见环境中每个元素约 8 字节：</p>
 <ol>
-<li>元素数：<code>2000×2000=4,000,000</code>；</li>
-<li>字节数：<code>4,000,000×8=32,000,000</code>；</li>
-<li>字节 → MiB：<code>32,000,000÷1024÷1024≈30.5 MiB</code>。</li>
+<li>元素数：<code dir="auto">2000×2000=4,000,000</code>；</li>
+<li>字节数：<code dir="auto">4,000,000×8=32,000,000</code>；</li>
+<li>字节 → MiB：<code dir="auto">32,000,000÷1024÷1024≈30.5 MiB</code>。</li>
 </ol>
-<p>这还没有计入其他数组和运行开销。边界检查既要看静态数组大小，也要看递归深度；例如链式图上的递归 DFS 深度可能达到 <code>n</code>。滚动数组把空间降下来后，还必须用小样例验证更新顺序没有覆盖旧状态。</p>
+<p>这还没有计入其他数组和运行开销。边界检查既要看静态数组大小，也要看递归深度；例如链式图上的递归 DFS 深度可能达到 <code dir="auto">n</code>。滚动数组把空间降下来后，还必须用小样例验证更新顺序没有覆盖旧状态。</p>
 <p><strong>逐段具体推演（对应 01—05）。</strong></p>
-<p><strong>01 变量与一维数组。</strong> 在常见 OJ 环境中按 <code>int</code> 4 字节估算，1000000 个元素约 4000000 字节，约 3.8 MiB。几个固定变量无论 <code>n</code> 多大都只占常数空间，而长度随 <code>n</code> 增长的数组是 <code>O(n)</code>。</p>
-<p><strong>02 二维状态。</strong> <code>1000×1000</code> 个 <code>long long</code> 元素按每个 8 字节估算，需要 <code>1000×1000×8=8000000</code> 字节，约 7.6 MiB。若开成 <code>10000×10000</code>，就约 763 MiB，可能超过内存限制。</p>
-<p><strong>03 图存储。</strong> 10000 个点、20000 条无向边，邻接表保存点入口和约 40000 条方向记录，空间随 <code>n+m</code> 增长；邻接矩阵要保存一亿个位置，即使每格 1 字节也约 95 MiB。</p>
-<p><strong>04 递归栈。</strong> 链式 DFS 深度为 4 时，调用栈依次是 <code>[dfs(1)]</code>、<code>[dfs(1),dfs(2)]</code>，直到同时保存 4 层；返回时才逐层释放。若深度扩大到 100000，即使每层变量很少也可能栈溢出。</p>
-<p><strong>05 滚动数组。</strong> 若 <code>dp[i][j]</code> 只依赖上一行，计算第 3 行时只需要第 2 行，不再需要第 1 行。保留 <code>previous</code> 和 <code>current</code> 两行就能把 <code>n×m</code> 个状态降为约 <code>2m</code> 个；更新顺序必须保证旧值还没被覆盖。</p>
+<p><strong>01 变量与一维数组。</strong> 在常见 OJ 环境中按 <code dir="auto">int</code> 4 字节估算，1000000 个元素约 4000000 字节，约 3.8 MiB。几个固定变量无论 <code dir="auto">n</code> 多大都只占常数空间，而长度随 <code dir="auto">n</code> 增长的数组是 <code dir="auto">O(n)</code>。</p>
+<p><strong>02 二维状态。</strong> <code dir="auto">1000×1000</code> 个 <code dir="auto">long long</code> 元素按每个 8 字节估算，需要 <code dir="auto">1000×1000×8=8000000</code> 字节，约 7.6 MiB。若开成 <code dir="auto">10000×10000</code>，就约 763 MiB，可能超过内存限制。</p>
+<p><strong>03 图存储。</strong> 10000 个点、20000 条无向边，邻接表保存点入口和约 40000 条方向记录，空间随 <code dir="auto">n+m</code> 增长；邻接矩阵要保存一亿个位置，即使每格 1 字节也约 95 MiB。</p>
+<p><strong>04 递归栈。</strong> 链式 DFS 深度为 4 时，调用栈依次是 <code dir="auto">[dfs(1)]</code>、<code dir="auto">[dfs(1),dfs(2)]</code>，直到同时保存 4 层；返回时才逐层释放。若深度扩大到 100000，即使每层变量很少也可能栈溢出。</p>
+<p><strong>05 滚动数组。</strong> 若 <code dir="auto">dp[i][j]</code> 只依赖上一行，计算第 3 行时只需要第 2 行，不再需要第 1 行。保留 <code dir="auto">previous</code> 和 <code dir="auto">current</code> 两行就能把 <code dir="auto">n×m</code> 个状态降为约 <code dir="auto">2m</code> 个；更新顺序必须保证旧值还没被覆盖。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -517,33 +537,33 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>固定数量变量</td>
-<td><code>O(1)</code></td>
+<td><code dir="auto">O(1)</code></td>
 </tr>
 <tr>
-<td>长度为 <code>n</code> 的数组</td>
-<td><code>O(n)</code></td>
+<td>长度为 <code dir="auto">n</code> 的数组</td>
+<td><code dir="auto">O(n)</code></td>
 </tr>
 <tr>
-<td><code>n×n</code> 矩阵</td>
-<td><code>O(n²)</code></td>
+<td><code dir="auto">n×n</code> 矩阵</td>
+<td><code dir="auto">O(n²)</code></td>
 </tr>
 <tr>
 <td>邻接表</td>
-<td><code>O(n+m)</code></td>
+<td><code dir="auto">O(n+m)</code></td>
 </tr>
 <tr>
-<td>深度为 <code>n</code> 的递归栈</td>
-<td><code>O(n)</code></td>
+<td>深度为 <code dir="auto">n</code> 的递归栈</td>
+<td><code dir="auto">O(n)</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>内存限制为 128 MiB，<code>n=10000</code>，图只有 <code>20000</code> 条边。邻接矩阵若使用 <code>int</code>，约需 <code>10000×10000×4</code> 字节，约 381 MiB，明显不可行；邻接表只保存顶点表和约 <code>40000</code> 条方向记录，更适合这个稀疏图。</p>
+<p>内存限制为 128 MiB，<code dir="auto">n=10000</code>，图只有 <code dir="auto">20000</code> 条边。邻接矩阵若使用 <code dir="auto">int</code>，约需 <code dir="auto">10000×10000×4</code> 字节，约 381 MiB，明显不可行；邻接表只保存顶点表和约 <code dir="auto">40000</code> 条方向记录，更适合这个稀疏图。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>只看变量名反例。</strong> <code>long long a[1000][1000]</code> 看起来只有一个变量名 <code>a</code>，但实际包含一百万个元素，约占 7.6 MiB。空间分析要数元素和字节，不能数源代码中写了几个名字。</p>
+<p><strong>只看变量名反例。</strong> <code dir="auto">long long a[1000][1000]</code> 看起来只有一个变量名 <code dir="auto">a</code>，但实际包含一百万个元素，约占 7.6 MiB。空间分析要数元素和字节，不能数源代码中写了几个名字。</p>
 <ul>
-<li>只写 <code>O(n²)</code>，不与实际内存限制比较。</li>
-<li>忘记 <code>long long</code> 通常比 <code>int</code> 占用更多字节。</li>
+<li>只写 <code dir="auto">O(n²)</code>，不与实际内存限制比较。</li>
+<li>忘记 <code dir="auto">long long</code> 通常比 <code dir="auto">int</code> 占用更多字节。</li>
 <li>认为没有大数组就一定不会超内存，忽略递归栈。</li>
 <li>无向图邻接表只记录一个方向，造成遍历错误。</li>
 <li>滚动数组更新顺序错误，覆盖了仍要使用的旧状态。</li>
@@ -553,7 +573,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li><a href="/gesp/level8/graph-modeling/">图论综合应用</a>：按图的稀疏程度选择存储结构。</li>
 <li><a href="/gesp/level8/algorithm-optimization/">算法优化</a>：在保证正确性的前提下降低空间。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2><div id="page-test"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能估算常见变量、数组和状态表的字节数与空间复杂度</label><label class="q-check"><input type="checkbox"> 能比较邻接矩阵与邻接表的空间差异</label><label class="q-check"><input type="checkbox"> 能识别递归栈和滚动数组的边界风险</label><span>6 题</span>
+<p class="q-title">第 1 题使用 n×n 的 long long 距离矩阵时，仅按元素数量估算，其空间复杂度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题使用 n×n 的 long l" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 1 题使用 n×n 的 long l" value="B"><b>B.</b> O(log n)</label><label class="q-opt"><input type="radio" name="第 1 题使用 n×n 的 long l" value="C"><b>C.</b> O(n)</label><label class="q-opt"><input type="radio" name="第 1 题使用 n×n 的 long l" value="D"><b>D.</b> O(n²)</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>矩阵有 n 行、每行 n 个元素，共保存 n² 个 long long。单个元素的字节数是常数，所以按增长速度记为空间复杂度 O(n²)。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 2 题长度为 n 的 int 数组，其空间复杂度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题长度为 n 的 int 数组，" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 2 题长度为 n 的 int 数组，" value="B"><b>B.</b> O(log n)</label><label class="q-opt"><input type="radio" name="第 2 题长度为 n 的 int 数组，" value="C"><b>C.</b> O(n)</label><label class="q-opt"><input type="radio" name="第 2 题长度为 n 的 int 数组，" value="D"><b>D.</b> O(n²)</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>数组包含 n 个固定大小的 int 元素，所需字节数随 n 成正比，因此按增长趋势记为空间复杂度 O(n)。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 3 题稀疏图有 n 个点、m 条边，邻接表的空间复杂度通常是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题稀疏图有 n 个点、m 条边，" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 3 题稀疏图有 n 个点、m 条边，" value="B"><b>B.</b> O(n+m)</label><label class="q-opt"><input type="radio" name="第 3 题稀疏图有 n 个点、m 条边，" value="C"><b>C.</b> O(n²)</label><label class="q-opt"><input type="radio" name="第 3 题稀疏图有 n 个点、m 条边，" value="D"><b>D.</b> O(2^n)</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>邻接表需要保存 n 个顶点入口和与 m 条边对应的记录，空间随 n+m 增长；稀疏图中通常比 O(n²) 的邻接矩阵节省。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 4 题递归深度最坏达到 n，每层只保存常数个局部变量，递归栈空间复杂度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题递归深度最坏达到 n，每层只保" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 4 题递归深度最坏达到 n，每层只保" value="B"><b>B.</b> O(log n)</label><label class="q-opt"><input type="radio" name="第 4 题递归深度最坏达到 n，每层只保" value="C"><b>C.</b> O(n)</label><label class="q-opt"><input type="radio" name="第 4 题递归深度最坏达到 n，每层只保" value="D"><b>D.</b> O(n²)</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>同时存在的调用层数最坏为 n，每层占用常数空间，所以调用栈总空间随 n 线性增长，记为 O(n)。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 5 题某 DP 状态只依赖上一行，把二维数组改为两行滚动数组，空间通常从什么降到什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题某 DP 状态只依赖上一行，把" value="A"><b>A.</b> O(n²) 降到 O(n)</label><label class="q-opt"><input type="radio" name="第 5 题某 DP 状态只依赖上一行，把" value="B"><b>B.</b> O(n) 降到 O(log n)</label><label class="q-opt"><input type="radio" name="第 5 题某 DP 状态只依赖上一行，把" value="C"><b>C.</b> O(log n) 降到 O(1)</label><label class="q-opt"><input type="radio" name="第 5 题某 DP 状态只依赖上一行，把" value="D"><b>D.</b> O(1) 降到 O(n)</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>原二维表保存所有行需要 O(n²) 空间；若转移只依赖上一行，只保留当前行和上一行即可，空间降为 O(n)。<br><span class="q-kp">对应知识点：05</span></p>
+<p class="q-title">第 6 题在 int 通常占 4 字节的环境中，1000000 个 int 约占多少字节？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题在 int 通常占 4 字节的" value="A"><b>A.</b> 1000000</label><label class="q-opt"><input type="radio" name="第 6 题在 int 通常占 4 字节的" value="B"><b>B.</b> 2000000</label><label class="q-opt"><input type="radio" name="第 6 题在 int 通常占 4 字节的" value="C"><b>C.</b> 4000000</label><label class="q-opt"><input type="radio" name="第 6 题在 int 通常占 4 字节的" value="D"><b>D.</b> 8000000</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>元素个数乘每个元素字节数：1000000×4=4000000 字节，对应页内知识点 01。<br><span class="q-kp">对应知识点：01</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/time-efficiency/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 10</small><strong>时间效率分析</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/gesp/level8/algorithm-optimization/" rel="next"><span><small>下一知识点 · 12</small><strong>算法优化</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -562,7 +600,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp12.html">下一个：算法优化 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 变量与一维数组</a></li><li><a href="#kp-02">02 二维数组与状态表</a></li><li><a href="#kp-03">03 图的存储空间</a></li><li><a href="#kp-04">04 递归调用栈</a></li><li><a href="#kp-05">05 空间优化</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 变量与一维数组</a></li><li><a href="#kp-02">02 二维数组与状态表</a></li><li><a href="#kp-03">03 图的存储空间</a></li><li><a href="#kp-04">04 递归调用栈</a></li><li><a href="#kp-05">05 空间优化</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -574,6 +612,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

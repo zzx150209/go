@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,62 +489,63 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <div data-gesp-level2-ui data-gesp-level2-detail></div>
-<h2 id="本课先记住">本课先记住</h2>
+    <h2 id="本课先记住">本课先记住</h2>
 <ul>
-<li><strong>核心结论：</strong> <code>abs</code>、<code>sqrt</code>、<code>min</code>、<code>max</code> 要核对参数范围与返回结果；<code>rand() % n</code> 的范围是 0 到 <code>n - 1</code>，<code>srand</code> 只设置序列起点，通常在一组取数开始前调用一次。</li>
-<li><strong>常用语法：</strong> 先选函数，再检查参数、返回类型和随机范围：<code>abs(x)</code>、<code>sqrt(x)</code>、<code>min(a, b)</code> / <code>max(a, b)</code>、<code>srand(seed)</code>、<code>rand() % n + start</code>。</li>
-<li><strong>最小示例：</strong> 确定随机范围时，先列出取余结果，再整体平移：<code>abs(-6) = 6</code>，<code>sqrt(49.0) = 7.0</code>，<code>rand() % 5 + 3</code> 的范围为 <code>[3, 7]</code>。</li>
-<li><strong>关键易错点：</strong> 不要对负实数直接求 <code>sqrt</code>；不要把 <code>sqrt</code> 结果一概当成 <code>int</code>；<code>% n</code> 从 0 开始；不要在每次 <code>rand</code> 前用同一种子重新 <code>srand</code>。</li>
+<li><strong>核心结论：</strong> <code dir="auto">abs</code>、<code dir="auto">sqrt</code>、<code dir="auto">min</code>、<code dir="auto">max</code> 要核对参数范围与返回结果；<code dir="auto">rand() % n</code> 的范围是 0 到 <code dir="auto">n - 1</code>，<code dir="auto">srand</code> 只设置序列起点，通常在一组取数开始前调用一次。</li>
+<li><strong>常用语法：</strong> 先选函数，再检查参数、返回类型和随机范围：<code dir="auto">abs(x)</code>、<code dir="auto">sqrt(x)</code>、<code dir="auto">min(a, b)</code> / <code dir="auto">max(a, b)</code>、<code dir="auto">srand(seed)</code>、<code dir="auto">rand() % n + start</code>。</li>
+<li><strong>最小示例：</strong> 确定随机范围时，先列出取余结果，再整体平移：<code dir="auto">abs(-6) = 6</code>，<code dir="auto">sqrt(49.0) = 7.0</code>，<code dir="auto">rand() % 5 + 3</code> 的范围为 <code dir="auto">[3, 7]</code>。</li>
+<li><strong>关键易错点：</strong> 不要对负实数直接求 <code dir="auto">sqrt</code>；不要把 <code dir="auto">sqrt</code> 结果一概当成 <code dir="auto">int</code>；<code dir="auto">% n</code> 从 0 开始；不要在每次 <code dir="auto">rand</code> 前用同一种子重新 <code dir="auto">srand</code>。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-abs" class="astro-6dte4xza">01 abs 绝对值函数</a></li><li class="astro-6dte4xza"><a href="#02-sqrt" class="astro-6dte4xza">02 sqrt 平方根函数</a></li><li class="astro-6dte4xza"><a href="#03-minmax" class="astro-6dte4xza">03 max 与 min</a></li><li class="astro-6dte4xza"><a href="#04-random" class="astro-6dte4xza">04 rand 与 srand</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
-<p>本页对应二级大纲中的常用数学函数：掌握 <code>abs</code>、<code>sqrt</code>、<code>max</code>、<code>min</code> 的基本用途，并认识 <code>rand</code>、<code>srand</code> 以及简单随机整数范围的构造。</p>
+<p>本页对应二级大纲中的常用数学函数：掌握 <code dir="auto">abs</code>、<code dir="auto">sqrt</code>、<code dir="auto">max</code>、<code dir="auto">min</code> 的基本用途，并认识 <code dir="auto">rand</code>、<code dir="auto">srand</code> 以及简单随机整数范围的构造。</p>
 <p>数学函数把常见计算封装成标准写法。使用前先明确函数需要什么参数、返回什么类型，再把结果放入后续表达式。</p>
-<p>本页用 <code>abs</code> 求距离，用 <code>sqrt</code> 求非负数的算术平方根，用 <code>min</code>、<code>max</code> 比较两个值；再从取余范围推导 <code>rand()</code> 生成的整数区间，并理解 <code>srand</code> 只设置伪随机序列的起点。</p>
-<p><strong>函数</strong>是一段已经封装好的操作。调用表达式 <code>sqrt(value)</code> 可以拆成三部分：<code>sqrt</code> 是函数名，圆括号里的 <code>value</code> 是传入的实参，函数计算后产生一个返回值。返回值可以直接输出、参与更大的表达式，也可以先保存到类型合适的变量中；调用函数不会因为名字像数学公式就自动忽略参数范围和返回类型。</p>
+<p>本页用 <code dir="auto">abs</code> 求距离，用 <code dir="auto">sqrt</code> 求非负数的算术平方根，用 <code dir="auto">min</code>、<code dir="auto">max</code> 比较两个值；再从取余范围推导 <code dir="auto">rand()</code> 生成的整数区间，并理解 <code dir="auto">srand</code> 只设置伪随机序列的起点。</p>
+<p><strong>函数</strong>是一段已经封装好的操作。调用表达式 <code dir="auto">sqrt(value)</code> 可以拆成三部分：<code dir="auto">sqrt</code> 是函数名，圆括号里的 <code dir="auto">value</code> 是传入的实参，函数计算后产生一个返回值。返回值可以直接输出、参与更大的表达式，也可以先保存到类型合适的变量中；调用函数不会因为名字像数学公式就自动忽略参数范围和返回类型。</p>
 <a id="01-abs"></a>
 <h2 id="01-abs-绝对值函数">01 abs 绝对值函数</h2>
-<p><code>abs(x)</code> 返回 <code>x</code> 的绝对值，也就是它到 0 的距离。<code>abs(-15)</code> 为 15，<code>abs(8)</code> 为 8。</p>
-<p>在整数主教学中，参数和返回值都按整数理解：负数去掉负号，正数和 0 保持不变。绝对值不是“总把符号改成正号”，因为 <code>abs(0)</code> 仍是 0；做减法距离题时还要确保参与计算的整数没有超出题目给定范围。</p>
-<pre><code>int difference = 12 - 20;cout &lt;&lt; abs(difference) &lt;&lt; endl;  // 取到 0 的距离</code></pre>
+<p><code dir="auto">abs(x)</code> 返回 <code dir="auto">x</code> 的绝对值，也就是它到 0 的距离。<code dir="auto">abs(-15)</code> 为 15，<code dir="auto">abs(8)</code> 为 8。</p>
+<p>在整数主教学中，参数和返回值都按整数理解：负数去掉负号，正数和 0 保持不变。绝对值不是“总把符号改成正号”，因为 <code dir="auto">abs(0)</code> 仍是 0；做减法距离题时还要确保参与计算的整数没有超出题目给定范围。</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>int difference = 12 - 20;cout &lt;&lt; abs(difference) &lt;&lt; endl;  // 取到 0 的距离</code></pre>
 <p>输出 8。求两个整数的距离时，先相减再取绝对值即可。</p>
-<p>例如输入 <code>-9 25</code>，如果要算两点在数轴上的距离，先求 <code>-9-25=-34</code>，再计算 <code>abs(-34)=34</code>。<code>abs</code> 接收的是括号内表达式已经算出的结果，不会分别处理两个数。</p>
+<p>例如输入 <code dir="auto">-9 25</code>，如果要算两点在数轴上的距离，先求 <code dir="auto">-9-25=-34</code>，再计算 <code dir="auto">abs(-34)=34</code>。<code dir="auto">abs</code> 接收的是括号内表达式已经算出的结果，不会分别处理两个数。</p>
 <a id="02-sqrt"></a>
 <h2 id="02-sqrt-平方根函数">02 sqrt 平方根函数</h2>
-<p><code>sqrt(x)</code> 计算非负数 <code>x</code> 的算术平方根，返回浮点类型。<code>sqrt(49.0)</code> 的数值为 7，但结果类型不是 <code>int</code>。</p>
+<p><code dir="auto">sqrt(x)</code> 计算非负数 <code dir="auto">x</code> 的算术平方根，返回浮点类型。<code dir="auto">sqrt(49.0)</code> 的数值为 7，但结果类型不是 <code dir="auto">int</code>。</p>
 <pre><code>double side = sqrt(81.0);  // sqrt 返回浮点结果cout &lt;&lt; side &lt;&lt; endl;</code></pre>
-<p><code>sqrt</code> 的实数参数必须满足 <code>x &gt;= 0</code>。它返回浮点值，即使 <code>sqrt(81.0)</code> 数值恰好是 9，也不应据此把所有平方根结果都当作整数；例如 <code>sqrt(2.0)</code> 是不能用有限小数精确写完的近似值。</p>
+<p><code dir="auto">sqrt</code> 的实数参数必须满足 <code dir="auto">x &gt;= 0</code>。它返回浮点值，即使 <code dir="auto">sqrt(81.0)</code> 数值恰好是 9，也不应据此把所有平方根结果都当作整数；例如 <code dir="auto">sqrt(2.0)</code> 是不能用有限小数精确写完的近似值。</p>
 <p>实数范围内不能对负数求平方根。若结果要保存到整数变量，还要考虑类型转换和可能的浮点误差，不能默认所有平方根都是整数。</p>
 <a id="03-minmax"></a>
 <h2 id="03-max-与-min">03 max 与 min</h2>
-<p><code>max(a, b)</code> 返回两者中的较大值，<code>min(a, b)</code> 返回较小值。两个参数应使用容易比较的相同类型。</p>
+<p><code dir="auto">max(a, b)</code> 返回两者中的较大值，<code dir="auto">min(a, b)</code> 返回较小值。两个参数应使用容易比较的相同类型。</p>
 <pre><code>int a = 8;int b = 3;int c = 6;cout &lt;&lt; min(max(a, b), c) &lt;&lt; endl;  // 先求 max(8,3)=8，再求 min(8,6)=6</code></pre>
-<p><code>max(a, b)</code> 和 <code>min(a, b)</code> 都接收两个可比较的同类值，并返回其中一个值；它们不会自动修改 <code>a</code> 或 <code>b</code>。需要比较三个数时，可以嵌套调用，但每次仍只比较两个，例如 <code>max(max(a, b), c)</code>，计算顺序从最内层开始。</p>
+<p><code dir="auto">max(a, b)</code> 和 <code dir="auto">min(a, b)</code> 都接收两个可比较的同类值，并返回其中一个值；它们不会自动修改 <code dir="auto">a</code> 或 <code dir="auto">b</code>。需要比较三个数时，可以嵌套调用，但每次仍只比较两个，例如 <code dir="auto">max(max(a, b), c)</code>，计算顺序从最内层开始。</p>
 <p>这里的中间结果可以写成：</p>
 <ol>
-<li>先进入最内层 <code>max(a,b)</code>，得到 <code>max(8,3)=8</code>；</li>
-<li>外层表达式变成 <code>min(8,c)</code>；</li>
-<li>代入 <code>c=6</code>，得到 <code>min(8,6)=6</code>。</li>
+<li>先进入最内层 <code dir="auto">max(a,b)</code>，得到 <code dir="auto">max(8,3)=8</code>；</li>
+<li>外层表达式变成 <code dir="auto">min(8,c)</code>；</li>
+<li>代入 <code dir="auto">c=6</code>，得到 <code dir="auto">min(8,6)=6</code>。</li>
 </ol>
 <p>如果误从外层开始猜答案，就容易把三个数中的最大值 8 当作最终结果。嵌套调用和带括号的普通表达式一样，从最里面开始。</p>
 <h2 id="过程演示">过程演示</h2>
-<p>现在已经分别形成了 <code>abs</code>、<code>sqrt</code>、<code>min</code> 和 <code>max</code> 的参数、返回值与边界，再把它们放进唯一一份完整程序。程序读取两个整数和一个非负实数，依次输出第一个整数的绝对值、两整数的较小值与较大值、实数的算术平方根。</p>
+<p>现在已经分别形成了 <code dir="auto">abs</code>、<code dir="auto">sqrt</code>、<code dir="auto">min</code> 和 <code dir="auto">max</code> 的参数、返回值与边界，再把它们放进唯一一份完整程序。程序读取两个整数和一个非负实数，依次输出第一个整数的绝对值、两整数的较小值与较大值、实数的算术平方根。</p>
 <h3 id="完成程序">完成程序</h3>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int a, b;    double value;    cin &gt;&gt; a &gt;&gt; b &gt;&gt; value;    cout &lt;&lt; abs(a) &lt;&lt; endl;    cout &lt;&lt; min(a, b) &lt;&lt; " " &lt;&lt; max(a, b) &lt;&lt; endl;    cout &lt;&lt; fixed &lt;&lt; setprecision(1) &lt;&lt; sqrt(value) &lt;&lt; endl;  // 平方根按一位小数显示    return 0;}</code></pre>
-<p>输入 <code>-7 3 81</code> 时，<code>abs(-7)=7</code>；<code>min(-7,3)=-7</code>、<code>max(-7,3)=3</code>；<code>sqrt(81)=9</code>，按一位小数输出为 <code>9.0</code>。每一行都先算函数参数，再使用返回值。<code>fixed &lt;&lt; setprecision(1)</code> 只负责把浮点结果显示为一位小数，不改变 <code>sqrt</code> 返回 <code>double</code> 的事实。</p>
-<p>**跟着做：先选函数，再核对结果。**设 <code>a=-6</code>、<code>b=4</code>、<code>value=49</code>，请分别写出“<code>a</code> 到 0 的距离”“<code>a</code>、<code>b</code> 中的较大值”和 <code>value</code> 的算术平方根所用表达式，并计算结果。然后不用运行代码，推导 <code>rand() % 5 + 3</code> 的最小值和最大值。提示：先列出 <code>% 5</code> 的余数范围。你的四项结果应依次为 6、4、7.0，以及闭区间 <code>[3, 7]</code>；若随机范围从 4 开始，回看余数是否漏掉了 0。</p>
+<p>输入 <code dir="auto">-7 3 81</code> 时，<code dir="auto">abs(-7)=7</code>；<code dir="auto">min(-7,3)=-7</code>、<code dir="auto">max(-7,3)=3</code>；<code dir="auto">sqrt(81)=9</code>，按一位小数输出为 <code dir="auto">9.0</code>。每一行都先算函数参数，再使用返回值。<code dir="auto">fixed &lt;&lt; setprecision(1)</code> 只负责把浮点结果显示为一位小数，不改变 <code dir="auto">sqrt</code> 返回 <code dir="auto">double</code> 的事实。</p>
+<p>**跟着做：先选函数，再核对结果。**设 <code dir="auto">a=-6</code>、<code dir="auto">b=4</code>、<code dir="auto">value=49</code>，请分别写出“<code dir="auto">a</code> 到 0 的距离”“<code dir="auto">a</code>、<code dir="auto">b</code> 中的较大值”和 <code dir="auto">value</code> 的算术平方根所用表达式，并计算结果。然后不用运行代码，推导 <code dir="auto">rand() % 5 + 3</code> 的最小值和最大值。提示：先列出 <code dir="auto">% 5</code> 的余数范围。你的四项结果应依次为 6、4、7.0，以及闭区间 <code dir="auto">[3, 7]</code>；若随机范围从 4 开始，回看余数是否漏掉了 0。</p>
 <a id="04-random"></a>
 <h2 id="04-rand-与-srand">04 rand 与 srand</h2>
-<p><code>rand()</code> 产生伪随机整数。<code>rand() % 6</code> 的余数范围是 0 到 5，所以 <code>rand() % 6 + 1</code> 的范围是 1 到 6。</p>
-<p><code>srand(seed)</code> 设置伪随机序列的种子。相同种子通常产生相同序列；种子不同，序列通常不同。<code>srand</code> 不负责直接产生随机数，也不改变取余表达式规定的范围。</p>
+<p><code dir="auto">rand()</code> 产生伪随机整数。<code dir="auto">rand() % 6</code> 的余数范围是 0 到 5，所以 <code dir="auto">rand() % 6 + 1</code> 的范围是 1 到 6。</p>
+<p><code dir="auto">srand(seed)</code> 设置伪随机序列的种子。相同种子通常产生相同序列；种子不同，序列通常不同。<code dir="auto">srand</code> 不负责直接产生随机数，也不改变取余表达式规定的范围。</p>
 <pre><code>srand(7);  // 一组取数前只设置一次种子int dice = rand() % 6 + 1;  // 把 0 到 5 平移到 1 到 6cout &lt;&lt; dice &lt;&lt; endl;</code></pre>
 <p>输出的具体数值依赖实现，但一定在 1 到 6 之间。二级题目重点是范围计算，不把伪随机数当作真正不可预测的随机数。</p>
-<p>范围推导不要跳步：<code>rand()</code> 返回的非负整数除以 6，余数只可能是 <code>0、1、2、3、4、5</code>，所以 <code>rand() % 6</code> 只能落在 0 到 5；每个可能值再加 1，就变为 <code>1、2、3、4、5、6</code>。加 1 是整体平移，不会多出 7。</p>
-<p>构造闭区间 <code>[left, right]</code> 时，可以先数清区间内有多少个整数：<code>count = right-left+1</code>，再写成 <code>rand() % count + left</code>。例如 5 到 9 有 <code>9-5+1=5</code> 个整数，所以使用 <code>rand()%5+5</code>。这个公式要求 <code>right &gt;= left</code>，且 <code>count</code> 必须大于 0；如果范围端点本身不合法，就不能直接套公式。</p>
-<p>若要连续模拟多次掷骰子，通常只在循环开始前设置一次种子，再在循环内重复调用 <code>rand()</code>。如果每轮都用同一个种子重新执行 <code>srand(7)</code>，伪随机序列会从同一位置重新开始，反而可能反复得到同样的第一个结果。</p>
-<p>可以把规则记成“<strong>只播种一次，多次取数</strong>”：程序开始产生这一组伪随机数前调用一次 <code>srand(seed)</code>，之后按需要多次调用 <code>rand()</code>。随机数的具体值不适合写成跨环境固定答案，应该检查范围性质，例如 <code>rand() % 6 + 1</code> 每次结果都满足 1 到 6。</p>
-<p>若使用完整的标准头文件，<code>rand</code>、<code>srand</code> 来自 <code>&lt;cstdlib&gt;</code>，时间值 <code>time(0)</code> 来自 <code>&lt;ctime&gt;</code>；本站完整程序使用的 <code>&lt;bits/stdc++.h&gt;</code> 会在常见 G++ 环境中统一引入这些内容。用当前时间作种子通常能让不同运行时的序列起点不同，但它仍是<strong>伪随机</strong>，不适合密码或安全用途。二级只讨论范围构造与播种位置。</p>
+<p>范围推导不要跳步：<code dir="auto">rand()</code> 返回的非负整数除以 6，余数只可能是 <code dir="auto">0、1、2、3、4、5</code>，所以 <code dir="auto">rand() % 6</code> 只能落在 0 到 5；每个可能值再加 1，就变为 <code dir="auto">1、2、3、4、5、6</code>。加 1 是整体平移，不会多出 7。</p>
+<p>构造闭区间 <code dir="auto">[left, right]</code> 时，可以先数清区间内有多少个整数：<code dir="auto">count = right-left+1</code>，再写成 <code dir="auto">rand() % count + left</code>。例如 5 到 9 有 <code dir="auto">9-5+1=5</code> 个整数，所以使用 <code dir="auto">rand()%5+5</code>。这个公式要求 <code dir="auto">right &gt;= left</code>，且 <code dir="auto">count</code> 必须大于 0；如果范围端点本身不合法，就不能直接套公式。</p>
+<p>若要连续模拟多次掷骰子，通常只在循环开始前设置一次种子，再在循环内重复调用 <code dir="auto">rand()</code>。如果每轮都用同一个种子重新执行 <code dir="auto">srand(7)</code>，伪随机序列会从同一位置重新开始，反而可能反复得到同样的第一个结果。</p>
+<p>可以把规则记成“<strong>只播种一次，多次取数</strong>”：程序开始产生这一组伪随机数前调用一次 <code dir="auto">srand(seed)</code>，之后按需要多次调用 <code dir="auto">rand()</code>。随机数的具体值不适合写成跨环境固定答案，应该检查范围性质，例如 <code dir="auto">rand() % 6 + 1</code> 每次结果都满足 1 到 6。</p>
+<p>若使用完整的标准头文件，<code dir="auto">rand</code>、<code dir="auto">srand</code> 来自 <code dir="auto">&lt;cstdlib&gt;</code>，时间值 <code dir="auto">time(0)</code> 来自 <code dir="auto">&lt;ctime&gt;</code>；本站完整程序使用的 <code dir="auto">&lt;bits/stdc++.h&gt;</code> 会在常见 G++ 环境中统一引入这些内容。用当前时间作种子通常能让不同运行时的序列起点不同，但它仍是<strong>伪随机</strong>，不适合密码或安全用途。二级只讨论范围构造与播种位置。</p>
 <table>
 <thead>
 <tr>
@@ -537,37 +557,37 @@ int main() {    int a, b;    double value;    cin &gt;&gt; a &gt;&gt; b &gt;&gt;
 </thead>
 <tbody>
 <tr>
-<td><code>abs(x)</code></td>
+<td><code dir="auto">abs(x)</code></td>
 <td>一个数</td>
 <td>与 0 的非负距离</td>
 <td>0 仍返回 0，整数运算不越界</td>
 </tr>
 <tr>
-<td><code>sqrt(x)</code></td>
+<td><code dir="auto">sqrt(x)</code></td>
 <td>一个非负数</td>
-<td><code>double</code> 平方根</td>
-<td><code>x &gt;= 0</code></td>
+<td><code dir="auto">double</code> 平方根</td>
+<td><code dir="auto">x &gt;= 0</code></td>
 </tr>
 <tr>
-<td><code>max(a,b)</code></td>
+<td><code dir="auto">max(a,b)</code></td>
 <td>两个同类型值</td>
 <td>较大者</td>
 <td>参数能用同一类型比较</td>
 </tr>
 <tr>
-<td><code>min(a,b)</code></td>
+<td><code dir="auto">min(a,b)</code></td>
 <td>两个同类型值</td>
 <td>较小者</td>
 <td>参数能用同一类型比较</td>
 </tr>
 <tr>
-<td><code>rand()</code></td>
+<td><code dir="auto">rand()</code></td>
 <td>无实参</td>
 <td>非负伪随机整数</td>
 <td>具体序列依赖实现</td>
 </tr>
 <tr>
-<td><code>srand(seed)</code></td>
+<td><code dir="auto">srand(seed)</code></td>
 <td>一个种子</td>
 <td>不直接产生随机数</td>
 <td>一组取数前通常只调用一次</td>
@@ -585,23 +605,23 @@ int main() {    int a, b;    double value;    cin &gt;&gt; a &gt;&gt; b &gt;&gt;
 <tbody>
 <tr>
 <td>两个位置相差多远</td>
-<td><code>abs(a - b)</code></td>
+<td><code dir="auto">abs(a - b)</code></td>
 </tr>
 <tr>
 <td>求正方形边长等平方根问题</td>
-<td><code>sqrt(x)</code></td>
+<td><code dir="auto">sqrt(x)</code></td>
 </tr>
 <tr>
 <td>从两个数中选择较大或较小值</td>
-<td><code>max(a, b)</code> / <code>min(a, b)</code></td>
+<td><code dir="auto">max(a, b)</code> / <code dir="auto">min(a, b)</code></td>
 </tr>
 <tr>
 <td>模拟骰子等指定整数范围</td>
-<td><code>rand() % n + start</code></td>
+<td><code dir="auto">rand() % n + start</code></td>
 </tr>
 </tbody>
 </table>
-<p>其中随机范围写法还要根据题目计算 <code>n</code> 和 <code>start</code>，不能原样套用。</p>
+<p>其中随机范围写法还要根据题目计算 <code dir="auto">n</code> 和 <code dir="auto">start</code>，不能原样套用。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -613,32 +633,32 @@ int main() {    int a, b;    double value;    cin &gt;&gt; a &gt;&gt; b &gt;&gt;
 </thead>
 <tbody>
 <tr>
-<td><code>abs(x)</code></td>
+<td><code dir="auto">abs(x)</code></td>
 <td>绝对值</td>
 <td>结果非负</td>
 </tr>
 <tr>
-<td><code>sqrt(x)</code></td>
+<td><code dir="auto">sqrt(x)</code></td>
 <td>算术平方根</td>
 <td>参数应非负，结果为浮点类型</td>
 </tr>
 <tr>
-<td><code>max(a,b)</code></td>
+<td><code dir="auto">max(a,b)</code></td>
 <td>较大值</td>
 <td>从内向外算嵌套调用</td>
 </tr>
 <tr>
-<td><code>min(a,b)</code></td>
+<td><code dir="auto">min(a,b)</code></td>
 <td>较小值</td>
 <td>参数类型应便于比较</td>
 </tr>
 <tr>
-<td><code>rand()</code></td>
+<td><code dir="auto">rand()</code></td>
 <td>伪随机整数</td>
 <td>取余后先从 0 开始</td>
 </tr>
 <tr>
-<td><code>srand(seed)</code></td>
+<td><code dir="auto">srand(seed)</code></td>
 <td>设置种子</td>
 <td>不直接返回随机数</td>
 </tr>
@@ -648,33 +668,42 @@ int main() {    int a, b;    double value;    cin &gt;&gt; a &gt;&gt; b &gt;&gt;
 <p>**题目：**怎样写出一个可能产生 5 到 9 的伪随机整数表达式，并说明范围？</p>
 <p><strong>推演：</strong></p>
 <ol>
-<li>5 到 9 一共有 <code>9-5+1=5</code> 个整数；</li>
-<li><code>rand() % 5</code> 的余数可能是 0、1、2、3、4；</li>
+<li>5 到 9 一共有 <code dir="auto">9-5+1=5</code> 个整数；</li>
+<li><code dir="auto">rand() % 5</code> 的余数可能是 0、1、2、3、4；</li>
 <li>每个结果加 5 后，依次变成 5、6、7、8、9；</li>
-<li>因而表达式可写为 <code>rand() % 5 + 5</code>；</li>
-<li><code>srand(seed)</code> 在产生这一串数之前设置种子，不直接返回其中某个数。</li>
+<li>因而表达式可写为 <code dir="auto">rand() % 5 + 5</code>；</li>
+<li><code dir="auto">srand(seed)</code> 在产生这一串数之前设置种子，不直接返回其中某个数。</li>
 </ol>
-<p><strong>结论：</strong><code>rand() % 5 + 5</code> 的范围是 5 到 9。构造 <code>[start, end]</code> 时，先计算整数个数，再把从 0 开始的余数整体平移到 <code>start</code>。</p>
+<p><strong>结论：</strong><code dir="auto">rand() % 5 + 5</code> 的范围是 5 到 9。构造 <code dir="auto">[start, end]</code> 时，先计算整数个数，再把从 0 开始的余数整体平移到 <code dir="auto">start</code>。</p>
 <a id="常见错误"></a>
 <h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
 <ul>
-<li>认为 <code>sqrt</code> 返回 <code>int</code>；</li>
+<li>认为 <code dir="auto">sqrt</code> 返回 <code dir="auto">int</code>；</li>
 <li>对负数直接调用实数平方根；</li>
-<li>嵌套 <code>min</code>、<code>max</code> 时不从内向外计算；</li>
-<li>把 <code>% n</code> 的范围误写为 1 到 n；</li>
-<li>认为 <code>srand</code> 本身会产生随机数；</li>
+<li>嵌套 <code dir="auto">min</code>、<code dir="auto">max</code> 时不从内向外计算；</li>
+<li>把 <code dir="auto">% n</code> 的范围误写为 1 到 n；</li>
+<li>认为 <code dir="auto">srand</code> 本身会产生随机数；</li>
 <li>把伪随机结果的具体值当作跨环境固定答案。</li>
 </ul>
-<p><strong>错误写法：</strong><code>double answer = sqrt(-4.0);</code></p>
+<p><strong>错误写法：</strong><code dir="auto">double answer = sqrt(-4.0);</code></p>
 <p>**错误原因：**在实数范围内，负数没有算术平方根，不能把结果当作普通实数继续计算。</p>
-<p>**正确写法：**调用 <code>sqrt(x)</code> 前先确认 <code>x &gt;= 0</code>。</p>
-<p>**错误写法：**用 <code>rand() % 6</code> 表示骰子的 1 到 6。</p>
+<p>**正确写法：**调用 <code dir="auto">sqrt(x)</code> 前先确认 <code dir="auto">x &gt;= 0</code>。</p>
+<p>**错误写法：**用 <code dir="auto">rand() % 6</code> 表示骰子的 1 到 6。</p>
 <p>**错误原因：**余数范围是 0 到 5，既可能出现 0，也不会出现 6。</p>
-<p>**正确写法：**使用 <code>rand() % 6 + 1</code> 得到 1 到 6。<code>srand(seed)</code> 只负责设置种子，通常在产生随机数前设置一次，不需要每次调用 <code>rand()</code> 前都重新设置。</p>
+<p>**正确写法：**使用 <code dir="auto">rand() % 6 + 1</code> 得到 1 到 6。<code dir="auto">srand(seed)</code> 只负责设置种子，通常在产生随机数前设置一次，不需要每次调用 <code dir="auto">rand()</code> 前都重新设置。</p>
 <h2 id="本节总结">本节总结</h2>
-<p>选择数学函数时先看任务，再检查参数范围和返回类型：<code>abs</code> 得到非负距离，<code>sqrt</code> 的实数参数应非负且结果为浮点类型，<code>min</code>、<code>max</code> 从内到外计算嵌套调用。随机整数先由 <code>% n</code> 得到 0 到 <code>n-1</code>，再整体平移；只播种一次，验证范围性质而不是固定某次结果。</p>
+<p>选择数学函数时先看任务，再检查参数范围和返回类型：<code dir="auto">abs</code> 得到非负距离，<code dir="auto">sqrt</code> 的实数参数应非负且结果为浮点类型，<code dir="auto">min</code>、<code dir="auto">max</code> 从内到外计算嵌套调用。随机整数先由 <code dir="auto">% n</code> 得到 0 到 <code dir="auto">n-1</code>，再整体平移；只播种一次，验证范围性质而不是固定某次结果。</p>
 <h2 id="关联学习">关联学习</h2>
-<p>数据类型转换页面解释 <code>sqrt</code> 浮点结果怎样保存；多层循环可多次调用随机函数或用 <code>min</code>、<code>max</code> 维护当前结果，但应先明确每轮更新顺序。</p>
+<p>数据类型转换页面解释 <code dir="auto">sqrt</code> 浮点结果怎样保存；多层循环可多次调用随机函数或用 <code dir="auto">min</code>、<code dir="auto">max</code> 维护当前结果，但应先明确每轮更新顺序。</p>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能选择 abs、sqrt、max、min 完成对应计算。</label><label class="q-check"><input type="checkbox"> 我知道 sqrt 返回浮点类型且参数应非负。</label><label class="q-check"><input type="checkbox"> 我能从 rand() % n + start 推出整数范围，并说明 srand 的作用。</label><span>6 题</span><gesp-comprehensive-test class="gesp-comprehensive-test gesp-level2-comprehensive-test" data-level="2" data-progress-event="xdz:gesp-level2-progress" data-lesson-id="math-functions"><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-01"><fieldset><legend><span>第 1 题</span>下列哪一组函数调用与结果都正确？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>&lt;cmath&gt; 提供常用数学函数的声明；sqrt(49.0) 的数值为 7，abs(-8) 的值为 8。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-02"><fieldset><legend><span>第 2 题</span>表达式 sqrt(25.0) 的数值和结果类型分别是什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>sqrt(25.0) 的数值是 5，但 sqrt 返回浮点类型结果，不是 int。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-03"><fieldset><legend><span>第 3 题</span>下面代码输出什么？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int a = 8, b = 3, c = 6;
+    cout &lt;&lt; min(max(a, b), c) &lt;&lt; endl;
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>max(8, 3) 先得到 8，随后 min(8, 6) 得到 6。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-04"><fieldset><legend><span>第 4 题</span>先执行 srand(seed) 后，表达式 rand() % 6 + 1 可能产生的整数范围是什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>rand() % 6 的余数只能是 0、1、2、3、4、5；每个结果再加 1 后，可能值变为 1、2、3、4、5、6。srand 只设置伪随机序列的种子，不直接产生随机数。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-05"><fieldset><legend><span>第 5 题</span>表达式 abs(-15) 的结果是多少？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>abs 返回参数的绝对值，负数 -15 到 0 的距离是 15，所以结果为 15。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-06"><fieldset><legend><span>第 6 题</span>关于 0 和伪随机函数，下列说法正确的是哪一项？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>0 的绝对值和算术平方根都为 0。srand(seed) 只设置伪随机序列的种子，真正取得伪随机整数要调用 rand()。</p></article><button type="button" data-test-submit>提交全部答案</button><button type="button" class="secondary" hidden data-test-retry>重新测试</button><p aria-live="polite" data-test-status>共 6 题，请全部作答后提交。</p></gesp-comprehensive-test><nav class="gesp-course-pager gesp-level2-pager" aria-label="二级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level2-pager__link gesp-level2-pager__link--previous" href="/gesp/level2/nested-loops/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 07</small><strong>多层循环</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level2-pager__link gesp-level2-pager__link--next" href="/gesp/level3/" rel="next"><span><small>下一等级</small><strong>GESP 三级总览</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -683,7 +712,7 @@ int main() {    int a, b;    double value;    cin &gt;&gt; a &gt;&gt; b &gt;&gt;
       
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-abs-绝对值函数">01 abs 绝对值函数</a></li><li><a href="#02-sqrt-平方根函数">02 sqrt 平方根函数</a></li><li><a href="#03-max-与-min">03 max 与 min</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#04-rand-与-srand">04 rand 与 srand</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-abs-绝对值函数">01 abs 绝对值函数</a></li><li><a href="#02-sqrt-平方根函数">02 sqrt 平方根函数</a></li><li><a href="#03-max-与-min">03 max 与 min</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#04-rand-与-srand">04 rand 与 srand</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -695,6 +724,31 @@ int main() {    int a, b;    double value;    cin &gt;&gt; a &gt;&gt; b &gt;&gt;
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

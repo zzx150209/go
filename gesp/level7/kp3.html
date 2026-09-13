@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,32 +489,33 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 二维状态</a><a href="#kp-02" class="astro-obblnf2s">02 网格路径</a><a href="#kp-03" class="astro-obblnf2s">03 障碍与最优值</a><a href="#kp-04" class="astro-obblnf2s">04 最长公共子序列</a><a href="#kp-05" class="astro-obblnf2s">05 编辑距离入门</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心检查</a><a href="#page-test" class="astro-obblnf2s">综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方七级大纲要求掌握二维动态规划。二维状态常用两个位置共同描述子问题：可以是网格的行列，也可以是两个序列各自的前缀长度。重点仍是状态含义、边界、转移和计算顺序。</p>
-<p><strong>什么时候使用二维 DP？</strong> 当答案同时由两个位置决定，例如网格中的行与列、两个字符串各自的前缀长度，单个下标无法区分所有子问题时，可以设计 <code>dp[i][j]</code>。两维各表示什么必须先写清楚，再判断上、左、左上等依赖是否已经算好。</p>
+<p><strong>什么时候使用二维 DP？</strong> 当答案同时由两个位置决定，例如网格中的行与列、两个字符串各自的前缀长度，单个下标无法区分所有子问题时，可以设计 <code dir="auto">dp[i][j]</code>。两维各表示什么必须先写清楚，再判断上、左、左上等依赖是否已经算好。</p>
 <h2 id="kp-01">01 二维状态与依赖方向</h2>
-<p><code>dp[i][j]</code> 只是存储形式，必须补全含义。例如“从 <code>(1,1)</code> 到 <code>(i,j)</code> 的路径数”或“两个序列前 <code>i</code>、<code>j</code> 项的最长公共子序列长度”。填表顺序应保证转移所依赖的位置已经求出。</p>
-<p><strong>具体推演：</strong> 在 <code>2 × 3</code> 网格中，<code>dp[2][3]</code> 若定义为“到达第 2 行第 3 列的路径数”，两个下标分别固定了行和列；它依赖已经算好的 <code>dp[1][3]</code> 与 <code>dp[2][2]</code>。若只写成一维 <code>dp[3]</code> 却没有说明当前保存的是哪一行，就无法判断读取的是上一行旧值还是当前行新值。</p>
+<p><code dir="auto">dp[i][j]</code> 只是存储形式，必须补全含义。例如“从 <code dir="auto">(1,1)</code> 到 <code dir="auto">(i,j)</code> 的路径数”或“两个序列前 <code dir="auto">i</code>、<code dir="auto">j</code> 项的最长公共子序列长度”。填表顺序应保证转移所依赖的位置已经求出。</p>
+<p><strong>具体推演：</strong> 在 <code dir="auto">2 × 3</code> 网格中，<code dir="auto">dp[2][3]</code> 若定义为“到达第 2 行第 3 列的路径数”，两个下标分别固定了行和列；它依赖已经算好的 <code dir="auto">dp[1][3]</code> 与 <code dir="auto">dp[2][2]</code>。若只写成一维 <code dir="auto">dp[3]</code> 却没有说明当前保存的是哪一行，就无法判断读取的是上一行旧值还是当前行新值。</p>
 <h2 id="kp-02">02 网格路径计数</h2>
-<p>若只能向右或向下移动，到达 <code>(i,j)</code> 的最后一步来自 <code>(i-1,j)</code> 或 <code>(i,j-1)</code>：</p>
-<p><code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code></p>
-<p>使用 1 下标时，可以令 <code>dp[1][1] = 1</code>，再按行、列递增计算。边界外状态不能被读取。</p>
-<p><strong>具体推演：</strong> 无障碍 <code>2 × 3</code> 网格先得到第一行 <code>1,1,1</code>、第一列 <code>1,1</code>；随后 <code>dp[2][2] = 1 + 1 = 2</code>，<code>dp[2][3] = dp[1][3] + dp[2][2] = 1 + 2 = 3</code>。中间值说明每个状态恰好汇总“从上来”和“从左来”两类互不重复的路径。</p>
+<p>若只能向右或向下移动，到达 <code dir="auto">(i,j)</code> 的最后一步来自 <code dir="auto">(i-1,j)</code> 或 <code dir="auto">(i,j-1)</code>：</p>
+<p><code dir="auto">dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code></p>
+<p>使用 1 下标时，可以令 <code dir="auto">dp[1][1] = 1</code>，再按行、列递增计算。边界外状态不能被读取。</p>
+<p><strong>具体推演：</strong> 无障碍 <code dir="auto">2 × 3</code> 网格先得到第一行 <code dir="auto">1,1,1</code>、第一列 <code dir="auto">1,1</code>；随后 <code dir="auto">dp[2][2] = 1 + 1 = 2</code>，<code dir="auto">dp[2][3] = dp[1][3] + dp[2][2] = 1 + 2 = 3</code>。中间值说明每个状态恰好汇总“从上来”和“从左来”两类互不重复的路径。</p>
 <h2 id="kp-03">03 障碍与网格最优值</h2>
-<p>遇到障碍格时，路径数应直接设为 <code>0</code>，表示不可达。求最大路径和时从合法来源取 <code>max</code>，求最小路径时从合法来源取 <code>min</code>；若权值可能为负，不能用 <code>0</code> 代表不可达。路径数量使用相加，最大路径和或最小路径使用比较，不能混用转移与初值。</p>
-<p><strong>具体推演：</strong> 在 <code>2 × 3</code> 网格中若 <code>(1,2)</code> 是障碍，第一行路径数变为 <code>1,0,0</code>；第二行依次为 <code>1</code>、<code>1</code>、<code>1</code>。到 <code>(2,3)</code> 的唯一合法路线是先向下再一直向右。若仍让障碍格沿用普通转移，<code>dp[1][2]</code> 会错误变成 <code>1</code>，后面就会凭空多出一条穿过障碍的路线。</p>
+<p>遇到障碍格时，路径数应直接设为 <code dir="auto">0</code>，表示不可达。求最大路径和时从合法来源取 <code dir="auto">max</code>，求最小路径时从合法来源取 <code dir="auto">min</code>；若权值可能为负，不能用 <code dir="auto">0</code> 代表不可达。路径数量使用相加，最大路径和或最小路径使用比较，不能混用转移与初值。</p>
+<p><strong>具体推演：</strong> 在 <code dir="auto">2 × 3</code> 网格中若 <code dir="auto">(1,2)</code> 是障碍，第一行路径数变为 <code dir="auto">1,0,0</code>；第二行依次为 <code dir="auto">1</code>、<code dir="auto">1</code>、<code dir="auto">1</code>。到 <code dir="auto">(2,3)</code> 的唯一合法路线是先向下再一直向右。若仍让障碍格沿用普通转移，<code dir="auto">dp[1][2]</code> 会错误变成 <code dir="auto">1</code>，后面就会凭空多出一条穿过障碍的路线。</p>
 <h2 id="kp-04">04 最长公共子序列 LCS</h2>
-<p>设 <code>dp[i][j]</code> 表示字符串 <code>a</code> 的前 <code>i</code> 个字符与 <code>b</code> 的前 <code>j</code> 个字符的 LCS 长度：</p>
+<p>设 <code dir="auto">dp[i][j]</code> 表示字符串 <code dir="auto">a</code> 的前 <code dir="auto">i</code> 个字符与 <code dir="auto">b</code> 的前 <code dir="auto">j</code> 个字符的 LCS 长度：</p>
 <ul>
-<li><code>a[i - 1] == b[j - 1]</code>：<code>dp[i][j] = dp[i - 1][j - 1] + 1</code>；</li>
-<li>不相等：<code>dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])</code>。</li>
+<li><code dir="auto">a[i - 1] == b[j - 1]</code>：<code dir="auto">dp[i][j] = dp[i - 1][j - 1] + 1</code>；</li>
+<li>不相等：<code dir="auto">dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])</code>。</li>
 </ul>
-<p>字符串使用 <code>0</code> 下标，所以长度为 <code>i</code>、<code>j</code> 的前缀末尾分别是 <code>a[i - 1]</code>、<code>b[j - 1]</code>。子序列可以不连续，但相对顺序不能改变。空前缀边界 <code>dp[0][j]</code> 与 <code>dp[i][0]</code> 都为 <code>0</code>。</p>
-<p><strong>具体推演：</strong> 对 <code>a = "abc"</code>、<code>b = "ac"</code>，先匹配 <code>a</code> 得到长度 <code>1</code>；字符 <code>b</code> 在第二个字符串当前前缀中没有匹配，长度仍为 <code>1</code>；最后两个 <code>c</code> 相等，从左上状态加一得到 <code>2</code>。最终公共子序列是 <code>"ac"</code>，它在 <code>a</code> 中不连续，却保持了先 <code>a</code> 后 <code>c</code> 的相对顺序。</p>
+<p>字符串使用 <code dir="auto">0</code> 下标，所以长度为 <code dir="auto">i</code>、<code dir="auto">j</code> 的前缀末尾分别是 <code dir="auto">a[i - 1]</code>、<code dir="auto">b[j - 1]</code>。子序列可以不连续，但相对顺序不能改变。空前缀边界 <code dir="auto">dp[0][j]</code> 与 <code dir="auto">dp[i][0]</code> 都为 <code dir="auto">0</code>。</p>
+<p><strong>具体推演：</strong> 对 <code dir="auto">a = "abc"</code>、<code dir="auto">b = "ac"</code>，先匹配 <code dir="auto">a</code> 得到长度 <code dir="auto">1</code>；字符 <code dir="auto">b</code> 在第二个字符串当前前缀中没有匹配，长度仍为 <code dir="auto">1</code>；最后两个 <code dir="auto">c</code> 相等，从左上状态加一得到 <code dir="auto">2</code>。最终公共子序列是 <code dir="auto">"ac"</code>，它在 <code dir="auto">a</code> 中不连续，却保持了先 <code dir="auto">a</code> 后 <code dir="auto">c</code> 的相对顺序。</p>
 <h2 id="kp-05">05 编辑距离入门</h2>
-<p>编辑距离表示把字符串 <code>a</code> 的前 <code>i</code> 个字符变成字符串 <code>b</code> 的前 <code>j</code> 个字符，最少需要多少次单字符操作。允许的三种操作是插入、删除、替换。</p>
-<p>设 <code>dp[i][j]</code> 为两个前缀间的最少编辑次数。空串变成长度为 <code>j</code> 的前缀需要插入 <code>j</code> 次，所以 <code>dp[0][j] = j</code>；长度为 <code>i</code> 的前缀变成空串需要删除 <code>i</code> 次，所以 <code>dp[i][0] = i</code>。若 <code>a[i - 1] == b[j - 1]</code>，末尾不用操作，从 <code>dp[i - 1][j - 1]</code> 转移；否则在插入、删除、替换三个来源的最小值上加 <code>1</code>。</p>
-<p><strong>具体推演：</strong> 把 <code>"cat"</code> 变成 <code>"cut"</code> 时，首字符 <code>c</code> 与末字符 <code>t</code> 都可保留，只需把中间的 <code>a</code> 替换成 <code>u</code>，总代价为 <code>1</code>。若只允许插入和删除，就要先删 <code>a</code> 再插 <code>u</code>，代价为 <code>2</code>；同时比较三种操作后取最小值，才能得到正确编辑距离 <code>1</code>。</p>
+<p>编辑距离表示把字符串 <code dir="auto">a</code> 的前 <code dir="auto">i</code> 个字符变成字符串 <code dir="auto">b</code> 的前 <code dir="auto">j</code> 个字符，最少需要多少次单字符操作。允许的三种操作是插入、删除、替换。</p>
+<p>设 <code dir="auto">dp[i][j]</code> 为两个前缀间的最少编辑次数。空串变成长度为 <code dir="auto">j</code> 的前缀需要插入 <code dir="auto">j</code> 次，所以 <code dir="auto">dp[0][j] = j</code>；长度为 <code dir="auto">i</code> 的前缀变成空串需要删除 <code dir="auto">i</code> 次，所以 <code dir="auto">dp[i][0] = i</code>。若 <code dir="auto">a[i - 1] == b[j - 1]</code>，末尾不用操作，从 <code dir="auto">dp[i - 1][j - 1]</code> 转移；否则在插入、删除、替换三个来源的最小值上加 <code dir="auto">1</code>。</p>
+<p><strong>具体推演：</strong> 把 <code dir="auto">"cat"</code> 变成 <code dir="auto">"cut"</code> 时，首字符 <code dir="auto">c</code> 与末字符 <code dir="auto">t</code> 都可保留，只需把中间的 <code dir="auto">a</code> 替换成 <code dir="auto">u</code>，总代价为 <code dir="auto">1</code>。若只允许插入和删除，就要先删 <code dir="auto">a</code> 再插 <code dir="auto">u</code>，代价为 <code dir="auto">2</code>；同时比较三种操作后取最小值，才能得到正确编辑距离 <code dir="auto">1</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -508,12 +528,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>网格路径数</td>
-<td>到达 <code>(i,j)</code> 的方案数</td>
+<td>到达 <code dir="auto">(i,j)</code> 的方案数</td>
 <td>上方、左方</td>
 </tr>
 <tr>
 <td>网格最大/最小路径</td>
-<td>到达 <code>(i,j)</code> 的最优值</td>
+<td>到达 <code dir="auto">(i,j)</code> 的最优值</td>
 <td>可达的上方、左方</td>
 </tr>
 <tr>
@@ -530,7 +550,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="基础例题">基础例题</h3>
-<p>在没有障碍的 <code>2 × 2</code> 网格中，从左上角出发，只能向右或向下走到右下角。令 <code>dp[i][j]</code> 表示到达 <code>(i,j)</code> 的路径数，则状态表为：</p>
+<p>在没有障碍的 <code dir="auto">2 × 2</code> 网格中，从左上角出发，只能向右或向下走到右下角。令 <code dir="auto">dp[i][j]</code> 表示到达 <code dir="auto">(i,j)</code> 的路径数，则状态表为：</p>
 <table>
 <thead>
 <tr>
@@ -541,38 +561,38 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>(1,1)</code></td>
-<td><code>1</code></td>
+<td><code dir="auto">(1,1)</code></td>
+<td><code dir="auto">1</code></td>
 <td>起点</td>
 </tr>
 <tr>
-<td><code>(1,2)</code></td>
-<td><code>1</code></td>
+<td><code dir="auto">(1,2)</code></td>
+<td><code dir="auto">1</code></td>
 <td>只能从左边来</td>
 </tr>
 <tr>
-<td><code>(2,1)</code></td>
-<td><code>1</code></td>
+<td><code dir="auto">(2,1)</code></td>
+<td><code dir="auto">1</code></td>
 <td>只能从上边来</td>
 </tr>
 <tr>
-<td><code>(2,2)</code></td>
-<td><code>2</code></td>
-<td><code>1 + 1</code></td>
+<td><code dir="auto">(2,2)</code></td>
+<td><code dir="auto">2</code></td>
+<td><code dir="auto">1 + 1</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="典型应用例题">典型应用例题</h3>
 <p>计算两个字符串的 LCS 长度：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size();    int m = b.size();    int dp[205][205] = {};    // dp[i][j] 表示 a 的前 i 个字符与 b 的前 j 个字符的 LCS 长度。    for (int i = 1; i &lt;= n; i++) {        for (int j = 1; j &lt;= m; j++) {            // 两个前缀的末尾字符下标分别是 i-1 和 j-1。            if (a[i - 1] == b[j - 1]) {                dp[i][j] = dp[i - 1][j - 1] + 1;            } else {                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);            }        }    }    // 两个完整字符串对应状态 dp[n][m]。    cout &lt;&lt; dp[n][m] &lt;&lt; endl;    return 0;}</code></pre>
-<p>输入 <code>abcde ace</code>，输出 <code>3</code>。时间复杂度为 <code>O(nm)</code>，空间复杂度为 <code>O(nm)</code>。</p>
+<p>输入 <code dir="auto">abcde ace</code>，输出 <code dir="auto">3</code>。时间复杂度为 <code dir="auto">O(nm)</code>，空间复杂度为 <code dir="auto">O(nm)</code>。</p>
 <h3 id="状态追踪">状态追踪</h3>
-<p>以 <code>a = "ab"</code>、<code>b = "ac"</code> 为例，空前缀所在的第 0 行和第 0 列都是 <code>0</code>：</p>
+<p>以 <code dir="auto">a = "ab"</code>、<code dir="auto">b = "ac"</code> 为例，空前缀所在的第 0 行和第 0 列都是 <code dir="auto">0</code>：</p>
 <table>
 <thead>
 <tr>
-<th><code>dp[i][j]</code></th>
+<th><code dir="auto">dp[i][j]</code></th>
 <th>比较的字符</th>
 <th>转移</th>
 <th>结果</th>
@@ -580,32 +600,32 @@ int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size(); 
 </thead>
 <tbody>
 <tr>
-<td><code>dp[1][1]</code></td>
-<td><code>a</code> 与 <code>a</code></td>
-<td><code>dp[0][0] + 1</code></td>
-<td><code>1</code></td>
+<td><code dir="auto">dp[1][1]</code></td>
+<td><code dir="auto">a</code> 与 <code dir="auto">a</code></td>
+<td><code dir="auto">dp[0][0] + 1</code></td>
+<td><code dir="auto">1</code></td>
 </tr>
 <tr>
-<td><code>dp[1][2]</code></td>
-<td><code>a</code> 与 <code>c</code></td>
-<td><code>max(dp[0][2], dp[1][1])</code></td>
-<td><code>1</code></td>
+<td><code dir="auto">dp[1][2]</code></td>
+<td><code dir="auto">a</code> 与 <code dir="auto">c</code></td>
+<td><code dir="auto">max(dp[0][2], dp[1][1])</code></td>
+<td><code dir="auto">1</code></td>
 </tr>
 <tr>
-<td><code>dp[2][1]</code></td>
-<td><code>b</code> 与 <code>a</code></td>
-<td><code>max(dp[1][1], dp[2][0])</code></td>
-<td><code>1</code></td>
+<td><code dir="auto">dp[2][1]</code></td>
+<td><code dir="auto">b</code> 与 <code dir="auto">a</code></td>
+<td><code dir="auto">max(dp[1][1], dp[2][0])</code></td>
+<td><code dir="auto">1</code></td>
 </tr>
 <tr>
-<td><code>dp[2][2]</code></td>
-<td><code>b</code> 与 <code>c</code></td>
-<td><code>max(dp[1][2], dp[2][1])</code></td>
-<td><code>1</code></td>
+<td><code dir="auto">dp[2][2]</code></td>
+<td><code dir="auto">b</code> 与 <code dir="auto">c</code></td>
+<td><code dir="auto">max(dp[1][2], dp[2][1])</code></td>
+<td><code dir="auto">1</code></td>
 </tr>
 </tbody>
 </table>
-<p>两个完整字符串的 LCS 长度是 <code>dp[2][2] = 1</code>，可以选择公共子序列 <code>"a"</code>。</p>
+<p>两个完整字符串的 LCS 长度是 <code dir="auto">dp[2][2] = 1</code>，可以选择公共子序列 <code dir="auto">"a"</code>。</p>
 <h3 id="建议测试案例">建议测试案例</h3>
 <table>
 <thead>
@@ -618,18 +638,18 @@ int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size(); 
 <tbody>
 <tr>
 <td>基础</td>
-<td>LCS 输入 <code>abcde ace</code></td>
-<td>输出 <code>3</code></td>
+<td>LCS 输入 <code dir="auto">abcde ace</code></td>
+<td>输出 <code dir="auto">3</code></td>
 </tr>
 <tr>
 <td>边界</td>
-<td>单行网格，从 <code>(1,1)</code> 走到 <code>(1,5)</code></td>
-<td>路径数为 <code>1</code></td>
+<td>单行网格，从 <code dir="auto">(1,1)</code> 走到 <code dir="auto">(1,5)</code></td>
+<td>路径数为 <code dir="auto">1</code></td>
 </tr>
 <tr>
 <td>易错</td>
 <td>起点就是障碍格</td>
-<td>路径数为 <code>0</code>，不能先固定为 <code>1</code></td>
+<td>路径数为 <code dir="auto">0</code>，不能先固定为 <code dir="auto">1</code></td>
 </tr>
 </tbody>
 </table>
@@ -646,10 +666,10 @@ int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size(); 
 <tr>
 <td>不解释两个下标分别代表什么</td>
 <td>状态与转移无法核对</td>
-<td>先写出 <code>dp[i][j]</code> 的完整含义</td>
+<td>先写出 <code dir="auto">dp[i][j]</code> 的完整含义</td>
 </tr>
 <tr>
-<td>访问 <code>i-1</code>、<code>j-1</code> 却不设空前缀边界</td>
+<td>访问 <code dir="auto">i-1</code>、<code dir="auto">j-1</code> 却不设空前缀边界</td>
 <td>第一个字符处会越界或使用错误初值</td>
 <td>明确初始化第 0 行和第 0 列</td>
 </tr>
@@ -661,12 +681,12 @@ int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size(); 
 <tr>
 <td>障碍格仍沿用普通转移</td>
 <td>不存在的路径会被继续传递</td>
-<td>障碍状态直接设为 <code>0</code></td>
+<td>障碍状态直接设为 <code dir="auto">0</code></td>
 </tr>
 <tr>
-<td>字符串写成 <code>a[i]</code>、<code>b[j]</code></td>
+<td>字符串写成 <code dir="auto">a[i]</code>、<code dir="auto">b[j]</code></td>
 <td>前缀长度与字符串下标错一位</td>
-<td>比较 <code>a[i - 1]</code> 与 <code>b[j - 1]</code></td>
+<td>比较 <code dir="auto">a[i - 1]</code> 与 <code dir="auto">b[j - 1]</code></td>
 </tr>
 <tr>
 <td>编辑距离只考虑替换</td>
@@ -676,10 +696,40 @@ int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size(); 
 </tbody>
 </table>
 <h3 id="错误反例推演">错误反例推演</h3>
-<p>在 <code>2 × 3</code> 网格中把 <code>(1,2)</code> 设为障碍。错误写法仍执行普通转移，会得到第一行 <code>1,1,1</code>、最终 <code>dp[2][3] = 3</code>；正确写法先把障碍状态设为 <code>0</code>，状态表变为第一行 <code>1,0,0</code>、第二行 <code>1,1,1</code>，答案只有 <code>1</code>。多出的两条路线都穿过了不可走格，说明障碍必须在转移前截断。</p>
+<p>在 <code dir="auto">2 × 3</code> 网格中把 <code dir="auto">(1,2)</code> 设为障碍。错误写法仍执行普通转移，会得到第一行 <code dir="auto">1,1,1</code>、最终 <code dir="auto">dp[2][3] = 3</code>；正确写法先把障碍状态设为 <code dir="auto">0</code>，状态表变为第一行 <code dir="auto">1,0,0</code>、第二行 <code dir="auto">1,1,1</code>，答案只有 <code dir="auto">1</code>。多出的两条路线都穿过了不可走格，说明障碍必须在转移前截断。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>复杂动态规划强调状态结构和计算阶段；本页聚焦二维状态。空间压缩属于优化问题，只有明确每一行依赖哪些旧状态后才能进行。</p>
-<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能解释二维状态的两个下标</label><label class="q-check"><input type="checkbox"> 能正确初始化网格和空前缀边界</label><label class="q-check"><input type="checkbox"> 能区分 LCS 与编辑距离的转移</label><span>10 题</span>
+<p class="q-title">第 1 题在没有障碍、只能向右或向下移动的网格中，若使用转移 dp[i][j] = dp[i - 1][j] + dp[i][j - 1]，dp[i][j] 最合适的含义是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题在没有障碍、只能向右或向下移动" value="A"><b>A.</b> 从起点到达 (i, j) 的路径数</label><label class="q-opt"><input type="radio" name="第 1 题在没有障碍、只能向右或向下移动" value="B"><b>B.</b> (i, j) 到终点的曼哈顿距离</label><label class="q-opt"><input type="radio" name="第 1 题在没有障碍、只能向右或向下移动" value="C"><b>C.</b> 第 i 行的格子总数</label><label class="q-opt"><input type="radio" name="第 1 题在没有障碍、只能向右或向下移动" value="D"><b>D.</b> 已经访问过的全部格子数</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 01：到达 (i,j) 的最后一步只可能从上方或左方走来，两类路径互不重叠，所以它们的路径数相加。只有“从起点到达当前位置的路径数”与该转移完全对应。</p>
+<p class="q-title">第 2 题无障碍网格从 (1, 1) 出发，只能向右或向下。采用路径数状态时，第一行和第一列应怎样初始化？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题无障碍网格从 (1, 1) 出" value="A"><b>A.</b> 全部初始化为 0</label><label class="q-opt"><input type="radio" name="第 2 题无障碍网格从 (1, 1) 出" value="B"><b>B.</b> 全部初始化为 1</label><label class="q-opt"><input type="radio" name="第 2 题无障碍网格从 (1, 1) 出" value="C"><b>C.</b> 第 i 个位置初始化为 i</label><label class="q-opt"><input type="radio" name="第 2 题无障碍网格从 (1, 1) 出" value="D"><b>D.</b> 只把右下角初始化为 1</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 02：第一行的每个格子只能一路向右到达，第一列的每个格子只能一路向下到达，因此各自都恰有 1 条路径。这个边界为内部格子的相加转移提供初值。</p>
+<p class="q-title">第 3 题网格中只能向右或向下移动。计算 dp[i][j] 时，应读取哪两个已经计算的状态？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题网格中只能向右或向下移动。计算" value="A"><b>A.</b> dp[i + 1][j] 和 dp[i][j + 1]</label><label class="q-opt"><input type="radio" name="第 3 题网格中只能向右或向下移动。计算" value="B"><b>B.</b> dp[i - 1][j - 1] 和 dp[i + 1][j + 1]</label><label class="q-opt"><input type="radio" name="第 3 题网格中只能向右或向下移动。计算" value="C"><b>C.</b> dp[i - 1][j] 和 dp[i][j - 1]</label><label class="q-opt"><input type="radio" name="第 3 题网格中只能向右或向下移动。计算" value="D"><b>D.</b> dp[i][j] 和 dp[i - 1][j - 1]</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 02：最后一步向下时来自上方 (i-1,j)，最后一步向右时来自左方 (i,j-1)，因此读取 dp[i-1][j] 与 dp[i][j-1]。按行或按列从小下标向大下标计算时，这两个状态都已确定。</p>
+<p class="q-title">第 4 题在 3×3 无障碍网格中，从左上角到右下角只能向右或向下，共有多少条不同路径？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题在 3×3 无障碍网格中，从左" value="A"><b>A.</b> 4</label><label class="q-opt"><input type="radio" name="第 4 题在 3×3 无障碍网格中，从左" value="B"><b>B.</b> 5</label><label class="q-opt"><input type="radio" name="第 4 题在 3×3 无障碍网格中，从左" value="C"><b>C.</b> 6</label><label class="q-opt"><input type="radio" name="第 4 题在 3×3 无障碍网格中，从左" value="D"><b>D.</b> 9</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 02：边界第一行、第一列均为 1。内部依次得到 dp[2][2]=2、dp[2][3]=3、dp[3][2]=3，最后 dp[3][3]=3+3=6，所以共有 6 条路径。</p>
+<p class="q-title">第 5 题求字符串 a 与 b 的最长公共子序列时，dp[i][j] 通常表示什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题求字符串 a 与 b 的最长公" value="A"><b>A.</b> a 的前 i 个字符与 b 的前 j 个字符的 LCS 长度</label><label class="q-opt"><input type="radio" name="第 5 题求字符串 a 与 b 的最长公" value="B"><b>B.</b> a[i] 与 b[j] 的字符编码之和</label><label class="q-opt"><input type="radio" name="第 5 题求字符串 a 与 b 的最长公" value="C"><b>C.</b> 两个字符串的总长度</label><label class="q-opt"><input type="radio" name="第 5 题求字符串 a 与 b 的最长公" value="D"><b>D.</b> 从 i 到 j 的连续相同字符数</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04：二维下标分别对应两个字符串的前缀。这样比较第 i、j 个字符后，可以转移到更短前缀 dp[i-1][j-1]、dp[i-1][j] 或 dp[i][j-1]。</p>
+<p class="q-title">第 6 题当 a[i - 1] == b[j - 1] 时，LCS 的正确转移是哪一项？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题当 a[i - 1] == b" value="A"><b>A.</b> dp[i][j] = dp[i - 1][j - 1] + 1</label><label class="q-opt"><input type="radio" name="第 6 题当 a[i - 1] == b" value="B"><b>B.</b> dp[i][j] = dp[i - 1][j] + 1</label><label class="q-opt"><input type="radio" name="第 6 题当 a[i - 1] == b" value="C"><b>C.</b> dp[i][j] = dp[i][j - 1] + 1</label><label class="q-opt"><input type="radio" name="第 6 题当 a[i - 1] == b" value="D"><b>D.</b> dp[i][j] = 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04：dp[i][j] 对应前 i、j 个字符，它们的末尾字符分别是 a[i-1] 与 b[j-1]。两者相同时，可以把这个共同字符接到两个更短前缀的公共子序列之后，因此从左上角状态 dp[i-1][j-1] 加 1。</p>
+<p class="q-title">第 7 题当 a[i - 1] != b[j - 1] 时，LCS 的正确转移是哪一项？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题当 a[i - 1] != b" value="A"><b>A.</b> dp[i][j] = dp[i - 1][j - 1] + 1</label><label class="q-opt"><input type="radio" name="第 7 题当 a[i - 1] != b" value="B"><b>B.</b> dp[i][j] = min(dp[i - 1][j], dp[i][j - 1])</label><label class="q-opt"><input type="radio" name="第 7 题当 a[i - 1] != b" value="C"><b>C.</b> dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])</label><label class="q-opt"><input type="radio" name="第 7 题当 a[i - 1] != b" value="D"><b>D.</b> dp[i][j] = dp[i - 1][j - 1]</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 04：dp[i][j] 的两个前缀末尾字符 a[i-1] 与 b[j-1] 不同时，不能同时把它们作为新的共同字符，只能分别舍去一个末尾字符，并保留 dp[i-1][j] 与 dp[i][j-1] 中的较大值。</p>
+<p class="q-title">第 8 题字符串 &quot;abc&quot; 与 &quot;ac&quot; 的最长公共子序列长度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 8 题字符串 &quot;abc&q" value="A"><b>A.</b> 1</label><label class="q-opt"><input type="radio" name="第 8 题字符串 &quot;abc&q" value="B"><b>B.</b> 2</label><label class="q-opt"><input type="radio" name="第 8 题字符串 &quot;abc&q" value="C"><b>C.</b> 3</label><label class="q-opt"><input type="radio" name="第 8 题字符串 &quot;abc&q" value="D"><b>D.</b> 4</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 04：字符 a 匹配后长度为 1；b 在第二个字符串中没有对应字符，长度仍为 1；最后 c 匹配，在两个前缀的结果上加 1，得到公共子序列 "ac"，长度为 2。</p>
+<p class="q-title">第 9 题网格路径计数中，格子 (i,j) 是障碍。dp[i][j] 应怎样处理？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 9 题网格路径计数中，格子 (i,j" value="A"><b>A.</b> 设为 0</label><label class="q-opt"><input type="radio" name="第 9 题网格路径计数中，格子 (i,j" value="B"><b>B.</b> 设为 1</label><label class="q-opt"><input type="radio" name="第 9 题网格路径计数中，格子 (i,j" value="C"><b>C.</b> 等于上方</label><label class="q-opt"><input type="radio" name="第 9 题网格路径计数中，格子 (i,j" value="D"><b>D.</b> 等于左方</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：障碍格不可到达，路径数必须为 0，否则会把不存在的路径继续传给后续格子。</p>
+<p class="q-title">第 10 题把字符串 cat 变成 cut，若每次可插入、删除或替换一个字符，最少需要几次操作？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 10 题把字符串 cat 变成 cu" value="A"><b>A.</b> 0</label><label class="q-opt"><input type="radio" name="第 10 题把字符串 cat 变成 cu" value="B"><b>B.</b> 1</label><label class="q-opt"><input type="radio" name="第 10 题把字符串 cat 变成 cu" value="C"><b>C.</b> 2</label><label class="q-opt"><input type="radio" name="第 10 题把字符串 cat 变成 cu" value="D"><b>D.</b> 3</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 05：只需把中间字符 a 替换为 u，字符串就从 cat 变成 cut，因此最少 1 次；编辑距离转移必须同时考虑插入、删除和替换。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level7-pager" aria-label="七级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level7-pager__link gesp-level7-pager__link--previous" href="/gesp/level7/complex-dp/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 02</small><strong>复杂动态规划</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level7-pager__link gesp-level7-pager__link--next" href="/gesp/level7/dp-optimization/" rel="next"><span><small>下一知识点 · 04</small><strong>动态规划最优解优化</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -688,7 +738,7 @@ int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size(); 
       <a class="kp-nav" href="kp4.html">下一个：线性动态规划 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 二维状态与依赖方向</a></li><li><a href="#kp-02">02 网格路径计数</a></li><li><a href="#kp-03">03 障碍与网格最优值</a></li><li><a href="#kp-04">04 最长公共子序列 LCS</a></li><li><a href="#kp-05">05 编辑距离入门</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#状态追踪" class="lvl3">状态追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 二维状态与依赖方向</a></li><li><a href="#kp-02">02 网格路径计数</a></li><li><a href="#kp-03">03 障碍与网格最优值</a></li><li><a href="#kp-04">04 最长公共子序列 LCS</a></li><li><a href="#kp-05">05 编辑距离入门</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#状态追踪" class="lvl3">状态追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -700,6 +750,31 @@ int main() {    string a, b;    cin &gt;&gt; a &gt;&gt; b;    int n = a.size(); 
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

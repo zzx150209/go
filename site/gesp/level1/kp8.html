@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -474,9 +493,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <ul>
 <li><strong>核心结论：</strong> 顺序结构按书写顺序逐条执行，每条语句都读取当时的变量值并留下新状态；程序语句不是同时成立的数学方程。</li>
 <li><strong>常用流程：</strong> 先读入数据，再按题意计算中间量，最后按要求输出；修改变量时在每条语句执行后记录一次状态快照。</li>
-<li><strong>最小示例：</strong> <code>a = 2; a = a + 3;</code> 先把 2 保存到 <code>a</code>，第二句再读出 2 并写回 5，最终 <code>a = 5</code>。</li>
+<li><strong>最小示例：</strong> <code dir="auto">a = 2; a = a + 3;</code> 先把 2 保存到 <code dir="auto">a</code>，第二句再读出 2 并写回 5，最终 <code dir="auto">a = 5</code>。</li>
 <li><strong>关键易错点：</strong> 交换两个变量时不能先覆盖旧值；单位换算要用余数继续拆分，输出也必须在正确的执行时刻读取变量。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-从上到下执行" class="astro-6dte4xza">01 执行顺序</a></li><li class="astro-6dte4xza"><a href="#02-变量变化追踪" class="astro-6dte4xza">02 变量追踪</a></li><li class="astro-6dte4xza"><a href="#03-输入计算输出" class="astro-6dte4xza">03 三段式程序</a></li><li class="astro-6dte4xza"><a href="#04-临时变量交换" class="astro-6dte4xza">04 变量交换</a></li><li class="astro-6dte4xza"><a href="#05-单位换算" class="astro-6dte4xza">05 单位换算</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>本页对应 GESP C++ 一级大纲中的“顺序结构”。前面已经学过变量怎样保存当前值、赋值怎样先算右侧再写左侧；现在把多条语句连成一条真实执行路线。</p>
 <p>本页集中解决三个问题：</p>
@@ -488,24 +509,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>本页所有主过程都沿一条路线执行，不使用条件选择，也不重复执行某段代码。分支和循环会在后面的课程中分别学习。</p>
 <h2 id="01-从上到下执行">01 从上到下执行</h2>
 <h3 id="顺序结构是一条连续路线">顺序结构是一条连续路线</h3>
-<p>程序进入 <code>main</code> 后，如果没有分支、循环等结构改变路线，普通语句会按照书写顺序从上到下执行。前一条语句执行完成，下一条才开始；后一条看到的是前面已经留下的新状态。</p>
-<pre><code>进入 main   ↓执行第 1 条语句，更新程序状态   ↓执行第 2 条语句，读取更新后的状态   ↓继续执行后面的语句   ↓return 0; 结束 main</code></pre>
-<p>这里说的是 <code>main</code> 代码块内本次实际走到的普通语句。头文件、命名空间和注释不作为运行时普通语句执行；<code>return 0;</code> 一旦执行，会立即结束 <code>main</code>，不会再继续执行它后面的语句。</p>
+<p>程序进入 <code dir="auto">main</code> 后，如果没有分支、循环等结构改变路线，普通语句会按照书写顺序从上到下执行。前一条语句执行完成，下一条才开始；后一条看到的是前面已经留下的新状态。</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>进入 main   ↓执行第 1 条语句，更新程序状态   ↓执行第 2 条语句，读取更新后的状态   ↓继续执行后面的语句   ↓return 0; 结束 main</code></pre>
+<p>这里说的是 <code dir="auto">main</code> 代码块内本次实际走到的普通语句。头文件、命名空间和注释不作为运行时普通语句执行；<code dir="auto">return 0;</code> 一旦执行，会立即结束 <code dir="auto">main</code>，不会再继续执行它后面的语句。</p>
 <h3 id="三条语句不能同时计算">三条语句不能同时计算</h3>
 <p>看下面的执行链：</p>
 <pre><code>int a = 3;a = a + 2;a = a * 4;</code></pre>
 <p>正确过程是：</p>
 <ol>
-<li>第一行建立 <code>a</code>，当前值为 3。</li>
-<li>第二行读取当时的 3，计算 <code>3 + 2 = 5</code>，再把 5 写回 <code>a</code>。</li>
-<li>第三行读取刚刚得到的 5，计算 <code>5 * 4 = 20</code>，再把 20 写回 <code>a</code>。</li>
+<li>第一行建立 <code dir="auto">a</code>，当前值为 3。</li>
+<li>第二行读取当时的 3，计算 <code dir="auto">3 + 2 = 5</code>，再把 5 写回 <code dir="auto">a</code>。</li>
+<li>第三行读取刚刚得到的 5，计算 <code dir="auto">5 * 4 = 20</code>，再把 20 写回 <code dir="auto">a</code>。</li>
 </ol>
-<p>最终 <code>a = 20</code>。如果第三行仍拿初值 3 计算，就会得到错误的 12；如果先算乘法再回头加 2，也违背了程序的语句顺序。</p>
+<p>最终 <code dir="auto">a = 20</code>。如果第三行仍拿初值 3 计算，就会得到错误的 12；如果先算乘法再回头加 2，也违背了程序的语句顺序。</p>
 <p>顺序程序不能像一组数学方程那样同时成立。每个赋值号都是一次发生在具体时刻的写入。</p>
 <h3 id="一条语句完成后状态才交给下一条">一条语句完成后，状态才交给下一条</h3>
 <p>可以把每条语句看成一次状态转换：</p>
 <pre><code>执行前状态 ──当前语句──→ 执行后状态执行后状态 ──下一语句──→ 新的执行后状态</code></pre>
-<p>第二行执行完之前，<code>a</code> 还是 3；第二行完成后，<code>a</code> 才变成 5。第三行必须从这个最新状态开始。</p>
+<p>第二行执行完之前，<code dir="auto">a</code> 还是 3；第二行完成后，<code dir="auto">a</code> 才变成 5。第三行必须从这个最新状态开始。</p>
 <p>这种“上一行产出、下一行使用”的关系，是顺序结构最重要的因果关系。</p>
 <h2 id="02-变量变化追踪">02 变量变化追踪</h2>
 <h3 id="状态表记录每行执行后的快照">状态表记录每行执行后的快照</h3>
@@ -516,37 +537,37 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <th>已完成的语句</th>
 <th>右侧怎样计算</th>
-<th style="text-align: right">执行后 <code>a</code></th>
+<th style="text-align: right">执行后 <code dir="auto">a</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>int a = 3;</code></td>
-<td>用 3 初始化 <code>a</code></td>
+<td><code dir="auto">int a = 3;</code></td>
+<td>用 3 初始化 <code dir="auto">a</code></td>
 <td style="text-align: right">3</td>
 </tr>
 <tr>
-<td><code>a = a + 2;</code></td>
-<td>读取旧值 3，计算 <code>3 + 2</code></td>
+<td><code dir="auto">a = a + 2;</code></td>
+<td>读取旧值 3，计算 <code dir="auto">3 + 2</code></td>
 <td style="text-align: right">5</td>
 </tr>
 <tr>
-<td><code>a = a * 4;</code></td>
-<td>读取新值 5，计算 <code>5 * 4</code></td>
+<td><code dir="auto">a = a * 4;</code></td>
+<td>读取新值 5，计算 <code dir="auto">5 * 4</code></td>
 <td style="text-align: right">20</td>
 </tr>
 </tbody>
 </table>
-<p>状态表直接回答了自测题：三条语句执行完以后，<code>a</code> 是 20。</p>
+<p>状态表直接回答了自测题：三条语句执行完以后，<code dir="auto">a</code> 是 20。</p>
 <h3 id="多个变量怎样记录">多个变量怎样记录</h3>
 <p>每个变量占一列。当前语句只修改其中一个变量时，其他列沿用上一行的值。</p>
-<p>假设初始有 <code>x = 2</code>、<code>y = 5</code>，接着执行 <code>x = y;</code>、<code>y = 8;</code>：</p>
+<p>假设初始有 <code dir="auto">x = 2</code>、<code dir="auto">y = 5</code>，接着执行 <code dir="auto">x = y;</code>、<code dir="auto">y = 8;</code>：</p>
 <table>
 <thead>
 <tr>
 <th>已完成的语句</th>
-<th style="text-align: right"><code>x</code></th>
-<th style="text-align: right"><code>y</code></th>
+<th style="text-align: right"><code dir="auto">x</code></th>
+<th style="text-align: right"><code dir="auto">y</code></th>
 <th>说明</th>
 </tr>
 </thead>
@@ -558,16 +579,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>两个变量都有确定值</td>
 </tr>
 <tr>
-<td><code>x = y;</code></td>
+<td><code dir="auto">x = y;</code></td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">5</td>
-<td>把 <code>y</code> 当时的 5 复制给 <code>x</code></td>
+<td>把 <code dir="auto">y</code> 当时的 5 复制给 <code dir="auto">x</code></td>
 </tr>
 <tr>
-<td><code>y = 8;</code></td>
+<td><code dir="auto">y = 8;</code></td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">8</td>
-<td>只修改 <code>y</code>，<code>x</code> 不会自动跟着变化</td>
+<td>只修改 <code dir="auto">y</code>，<code dir="auto">x</code> 不会自动跟着变化</td>
 </tr>
 </tbody>
 </table>
@@ -575,7 +596,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h3 id="画状态表的固定步骤">画状态表的固定步骤</h3>
 <ol>
 <li>按程序出现顺序列出需要追踪的变量。</li>
-<li>从 <code>main</code> 内第一条相关语句开始，不跳行。</li>
+<li>从 <code dir="auto">main</code> 内第一条相关语句开始，不跳行。</li>
 <li>先用上一行状态计算当前语句右侧。</li>
 <li>当前语句写回哪些变量，就更新哪些列。</li>
 <li>其他变量照抄上一行的当前值。</li>
@@ -615,35 +636,35 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h3 id="从题意写成语句">从题意写成语句</h3>
 <p>以“输入长方形的长和宽，输出面积与周长”为例：</p>
 <ol>
-<li>**输入量：**长 <code>length</code>、宽 <code>width</code>；</li>
-<li><strong>面积公式：</strong><code>area = length * width</code>；</li>
-<li><strong>周长公式：</strong><code>perimeter = (length + width) * 2</code>；</li>
+<li>**输入量：**长 <code dir="auto">length</code>、宽 <code dir="auto">width</code>；</li>
+<li><strong>面积公式：</strong><code dir="auto">area = length * width</code>；</li>
+<li><strong>周长公式：</strong><code dir="auto">perimeter = (length + width) * 2</code>；</li>
 <li>**输出要求：**先面积，空一格，再周长。</li>
 </ol>
 <p>自测题问“哪条语句能计算并保存面积”，应选择：</p>
 <pre><code>area = length * width;</code></pre>
-<p><code>area = length + width;</code> 公式错误；<code>area == length * width;</code> 只是在比较；<code>length * width = area;</code> 把不能接收赋值的计算结果放到了左边。</p>
+<p><code dir="auto">area = length + width;</code> 公式错误；<code dir="auto">area == length * width;</code> 只是在比较；<code dir="auto">length * width = area;</code> 把不能接收赋值的计算结果放到了左边。</p>
 <h3 id="先核对范围和中间结果">先核对范围和中间结果</h3>
-<p>假设题目约定 <code>length</code>、<code>width</code> 都是 1 到 30000 的整数：</p>
+<p>假设题目约定 <code dir="auto">length</code>、<code dir="auto">width</code> 都是 1 到 30000 的整数：</p>
 <ul>
-<li>最大面积：<code>30000 * 30000 = 900000000</code>；</li>
-<li>最大周长：<code>(30000 + 30000) * 2 = 120000</code>。</li>
+<li>最大面积：<code dir="auto">30000 * 30000 = 900000000</code>；</li>
+<li>最大周长：<code dir="auto">(30000 + 30000) * 2 = 120000</code>。</li>
 </ul>
-<p>两个最大中间结果都没有超过常见 32 位 <code>int</code> 上限，因此本例使用 <code>int</code> 安全。若题目范围改变，要重新估算，不能因为样例很小就默认类型一定合适。</p>
+<p>两个最大中间结果都没有超过常见 32 位 <code dir="auto">int</code> 上限，因此本例使用 <code dir="auto">int</code> 安全。若题目范围改变，要重新估算，不能因为样例很小就默认类型一定合适。</p>
 <h3 id="输出也有执行时刻">输出也有执行时刻</h3>
-<p>输出语句读取的是执行到那一刻变量中的当前值。如果在计算面积之前就输出 <code>area</code>，它可能尚未得到正确值；如果计算后又修改了 <code>area</code>，输出看到的会是修改后的新值。</p>
+<p>输出语句读取的是执行到那一刻变量中的当前值。如果在计算面积之前就输出 <code dir="auto">area</code>，它可能尚未得到正确值；如果计算后又修改了 <code dir="auto">area</code>，输出看到的会是修改后的新值。</p>
 <p>因此，输入、计算、输出的先后次序决定了数据是否已经准备好，不能只把它们当作页面上的三个区块。</p>
 <h2 id="04-临时变量交换">04 临时变量交换</h2>
 <h3 id="为什么直接互相赋值会丢数据">为什么直接互相赋值会丢数据</h3>
-<p>假设开始时 <code>x = 3</code>、<code>y = 5</code>，希望交换为 <code>x = 5</code>、<code>y = 3</code>。如果直接写：</p>
+<p>假设开始时 <code dir="auto">x = 3</code>、<code dir="auto">y = 5</code>，希望交换为 <code dir="auto">x = 5</code>、<code dir="auto">y = 3</code>。如果直接写：</p>
 <pre><code>x = y;y = x;</code></pre>
-<p>第一行已经用 5 覆盖了 <code>x</code> 原来的 3；第二行再读取 <code>x</code> 时，只能读到 5。最后两个变量都会是 5，旧的 3 已经丢失。</p>
+<p>第一行已经用 5 覆盖了 <code dir="auto">x</code> 原来的 3；第二行再读取 <code dir="auto">x</code> 时，只能读到 5。最后两个变量都会是 5，旧的 3 已经丢失。</p>
 <table>
 <thead>
 <tr>
 <th>已完成的语句</th>
-<th style="text-align: right"><code>x</code></th>
-<th style="text-align: right"><code>y</code></th>
+<th style="text-align: right"><code dir="auto">x</code></th>
+<th style="text-align: right"><code dir="auto">y</code></th>
 <th>问题</th>
 </tr>
 </thead>
@@ -655,13 +676,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>目标是交换</td>
 </tr>
 <tr>
-<td><code>x = y;</code></td>
+<td><code dir="auto">x = y;</code></td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">5</td>
-<td>旧 <code>x = 3</code> 已被覆盖</td>
+<td>旧 <code dir="auto">x = 3</code> 已被覆盖</td>
 </tr>
 <tr>
-<td><code>y = x;</code></td>
+<td><code dir="auto">y = x;</code></td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">5</td>
 <td>已经找不回 3</td>
@@ -676,9 +697,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <thead>
 <tr>
 <th>已完成的语句</th>
-<th style="text-align: right"><code>temp</code></th>
-<th style="text-align: right"><code>x</code></th>
-<th style="text-align: right"><code>y</code></th>
+<th style="text-align: right"><code dir="auto">temp</code></th>
+<th style="text-align: right"><code dir="auto">x</code></th>
+<th style="text-align: right"><code dir="auto">y</code></th>
 </tr>
 </thead>
 <tbody>
@@ -689,27 +710,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td style="text-align: right">5</td>
 </tr>
 <tr>
-<td><code>int temp = x;</code></td>
+<td><code dir="auto">int temp = x;</code></td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
 </tr>
 <tr>
-<td><code>x = y;</code></td>
+<td><code dir="auto">x = y;</code></td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">5</td>
 </tr>
 <tr>
-<td><code>y = temp;</code></td>
+<td><code dir="auto">y = temp;</code></td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">3</td>
 </tr>
 </tbody>
 </table>
-<p><code>temp</code> 的职责只是在覆盖 <code>x</code> 之前保存旧值。执行完三条语句后，<code>x</code>、<code>y</code> 已经完成交换。</p>
-<p>这个例子说明，顺序不是可以随意调换的外观。<code>int temp = x;</code> 必须发生在 <code>x = y;</code> 之前，否则要保护的数据已经丢失。</p>
+<p><code dir="auto">temp</code> 的职责只是在覆盖 <code dir="auto">x</code> 之前保存旧值。执行完三条语句后，<code dir="auto">x</code>、<code dir="auto">y</code> 已经完成交换。</p>
+<p>这个例子说明，顺序不是可以随意调换的外观。<code dir="auto">int temp = x;</code> 必须发生在 <code dir="auto">x = y;</code> 之前，否则要保护的数据已经丢失。</p>
 <h2 id="05-单位换算">05 单位换算</h2>
 <h3 id="除法取完整单位取余保留剩余量">除法取完整单位，取余保留剩余量</h3>
 <p>把总秒数拆成“小时、分钟、秒”时，每一步都使用上一步留下的状态：</p>
@@ -725,39 +746,39 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>hour = totalSeconds / 3600</code></td>
-<td><code>3723 / 3600</code></td>
-<td><code>hour = 1</code></td>
+<td><code dir="auto">hour = totalSeconds / 3600</code></td>
+<td><code dir="auto">3723 / 3600</code></td>
+<td><code dir="auto">hour = 1</code></td>
 </tr>
 <tr>
-<td><code>rest = totalSeconds % 3600</code></td>
-<td><code>3723 % 3600</code></td>
-<td><code>rest = 123</code></td>
+<td><code dir="auto">rest = totalSeconds % 3600</code></td>
+<td><code dir="auto">3723 % 3600</code></td>
+<td><code dir="auto">rest = 123</code></td>
 </tr>
 <tr>
-<td><code>minute = rest / 60</code></td>
-<td><code>123 / 60</code></td>
-<td><code>minute = 2</code></td>
+<td><code dir="auto">minute = rest / 60</code></td>
+<td><code dir="auto">123 / 60</code></td>
+<td><code dir="auto">minute = 2</code></td>
 </tr>
 <tr>
-<td><code>second = rest % 60</code></td>
-<td><code>123 % 60</code></td>
-<td><code>second = 3</code></td>
+<td><code dir="auto">second = rest % 60</code></td>
+<td><code dir="auto">123 % 60</code></td>
+<td><code dir="auto">second = 3</code></td>
 </tr>
 </tbody>
 </table>
-<p>结果是 1 小时 2 分 3 秒。可以反向检查：<code>1 * 3600 + 2 * 60 + 3 = 3723</code>。</p>
-<h3 id="为什么分钟要从-rest-中计算">为什么分钟要从 <code>rest</code> 中计算</h3>
-<p><code>totalSeconds / 60</code> 得到的是总共包含多少个完整分钟，其中包括那 1 小时里的 60 分钟。若目标是分别输出“小时部分、分钟部分、秒部分”，分钟必须从不足一小时的 <code>rest</code> 中继续拆。</p>
+<p>结果是 1 小时 2 分 3 秒。可以反向检查：<code dir="auto">1 * 3600 + 2 * 60 + 3 = 3723</code>。</p>
+<h3 id="为什么分钟要从-rest-中计算">为什么分钟要从 <code dir="auto">rest</code> 中计算</h3>
+<p><code dir="auto">totalSeconds / 60</code> 得到的是总共包含多少个完整分钟，其中包括那 1 小时里的 60 分钟。若目标是分别输出“小时部分、分钟部分、秒部分”，分钟必须从不足一小时的 <code dir="auto">rest</code> 中继续拆。</p>
 <p>顺序关系是：</p>
 <pre><code>总秒数  ├─ 除以 3600 → 完整小时  └─ 对 3600 取余 → 不足一小时的秒数 rest                         ├─ 除以 60 → 完整分钟                         └─ 对 60 取余 → 最后秒数</code></pre>
-<p>这条依赖链决定了 <code>rest</code> 必须先算，<code>minute</code> 和 <code>second</code> 才能使用它。</p>
+<p>这条依赖链决定了 <code dir="auto">rest</code> 必须先算，<code dir="auto">minute</code> 和 <code dir="auto">second</code> 才能使用它。</p>
 <h3 id="用自测数据快速验证">用自测数据快速验证</h3>
 <p>若总秒数为 125：</p>
 <ul>
-<li><code>minute = 125 / 60</code> 得 2；</li>
-<li><code>second = 125 % 60</code> 得 5；</li>
-<li>反向检查：<code>2 * 60 + 5 = 125</code>。</li>
+<li><code dir="auto">minute = 125 / 60</code> 得 2；</li>
+<li><code dir="auto">second = 125 % 60</code> 得 5；</li>
+<li>反向检查：<code dir="auto">2 * 60 + 5 = 125</code>。</li>
 </ul>
 <p>所以结果是 2 分 5 秒。若总秒数正好为 120，余数为 0，结果是 2 分 0 秒；这里的 0 表示恰好整除，是正确状态。</p>
 <h2 id="写顺序程序的统一方法">写顺序程序的统一方法</h2>
@@ -798,7 +819,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 <tr>
 <td>交换变量</td>
-<td>覆盖前先用 <code>temp</code> 保存旧值</td>
+<td>覆盖前先用 <code dir="auto">temp</code> 保存旧值</td>
 <td>检查中间状态是否还保留两份数据</td>
 </tr>
 <tr>
@@ -815,28 +836,28 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width; // 按“长、宽”的顺序读取两个数据
     int area = length * width; // 面积等于长乘宽    int perimeter = (length + width) * 2; // 周长先算长加宽，再乘 2
     cout &lt;&lt; area &lt;&lt; " " &lt;&lt; perimeter &lt;&lt; endl; // 按“面积 空格 周长”输出    return 0;}</code></pre>
-<p>用输入 <code>3 5</code> 验证。</p>
+<p>用输入 <code dir="auto">3 5</code> 验证。</p>
 <h3 id="第一步先手算期望输出">第一步：先手算期望输出</h3>
 <ul>
-<li>面积：<code>3 * 5 = 15</code>；</li>
-<li>周长：<code>(3 + 5) * 2 = 16</code>；</li>
-<li>题目要求输出“面积 空格 周长”，所以期望输出为 <code>15 16</code>。</li>
+<li>面积：<code dir="auto">3 * 5 = 15</code>；</li>
+<li>周长：<code dir="auto">(3 + 5) * 2 = 16</code>；</li>
+<li>题目要求输出“面积 空格 周长”，所以期望输出为 <code dir="auto">15 16</code>。</li>
 </ul>
 <h3 id="第二步画状态表">第二步：画状态表</h3>
 <table>
 <thead>
 <tr>
 <th>已完成的语句</th>
-<th style="text-align: right"><code>length</code></th>
-<th style="text-align: right"><code>width</code></th>
-<th style="text-align: right"><code>area</code></th>
-<th style="text-align: right"><code>perimeter</code></th>
+<th style="text-align: right"><code dir="auto">length</code></th>
+<th style="text-align: right"><code dir="auto">width</code></th>
+<th style="text-align: right"><code dir="auto">area</code></th>
+<th style="text-align: right"><code dir="auto">perimeter</code></th>
 <th>当前输出</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>cin &gt;&gt; length &gt;&gt; width;</code></td>
+<td><code dir="auto">cin &gt;&gt; length &gt;&gt; width;</code></td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">尚未建立</td>
@@ -844,28 +865,28 @@ int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width;
 <td>无</td>
 </tr>
 <tr>
-<td><code>int area = length * width;</code></td>
-<td style="text-align: right">3</td>
-<td style="text-align: right">5</td>
-<td style="text-align: right">15</td>
-<td style="text-align: right">尚未建立</td>
-<td>无</td>
-</tr>
-<tr>
-<td><code>int perimeter = (length + width) * 2;</code></td>
+<td><code dir="auto">int area = length * width;</code></td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">15</td>
-<td style="text-align: right">16</td>
+<td style="text-align: right">尚未建立</td>
 <td>无</td>
 </tr>
 <tr>
-<td><code>cout &lt;&lt; area &lt;&lt; " " &lt;&lt; perimeter &lt;&lt; endl;</code></td>
+<td><code dir="auto">int perimeter = (length + width) * 2;</code></td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">15</td>
 <td style="text-align: right">16</td>
-<td><code>15 16</code> 并换行</td>
+<td>无</td>
+</tr>
+<tr>
+<td><code dir="auto">cout &lt;&lt; area &lt;&lt; " " &lt;&lt; perimeter &lt;&lt; endl;</code></td>
+<td style="text-align: right">3</td>
+<td style="text-align: right">5</td>
+<td style="text-align: right">15</td>
+<td style="text-align: right">16</td>
+<td><code dir="auto">15 16</code> 并换行</td>
 </tr>
 </tbody>
 </table>
@@ -885,18 +906,18 @@ int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width;
 </thead>
 <tbody>
 <tr>
-<td><code>1 1</code></td>
-<td><code>1 4</code></td>
+<td><code dir="auto">1 1</code></td>
+<td><code dir="auto">1 4</code></td>
 <td>最小范围、长宽相等</td>
 </tr>
 <tr>
-<td><code>1 8</code></td>
-<td><code>8 18</code></td>
+<td><code dir="auto">1 8</code></td>
+<td><code dir="auto">8 18</code></td>
 <td>长宽不相等，检查周长括号</td>
 </tr>
 <tr>
-<td><code>30000 30000</code></td>
-<td><code>900000000 120000</code></td>
+<td><code dir="auto">30000 30000</code></td>
+<td><code dir="auto">900000000 120000</code></td>
 <td>最大范围与中间结果</td>
 </tr>
 </tbody>
@@ -947,24 +968,24 @@ int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width;
 </table>
 <p>修正后用同一组失败数据重新运行，确认错误现象真的消失；再补一组边界数据，避免只修好了一个样例。</p>
 <h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
-<p>令 <code>a = 4</code>、<code>b = 7</code>，使用临时变量交换。先填写三个状态：保存旧 <code>a</code> 后 <code>temp = 4</code>；执行 <code>a = b</code> 后 <code>a = 7</code>；执行 <code>b = temp</code> 后 <code>b = 4</code>。</p>
-<p><strong>成功标准：</strong> 状态表最后必须是 <code>a = 7</code>、<code>b = 4</code>，且任何一步都能找到尚未丢失的旧值。完成后不看提示独立完成页末“整页综合测试”；提交后逐行重画错题的变量快照。</p>
+<p>令 <code dir="auto">a = 4</code>、<code dir="auto">b = 7</code>，使用临时变量交换。先填写三个状态：保存旧 <code dir="auto">a</code> 后 <code dir="auto">temp = 4</code>；执行 <code dir="auto">a = b</code> 后 <code dir="auto">a = 7</code>；执行 <code dir="auto">b = temp</code> 后 <code dir="auto">b = 4</code>。</p>
+<p><strong>成功标准：</strong> 状态表最后必须是 <code dir="auto">a = 7</code>、<code dir="auto">b = 4</code>，且任何一步都能找到尚未丢失的旧值。完成后不看提示独立完成页末“整页综合测试”；提交后逐行重画错题的变量快照。</p>
 <h2 id="常见错误">常见错误</h2>
 <h3 id="把多条赋值当成同时成立的方程">把多条赋值当成同时成立的方程</h3>
-<p><strong>错误：</strong> 用初值 3 同时计算 <code>a = a + 2;</code> 和 <code>a = a * 4;</code>。</p>
+<p><strong>错误：</strong> 用初值 3 同时计算 <code dir="auto">a = a + 2;</code> 和 <code dir="auto">a = a * 4;</code>。</p>
 <p><strong>检查：</strong> 每执行一行就更新状态。第三行必须读取第二行留下的 5。</p>
 <h3 id="输入变量还没准备好就开始计算">输入变量还没准备好就开始计算</h3>
-<p><strong>错误：</strong> 把面积计算放在 <code>cin</code> 之前，或读取未初始化变量。</p>
+<p><strong>错误：</strong> 把面积计算放在 <code dir="auto">cin</code> 之前，或读取未初始化变量。</p>
 <p><strong>检查：</strong> 顺着程序找每个变量的第一次读取，确认此前已有输入、初始化或赋值。</p>
 <h3 id="面积公式或赋值方向写错">面积公式或赋值方向写错</h3>
-<p><strong>错误：</strong> 写成 <code>area = length + width;</code>、<code>area == length * width;</code> 或 <code>length * width = area;</code>。</p>
-<p><strong>检查：</strong> 先手算公式，再确认左侧是接收结果的变量，使用的是赋值号 <code>=</code>。</p>
+<p><strong>错误：</strong> 写成 <code dir="auto">area = length + width;</code>、<code dir="auto">area == length * width;</code> 或 <code dir="auto">length * width = area;</code>。</p>
+<p><strong>检查：</strong> 先手算公式，再确认左侧是接收结果的变量，使用的是赋值号 <code dir="auto">=</code>。</p>
 <h3 id="交换时先覆盖旧值">交换时先覆盖旧值</h3>
-<p><strong>错误：</strong> 直接执行 <code>x = y; y = x;</code>。</p>
-<p><strong>检查：</strong> 画三列表，确认第一步已用 <code>temp</code> 保存旧 <code>x</code>。</p>
+<p><strong>错误：</strong> 直接执行 <code dir="auto">x = y; y = x;</code>。</p>
+<p><strong>检查：</strong> 画三列表，确认第一步已用 <code dir="auto">temp</code> 保存旧 <code dir="auto">x</code>。</p>
 <h3 id="单位拆分重复计算大单位">单位拆分重复计算大单位</h3>
 <p><strong>错误：</strong> 已算出小时后，仍直接用总秒数除以 60 得分钟部分。</p>
-<p><strong>检查：</strong> 先对 3600 取余得到 <code>rest</code>，再从 <code>rest</code> 中拆分钟和秒。</p>
+<p><strong>检查：</strong> 先对 3600 取余得到 <code dir="auto">rest</code>，再从 <code dir="auto">rest</code> 中拆分钟和秒。</p>
 <h3 id="公式正确输出顺序或格式错误">公式正确，输出顺序或格式错误</h3>
 <p><strong>错误：</strong> 题目要求“面积 周长”，却输出“周长 面积”，或擅自加提示文字。</p>
 <p><strong>检查：</strong> 把期望输出写成完整文本，与实际输出逐字符比较。</p>
@@ -973,7 +994,25 @@ int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width;
 <p><strong>检查：</strong> 代入输入上限，分别计算乘积、总和等可能出现的最大值。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>前面的<a href="/gesp/level1/variables-expressions/">程序基本概念</a>解释了变量和赋值，<a href="/gesp/level1/data-types/">基本数据类型</a>与<a href="/gesp/level1/operations/">基本运算</a>提供了类型和表达式规则。下一页<a href="/gesp/level1/branch/">分支结构</a>会在顺序执行的基础上加入条件：程序先计算条件，再选择本次真正要走的路线。</p>
-<section aria-labelledby="related-knowledge-sequential"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-sequential" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/operations/" class="astro-mkwt4ymd">基本运算</a></li></ul></section></div></section>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能说明顺序结构为什么按从上到下的实际语句次序执行。</label><label class="q-check"><input type="checkbox"> 我能在每条赋值后更新状态表，并判断旧值何时被覆盖。</label><label class="q-check"><input type="checkbox"> 我能用输入、手算、状态表和实际输出验证一段顺序程序。</label>
+<h2 id="整页综合测试">整页综合测试</h2>
+<span>5 题</span>
+<p class="q-title">第 1 题执行 int a = 3; a = a + 2; a = a * 4; 后，a 的值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题执行 int a = 3; a" value="A"><b>A.</b> 5</label><label class="q-opt"><input type="radio" name="第 1 题执行 int a = 3; a" value="B"><b>B.</b> 12</label><label class="q-opt"><input type="radio" name="第 1 题执行 int a = 3; a" value="C"><b>C.</b> 20</label><label class="q-opt"><input type="radio" name="第 1 题执行 int a = 3; a" value="D"><b>D.</b> 24</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>语句按顺序执行：a 先由 3 变为 5，再由 5 变为 20。<br><span class="q-kp">对应知识点：02 变量变化追踪</span></p>
+<p class="q-title">第 2 题输入长方形的长 a 和宽 b 后，哪条语句能计算并保存面积？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题输入长方形的长 a 和宽 b " value="A"><b>A.</b> area = a * b;</label><label class="q-opt"><input type="radio" name="第 2 题输入长方形的长 a 和宽 b " value="B"><b>B.</b> area = a + b;</label><label class="q-opt"><input type="radio" name="第 2 题输入长方形的长 a 和宽 b " value="C"><b>C.</b> area == a * b;</label><label class="q-opt"><input type="radio" name="第 2 题输入长方形的长 a 和宽 b " value="D"><b>D.</b> a * b = area;</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>长方形面积是长乘宽，赋值号左侧放保存结果的变量。<br><span class="q-kp">对应知识点：03 输入、计算、输出</span></p>
+<p class="q-title">第 3 题程序依次读入 x、y，再交换它们的值。哪组语句正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题程序依次读入 x、y，再交换它" value="A"><b>A.</b> t = x; x = y; y = t;</label><label class="q-opt"><input type="radio" name="第 3 题程序依次读入 x、y，再交换它" value="B"><b>B.</b> x = y; y = x;</label><label class="q-opt"><input type="radio" name="第 3 题程序依次读入 x、y，再交换它" value="C"><b>C.</b> t = x; y = t;</label><label class="q-opt"><input type="radio" name="第 3 题程序依次读入 x、y，再交换它" value="D"><b>D.</b> x == y;</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>先用临时变量 t 保存 x 的旧值，再把 y 赋给 x，最后把旧 x 赋给 y。<br><span class="q-kp">对应知识点：04 临时变量交换</span></p>
+<p class="q-title">第 4 题若总秒数为 125，依次计算 minute = 125 / 60 和 second = 125 % 60，结果是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题若总秒数为 125，依次计算 " value="A"><b>A.</b> 2 分 5 秒</label><label class="q-opt"><input type="radio" name="第 4 题若总秒数为 125，依次计算 " value="B"><b>B.</b> 2 分 25 秒</label><label class="q-opt"><input type="radio" name="第 4 题若总秒数为 125，依次计算 " value="C"><b>C.</b> 1 分 65 秒</label><label class="q-opt"><input type="radio" name="第 4 题若总秒数为 125，依次计算 " value="D"><b>D.</b> 125 分 0 秒</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>整数除法得到完整分钟数 2，取余得到不足一分钟的 5 秒。<br><span class="q-kp">对应知识点：05 单位换算</span></p>
+<p class="q-title">第 5 题顺序结构程序通常按什么次序执行普通语句？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题顺序结构程序通常按什么次序执行" value="A"><b>A.</b> 从上到下</label><label class="q-opt"><input type="radio" name="第 5 题顺序结构程序通常按什么次序执行" value="B"><b>B.</b> 从下到上</label><label class="q-opt"><input type="radio" name="第 5 题顺序结构程序通常按什么次序执行" value="C"><b>C.</b> 随机执行</label><label class="q-opt"><input type="radio" name="第 5 题顺序结构程序通常按什么次序执行" value="D"><b>D.</b> 只执行最后一行</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>没有分支和循环改变流程时，普通语句按书写顺序从上到下执行。<br><span class="q-kp">对应知识点：01 从上到下执行</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/operations/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 07</small><strong>基本运算</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/branch/" rel="next"><span><small>下一知识点 · 09</small><strong>分支结构</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -982,7 +1021,7 @@ int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width;
       <a class="kp-nav" href="kp9.html">下一个：分支结构 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-从上到下执行">01 从上到下执行</a></li><li><a href="#顺序结构是一条连续路线" class="lvl3">顺序结构是一条连续路线</a></li><li><a href="#三条语句不能同时计算" class="lvl3">三条语句不能同时计算</a></li><li><a href="#一条语句完成后状态才交给下一条" class="lvl3">一条语句完成后，状态才交给下一条</a></li><li><a href="#02-变量变化追踪">02 变量变化追踪</a></li><li><a href="#状态表记录每行执行后的快照" class="lvl3">状态表记录每行执行后的快照</a></li><li><a href="#多个变量怎样记录" class="lvl3">多个变量怎样记录</a></li><li><a href="#画状态表的固定步骤" class="lvl3">画状态表的固定步骤</a></li><li><a href="#03-输入计算输出">03 输入、计算、输出</a></li><li><a href="#顺序程序常见的三段职责" class="lvl3">顺序程序常见的三段职责</a></li><li><a href="#从题意写成语句" class="lvl3">从题意写成语句</a></li><li><a href="#先核对范围和中间结果" class="lvl3">先核对范围和中间结果</a></li><li><a href="#输出也有执行时刻" class="lvl3">输出也有执行时刻</a></li><li><a href="#04-临时变量交换">04 临时变量交换</a></li><li><a href="#为什么直接互相赋值会丢数据" class="lvl3">为什么直接互相赋值会丢数据</a></li><li><a href="#用临时变量保住即将被覆盖的旧值" class="lvl3">用临时变量保住即将被覆盖的旧值</a></li><li><a href="#05-单位换算">05 单位换算</a></li><li><a href="#除法取完整单位取余保留剩余量" class="lvl3">除法取完整单位，取余保留剩余量</a></li><li><a href="#为什么分钟要从-rest-中计算" class="lvl3">为什么分钟要从 rest 中计算</a></li><li><a href="#用自测数据快速验证" class="lvl3">用自测数据快速验证</a></li><li><a href="#写顺序程序的统一方法">写顺序程序的统一方法</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#第一步先手算期望输出" class="lvl3">第一步：先手算期望输出</a></li><li><a href="#第二步画状态表" class="lvl3">第二步：画状态表</a></li><li><a href="#第三步运行并逐字比较" class="lvl3">第三步：运行并逐字比较</a></li><li><a href="#顺序程序的验证清单">顺序程序的验证清单</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#把多条赋值当成同时成立的方程" class="lvl3">把多条赋值当成同时成立的方程</a></li><li><a href="#输入变量还没准备好就开始计算" class="lvl3">输入变量还没准备好就开始计算</a></li><li><a href="#面积公式或赋值方向写错" class="lvl3">面积公式或赋值方向写错</a></li><li><a href="#交换时先覆盖旧值" class="lvl3">交换时先覆盖旧值</a></li><li><a href="#单位拆分重复计算大单位" class="lvl3">单位拆分重复计算大单位</a></li><li><a href="#公式正确输出顺序或格式错误" class="lvl3">公式正确，输出顺序或格式错误</a></li><li><a href="#只测普通样例不估算最大中间结果" class="lvl3">只测普通样例，不估算最大中间结果</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-sequential">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-从上到下执行">01 从上到下执行</a></li><li><a href="#顺序结构是一条连续路线" class="lvl3">顺序结构是一条连续路线</a></li><li><a href="#三条语句不能同时计算" class="lvl3">三条语句不能同时计算</a></li><li><a href="#一条语句完成后状态才交给下一条" class="lvl3">一条语句完成后，状态才交给下一条</a></li><li><a href="#02-变量变化追踪">02 变量变化追踪</a></li><li><a href="#状态表记录每行执行后的快照" class="lvl3">状态表记录每行执行后的快照</a></li><li><a href="#多个变量怎样记录" class="lvl3">多个变量怎样记录</a></li><li><a href="#画状态表的固定步骤" class="lvl3">画状态表的固定步骤</a></li><li><a href="#03-输入计算输出">03 输入、计算、输出</a></li><li><a href="#顺序程序常见的三段职责" class="lvl3">顺序程序常见的三段职责</a></li><li><a href="#从题意写成语句" class="lvl3">从题意写成语句</a></li><li><a href="#先核对范围和中间结果" class="lvl3">先核对范围和中间结果</a></li><li><a href="#输出也有执行时刻" class="lvl3">输出也有执行时刻</a></li><li><a href="#04-临时变量交换">04 临时变量交换</a></li><li><a href="#为什么直接互相赋值会丢数据" class="lvl3">为什么直接互相赋值会丢数据</a></li><li><a href="#用临时变量保住即将被覆盖的旧值" class="lvl3">用临时变量保住即将被覆盖的旧值</a></li><li><a href="#05-单位换算">05 单位换算</a></li><li><a href="#除法取完整单位取余保留剩余量" class="lvl3">除法取完整单位，取余保留剩余量</a></li><li><a href="#为什么分钟要从-rest-中计算" class="lvl3">为什么分钟要从 rest 中计算</a></li><li><a href="#用自测数据快速验证" class="lvl3">用自测数据快速验证</a></li><li><a href="#写顺序程序的统一方法">写顺序程序的统一方法</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#第一步先手算期望输出" class="lvl3">第一步：先手算期望输出</a></li><li><a href="#第二步画状态表" class="lvl3">第二步：画状态表</a></li><li><a href="#第三步运行并逐字比较" class="lvl3">第三步：运行并逐字比较</a></li><li><a href="#顺序程序的验证清单">顺序程序的验证清单</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#把多条赋值当成同时成立的方程" class="lvl3">把多条赋值当成同时成立的方程</a></li><li><a href="#输入变量还没准备好就开始计算" class="lvl3">输入变量还没准备好就开始计算</a></li><li><a href="#面积公式或赋值方向写错" class="lvl3">面积公式或赋值方向写错</a></li><li><a href="#交换时先覆盖旧值" class="lvl3">交换时先覆盖旧值</a></li><li><a href="#单位拆分重复计算大单位" class="lvl3">单位拆分重复计算大单位</a></li><li><a href="#公式正确输出顺序或格式错误" class="lvl3">公式正确，输出顺序或格式错误</a></li><li><a href="#只测普通样例不估算最大中间结果" class="lvl3">只测普通样例，不估算最大中间结果</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -994,6 +1033,31 @@ int main() {    int length;    int width;    cin &gt;&gt; length &gt;&gt; width;
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

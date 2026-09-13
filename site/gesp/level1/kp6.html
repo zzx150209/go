@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -473,13 +492,15 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <h2 id="本课先记住">本课先记住</h2>
 <ul>
 <li><strong>核心结论：</strong> 数据类型决定一个值怎样被解释、通常能保存多大以及参与运算时遵守什么规则；选择类型要同时检查输入范围和中间结果。</li>
-<li><strong>常用语法：</strong> 整数常用 <code>int</code>、较大整数用 <code>long long</code>，小数常用 <code>double</code>，单个字符用 <code>char</code>，真假状态用 <code>bool</code>。</li>
-<li><strong>最小示例：</strong> <code>int age = 12; double score = 92.5; char grade = 'A'; bool passed = true;</code></li>
-<li><strong>关键易错点：</strong> 数值范围不等于有效精度；整数除法会舍去小数部分，普通 <code>char</code> 的符号范围还可能随平台而不同。</li>
+<li><strong>常用语法：</strong> 整数常用 <code dir="auto">int</code>、较大整数用 <code dir="auto">long long</code>，小数常用 <code dir="auto">double</code>，单个字符用 <code dir="auto">char</code>，真假状态用 <code dir="auto">bool</code>。</li>
+<li><strong>最小示例：</strong> <code dir="auto">int age = 12; double score = 92.5; char grade = 'A'; bool passed = true;</code></li>
+<li><strong>关键易错点：</strong> 数值范围不等于有效精度；整数除法会舍去小数部分，普通 <code dir="auto">char</code> 的符号范围还可能随平台而不同。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-整数类型" class="astro-6dte4xza">01 整数类型</a></li><li class="astro-6dte4xza"><a href="#02-浮点类型与有效精度" class="astro-6dte4xza">02 浮点类型</a></li><li class="astro-6dte4xza"><a href="#03-char-字符类型" class="astro-6dte4xza">03 char</a></li><li class="astro-6dte4xza"><a href="#04-bool-与逻辑值" class="astro-6dte4xza">04 bool</a></li><li class="astro-6dte4xza"><a href="#05-类型转换" class="astro-6dte4xza">05 类型转换</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>变量像一个有名字的盒子，<strong>数据类型决定这个盒子准备保存什么、通常能保存多大，以及计算机怎样解释里面的数据</strong>。</p>
-<p>例如，年龄 12、平均分 92.5、等级字符 <code>'A'</code> 和“记录是否完成”这四项数据看起来都很短，却不能用同一种规则理解：</p>
+<p>例如，年龄 12、平均分 92.5、等级字符 <code dir="auto">'A'</code> 和“记录是否完成”这四项数据看起来都很短，却不能用同一种规则理解：</p>
 <table>
 <thead>
 <tr>
@@ -500,14 +521,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>浮点类型</td>
 </tr>
 <tr>
-<td><code>'A'</code></td>
+<td><code dir="auto">'A'</code></td>
 <td>是哪个单个字符</td>
-<td><code>char</code></td>
+<td><code dir="auto">char</code></td>
 </tr>
 <tr>
-<td><code>true</code></td>
+<td><code dir="auto">true</code></td>
 <td>某件事是否成立</td>
-<td><code>bool</code></td>
+<td><code dir="auto">bool</code></td>
 </tr>
 </tbody>
 </table>
@@ -520,7 +541,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <p>本页覆盖一级大纲中的整数、浮点、字符、布尔类型，并保留现有自测需要的最小类型转换知识。表中的字节数和范围以常见 GCC/OJ 环境为参考；C++ 在不同编译器和平台上的具体实现可能不同。</p>
 <h2 id="01-整数类型">01 整数类型</h2>
-<p>整数类型保存没有小数部分的数，例如人数、次数、编号和总和。一级只学习 <code>int</code> 和 <code>long long</code>：普通整数优先用 <code>int</code>，较大整数或较大中间结果用 <code>long long</code>。</p>
+<p>整数类型保存没有小数部分的数，例如人数、次数、编号和总和。一级只学习 <code dir="auto">int</code> 和 <code dir="auto">long long</code>：普通整数优先用 <code dir="auto">int</code>，较大整数或较大中间结果用 <code dir="auto">long long</code>。</p>
 <h3 id="常见大小和范围">常见大小和范围</h3>
 <table>
 <thead>
@@ -533,29 +554,29 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>int</code></td>
+<td><code dir="auto">int</code></td>
 <td style="text-align: right">4 字节</td>
 <td>-2,147,483,648 到 2,147,483,647</td>
 <td>普通整数的首选</td>
 </tr>
 <tr>
-<td><code>long long</code></td>
+<td><code dir="auto">long long</code></td>
 <td style="text-align: right">8 字节</td>
 <td>-9,223,372,036,854,775,808 到 9,223,372,036,854,775,807</td>
 <td>较大整数和较大中间结果</td>
 </tr>
 </tbody>
 </table>
-<p>表中的字节数和范围以常见 GCC/OJ 环境为参考；选择时仍要以题目数据范围为准。一级竞赛代码需要保存较大整数时，直接检查是否应使用 <code>long long</code>，不扩展其他整数类型成员。</p>
+<p>表中的字节数和范围以常见 GCC/OJ 环境为参考；选择时仍要以题目数据范围为准。一级竞赛代码需要保存较大整数时，直接检查是否应使用 <code dir="auto">long long</code>，不扩展其他整数类型成员。</p>
 <h3 id="普通整数为什么优先用-int">普通整数为什么优先用 int</h3>
-<p><code>int</code> 能覆盖大多数一级题目的年龄、分数、计数和较小计算结果，写法也最直白：</p>
-<pre><code>int age = 12; // 年龄是普通整数，12 远在 int 的常见范围内int studentCount = 45; // 当前学生人数也适合用 int 保存</code></pre>
+<p><code dir="auto">int</code> 能覆盖大多数一级题目的年龄、分数、计数和较小计算结果，写法也最直白：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>int age = 12; // 年龄是普通整数，12 远在 int 的常见范围内int studentCount = 45; // 当前学生人数也适合用 int 保存</code></pre>
 <h3 id="什么时候需要-long-long">什么时候需要 long long</h3>
 <p>要同时检查<strong>输入值</strong>和<strong>计算结果</strong>。例如 100,000 个数，每个数最大是 100,000：</p>
 <pre><code>最大总和 = 100000 × 100000 = 10000000000</code></pre>
-<p>每个输入都能放进 <code>int</code>，但总和 10,000,000,000 已经超过 <code>int</code> 的常见上限，所以保存总和的变量应使用 <code>long long</code>。</p>
+<p>每个输入都能放进 <code dir="auto">int</code>，但总和 10,000,000,000 已经超过 <code dir="auto">int</code> 的常见上限，所以保存总和的变量应使用 <code dir="auto">long long</code>。</p>
 <pre><code>long long total = 100000LL * 100000; // 先按 long long 做乘法，再保存 10000000000</code></pre>
-<p><code>LL</code> 后缀说明这个整数常量按 <code>long long</code> 处理。不能只把左边改成 <code>long long</code>，却让右边先按范围较小的整数类型算完；<strong>中间结果溢出后，再放进更大的盒子也救不回来。</strong></p>
+<p><code dir="auto">LL</code> 后缀说明这个整数常量按 <code dir="auto">long long</code> 处理。不能只把左边改成 <code dir="auto">long long</code>，却让右边先按范围较小的整数类型算完；<strong>中间结果溢出后，再放进更大的盒子也救不回来。</strong></p>
 <h3 id="怎样验证整数类型是否合适">怎样验证整数类型是否合适</h3>
 <ol>
 <li>找出题目允许的最大绝对值。</li>
@@ -563,9 +584,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>与类型范围比较，不要只看最后答案。</li>
 <li>用最大值附近的数据手算一次。</li>
 </ol>
-<p>例如结果最多 1,000,000，<code>int</code> 足够；结果可能到 5,000,000,000，就应考虑 <code>long long</code>。即使使用 <code>long long</code>，范围也不是无限的，继续乘很大的数仍会溢出。</p>
+<p>例如结果最多 1,000,000，<code dir="auto">int</code> 足够；结果可能到 5,000,000,000，就应考虑 <code dir="auto">long long</code>。即使使用 <code dir="auto">long long</code>，范围也不是无限的，继续乘很大的数仍会溢出。</p>
 <h2 id="02-浮点类型与有效精度">02 浮点类型与有效精度</h2>
-<p>浮点类型用来保存带小数的数据，例如温度、平均分、长度和计算得到的比值。一级主要认识 <code>float</code> 和 <code>double</code>。</p>
+<p>浮点类型用来保存带小数的数据，例如温度、平均分、长度和计算得到的比值。一级主要认识 <code dir="auto">float</code> 和 <code dir="auto">double</code>。</p>
 <h3 id="范围和精度是两件事">范围和精度是两件事</h3>
 <table>
 <thead>
@@ -578,13 +599,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>float</code></td>
+<td><code dir="auto">float</code></td>
 <td style="text-align: right">4 字节</td>
 <td style="text-align: right">3.4 × 10³⁸</td>
 <td style="text-align: right">6—7 位</td>
 </tr>
 <tr>
-<td><code>double</code></td>
+<td><code dir="auto">double</code></td>
 <td style="text-align: right">8 字节</td>
 <td style="text-align: right">1.7 × 10³⁰⁸</td>
 <td style="text-align: right">15—16 位</td>
@@ -621,12 +642,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>因此，“<code>float</code> 约有 6—7 位有效数字”不能理解成“永远保留小数点后 6—7 位”。把超过可靠位数的值保存进去时，末尾可能发生舍入：</p>
+<p>因此，“<code dir="auto">float</code> 约有 6—7 位有效数字”不能理解成“永远保留小数点后 6—7 位”。把超过可靠位数的值保存进去时，末尾可能发生舍入：</p>
 <pre><code>float roughValue = 12345678.0f; // 8 位整数超过 float 常见可靠精度，末尾可能舍入double preciseValue = 12345678.0; // double 通常能可靠保留这 8 位数字</code></pre>
-<p>小数常量 <code>3.14</code> 默认按 <code>double</code> 看待；写成 <code>3.14f</code> 才明确表示 <code>float</code> 常量。一级小数计算通常优先使用 <code>double</code>，除非题目明确要求其他类型。</p>
+<p>小数常量 <code dir="auto">3.14</code> 默认按 <code dir="auto">double</code> 看待；写成 <code dir="auto">3.14f</code> 才明确表示 <code dir="auto">float</code> 常量。一级小数计算通常优先使用 <code dir="auto">double</code>，除非题目明确要求其他类型。</p>
 <h3 id="为什么小数有时不是完全精确">为什么小数有时不是完全精确</h3>
-<p>计算机内部用二进制保存数据，很多十进制小数不能用有限位二进制准确写完。于是 <code>0.1</code>、<code>0.2</code> 这样的值在内部通常只是非常接近原数。</p>
-<p>这属于浮点表示的精度限制，并不是 <code>double</code> “算错了”。还要分清：</p>
+<p>计算机内部用二进制保存数据，很多十进制小数不能用有限位二进制准确写完。于是 <code dir="auto">0.1</code>、<code dir="auto">0.2</code> 这样的值在内部通常只是非常接近原数。</p>
+<p>这属于浮点表示的精度限制，并不是 <code dir="auto">double</code> “算错了”。还要分清：</p>
 <ul>
 <li><strong>保存精度</strong>：变量内部能可靠保留多少位有效数字；</li>
 <li><strong>输出格式</strong>：屏幕上要求显示几位小数。</li>
@@ -641,7 +662,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>最后按题目要求核对输出位数，不把显示格式当成内部精度。</li>
 </ol>
 <h2 id="03-char-字符类型">03 char 字符类型</h2>
-<p><code>char</code> 保存一个字符，常见大小是 1 字节。字符常量必须用<strong>单引号</strong>：</p>
+<p><code dir="auto">char</code> 保存一个字符，常见大小是 1 字节。字符常量必须用<strong>单引号</strong>：</p>
 <pre><code>char grade = 'A'; // grade 保存单个等级字符 Achar digit = '3'; // digit 保存字符 3，不是整数 3</code></pre>
 <p>下面三种写法表示的对象不同：</p>
 <table>
@@ -654,30 +675,30 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>'3'</code></td>
+<td><code dir="auto">'3'</code></td>
 <td>单个字符 3</td>
-<td><code>char</code></td>
+<td><code dir="auto">char</code></td>
 </tr>
 <tr>
-<td><code>3</code></td>
+<td><code dir="auto">3</code></td>
 <td>整数三</td>
 <td>整数类型</td>
 </tr>
 <tr>
-<td><code>"3"</code></td>
+<td><code dir="auto">"3"</code></td>
 <td>由双引号包围的文本</td>
-<td>不是普通 <code>char</code></td>
+<td>不是普通 <code dir="auto">char</code></td>
 </tr>
 </tbody>
 </table>
-<p>所以自测中问“字符常量 <code>'3'</code> 的类型”，应先看单引号，答案是 <code>char</code>，不能因为里面长得像数字就选 <code>int</code>。</p>
-<p>字符在计算机内部也有编号。常见 ASCII 编码中，<code>'0'</code> 到 <code>'9'</code>、<code>'A'</code> 到 <code>'Z'</code>、<code>'a'</code> 到 <code>'z'</code> 各自连续，<code>'0'</code> 常见编号为 48，<code>'A'</code> 为 65。本页只用它说明“字符和整数不是同一个值”；字符编码和字符转换会在后续内容中系统学习。</p>
-<p>普通 <code>char</code> 默认按有符号还是无符号解释，由编译器和平台决定。一级阶段把它用于普通单字符，不要依赖它保存负数，也不要把“1 字节”误解成“固定能保存 -128 到 127”。</p>
+<p>所以自测中问“字符常量 <code dir="auto">'3'</code> 的类型”，应先看单引号，答案是 <code dir="auto">char</code>，不能因为里面长得像数字就选 <code dir="auto">int</code>。</p>
+<p>字符在计算机内部也有编号。常见 ASCII 编码中，<code dir="auto">'0'</code> 到 <code dir="auto">'9'</code>、<code dir="auto">'A'</code> 到 <code dir="auto">'Z'</code>、<code dir="auto">'a'</code> 到 <code dir="auto">'z'</code> 各自连续，<code dir="auto">'0'</code> 常见编号为 48，<code dir="auto">'A'</code> 为 65。本页只用它说明“字符和整数不是同一个值”；字符编码和字符转换会在后续内容中系统学习。</p>
+<p>普通 <code dir="auto">char</code> 默认按有符号还是无符号解释，由编译器和平台决定。一级阶段把它用于普通单字符，不要依赖它保存负数，也不要把“1 字节”误解成“固定能保存 -128 到 127”。</p>
 <h2 id="04-bool-与逻辑值">04 bool 与逻辑值</h2>
-<p><code>bool</code> 只表示两种逻辑状态：</p>
+<p><code dir="auto">bool</code> 只表示两种逻辑状态：</p>
 <pre><code>bool recordReady = true; // 记录已经准备好，状态成立bool answerCorrect = false; // 记录答案尚不正确，状态不成立</code></pre>
-<p><code>true</code> 和 <code>false</code> 必须小写。它们不是放在引号中的文字，也不是四种不同状态中的两个编号。</p>
-<p>在常见 GCC/OJ 环境中，<code>bool</code> 通常占 1 字节；这不表示它有 256 种逻辑状态，它的逻辑值仍只有 <code>false</code> 和 <code>true</code>。普通 <code>cout</code> 输出时，<code>false</code> 通常显示 0，<code>true</code> 通常显示 1。</p>
+<p><code dir="auto">true</code> 和 <code dir="auto">false</code> 必须小写。它们不是放在引号中的文字，也不是四种不同状态中的两个编号。</p>
+<p>在常见 GCC/OJ 环境中，<code dir="auto">bool</code> 通常占 1 字节；这不表示它有 256 种逻辑状态，它的逻辑值仍只有 <code dir="auto">false</code> 和 <code dir="auto">true</code>。普通 <code dir="auto">cout</code> 输出时，<code dir="auto">false</code> 通常显示 0，<code dir="auto">true</code> 通常显示 1。</p>
 <p>条件判断中，0 会被当作假，非 0 会被当作真。但写程序时应优先使用含义明确的状态名和比较条件，不要让读者猜一个数字代表什么。</p>
 <table>
 <thead>
@@ -710,7 +731,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>只有当问题本身只需要回答“是／否”时，才适合选择 <code>bool</code>。</p>
+<p>只有当问题本身只需要回答“是／否”时，才适合选择 <code dir="auto">bool</code>。</p>
 <h2 id="05-类型转换">05 类型转换</h2>
 <p>有时已有数据的类型与当前需要的结果不同，程序会发生类型转换。本页只讲现有一级自测需要的三条规则，完整运算规则在下一页继续学习。</p>
 <h3 id="浮点数转整数向-0-截去小数部分">浮点数转整数：向 0 截去小数部分</h3>
@@ -726,24 +747,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td style="text-align: right">3.14</td>
-<td><code>int(3.14)</code></td>
+<td><code dir="auto">int(3.14)</code></td>
 <td style="text-align: right">3</td>
 </tr>
 <tr>
 <td style="text-align: right">3.8</td>
-<td><code>int(3.8)</code></td>
+<td><code dir="auto">int(3.8)</code></td>
 <td style="text-align: right">3</td>
 </tr>
 <tr>
 <td style="text-align: right">-3.8</td>
-<td><code>int(-3.8)</code></td>
+<td><code dir="auto">int(-3.8)</code></td>
 <td style="text-align: right">-3</td>
 </tr>
 </tbody>
 </table>
-<p>这不是四舍五入。转换得到的是一个新的整数值，原来的 <code>value</code> 仍保存 -3.8。</p>
+<p>这不是四舍五入。转换得到的是一个新的整数值，原来的 <code dir="auto">value</code> 仍保存 -3.8。</p>
 <h3 id="整数除法和浮点除法">整数除法和浮点除法</h3>
-<p>当 <code>a = 7</code>、<code>b = 2</code> 时：</p>
+<p>当 <code dir="auto">a = 7</code>、<code dir="auto">b = 2</code> 时：</p>
 <table>
 <thead>
 <tr>
@@ -754,32 +775,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>a / b</code></td>
+<td><code dir="auto">a / b</code></td>
 <td>两边都是整数，先做整数除法</td>
 <td style="text-align: right">3</td>
 </tr>
 <tr>
-<td><code>a * 1.0 / b</code></td>
-<td><code>1.0</code> 让运算中出现浮点数</td>
+<td><code dir="auto">a * 1.0 / b</code></td>
+<td><code dir="auto">1.0</code> 让运算中出现浮点数</td>
 <td style="text-align: right">3.5</td>
 </tr>
 <tr>
-<td><code>0.0 + a / b</code></td>
-<td>先算 <code>a / b = 3</code>，再加 0.0</td>
+<td><code dir="auto">0.0 + a / b</code></td>
+<td>先算 <code dir="auto">a / b = 3</code>，再加 0.0</td>
 <td style="text-align: right">3.0</td>
 </tr>
 <tr>
-<td><code>(0.0 + a) / b</code></td>
+<td><code dir="auto">(0.0 + a) / b</code></td>
 <td>括号内先得到浮点数 7.0，再除以 2</td>
 <td style="text-align: right">3.5</td>
 </tr>
 </tbody>
 </table>
-<p>判断结果时，要看小数<strong>在整数除法之前还是之后</strong>参与运算。整数除法已经算完后再出现 <code>0.0</code>，丢掉的小数部分不会回来。</p>
+<p>判断结果时，要看小数<strong>在整数除法之前还是之后</strong>参与运算。整数除法已经算完后再出现 <code dir="auto">0.0</code>，丢掉的小数部分不会回来。</p>
 <h3 id="取余只用于整数">取余只用于整数</h3>
-<p><code>%</code> 的两个操作数都必须是整数：</p>
+<p><code dir="auto">%</code> 的两个操作数都必须是整数：</p>
 <pre><code>int remainder = 7 % 2; // 7 除以 2 余 1，两个操作数都是整数</code></pre>
-<p><code>7 % 2.5</code>、<code>3.14 % 2</code> 和 <code>8.0 % 3.0</code> 都不符合 C++ 的取余规则。需要处理浮点运算时，不能直接套用整数取余写法。</p>
+<p><code dir="auto">7 % 2.5</code>、<code dir="auto">3.14 % 2</code> 和 <code dir="auto">8.0 % 3.0</code> 都不符合 C++ 的取余规则。需要处理浮点运算时，不能直接套用整数取余写法。</p>
 <h2 id="怎样选择类型">怎样选择类型</h2>
 <table>
 <thead>
@@ -792,27 +813,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>普通整数</td>
-<td><code>int</code></td>
+<td><code dir="auto">int</code></td>
 <td>输入和中间结果是否超过约 21 亿</td>
 </tr>
 <tr>
 <td>较大整数</td>
-<td><code>long long</code></td>
+<td><code dir="auto">long long</code></td>
 <td>结果是否仍在约 ±9.22 × 10¹⁸ 内</td>
 </tr>
 <tr>
 <td>带小数的数据</td>
-<td><code>double</code></td>
+<td><code dir="auto">double</code></td>
 <td>范围、有效数字和题目输出要求</td>
 </tr>
 <tr>
 <td>单个字符</td>
-<td><code>char</code></td>
+<td><code dir="auto">char</code></td>
 <td>是否确实只有一个字符、是否用了单引号</td>
 </tr>
 <tr>
 <td>是／否状态</td>
-<td><code>bool</code></td>
+<td><code dir="auto">bool</code></td>
 <td>问题是否真的只有两种状态</td>
 </tr>
 </tbody>
@@ -841,54 +862,72 @@ int main() {    int activeStudents; // 当前活跃人数是普通范围内的�
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>activeStudents = 45</code></td>
-<td>45 是普通整数，<code>int</code> 足够</td>
+<td><code dir="auto">activeStudents = 45</code></td>
+<td>45 是普通整数，<code dir="auto">int</code> 足够</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>totalSubmissions = 8000000000</code></td>
-<td>80 亿超过 <code>int</code> 常见上限，使用 <code>long long</code></td>
+<td><code dir="auto">totalSubmissions = 8000000000</code></td>
+<td>80 亿超过 <code dir="auto">int</code> 常见上限，使用 <code dir="auto">long long</code></td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td><code>averageScore = 92.5</code></td>
-<td>平均分带小数，使用 <code>double</code></td>
+<td><code dir="auto">averageScore = 92.5</code></td>
+<td>平均分带小数，使用 <code dir="auto">double</code></td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td><code>level = 'A'</code></td>
-<td>等级只有一个字符，使用 <code>char</code></td>
+<td><code dir="auto">level = 'A'</code></td>
+<td>等级只有一个字符，使用 <code dir="auto">char</code></td>
 </tr>
 <tr>
 <td style="text-align: right">5</td>
-<td><code>recordReady = true</code></td>
-<td>只记录是否准备好，使用 <code>bool</code></td>
+<td><code dir="auto">recordReady = true</code></td>
+<td>只记录是否准备好，使用 <code dir="auto">bool</code></td>
 </tr>
 <tr>
 <td style="text-align: right">6</td>
 <td>依次输出五项</td>
-<td>普通输出中 <code>true</code> 显示为 1</td>
+<td>普通输出中 <code dir="auto">true</code> 显示为 1</td>
 </tr>
 </tbody>
 </table>
-<p>这段程序展示了同一条记录中怎样根据数据含义和范围选择类型。把第二项错误地改成 <code>int</code>，输入 8,000,000,000 就可能超出范围；把第三项改成 <code>int</code>，92.5 的小数部分无法按原值保存。</p>
+<p>这段程序展示了同一条记录中怎样根据数据含义和范围选择类型。把第二项错误地改成 <code dir="auto">int</code>，输入 8,000,000,000 就可能超出范围；把第三项改成 <code dir="auto">int</code>，92.5 的小数部分无法按原值保存。</p>
 <h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
-<p>为 <code>2000000000</code>、<code>3000000000</code>、<code>0.000123456789</code> 选择类型。先判断数据是整数还是小数，再检查常见范围或有效数字：第一项可用 <code>int</code>，第二项超过常见 <code>int</code> 上限应使用 <code>long long</code>，第三项需要保留较多有效数字时优先使用 <code>double</code>。</p>
+<p>为 <code dir="auto">2000000000</code>、<code dir="auto">3000000000</code>、<code dir="auto">0.000123456789</code> 选择类型。先判断数据是整数还是小数，再检查常见范围或有效数字：第一项可用 <code dir="auto">int</code>，第二项超过常见 <code dir="auto">int</code> 上限应使用 <code dir="auto">long long</code>，第三项需要保留较多有效数字时优先使用 <code dir="auto">double</code>。</p>
 <p><strong>成功标准：</strong> 每项选择都同时写出“数据含义”和“范围或精度”依据。完成后不看本段答案，独立完成页末“整页综合测试”；提交后逐题核对解析，并能用边界值重新说明错题为什么不适合原类型。</p>
 <h2 id="常见错误">常见错误</h2>
 <ol>
-<li><strong>只看最后答案，不看中间结果。</strong> 右边先溢出后，再赋给 <code>long long</code> 已经太晚；要让较大类型在计算开始前参与。</li>
+<li><strong>只看最后答案，不看中间结果。</strong> 右边先溢出后，再赋给 <code dir="auto">long long</code> 已经太晚；要让较大类型在计算开始前参与。</li>
 <li><strong>把浮点范围和精度混为一谈。</strong> 能表示很大的数，不等于每一位都可靠。</li>
-<li><strong>把有效数字理解成小数位数。</strong> <code>123.456</code> 与 <code>0.00123456</code> 都有 6 位有效数字。</li>
-<li><strong>字符引号写错。</strong> 单个字符写 <code>'A'</code>；<code>"A"</code> 不是普通 <code>char</code>。</li>
-<li><strong>把 <code>bool</code> 当成普通小整数。</strong> 它应表达“是否成立”，不能保存分数或多项菜单编号。</li>
-<li><strong>认为浮点转整数会四舍五入。</strong> <code>int(3.8)</code> 得 3，<code>int(-3.8)</code> 得 -3，都是向 0 截断。</li>
+<li><strong>把有效数字理解成小数位数。</strong> <code dir="auto">123.456</code> 与 <code dir="auto">0.00123456</code> 都有 6 位有效数字。</li>
+<li><strong>字符引号写错。</strong> 单个字符写 <code dir="auto">'A'</code>；<code dir="auto">"A"</code> 不是普通 <code dir="auto">char</code>。</li>
+<li><strong>把 <code dir="auto">bool</code> 当成普通小整数。</strong> 它应表达“是否成立”，不能保存分数或多项菜单编号。</li>
+<li><strong>认为浮点转整数会四舍五入。</strong> <code dir="auto">int(3.8)</code> 得 3，<code dir="auto">int(-3.8)</code> 得 -3，都是向 0 截断。</li>
 <li><strong>看到表达式里有 0.0 就断定结果一定是 3.5。</strong> 若整数除法已经先完成，丢掉的小数部分不会被后面的浮点数补回来。</li>
-<li><strong>把 <code>%</code> 用在小数上。</strong> 取余运算的两个操作数都必须是整数。</li>
+<li><strong>把 <code dir="auto">%</code> 用在小数上。</strong> 取余运算的两个操作数都必须是整数。</li>
 </ol>
 <h2 id="关联学习">关联学习</h2>
 <p><a href="/gesp/level1/operations/">基本运算</a>会继续讲整数除法、取余、运算顺序和不同类型共同参与计算时的结果。</p>
-<section aria-labelledby="related-knowledge-data-types"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-data-types" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/variables-expressions/" class="astro-mkwt4ymd">程序基本概念</a></li></ul></section></div></section>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能先按数据含义分类，再按范围或精度选择类型。</label><label class="q-check"><input type="checkbox"> 我能解释整数中间结果、浮点有效数字、char 单引号和 bool 二态。</label><label class="q-check"><input type="checkbox"> 我能判断向 0 截断、整数除法与取余的最小类型规则。</label>
+<h2 id="整页综合测试">整页综合测试</h2>
+<span>5 题</span>
+<p class="q-title">第 1 题字符常量 &#39;3&#39; 的数据类型是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题字符常量 &#39;3&#39" value="A"><b>A.</b> double</label><label class="q-opt"><input type="radio" name="第 1 题字符常量 &#39;3&#39" value="B"><b>B.</b> float</label><label class="q-opt"><input type="radio" name="第 1 题字符常量 &#39;3&#39" value="C"><b>C.</b> char</label><label class="q-opt"><input type="radio" name="第 1 题字符常量 &#39;3&#39" value="D"><b>D.</b> int</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>单引号包围一个字符，得到 char 类型的字符常量。<br><span class="q-kp">对应知识点：03 常量</span></p>
+<p class="q-title">第 2 题当 a = 7、b = 2 时，下面哪个表达式的结果不是 3.5？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题当 a = 7、b = 2 时" value="A"><b>A.</b> 0.0 + a / b</label><label class="q-opt"><input type="radio" name="第 2 题当 a = 7、b = 2 时" value="B"><b>B.</b> (a + 0.0) / b</label><label class="q-opt"><input type="radio" name="第 2 题当 a = 7、b = 2 时" value="C"><b>C.</b> (0.0 + a) / b</label><label class="q-opt"><input type="radio" name="第 2 题当 a = 7、b = 2 时" value="D"><b>D.</b> a / (0.0 + b)</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>A 中 a / b 先做整数除法得到 3，再与 0.0 相加得到 3.0。其余选项先把运算转为浮点除法。<br><span class="q-kp">对应知识点：02 浮点类型与有效精度</span></p>
+<p class="q-title">第 3 题下面哪个表达式符合 C++ 的取余规则？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题下面哪个表达式符合 C++ 的" value="A"><b>A.</b> 7 % 2</label><label class="q-opt"><input type="radio" name="第 3 题下面哪个表达式符合 C++ 的" value="B"><b>B.</b> 7 % 2.5</label><label class="q-opt"><input type="radio" name="第 3 题下面哪个表达式符合 C++ 的" value="C"><b>C.</b> 3.14 % 2</label><label class="q-opt"><input type="radio" name="第 3 题下面哪个表达式符合 C++ 的" value="D"><b>D.</b> 8.0 % 3.0</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>取余运算符 % 的两个操作数都必须是整数，只有 7 % 2 符合规则。<br><span class="q-kp">对应知识点：01 整数类型</span></p>
+<p class="q-title">第 4 题int(3.14) 的结果是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题int(3.14) 的结果是什" value="A"><b>A.</b> 3</label><label class="q-opt"><input type="radio" name="第 4 题int(3.14) 的结果是什" value="B"><b>B.</b> 3.14</label><label class="q-opt"><input type="radio" name="第 4 题int(3.14) 的结果是什" value="C"><b>C.</b> 4</label><label class="q-opt"><input type="radio" name="第 4 题int(3.14) 的结果是什" value="D"><b>D.</b> 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>转换为 int 时会截去小数部分，因此得到 3。<br><span class="q-kp">对应知识点：05 类型转换</span></p>
+<p class="q-title">第 5 题要保存 true 或 false，最直接的数据类型是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题要保存 true 或 fals" value="A"><b>A.</b> bool</label><label class="q-opt"><input type="radio" name="第 5 题要保存 true 或 fals" value="B"><b>B.</b> char</label><label class="q-opt"><input type="radio" name="第 5 题要保存 true 或 fals" value="C"><b>C.</b> double</label><label class="q-opt"><input type="radio" name="第 5 题要保存 true 或 fals" value="D"><b>D.</b> long long</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>bool 用于保存逻辑值 true 或 false，输出时通常显示为 1 或 0。<br><span class="q-kp">对应知识点：04 bool 与逻辑值</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/variables-expressions/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 05</small><strong>程序基本概念</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/operations/" rel="next"><span><small>下一知识点 · 07</small><strong>基本运算</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -897,7 +936,7 @@ int main() {    int activeStudents; // 当前活跃人数是普通范围内的�
       <a class="kp-nav" href="kp7.html">下一个：基本运算 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-整数类型">01 整数类型</a></li><li><a href="#常见大小和范围" class="lvl3">常见大小和范围</a></li><li><a href="#普通整数为什么优先用-int" class="lvl3">普通整数为什么优先用 int</a></li><li><a href="#什么时候需要-long-long" class="lvl3">什么时候需要 long long</a></li><li><a href="#怎样验证整数类型是否合适" class="lvl3">怎样验证整数类型是否合适</a></li><li><a href="#02-浮点类型与有效精度">02 浮点类型与有效精度</a></li><li><a href="#范围和精度是两件事" class="lvl3">范围和精度是两件事</a></li><li><a href="#什么是有效数字" class="lvl3">什么是有效数字</a></li><li><a href="#为什么小数有时不是完全精确" class="lvl3">为什么小数有时不是完全精确</a></li><li><a href="#怎样验证浮点类型是否合适" class="lvl3">怎样验证浮点类型是否合适</a></li><li><a href="#03-char-字符类型">03 char 字符类型</a></li><li><a href="#04-bool-与逻辑值">04 bool 与逻辑值</a></li><li><a href="#05-类型转换">05 类型转换</a></li><li><a href="#浮点数转整数向-0-截去小数部分" class="lvl3">浮点数转整数：向 0 截去小数部分</a></li><li><a href="#整数除法和浮点除法" class="lvl3">整数除法和浮点除法</a></li><li><a href="#取余只用于整数" class="lvl3">取余只用于整数</a></li><li><a href="#怎样选择类型">怎样选择类型</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-data-types">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-整数类型">01 整数类型</a></li><li><a href="#常见大小和范围" class="lvl3">常见大小和范围</a></li><li><a href="#普通整数为什么优先用-int" class="lvl3">普通整数为什么优先用 int</a></li><li><a href="#什么时候需要-long-long" class="lvl3">什么时候需要 long long</a></li><li><a href="#怎样验证整数类型是否合适" class="lvl3">怎样验证整数类型是否合适</a></li><li><a href="#02-浮点类型与有效精度">02 浮点类型与有效精度</a></li><li><a href="#范围和精度是两件事" class="lvl3">范围和精度是两件事</a></li><li><a href="#什么是有效数字" class="lvl3">什么是有效数字</a></li><li><a href="#为什么小数有时不是完全精确" class="lvl3">为什么小数有时不是完全精确</a></li><li><a href="#怎样验证浮点类型是否合适" class="lvl3">怎样验证浮点类型是否合适</a></li><li><a href="#03-char-字符类型">03 char 字符类型</a></li><li><a href="#04-bool-与逻辑值">04 bool 与逻辑值</a></li><li><a href="#05-类型转换">05 类型转换</a></li><li><a href="#浮点数转整数向-0-截去小数部分" class="lvl3">浮点数转整数：向 0 截去小数部分</a></li><li><a href="#整数除法和浮点除法" class="lvl3">整数除法和浮点除法</a></li><li><a href="#取余只用于整数" class="lvl3">取余只用于整数</a></li><li><a href="#怎样选择类型">怎样选择类型</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -909,6 +948,31 @@ int main() {    int activeStudents; // 当前活跃人数是普通范围内的�
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

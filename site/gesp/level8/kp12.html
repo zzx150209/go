@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,11 +489,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 基础解法与瓶颈</a><a href="#kp-02" class="astro-obblnf2s">02 剪枝</a><a href="#kp-03" class="astro-obblnf2s">03 预处理与数学规律</a><a href="#kp-04" class="astro-obblnf2s">04 数据结构与算法替换</a><a href="#kp-05" class="astro-obblnf2s">05 时间与空间的权衡</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方八级要求理解常见算法优化思路，能够从时间和空间角度改进算法。优化的前提是结果正确：先写清基础解法、分析瓶颈，再选择有依据的改进方法，并重新验证边界和复杂度。</p>
 <h2 id="kp-01">01 基础解法与瓶颈</h2>
 <p>先写出能保证正确的直接方法，再分析最耗时或最占空间的部分。瓶颈可能来自重复计算、无效枚举、不合适的数据结构、过大的状态表或不必要的高复杂度算法。</p>
-<p>优化目标必须具体。例如把两层枚举的 <code>O(n²)</code> 降为排序后的 <code>O(n log n)</code>，或者把只依赖上一行的 <code>O(n²)</code> 状态表压缩成 <code>O(n)</code> 空间。</p>
+<p>优化目标必须具体。例如把两层枚举的 <code dir="auto">O(n²)</code> 降为排序后的 <code dir="auto">O(n log n)</code>，或者把只依赖上一行的 <code dir="auto">O(n²)</code> 状态表压缩成 <code dir="auto">O(n)</code> 空间。</p>
 <h2 id="kp-02">02 剪枝</h2>
 <p>剪枝是在搜索过程中提前停止不可能得到合法答案或更优答案的分支。常见条件有：</p>
 <ul>
@@ -485,15 +505,15 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ul>
 <p>剪枝必须有严格理由。错误地删除仍可能产生答案的分支，会让程序更快地得到错误结果。</p>
 <h2 id="kp-03">03 预处理与数学规律</h2>
-<p>当许多询问反复使用相同信息时，可以先统一计算一次。例如前缀和把每次区间求和从 <code>O(n)</code> 降为 <code>O(1)</code>；杨辉三角预处理后可以多次查询组合数。</p>
+<p>当许多询问反复使用相同信息时，可以先统一计算一次。例如前缀和把每次区间求和从 <code dir="auto">O(n)</code> 降为 <code dir="auto">O(1)</code>；杨辉三角预处理后可以多次查询组合数。</p>
 <p>发现数学规律也能减少枚举。使用公式前必须核对适用条件、整数范围和取模要求，不能为了“看起来更快”直接套用未经证明的结论。</p>
 <h2 id="kp-04">04 数据结构与算法替换</h2>
 <p>如果基础方法的瓶颈是反复查找，可以选择更合适的查找方式；如果图很稀疏，可以用邻接表替代邻接矩阵；如果问题目标已经有成熟算法，应使用与条件匹配的算法，而不是继续暴力枚举。</p>
-<p>例如在有序数组中寻找和为目标值的一对数，可以用左右指针从两端向中间移动，把两层枚举的 <code>O(n²)</code> 降为排序后的 <code>O(n log n)</code>。</p>
+<p>例如在有序数组中寻找和为目标值的一对数，可以用左右指针从两端向中间移动，把两层枚举的 <code dir="auto">O(n²)</code> 降为排序后的 <code dir="auto">O(n log n)</code>。</p>
 <h2 id="kp-05">05 时间与空间的权衡</h2>
 <p>有些优化用更多空间换时间，例如预处理表；有些优化用更多计算换空间，例如不保存全部中间结果。选择时要同时满足时间限制和内存限制。</p>
 <p>滚动数组可以降低空间，但可能让恢复完整方案变得困难；预处理可以加快询问，但若只查询一次，预处理成本未必划算。优化不是越复杂越好，而是让整体方案在题目约束下稳定通过。</p>
-<p><strong>优化前后追踪。</strong> “判断数组中是否存在两个不同位置的数之和为目标值”的基线方案枚举所有数对，最多检查 <code>n(n-1)/2</code> 对，时间为 <code>O(n²)</code>。优化方案先排序，再用左右指针：</p>
+<p><strong>优化前后追踪。</strong> “判断数组中是否存在两个不同位置的数之和为目标值”的基线方案枚举所有数对，最多检查 <code dir="auto">n(n-1)/2</code> 对，时间为 <code dir="auto">O(n²)</code>。优化方案先排序，再用左右指针：</p>
 <table>
 <thead>
 <tr>
@@ -520,13 +540,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>排序后扫描只移动至多 <code>n-1</code> 次，总时间变为 <code>O(n log n)</code>。优化后必须做反例验证：包含重复元素、全为负数、只有一个元素、答案不存在；还要检查排序是否会破坏题目要求保留原下标的附加条件。</p>
+<p>排序后扫描只移动至多 <code dir="auto">n-1</code> 次，总时间变为 <code dir="auto">O(n log n)</code>。优化后必须做反例验证：包含重复元素、全为负数、只有一个元素、答案不存在；还要检查排序是否会破坏题目要求保留原下标的附加条件。</p>
 <p><strong>逐段具体推演（对应 01—05）。</strong></p>
-<p><strong>01 先量化基线。</strong> 对 <code>n=100000、q=100000</code> 的区间和查询，每次扫描整个区间最坏约做 <code>nq=10¹⁰</code> 次加法。结果虽然正确，但数量级说明瓶颈就在重复扫描，而不是输入输出格式。</p>
+<p><strong>01 先量化基线。</strong> 对 <code dir="auto">n=100000、q=100000</code> 的区间和查询，每次扫描整个区间最坏约做 <code dir="auto">nq=10¹⁰</code> 次加法。结果虽然正确，但数量级说明瓶颈就在重复扫描，而不是输入输出格式。</p>
 <p><strong>02 剪枝。</strong> 从正整数中搜索和为 10 的方案，当前和已经是 12 时，后面继续加入正数只会更大，这条分支可以立刻返回。若允许负数，就不能用同一条件剪枝，因为后面可能用负数把和降回 10。</p>
-<p><strong>03 预处理、公式与差分数组。</strong> 静态区间和可先建前缀和，把一次查询从 <code>O(n)</code> 降为 <code>O(1)</code>。若有多次区间加法，可在差分数组中对区间 <code>[l,r]</code> 执行 <code>diff[l]+=x、diff[r+1]-=x</code>，最后一次前缀累加还原全部值；素数查询很多时则可先筛出素数表。</p>
-<p><strong>04 更换数据结构或算法。</strong> 有序数组中查一个数，顺序扫描最多比较 n 次，二分查找每次排除一半，只需约 <code>log₂n</code> 次。两数之和从双重枚举 <code>O(n²)</code> 改为排序加双指针后是 <code>O(n log n)</code>，但必须保留“两个不同位置”等边界。</p>
-<p><strong>05 时间与空间权衡。</strong> 长度 n 的前缀和多用 <code>O(n)</code> 空间，换来每次 <code>O(1)</code> 查询；滚动数组则在依赖允许时减少空间。优化后要用普通、边界和极限数据比较新旧答案，再确认复杂度确实下降。</p>
+<p><strong>03 预处理、公式与差分数组。</strong> 静态区间和可先建前缀和，把一次查询从 <code dir="auto">O(n)</code> 降为 <code dir="auto">O(1)</code>。若有多次区间加法，可在差分数组中对区间 <code dir="auto">[l,r]</code> 执行 <code dir="auto">diff[l]+=x、diff[r+1]-=x</code>，最后一次前缀累加还原全部值；素数查询很多时则可先筛出素数表。</p>
+<p><strong>04 更换数据结构或算法。</strong> 有序数组中查一个数，顺序扫描最多比较 n 次，二分查找每次排除一半，只需约 <code dir="auto">log₂n</code> 次。两数之和从双重枚举 <code dir="auto">O(n²)</code> 改为排序加双指针后是 <code dir="auto">O(n log n)</code>，但必须保留“两个不同位置”等边界。</p>
+<p><strong>05 时间与空间权衡。</strong> 长度 n 的前缀和多用 <code dir="auto">O(n)</code> 空间，换来每次 <code dir="auto">O(1)</code> 查询；滚动数组则在依赖允许时减少空间。优化后要用普通、边界和极限数据比较新旧答案，再确认复杂度确实下降。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -559,15 +579,15 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>输入 <code>n</code> 个整数和目标值，判断是否存在两个不同位置的数之和等于目标值。先排序，再用左右指针判断：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<p>输入 <code dir="auto">n</code> 个整数和目标值，判断是否存在两个不同位置的数之和等于目标值。先排序，再用左右指针判断：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int n;    long long target;    cin &gt;&gt; n &gt;&gt; target;
     vector&lt;long long&gt; a(n);    for (int i = 0; i &lt; n; i++) {        cin &gt;&gt; a[i];    }    // 双指针依赖单调性，必须先排序。    sort(a.begin(), a.end());
     int left = 0;    int right = n - 1;    bool found = false;    while (left &lt; right) {        long long sum = a[left] + a[right];        if (sum == target) {            found = true;            break;        } else if (sum &lt; target) {            // 当前和偏小，左端右移才可能增大总和。            left++;        } else {            // 当前和偏大，右端左移才可能减小总和。            right--;        }    }
     if (found) {        cout &lt;&lt; "YES\n";    } else {        cout &lt;&lt; "NO\n";    }    return 0;}</code></pre>
-<p>排序为 <code>O(n log n)</code>，双指针扫描为 <code>O(n)</code>，总时间复杂度为 <code>O(n log n)</code>。</p>
+<p>排序为 <code dir="auto">O(n log n)</code>，双指针扫描为 <code dir="auto">O(n)</code>，总时间复杂度为 <code dir="auto">O(n log n)</code>。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>优化后漏解反例。</strong> 两数之和目标为 6，数组是 <code>[3,3]</code>。若优化后错误规定“两个数值不能相等”，就会漏掉两个不同位置上的 3；正确限制是下标不同，而不是数值不同。新算法必须与基线在这个反例上都返回存在解。</p>
+<p><strong>优化后漏解反例。</strong> 两数之和目标为 6，数组是 <code dir="auto">[3,3]</code>。若优化后错误规定“两个数值不能相等”，就会漏掉两个不同位置上的 3；正确限制是下标不同，而不是数值不同。新算法必须与基线在这个反例上都返回存在解。</p>
 <ul>
 <li>未证明剪枝条件正确就删除搜索分支。</li>
 <li>只比较某一行代码，不分析整体复杂度。</li>
@@ -580,7 +600,28 @@ int main() {    int n;    long long target;    cin &gt;&gt; n &gt;&gt; target;
 <li><a href="/gesp/level8/time-efficiency/">时间效率分析</a>：定位操作次数增长最快的部分。</li>
 <li><a href="/gesp/level8/space-efficiency/">空间效率分析</a>：检查优化后的额外存储。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2><div id="page-test"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能从正确的基础解法中定位时间或空间瓶颈</label><label class="q-check"><input type="checkbox"> 能说明剪枝、预处理和算法替换为什么正确</label><label class="q-check"><input type="checkbox"> 能比较优化前后的复杂度并重新检查边界</label><span>7 题</span>
+<p class="q-title">第 1 题准备优化一个已经能得到正确答案的程序时，最合理的第一步是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题准备优化一个已经能得到正确答案" value="A"><b>A.</b> 立刻换成最长的模板</label><label class="q-opt"><input type="radio" name="第 1 题准备优化一个已经能得到正确答案" value="B"><b>B.</b> 写出基线复杂度并定位真正瓶颈</label><label class="q-opt"><input type="radio" name="第 1 题准备优化一个已经能得到正确答案" value="C"><b>C.</b> 删除所有边界判断</label><label class="q-opt"><input type="radio" name="第 1 题准备优化一个已经能得到正确答案" value="D"><b>D.</b> 只缩短变量名</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>优化应从正确基线出发，先结合数据范围写出当前复杂度，再找到执行次数最多的瓶颈。否则即使代码变化很大，也不一定更快或仍然正确。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题需要回答大量静态数组区间和查询时，哪种做法最适合消除重复计算？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题需要回答大量静态数组区间和查询" value="A"><b>A.</b> 每次重新遍历区间</label><label class="q-opt"><input type="radio" name="第 2 题需要回答大量静态数组区间和查询" value="B"><b>B.</b> 预处理前缀和</label><label class="q-opt"><input type="radio" name="第 2 题需要回答大量静态数组区间和查询" value="C"><b>C.</b> 把数组倒序输出</label><label class="q-opt"><input type="radio" name="第 2 题需要回答大量静态数组区间和查询" value="D"><b>D.</b> 枚举所有排列</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>前缀和把每个位置之前的累计结果预先保存。之后一次闭区间查询只需两个前缀值相减，可把每次线性求和优化为 O(1) 查询。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 3 题使用左右双指针判断两数之和前，最关键的前提通常是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题使用左右双指针判断两数之和前，" value="A"><b>A.</b> 数组已经有序</label><label class="q-opt"><input type="radio" name="第 3 题使用左右双指针判断两数之和前，" value="B"><b>B.</b> 所有数都相等</label><label class="q-opt"><input type="radio" name="第 3 题使用左右双指针判断两数之和前，" value="C"><b>C.</b> n 必须小于 10</label><label class="q-opt"><input type="radio" name="第 3 题使用左右双指针判断两数之和前，" value="D"><b>D.</b> 目标值必须是偶数</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>双指针根据当前和偏小或偏大来排除一侧候选，这个推理依赖数组的单调有序性。无序数组中直接移动指针可能跳过正确答案。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 4 题用长度为 n 的前缀和数组把 q 次区间查询从 O(nq) 优化到 O(n+q)，还必须检查什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题用长度为 n 的前缀和数组把 " value="A"><b>A.</b> 只看代码行数是否减少</label><label class="q-opt"><input type="radio" name="第 4 题用长度为 n 的前缀和数组把 " value="B"><b>B.</b> 额外 O(n) 空间和累计和是否溢出</label><label class="q-opt"><input type="radio" name="第 4 题用长度为 n 的前缀和数组把 " value="C"><b>C.</b> 是否能删除所有注释</label><label class="q-opt"><input type="radio" name="第 4 题用长度为 n 的前缀和数组把 " value="D"><b>D.</b> 查询顺序是否按字典序</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>该优化用额外 O(n) 空间换取时间，并会累计许多数值。必须同时核对内存限制与整数范围，不能只看到时间复杂度下降。<br><span class="q-kp">对应知识点：05</span></p>
+<p class="q-title">第 5 题搜索中已经确定当前分支不可能得到合法答案，最合适的处理是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题搜索中已经确定当前分支不可能得" value="A"><b>A.</b> 继续枚举到最深层</label><label class="q-opt"><input type="radio" name="第 5 题搜索中已经确定当前分支不可能得" value="B"><b>B.</b> 立即返回，剪去这条分支</label><label class="q-opt"><input type="radio" name="第 5 题搜索中已经确定当前分支不可能得" value="C"><b>C.</b> 删除所有限制</label><label class="q-opt"><input type="radio" name="第 5 题搜索中已经确定当前分支不可能得" value="D"><b>D.</b> 把答案固定为 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>提前识别不可能成功的状态并立即返回，可以避免继续枚举无效后续，这正是搜索剪枝减少工作量的基本思想。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 6 题把两数之和算法改成“排序+双指针”后，哪组案例最能检查重复元素边界？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题把两数之和算法改成“排序+双指" value="A"><b>A.</b> [3,3]，目标值 6</label><label class="q-opt"><input type="radio" name="第 6 题把两数之和算法改成“排序+双指" value="B"><b>B.</b> [1]，目标值 1</label><label class="q-opt"><input type="radio" name="第 6 题把两数之和算法改成“排序+双指" value="C"><b>C.</b> 空数组</label><label class="q-opt"><input type="radio" name="第 6 题把两数之和算法改成“排序+双指" value="D"><b>D.</b> [1,2]，不设目标值</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>两个不同位置可以保存相同数值。[3,3]、目标 6 能检查优化后是否错误地把“数值相同”当成“位置相同”，对应页内知识点 04。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 7 题对数组区间 [l,r] 内每个数都加 x，使用差分数组时应怎样记录？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="A"><b>A.</b> diff[l]+=x，diff[r+1]-=x</label><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="B"><b>B.</b> diff[l]-=x，diff[r]+=x</label><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="C"><b>C.</b> 只修改 diff[r]</label><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="D"><b>D.</b> 把每个位置立即排序</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>diff[l]+=x 表示从 l 开始增加 x，diff[r+1]-=x 表示从 r+1 起取消这次增加。完成所有修改后做一次前缀累加即可还原结果。对应页内知识点 03。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/space-efficiency/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 11</small><strong>空间效率分析</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/template/" rel="next"><span><small>下一等级</small><strong>程序模板</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -589,7 +630,7 @@ int main() {    int n;    long long target;    cin &gt;&gt; n &gt;&gt; target;
       
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 基础解法与瓶颈</a></li><li><a href="#kp-02">02 剪枝</a></li><li><a href="#kp-03">03 预处理与数学规律</a></li><li><a href="#kp-04">04 数据结构与算法替换</a></li><li><a href="#kp-05">05 时间与空间的权衡</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 基础解法与瓶颈</a></li><li><a href="#kp-02">02 剪枝</a></li><li><a href="#kp-03">03 预处理与数学规律</a></li><li><a href="#kp-04">04 数据结构与算法替换</a></li><li><a href="#kp-05">05 时间与空间的权衡</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -601,6 +642,31 @@ int main() {    int n;    long long target;    cin &gt;&gt; n &gt;&gt; target;
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

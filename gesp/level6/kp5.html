@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,7 +489,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲 DFS 的思想、基本框架、递归、回溯与迷宫路径类基础应用。网格使用 1 下标，方向数组使用 <code>fx</code>、<code>fy</code> 且下标 0 占位。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-dfs-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-dfs-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">5 个子页</span></header><div><article><div><span class="astro-aidf4k4y">05</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/dfs/">深度优先搜索 DFS</a></h3><p class="astro-aidf4k4y">理解一条路走到底再回退的搜索过程，掌握递归出口、标记与回溯。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/maze-search/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">DFS 初学：走迷宫</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/flood-fill/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">Flood Fill：连通块</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/maze-backtracking/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">03</span><strong class="astro-aidf4k4y">迷宫路径枚举与回溯</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/permutation-enumeration/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">04</span><strong class="astro-aidf4k4y">全排列</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/subset-enumeration/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">05</span><strong class="astro-aidf4k4y">选与不选：子集枚举</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 DFS 状态与出口</h2><p>DFS 不只是“使用递归”，而是一种先沿一个选择继续深入、遇到目标或无路可走时再返回的搜索顺序。写代码前先说明当前状态，例如 <code>dfs(x, y)</code> 表示“当前已经走到 <code>(x,y)</code>，继续搜索”。函数开头处理越界、障碍、已访问或到达终点等出口，之后才枚举下一步。</p><h2 id="kp-02">02 标记与回溯</h2><p>标记含义决定是否恢复：路径枚举中的 <code>visited</code> 表示“当前路径已经使用”，离开本层时要恢复现场，让其他分支还能选择这个位置；连通区域标记表示“已经确认处理”，不恢复，否则会重复访问甚至在环中不停递归。一个完整回溯步骤是“记录当前选择 → 继续搜索 → 撤销当前选择”。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 DFS 状态与出口</a><a href="#kp-02" class="astro-obblnf2s">02 标记与回溯</a><a href="#kp-03" class="astro-obblnf2s">03 网格 DFS</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#related-learning" class="astro-obblnf2s">关联学习</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲 DFS 的思想、基本框架、递归、回溯与迷宫路径类基础应用。网格使用 1 下标，方向数组使用 <code dir="auto">fx</code>、<code dir="auto">fy</code> 且下标 0 占位。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><header class="gesp-level6-knowledge-grid__heading"><h2 id="gesp-level6-dfs-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p><span class="astro-aidf4k4y">5 个子页</span></header><article class="gesp-level6-parent-card"><span class="astro-aidf4k4y">05</span><span data-course-status class="astro-aidf4k4y">未复习</span>
+<h3 class="astro-aidf4k4y"><a class="gesp-level6-parent-card__primary" href="/gesp/level6/dfs/">深度优先搜索 DFS</a></h3><p class="astro-aidf4k4y">理解一条路走到底再回退的搜索过程，掌握递归出口、标记与回溯。</p><ul aria-label="深度优先搜索 DFS子知识点" class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/maze-search/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">DFS 初学：走迷宫</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/flood-fill/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">Flood Fill：连通块</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/maze-backtracking/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">03</span><strong class="astro-aidf4k4y">迷宫路径枚举与回溯</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/permutation-enumeration/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">04</span><strong class="astro-aidf4k4y">全排列</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/dfs/subset-enumeration/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">05</span><strong class="astro-aidf4k4y">选与不选：子集枚举</strong></a></li></ul></article></gesp-course-grid><h2 id="kp-01">01 DFS 状态与出口</h2><p>DFS 不只是“使用递归”，而是一种先沿一个选择继续深入、遇到目标或无路可走时再返回的搜索顺序。写代码前先说明当前状态，例如 <code dir="auto">dfs(x, y)</code> 表示“当前已经走到 <code dir="auto">(x,y)</code>，继续搜索”。函数开头处理越界、障碍、已访问或到达终点等出口，之后才枚举下一步。</p><h2 id="kp-02">02 标记与回溯</h2><p>标记含义决定是否恢复：路径枚举中的 <code dir="auto">visited</code> 表示“当前路径已经使用”，离开本层时要恢复现场，让其他分支还能选择这个位置；连通区域标记表示“已经确认处理”，不恢复，否则会重复访问甚至在环中不停递归。一个完整回溯步骤是“记录当前选择 → 继续搜索 → 撤销当前选择”。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int n, m;char grid[8][8];bool visited[8][8];long long answer = 0;int fx[5] = {0, -1, 1, 0, 0};int fy[5] = {0, 0, 0, -1, 1};
 void dfs(int x, int y) {    if (x == n &amp;&amp; y == m) {  // 已到达终点，当前路径构成一种有效方案        answer++;        return;    }    visited[x][y] = true;    for (int d = 1; d &lt;= 4; d++) {  // 依次尝试上、下、左、右四个方向        int nx = x + fx[d], ny = y + fy[d];        if (nx &lt; 1 || nx &gt; n || ny &lt; 1 || ny &gt; m) continue;  // 越界位置不能进入        if (grid[nx][ny] == '#' || visited[nx][ny]) continue;  // 障碍和当前路径中的格子不能重复走        dfs(nx, ny);    }    visited[x][y] = false;  // 返回上一层前恢复现场，供其他路径使用}
 int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) {  // 读入第 1 到第 n 行网格        for (int y = 1; y &lt;= m; y++) {            cin &gt;&gt; grid[x][y];        }    }    if (grid[1][1] == '.' &amp;&amp; grid[n][m] == '.') {  // 起点和终点都可走时才开始搜索        dfs(1, 1);    }    cout &lt;&lt; answer &lt;&lt; '\n';    return 0;}</code></pre><p>路径枚举最坏会尝试大量分支，只适合题目给出的较小范围；递归深度不超过可走格子数。</p><h3 id="测试案例">测试案例</h3><table>
@@ -484,7 +504,7 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
 <tbody>
 <tr>
 <td>基础</td>
-<td><code>2×2</code> 全部可走</td>
+<td><code dir="auto">2×2</code> 全部可走</td>
 <td>不重复经过格子时有 2 条路径</td>
 </tr>
 <tr>
@@ -494,7 +514,7 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
 </tr>
 <tr>
 <td>特殊</td>
-<td><code>1×1</code> 且起点就是终点</td>
+<td><code dir="auto">1×1</code> 且起点就是终点</td>
 <td>进入 DFS 后立即得到唯一一条路径</td>
 </tr>
 <tr>
@@ -503,7 +523,23 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
 <td>永久访问标记不能恢复，否则会重复进入</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>所有 DFS 都恢复标记</h3><div><div><strong><span>×</span> 错误写法</strong><code>连通标记结束也写 visited[x][y] = false</code></div><div><strong><span>✓</span> 正确写法</strong><code>路径枚举恢复；连通标记不恢复</code></div></div><p><strong>原因：</strong>别的方向会再次进入已处理格子，环形区域可能不停递归。</p><p><strong>检查方法：</strong>先写清标记表示当前路径还是已经处理。</p></section><section><h3>找到终点后仍继续扩展</h3><div><div><strong><span>×</span> 错误写法</strong><code>到达终点只让 answer 加一，但不 return</code></div><div><strong><span>✓</span> 正确写法</strong><code>到达终点后记录答案并立即结束当前分支</code></div></div><p><strong>原因：</strong>当前分支会从终点继续绕行，可能把同一条到达方案延长成不符合题意的路径。</p><p><strong>检查方法：</strong>递归出口不仅决定何时计数，也决定哪里必须停止。</p></section><h2 id="related-learning">关联学习</h2><p>需要每步代价相同的最少步数时，应使用下一页的 BFS；需要枚举完整路径或递归处理树时，DFS 更自然。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>所有 DFS 都恢复标记</h3><p><strong>原因：</strong>别的方向会再次进入已处理格子，环形区域可能不停递归。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>先写清标记表示当前路径还是已经处理。</p><h3>找到终点后仍继续扩展</h3><p><strong>原因：</strong>当前分支会从终点继续绕行，可能把同一条到达方案延长成不符合题意的路径。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>递归出口不仅决定何时计数，也决定哪里必须停止。</p><h2 id="related-learning">关联学习</h2><p>需要每步代价相同的最少步数时，应使用下一页的 BFS；需要枚举完整路径或递归处理树时，DFS 更自然。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能用一句话说明 dfs 参数表示的当前状态</label><label class="q-check"><input type="checkbox"> 能写出递归出口并判断标记是否需要恢复</label><label class="q-check"><input type="checkbox"> 能用 1 下标和 fx、fy 完成基础网格搜索</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题DFS 的基本访问特点是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题DFS 的基本访问特点是什么？" value="A"><b>A.</b> 逐层扩展</label><label class="q-opt"><input type="radio" name="第 1 题DFS 的基本访问特点是什么？" value="B"><b>B.</b> 沿一个选择深入再回退</label><label class="q-opt"><input type="radio" name="第 1 题DFS 的基本访问特点是什么？" value="C"><b>C.</b> 总选权值最小结点</label><label class="q-opt"><input type="radio" name="第 1 题DFS 的基本访问特点是什么？" value="D"><b>D.</b> 只访问起点</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>深度优先搜索会先沿当前选择继续深入，遇到终点或无路可走时再返回上一层。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题递归 DFS 为什么必须有终止条件？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题递归 DFS 为什么必须有终止" value="A"><b>A.</b> 为了重复访问</label><label class="q-opt"><input type="radio" name="第 2 题递归 DFS 为什么必须有终止" value="B"><b>B.</b> 为了在目标或非法状态及时返回</label><label class="q-opt"><input type="radio" name="第 2 题递归 DFS 为什么必须有终止" value="C"><b>C.</b> 为了改成 BFS</label><label class="q-opt"><input type="radio" name="第 2 题递归 DFS 为什么必须有终止" value="D"><b>D.</b> 为了删除数组</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>终止条件给递归明确出口，在到达目标、越界或状态不合法时停止继续深入。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 3 题路径枚举返回上一层时，为什么常要恢复 visited？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题路径枚举返回上一层时，为什么常" value="A"><b>A.</b> 让同一格子可用于其他路径</label><label class="q-opt"><input type="radio" name="第 3 题路径枚举返回上一层时，为什么常" value="B"><b>B.</b> 把障碍变成通路</label><label class="q-opt"><input type="radio" name="第 3 题路径枚举返回上一层时，为什么常" value="C"><b>C.</b> 让当前路径无限循环</label><label class="q-opt"><input type="radio" name="第 3 题路径枚举返回上一层时，为什么常" value="D"><b>D.</b> 把 DFS 改成队列</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>路径标记只表示当前路径经过，返回后恢复才能让其他合法路径再次选择这个格子。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题连通区域标记中的 visited 是否应在返回时恢复？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题连通区域标记中的 visite" value="A"><b>A.</b> 一定恢复</label><label class="q-opt"><input type="radio" name="第 4 题连通区域标记中的 visite" value="B"><b>B.</b> 不恢复，因为已确认处理过</label><label class="q-opt"><input type="radio" name="第 4 题连通区域标记中的 visite" value="C"><b>C.</b> 只在根恢复</label><label class="q-opt"><input type="radio" name="第 4 题连通区域标记中的 visite" value="D"><b>D.</b> 由结点值奇偶决定</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>连通标记表示已经确认并处理过，永久保留可防止重复访问和在环中无限递归。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 5 题2×2 空网格从左上到右下，只能向右或向下，共有几条路径？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题2×2 空网格从左上到右下，只" value="A"><b>A.</b> 1</label><label class="q-opt"><input type="radio" name="第 5 题2×2 空网格从左上到右下，只" value="B"><b>B.</b> 2</label><label class="q-opt"><input type="radio" name="第 5 题2×2 空网格从左上到右下，只" value="C"><b>C.</b> 3</label><label class="q-opt"><input type="radio" name="第 5 题2×2 空网格从左上到右下，只" value="D"><b>D.</b> 4</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>合法路径是先右后下、先下后右两条，DFS 到达终点时分别计数一次。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/coding/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">上一父知识点 · 04</small><strong class="astro-23ojxnem">编码知识</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/bfs/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 06</small><strong class="astro-23ojxnem">宽度优先搜索 BFS</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -512,7 +548,7 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
       <a class="kp-nav" href="kp6.html">下一个：哈夫曼编码 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-dfs-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 DFS 状态与出口</a></li><li><a href="#kp-02">02 标记与回溯</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-dfs-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 DFS 状态与出口</a></li><li><a href="#kp-02">02 标记与回溯</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -524,6 +560,31 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

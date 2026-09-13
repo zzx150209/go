@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,18 +489,68 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">参数负责把数据送进函数，作用域决定一个名字在程序的哪些位置有效。调用函数、阅读同名变量或排查“变量未定义”时，要先找参数，再看局部变量和外层变量。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">实参在调用处提供数据，形参在函数内接收数据；查找同名变量时，从使用位置向外找最近的声明。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int add(int left, int right) { // left、right 是本次调用的形参
+    <article class="level4-dictionary-article"><p class="level4-dictionary-article__intro">参数负责把数据送进函数，作用域决定一个名字在程序的哪些位置有效。调用函数、阅读同名变量或排查“变量未定义”时，要先找参数，再看局部变量和外层变量。</p><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">实参在调用处提供数据，形参在函数内接收数据；查找同名变量时，从使用位置向外找最近的声明。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int add(int left, int right) { // left、right 是本次调用的形参
     int sum = left + right; // sum 是只在函数体内有效的局部变量
     return sum; // 返回结果并结束本次调用
 } // 离开函数体后，本次形参和局部变量的生命周期结束</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int value = 10; // 定义外层 value，值为 10
 { // 进入一个新的内层作用域
     int value = 3; // 定义内层同名变量并暂时遮蔽外层 value
     cout &lt;&lt; value; // 最近声明是内层 value，因此输出 3
-} // 内层 value 的作用域和生命周期在此结束</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">把值参数当成调用处的原变量</li><li class="astro-e22r5uwj">离开大括号后仍使用其中的局部变量</li><li class="astro-e22r5uwj">看到同名变量就默认它是全局变量</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：分清实参与形参；同时判断名字的作用域和对象的生命周期；遇到同名变量时从使用位置向外找到真正对象。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">学校里可以同时有“全校积分”“班级积分”和“小组积分”三个同名概念。程序里的名字也有自己的有效范围：站在不同的大括号里，看到的可能不是同一个变量。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握形参与实参、局部变量、全局变量、作用域和生命周期，并能判断同名变量的遮蔽关系。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 形参与实参</h2><p class="astro-e22r5uwj">函数定义中用于接收数据的变量叫形参，调用表达式中真正提供数据的值、变量或表达式叫实参。`add(3, 5)` 里的 3、5 是实参，函数体里的 left、right 是形参。</p><p class="astro-e22r5uwj">一次调用开始时，程序先计算实参，再按位置把结果交给形参：第一个实参给第一个形参，第二个给第二个；并不是按名字对应。</p><p class="astro-e22r5uwj">每次调用都会重新创建一组形参。第一次 add(3,5) 的 left 与第二次 add(8,2) 的 left 名字相同，却是两次调用中的不同对象。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int add(int left, int right) { // 定义接收两个整数形参的加法函数
+} // 内层 value 的作用域和生命周期在此结束</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">把值参数当成调用处的原变量</li><li class="astro-e22r5uwj">离开大括号后仍使用其中的局部变量</li><li class="astro-e22r5uwj">看到同名变量就默认它是全局变量</li></ul></article><nav class="dictionary-page-quick-nav" aria-labelledby="dictionary-page-quick-nav-title"><h2 id="dictionary-page-quick-nav-title" class="astro-nnvy3ny7">本页速查</h2><a href="#topic-01" class="astro-nnvy3ny7">01 形参与实参</a><a href="#topic-02" class="astro-nnvy3ny7">02 局部变量与生命周期</a><a href="#topic-03" class="astro-nnvy3ny7">03 全局变量与作用域</a><a href="#topic-04" class="astro-nnvy3ny7">04 同名变量与遮蔽</a><a href="#examples" class="astro-nnvy3ny7">典型例题</a><a href="#practice" class="astro-nnvy3ny7">分层练习</a><a href="#mistakes" class="astro-nnvy3ny7">常见错误</a><a href="#core-check" class="astro-nnvy3ny7">核心内容检查</a><a href="#test" class="astro-nnvy3ny7">整页综合测试</a><a href="#page-top" class="astro-nnvy3ny7">返回本页顶部</a></nav><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：分清实参与形参；同时判断名字的作用域和对象的生命周期；遇到同名变量时从使用位置向外找到真正对象。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">学校里可以同时有“全校积分”“班级积分”和“小组积分”三个同名概念。程序里的名字也有自己的有效范围：站在不同的大括号里，看到的可能不是同一个变量。</p><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握形参与实参、局部变量、全局变量、作用域和生命周期，并能判断同名变量的遮蔽关系。</p><h2 id="topic-01" class="astro-e22r5uwj">01 形参与实参</h2><p class="astro-e22r5uwj">函数定义中用于接收数据的变量叫形参，调用表达式中真正提供数据的值、变量或表达式叫实参。`add(3, 5)` 里的 3、5 是实参，函数体里的 left、right 是形参。</p><p class="astro-e22r5uwj">一次调用开始时，程序先计算实参，再按位置把结果交给形参：第一个实参给第一个形参，第二个给第二个；并不是按名字对应。</p><p class="astro-e22r5uwj">每次调用都会重新创建一组形参。第一次 add(3,5) 的 left 与第二次 add(8,2) 的 left 名字相同，却是两次调用中的不同对象。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int add(int left, int right) { // 定义接收两个整数形参的加法函数
     return left + right; // 返回本次调用中两个形参之和
 } // 本次调用结束时，left 和 right 随之销毁
 
-int result = add(3, 5); // 3、5 是实参，按位置创建 left=3、right=5</code></pre><aside
+int result = add(3, 5); // 3、5 是实参，按位置创建 left=3、right=5</code></pre><aside class="level4-dictionary-article__warning"><strong class="astro-e22r5uwj">关键提醒：</strong>不要只看变量名是否相同。实参与形参按位置和类型对应。</aside><h2 id="topic-02" class="astro-e22r5uwj">02 局部变量与生命周期</h2><p class="astro-e22r5uwj">在函数体或一对大括号内部定义的普通变量是局部变量。作用域回答“源代码的哪些位置能使用这个名字”，生命周期回答“程序运行的哪段时间这个对象真实存在”，二者不能混为一句“括号里有效”。</p><p class="astro-e22r5uwj">局部变量通常从声明处开始可见；程序执行到声明并完成初始化后，对象才产生。离开所属代码块，对象销毁，名字也不能在块外使用。</p><p class="astro-e22r5uwj">若 if 条件为假，块内声明根本不会执行，bonus 对象不会产生；若条件为真，它只在本次进入代码块期间存在。</p><pre class="astro-e22r5uwj"><code class="language-cpp">if (score &gt;= 60) { // 条件成立时才进入这个局部作用域
+    int bonus = 5; // 执行到此处才创建并初始化局部变量 bonus
+    score = score + bonus; // 在 bonus 的作用域内读取它并更新 score
+} // 离开代码块时 bonus 被销毁，名字也不再可用</code></pre><h2 id="topic-03" class="astro-e22r5uwj">03 全局变量与作用域</h2><p class="astro-e22r5uwj">在所有函数外定义的变量通常具有全局作用域。从它的声明之后，后续函数可以按规则访问同一个对象；这个对象在程序开始阶段就存在，直到程序结束。</p><p class="astro-e22r5uwj">例如全局 count 初值为 2，函数执行 `count = count + 3` 后，main 再读取的是同一对象，因此得到 5。这与值参数“创建副本”不同。</p><p class="astro-e22r5uwj">全局变量共享范围大，任何能访问它的函数都可能改变它，排错时很难确认修改来源。能通过参数和返回值传递的数据，不应只为少写参数而改成全局变量。</p><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">程序开始后，全局变量 count 先存在并初始化为 2</li><li class="astro-e22r5uwj">函数执行 count = count + 3 后，共享的同一个 count 变为 5</li><li class="astro-e22r5uwj">若改用参数和返回值，数据从哪里来、到哪里去会更清楚</li></ul><aside class="level4-dictionary-article__warning"><strong class="astro-e22r5uwj">关键提醒：</strong>全局可见不等于任何位置都可以随意修改。设计程序时仍应缩小可修改范围。</aside><h2 id="topic-04" class="astro-e22r5uwj">04 同名变量与遮蔽</h2><p class="astro-e22r5uwj">内层作用域定义与外层同名的变量后，内层名字会暂时遮蔽外层名字。遮蔽不等于删除或修改：外层对象仍存在，只是这个名字在内层优先指向更近的对象。</p><p class="astro-e22r5uwj">阅读每一次使用时，从当前位置所在代码块开始，逐层向外寻找最近的同名声明。离开内层作用域后，内层对象销毁，外层名字重新成为最近声明。</p><p class="astro-e22r5uwj">同名写法合法却容易读错。教学和竞赛主程序应优先使用含义清楚的不同名字；这里保留同名只为训练识别规则。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int value = 10; // 创建外层 value，保存 10
+{ // 进入内层作用域
+    int value = 3; // 创建新的内层 value，暂时遮蔽外层同名变量
+    cout &lt;&lt; value &lt;&lt; &#39;\n&#39;; // 最近声明是内层 value，因此输出 3
+} // 内层 value 销毁，外层 value 重新可见
+cout &lt;&lt; value &lt;&lt; &#39;\n&#39;; // 读取仍为 10 的外层 value</code></pre><h2 id="quick-table" class="astro-e22r5uwj">知识点速查表</h2><table class="astro-e22r5uwj"><thead class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><th class="astro-e22r5uwj">项目</th><th class="astro-e22r5uwj">含义</th><th class="astro-e22r5uwj">检查重点</th></tr></thead><tbody class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">实参</td><td class="astro-e22r5uwj">调用处提供的数据</td><td class="astro-e22r5uwj">按顺序对应形参</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">形参</td><td class="astro-e22r5uwj">函数内部接收数据的名字</td><td class="astro-e22r5uwj">只在函数内有效</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">局部变量</td><td class="astro-e22r5uwj">代码块内定义的变量</td><td class="astro-e22r5uwj">离开代码块后失效</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">遮蔽</td><td class="astro-e22r5uwj">内层同名变量暂时挡住外层变量</td><td class="astro-e22r5uwj">寻找最近声明</td></tr></tbody></table>
+<h2 id="algorithm-trace" class="astro-e22r5uwj">算法实际怎样执行</h2><h3 class="astro-e22r5uwj">连续两次调用 increase 时，每组局部对象怎样独立存在</h3><table class="astro-e22r5uwj"><thead class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><th class="astro-e22r5uwj">时刻</th><th class="astro-e22r5uwj">main 的 value</th><th class="astro-e22r5uwj">increase 的形参 value</th><th class="astro-e22r5uwj">局部 result</th></tr></thead><tbody class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">调用前</td><td class="astro-e22r5uwj">10，已存在</td><td class="astro-e22r5uwj">尚不存在</td><td class="astro-e22r5uwj">尚不存在</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">第一次进入函数</td><td class="astro-e22r5uwj">10</td><td class="astro-e22r5uwj">新建为 10</td><td class="astro-e22r5uwj">尚不存在</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">计算并返回</td><td class="astro-e22r5uwj">10</td><td class="astro-e22r5uwj">10</td><td class="astro-e22r5uwj">新建为 11，返回 11</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">第一次结束</td><td class="astro-e22r5uwj">10</td><td class="astro-e22r5uwj">已销毁</td><td class="astro-e22r5uwj">已销毁</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">第二次调用 increase(20)</td><td class="astro-e22r5uwj">10</td><td class="astro-e22r5uwj">重新新建为 20</td><td class="astro-e22r5uwj">重新新建为 21</td></tr></tbody></table>
+<h2 id="examples" class="astro-e22r5uwj">典型例题</h2><h3 class="astro-e22r5uwj">追踪两次函数调用中的局部变量</h3><p class="astro-e22r5uwj">程序使用固定数据 10 和 20，观察函数每次都从自己的局部变量开始计算。</p><h3 class="astro-e22r5uwj">完成程序</h3><pre class="astro-e22r5uwj"><code class="language-cpp">#include &lt;bits/stdc++.h&gt; // 引入本程序需要的标准库
+using namespace std; // 允许直接使用 cin、cout、string 等标准库名称
+
+int increase(int value) { // 定义把一个整数增加 1 的函数
+    int result = value + 1; // 用本次调用的形参计算局部结果
+    return result; // 把局部结果返回给调用处
+} // 结束 increase 函数，本次调用的局部变量随之结束
+
+int main() { // 主函数是程序的入口
+    int value = 10; // 定义 main 作用域中的 value
+    cout &lt;&lt; increase(value) &lt;&lt; &#39;\n&#39;; // 第一次调用使用实参 10，输出 11
+    cout &lt;&lt; increase(20) &lt;&lt; &#39;\n&#39;; // 第二次调用重新创建形参并输出 21
+    cout &lt;&lt; value &lt;&lt; &#39;\n&#39;; // 输出 main 中未被值传递修改的 value
+    return 0; // 返回 0，表示程序正常结束
+} // 结束 main 函数</code></pre><h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">第一次进入 increase 时，创建局部形参 value = 10。</li><li class="astro-e22r5uwj">函数内再创建局部变量 result = 11，return 把 11 交回 main。</li><li class="astro-e22r5uwj">第一次调用结束后，形参 value 和局部变量 result 的生命周期结束；第二次调用会重新创建它们。</li><li class="astro-e22r5uwj">main 中的 value 属于另一个作用域，始终保持 10。</li></ol><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">标出名字的范围</h3><p class="astro-e22r5uwj">在一段含函数和 if 代码块的程序中，圈出每个局部变量可以使用的行。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">变量从声明处开始可见，到所属代码块的右大括号结束。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">追踪同名 value</h3><p class="astro-e22r5uwj">分别写出 main 的 value、形参 value 和内层块 value 的初值与结束时刻。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">把三个变量分三行记录，不要因为名字相同就合并。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">减少全局依赖</h3><p class="astro-e22r5uwj">把一个直接修改全局 total 的函数改成“参数传入、返回值传出”。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">让调用处明确写出 total = 函数(total, ...)。</p></details></article>
+<h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><h3 class="astro-e22r5uwj">把形参当成实参本身</h3><p class="astro-e22r5uwj">错误写法：认为普通值参数 value 改变后，main 中同名变量也会改变。原因：值参数是副本。正确写法：先判断传递方式，再分别追踪实参与形参。</p><h3 class="astro-e22r5uwj">在作用域外使用局部变量</h3><p class="astro-e22r5uwj">错误写法：在右大括号之后继续使用块内定义的 bonus。原因：名字已经超出作用域。正确写法：只在声明所在代码块内使用，或把变量定义到确实需要的外层。</p><h3 class="astro-e22r5uwj">同名变量遮蔽判断错误</h3><p class="astro-e22r5uwj">错误写法：在函数内看到 x 就直接当成全局 x。原因：内层同名声明会遮蔽外层名字。正确写法：从使用位置向外寻找最近的同名声明。</p><h3 class="astro-e22r5uwj">滥用全局变量</h3><p class="astro-e22r5uwj">错误写法：所有函数都直接读写同一个全局结果。原因：修改来源难追踪。正确写法：优先通过参数传入，通过返回值或引用明确传出。</p>
+<h2 id="related-learning" class="astro-e22r5uwj">关联学习</h2><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj"><a href="/gesp/level4/parameter-passing/" class="astro-e22r5uwj">参数传递</a>：进一步判断函数能否修改调用处的数据。</li></ul><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="parameters-scope" data-progress-event="xdz:gesp-level4-progress"><fieldset class="astro-l37rdmqc"><legend class="astro-l37rdmqc">完成全部核心内容检查，再记录本页已经复习</legend><label class="astro-l37rdmqc"><input type="checkbox" value="0" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能指出一次调用中的实参与形参</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="1" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能判断局部变量何时可见、何时失效</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="2" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能从使用位置找到最近的同名声明</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="3" class="astro-l37rdmqc"><span class="astro-l37rdmqc">知道全局变量会扩大依赖范围</span></label></fieldset><button type="button" disabled data-review-button class="astro-l37rdmqc">标记为已复习</button><span aria-live="polite" data-review-status class="astro-l37rdmqc">勾选全部检查项后即可标记。</span></gesp-dictionary-review><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="parameters-scope" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 5 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><fieldset class="dictionary-test__question" data-question-id="l4-parameters-scope-01"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">01</span>【基础测试】观察下面的函数定义和调用，哪一项正确区分了形参与实参？</legend><pre class="astro-h6wltfcv"><code class="astro-h6wltfcv">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int add(int left, int right) {
+    return left + right;
+}
+
+int main() {
+    int x = 4;
+    int total = add(x, 5);
+    return total == 9 ? 0 : 1;
+}</code></pre><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-01" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> left、right 是形参，x、5 是这次调用的实参</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-01" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> x、5 是形参，left、right 是实参</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-01" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> left、x 是形参，right、5 是实参</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-01" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> total 是形参，add 是实参</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级形参与实参条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameters-scope-02"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">02</span>【基础测试】运行下面的 C++ 程序，输出是什么？</legend><pre class="astro-h6wltfcv"><code class="astro-h6wltfcv">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int value = 10;
+
+int adjust(int value) {
+    int result = value + 2;
+    return result;
+}
+
+int main() {
+    cout &lt;&lt; adjust(3) &lt;&lt; &#39; &#39; &lt;&lt; value &lt;&lt; &#39;\n&#39;;
+    return 0;
+}</code></pre><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-02" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 3 10</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-02" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> 5 10</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-02" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 5 12</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-02" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 12 12</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级变量作用域与遮蔽条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameters-scope-03"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">03</span>【边界测试】在一对大括号内部定义的普通局部变量，离开这对大括号后会怎样？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-03" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 超出作用域，不能再通过该名字访问</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-03" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> 自动变成全局变量</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-03" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 数值自动清零后仍可访问</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-03" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 自动复制到 main 函数</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级局部作用域边界条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameters-scope-04"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">04</span>【易错测试】已知 price 在 0 到 1000 之间、count 在 0 到 100 之间。若要计算小计并尽量避免依赖全局变量，哪种函数设计最合适？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-04" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> int subtotal(int price, int count) { return price * count; }</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-04" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> int price; int count; int subtotal() { return price * count; }</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-04" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> void subtotal(int price, int count) { int result = price * count; }</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-04" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> int subtotal() { int price = 0; int count = 0; return price * count; }</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级参数与作用域应用条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameters-scope-05"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">05</span>【易错测试】一个局部变量在函数调用结束后会怎样？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-05" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 离开其作用域，生命周期结束</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-05" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> 自动变成全局变量</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-05" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 永久保留并能被任何函数访问</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameters-scope-05" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 名称自动改为函数名</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级局部变量生命周期条目）</a></p></fieldset><button type="button" data-submit-test class="astro-h6wltfcv">提交答案</button><button type="button" data-retry-test hidden class="astro-h6wltfcv">重新测试</button><span data-test-status aria-live="polite" class="astro-h6wltfcv">尚未提交。本页测试只保留最近一次有效结果。</span></gesp-dictionary-test><nav class="dictionary-lesson-pager" aria-label="知识点翻页"><a href="/gesp/level4/function-definition/" rel="prev" class="astro-hl664apc"><span class="astro-hl664apc">上一知识点</span><strong class="astro-hl664apc">函数基础</strong></a><a href="/gesp/level4/pointers/" rel="next" class="astro-hl664apc"><span class="astro-hl664apc">下一知识点</span><strong class="astro-hl664apc">指针基础</strong></a></nav></article><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -490,7 +559,7 @@ int result = add(3, 5); // 3、5 是实参，按位置创建 left=3、right=5</c
       <a class="kp-nav" href="kp3.html">下一个：指针基础 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#quick-review-title">本课先记住</a></li><li><a href="#learning-goal">这节课要会什么</a></li><li><a href="#knowledge-range">知识范围与官方定位</a></li><li><a href="#topic-01">01 形参与实参</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#quick-review-title">本课先记住</a></li><li><a href="#dictionary-page-quick-nav-title">本页速查</a></li><li><a href="#learning-goal">这节课要会什么</a></li><li><a href="#knowledge-range">知识范围与官方定位</a></li><li><a href="#topic-01">01 形参与实参</a></li><li><a href="#topic-02">02 局部变量与生命周期</a></li><li><a href="#topic-03">03 全局变量与作用域</a></li><li><a href="#topic-04">04 同名变量与遮蔽</a></li><li><a href="#quick-table">知识点速查表</a></li><li><a href="#algorithm-trace">算法实际怎样执行</a></li><li><a href="#examples">典型例题</a></li><li><a href="#practice">分层练习</a></li><li><a href="#mistakes">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#test">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -502,6 +571,31 @@ int result = add(3, 5); // 3、5 是实参，按位置创建 left=3、right=5</c
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

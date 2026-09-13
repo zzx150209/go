@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -473,10 +492,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <h2 id="本课先记住">本课先记住</h2>
 <ul>
 <li><strong>核心结论：</strong> 输入按题目顺序把数据交给变量，输出按代码顺序形成最终文本；OJ 比较的是实际输出，空格、换行和小数格式都属于答案。</li>
-<li><strong>常用语法：</strong> C++ 流使用 <code>cin &gt;&gt;</code>、<code>cout &lt;&lt;</code>；C 风格输入输出使用 <code>scanf</code>、<code>printf</code>，格式符必须与变量类型匹配。</li>
-<li><strong>最小示例：</strong> <code>cin &gt;&gt; a &gt;&gt; b; cout &lt;&lt; a + b &lt;&lt; '\n';</code> 会读入两个数并只输出它们的和与一个换行。</li>
-<li><strong>关键易错点：</strong> 程序不会自动补空格，<code>scanf</code> 读普通变量通常要写地址符 <code>&amp;</code>，保留小数位数只改变显示形式，不会提高变量精度。</li>
+<li><strong>常用语法：</strong> C++ 流使用 <code dir="auto">cin &gt;&gt;</code>、<code dir="auto">cout &lt;&lt;</code>；C 风格输入输出使用 <code dir="auto">scanf</code>、<code dir="auto">printf</code>，格式符必须与变量类型匹配。</li>
+<li><strong>最小示例：</strong> <code dir="auto">cin &gt;&gt; a &gt;&gt; b; cout &lt;&lt; a + b &lt;&lt; '\n';</code> 会读入两个数并只输出它们的和与一个换行。</li>
+<li><strong>关键易错点：</strong> 程序不会自动补空格，<code dir="auto">scanf</code> 读普通变量通常要写地址符 <code dir="auto">&amp;</code>，保留小数位数只改变显示形式，不会提高变量精度。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-cin-标准输入" class="astro-6dte4xza">01 cin 输入</a></li><li class="astro-6dte4xza"><a href="#02-cout-标准输出" class="astro-6dte4xza">02 cout 输出</a></li><li class="astro-6dte4xza"><a href="#03-空格换行与输出格式" class="astro-6dte4xza">03 空格与换行</a></li><li class="astro-6dte4xza"><a href="#04-scanf-与-printf" class="astro-6dte4xza">04 scanf / printf</a></li><li class="astro-6dte4xza"><a href="#05-格式化输出与保留小数" class="astro-6dte4xza">05 保留小数</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>程序有了基本结构以后，还需要让题目给出的数据进入程序，再把处理结果按照指定格式送出去。这个过程分成两端：</p>
 <table>
@@ -491,33 +512,33 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <td>标准输入</td>
 <td>数据从哪里来，依次保存到什么位置</td>
-<td><code>cin</code>、<code>scanf</code></td>
+<td><code dir="auto">cin</code>、<code dir="auto">scanf</code></td>
 </tr>
 <tr>
 <td>标准输出</td>
 <td>哪些内容以什么顺序组成最终答案</td>
-<td><code>cout</code>、<code>printf</code></td>
+<td><code dir="auto">cout</code>、<code dir="auto">printf</code></td>
 </tr>
 </tbody>
 </table>
 <p>例如，输入依次给出学号和成绩：</p>
-<pre><code>101 87</code></pre>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>101 87</code></pre>
 <p>题目要求先输出成绩，再输出学号：</p>
 <pre><code>87 101</code></pre>
 <p>这不只是“把两个数显示出来”。程序还要读对数据的数量和顺序，知道每个数据保存在哪里，再按照题目要求改变输出顺序，准确放入空格和换行。</p>
 <p>本页集中解决三个核心问题：</p>
 <ol>
-<li><code>cin</code>、<code>cout</code> 怎样从左到右处理数据；</li>
-<li><code>scanf</code>、<code>printf</code> 的格式符怎样与数据逐项对应；</li>
+<li><code dir="auto">cin</code>、<code dir="auto">cout</code> 怎样从左到右处理数据；</li>
+<li><code dir="auto">scanf</code>、<code dir="auto">printf</code> 的格式符怎样与数据逐项对应；</li>
 <li>怎样让最终输出的字符和题目要求完全一致。</li>
 </ol>
-<p>本页先把 <code>studentId</code>、<code>score</code> 看作已经准备好的保存位置。变量怎样定义、数据类型怎样选择、表达式怎样计算，会在后面的课程中分别讲解。</p>
+<p>本页先把 <code dir="auto">studentId</code>、<code dir="auto">score</code> 看作已经准备好的保存位置。变量怎样定义、数据类型怎样选择、表达式怎样计算，会在后面的课程中分别讲解。</p>
 <h2 id="01-cin-标准输入">01 cin 标准输入</h2>
-<p><code>cin</code> 的职责是从标准输入中读取数据，并把读到的内容保存到变量中。同一份程序因此可以处理不同的输入，而不需要把样例数字写死在代码里。</p>
+<p><code dir="auto">cin</code> 的职责是从标准输入中读取数据，并把读到的内容保存到变量中。同一份程序因此可以处理不同的输入，而不需要把样例数字写死在代码里。</p>
 <h3 id="输入一个数据与多个数据">输入一个数据与多个数据</h3>
 <p>输入一个数据的基本写法是：</p>
 <pre><code>cin &gt;&gt; studentId; // 读取一个数据，保存到 studentId</code></pre>
-<p>需要连续读取多个数据时，继续按照题目给出的顺序写 <code>&gt;&gt;</code>：</p>
+<p>需要连续读取多个数据时，继续按照题目给出的顺序写 <code dir="auto">&gt;&gt;</code>：</p>
 <pre><code>cin &gt;&gt; studentId &gt;&gt; score; // 依次读取学号和成绩</code></pre>
 <p>这条语句可以按三个部分理解：</p>
 <table>
@@ -529,11 +550,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>cin</code></td>
+<td><code dir="auto">cin</code></td>
 <td>指明数据来自标准输入</td>
 </tr>
 <tr>
-<td><code>&gt;&gt;</code></td>
+<td><code dir="auto">&gt;&gt;</code></td>
 <td>取出下一个符合要求的数据</td>
 </tr>
 <tr>
@@ -542,7 +563,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>一处 <code>&gt;&gt;</code> 对应一个保存位置。需要两个数据，就要准备两个位置并写出两次读取，不能用逗号代替后面的 <code>&gt;&gt;</code>。</p>
+<p>一处 <code dir="auto">&gt;&gt;</code> 对应一个保存位置。需要两个数据，就要准备两个位置并写出两次读取，不能用逗号代替后面的 <code dir="auto">&gt;&gt;</code>。</p>
 <h3 id="cin-从左到右怎样读取">cin 从左到右怎样读取</h3>
 <p>假设代码是：</p>
 <pre><code>cin &gt;&gt; studentId &gt;&gt; score;</code></pre>
@@ -561,36 +582,36 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>&gt;&gt; studentId</code></td>
+<td><code dir="auto">&gt;&gt; studentId</code></td>
 <td style="text-align: right">101</td>
-<td><code>studentId = 101</code></td>
+<td><code dir="auto">studentId = 101</code></td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>&gt;&gt; score</code></td>
+<td><code dir="auto">&gt;&gt; score</code></td>
 <td style="text-align: right">87</td>
-<td><code>score = 87</code></td>
+<td><code dir="auto">score = 87</code></td>
 </tr>
 </tbody>
 </table>
-<p>变量名不会让 <code>cin</code> 自动寻找“像学号的数据”。真正决定对应关系的是代码中的位置：第一个数据给第一个变量，第二个数据给第二个变量，依次类推。</p>
+<p>变量名不会让 <code dir="auto">cin</code> 自动寻找“像学号的数据”。真正决定对应关系的是代码中的位置：第一个数据给第一个变量，第二个数据给第二个变量，依次类推。</p>
 <h3 id="空格换行和制表符怎样分隔数据">空格、换行和制表符怎样分隔数据</h3>
-<p>对于本页使用的普通数字输入，<code>cin &gt;&gt;</code> 会先跳过数据前面的空格、制表符和换行，再读取下一个数据。因此下面三种输入都能得到相同结果：</p>
+<p>对于本页使用的普通数字输入，<code dir="auto">cin &gt;&gt;</code> 会先跳过数据前面的空格、制表符和换行，再读取下一个数据。因此下面三种输入都能得到相同结果：</p>
 <pre><code>101 87</code></pre>
 <pre><code>10187</code></pre>
 <pre><code>101     87</code></pre>
-<p>所以 <code>cin &gt;&gt; a &gt;&gt; b;</code> 表示“依次读取两个数据”，不表示“每一行只能读取一个数据”。以后学习整行文字输入时，换行会有不同作用，本页暂不展开。</p>
+<p>所以 <code dir="auto">cin &gt;&gt; a &gt;&gt; b;</code> 表示“依次读取两个数据”，不表示“每一行只能读取一个数据”。以后学习整行文字输入时，换行会有不同作用，本页暂不展开。</p>
 <h3 id="什么时候不能按预期读完">什么时候不能按预期读完</h3>
-<p>检查 <code>cin</code> 时要同时看四件事：数据数量、先后顺序、目标类型和保存位置。</p>
+<p>检查 <code dir="auto">cin</code> 时要同时看四件事：数据数量、先后顺序、目标类型和保存位置。</p>
 <ul>
 <li>**数据不足：**程序还没有拿到后面的数据。在控制台中通常会继续等待；如果输入文件已经结束，后续读取会失败。</li>
 <li>**顺序写反：**程序可能仍能读完，但数据进入了错误的变量。</li>
-<li>**类型不匹配：**需要整数的位置遇到 <code>*</code> 之类不能读成整数的内容时，读取会失败，不能把该变量当作有效输入，也不能假定它一定自动变成 0。</li>
+<li>**类型不匹配：**需要整数的位置遇到 <code dir="auto">*</code> 之类不能读成整数的内容时，读取会失败，不能把该变量当作有效输入，也不能假定它一定自动变成 0。</li>
 <li>**数据多余：**当前语句只读取需要的数量，后面的数据会留给后续读取语句。</li>
 </ul>
-<p>例如输入 <code>1 *</code> 时，两个整数位置不能全部读取成功；若第二个位置是字符，<code>*</code> 才可以作为一个字符读入。这里先认识“类型会影响读取规则”，各种类型会在“基本数据类型”一页系统学习。</p>
+<p>例如输入 <code dir="auto">1 *</code> 时，两个整数位置不能全部读取成功；若第二个位置是字符，<code dir="auto">*</code> 才可以作为一个字符读入。这里先认识“类型会影响读取规则”，各种类型会在“基本数据类型”一页系统学习。</p>
 <h2 id="02-cout-标准输出">02 cout 标准输出</h2>
-<p><code>cout</code> 的职责是把内容送到标准输出。它不会替我们猜测应该输出哪些文字、空格或标点，代码写了什么，最终文本才会出现什么。</p>
+<p><code dir="auto">cout</code> 的职责是把内容送到标准输出。它不会替我们猜测应该输出哪些文字、空格或标点，代码写了什么，最终文本才会出现什么。</p>
 <h3 id="cout-可以连接哪些内容">cout 可以连接哪些内容</h3>
 <p>例如：</p>
 <pre><code>cout &lt;&lt; "score=" &lt;&lt; score;</code></pre>
@@ -604,20 +625,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>"score="</code></td>
-<td>双引号中的固定文字 <code>score=</code></td>
+<td><code dir="auto">"score="</code></td>
+<td>双引号中的固定文字 <code dir="auto">score=</code></td>
 </tr>
 <tr>
-<td><code>score</code></td>
+<td><code dir="auto">score</code></td>
 <td>变量当前保存的值</td>
 </tr>
 </tbody>
 </table>
-<p>如果 <code>score = 91</code>，最终形成的文本是 <code>score=91</code>。变量名 <code>score</code> 本身不会出现在屏幕上，除非把它写进双引号。</p>
+<p>如果 <code dir="auto">score = 91</code>，最终形成的文本是 <code dir="auto">score=91</code>。变量名 <code dir="auto">score</code> 本身不会出现在屏幕上，除非把它写进双引号。</p>
 <h3 id="cout-从左到右怎样形成文本">cout 从左到右怎样形成文本</h3>
 <p>继续输出学号：</p>
 <pre><code>cout &lt;&lt; "score=" &lt;&lt; score &lt;&lt; ", id=" &lt;&lt; studentId;</code></pre>
-<p>当 <code>score = 91</code>、<code>studentId = 205</code> 时：</p>
+<p>当 <code dir="auto">score = 91</code>、<code dir="auto">studentId = 205</code> 时：</p>
 <table>
 <thead>
 <tr>
@@ -629,31 +650,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td>固定文字 <code>score=</code></td>
-<td><code>score=</code></td>
+<td>固定文字 <code dir="auto">score=</code></td>
+<td><code dir="auto">score=</code></td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>score</code> 的值 91</td>
-<td><code>score=91</code></td>
+<td><code dir="auto">score</code> 的值 91</td>
+<td><code dir="auto">score=91</code></td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td>固定文字 <code>, id=</code></td>
-<td><code>score=91, id=</code></td>
+<td>固定文字 <code dir="auto">, id=</code></td>
+<td><code dir="auto">score=91, id=</code></td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td><code>studentId</code> 的值 205</td>
-<td><code>score=91, id=205</code></td>
+<td><code dir="auto">studentId</code> 的值 205</td>
+<td><code dir="auto">score=91, id=205</code></td>
 </tr>
 </tbody>
 </table>
-<p>每一处 <code>&lt;&lt;</code> 都把右侧内容接到当前文本末尾。判断输出时，应沿代码从左到右拼接，不能只看最后一个变量。</p>
+<p>每一处 <code dir="auto">&lt;&lt;</code> 都把右侧内容接到当前文本末尾。判断输出时，应沿代码从左到右拼接，不能只看最后一个变量。</p>
 <h2 id="03-空格换行与输出格式">03 空格、换行与输出格式</h2>
 <p>输出格式决定最终答案“长什么样”。数值相同，但空格、换行、标点或顺序不同，仍然是不同的输出。</p>
 <h3 id="程序不会自动补空格">程序不会自动补空格</h3>
-<p>假设 <code>score = 91</code>、<code>studentId = 205</code>：</p>
+<p>假设 <code dir="auto">score = 91</code>、<code dir="auto">studentId = 205</code>：</p>
 <table>
 <thead>
 <tr>
@@ -664,31 +685,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>cout &lt;&lt; score &lt;&lt; studentId;</code></td>
-<td><code>91205</code></td>
+<td><code dir="auto">cout &lt;&lt; score &lt;&lt; studentId;</code></td>
+<td><code dir="auto">91205</code></td>
 <td>中间没有空格</td>
 </tr>
 <tr>
-<td><code>cout &lt;&lt; score &lt;&lt; " " &lt;&lt; studentId;</code></td>
-<td><code>91 205</code></td>
+<td><code dir="auto">cout &lt;&lt; score &lt;&lt; " " &lt;&lt; studentId;</code></td>
+<td><code dir="auto">91 205</code></td>
 <td>中间恰好一个空格</td>
 </tr>
 <tr>
-<td><code>cout &lt;&lt; score &lt;&lt; "  " &lt;&lt; studentId;</code></td>
-<td><code>91  205</code></td>
+<td><code dir="auto">cout &lt;&lt; score &lt;&lt; "  " &lt;&lt; studentId;</code></td>
+<td><code dir="auto">91  205</code></td>
 <td>中间有两个空格</td>
 </tr>
 </tbody>
 </table>
-<p>空格也属于双引号中的固定内容。题目要求几个空格，就要写出几个；<code>cout</code> 不会因为两个变量相邻而自动加空格。</p>
+<p>空格也属于双引号中的固定内容。题目要求几个空格，就要写出几个；<code dir="auto">cout</code> 不会因为两个变量相邻而自动加空格。</p>
 <h3 id="endl-与换行符">endl 与换行符</h3>
 <p>下面两种写法都能在一级常见输出题中结束当前行：</p>
 <pre><code>cout &lt;&lt; score &lt;&lt; endl; // 输出成绩后换行cout &lt;&lt; studentId &lt;&lt; "\n"; // 输出学号后换行</code></pre>
-<p><code>endl</code> 是换行写法；<code>"\n"</code> 中的 <code>\n</code> 是转义序列，也表示换行。双引号中的普通文字、空格和标点按写法输出，<code>\n</code> 这样的转义序列则按特殊含义执行，不会在屏幕上显示反斜杠和字母 n。</p>
+<p><code dir="auto">endl</code> 是换行写法；<code dir="auto">"\n"</code> 中的 <code dir="auto">\n</code> 是转义序列，也表示换行。双引号中的普通文字、空格和标点按写法输出，<code dir="auto">\n</code> 这样的转义序列则按特殊含义执行，不会在屏幕上显示反斜杠和字母 n。</p>
 <p>换行放在哪里，下一段内容就从哪里开始：</p>
 <pre><code>cout &lt;&lt; score &lt;&lt; " " &lt;&lt; studentId &lt;&lt; "\n"; // 同一行输出两个值cout &lt;&lt; score &lt;&lt; "\n" &lt;&lt; studentId &lt;&lt; "\n"; // 两个值分成两行</code></pre>
 <h3 id="oj-会检查最终文本">OJ 会检查最终文本</h3>
-<p>OJ 通常只接收题目要求的结果。题目没有要求时，不要擅自输出 <code>请输入数据</code>、<code>答案是</code> 等提示文字。</p>
+<p>OJ 通常只接收题目要求的结果。题目没有要求时，不要擅自输出 <code dir="auto">请输入数据</code>、<code dir="auto">答案是</code> 等提示文字。</p>
 <p>提交前逐项检查：</p>
 <ol>
 <li>输出的数据数量和顺序是否正确；</li>
@@ -699,9 +720,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>是否混入题目没有要求的内容。</li>
 </ol>
 <h2 id="04-scanf-与-printf">04 scanf 与 printf</h2>
-<p><code>scanf</code>、<code>printf</code> 是另一套常见输入输出方式。它们把数据的格式写进第一个双引号中，再让后面的输入位置或输出数据与格式符一一对应。</p>
+<p><code dir="auto">scanf</code>、<code dir="auto">printf</code> 是另一套常见输入输出方式。它们把数据的格式写进第一个双引号中，再让后面的输入位置或输出数据与格式符一一对应。</p>
 <h3 id="scanf-怎样按照格式读取">scanf 怎样按照格式读取</h3>
-<p>读取两个 <code>int</code> 数据可以写成：</p>
+<p>读取两个 <code dir="auto">int</code> 数据可以写成：</p>
 <pre><code>scanf("%d%d", &amp;studentId, &amp;score);</code></pre>
 <table>
 <thead>
@@ -712,24 +733,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>scanf</code></td>
+<td><code dir="auto">scanf</code></td>
 <td>按格式从标准输入读取数据</td>
 </tr>
 <tr>
-<td><code>"%d%d"</code></td>
-<td>两个 <code>%d</code> 依次要求两个 <code>int</code> 数据</td>
+<td><code dir="auto">"%d%d"</code></td>
+<td>两个 <code dir="auto">%d</code> 依次要求两个 <code dir="auto">int</code> 数据</td>
 </tr>
 <tr>
-<td><code>&amp;studentId</code></td>
-<td>第一个数据写入 <code>studentId</code></td>
+<td><code dir="auto">&amp;studentId</code></td>
+<td>第一个数据写入 <code dir="auto">studentId</code></td>
 </tr>
 <tr>
-<td><code>&amp;score</code></td>
-<td>第二个数据写入 <code>score</code></td>
+<td><code dir="auto">&amp;score</code></td>
+<td>第二个数据写入 <code dir="auto">score</code></td>
 </tr>
 </tbody>
 </table>
-<p><code>scanf</code> 要把数据写进变量，因此普通输入位置前要写 <code>&amp;</code>。一级阶段先把它记作必要写法，不在本页展开地址和指针。</p>
+<p><code dir="auto">scanf</code> 要把数据写进变量，因此普通输入位置前要写 <code dir="auto">&amp;</code>。一级阶段先把它记作必要写法，不在本页展开地址和指针。</p>
 <h3 id="printf-怎样按照格式输出">printf 怎样按照格式输出</h3>
 <p>输出成绩和学号可以写成：</p>
 <pre><code>printf("%d %d\n", score, studentId);</code></pre>
@@ -743,63 +764,63 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td>第一个 <code>%d</code></td>
-<td>输出 <code>score</code> 的值</td>
+<td>第一个 <code dir="auto">%d</code></td>
+<td>输出 <code dir="auto">score</code> 的值</td>
 </tr>
 <tr>
 <td>中间空格</td>
 <td>输出一个普通空格</td>
 </tr>
 <tr>
-<td>第二个 <code>%d</code></td>
-<td>输出 <code>studentId</code> 的值</td>
+<td>第二个 <code dir="auto">%d</code></td>
+<td>输出 <code dir="auto">studentId</code> 的值</td>
 </tr>
 <tr>
-<td><code>\n</code></td>
+<td><code dir="auto">\n</code></td>
 <td>换行</td>
 </tr>
 </tbody>
 </table>
-<p><code>printf</code> 只读取变量的值用于显示，所以输出数据前不写 <code>&amp;</code>。</p>
+<p><code dir="auto">printf</code> 只读取变量的值用于显示，所以输出数据前不写 <code dir="auto">&amp;</code>。</p>
 <h3 id="格式符必须与类型配对">格式符必须与类型配对</h3>
 <table>
 <thead>
 <tr>
 <th>数据类型</th>
-<th><code>scanf</code> 读取</th>
-<th><code>printf</code> 输出</th>
+<th><code dir="auto">scanf</code> 读取</th>
+<th><code dir="auto">printf</code> 输出</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>int</code></td>
-<td><code>%d</code></td>
-<td><code>%d</code></td>
+<td><code dir="auto">int</code></td>
+<td><code dir="auto">%d</code></td>
+<td><code dir="auto">%d</code></td>
 </tr>
 <tr>
-<td><code>long long</code></td>
-<td><code>%lld</code></td>
-<td><code>%lld</code></td>
+<td><code dir="auto">long long</code></td>
+<td><code dir="auto">%lld</code></td>
+<td><code dir="auto">%lld</code></td>
 </tr>
 <tr>
-<td><code>float</code></td>
-<td><code>%f</code></td>
-<td><code>%f</code></td>
+<td><code dir="auto">float</code></td>
+<td><code dir="auto">%f</code></td>
+<td><code dir="auto">%f</code></td>
 </tr>
 <tr>
-<td><code>double</code></td>
-<td><code>%lf</code></td>
-<td><code>%f</code></td>
+<td><code dir="auto">double</code></td>
+<td><code dir="auto">%lf</code></td>
+<td><code dir="auto">%f</code></td>
 </tr>
 <tr>
-<td><code>char</code></td>
-<td><code>%c</code></td>
-<td><code>%c</code></td>
+<td><code dir="auto">char</code></td>
+<td><code dir="auto">%c</code></td>
+<td><code dir="auto">%c</code></td>
 </tr>
 </tbody>
 </table>
-<p>最容易混淆的是 <code>double</code>：<code>scanf</code> 读取时使用 <code>%lf</code>，<code>printf</code> 输出时使用 <code>%f</code>。格式符数量、顺序或类型不对应，都可能让程序无法按预期工作。</p>
-<p>普通 <code>%c</code> 会直接读取下一个字符，空格和换行也可能被读入。如果题目要求下一个非空白字符，常见写法是在 <code>%c</code> 前放一个空格：</p>
+<p>最容易混淆的是 <code dir="auto">double</code>：<code dir="auto">scanf</code> 读取时使用 <code dir="auto">%lf</code>，<code dir="auto">printf</code> 输出时使用 <code dir="auto">%f</code>。格式符数量、顺序或类型不对应，都可能让程序无法按预期工作。</p>
+<p>普通 <code dir="auto">%c</code> 会直接读取下一个字符，空格和换行也可能被读入。如果题目要求下一个非空白字符，常见写法是在 <code dir="auto">%c</code> 前放一个空格：</p>
 <pre><code>scanf(" %c", &amp;grade); // 先跳过空白，再读取一个字符</code></pre>
 <p>若题目本来就要读取空格字符，则不能这样跳过空白。</p>
 <h3 id="格式串中的固定字符也要匹配">格式串中的固定字符也要匹配</h3>
@@ -807,26 +828,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <pre><code>scanf("%d,%d", &amp;studentId, &amp;score);</code></pre>
 <p>这条语句对应的输入是：</p>
 <pre><code>205,91</code></pre>
-<p>英文逗号是格式串中的固定字符，输入中也必须在对应位置出现。类似地，<code>scanf("%d:%d:%d", ...)</code> 会要求三个整数之间出现冒号。固定字符只负责匹配，不会被保存到变量中。</p>
-<p>一级阶段选择 <code>cin</code>／<code>cout</code> 或 <code>scanf</code>／<code>printf</code> 中的一套写对、写一致即可。本页不展开底层缓冲、性能基准或输入失败后的恢复操作。</p>
+<p>英文逗号是格式串中的固定字符，输入中也必须在对应位置出现。类似地，<code dir="auto">scanf("%d:%d:%d", ...)</code> 会要求三个整数之间出现冒号。固定字符只负责匹配，不会被保存到变量中。</p>
+<p>一级阶段选择 <code dir="auto">cin</code>／<code dir="auto">cout</code> 或 <code dir="auto">scanf</code>／<code dir="auto">printf</code> 中的一套写对、写一致即可。本页不展开底层缓冲、性能基准或输入失败后的恢复操作。</p>
 <h2 id="05-格式化输出与保留小数">05 格式化输出与保留小数</h2>
 <p>格式化输出只决定结果怎样显示。它不会改变变量原来保存的值，也不能修复此前已经发生的错误计算。</p>
 <h3 id="固定显示小数位数">固定显示小数位数</h3>
-<p>数值 <code>3.5</code> 按要求显示两位小数时，应输出 <code>3.50</code>。</p>
-<p>使用 <code>cout</code>：</p>
+<p>数值 <code dir="auto">3.5</code> 按要求显示两位小数时，应输出 <code dir="auto">3.50</code>。</p>
+<p>使用 <code dir="auto">cout</code>：</p>
 <pre><code>cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; 3.5 &lt;&lt; "\n";</code></pre>
-<p>使用 <code>printf</code>：</p>
+<p>使用 <code dir="auto">printf</code>：</p>
 <pre><code>printf("%.2f\n", 3.5);</code></pre>
 <p>两种写法都输出：</p>
 <pre><code>3.50</code></pre>
-<p><code>fixed</code> 让 <code>setprecision(2)</code> 表示小数点后两位；<code>%.2f</code> 中的 <code>.2</code> 也表示小数点后两位。若后面还有更多数字，显示时会按规则舍入。例如 <code>3.456</code> 显示两位小数时得到 <code>3.46</code>。</p>
+<p><code dir="auto">fixed</code> 让 <code dir="auto">setprecision(2)</code> 表示小数点后两位；<code dir="auto">%.2f</code> 中的 <code dir="auto">.2</code> 也表示小数点后两位。若后面还有更多数字，显示时会按规则舍入。例如 <code dir="auto">3.456</code> 显示两位小数时得到 <code dir="auto">3.46</code>。</p>
 <h3 id="先确认数值再检查显示">先确认数值，再检查显示</h3>
 <p>判断格式化输出时按两步走：</p>
 <ol>
 <li>先确认变量中保存的值是否正确；</li>
-<li>再根据 <code>fixed</code>、<code>setprecision</code> 或 <code>printf</code> 格式检查显示结果。</li>
+<li>再根据 <code dir="auto">fixed</code>、<code dir="auto">setprecision</code> 或 <code dir="auto">printf</code> 格式检查显示结果。</li>
 </ol>
-<p>把 <code>3.5</code> 显示成 <code>3.50</code>，变量并没有永久变成“只能保存两位小数”。反过来，若前面的计算已经得到错误数值，再漂亮的输出格式也不能把它改正确。</p>
+<p>把 <code dir="auto">3.5</code> 显示成 <code dir="auto">3.50</code>，变量并没有永久变成“只能保存两位小数”。反过来，若前面的计算已经得到错误数值，再漂亮的输出格式也不能把它改正确。</p>
 <h2 id="输入输出的统一检查顺序">输入输出的统一检查顺序</h2>
 <p>面对一段输入输出代码，可以按下面的顺序检查：</p>
 <table>
@@ -846,12 +867,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <td>输入对应</td>
 <td>每个数据按什么顺序、什么类型保存</td>
-<td>沿 <code>cin</code> 或 <code>scanf</code> 从左到右连线</td>
+<td>沿 <code dir="auto">cin</code> 或 <code dir="auto">scanf</code> 从左到右连线</td>
 </tr>
 <tr>
 <td>输出内容</td>
 <td>要输出变量值还是固定文字</td>
-<td>把每一处 <code>&lt;&lt;</code> 或格式串拆成片段</td>
+<td>把每一处 <code dir="auto">&lt;&lt;</code> 或格式串拆成片段</td>
 </tr>
 <tr>
 <td>输出格式</td>
@@ -890,16 +911,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <td style="text-align: right">1</td>
 <td style="text-align: right">101</td>
-<td><code>studentId</code></td>
+<td><code dir="auto">studentId</code></td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
 <td style="text-align: right">87</td>
-<td><code>score</code></td>
+<td><code dir="auto">score</code></td>
 </tr>
 </tbody>
 </table>
-<p>输出时先取 <code>score</code> 的值 87，再加入一个字面量空格，接着取 <code>studentId</code> 的值 101，最后换行。输入顺序和输出顺序不同，正好可以检查程序有没有把两个保存位置写反。</p>
+<p>输出时先取 <code dir="auto">score</code> 的值 87，再加入一个字面量空格，接着取 <code dir="auto">studentId</code> 的值 101，最后换行。输入顺序和输出顺序不同，正好可以检查程序有没有把两个保存位置写反。</p>
 <h3 id="逐步写出关键语句">逐步写出关键语句</h3>
 <p>先准备两个保存位置并按题目顺序读取：</p>
 <pre><code>int studentId; // 保存学号int score; // 保存当前成绩cin &gt;&gt; studentId &gt;&gt; score; // 依次读取学号和成绩</code></pre>
@@ -910,7 +931,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 int main() {    int studentId; // 保存输入中的学号    int score; // 保存输入中的当前成绩    cin &gt;&gt; studentId &gt;&gt; score; // 按题目顺序读取两个数据
     cout &lt;&lt; score &lt;&lt; " " &lt;&lt; studentId &lt;&lt; "\n"; // 先输出成绩，再输出学号    return 0;}</code></pre>
 <h3 id="执行过程">执行过程</h3>
-<p>输入 <code>101 87</code> 时：</p>
+<p>输入 <code dir="auto">101 87</code> 时：</p>
 <table>
 <thead>
 <tr>
@@ -923,37 +944,37 @@ int main() {    int studentId; // 保存输入中的学号    int score; // 保�
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>cin &gt;&gt; studentId</code></td>
-<td><code>studentId = 101</code></td>
+<td><code dir="auto">cin &gt;&gt; studentId</code></td>
+<td><code dir="auto">studentId = 101</code></td>
 <td>无</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>&gt;&gt; score</code></td>
-<td><code>score = 87</code></td>
+<td><code dir="auto">&gt;&gt; score</code></td>
+<td><code dir="auto">score = 87</code></td>
 <td>无</td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td>输出 <code>score</code></td>
+<td>输出 <code dir="auto">score</code></td>
 <td>两个变量都不改变</td>
-<td><code>87</code></td>
+<td><code dir="auto">87</code></td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td>输出字面量空格 <code>" "</code></td>
+<td>输出字面量空格 <code dir="auto">" "</code></td>
 <td>两个变量都不改变</td>
-<td><code>87 </code></td>
+<td><code dir="auto">87 </code></td>
 </tr>
 <tr>
 <td style="text-align: right">5</td>
-<td>输出 <code>studentId</code></td>
+<td>输出 <code dir="auto">studentId</code></td>
 <td>两个变量都不改变</td>
-<td><code>87 101</code></td>
+<td><code dir="auto">87 101</code></td>
 </tr>
 <tr>
 <td style="text-align: right">6</td>
-<td>输出 <code>"\n"</code></td>
+<td>输出 <code dir="auto">"\n"</code></td>
 <td>两个变量都不改变</td>
 <td>当前行结束</td>
 </tr>
@@ -971,40 +992,58 @@ int main() {    int studentId; // 保存输入中的学号    int score; // 保�
 </thead>
 <tbody>
 <tr>
-<td><code>101 87</code></td>
-<td><code>87 101</code>，然后换行</td>
+<td><code dir="auto">101 87</code></td>
+<td><code dir="auto">87 101</code>，然后换行</td>
 <td>正式样例与交换顺序</td>
 </tr>
 <tr>
-<td><code>205 91</code></td>
-<td><code>91 205</code>，然后换行</td>
+<td><code dir="auto">205 91</code></td>
+<td><code dir="auto">91 205</code>，然后换行</td>
 <td>更换数据后仍按保存位置输出</td>
 </tr>
 <tr>
-<td>第一行 <code>7</code>，第二行 <code>100</code></td>
-<td><code>100 7</code>，然后换行</td>
+<td>第一行 <code dir="auto">7</code>，第二行 <code dir="auto">100</code></td>
+<td><code dir="auto">100 7</code>，然后换行</td>
 <td>换行也能分隔两个普通整数</td>
 </tr>
 </tbody>
 </table>
 <p>若程序只在第一组样例中正确，换一组学号和成绩后就输出反了，说明代码没有真正按保存位置和题目顺序组织输出。</p>
 <h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
-<p>补全“读入两个整数并输出一行和”的关键语句。输入 <code>3 4</code> 时，先把 3、4 分别交给两个变量，再计算和；输出不得带提示文字，只保留结果和换行。</p>
-<p><strong>成功标准：</strong> 实际输出必须逐字等于 <code>7</code> 后接一个换行，不能多空格或说明文字。完成后不看提示独立完成页末“整页综合测试”；提交后逐题核对格式符、变量地址、空格、换行和小数位数。</p>
+<p>补全“读入两个整数并输出一行和”的关键语句。输入 <code dir="auto">3 4</code> 时，先把 3、4 分别交给两个变量，再计算和；输出不得带提示文字，只保留结果和换行。</p>
+<p><strong>成功标准：</strong> 实际输出必须逐字等于 <code dir="auto">7</code> 后接一个换行，不能多空格或说明文字。完成后不看提示独立完成页末“整页综合测试”；提交后逐题核对格式符、变量地址、空格、换行和小数位数。</p>
 <h2 id="常见错误">常见错误</h2>
 <ol>
-<li><strong>把输入输出符号写反。</strong> <code>cin</code> 使用 <code>&gt;&gt;</code>，<code>cout</code> 使用 <code>&lt;&lt;</code>；方向写反会导致编译或语义错误。</li>
-<li><strong>写成 <code>cin &gt;&gt; a, b;</code>。</strong> 逗号不会代替第二个 <code>&gt;&gt;</code>，这条语句只让 <code>cin</code> 读取 <code>a</code>；多个变量要写成 <code>cin &gt;&gt; a &gt;&gt; b;</code>。</li>
+<li><strong>把输入输出符号写反。</strong> <code dir="auto">cin</code> 使用 <code dir="auto">&gt;&gt;</code>，<code dir="auto">cout</code> 使用 <code dir="auto">&lt;&lt;</code>；方向写反会导致编译或语义错误。</li>
+<li><strong>写成 <code dir="auto">cin &gt;&gt; a, b;</code>。</strong> 逗号不会代替第二个 <code dir="auto">&gt;&gt;</code>，这条语句只让 <code dir="auto">cin</code> 读取 <code dir="auto">a</code>；多个变量要写成 <code dir="auto">cin &gt;&gt; a &gt;&gt; b;</code>。</li>
 <li><strong>输入数量、顺序或类型不匹配。</strong> 给数据和保存位置编号，再逐项连线；读取失败后不要继续把变量当作有效输入。</li>
-<li><strong>输出漏空格或换行位置错误。</strong> 把预期结果按字符写出来，再沿 <code>cout</code> 或格式串逐段拼接。</li>
-<li><strong>擅自输出提示文字。</strong> OJ 没有要求的 <code>答案是</code>、<code>请输入</code> 都可能让结果错误。</li>
-<li><strong><code>scanf</code> 漏写 <code>&amp;</code> 或格式符配错。</strong> 从第一个格式符开始，与后面的每个输入位置和类型一一对应。</li>
-<li><strong>只写 <code>setprecision(2)</code>，没有配合 <code>fixed</code>。</strong> 此时不一定表示小数点后固定两位。</li>
+<li><strong>输出漏空格或换行位置错误。</strong> 把预期结果按字符写出来，再沿 <code dir="auto">cout</code> 或格式串逐段拼接。</li>
+<li><strong>擅自输出提示文字。</strong> OJ 没有要求的 <code dir="auto">答案是</code>、<code dir="auto">请输入</code> 都可能让结果错误。</li>
+<li><strong><code dir="auto">scanf</code> 漏写 <code dir="auto">&amp;</code> 或格式符配错。</strong> 从第一个格式符开始，与后面的每个输入位置和类型一一对应。</li>
+<li><strong>只写 <code dir="auto">setprecision(2)</code>，没有配合 <code dir="auto">fixed</code>。</strong> 此时不一定表示小数点后固定两位。</li>
 <li><strong>认为格式化会改变原值。</strong> 格式控制发生在输出阶段，只改变显示文本。</li>
 </ol>
 <h2 id="关联学习">关联学习</h2>
-<p><a href="/gesp/level1/variables-expressions/">程序基本概念</a>会说明变量如何定义、赋值和参与表达式；<a href="/gesp/level1/data-types/">基本数据类型</a>会解释 <code>int</code>、<code>double</code>、<code>char</code> 等类型为什么具有不同的读取规则。</p>
-<section aria-labelledby="related-knowledge-input-output"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-input-output" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/program-structure/" class="astro-mkwt4ymd">程序结构</a></li></ul></section></div></section>
+<p><a href="/gesp/level1/variables-expressions/">程序基本概念</a>会说明变量如何定义、赋值和参与表达式；<a href="/gesp/level1/data-types/">基本数据类型</a>会解释 <code dir="auto">int</code>、<code dir="auto">double</code>、<code dir="auto">char</code> 等类型为什么具有不同的读取规则。</p>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能按数量、顺序和类型把输入数据与保存位置一一对应。</label><label class="q-check"><input type="checkbox"> 我能从左到右拼出 cout 的最终文本，并核对空格、换行和小数位数。</label><label class="q-check"><input type="checkbox"> 我能识别 scanf、printf 的常见格式符，以及 scanf 输入位置前的 &amp;。</label>
+<h2 id="整页综合测试">整页综合测试</h2>
+<span>5 题</span>
+<p class="q-title">第 1 题若要依次输出文字 sum = 和变量 sum 的值，哪种写法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题若要依次输出文字 sum = " value="A"><b>A.</b> cout &lt;&lt; &quot;sum = &quot; &lt;&lt; sum;</label><label class="q-opt"><input type="radio" name="第 1 题若要依次输出文字 sum = " value="B"><b>B.</b> cout &gt;&gt; &quot;sum = &quot; &gt;&gt; sum;</label><label class="q-opt"><input type="radio" name="第 1 题若要依次输出文字 sum = " value="C"><b>C.</b> cin &lt;&lt; &quot;sum = &quot; &lt;&lt; sum;</label><label class="q-opt"><input type="radio" name="第 1 题若要依次输出文字 sum = " value="D"><b>D.</b> cout &lt;&lt; sum = &quot;sum&quot;;</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>cout 使用 << 依次连接要输出的文字和变量。双引号内按原样输出，变量会输出当前值。<br><span class="q-kp">对应知识点：02 cout 标准输出</span></p>
+<p class="q-title">第 2 题若 a = 3、b = 5，要在同一行输出“3 5”并换行，哪种写法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题若 a = 3、b = 5，要" value="A"><b>A.</b> cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</label><label class="q-opt"><input type="radio" name="第 2 题若 a = 3、b = 5，要" value="B"><b>B.</b> cout &lt;&lt; a &lt;&lt; b &lt;&lt; endl;</label><label class="q-opt"><input type="radio" name="第 2 题若 a = 3、b = 5，要" value="C"><b>C.</b> cout &lt;&lt; a &lt;&lt; endl &lt;&lt; b;</label><label class="q-opt"><input type="radio" name="第 2 题若 a = 3、b = 5，要" value="D"><b>D.</b> cin &gt;&gt; a &gt;&gt; b;</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03 空格、换行与输出格式。双引号中的一个空格分隔两个数，endl 在末尾换行；第二种写法会紧挨着输出 35。<br><span class="q-kp">对应知识点：03 空格、换行与输出格式</span></p>
+<p class="q-title">第 3 题使用 scanf 读入两个 int 变量 a、b，哪种写法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题使用 scanf 读入两个 i" value="A"><b>A.</b> scanf(&quot;%d%d&quot;, &amp;a, &amp;b);</label><label class="q-opt"><input type="radio" name="第 3 题使用 scanf 读入两个 i" value="B"><b>B.</b> scanf(&quot;%d%d&quot;, a, b);</label><label class="q-opt"><input type="radio" name="第 3 题使用 scanf 读入两个 i" value="C"><b>C.</b> printf(&quot;%d%d&quot;, &amp;a, &amp;b);</label><label class="q-opt"><input type="radio" name="第 3 题使用 scanf 读入两个 i" value="D"><b>D.</b> scanf(a, b, &quot;%d%d&quot;);</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04 scanf 与 printf。格式串中的两个 %d 按顺序对应 &a、&b；scanf 要把读到的数据写入变量，因此变量名前要写地址符 &。<br><span class="q-kp">对应知识点：04 scanf 与 printf</span></p>
+<p class="q-title">第 4 题要从标准输入依次读入整数 a 和 b，哪种写法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题要从标准输入依次读入整数 a " value="A"><b>A.</b> cin &gt;&gt; a &gt;&gt; b;</label><label class="q-opt"><input type="radio" name="第 4 题要从标准输入依次读入整数 a " value="B"><b>B.</b> cin &lt;&lt; a &lt;&lt; b;</label><label class="q-opt"><input type="radio" name="第 4 题要从标准输入依次读入整数 a " value="C"><b>C.</b> cout &gt;&gt; a &gt;&gt; b;</label><label class="q-opt"><input type="radio" name="第 4 题要从标准输入依次读入整数 a " value="D"><b>D.</b> cin = a = b;</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>cin 使用 >> 输入运算符，可以按顺序把输入的数据保存到 a 和 b。<br><span class="q-kp">对应知识点：01 cin 标准输入</span></p>
+<p class="q-title">第 5 题要把 3.5 按两位小数输出为 3.50，哪种写法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题要把 3.5 按两位小数输出为" value="A"><b>A.</b> cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; 3.5;</label><label class="q-opt"><input type="radio" name="第 5 题要把 3.5 按两位小数输出为" value="B"><b>B.</b> cin &gt;&gt; fixed &gt;&gt; setprecision(2) &gt;&gt; 3.5;</label><label class="q-opt"><input type="radio" name="第 5 题要把 3.5 按两位小数输出为" value="C"><b>C.</b> cout &lt;&lt; 3.5 / 2;</label><label class="q-opt"><input type="radio" name="第 5 题要把 3.5 按两位小数输出为" value="D"><b>D.</b> cout &lt;&lt; setprecision(0) &lt;&lt; 3.5;</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>fixed 配合 setprecision(2) 表示固定输出两位小数。<br><span class="q-kp">对应知识点：05 格式化输出与保留小数</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/program-structure/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 03</small><strong>程序结构</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/variables-expressions/" rel="next"><span><small>下一知识点 · 05</small><strong>程序基本概念</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -1013,7 +1052,7 @@ int main() {    int studentId; // 保存输入中的学号    int score; // 保�
       <a class="kp-nav" href="kp5.html">下一个：程序基本概念 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-cin-标准输入">01 cin 标准输入</a></li><li><a href="#输入一个数据与多个数据" class="lvl3">输入一个数据与多个数据</a></li><li><a href="#cin-从左到右怎样读取" class="lvl3">cin 从左到右怎样读取</a></li><li><a href="#空格换行和制表符怎样分隔数据" class="lvl3">空格、换行和制表符怎样分隔数据</a></li><li><a href="#什么时候不能按预期读完" class="lvl3">什么时候不能按预期读完</a></li><li><a href="#02-cout-标准输出">02 cout 标准输出</a></li><li><a href="#cout-可以连接哪些内容" class="lvl3">cout 可以连接哪些内容</a></li><li><a href="#cout-从左到右怎样形成文本" class="lvl3">cout 从左到右怎样形成文本</a></li><li><a href="#03-空格换行与输出格式">03 空格、换行与输出格式</a></li><li><a href="#程序不会自动补空格" class="lvl3">程序不会自动补空格</a></li><li><a href="#endl-与换行符" class="lvl3">endl 与换行符</a></li><li><a href="#oj-会检查最终文本" class="lvl3">OJ 会检查最终文本</a></li><li><a href="#04-scanf-与-printf">04 scanf 与 printf</a></li><li><a href="#scanf-怎样按照格式读取" class="lvl3">scanf 怎样按照格式读取</a></li><li><a href="#printf-怎样按照格式输出" class="lvl3">printf 怎样按照格式输出</a></li><li><a href="#格式符必须与类型配对" class="lvl3">格式符必须与类型配对</a></li><li><a href="#格式串中的固定字符也要匹配" class="lvl3">格式串中的固定字符也要匹配</a></li><li><a href="#05-格式化输出与保留小数">05 格式化输出与保留小数</a></li><li><a href="#固定显示小数位数" class="lvl3">固定显示小数位数</a></li><li><a href="#先确认数值再检查显示" class="lvl3">先确认数值，再检查显示</a></li><li><a href="#输入输出的统一检查顺序">输入输出的统一检查顺序</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#题目与输入输出" class="lvl3">题目与输入输出</a></li><li><a href="#先手工确定数据去向" class="lvl3">先手工确定数据去向</a></li><li><a href="#逐步写出关键语句" class="lvl3">逐步写出关键语句</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#执行过程" class="lvl3">执行过程</a></li><li><a href="#用多组数据验证" class="lvl3">用多组数据验证</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-input-output">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-cin-标准输入">01 cin 标准输入</a></li><li><a href="#输入一个数据与多个数据" class="lvl3">输入一个数据与多个数据</a></li><li><a href="#cin-从左到右怎样读取" class="lvl3">cin 从左到右怎样读取</a></li><li><a href="#空格换行和制表符怎样分隔数据" class="lvl3">空格、换行和制表符怎样分隔数据</a></li><li><a href="#什么时候不能按预期读完" class="lvl3">什么时候不能按预期读完</a></li><li><a href="#02-cout-标准输出">02 cout 标准输出</a></li><li><a href="#cout-可以连接哪些内容" class="lvl3">cout 可以连接哪些内容</a></li><li><a href="#cout-从左到右怎样形成文本" class="lvl3">cout 从左到右怎样形成文本</a></li><li><a href="#03-空格换行与输出格式">03 空格、换行与输出格式</a></li><li><a href="#程序不会自动补空格" class="lvl3">程序不会自动补空格</a></li><li><a href="#endl-与换行符" class="lvl3">endl 与换行符</a></li><li><a href="#oj-会检查最终文本" class="lvl3">OJ 会检查最终文本</a></li><li><a href="#04-scanf-与-printf">04 scanf 与 printf</a></li><li><a href="#scanf-怎样按照格式读取" class="lvl3">scanf 怎样按照格式读取</a></li><li><a href="#printf-怎样按照格式输出" class="lvl3">printf 怎样按照格式输出</a></li><li><a href="#格式符必须与类型配对" class="lvl3">格式符必须与类型配对</a></li><li><a href="#格式串中的固定字符也要匹配" class="lvl3">格式串中的固定字符也要匹配</a></li><li><a href="#05-格式化输出与保留小数">05 格式化输出与保留小数</a></li><li><a href="#固定显示小数位数" class="lvl3">固定显示小数位数</a></li><li><a href="#先确认数值再检查显示" class="lvl3">先确认数值，再检查显示</a></li><li><a href="#输入输出的统一检查顺序">输入输出的统一检查顺序</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#题目与输入输出" class="lvl3">题目与输入输出</a></li><li><a href="#先手工确定数据去向" class="lvl3">先手工确定数据去向</a></li><li><a href="#逐步写出关键语句" class="lvl3">逐步写出关键语句</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#执行过程" class="lvl3">执行过程</a></li><li><a href="#用多组数据验证" class="lvl3">用多组数据验证</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -1025,6 +1064,31 @@ int main() {    int studentId; // 保存输入中的学号    int score; // 保�
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

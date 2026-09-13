@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,9 +489,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲 BFS 的思想、队列、访问标记、扩展方向、步数记录和迷宫最短路径。这里只保证每一步代价相同问题的最少步数，不扩展七级图论。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-bfs-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-bfs-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">2 个子页</span></header><div><article><div><span class="astro-aidf4k4y">06</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/bfs/">宽度优先搜索 BFS</a></h3><p class="astro-aidf4k4y">使用队列按层扩展状态，记录首次到达距离，求每步代价相同问题的最短步数。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/bfs/bfs-basics/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">BFS 初学：队列按层搜索</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/bfs/bfs-shortest-path/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">BFS 求最短路径</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 队列分层扩展</h2><p>BFS 从起点开始处理距离 <code>0、1、2……</code> 的状态。先把起点入队；循环取出队首，依次检查相邻状态，并把新状态加入队尾。先进先出让距离较小的状态先处理。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 队列分层扩展</a><a href="#kp-02" class="astro-obblnf2s">02 标记与距离</a><a href="#kp-03" class="astro-obblnf2s">03 网格最短步数</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#related-learning" class="astro-obblnf2s">关联学习</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲 BFS 的思想、队列、访问标记、扩展方向、步数记录和迷宫最短路径。这里只保证每一步代价相同问题的最少步数，不扩展七级图论。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><header class="gesp-level6-knowledge-grid__heading"><h2 id="gesp-level6-bfs-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p><span class="astro-aidf4k4y">2 个子页</span></header><article class="gesp-level6-parent-card"><span class="astro-aidf4k4y">06</span><span data-course-status class="astro-aidf4k4y">未复习</span>
+<h3 class="astro-aidf4k4y"><a class="gesp-level6-parent-card__primary" href="/gesp/level6/bfs/">宽度优先搜索 BFS</a></h3><p class="astro-aidf4k4y">使用队列按层扩展状态，记录首次到达距离，求每步代价相同问题的最短步数。</p><ul aria-label="宽度优先搜索 BFS子知识点" class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/bfs/bfs-basics/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">BFS 初学：队列按层搜索</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/bfs/bfs-shortest-path/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">BFS 求最短路径</strong></a></li></ul></article></gesp-course-grid><h2 id="kp-01">01 队列分层扩展</h2><p>BFS 从起点开始处理距离 <code dir="auto">0、1、2……</code> 的状态。先把起点入队；循环取出队首，依次检查相邻状态，并把新状态加入队尾。先进先出让距离较小的状态先处理。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int n, m, dist[105][105];char grid[105][105];int fx[5] = {0, -1, 1, 0, 0};int fy[5] = {0, 0, 0, -1, 1};
-int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) {  // 读入网格并把所有格子设为未访问        for (int y = 1; y &lt;= m; y++) {            cin &gt;&gt; grid[x][y];            dist[x][y] = -1;        }    }    queue&lt;pair&lt;int, int&gt;&gt; q;    if (grid[1][1] == '.') {  // 起点可走时，把它作为第 0 层加入队列        dist[1][1] = 0;        q.push({1, 1});    }    while (!q.empty()) {  // 按发现顺序逐个扩展队首格子        int x = q.front().first, y = q.front().second;        q.pop();        for (int d = 1; d &lt;= 4; d++) {  // 检查当前格子的四个相邻位置            int nx = x + fx[d], ny = y + fy[d];            if (nx &lt; 1 || nx &gt; n || ny &lt; 1 || ny &gt; m) continue;  // 越界位置不能进入            if (grid[nx][ny] == '#' || dist[nx][ny] != -1) continue;  // 跳过障碍和已发现格子            // 第一次发现邻点时就确定最短距离并立即标记            dist[nx][ny] = dist[x][y] + 1;            q.push({nx, ny});        }    }    cout &lt;&lt; dist[n][m] &lt;&lt; '\n';    return 0;}</code></pre><h3 id="测试案例">测试案例</h3><table>
+int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) {  // 读入网格并把所有格子设为未访问        for (int y = 1; y &lt;= m; y++) {            cin &gt;&gt; grid[x][y];            dist[x][y] = -1;        }    }    queue&lt;pair&lt;int, int&gt;&gt; q;    if (grid[1][1] == '.') {  // 起点可走时，把它作为第 0 层加入队列        dist[1][1] = 0;        q.push({1, 1});    }    while (!q.empty()) {  // 按发现顺序逐个扩展队首格子        int x = q.front().first, y = q.front().second;        q.pop();        for (int d = 1; d &lt;= 4; d++) {  // 检查当前格子的四个相邻位置            int nx = x + fx[d], ny = y + fy[d];            if (nx &lt; 1 || nx &gt; n || ny &lt; 1 || ny &gt; m) continue;  // 越界位置不能进入            if (grid[nx][ny] == '#' || dist[nx][ny] != -1) continue;  // 跳过障碍和已发现格子            // 第一次发现邻点时就确定最短距离并立即标记            dist[nx][ny] = dist[x][y] + 1;            q.push({nx, ny});        }    }    cout &lt;&lt; dist[n][m] &lt;&lt; '\n';    return 0;}</code></pre>
+<h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -483,18 +504,18 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
 <tbody>
 <tr>
 <td>基础</td>
-<td><code>2×2</code> 全部可走</td>
+<td><code dir="auto">2×2</code> 全部可走</td>
 <td>从左上到右下最短为 2 步</td>
 </tr>
 <tr>
 <td>边界</td>
-<td><code>1×1</code>，起点就是终点</td>
+<td><code dir="auto">1×1</code>，起点就是终点</td>
 <td>距离为 0，不需要移动</td>
 </tr>
 <tr>
 <td>特殊</td>
 <td>终点被障碍完全围住</td>
-<td>搜索结束仍为 <code>-1</code>，表示无路可达</td>
+<td>搜索结束仍为 <code dir="auto">-1</code>，表示无路可达</td>
 </tr>
 <tr>
 <td>特殊</td>
@@ -502,7 +523,23 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
 <td>返回最少步数，不统计路径总数</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>等到出队才标记</h3><div><div><strong><span>×</span> 错误写法</strong><code>先 q.push(next)，以后出队才修改 dist</code></div><div><strong><span>✓</span> 正确写法</strong><code>判断未访问 → 写距离 → 入队</code></div></div><p><strong>原因：</strong>等待出队期间仍显示未访问，可能被重复加入。</p><p><strong>检查方法：</strong>把这三步写成固定顺序。</p></section><section><h3>把 BFS 当成任意代价下的最短路</h3><div><div><strong><span>×</span> 错误写法</strong><code>不论每一步代价是多少，都直接按经过边数做 BFS</code></div><div><strong><span>✓</span> 正确写法</strong><code>先确认每次移动代价相同，再用本页 BFS 求最少步数</code></div></div><p><strong>原因：</strong>普通 BFS 的分层只表示步数，只有每一步代价相同时，先到达才保证总代价最小。</p><p><strong>检查方法：</strong>题目若给不同费用，本页结论不能直接套用。</p></section><h2 id="related-learning">关联学习</h2><p>需要枚举所有路径或沿一个分支深入时使用 DFS；BFS 的队列基础可在“12 队列”中查询。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>等到出队才标记</h3><p><strong>原因：</strong>等待出队期间仍显示未访问，可能被重复加入。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>把这三步写成固定顺序。</p><h3>把 BFS 当成任意代价下的最短路</h3><p><strong>原因：</strong>普通 BFS 的分层只表示步数，只有每一步代价相同时，先到达才保证总代价最小。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>题目若给不同费用，本页结论不能直接套用。</p><h2 id="related-learning">关联学习</h2><p>需要枚举所有路径或沿一个分支深入时使用 DFS；BFS 的队列基础可在“12 队列”中查询。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能写出起点入队、取队首和邻点入队步骤</label><label class="q-check"><input type="checkbox"> 能解释为什么发现邻点时立即标记</label><label class="q-check"><input type="checkbox"> 能用距离数组求每步代价相同的网格最短步数</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题BFS 使用队列的主要原因是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题BFS 使用队列的主要原因是什" value="A"><b>A.</b> 维持先进先出的分层顺序</label><label class="q-opt"><input type="radio" name="第 1 题BFS 使用队列的主要原因是什" value="B"><b>B.</b> 让最后状态先处理</label><label class="q-opt"><input type="radio" name="第 1 题BFS 使用队列的主要原因是什" value="C"><b>C.</b> 自动排序权值</label><label class="q-opt"><input type="radio" name="第 1 题BFS 使用队列的主要原因是什" value="D"><b>D.</b> 代替所有访问标记</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>队列让先发现的状态先处理，因此距离较小的一层会在下一层之前完成扩展。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题每步代价相同的网格中，BFS 首次到达某格意味着什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题每步代价相同的网格中，BFS " value="A"><b>A.</b> 路径字典序最小</label><label class="q-opt"><input type="radio" name="第 2 题每步代价相同的网格中，BFS " value="B"><b>B.</b> 移动步数最少</label><label class="q-opt"><input type="radio" name="第 2 题每步代价相同的网格中，BFS " value="C"><b>C.</b> 一定没有障碍</label><label class="q-opt"><input type="radio" name="第 2 题每步代价相同的网格中，BFS " value="D"><b>D.</b> DFS 也已完成</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>BFS 按距离从小到大扩展，所以第一次到达时记录的就是从起点出发的最少步数。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 3 题发现未访问邻点时，正确顺序是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题发现未访问邻点时，正确顺序是什" value="A"><b>A.</b> 入队后等出队再标记</label><label class="q-opt"><input type="radio" name="第 3 题发现未访问邻点时，正确顺序是什" value="B"><b>B.</b> 先写距离或标记，再入队</label><label class="q-opt"><input type="radio" name="第 3 题发现未访问邻点时，正确顺序是什" value="C"><b>C.</b> 递归到底再入队</label><label class="q-opt"><input type="radio" name="第 3 题发现未访问邻点时，正确顺序是什" value="D"><b>D.</b> 不标记并反复入队</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>入队时立即写入距离或标记，可防止同一状态在等待出队期间被重复加入。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题dist 全部初始化为 -1，起点设为 0；结束后终点仍为 -1 表示什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题dist 全部初始化为 -1，" value="A"><b>A.</b> 终点不可达</label><label class="q-opt"><input type="radio" name="第 4 题dist 全部初始化为 -1，" value="B"><b>B.</b> 终点就是起点</label><label class="q-opt"><input type="radio" name="第 4 题dist 全部初始化为 -1，" value="C"><b>C.</b> 最短距离为 1</label><label class="q-opt"><input type="radio" name="第 4 题dist 全部初始化为 -1，" value="D"><b>D.</b> 队列已满</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>搜索结束仍为 -1 表示终点从未被发现，因此不存在从起点到终点的可达路径。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 5 题3×3 空网格从 (1,1) 到 (3,3)，每次上下左右一步，最少几步？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题3×3 空网格从 (1,1) " value="A"><b>A.</b> 2</label><label class="q-opt"><input type="radio" name="第 5 题3×3 空网格从 (1,1) " value="B"><b>B.</b> 3</label><label class="q-opt"><input type="radio" name="第 5 题3×3 空网格从 (1,1) " value="C"><b>C.</b> 4</label><label class="q-opt"><input type="radio" name="第 5 题3×3 空网格从 (1,1) " value="D"><b>D.</b> 6</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>行坐标要增加 2、列坐标也要增加 2，总共至少 4 步，并且确实存在 4 步路径。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/dfs/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">上一父知识点 · 05</small><strong class="astro-23ojxnem">深度优先搜索 DFS</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/binary-search-tree/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 07</small><strong class="astro-23ojxnem">二叉树搜索</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -511,7 +548,7 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
       <a class="kp-nav" href="kp7.html">下一个：格雷码 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-bfs-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 队列分层扩展</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-bfs-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 队列分层扩展</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -523,6 +560,31 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    for (int x = 1; x &lt;= n; x++) { 
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

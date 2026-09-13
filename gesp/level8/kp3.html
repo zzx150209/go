@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,33 +489,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
-<p>官方八级要求理解杨辉三角、组合数递推、组合数预处理和基础路径计数。本页使用 <code>long long</code> 讲解有限范围的精确整数结果；组合数取模只说明“应按题意在递推时取模”，不扩展逆元等内容。</p>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 杨辉三角定义与边界</a><a href="#kp-02" class="astro-obblnf2s">02 组合数递推</a><a href="#kp-03" class="astro-obblnf2s">03 与组合数的关系</a><a href="#kp-04" class="astro-obblnf2s">04 二维数组预处理</a><a href="#kp-05" class="astro-obblnf2s">05 路径计数</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级要求理解杨辉三角、组合数递推、组合数预处理和基础路径计数。本页使用 <code dir="auto">long long</code> 讲解有限范围的精确整数结果；组合数取模只说明“应按题意在递推时取模”，不扩展逆元等内容。</p>
 <h2 id="kp-01">01 杨辉三角定义与边界</h2>
-<p>杨辉三角每行两侧都是 1，内部每个数等于上一行左上方与右上方两个数之和。按组合数下标书写时，两侧边界是 <code>C(n,0)=1</code> 和 <code>C(n,n)=1</code>。</p>
-<p>第 0 行只有 <code>1</code>；第 1 行是 <code>1 1</code>；第 2 行是 <code>1 2 1</code>。计算任何内部位置前，必须先准备好上一行。</p>
+<p>杨辉三角每行两侧都是 1，内部每个数等于上一行左上方与右上方两个数之和。按组合数下标书写时，两侧边界是 <code dir="auto">C(n,0)=1</code> 和 <code dir="auto">C(n,n)=1</code>。</p>
+<p>第 0 行只有 <code dir="auto">1</code>；第 1 行是 <code dir="auto">1 1</code>；第 2 行是 <code dir="auto">1 2 1</code>。计算任何内部位置前，必须先准备好上一行。</p>
 <h2 id="kp-02">02 组合数递推</h2>
-<p>计算 <code>C(n,k)</code> 时，按第 <code>n</code> 个元素是否被选择分类：</p>
+<p>计算 <code dir="auto">C(n,k)</code> 时，按第 <code dir="auto">n</code> 个元素是否被选择分类：</p>
 <ul>
-<li>选择它，还需从前 <code>n-1</code> 个中选 <code>k-1</code> 个；</li>
-<li>不选择它，还需从前 <code>n-1</code> 个中选 <code>k</code> 个。</li>
+<li>选择它，还需从前 <code dir="auto">n-1</code> 个中选 <code dir="auto">k-1</code> 个；</li>
+<li>不选择它，还需从前 <code dir="auto">n-1</code> 个中选 <code dir="auto">k</code> 个。</li>
 </ul>
 <p>两类互不重叠，所以：</p>
-<p><code>C(n,k)=C(n-1,k-1)+C(n-1,k)</code></p>
+<p><code dir="auto">C(n,k)=C(n-1,k-1)+C(n-1,k)</code></p>
 <h2 id="kp-03">03 杨辉三角与组合数的关系</h2>
-<p>杨辉三角第 <code>n</code> 行从左到右就是 <code>C(n,0), C(n,1), ..., C(n,n)</code>。例如第 5 行为 <code>1 5 10 10 5 1</code>，因此 <code>C(5,2)=10</code>。</p>
+<p>杨辉三角第 <code dir="auto">n</code> 行从左到右就是 <code dir="auto">C(n,0), C(n,1), ..., C(n,n)</code>。例如第 5 行为 <code dir="auto">1 5 10 10 5 1</code>，因此 <code dir="auto">C(5,2)=10</code>。</p>
 <p>这种对应关系使多个组合数查询可以先统一预处理，再直接查表，避免每次重复计算阶乘。</p>
 <h2 id="kp-04">04 二维数组预处理</h2>
-<p>下面输入 <code>n,k</code> 并输出 <code>C(n,k)</code>。约定 <code>0 &lt;= k &lt;= n &lt;= 60</code>，结果可由 <code>long long</code> 保存。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<p>下面输入 <code dir="auto">n,k</code> 并输出 <code dir="auto">C(n,k)</code>。约定 <code dir="auto">0 &lt;= k &lt;= n &lt;= 60</code>，结果可由 <code dir="auto">long long</code> 保存。</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int n, k;    cin &gt;&gt; n &gt;&gt; k;
     long long combination[65][65] = {};    // 按行计算，确保使用第 i-1 行时它已经完成。    for (int i = 0; i &lt;= n; i++) {        combination[i][0] = 1;        combination[i][i] = 1;        for (int j = 1; j &lt; i; j++) {            combination[i][j] =                combination[i - 1][j - 1] + combination[i - 1][j];        }    }
     cout &lt;&lt; combination[n][k] &lt;&lt; endl;    return 0;}</code></pre>
-<p>时间复杂度和空间复杂度都是 <code>O(n²)</code>。组合数增长很快，扩大 <code>n</code> 前必须重新核对整数范围；若题目要求取模，应在每次加法后按指定模数处理。</p>
+<p>时间复杂度和空间复杂度都是 <code dir="auto">O(n²)</code>。组合数增长很快，扩大 <code dir="auto">n</code> 前必须重新核对整数范围；若题目要求取模，应在每次加法后按指定模数处理。</p>
 <h2 id="kp-05">05 路径计数</h2>
-<p>网格中只能向右或向下走，从起点到终点若必须走 <code>r</code> 步向右、<code>d</code> 步向下，总共 <code>r+d</code> 步。只要从这些位置中选出 <code>d</code> 个放“向下”，其余自动向右，因此路径数是 <code>C(r+d,d)</code>。</p>
-<p>例如走 3 步向右、2 步向下共有 <code>C(5,2)=10</code> 条路径。若出现障碍，直接使用这个公式通常不再成立，需要根据可走位置重新计数。</p>
-<p><strong>逐行填表追踪。</strong> 从 <code>C(0,0)=1</code> 开始：</p>
+<p>网格中只能向右或向下走，从起点到终点若必须走 <code dir="auto">r</code> 步向右、<code dir="auto">d</code> 步向下，总共 <code dir="auto">r+d</code> 步。只要从这些位置中选出 <code dir="auto">d</code> 个放“向下”，其余自动向右，因此路径数是 <code dir="auto">C(r+d,d)</code>。</p>
+<p>例如走 3 步向右、2 步向下共有 <code dir="auto">C(5,2)=10</code> 条路径。若出现障碍，直接使用这个公式通常不再成立，需要根据可走位置重新计数。</p>
+<p><strong>逐行填表追踪。</strong> 从 <code dir="auto">C(0,0)=1</code> 开始：</p>
 <table>
 <thead>
 <tr>
@@ -508,32 +528,32 @@ int main() {    int n, k;    cin &gt;&gt; n &gt;&gt; k;
 </thead>
 <tbody>
 <tr>
-<td><code>n=1</code></td>
-<td><code>C(1,0)=C(1,1)=1</code></td>
+<td><code dir="auto">n=1</code></td>
+<td><code dir="auto">C(1,0)=C(1,1)=1</code></td>
 <td>无</td>
-<td><code>1 1</code></td>
+<td><code dir="auto">1 1</code></td>
 </tr>
 <tr>
-<td><code>n=2</code></td>
+<td><code dir="auto">n=2</code></td>
 <td>两端为 1</td>
-<td><code>C(2,1)=1+1=2</code></td>
-<td><code>1 2 1</code></td>
+<td><code dir="auto">C(2,1)=1+1=2</code></td>
+<td><code dir="auto">1 2 1</code></td>
 </tr>
 <tr>
-<td><code>n=3</code></td>
+<td><code dir="auto">n=3</code></td>
 <td>两端为 1</td>
-<td><code>C(3,1)=1+2=3</code>，<code>C(3,2)=2+1=3</code></td>
-<td><code>1 3 3 1</code></td>
+<td><code dir="auto">C(3,1)=1+2=3</code>，<code dir="auto">C(3,2)=2+1=3</code></td>
+<td><code dir="auto">1 3 3 1</code></td>
 </tr>
 </tbody>
 </table>
-<p>这张表说明必须先有上一行，才能填下一行。基础案例可查 <code>C(3,1)=3</code>；边界案例查 <code>C(n,0)</code> 和 <code>C(n,n)</code>；规模案例则要先判断结果是否超过整数范围。即使数组下标没有越界，组合数本身也可能让 <code>long long</code> 溢出。</p>
+<p>这张表说明必须先有上一行，才能填下一行。基础案例可查 <code dir="auto">C(3,1)=3</code>；边界案例查 <code dir="auto">C(n,0)</code> 和 <code dir="auto">C(n,n)</code>；规模案例则要先判断结果是否超过整数范围。即使数组下标没有越界，组合数本身也可能让 <code dir="auto">long long</code> 溢出。</p>
 <p><strong>逐段具体推演（对应 01—05）。</strong></p>
-<p><strong>01 边界。</strong> 第 0 行只有 <code>C(0,0)=1</code>；第 1 行是 <code>1 1</code>；第 2 行先放两侧的 1，中间才由上一行相加得到 <code>1+1=2</code>，所以是 <code>1 2 1</code>。边界必须单独初始化。</p>
-<p><strong>02 递推。</strong> 求 <code>C(5,2)</code> 时，按第 5 个元素是否入选分成两类：选它有 <code>C(4,1)=4</code> 种，不选它有 <code>C(4,2)=6</code> 种，中间结果相加为 10。</p>
-<p><strong>03 对应关系。</strong> 第 5 行是 <code>1 5 10 10 5 1</code>，从左到右分别是 <code>C(5,0)</code> 到 <code>C(5,5)</code>。第 2 列（从 0 开始）是 10，正好表示从 5 个元素选 2 个。</p>
-<p><strong>04 二维表与取模。</strong> 每行先写 <code>c[i][0]=c[i][i]=1</code>，再填内部位置。若题目要求对 7 取模，仍按递推加法后取模：<code>C(5,2)=10</code>，所以 <code>C(5,2) mod 7=3</code>。这个 3 是余数，不是真实组合数。</p>
-<p><strong>05 路径计数。</strong> 必须走 3 次向右、2 次向下，总共 5 步。只要从 5 个位置选出 2 个放“向下”，其余自动向右，所以路径数是 <code>C(5,2)=10</code>。</p>
+<p><strong>01 边界。</strong> 第 0 行只有 <code dir="auto">C(0,0)=1</code>；第 1 行是 <code dir="auto">1 1</code>；第 2 行先放两侧的 1，中间才由上一行相加得到 <code dir="auto">1+1=2</code>，所以是 <code dir="auto">1 2 1</code>。边界必须单独初始化。</p>
+<p><strong>02 递推。</strong> 求 <code dir="auto">C(5,2)</code> 时，按第 5 个元素是否入选分成两类：选它有 <code dir="auto">C(4,1)=4</code> 种，不选它有 <code dir="auto">C(4,2)=6</code> 种，中间结果相加为 10。</p>
+<p><strong>03 对应关系。</strong> 第 5 行是 <code dir="auto">1 5 10 10 5 1</code>，从左到右分别是 <code dir="auto">C(5,0)</code> 到 <code dir="auto">C(5,5)</code>。第 2 列（从 0 开始）是 10，正好表示从 5 个元素选 2 个。</p>
+<p><strong>04 二维表与取模。</strong> 每行先写 <code dir="auto">c[i][0]=c[i][i]=1</code>，再填内部位置。若题目要求对 7 取模，仍按递推加法后取模：<code dir="auto">C(5,2)=10</code>，所以 <code dir="auto">C(5,2) mod 7=3</code>。这个 3 是余数，不是真实组合数。</p>
+<p><strong>05 路径计数。</strong> 必须走 3 次向右、2 次向下，总共 5 步。只要从 5 个位置选出 2 个放“向下”，其余自动向右，所以路径数是 <code dir="auto">C(5,2)=10</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -545,39 +565,60 @@ int main() {    int n, k;    cin &gt;&gt; n &gt;&gt; k;
 <tbody>
 <tr>
 <td>两侧边界</td>
-<td><code>C(n,0)=C(n,n)=1</code></td>
+<td><code dir="auto">C(n,0)=C(n,n)=1</code></td>
 </tr>
 <tr>
 <td>内部递推</td>
-<td><code>C(n,k)=C(n-1,k-1)+C(n-1,k)</code></td>
+<td><code dir="auto">C(n,k)=C(n-1,k-1)+C(n-1,k)</code></td>
 </tr>
 <tr>
 <td>对称性</td>
-<td><code>C(n,k)=C(n,n-k)</code></td>
+<td><code dir="auto">C(n,k)=C(n,n-k)</code></td>
 </tr>
 <tr>
 <td>无障碍网格路径</td>
-<td><code>C(r+d,d)</code></td>
+<td><code dir="auto">C(r+d,d)</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>连续查询 <code>C(6,2)</code>、<code>C(6,3)</code> 和 <code>C(6,4)</code>。先预处理到第 6 行，可直接读出 <code>15、20、15</code>。首尾两个结果相等，来自对称性 <code>C(6,2)=C(6,4)</code>。</p>
+<p>连续查询 <code dir="auto">C(6,2)</code>、<code dir="auto">C(6,3)</code> 和 <code dir="auto">C(6,4)</code>。先预处理到第 6 行，可直接读出 <code dir="auto">15、20、15</code>。首尾两个结果相等，来自对称性 <code dir="auto">C(6,2)=C(6,4)</code>。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>边界初始化反例。</strong> 若整个数组初始为 0，却直接执行内部递推，那么第 1 行两侧也会保持 0，后面整张表继续全为 0。正确做法是每行先把 <code>c[i][0]</code> 和 <code>c[i][i]</code> 设为 1，再计算内部位置。</p>
+<p><strong>边界初始化反例。</strong> 若整个数组初始为 0，却直接执行内部递推，那么第 1 行两侧也会保持 0，后面整张表继续全为 0。正确做法是每行先把 <code dir="auto">c[i][0]</code> 和 <code dir="auto">c[i][i]</code> 设为 1，再计算内部位置。</p>
 <ul>
 <li>忘记初始化第 0 行或两侧边界，导致后续整表错误。</li>
 <li>从大行向小行计算，读取了尚未得到的状态。</li>
-<li>把 <code>C(n,k)</code> 与 <code>C(n-1,k-1)</code> 的下标位置写错。</li>
-<li>未估算组合数大小，<code>long long</code> 发生溢出。</li>
+<li>把 <code dir="auto">C(n,k)</code> 与 <code dir="auto">C(n-1,k-1)</code> 的下标位置写错。</li>
+<li>未估算组合数大小，<code dir="auto">long long</code> 发生溢出。</li>
 <li>有障碍的网格仍直接套无障碍路径公式。</li>
 </ul>
 <h2 id="关联学习">关联学习</h2>
 <ul>
-<li><a href="/gesp/level8/permutations-combinations/">排列与组合</a>：理解 <code>C(n,k)</code> 的选择含义。</li>
+<li><a href="/gesp/level8/permutations-combinations/">排列与组合</a>：理解 <code dir="auto">C(n,k)</code> 的选择含义。</li>
 <li><a href="/template/math/pascal-triangle/">杨辉三角程序模板</a>：查看可复用的预处理框架。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能正确写出两侧边界和内部递推</label><label class="q-check"><input type="checkbox"> 能解释递推对应的两类选择</label><label class="q-check"><input type="checkbox"> 能用组合数表示基础无障碍路径数并检查溢出</label><span>7 题</span>
+<p class="q-title">第 1 题组合数递推 C(n,k)=C(n-1,k-1)+C(n-1,k) 表示哪两类方案？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题组合数递推 C(n,k)=C(" value="A"><b>A.</b> 一定选择第 n 个与一定不选择第 n 个</label><label class="q-opt"><input type="radio" name="第 1 题组合数递推 C(n,k)=C(" value="B"><b>B.</b> 选择奇数与选择偶数</label><label class="q-opt"><input type="radio" name="第 1 题组合数递推 C(n,k)=C(" value="C"><b>C.</b> 升序与降序</label><label class="q-opt"><input type="radio" name="第 1 题组合数递推 C(n,k)=C(" value="D"><b>D.</b> 有重复与无重复</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>按第 n 个元素是否被选择分类。选择它时还需从前 n-1 个中选 k-1 个；不选择它时需从前 n-1 个中选 k 个，两类互不重叠。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 2 题C(5,2) 的值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题C(5,2) 的值是多少？" value="A"><b>A.</b> 5</label><label class="q-opt"><input type="radio" name="第 2 题C(5,2) 的值是多少？" value="B"><b>B.</b> 10</label><label class="q-opt"><input type="radio" name="第 2 题C(5,2) 的值是多少？" value="C"><b>C.</b> 15</label><label class="q-opt"><input type="radio" name="第 2 题C(5,2) 的值是多少？" value="D"><b>D.</b> 20</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>由公式或杨辉三角可得 C(5,2)=5×4÷(2×1)=10；也可用递推 C(4,1)+C(4,2)=4+6=10。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 3 题构造组合数表时，C(i,0) 和 C(i,i) 应初始化为多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题构造组合数表时，C(i,0) " value="A"><b>A.</b> 都为 0</label><label class="q-opt"><input type="radio" name="第 3 题构造组合数表时，C(i,0) " value="B"><b>B.</b> 都为 1</label><label class="q-opt"><input type="radio" name="第 3 题构造组合数表时，C(i,0) " value="C"><b>C.</b> 分别为 0 和 1</label><label class="q-opt"><input type="radio" name="第 3 题构造组合数表时，C(i,0) " value="D"><b>D.</b> 都为 i</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>从 i 个元素中选择 0 个只有一种方案，选择全部 i 个也只有一种方案，所以杨辉三角每行两侧边界都为 1。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 4 题使用 long long 保存未经取模的组合数表时，为什么仍要限制 n？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题使用 long long 保存" value="A"><b>A.</b> 递推只能处理偶数 n</label><label class="q-opt"><input type="radio" name="第 4 题使用 long long 保存" value="B"><b>B.</b> 组合数增长很快，仍可能超过整数范围</label><label class="q-opt"><input type="radio" name="第 4 题使用 long long 保存" value="C"><b>C.</b> 数组不能使用 1 下标</label><label class="q-opt"><input type="radio" name="第 4 题使用 long long 保存" value="D"><b>D.</b> long long 不能做加法</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>组合数在中间位置增长非常快。long long 虽比 int 范围大，但仍是有限整数类型；n 足够大时加法结果会溢出，因此示例必须给出安全范围。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 5 题只能向右或向下走，从左上角到右下角共走 3 次向右、2 次向下，路径数应写成哪个组合数？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题只能向右或向下走，从左上角到右" value="A"><b>A.</b> C(3,2)</label><label class="q-opt"><input type="radio" name="第 5 题只能向右或向下走，从左上角到右" value="B"><b>B.</b> C(5,2)</label><label class="q-opt"><input type="radio" name="第 5 题只能向右或向下走，从左上角到右" value="C"><b>C.</b> C(6,2)</label><label class="q-opt"><input type="radio" name="第 5 题只能向右或向下走，从左上角到右" value="D"><b>D.</b> 2^5</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>总共走 5 步，只需从 5 个位置中选择 2 个位置放“向下”，其余位置自动是“向右”，所以路径数为 C(5,2)。<br><span class="q-kp">对应知识点：05</span></p>
+<p class="q-title">第 6 题杨辉三角第 0 行唯一的数，也就是 C(0,0)，等于多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题杨辉三角第 0 行唯一的数，也" value="A"><b>A.</b> 0</label><label class="q-opt"><input type="radio" name="第 6 题杨辉三角第 0 行唯一的数，也" value="B"><b>B.</b> 1</label><label class="q-opt"><input type="radio" name="第 6 题杨辉三角第 0 行唯一的数，也" value="C"><b>C.</b> 2</label><label class="q-opt"><input type="radio" name="第 6 题杨辉三角第 0 行唯一的数，也" value="D"><b>D.</b> 不存在</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>第 0 行只有一个边界值 1，即 C(0,0)=1。它也是逐行递推的起点，对应页内知识点 01。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 7 题已知 C(5,2)=10，题目要求结果对 7 取模，应输出多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题已知 C(5,2)=10，题目" value="A"><b>A.</b> 1</label><label class="q-opt"><input type="radio" name="第 7 题已知 C(5,2)=10，题目" value="B"><b>B.</b> 3</label><label class="q-opt"><input type="radio" name="第 7 题已知 C(5,2)=10，题目" value="C"><b>C.</b> 7</label><label class="q-opt"><input type="radio" name="第 7 题已知 C(5,2)=10，题目" value="D"><b>D.</b> 10</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>10 除以 7 的余数是 3，所以输出 3。递推组合数表时应按题意在每次加法后取模，并使用足够宽的整数类型。对应页内知识点 04。<br><span class="q-kp">对应知识点：04</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/permutations-combinations/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 02</small><strong>排列与组合</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/gesp/level8/binary-lifting/" rel="next"><span><small>下一知识点 · 04</small><strong>倍增法</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -586,7 +627,7 @@ int main() {    int n, k;    cin &gt;&gt; n &gt;&gt; k;
       <a class="kp-nav" href="kp4.html">下一个：倍增 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 杨辉三角定义与边界</a></li><li><a href="#kp-02">02 组合数递推</a></li><li><a href="#kp-03">03 杨辉三角与组合数的关系</a></li><li><a href="#kp-04">04 二维数组预处理</a></li><li><a href="#kp-05">05 路径计数</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 杨辉三角定义与边界</a></li><li><a href="#kp-02">02 组合数递推</a></li><li><a href="#kp-03">03 杨辉三角与组合数的关系</a></li><li><a href="#kp-04">04 二维数组预处理</a></li><li><a href="#kp-05">05 路径计数</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -598,6 +639,31 @@ int main() {    int n, k;    cin &gt;&gt; n &gt;&gt; k;
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

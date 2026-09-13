@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -473,9 +492,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <h2 id="本章先记住">本章先记住</h2>
 <ul>
 <li><strong>核心结论：</strong> 循环让程序重复处理同一类任务；初始状态决定从哪里开始，条件决定是否继续，更新让状态逐步走向结束。</li>
-<li><strong>常用选择：</strong> 起点和终点明确时先考虑 <code>for</code>；次数不定但继续条件清楚时考虑 <code>while</code>；必须先做一次再判断时才考虑 <code>do-while</code>。</li>
-<li><strong>最小对照：</strong> 初值为 1 时，三种循环都能输出 1 到 5；初值改为 6 后，<code>for</code> 和 <code>while</code> 执行 0 次，<code>do-while</code> 仍先执行 1 次。</li>
-<li><strong>关键易错点：</strong> 不能只看已经输出的结果，还要找到更新后的状态、条件第一次为假的判断，以及 <code>break</code> 或 <code>continue</code> 真正改变的去向。</li>
+<li><strong>常用选择：</strong> 起点和终点明确时先考虑 <code dir="auto">for</code>；次数不定但继续条件清楚时考虑 <code dir="auto">while</code>；必须先做一次再判断时才考虑 <code dir="auto">do-while</code>。</li>
+<li><strong>最小对照：</strong> 初值为 1 时，三种循环都能输出 1 到 5；初值改为 6 后，<code dir="auto">for</code> 和 <code dir="auto">while</code> 执行 0 次，<code dir="auto">do-while</code> 仍先执行 1 次。</li>
+<li><strong>关键易错点：</strong> 不能只看已经输出的结果，还要找到更新后的状态、条件第一次为假的判断，以及 <code dir="auto">break</code> 或 <code dir="auto">continue</code> 真正改变的去向。</li>
 </ul>
 <p>前一章的分支结构让程序从多条路线中选择一条。本章继续使用条件判断，但条件现在负责决定一段任务是否还要再做一轮。循环并不是把代码“自动重复几次”，每一轮能否开始、怎样前进、何时停止，都由程序中的具体状态决定。</p>
 <p>这是一张章节地图。四个子课负责语法、过程表和完整程序；本页负责把它们排成学习路线，并帮助你在做题时找到合适入口。</p>
@@ -486,9 +505,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li><strong>初始状态：</strong> 第一次判断或第一次执行使用什么值；</li>
 <li><strong>继续条件：</strong> 当前状态满足什么要求才继续；</li>
 <li><strong>本轮任务：</strong> 条件允许后，这一轮具体处理什么；</li>
-<li><strong>状态更新：</strong> 哪条语句让下一轮使用新状态，并最终使条件变成 <code>false</code>。</li>
+<li><strong>状态更新：</strong> 哪条语句让下一轮使用新状态，并最终使条件变成 <code dir="auto">false</code>。</li>
 </ol>
-<p><code>for</code>、<code>while</code> 和 <code>do-while</code> 没有改变这四项职责，只是把判断与更新放在了不同位置。<code>break</code> 和 <code>continue</code> 则在正常路径上增加了提前离开或跳过本轮的去向。</p>
+<p><code dir="auto">for</code>、<code dir="auto">while</code> 和 <code dir="auto">do-while</code> 没有改变这四项职责，只是把判断与更新放在了不同位置。<code dir="auto">break</code> 和 <code dir="auto">continue</code> 则在正常路径上增加了提前离开或跳过本轮的去向。</p>
 <h2 id="同一个任务怎样比较三种循环">同一个任务怎样比较三种循环</h2>
 <p>先固定任务：“从 1 开始，每行输出一个整数，直到输出 5。”正常初值为 1 时，三种循环的可观察结果相同，都是 1、2、3、4、5；真正需要比较的是每一步先去哪里。</p>
 <table>
@@ -503,29 +522,29 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>for</code></td>
+<td><code dir="auto">for</code></td>
 <td>初始化、条件、更新集中在循环头</td>
-<td>初始化后先判断 <code>1 &lt;= 5</code></td>
+<td>初始化后先判断 <code dir="auto">1 &lt;= 5</code></td>
 <td>先更新，再回到条件</td>
-<td><code>6 &lt;= 5</code> 为 false，执行 0 次</td>
+<td><code dir="auto">6 &lt;= 5</code> 为 false，执行 0 次</td>
 </tr>
 <tr>
-<td><code>while</code></td>
+<td><code dir="auto">while</code></td>
 <td>初始化在循环前，条件在循环头，更新在循环体内</td>
-<td>先判断 <code>1 &lt;= 5</code></td>
+<td>先判断 <code dir="auto">1 &lt;= 5</code></td>
 <td>执行体内更新，再回到条件</td>
-<td><code>6 &lt;= 5</code> 为 false，执行 0 次</td>
+<td><code dir="auto">6 &lt;= 5</code> 为 false，执行 0 次</td>
 </tr>
 <tr>
-<td><code>do-while</code></td>
+<td><code dir="auto">do-while</code></td>
 <td>初始化在循环前，条件在循环体末尾</td>
 <td>不先判断，直接完成第一轮</td>
 <td>先更新，再判断末尾条件</td>
-<td>先处理 6，更新为 7，再由 <code>7 &lt;= 5</code> 为 false 离开</td>
+<td>先处理 6，更新为 7，再由 <code dir="auto">7 &lt;= 5</code> 为 false 离开</td>
 </tr>
 </tbody>
 </table>
-<p>初值为 1 时，三种写法都要在输出 5 后把状态更新为 6。<code>for</code> 和 <code>while</code> 接着判断 <code>6 &lt;= 5</code>；<code>do-while</code> 在本轮末尾判断同一个条件。正常结束一定能找到这次第一次为假的判断，不能在最后一次输出后直接说“循环结束”。</p>
+<p>初值为 1 时，三种写法都要在输出 5 后把状态更新为 6。<code dir="auto">for</code> 和 <code dir="auto">while</code> 接着判断 <code dir="auto">6 &lt;= 5</code>；<code dir="auto">do-while</code> 在本轮末尾判断同一个条件。正常结束一定能找到这次第一次为假的判断，不能在最后一次输出后直接说“循环结束”。</p>
 <h2 id="四个子课怎样衔接">四个子课怎样衔接</h2>
 <p>建议按表中顺序学习。每完成一课，都用“输出 1 到 5”重新走一遍，这样只改变控制位置，不会被新题目分散注意力。</p>
 <table>
@@ -574,31 +593,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>起点、终点、次数或固定步长明确</td>
-<td><code>for</code></td>
+<td><code dir="auto">for</code></td>
 <td>两端是否包含，更新方向是否朝终点前进</td>
 <td><a href="/gesp/level1/loop/for/#%E6%80%8E%E6%A0%B7%E7%A1%AE%E5%AE%9A%E8%B5%B7%E7%82%B9%E7%BB%88%E7%82%B9%E5%92%8C%E6%9B%B4%E6%96%B0">怎样确定起点、终点和更新</a></td>
 </tr>
 <tr>
 <td>次数不容易预先算出，但“只要……就继续”的条件清楚</td>
-<td><code>while</code></td>
+<td><code dir="auto">while</code></td>
 <td>初始条件是否可能直接为假，所有能继续的路径是否更新状态</td>
 <td><a href="/gesp/level1/loop/while/#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%80%89%E6%8B%A9-while">什么时候选择 while</a></td>
 </tr>
 <tr>
 <td>每轮完成后才能知道是否继续，而且第一次任务必须发生</td>
-<td><code>do-while</code></td>
+<td><code dir="auto">do-while</code></td>
 <td>初值越界时先做一轮是否符合题意，末尾分号是否保留</td>
 <td><a href="/gesp/level1/loop/do-while/#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%80%82%E5%90%88-do-while">什么时候适合 do-while</a></td>
 </tr>
 <tr>
 <td>找到目标后不必继续，或某个特殊值本轮不处理</td>
-<td>在已有循环中加入 <code>break</code> 或 <code>continue</code></td>
+<td>在已有循环中加入 <code dir="auto">break</code> 或 <code dir="auto">continue</code></td>
 <td>是结束整个最近循环，还是只跳过本轮；下一步到底去哪</td>
 <td><a href="/gesp/level1/loop/break-continue/#continue-%E5%9C%A8%E4%B8%89%E7%A7%8D%E5%BE%AA%E7%8E%AF%E4%B8%AD%E5%88%86%E5%88%AB%E5%8E%BB%E5%93%AA%E9%87%8C">continue 在三种循环中的下一位置</a></td>
 </tr>
 </tbody>
 </table>
-<p><code>break</code> 和 <code>continue</code> 不是第四种循环。先选择 <code>for</code>、<code>while</code> 或 <code>do-while</code> 作为正常骨架，确实需要改变正常去向时再加入控制语句。</p>
+<p><code dir="auto">break</code> 和 <code dir="auto">continue</code> 不是第四种循环。先选择 <code dir="auto">for</code>、<code dir="auto">while</code> 或 <code dir="auto">do-while</code> 作为正常骨架，确实需要改变正常去向时再加入控制语句。</p>
 <h2 id="常见任务怎样找到子课">常见任务怎样找到子课</h2>
 <p>整章综合测试还会把循环用于累计、计数、求积、最值、枚举因数与质数、数位处理和简单过程模拟。本页不再给这些任务各写一套程序，只保留状态选择与学习入口。</p>
 <table>
@@ -632,7 +651,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>状态的初值必须符合任务含义：累计和与计数通常从 0 开始，求积从 1 开始，最大值或最小值要从第一个真实数据开始。详细原因和过程放在 <code>for</code> 子课；做综合测试时，先确认自己保存的是循环位置还是任务结果，不要让一个变量同时承担两种职责。</p>
+<p>状态的初值必须符合任务含义：累计和与计数通常从 0 开始，求积从 1 开始，最大值或最小值要从第一个真实数据开始。详细原因和过程放在 <code dir="auto">for</code> 子课；做综合测试时，先确认自己保存的是循环位置还是任务结果，不要让一个变量同时承担两种职责。</p>
 <h2 id="怎样验证一个循环">怎样验证一个循环</h2>
 <p>循环的输出正确一次，还不能证明边界和停止路径都正确。至少准备下面四类检查：</p>
 <table>
@@ -652,7 +671,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <td>终点附近</td>
 <td>终点值是否处理，更新后的下一个值是什么</td>
-<td><code>&lt;</code> 与 <code>&lt;=</code> 混淆，多一轮或少一轮</td>
+<td><code dir="auto">&lt;</code> 与 <code dir="auto">&lt;=</code> 混淆，多一轮或少一轮</td>
 </tr>
 <tr>
 <td>第一次失败</td>
@@ -661,7 +680,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 <tr>
 <td>特殊路径</td>
-<td><code>break</code> 或 <code>continue</code> 是否触发，跳过了什么，下一步去哪</td>
+<td><code dir="auto">break</code> 或 <code dir="auto">continue</code> 是否触发，跳过了什么，下一步去哪</td>
 <td>把结束循环和跳过本轮混为一谈</td>
 </tr>
 </tbody>
@@ -678,22 +697,22 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>for</code> 的固定范围</td>
+<td><code dir="auto">for</code> 的固定范围</td>
 <td>起点、终点和更新是否描述同一个范围</td>
 <td><a href="/gesp/level1/loop/for/#%E8%BE%93%E5%87%BA-1-%E5%88%B0-5">for 循环</a></td>
 </tr>
 <tr>
-<td><code>while</code> 的状态条件</td>
+<td><code dir="auto">while</code> 的状态条件</td>
 <td>第一次能否进入，循环体内哪条语句改变条件所用状态</td>
 <td><a href="/gesp/level1/loop/while/#%E5%9B%9B%E9%A1%B9%E8%81%8C%E8%B4%A3%E5%88%86%E5%BC%80%E6%94%BE%E5%9C%A8%E5%93%AA%E9%87%8C">while 循环</a></td>
 </tr>
 <tr>
-<td><code>do-while</code> 的后判断</td>
+<td><code dir="auto">do-while</code> 的后判断</td>
 <td>第一轮为什么必定发生，末尾条件使用哪个更新后的值</td>
 <td><a href="/gesp/level1/loop/do-while/#%E4%B8%89%E7%A7%8D%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%88%A4%E6%96%AD%E4%BD%8D%E7%BD%AE">do-while 循环</a></td>
 </tr>
 <tr>
-<td><code>break</code> 与 <code>continue</code></td>
+<td><code dir="auto">break</code> 与 <code dir="auto">continue</code></td>
 <td>当前语句结束了什么、跳过了什么、下一步到哪里</td>
 <td><a href="/gesp/level1/loop/break-continue/#break-%E4%B8%8E-continue-%E7%9A%84%E6%9C%80%E8%BF%91%E4%B8%80%E5%B1%82%E8%BE%B9%E7%95%8C">循环控制</a></td>
 </tr>
@@ -710,15 +729,48 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>只凭“次数多或少”选择结构，没有看题目给的是固定范围、状态条件还是至少一次要求。</li>
 <li>更新没有改变条件使用的变量，或更新方向让状态离停止边界越来越远。</li>
 <li>过程只写成功轮次，漏掉正常结束时条件第一次为假的判断。</li>
-<li>把 <code>do-while</code> 当成先判断，错误地认为初始条件为假时执行 0 次。</li>
-<li>把 <code>break</code> 当成跳过本轮，或把 <code>continue</code> 当成结束整个循环。</li>
+<li>把 <code dir="auto">do-while</code> 当成先判断，错误地认为初始条件为假时执行 0 次。</li>
+<li>把 <code dir="auto">break</code> 当成跳过本轮，或把 <code dir="auto">continue</code> 当成结束整个循环。</li>
 <li>只测试一个普通数据，没有覆盖零次、终点、首次失败和特殊控制路径。</li>
 </ol>
 <p>具体语法、完整程序和逐轮状态表都在四个子课中。本页只负责选择、连接和验证，不把同一份叶子课内容再讲一遍。</p>
 <h2 id="本章边界与关联学习">本章边界与关联学习</h2>
-<p><a href="/gesp/level1/branch/">分支结构</a>提供了循环条件和循环体内的选择路线。本章在它的基础上学习单层循环、常见状态更新以及 <code>break</code>、<code>continue</code> 的基本去向；复杂嵌套循环、数组配合和新的算法方法暂不展开。</p>
+<p><a href="/gesp/level1/branch/">分支结构</a>提供了循环条件和循环体内的选择路线。本章在它的基础上学习单层循环、常见状态更新以及 <code dir="auto">break</code>、<code dir="auto">continue</code> 的基本去向；复杂嵌套循环、数组配合和新的算法方法暂不展开。</p>
 <p>整章测试会检查三种循环、边界、状态更新、控制语句和一级常见应用。遇到某个语法或过程不确定时，先从上面的深链回到对应子课，再回来完成综合测试。</p>
-<section aria-labelledby="related-knowledge-loop"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-loop" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/branch/" class="astro-mkwt4ymd">分支结构</a></li></ul></section></div></section>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能按任务特点选择 for、while 或 do-while。</label><label class="q-check"><input type="checkbox"> 我能正确设置初值、边界、更新和停止条件。</label><label class="q-check"><input type="checkbox"> 我能完成一级的累计、最值、质数、数位和简单模拟问题。</label>
+<h2 id="整章综合测试">整章综合测试</h2>
+<span>10 题</span>
+<p class="q-title">第 1 题要输出 1 到 3，下面哪一项完整列出了循环必须考虑的四个要素？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题要输出 1 到 3，下面哪一项" value="A"><b>A.</b> 初值、继续条件、每轮任务、更新</label><label class="q-opt"><input type="radio" name="第 1 题要输出 1 到 3，下面哪一项" value="B"><b>B.</b> 输入、编译、链接、关机</label><label class="q-opt"><input type="radio" name="第 1 题要输出 1 到 3，下面哪一项" value="C"><b>C.</b> 变量名、文件名、颜色、字体</label><label class="q-opt"><input type="radio" name="第 1 题要输出 1 到 3，下面哪一项" value="D"><b>D.</b> 加法、减法、乘法、除法</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 01 循环的四个要素。四项共同决定从哪里开始、何时继续、每轮做什么以及怎样接近结束；少了更新就可能无法结束。<br><span class="q-kp">对应知识点：01 循环的四个要素</span></p>
+<p class="q-title">第 2 题循环依次处理 i = 1 到 6；i = 2 时 continue，i = 5 时 break，其余情况输出 i。输出是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题循环依次处理 i = 1 到 " value="A"><b>A.</b> 1 3 4</label><label class="q-opt"><input type="radio" name="第 2 题循环依次处理 i = 1 到 " value="B"><b>B.</b> 1 3 4 6</label><label class="q-opt"><input type="radio" name="第 2 题循环依次处理 i = 1 到 " value="C"><b>C.</b> 1 2 3 4</label><label class="q-opt"><input type="radio" name="第 2 题循环依次处理 i = 1 到 " value="D"><b>D.</b> 2 5</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 05 break 与 continue。continue 只跳过 i = 2 这一轮的输出；break 在 i = 5 时结束整个循环，因此 5、6 都不输出。<br><span class="q-kp">对应知识点：05 break 与 continue</span></p>
+<p class="q-title">第 3 题n 从 5 开始，每轮减 2，直到 n 不再大于 0。循环体会执行几次？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题n 从 5 开始，每轮减 2，" value="A"><b>A.</b> 2</label><label class="q-opt"><input type="radio" name="第 3 题n 从 5 开始，每轮减 2，" value="B"><b>B.</b> 3</label><label class="q-opt"><input type="radio" name="第 3 题n 从 5 开始，每轮减 2，" value="C"><b>C.</b> 4</label><label class="q-opt"><input type="radio" name="第 3 题n 从 5 开始，每轮减 2，" value="D"><b>D.</b> 5</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>循环开始时 n 依次为 5、3、1，共执行 3 次。<br><span class="q-kp">对应知识点：03 while 循环</span></p>
+<p class="q-title">第 4 题要让 i 从 1 枚举到 n（包含 n），哪个 for 循环头能够正确前进并结束？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题要让 i 从 1 枚举到 n（" value="A"><b>A.</b> for (int i=1; i&lt;n; i+1)</label><label class="q-opt"><input type="radio" name="第 4 题要让 i 从 1 枚举到 n（" value="B"><b>B.</b> for (int i=1; i&lt;n+1; i+1)</label><label class="q-opt"><input type="radio" name="第 4 题要让 i 从 1 枚举到 n（" value="C"><b>C.</b> for (int i=1; i&lt;n; i++)</label><label class="q-opt"><input type="radio" name="第 4 题要让 i 从 1 枚举到 n（" value="D"><b>D.</b> for (int i=1; i&lt;n+1; i++)</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>官方真题少见写法。先按一级能理解的边界看：i < n + 1 用来覆盖 n，i++ 才会真正修改 i；原题选项中的 i + 1 只是计算一个结果，并不会更新循环变量。容易误判 i + 1 等同于 i++，导致循环不前进。日常代码推荐写成 for (int i = 1; i <= n; i++)，边界和更新都更直接。<br><span class="q-kp">对应知识点：02 for 循环</span></p>
+<p class="q-title">第 5 题sum 从 0 开始，循环把 1、2、3 依次加入 sum；若同类题目的累加结果可能超过 int 的常见范围，下面哪项同时正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题sum 从 0 开始，循环把 " value="A"><b>A.</b> sum 是 3，继续用 int</label><label class="q-opt"><input type="radio" name="第 5 题sum 从 0 开始，循环把 " value="B"><b>B.</b> sum 是 5，sum 不必初始化</label><label class="q-opt"><input type="radio" name="第 5 题sum 从 0 开始，循环把 " value="C"><b>C.</b> sum 是 6，可改用 long long</label><label class="q-opt"><input type="radio" name="第 5 题sum 从 0 开始，循环把 " value="D"><b>D.</b> sum 是 7，应删除循环条件</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 06 累加计数与乘积。sum 从 0 开始，依次变为 1、3、6，所以循环结束后是 6。累加变量必须先初始化；结果可能超过 int 的常见范围时，可使用一级已经学过的 long long。<br><span class="q-kp">对应知识点：06 累加计数与乘积</span></p>
+<p class="q-title">第 6 题井高 10，每天先上爬 4，未到井口才下滑 1。青蛙第几天首次到达井口？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题井高 10，每天先上爬 4，未" value="A"><b>A.</b> 2 天</label><label class="q-opt"><input type="radio" name="第 6 题井高 10，每天先上爬 4，未" value="B"><b>B.</b> 3 天</label><label class="q-opt"><input type="radio" name="第 6 题井高 10，每天先上爬 4，未" value="C"><b>C.</b> 4 天</label><label class="q-opt"><input type="radio" name="第 6 题井高 10，每天先上爬 4，未" value="D"><b>D.</b> 10 天</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 10 简单过程模拟。前两天结束后高度依次为 3、6；第三天先从 6 爬到 10，已经到达井口，立即结束，不再下滑。<br><span class="q-kp">对应知识点：10 简单过程模拟</span></p>
+<p class="q-title">第 7 题逐位处理正整数 n 时，哪个表达式能得到当前个位数字的平方？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题逐位处理正整数 n 时，哪个表" value="A"><b>A.</b> n / 10</label><label class="q-opt"><input type="radio" name="第 7 题逐位处理正整数 n 时，哪个表" value="B"><b>B.</b> (n / 10) * (n / 10)</label><label class="q-opt"><input type="radio" name="第 7 题逐位处理正整数 n 时，哪个表" value="C"><b>C.</b> n % 10</label><label class="q-opt"><input type="radio" name="第 7 题逐位处理正整数 n 时，哪个表" value="D"><b>D.</b> (n % 10) * (n % 10)</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>n % 10 取得个位数字，再把它与自身相乘即可得到平方。<br><span class="q-kp">对应知识点：09 十进制数位处理</span></p>
+<p class="q-title">第 8 题依次输入 -5、-2、-8，按“第一个真实数据初始化最大值”的方法，最终最大值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 8 题依次输入 -5、-2、-8，按" value="A"><b>A.</b> 0</label><label class="q-opt"><input type="radio" name="第 8 题依次输入 -5、-2、-8，按" value="B"><b>B.</b> -8</label><label class="q-opt"><input type="radio" name="第 8 题依次输入 -5、-2、-8，按" value="C"><b>C.</b> -5</label><label class="q-opt"><input type="radio" name="第 8 题依次输入 -5、-2、-8，按" value="D"><b>D.</b> -2</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>对应本页 07 最大值与最小值。最大值先为 -5，读到 -2 后更新为 -2，读到 -8 时保持 -2。若错误地初始化为 0，处理全负数就会得到不存在的 0。<br><span class="q-kp">对应知识点：07 最大值与最小值</span></p>
+<p class="q-title">第 9 题用从 2 到 n - 1 枚举因数的方法判断 9，在哪个 i 值会发现 9 不是质数？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 9 题用从 2 到 n - 1 枚举" value="A"><b>A.</b> 1</label><label class="q-opt"><input type="radio" name="第 9 题用从 2 到 n - 1 枚举" value="B"><b>B.</b> 2</label><label class="q-opt"><input type="radio" name="第 9 题用从 2 到 n - 1 枚举" value="C"><b>C.</b> 3</label><label class="q-opt"><input type="radio" name="第 9 题用从 2 到 n - 1 枚举" value="D"><b>D.</b> 9</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 08 枚举因数与质数。i = 2 时 9 % 2 不为 0；i = 3 时 9 % 3 等于 0，找到中间因数 3 后即可判定 9 不是质数并停止循环。<br><span class="q-kp">对应知识点：08 枚举因数与质数</span></p>
+<p class="q-title">第 10 题关于 while 和 do-while，哪项说法正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 10 题关于 while 和 do-" value="A"><b>A.</b> 两种循环都可能成为死循环</label><label class="q-opt"><input type="radio" name="第 10 题关于 while 和 do-" value="B"><b>B.</b> 只有 while 可能成为死循环</label><label class="q-opt"><input type="radio" name="第 10 题关于 while 和 do-" value="C"><b>C.</b> 只有 do-while 可能成为死循环</label><label class="q-opt"><input type="radio" name="第 10 题关于 while 和 do-" value="D"><b>D.</b> 两种循环都不可能成为死循环</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>两种循环都可能因为条件始终为真且状态不变化而无法结束。<br><span class="q-kp">对应知识点：04 do-while 循环</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/branch/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 09</small><strong>分支结构</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/" rel="next"><span><small>返回一级字典</small><strong>返回一级总览</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -727,7 +779,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本章先记住">本章先记住</a></li><li><a href="#从顺序执行到重复处理">从顺序执行到重复处理</a></li><li><a href="#同一个任务怎样比较三种循环">同一个任务怎样比较三种循环</a></li><li><a href="#四个子课怎样衔接">四个子课怎样衔接</a></li><li><a href="#先按题目特征选择入口">先按题目特征选择入口</a></li><li><a href="#常见任务怎样找到子课">常见任务怎样找到子课</a></li><li><a href="#怎样验证一个循环">怎样验证一个循环</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#本章边界与关联学习">本章边界与关联学习</a></li><li><a href="#related-knowledge-loop">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本章先记住">本章先记住</a></li><li><a href="#从顺序执行到重复处理">从顺序执行到重复处理</a></li><li><a href="#同一个任务怎样比较三种循环">同一个任务怎样比较三种循环</a></li><li><a href="#四个子课怎样衔接">四个子课怎样衔接</a></li><li><a href="#先按题目特征选择入口">先按题目特征选择入口</a></li><li><a href="#常见任务怎样找到子课">常见任务怎样找到子课</a></li><li><a href="#怎样验证一个循环">怎样验证一个循环</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#本章边界与关联学习">本章边界与关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整章综合测试">整章综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -739,6 +791,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

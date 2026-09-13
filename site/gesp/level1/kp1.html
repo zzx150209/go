@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -474,12 +493,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <ul>
 <li><strong>核心结论：</strong> 计算机系统依靠硬件和软件共同完成信息的输入、存储、处理与输出；判断设备职责时要看信息流向，判断文件身份时要看内容和用途。</li>
 <li><strong>常用判断：</strong> 用“CPU 负责处理、内存临时保存、外部存储长期保存”区分核心部件；用箭头方向区分输入与输出；用路径定位文件所在位置。</li>
-<li><strong>最小示例：</strong> 键盘输入数据 → 程序装入内存并由 CPU 执行 → 屏幕输出结果；保存的 <code>.cpp</code> 源文件仍需编译才能得到可执行程序。</li>
+<li><strong>最小示例：</strong> 键盘输入数据 → 程序装入内存并由 CPU 执行 → 屏幕输出结果；保存的 <code dir="auto">.cpp</code> 源文件仍需编译才能得到可执行程序。</li>
 <li><strong>关键易错点：</strong> 改扩展名不会改变文件内容，程序也不是一直直接在硬盘上运行；触摸屏等设备还可能同时承担输入和输出。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-计算机的发展与应用" class="astro-6dte4xza">01 发展与应用</a></li><li class="astro-6dte4xza"><a href="#02-计算机的组成" class="astro-6dte4xza">02 计算机组成</a></li><li class="astro-6dte4xza"><a href="#03-输入设备与输出设备" class="astro-6dte4xza">03 输入与输出设备</a></li><li class="astro-6dte4xza"><a href="#04-信息表示与二进制" class="astro-6dte4xza">04 二进制</a></li><li class="astro-6dte4xza"><a href="#05-软件与操作系统" class="astro-6dte4xza">05 软件与操作系统</a></li><li class="astro-6dte4xza"><a href="#06-文件目录与扩展名" class="astro-6dte4xza">06 文件与目录</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>计算机不只是桌面上的主机和显示器。手机、自助挂号机、汽车导航和学校成绩系统也在接收、保存、处理和输出信息。要看懂它们怎样工作，可以先记住一条主线：</p>
-<pre><code>外部信息 → 输入 → 存储与处理 → 输出 → 外部</code></pre>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>外部信息 → 输入 → 存储与处理 → 输出 → 外部</code></pre>
 <p>本页对应 GESP C++ 一级大纲中的“计算机基础知识”，重点回答六个问题：</p>
 <ol>
 <li>计算机为什么从专门的计算工具发展成了通用信息处理工具？</li>
@@ -489,7 +510,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>操作系统与普通应用软件有什么区别？</li>
 <li>文件、目录、路径和扩展名分别说明什么？</li>
 </ol>
-<p>这是一页纯概念知识，不需要用 C++ 程序来证明。后文会用一个贯穿场景把概念落到具体过程：<code>answer.cpp</code> 保存在磁盘中；编译后得到可执行程序；运行时，可执行程序被装入内存，CPU 执行指令，键盘提供输入，屏幕显示输出。一级不学习硬件电路、复杂进制转换或操作系统内部算法。</p>
+<p>这是一页纯概念知识，不需要用 C++ 程序来证明。后文会用一个贯穿场景把概念落到具体过程：<code dir="auto">answer.cpp</code> 保存在磁盘中；编译后得到可执行程序；运行时，可执行程序被装入内存，CPU 执行指令，键盘提供输入，屏幕显示输出。一级不学习硬件电路、复杂进制转换或操作系统内部算法。</p>
 <h2 id="01-计算机的发展与应用">01 计算机的发展与应用</h2>
 <h3 id="从计算数字到处理信息">从“计算数字”到“处理信息”</h3>
 <p>早期电子计算机体积大、耗电多，主要承担科学计算等专门任务。随着电子器件变小、速度提高、成本下降，计算机逐渐进入学校、家庭、医院、工厂和交通系统。它能处理的内容也从数字扩展到文字、图片、声音和网络数据。</p>
@@ -637,7 +658,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <p>“电脑有 16 GB 内存”和“电脑有 1 TB 固态硬盘”说的是两种不同的存储用途。内存像运行时展开材料的工作台，外部存储像长期存放材料的文件柜；这个比喻只帮助区分职责，不表示它们的内部结构真的相同。</p>
 <h3 id="一个程序真正怎样运行">一个程序真正怎样运行</h3>
-<p>假设磁盘中已经保存了源文件 <code>answer.cpp</code>，编译后得到了可执行程序。运行时会经历下面的过程：</p>
+<p>假设磁盘中已经保存了源文件 <code dir="auto">answer.cpp</code>，编译后得到了可执行程序。运行时会经历下面的过程：</p>
 <table>
 <thead>
 <tr>
@@ -649,7 +670,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>answer.cpp</code> 和编译得到的可执行程序保存在磁盘中</td>
+<td><code dir="auto">answer.cpp</code> 和编译得到的可执行程序保存在磁盘中</td>
 <td>外部存储设备</td>
 </tr>
 <tr>
@@ -733,13 +754,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>硬盘负责存储，不要因为它既能读取又能写入，就在“计算机五大组成”的题目中机械地归为输入或输出设备。先看题目采用的是哪种分类标准，再根据设备在该过程中的主要职责判断。</p>
 <h2 id="04-信息表示与二进制">04 信息表示与二进制</h2>
 <h3 id="为什么使用-0-和-1">为什么使用 0 和 1</h3>
-<p>计算机的电子器件适合区分两种稳定状态。人们用 <code>0</code> 和 <code>1</code> 表示这两种状态，并规定怎样把它们组合起来表示数字、文字、图片和声音。二进制中的每一位只能是 0 或 1；这样的一个二进制位常称为一个“位”。</p>
+<p>计算机的电子器件适合区分两种稳定状态。人们用 <code dir="auto">0</code> 和 <code dir="auto">1</code> 表示这两种状态，并规定怎样把它们组合起来表示数字、文字、图片和声音。二进制中的每一位只能是 0 或 1；这样的一个二进制位常称为一个“位”。</p>
 <p>这并不表示计算机只会处理数字 0 和 1。屏幕上的汉字、照片中的颜色和扬声器播放的声音，都会按照相应规则转换成二进制数据，再由计算机保存和处理。不同类型的信息使用不同的表示规则，具体编码方法会在后续知识中学习。</p>
 <h3 id="相同字符不一定表示相同数值">相同字符不一定表示相同数值</h3>
-<p>二进制采用“逢二进一”。例如二进制 <code>101</code> 可以按位置拆开：</p>
+<p>二进制采用“逢二进一”。例如二进制 <code dir="auto">101</code> 可以按位置拆开：</p>
 <pre><code>二进制 101 = 1 × 4 + 0 × 2 + 1 × 1 = 十进制 5</code></pre>
-<p>二进制 <code>101</code> 与十进制 <code>101</code> 看起来都由字符 1、0、1 组成，数值却不同：前者表示十进制 5，后者表示一百零一。因此，读一个数时除了看写了哪些数字，还要确认它采用什么进制。</p>
-<p>一级只要求理解二进制由 0 和 1 组成，并能看懂这种简单的位置意义，不需要进行复杂进制转换。遇到 <code>10201</code> 这样的写法，可以立刻判断它不是合法的二进制数，因为其中出现了数字 2。</p>
+<p>二进制 <code dir="auto">101</code> 与十进制 <code dir="auto">101</code> 看起来都由字符 1、0、1 组成，数值却不同：前者表示十进制 5，后者表示一百零一。因此，读一个数时除了看写了哪些数字，还要确认它采用什么进制。</p>
+<p>一级只要求理解二进制由 0 和 1 组成，并能看懂这种简单的位置意义，不需要进行复杂进制转换。遇到 <code dir="auto">10201</code> 这样的写法，可以立刻判断它不是合法的二进制数，因为其中出现了数字 2。</p>
 <h2 id="05-软件与操作系统">05 软件与操作系统</h2>
 <h3 id="系统软件与应用软件解决的问题不同">系统软件与应用软件解决的问题不同</h3>
 <p>软件让硬件按照确定的步骤完成任务。按主要用途，可以先分成两类：</p>
@@ -810,26 +831,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <td>文件</td>
 <td>保存的内容是什么</td>
-<td><code>answer.cpp</code></td>
+<td><code dir="auto">answer.cpp</code></td>
 </tr>
 <tr>
 <td>目录（文件夹）</td>
 <td>文件放在哪一组中</td>
-<td><code>gesp</code> 文件夹</td>
+<td><code dir="auto">gesp</code> 文件夹</td>
 </tr>
 <tr>
 <td>路径</td>
 <td>怎样找到这个文件</td>
-<td><code>D:\gesp\answer.cpp</code></td>
+<td><code dir="auto">D:\gesp\answer.cpp</code></td>
 </tr>
 </tbody>
 </table>
-<p>在路径 <code>D:\gesp\answer.cpp</code> 中：</p>
+<p>在路径 <code dir="auto">D:\gesp\answer.cpp</code> 中：</p>
 <ul>
-<li><code>D:</code> 表示盘符；</li>
-<li><code>gesp</code> 是目录名；</li>
-<li><code>answer.cpp</code> 是文件名；</li>
-<li><code>.cpp</code> 是扩展名，<code>answer</code> 是扩展名前的主文件名。</li>
+<li><code dir="auto">D:</code> 表示盘符；</li>
+<li><code dir="auto">gesp</code> 是目录名；</li>
+<li><code dir="auto">answer.cpp</code> 是文件名；</li>
+<li><code dir="auto">.cpp</code> 是扩展名，<code dir="auto">answer</code> 是扩展名前的主文件名。</li>
 </ul>
 <p>目录本身不是一份源代码，路径也不是文件内容。路径只是对位置的描述，就像地址帮助我们找到房间，但地址本身不是房间里的物品。</p>
 <h3 id="扩展名是线索不是变身开关">扩展名是线索，不是“变身开关”</h3>
@@ -843,28 +864,28 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>.cpp</code></td>
+<td><code dir="auto">.cpp</code></td>
 <td>C++ 源代码文件</td>
 <td>人能阅读和编辑的 C++ 代码文字</td>
 </tr>
 <tr>
-<td><code>.exe</code></td>
+<td><code dir="auto">.exe</code></td>
 <td>Windows 中常见的可执行文件</td>
 <td>编译后可由系统加载运行的程序</td>
 </tr>
 <tr>
-<td><code>.txt</code></td>
+<td><code dir="auto">.txt</code></td>
 <td>文本文件</td>
 <td>普通文字</td>
 </tr>
 <tr>
-<td><code>.png</code></td>
+<td><code dir="auto">.png</code></td>
 <td>图片文件</td>
 <td>按 PNG 格式组织的图像数据</td>
 </tr>
 </tbody>
 </table>
-<p>扩展名能帮助操作系统和用户判断文件类型，但改名不会自动改变文件内部的数据。把 <code>notes.txt</code> 改成 <code>notes.cpp</code>，里面仍然是原来的文字；只有内容符合 C++ 语法，编译器才可能把它当作正确源代码处理。把图片改名为 <code>.txt</code>，也不会让图片内容自动变成文章。</p>
+<p>扩展名能帮助操作系统和用户判断文件类型，但改名不会自动改变文件内部的数据。把 <code dir="auto">notes.txt</code> 改成 <code dir="auto">notes.cpp</code>，里面仍然是原来的文字；只有内容符合 C++ 语法，编译器才可能把它当作正确源代码处理。把图片改名为 <code dir="auto">.txt</code>，也不会让图片内容自动变成文章。</p>
 <h3 id="c-源文件与可执行程序不是同一个文件">C++ 源文件与可执行程序不是同一个文件</h3>
 <table>
 <thead>
@@ -877,8 +898,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>常见名称</td>
-<td><code>answer.cpp</code></td>
-<td>Windows 中常见 <code>answer.exe</code></td>
+<td><code dir="auto">answer.cpp</code></td>
+<td>Windows 中常见 <code dir="auto">answer.exe</code></td>
 </tr>
 <tr>
 <td>内容作用</td>
@@ -897,8 +918,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>在 Windows 中，可执行文件常用 <code>.exe</code>；在 Linux 中，可执行文件不一定有固定扩展名，所以不能把“所有可执行程序都必须以 <code>.exe</code> 结尾”当成通用规则。</p>
-<p>还有一个常见现象：你改了 <code>answer.cpp</code>，却没有保存或重新编译，运行结果仍然和以前一样。原因是旧的可执行程序没有自动变成新版本。下一页“集成开发环境”会继续讲编辑、保存、编译和运行之间的区别。</p>
+<p>在 Windows 中，可执行文件常用 <code dir="auto">.exe</code>；在 Linux 中，可执行文件不一定有固定扩展名，所以不能把“所有可执行程序都必须以 <code dir="auto">.exe</code> 结尾”当成通用规则。</p>
+<p>还有一个常见现象：你改了 <code dir="auto">answer.cpp</code>，却没有保存或重新编译，运行结果仍然和以前一样。原因是旧的可执行程序没有自动变成新版本。下一页“集成开发环境”会继续讲编辑、保存、编译和运行之间的区别。</p>
 <h2 id="判断计算机基础概念的统一顺序">判断计算机基础概念的统一顺序</h2>
 <p>概念题看起来很零散，其实可以按下面的顺序逐步判断：</p>
 <ol>
@@ -965,7 +986,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>逐段找到盘符、目录和文件名</td>
 </tr>
 <tr>
-<td><code>.cpp</code></td>
+<td><code dir="auto">.cpp</code></td>
 <td>C++ 源代码文件</td>
 <td>与编译后的可执行程序分开</td>
 </tr>
@@ -974,8 +995,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="典型例题">典型例题</h2>
 <p>一名学生在 Windows 电脑上完成下面的操作：</p>
 <ol>
-<li>在 IDE 中编辑 <code>D:\gesp\answer.cpp</code> 并保存；</li>
-<li>编译后得到 <code>answer.exe</code>；</li>
+<li>在 IDE 中编辑 <code dir="auto">D:\gesp\answer.cpp</code> 并保存；</li>
+<li>编译后得到 <code dir="auto">answer.exe</code>；</li>
 <li>运行程序，用键盘输入数据；</li>
 <li>程序完成处理，并把结果显示在屏幕上。</li>
 </ol>
@@ -991,9 +1012,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>D:\gesp\answer.cpp</code></td>
+<td><code dir="auto">D:\gesp\answer.cpp</code></td>
 <td>路径指向一个 C++ 源文件</td>
-<td><code>D:</code> 是盘符，<code>gesp</code> 是目录，<code>.cpp</code> 提示源文件类型</td>
+<td><code dir="auto">D:</code> 是盘符，<code dir="auto">gesp</code> 是目录，<code dir="auto">.cpp</code> 提示源文件类型</td>
 </tr>
 <tr>
 <td>点击“保存”</td>
@@ -1001,12 +1022,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>需要在断电后继续保留</td>
 </tr>
 <tr>
-<td>得到 <code>answer.exe</code></td>
+<td>得到 <code dir="auto">answer.exe</code></td>
 <td>产生 Windows 中常见的可执行文件</td>
-<td>它与人编辑的 <code>.cpp</code> 源文件职责不同</td>
+<td>它与人编辑的 <code dir="auto">.cpp</code> 源文件职责不同</td>
 </tr>
 <tr>
-<td>运行 <code>answer.exe</code></td>
+<td>运行 <code dir="auto">answer.exe</code></td>
 <td>程序先装入内存，再由 CPU 执行</td>
 <td>内存提供运行空间，CPU 负责指令和运算</td>
 </tr>
@@ -1031,8 +1052,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <ul>
 <li>把键盘换成麦克风，仍然是输入，因为信息方向没有变。</li>
 <li>把显示器换成扬声器，仍然是输出，因为结果仍由计算机送向外部。</li>
-<li>关闭电脑后，已经保存的 <code>answer.cpp</code> 通常仍在磁盘中；运行时没有另行保存的内存数据通常会丢失。</li>
-<li>只把 <code>answer.cpp</code> 改名为 <code>answer.exe</code>，不会得到真正的可执行程序，因为改名没有改变文件内部内容。</li>
+<li>关闭电脑后，已经保存的 <code dir="auto">answer.cpp</code> 通常仍在磁盘中；运行时没有另行保存的内存数据通常会丢失。</li>
+<li>只把 <code dir="auto">answer.cpp</code> 改名为 <code dir="auto">answer.exe</code>，不会得到真正的可执行程序，因为改名没有改变文件内部内容。</li>
 </ul>
 <p>这个例子可以同时核对硬件职责、输入输出方向、操作系统作用和文件身份。判断依据来自实际过程，不依赖设备名称的死记。</p>
 <h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
@@ -1045,13 +1066,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li><strong>认为程序一直直接在硬盘上运行。</strong> 可执行程序通常先从外部存储装入内存，再由 CPU 取出指令执行。</li>
 <li><strong>只按设备名称判断输入输出。</strong> 触摸屏、多功能打印机可能同时具有两种功能；把题目中的具体动作画成信息箭头再判断。</li>
 <li><strong>把 Windows、Linux 当成应用软件或编程语言。</strong> 它们是操作系统，负责管理硬件、文件和程序。</li>
-<li><strong>认为二进制 <code>101</code> 就是十进制 101。</strong> 进制不同，位置代表的数值不同；先确认采用什么进制。</li>
+<li><strong>认为二进制 <code dir="auto">101</code> 就是十进制 101。</strong> 进制不同，位置代表的数值不同；先确认采用什么进制。</li>
 <li><strong>认为改扩展名就能改变文件内容。</strong> 扩展名只是类型线索，改名不会完成编译，也不会把图片变成文字。</li>
-<li><strong>把 <code>.cpp</code> 源文件和可执行程序当成同一个文件。</strong> 源文件供人编辑，编译后的程序供系统加载运行；修改源文件后还要保存并重新编译。</li>
+<li><strong>把 <code dir="auto">.cpp</code> 源文件和可执行程序当成同一个文件。</strong> 源文件供人编辑，编译后的程序供系统加载运行；修改源文件后还要保存并重新编译。</li>
 </ol>
 <h2 id="关联学习">关联学习</h2>
 <p>下一页的<a href="/gesp/level1/ide/">集成开发环境</a>会继续使用源文件、可执行程序和操作系统中的文件操作，并讲清编辑、保存、编译、运行与调试的区别。</p>
-<section aria-labelledby="related-knowledge-computer-basics"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-computer-basics" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><p>暂无前置知识</p></section></div></section>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能根据数据流向区分输入设备和输出设备。</label><label class="q-check"><input type="checkbox"> 我能说明 CPU、内存、硬盘和操作系统的基本作用。</label><label class="q-check"><input type="checkbox"> 我能识别 .cpp 源文件、目录和常见文件扩展名。</label>
+<h2 id="整页综合测试">整页综合测试</h2>
+<span>6 题</span>
+<p class="q-title">第 1 题下面哪一项不属于计算机的输出设备？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题下面哪一项不属于计算机的输出设" value="A"><b>A.</b> 麦克风</label><label class="q-opt"><input type="radio" name="第 1 题下面哪一项不属于计算机的输出设" value="B"><b>B.</b> 扬声器</label><label class="q-opt"><input type="radio" name="第 1 题下面哪一项不属于计算机的输出设" value="C"><b>C.</b> 打印机</label><label class="q-opt"><input type="radio" name="第 1 题下面哪一项不属于计算机的输出设" value="D"><b>D.</b> 显示器</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>麦克风负责采集声音，是输入设备；其余三项都把信息输出给用户。<br><span class="q-kp">对应知识点：03 输入设备与输出设备</span></p>
+<p class="q-title">第 2 题计算机中负责执行程序指令和进行运算的核心部件通常是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题计算机中负责执行程序指令和进行" value="A"><b>A.</b> 中央处理器</label><label class="q-opt"><input type="radio" name="第 2 题计算机中负责执行程序指令和进行" value="B"><b>B.</b> 显示器</label><label class="q-opt"><input type="radio" name="第 2 题计算机中负责执行程序指令和进行" value="C"><b>C.</b> 键盘</label><label class="q-opt"><input type="radio" name="第 2 题计算机中负责执行程序指令和进行" value="D"><b>D.</b> 打印机</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>中央处理器负责解释并执行程序指令，也承担主要的算术和逻辑运算。<br><span class="q-kp">对应知识点：02 计算机的组成</span></p>
+<p class="q-title">第 3 题医院自助挂号机接收证件信息、处理科室选择并打印凭条，为什么属于计算机应用？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题医院自助挂号机接收证件信息、处" value="A"><b>A.</b> 它完成了信息的输入、处理和输出</label><label class="q-opt"><input type="radio" name="第 3 题医院自助挂号机接收证件信息、处" value="B"><b>B.</b> 它的外壳一定是黑色</label><label class="q-opt"><input type="radio" name="第 3 题医院自助挂号机接收证件信息、处" value="C"><b>C.</b> 它只能进行科学计算</label><label class="q-opt"><input type="radio" name="第 3 题医院自助挂号机接收证件信息、处" value="D"><b>D.</b> 它不需要保存任何数据</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 01 计算机的发展与应用。判断重点是设备能自动接收、处理、保存或输出信息，而不是观察外形或颜色。<br><span class="q-kp">对应知识点：01 计算机的发展与应用</span></p>
+<p class="q-title">第 4 题用二进制表示信息时，每一位只能取哪两个值？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题用二进制表示信息时，每一位只能" value="A"><b>A.</b> 0 和 1</label><label class="q-opt"><input type="radio" name="第 4 题用二进制表示信息时，每一位只能" value="B"><b>B.</b> 1 和 2</label><label class="q-opt"><input type="radio" name="第 4 题用二进制表示信息时，每一位只能" value="C"><b>C.</b> 0 到 9</label><label class="q-opt"><input type="radio" name="第 4 题用二进制表示信息时，每一位只能" value="D"><b>D.</b> A 和 B</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>二进制只有 0 和 1 两个基本数码，计算机用它们表示和处理信息。<br><span class="q-kp">对应知识点：04 信息表示与二进制</span></p>
+<p class="q-title">第 5 题下面哪个文件名最可能是 C++ 源代码文件？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题下面哪个文件名最可能是 C++" value="A"><b>A.</b> answer.cpp</label><label class="q-opt"><input type="radio" name="第 5 题下面哪个文件名最可能是 C++" value="B"><b>B.</b> answer.exe</label><label class="q-opt"><input type="radio" name="第 5 题下面哪个文件名最可能是 C++" value="C"><b>C.</b> answer.png</label><label class="q-opt"><input type="radio" name="第 5 题下面哪个文件名最可能是 C++" value="D"><b>D.</b> answer.mp3</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>.cpp 是常见的 C++ 源代码扩展名；.exe 常表示 Windows 可执行文件。<br><span class="q-kp">对应知识点：06 文件、目录与扩展名</span></p>
+<p class="q-title">第 6 题双击浏览器图标后，负责管理程序文件、运行资源和窗口的通常是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题双击浏览器图标后，负责管理程序" value="A"><b>A.</b> 操作系统</label><label class="q-opt"><input type="radio" name="第 6 题双击浏览器图标后，负责管理程序" value="B"><b>B.</b> 键盘</label><label class="q-opt"><input type="radio" name="第 6 题双击浏览器图标后，负责管理程序" value="C"><b>C.</b> 浏览器网页</label><label class="q-opt"><input type="radio" name="第 6 题双击浏览器图标后，负责管理程序" value="D"><b>D.</b> 打印机</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 05 软件与操作系统。Windows、Linux 等操作系统管理硬件、文件和运行中的程序；浏览器负责具体的网页任务。<br><span class="q-kp">对应知识点：05 软件与操作系统</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>返回</small><strong>一级总览</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/ide/" rel="next"><span><small>下一知识点 · 02</small><strong>开发环境</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -1060,7 +1102,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp2.html">下一个：集成开发环境 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-计算机的发展与应用">01 计算机的发展与应用</a></li><li><a href="#从计算数字到处理信息" class="lvl3">从“计算数字”到“处理信息”</a></li><li><a href="#判断计算机应用要看信息过程" class="lvl3">判断“计算机应用”要看信息过程</a></li><li><a href="#02-计算机的组成">02 计算机的组成</a></li><li><a href="#计算机系统需要硬件和软件共同工作" class="lvl3">计算机系统需要硬件和软件共同工作</a></li><li><a href="#cpu内存和外部存储各有职责" class="lvl3">CPU、内存和外部存储各有职责</a></li><li><a href="#一个程序真正怎样运行" class="lvl3">一个程序真正怎样运行</a></li><li><a href="#03-输入设备与输出设备">03 输入设备与输出设备</a></li><li><a href="#以计算机为中心看信息方向" class="lvl3">以计算机为中心看信息方向</a></li><li><a href="#同一设备可能承担两种作用" class="lvl3">同一设备可能承担两种作用</a></li><li><a href="#04-信息表示与二进制">04 信息表示与二进制</a></li><li><a href="#为什么使用-0-和-1" class="lvl3">为什么使用 0 和 1</a></li><li><a href="#相同字符不一定表示相同数值" class="lvl3">相同字符不一定表示相同数值</a></li><li><a href="#05-软件与操作系统">05 软件与操作系统</a></li><li><a href="#系统软件与应用软件解决的问题不同" class="lvl3">系统软件与应用软件解决的问题不同</a></li><li><a href="#操作系统站在应用与硬件之间" class="lvl3">操作系统站在应用与硬件之间</a></li><li><a href="#06-文件目录与扩展名">06 文件、目录与扩展名</a></li><li><a href="#文件保存内容目录组织文件路径说明位置" class="lvl3">文件保存内容，目录组织文件，路径说明位置</a></li><li><a href="#扩展名是线索不是变身开关" class="lvl3">扩展名是线索，不是“变身开关”</a></li><li><a href="#c-源文件与可执行程序不是同一个文件" class="lvl3">C++ 源文件与可执行程序不是同一个文件</a></li><li><a href="#判断计算机基础概念的统一顺序">判断计算机基础概念的统一顺序</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#先沿过程找证据" class="lvl3">先沿过程找证据</a></li><li><a href="#再换条件验证" class="lvl3">再换条件验证</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-computer-basics">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-计算机的发展与应用">01 计算机的发展与应用</a></li><li><a href="#从计算数字到处理信息" class="lvl3">从“计算数字”到“处理信息”</a></li><li><a href="#判断计算机应用要看信息过程" class="lvl3">判断“计算机应用”要看信息过程</a></li><li><a href="#02-计算机的组成">02 计算机的组成</a></li><li><a href="#计算机系统需要硬件和软件共同工作" class="lvl3">计算机系统需要硬件和软件共同工作</a></li><li><a href="#cpu内存和外部存储各有职责" class="lvl3">CPU、内存和外部存储各有职责</a></li><li><a href="#一个程序真正怎样运行" class="lvl3">一个程序真正怎样运行</a></li><li><a href="#03-输入设备与输出设备">03 输入设备与输出设备</a></li><li><a href="#以计算机为中心看信息方向" class="lvl3">以计算机为中心看信息方向</a></li><li><a href="#同一设备可能承担两种作用" class="lvl3">同一设备可能承担两种作用</a></li><li><a href="#04-信息表示与二进制">04 信息表示与二进制</a></li><li><a href="#为什么使用-0-和-1" class="lvl3">为什么使用 0 和 1</a></li><li><a href="#相同字符不一定表示相同数值" class="lvl3">相同字符不一定表示相同数值</a></li><li><a href="#05-软件与操作系统">05 软件与操作系统</a></li><li><a href="#系统软件与应用软件解决的问题不同" class="lvl3">系统软件与应用软件解决的问题不同</a></li><li><a href="#操作系统站在应用与硬件之间" class="lvl3">操作系统站在应用与硬件之间</a></li><li><a href="#06-文件目录与扩展名">06 文件、目录与扩展名</a></li><li><a href="#文件保存内容目录组织文件路径说明位置" class="lvl3">文件保存内容，目录组织文件，路径说明位置</a></li><li><a href="#扩展名是线索不是变身开关" class="lvl3">扩展名是线索，不是“变身开关”</a></li><li><a href="#c-源文件与可执行程序不是同一个文件" class="lvl3">C++ 源文件与可执行程序不是同一个文件</a></li><li><a href="#判断计算机基础概念的统一顺序">判断计算机基础概念的统一顺序</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#先沿过程找证据" class="lvl3">先沿过程找证据</a></li><li><a href="#再换条件验证" class="lvl3">再换条件验证</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -1072,6 +1114,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,41 +489,42 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 方程与退化情况</a><a href="#kp-02" class="astro-obblnf2s">02 表达式与公式转程序</a><a href="#kp-03" class="astro-obblnf2s">03 等差数列</a><a href="#kp-04" class="astro-obblnf2s">04 等比数列入门</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方八级代数基础包括一元一次方程、二元一次方程的基础求解、表达式化简、公式转程序、等差数列和等比数列入门。本页侧重把已知数学关系准确翻译成程序，不引入高斯消元。</p>
 <h2 id="kp-01">01 方程与退化情况</h2>
-<p>对 <code>ax+b=0</code>，先判断 <code>a</code>：</p>
+<p>对 <code dir="auto">ax+b=0</code>，先判断 <code dir="auto">a</code>：</p>
 <ul>
-<li><code>a≠0</code>：唯一解 <code>x=-b/a</code>；</li>
-<li><code>a=0,b≠0</code>：无解；</li>
-<li><code>a=0,b=0</code>：无数解。</li>
+<li><code dir="auto">a≠0</code>：唯一解 <code dir="auto">x=-b/a</code>；</li>
+<li><code dir="auto">a=0,b≠0</code>：无解；</li>
+<li><code dir="auto">a=0,b=0</code>：无数解。</li>
 </ul>
-<p>使用浮点数时，可按题目精度设置 <code>EPS</code>，用 <code>fabs(value)&lt;EPS</code> 判断结果是否接近 0。二元一次方程也要先检查分母对应的行列式是否为 0，再决定唯一解或退化情况。</p>
+<p>使用浮点数时，可按题目精度设置 <code dir="auto">EPS</code>，用 <code dir="auto">fabs(value)&lt;EPS</code> 判断结果是否接近 0。二元一次方程也要先检查分母对应的行列式是否为 0，再决定唯一解或退化情况。</p>
 <h2 id="kp-02">02 表达式与公式转程序</h2>
-<p>翻译公式时要保留括号、运算顺序和数据类型。例如 <code>s=(a+b)h/2</code> 应写成 <code>(a+b)*h/2.0</code> 或让参与运算的数据使用 <code>double</code>，避免整数除法提前截断。</p>
-<p>平方可写为 <code>x*x</code>；不要用 <code>^</code> 表示乘方，因为 C++ 中 <code>^</code> 是按位异或。长公式可以先计算有明确含义的中间量，使检查更容易。</p>
+<p>翻译公式时要保留括号、运算顺序和数据类型。例如 <code dir="auto">s=(a+b)h/2</code> 应写成 <code dir="auto">(a+b)*h/2.0</code> 或让参与运算的数据使用 <code dir="auto">double</code>，避免整数除法提前截断。</p>
+<p>平方可写为 <code dir="auto">x*x</code>；不要用 <code dir="auto">^</code> 表示乘方，因为 C++ 中 <code dir="auto">^</code> 是按位异或。长公式可以先计算有明确含义的中间量，使检查更容易。</p>
 <h2 id="kp-03">03 等差数列</h2>
-<p>首项为 <code>a1</code>、公差为 <code>d</code>：</p>
+<p>首项为 <code dir="auto">a1</code>、公差为 <code dir="auto">d</code>：</p>
 <ul>
-<li>第 <code>n</code> 项：<code>an=a1+(n-1)d</code>；</li>
-<li>前 <code>n</code> 项和：<code>Sn=n(a1+an)/2</code>。</li>
+<li>第 <code dir="auto">n</code> 项：<code dir="auto">an=a1+(n-1)d</code>；</li>
+<li>前 <code dir="auto">n</code> 项和：<code dir="auto">Sn=n(a1+an)/2</code>。</li>
 </ul>
-<p>例如首项 3、公差 2，第 5 项是 <code>3+4×2=11</code>。公差只增加 <code>n-1</code> 次，这是最常见的下标错误。</p>
+<p>例如首项 3、公差 2，第 5 项是 <code dir="auto">3+4×2=11</code>。公差只增加 <code dir="auto">n-1</code> 次，这是最常见的下标错误。</p>
 <h2 id="kp-04">04 等比数列入门</h2>
-<p>首项为 <code>a1</code>、公比为 <code>q</code>，第 <code>n</code> 项是 <code>an=a1×q^(n-1)</code>。例如首项 2、公比 3，第 4 项为 <code>2×3^3=54</code>。</p>
+<p>首项为 <code dir="auto">a1</code>、公比为 <code dir="auto">q</code>，第 <code dir="auto">n</code> 项是 <code dir="auto">an=a1×q^(n-1)</code>。例如首项 2、公比 3，第 4 项为 <code dir="auto">2×3^3=54</code>。</p>
 <p>当指数较大时，数值增长很快，要先估算整数范围；需要取模时可关联倍增思想下的快速幂，但本页不把复杂数列求和公式作为核心。</p>
 <p><strong>公式代入追踪。</strong> 梯形上底 3、下底 7、高 4，按“公式 → 代入 → 计算”完成：</p>
 <ol>
-<li>写公式 <code>S=(a+b)h/2</code>；</li>
-<li>代入为 <code>S=(3+7)×4÷2</code>；</li>
-<li>先算括号，再乘高，最后除以 2，得到 <code>20</code>。</li>
+<li>写公式 <code dir="auto">S=(a+b)h/2</code>；</li>
+<li>代入为 <code dir="auto">S=(3+7)×4÷2</code>；</li>
+<li>先算括号，再乘高，最后除以 2，得到 <code dir="auto">20</code>。</li>
 </ol>
 <p>若长度中同时出现米和厘米，单位必须统一后才能代入。方程类案例还要先做退化判断：分母为 0 时不能继续除法；输入系数很大时，要检查乘法和中间结果是否越界；需要小数时，要明确精度与输出格式。</p>
 <p><strong>逐段具体推演（对应 01—04）。</strong></p>
-<p><strong>01 方程。</strong> 一元方程 <code>2x-6=0</code> 得 <code>x=3</code>，代回后 <code>2×3-6=0</code>。二元一次方程组 <code>x+y=3、x-y=1</code> 两式相加得 <code>2x=4</code>，所以 <code>x=2，y=1</code>；代回两式分别得到 3 和 1。两式相同或矛盾时不能硬算唯一解。</p>
-<p><strong>02 公式转程序。</strong> 梯形上底 3、下底 5、高 4，先算括号 <code>3+5=8</code>，再乘高得 32，最后除以 2 得 16。写成 <code>a+b*h/2</code> 会先算乘除，已经改变原公式。</p>
-<p><strong>03 等差数列。</strong> 首项 3、公差 2，第 5 项经历 4 次增加：<code>3→5→7→9→11</code>，所以是 <code>3+(5-1)×2=11</code>；前 5 项和是 <code>(3+11)×5÷2=35</code>。</p>
-<p><strong>04 等比数列。</strong> 首项 2、公比 3，第 4 项过程是 <code>2→6→18→54</code>，共乘 3 次，所以指数是 <code>4-1</code>。<code>q=1</code> 时每项都等于首项。</p>
+<p><strong>01 方程。</strong> 一元方程 <code dir="auto">2x-6=0</code> 得 <code dir="auto">x=3</code>，代回后 <code dir="auto">2×3-6=0</code>。二元一次方程组 <code dir="auto">x+y=3、x-y=1</code> 两式相加得 <code dir="auto">2x=4</code>，所以 <code dir="auto">x=2，y=1</code>；代回两式分别得到 3 和 1。两式相同或矛盾时不能硬算唯一解。</p>
+<p><strong>02 公式转程序。</strong> 梯形上底 3、下底 5、高 4，先算括号 <code dir="auto">3+5=8</code>，再乘高得 32，最后除以 2 得 16。写成 <code dir="auto">a+b*h/2</code> 会先算乘除，已经改变原公式。</p>
+<p><strong>03 等差数列。</strong> 首项 3、公差 2，第 5 项经历 4 次增加：<code dir="auto">3→5→7→9→11</code>，所以是 <code dir="auto">3+(5-1)×2=11</code>；前 5 项和是 <code dir="auto">(3+11)×5÷2=35</code>。</p>
+<p><strong>04 等比数列。</strong> 首项 2、公比 3，第 4 项过程是 <code dir="auto">2→6→18→54</code>，共乘 3 次，所以指数是 <code dir="auto">4-1</code>。<code dir="auto">q=1</code> 时每项都等于首项。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -524,40 +544,61 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 <tr>
 <td>等差第 n 项</td>
-<td><code>a1+(n-1)d</code></td>
+<td><code dir="auto">a1+(n-1)d</code></td>
 </tr>
 <tr>
 <td>等差前 n 项和</td>
-<td><code>n(a1+an)/2</code></td>
+<td><code dir="auto">n(a1+an)/2</code></td>
 </tr>
 <tr>
 <td>等比第 n 项</td>
-<td><code>a1×q^(n-1)</code></td>
+<td><code dir="auto">a1×q^(n-1)</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>输入一元一次方程 <code>ax+b=0</code> 的系数，输出解的类型和唯一解。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<p>输入一元一次方程 <code dir="auto">ax+b=0</code> 的系数，输出解的类型和唯一解。</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 const double EPS = 1e-9;
 int main() {    double a, b;    cin &gt;&gt; a &gt;&gt; b;
     // 先处理 a 为 0 的退化情况，避免直接除以 0。    if (fabs(a) &lt; EPS) {        if (fabs(b) &lt; EPS) {            cout &lt;&lt; "many" &lt;&lt; endl;        } else {            cout &lt;&lt; "no" &lt;&lt; endl;        }    } else {        // 只有 a 不为 0 时，方程才有唯一解 -b/a。        double x = -b / a;        cout &lt;&lt; fixed &lt;&lt; setprecision(6) &lt;&lt; x &lt;&lt; endl;    }    return 0;}</code></pre>
-<p>程序只做固定次数运算，时间和额外空间复杂度均为 <code>O(1)</code>。</p>
+<p>程序只做固定次数运算，时间和额外空间复杂度均为 <code dir="auto">O(1)</code>。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>整数除法反例。</strong> 用 <code>int</code> 计算 <code>1/2*3</code>，程序先得到 <code>1/2=0</code>，再算出 0，但数学结果应为 1.5。正确做法是使用 <code>double</code>，例如 <code>1.0/2*3</code>，并让结果变量也能保存小数。</p>
+<p><strong>整数除法反例。</strong> 用 <code dir="auto">int</code> 计算 <code dir="auto">1/2*3</code>，程序先得到 <code dir="auto">1/2=0</code>，再算出 0，但数学结果应为 1.5。正确做法是使用 <code dir="auto">double</code>，例如 <code dir="auto">1.0/2*3</code>，并让结果变量也能保存小数。</p>
 <ul>
-<li>没有判断 <code>a</code> 就计算 <code>-b/a</code>，产生除零。</li>
-<li>把 <code>^</code> 当乘方运算符；应使用乘法或逐次计算幂。</li>
+<li>没有判断 <code dir="auto">a</code> 就计算 <code dir="auto">-b/a</code>，产生除零。</li>
+<li>把 <code dir="auto">^</code> 当乘方运算符；应使用乘法或逐次计算幂。</li>
 <li>忽略括号，改变原公式运算顺序。</li>
 <li>在需要小数时仍使用整数除法。</li>
-<li>等差、等比第 <code>n</code> 项误写成增加或相乘 <code>n</code> 次。</li>
+<li>等差、等比第 <code dir="auto">n</code> 项误写成增加或相乘 <code dir="auto">n</code> 次。</li>
 </ul>
 <h2 id="关联学习">关联学习</h2>
 <ul>
 <li><a href="/gesp/level8/binary-lifting/">倍增法</a>：理解快速幂中的二进制拆分。</li>
 <li><a href="/gesp/level8/algorithm-optimization/">算法优化</a>：用公式替代重复循环。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能完整分类一元一次方程的三种情况</label><label class="q-check"><input type="checkbox"> 能把公式按正确括号和数据类型写进程序</label><label class="q-check"><input type="checkbox"> 能写出等差、等比数列第 n 项并检查范围</label><span>7 题</span>
+<p class="q-title">第 1 题方程 0x+0=0 的解的情况是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题方程 0x+0=0 的解的情况" value="A"><b>A.</b> 唯一解 0</label><label class="q-opt"><input type="radio" name="第 1 题方程 0x+0=0 的解的情况" value="B"><b>B.</b> 无解</label><label class="q-opt"><input type="radio" name="第 1 题方程 0x+0=0 的解的情况" value="C"><b>C.</b> 无数解</label><label class="q-opt"><input type="radio" name="第 1 题方程 0x+0=0 的解的情况" value="D"><b>D.</b> 唯一解 1</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>无论 x 取什么值，左边都是 0，等式恒成立，因此有无数解。程序必须先判断 a 是否接近 0，再根据 b 分类。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题判断 double 系数 a 是否可视为 0，更稳妥的基础写法是哪一项？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题判断 double 系数 a " value="A"><b>A.</b> a == 0.0</label><label class="q-opt"><input type="radio" name="第 2 题判断 double 系数 a " value="B"><b>B.</b> fabs(a) &lt; EPS</label><label class="q-opt"><input type="radio" name="第 2 题判断 double 系数 a " value="C"><b>C.</b> a &lt; 0</label><label class="q-opt"><input type="radio" name="第 2 题判断 double 系数 a " value="D"><b>D.</b> int(a) == 1</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>浮点计算可能带来微小误差，通常设定允许误差 EPS，再判断 fabs(a)<EPS。EPS 的具体大小仍应结合题目数据与精度要求确定。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 3 题把公式 s=(a+b)×h÷2 写进程序时，为避免整数除法提前截断，哪种做法更稳妥？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题把公式 s=(a+b)×h÷2" value="A"><b>A.</b> 先算 h/2</label><label class="q-opt"><input type="radio" name="第 3 题把公式 s=(a+b)×h÷2" value="B"><b>B.</b> 使用 double 保存数据并按公式计算</label><label class="q-opt"><input type="radio" name="第 3 题把公式 s=(a+b)×h÷2" value="C"><b>C.</b> 删除除法</label><label class="q-opt"><input type="radio" name="第 3 题把公式 s=(a+b)×h÷2" value="D"><b>D.</b> 把结果固定为整数</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>几何或代数公式可能产生小数。使用 double 保存参与运算的数据，再按完整公式计算，可以避免整数除法把小数部分提前截掉。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题等差数列首项为 3、公差为 2，第 5 项是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题等差数列首项为 3、公差为 2" value="A"><b>A.</b> 9</label><label class="q-opt"><input type="radio" name="第 4 题等差数列首项为 3、公差为 2" value="B"><b>B.</b> 10</label><label class="q-opt"><input type="radio" name="第 4 题等差数列首项为 3、公差为 2" value="C"><b>C.</b> 11</label><label class="q-opt"><input type="radio" name="第 4 题等差数列首项为 3、公差为 2" value="D"><b>D.</b> 13</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>等差数列第 n 项是 a1+(n-1)d，因此第 5 项为 3+(5-1)×2=11。注意公差只增加了 n-1 次。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 5 题等比数列首项为 2、公比为 3，第 4 项是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题等比数列首项为 2、公比为 3" value="A"><b>A.</b> 18</label><label class="q-opt"><input type="radio" name="第 5 题等比数列首项为 2、公比为 3" value="B"><b>B.</b> 27</label><label class="q-opt"><input type="radio" name="第 5 题等比数列首项为 2、公比为 3" value="C"><b>C.</b> 54</label><label class="q-opt"><input type="radio" name="第 5 题等比数列首项为 2、公比为 3" value="D"><b>D.</b> 81</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>等比数列第 n 项为 a1×q^(n-1)。第 4 项是 2×3^3=54，指数是 n-1 而不是 n。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 6 题方程 0×x+5=0 的解的情况是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题方程 0×x+5=0 的解的情" value="A"><b>A.</b> 唯一解 x=0</label><label class="q-opt"><input type="radio" name="第 6 题方程 0×x+5=0 的解的情" value="B"><b>B.</b> 唯一解 x=-5</label><label class="q-opt"><input type="radio" name="第 6 题方程 0×x+5=0 的解的情" value="C"><b>C.</b> 无解</label><label class="q-opt"><input type="radio" name="第 6 题方程 0×x+5=0 的解的情" value="D"><b>D.</b> 无数解</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>当 a=0、b≠0 时，等式变成 5=0，不可能成立，因此无解，对应页内知识点 01。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 7 题方程组 x+y=3、x-y=1 的解是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题方程组 x+y=3、x-y=1" value="A"><b>A.</b> x=1，y=2</label><label class="q-opt"><input type="radio" name="第 7 题方程组 x+y=3、x-y=1" value="B"><b>B.</b> x=2，y=1</label><label class="q-opt"><input type="radio" name="第 7 题方程组 x+y=3、x-y=1" value="C"><b>C.</b> x=3，y=1</label><label class="q-opt"><input type="radio" name="第 7 题方程组 x+y=3、x-y=1" value="D"><b>D.</b> 无解</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>两式相加得到 2x=4，所以 x=2；代回 x+y=3 得 y=1。再代回原来的两式分别得到 3 和 1，验证成立。对应页内知识点 01。<br><span class="q-kp">对应知识点：01</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/binary-lifting/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 04</small><strong>倍增法</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/gesp/level8/plane-geometry/" rel="next"><span><small>下一知识点 · 06</small><strong>平面几何</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -566,7 +607,7 @@ int main() {    double a, b;    cin &gt;&gt; a &gt;&gt; b;
       <a class="kp-nav" href="kp6.html">下一个：几何计算 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 方程与退化情况</a></li><li><a href="#kp-02">02 表达式与公式转程序</a></li><li><a href="#kp-03">03 等差数列</a></li><li><a href="#kp-04">04 等比数列入门</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 方程与退化情况</a></li><li><a href="#kp-02">02 表达式与公式转程序</a></li><li><a href="#kp-03">03 等差数列</a></li><li><a href="#kp-04">04 等比数列入门</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -578,6 +619,31 @@ int main() {    double a, b;    cin &gt;&gt; a &gt;&gt; b;
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -473,10 +492,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <h2 id="本课先记住">本课先记住</h2>
 <ul>
 <li><strong>核心结论：</strong> 运算符按优先级和结合方向组成表达式；先得到右侧结果，再由赋值把结果写回变量，关系与逻辑运算得到真假值。</li>
-<li><strong>常用语法：</strong> 一级常用算术、关系、逻辑和赋值运算；整除与取余使用 <code>/</code>、<code>%</code>，增加 1 可写 <code>i = i + 1</code> 或单独使用 <code>i++</code>。</li>
-<li><strong>最小示例：</strong> <code>a = b = 3;</code> 先执行 <code>b = 3</code>，再执行 <code>a = b</code>，最后 <code>a</code> 和 <code>b</code> 都是 3。</li>
-<li><strong>关键易错点：</strong> <code>=</code> 不是 <code>==</code>，两个整数相除仍是整数结果；混合表达式不确定时应加括号并逐步记录中间值。</li>
+<li><strong>常用语法：</strong> 一级常用算术、关系、逻辑和赋值运算；整除与取余使用 <code dir="auto">/</code>、<code dir="auto">%</code>，增加 1 可写 <code dir="auto">i = i + 1</code> 或单独使用 <code dir="auto">i++</code>。</li>
+<li><strong>最小示例：</strong> <code dir="auto">a = b = 3;</code> 先执行 <code dir="auto">b = 3</code>，再执行 <code dir="auto">a = b</code>，最后 <code dir="auto">a</code> 和 <code dir="auto">b</code> 都是 3。</li>
+<li><strong>关键易错点：</strong> <code dir="auto">=</code> 不是 <code dir="auto">==</code>，两个整数相除仍是整数结果；混合表达式不确定时应加括号并逐步记录中间值。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-算术运算" class="astro-6dte4xza">01 算术运算</a></li><li class="astro-6dte4xza"><a href="#02-关系运算" class="astro-6dte4xza">02 关系运算</a></li><li class="astro-6dte4xza"><a href="#03-整数除法与取余" class="astro-6dte4xza">03 除法与取余</a></li><li class="astro-6dte4xza"><a href="#04-赋值与复合赋值" class="astro-6dte4xza">04 赋值运算</a></li><li class="astro-6dte4xza"><a href="#05-自增与自减" class="astro-6dte4xza">05 自增自减</a></li><li class="astro-6dte4xza"><a href="#06-逻辑运算" class="astro-6dte4xza">06 逻辑运算</a></li><li class="astro-6dte4xza"><a href="#07-条件运算符" class="astro-6dte4xza">07 条件运算</a></li><li class="astro-6dte4xza"><a href="#08-优先级与结合方向" class="astro-6dte4xza">08 优先级</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>变量保存数据，运算符则告诉程序怎样处理这些数据。看见一个表达式时，不能只认出其中的符号，还要回答三个问题：</p>
 <ol>
@@ -484,7 +505,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>它只产生结果，还是会把新值写回变量？</li>
 <li>有多个运算符时，程序先算哪一部分？</li>
 </ol>
-<p>例如下面四个表达式都使用了变量 <code>a</code>、<code>b</code>，作用却不同：</p>
+<p>例如下面四个表达式都使用了变量 <code dir="auto">a</code>、<code dir="auto">b</code>，作用却不同：</p>
 <table>
 <thead>
 <tr>
@@ -495,30 +516,30 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>a + b</code></td>
+<td><code dir="auto">a + b</code></td>
 <td>两数之和</td>
 <td style="text-align: center">否</td>
 </tr>
 <tr>
-<td><code>a &gt; b</code></td>
-<td><code>true</code> 或 <code>false</code></td>
+<td><code dir="auto">a &gt; b</code></td>
+<td><code dir="auto">true</code> 或 <code dir="auto">false</code></td>
 <td style="text-align: center">否</td>
 </tr>
 <tr>
-<td><code>a += b</code></td>
-<td>更新后的 <code>a</code></td>
-<td style="text-align: center">是，修改 <code>a</code></td>
+<td><code dir="auto">a += b</code></td>
+<td>更新后的 <code dir="auto">a</code></td>
+<td style="text-align: center">是，修改 <code dir="auto">a</code></td>
 </tr>
 <tr>
-<td><code>a++</code></td>
+<td><code dir="auto">a++</code></td>
 <td>完成一次自增</td>
-<td style="text-align: center">是，修改 <code>a</code></td>
+<td style="text-align: center">是，修改 <code dir="auto">a</code></td>
 </tr>
 </tbody>
 </table>
 <p>本页覆盖一级大纲中的算术、关系、赋值、自增自减、逻辑和条件运算，以及常用优先级和结合方向。位运算、复杂类型转换、嵌套三目运算和复杂表达式求值规则不在本页范围内。</p>
 <h2 id="01-算术运算">01 算术运算</h2>
-<p>运算符旁边参与运算的数据叫作<strong>操作数</strong>。在 <code>a + b</code> 中，<code>a</code>、<code>b</code> 是操作数，<code>+</code> 决定对它们做加法。</p>
+<p>运算符旁边参与运算的数据叫作<strong>操作数</strong>。在 <code dir="auto">a + b</code> 中，<code dir="auto">a</code>、<code dir="auto">b</code> 是操作数，<code dir="auto">+</code> 决定对它们做加法。</p>
 <h3 id="五种基本算术运算">五种基本算术运算</h3>
 <table>
 <thead>
@@ -532,109 +553,109 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>加法</td>
-<td><code>+</code></td>
-<td><code>12 + 5</code></td>
+<td><code dir="auto">+</code></td>
+<td><code dir="auto">12 + 5</code></td>
 <td style="text-align: right">17</td>
 </tr>
 <tr>
 <td>减法</td>
-<td><code>-</code></td>
-<td><code>12 - 5</code></td>
+<td><code dir="auto">-</code></td>
+<td><code dir="auto">12 - 5</code></td>
 <td style="text-align: right">7</td>
 </tr>
 <tr>
 <td>乘法</td>
-<td><code>*</code></td>
-<td><code>12 * 5</code></td>
+<td><code dir="auto">*</code></td>
+<td><code dir="auto">12 * 5</code></td>
 <td style="text-align: right">60</td>
 </tr>
 <tr>
 <td>除法</td>
-<td><code>/</code></td>
-<td><code>12 / 5</code></td>
+<td><code dir="auto">/</code></td>
+<td><code dir="auto">12 / 5</code></td>
 <td style="text-align: right">2</td>
 </tr>
 <tr>
 <td>取余</td>
-<td><code>%</code></td>
-<td><code>12 % 5</code></td>
+<td><code dir="auto">%</code></td>
+<td><code dir="auto">12 % 5</code></td>
 <td style="text-align: right">2</td>
 </tr>
 </tbody>
 </table>
-<p>C++ 中的乘法必须写成 <code>*</code>，不能写数学中的 <code>×</code>，也不能省略乘号：</p>
-<pre><code>int area = length * width; // 正确：用 * 计算长方形面积</code></pre>
-<p><code>2x</code> 不是 C++ 的乘法写法，必须写成 <code>2 * x</code>。</p>
+<p>C++ 中的乘法必须写成 <code dir="auto">*</code>，不能写数学中的 <code dir="auto">×</code>，也不能省略乘号：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>int area = length * width; // 正确：用 * 计算长方形面积</code></pre>
+<p><code dir="auto">2x</code> 不是 C++ 的乘法写法，必须写成 <code dir="auto">2 * x</code>。</p>
 <h3 id="加号减号也能表示正负">加号、减号也能表示正负</h3>
-<p>当 <code>+</code> 或 <code>-</code> 只作用于一个操作数时，它们表示正号或负号：</p>
+<p>当 <code dir="auto">+</code> 或 <code dir="auto">-</code> 只作用于一个操作数时，它们表示正号或负号：</p>
 <pre><code>int a = 5;int positive = +a; // positive 得到 5，a 不变int negative = -a; // negative 得到 -5，a 仍然不变</code></pre>
-<p><code>-a</code> 只是计算出 <code>a</code> 的相反数。若要修改 <code>a</code>，必须把结果重新写回：</p>
+<p><code dir="auto">-a</code> 只是计算出 <code dir="auto">a</code> 的相反数。若要修改 <code dir="auto">a</code>，必须把结果重新写回：</p>
 <pre><code>a = -a; // 先求 -a，再把结果保存回 a</code></pre>
 <p>所以判断表达式是否改变变量时，要找有没有赋值、复合赋值、自增或自减，不能看到一次计算就认为原变量已经变化。</p>
 <h2 id="02-关系运算">02 关系运算</h2>
-<p>关系运算比较两个数据，结果只有 <code>true</code> 或 <code>false</code>。</p>
+<p>关系运算比较两个数据，结果只有 <code dir="auto">true</code> 或 <code dir="auto">false</code>。</p>
 <table>
 <thead>
 <tr>
 <th>运算符</th>
 <th>含义</th>
-<th>当 <code>a = 3</code>、<code>b = 5</code> 时</th>
+<th>当 <code dir="auto">a = 3</code>、<code dir="auto">b = 5</code> 时</th>
 <th>结果</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>&gt;</code></td>
+<td><code dir="auto">&gt;</code></td>
 <td>大于</td>
-<td><code>a &gt; b</code></td>
-<td><code>false</code></td>
+<td><code dir="auto">a &gt; b</code></td>
+<td><code dir="auto">false</code></td>
 </tr>
 <tr>
-<td><code>&gt;=</code></td>
+<td><code dir="auto">&gt;=</code></td>
 <td>大于等于</td>
-<td><code>b &gt;= 5</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">b &gt;= 5</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 <tr>
-<td><code>&lt;</code></td>
+<td><code dir="auto">&lt;</code></td>
 <td>小于</td>
-<td><code>a &lt; b</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">a &lt; b</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 <tr>
-<td><code>&lt;=</code></td>
+<td><code dir="auto">&lt;=</code></td>
 <td>小于等于</td>
-<td><code>a &lt;= 3</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">a &lt;= 3</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 <tr>
-<td><code>==</code></td>
+<td><code dir="auto">==</code></td>
 <td>等于</td>
-<td><code>a == b</code></td>
-<td><code>false</code></td>
+<td><code dir="auto">a == b</code></td>
+<td><code dir="auto">false</code></td>
 </tr>
 <tr>
-<td><code>!=</code></td>
+<td><code dir="auto">!=</code></td>
 <td>不等于</td>
-<td><code>a != b</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">a != b</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 </tbody>
 </table>
-<p>关系运算只负责比较，不会修改参与比较的变量。普通 <code>cout</code> 输出真假值时，<code>true</code> 通常显示为 1，<code>false</code> 通常显示为 0。</p>
+<p>关系运算只负责比较，不会修改参与比较的变量。普通 <code dir="auto">cout</code> 输出真假值时，<code dir="auto">true</code> 通常显示为 1，<code dir="auto">false</code> 通常显示为 0。</p>
 <h3 id="赋值等号和相等比较不是一回事">赋值等号和相等比较不是一回事</h3>
 <pre><code>a = b;  // 赋值：把 b 的值保存到 a，会修改 aa == b; // 比较：判断 a 与 b 是否相等，不修改变量</code></pre>
-<p>读到等号时，先看是一个 <code>=</code> 还是两个 <code>==</code>。一个表示“保存”，两个表示“是否相等”。</p>
+<p>读到等号时，先看是一个 <code dir="auto">=</code> 还是两个 <code dir="auto">==</code>。一个表示“保存”，两个表示“是否相等”。</p>
 <h3 id="c-不能照写数学中的链式比较">C++ 不能照写数学中的链式比较</h3>
-<p>数学中可以写 <code>1 ≤ x ≤ 10</code>。C++ 中不要写成：</p>
+<p>数学中可以写 <code dir="auto">1 ≤ x ≤ 10</code>。C++ 中不要写成：</p>
 <pre><code>1 &lt;= x &lt;= 10 // 不能按“x 在 1 到 10 之间”理解</code></pre>
-<p>C++ 会先计算 <code>1 &lt;= x</code>，结果只能是 <code>false</code> 或 <code>true</code>；参与后面的数值比较时，它们分别相当于 0 或 1。于是第二次比较实际是 <code>0 &lt;= 10</code> 或 <code>1 &lt;= 10</code>，结果都会为真，当然不能正确检查范围。</p>
+<p>C++ 会先计算 <code dir="auto">1 &lt;= x</code>，结果只能是 <code dir="auto">false</code> 或 <code dir="auto">true</code>；参与后面的数值比较时，它们分别相当于 0 或 1。于是第二次比较实际是 <code dir="auto">0 &lt;= 10</code> 或 <code dir="auto">1 &lt;= 10</code>，结果都会为真，当然不能正确检查范围。</p>
 <p>正确写法是把两个关系分别写清，再用逻辑与连接：</p>
 <pre><code>(x &gt;= 1) &amp;&amp; (x &lt;= 10) // 下界和上界都满足，x 才在范围内</code></pre>
 <h2 id="03-整数除法与取余">03 整数除法与取余</h2>
-<p>上一页已经看到 <code>7 / 2</code> 和 <code>7 % 2</code>。本节把整数除法的“商”和“余数”放在一起讲清楚。</p>
+<p>上一页已经看到 <code dir="auto">7 / 2</code> 和 <code dir="auto">7 % 2</code>。本节把整数除法的“商”和“余数”放在一起讲清楚。</p>
 <h3 id="两个整数相除得到整数商">两个整数相除得到整数商</h3>
-<p>对于本页使用的正整数，<code>/</code> 会保留完整商，舍去不能整除的部分，不做四舍五入：</p>
+<p>对于本页使用的正整数，<code dir="auto">/</code> 会保留完整商，舍去不能整除的部分，不做四舍五入：</p>
 <table>
 <thead>
 <tr>
@@ -645,42 +666,42 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>17 / 5</code></td>
+<td><code dir="auto">17 / 5</code></td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">3</td>
 </tr>
 <tr>
-<td><code>3 / 5</code></td>
+<td><code dir="auto">3 / 5</code></td>
 <td style="text-align: right">0</td>
 <td style="text-align: right">0</td>
 </tr>
 <tr>
-<td><code>10 / 5</code></td>
+<td><code dir="auto">10 / 5</code></td>
 <td style="text-align: right">2</td>
 <td style="text-align: right">2</td>
 </tr>
 </tbody>
 </table>
-<p>若要得到小数结果，必须让浮点数在除法发生前参与运算。例如 <code>7.0 / 2.0</code> 得到 3.5。整数与小数混合运算的完整类型转换规则会在后续等级继续学习。</p>
+<p>若要得到小数结果，必须让浮点数在除法发生前参与运算。例如 <code dir="auto">7.0 / 2.0</code> 得到 3.5。整数与小数混合运算的完整类型转换规则会在后续等级继续学习。</p>
 <h3 id="取余得到没有分完的部分">取余得到没有分完的部分</h3>
-<p><code>%</code> 计算整数相除后的余数：</p>
+<p><code dir="auto">%</code> 计算整数相除后的余数：</p>
 <pre><code>17 / 5 = 317 % 5 = 2</code></pre>
 <p>可以用下面的关系反向核对：</p>
 <pre><code>被除数 = 商 × 除数 + 余数17 = 3 × 5 + 2</code></pre>
-<p>对于正整数，余数满足 <code>0 &lt;= 余数 &lt; 除数</code>。如果算出的余数等于或大于除数，就说明商或余数算错了。</p>
+<p>对于正整数，余数满足 <code dir="auto">0 &lt;= 余数 &lt; 除数</code>。如果算出的余数等于或大于除数，就说明商或余数算错了。</p>
 <h3 id="除法和取余的使用条件">除法和取余的使用条件</h3>
 <ul>
-<li><code>/</code> 和 <code>%</code> 的除数都不能为 0；</li>
-<li><code>%</code> 两侧必须是整数；</li>
+<li><code dir="auto">/</code> 和 <code dir="auto">%</code> 的除数都不能为 0；</li>
+<li><code dir="auto">%</code> 两侧必须是整数；</li>
 <li>本页主教学只处理非负整数。负数整数除法和负数取余的完整规则不在本课展开。</li>
 </ul>
 <p>取余常用于：</p>
 <pre><code>n % 2  // 检查非负整数 n 除以 2 的余数n % 10 // 取得非负整数 n 的个位数字n % k  // 计算每组 k 个时剩余多少个</code></pre>
-<p>这里的 <code>%</code> 表示取余，不是数学中的百分号。</p>
+<p>这里的 <code dir="auto">%</code> 表示取余，不是数学中的百分号。</p>
 <h2 id="04-赋值与复合赋值">04 赋值与复合赋值</h2>
 <p>赋值的执行顺序是：<strong>先计算右侧，再把结果保存到左侧变量。</strong></p>
 <pre><code>int a = 10;a = a + 3; // 右侧先用旧值 10 算出 13，再把 13 写回 a</code></pre>
-<p>执行后 <code>a</code> 从 10 变成 13。左侧必须是可以修改的变量，不能写 <code>3 = a</code>。</p>
+<p>执行后 <code dir="auto">a</code> 从 10 变成 13。左侧必须是可以修改的变量，不能写 <code dir="auto">3 = a</code>。</p>
 <h3 id="复合赋值把计算和写回合在一起">复合赋值把计算和写回合在一起</h3>
 <table>
 <thead>
@@ -692,29 +713,29 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>a += b</code></td>
-<td><code>a = a + b</code></td>
-<td><code>a</code> 增加 <code>b</code></td>
+<td><code dir="auto">a += b</code></td>
+<td><code dir="auto">a = a + b</code></td>
+<td><code dir="auto">a</code> 增加 <code dir="auto">b</code></td>
 </tr>
 <tr>
-<td><code>a -= b</code></td>
-<td><code>a = a - b</code></td>
-<td><code>a</code> 减少 <code>b</code></td>
+<td><code dir="auto">a -= b</code></td>
+<td><code dir="auto">a = a - b</code></td>
+<td><code dir="auto">a</code> 减少 <code dir="auto">b</code></td>
 </tr>
 <tr>
-<td><code>a *= b</code></td>
-<td><code>a = a * b</code></td>
-<td><code>a</code> 变为原来的 <code>b</code> 倍</td>
+<td><code dir="auto">a *= b</code></td>
+<td><code dir="auto">a = a * b</code></td>
+<td><code dir="auto">a</code> 变为原来的 <code dir="auto">b</code> 倍</td>
 </tr>
 <tr>
-<td><code>a /= b</code></td>
-<td><code>a = a / b</code></td>
-<td>商写回 <code>a</code></td>
+<td><code dir="auto">a /= b</code></td>
+<td><code dir="auto">a = a / b</code></td>
+<td>商写回 <code dir="auto">a</code></td>
 </tr>
 <tr>
-<td><code>a %= b</code></td>
-<td><code>a = a % b</code></td>
-<td>余数写回 <code>a</code></td>
+<td><code dir="auto">a %= b</code></td>
+<td><code dir="auto">a = a % b</code></td>
+<td>余数写回 <code dir="auto">a</code></td>
 </tr>
 </tbody>
 </table>
@@ -725,21 +746,21 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <pre><code>int a;int b;a = b = 3;</code></pre>
 <p>执行过程是：</p>
 <ol>
-<li>先执行 <code>b = 3</code>，此时 <code>b</code> 得到 3；</li>
-<li>再执行 <code>a = b</code>，此时 <code>a</code> 也得到 3。</li>
+<li>先执行 <code dir="auto">b = 3</code>，此时 <code dir="auto">b</code> 得到 3；</li>
+<li>再执行 <code dir="auto">a = b</code>，此时 <code dir="auto">a</code> 也得到 3。</li>
 </ol>
 <p>等价的直白写法是：</p>
 <pre><code>b = 3;a = b;</code></pre>
-<p><code>int a = b = 3;</code> 中的 <code>b</code> 必须提前定义，否则程序找不到要赋值的变量。一级主代码优先使用分步写法，连续赋值只要求能按从右到左读懂。</p>
+<p><code dir="auto">int a = b = 3;</code> 中的 <code dir="auto">b</code> 必须提前定义，否则程序找不到要赋值的变量。一级主代码优先使用分步写法，连续赋值只要求能按从右到左读懂。</p>
 <p>还要注意：</p>
 <pre><code>a += 3; // a 在原值上增加 3a =+ 3; // 相当于 a = +3，直接把正数 3 赋给 a</code></pre>
 <p>符号顺序不同，含义完全不同。</p>
 <h2 id="05-自增与自减">05 自增与自减</h2>
-<p>单独计算 <code>i + 1</code> 不会修改 <code>i</code>：</p>
+<p>单独计算 <code dir="auto">i + 1</code> 不会修改 <code dir="auto">i</code>：</p>
 <pre><code>int i = 5;i + 1; // 只产生结果 6，没有写回，i 仍为 5</code></pre>
-<p>要让 <code>i</code> 增加 1，可以写：</p>
+<p>要让 <code dir="auto">i</code> 增加 1，可以写：</p>
 <pre><code>i = i + 1; // 完整写法i += 1;    // 复合赋值i++;       // 自增</code></pre>
-<p>相应地，<code>i--</code> 让 <code>i</code> 减少 1。循环变量每轮只增加 1 时可以优先写 <code>i++</code>；普通累计量或增加量不是 1 时，仍用完整赋值或复合赋值表达清楚。</p>
+<p>相应地，<code dir="auto">i--</code> 让 <code dir="auto">i</code> 减少 1。循环变量每轮只增加 1 时可以优先写 <code dir="auto">i++</code>；普通累计量或增加量不是 1 时，仍用完整赋值或复合赋值表达清楚。</p>
 <h3 id="单独使用时前置和后置结果相同">单独使用时，前置和后置结果相同</h3>
 <pre><code>++a; // a 先增加 1b++; // b 也增加 1--c; // c 减少 1d--; // d 也减少 1</code></pre>
 <p>当它们各自单独占一条语句时，前置和后置的最终效果相同。</p>
@@ -757,22 +778,22 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>x = a++</code></td>
-<td><code>a</code> 的旧值 5</td>
-<td style="text-align: right"><code>a = 6</code></td>
-<td style="text-align: right"><code>x = 5</code></td>
+<td><code dir="auto">x = a++</code></td>
+<td><code dir="auto">a</code> 的旧值 5</td>
+<td style="text-align: right"><code dir="auto">a = 6</code></td>
+<td style="text-align: right"><code dir="auto">x = 5</code></td>
 </tr>
 <tr>
-<td><code>y = ++b</code></td>
-<td><code>b</code> 增加后的新值 6</td>
-<td style="text-align: right"><code>b = 6</code></td>
-<td style="text-align: right"><code>y = 6</code></td>
+<td><code dir="auto">y = ++b</code></td>
+<td><code dir="auto">b</code> 增加后的新值 6</td>
+<td style="text-align: right"><code dir="auto">b = 6</code></td>
+<td style="text-align: right"><code dir="auto">y = 6</code></td>
 </tr>
 </tbody>
 </table>
-<p>自减遵循相同规则。一级实际编程仍优先把 <code>i++</code>、<code>i--</code> 单独写成更新语句，不在一条复杂表达式中多次修改同一个变量。</p>
+<p>自减遵循相同规则。一级实际编程仍优先把 <code dir="auto">i++</code>、<code dir="auto">i--</code> 单独写成更新语句，不在一条复杂表达式中多次修改同一个变量。</p>
 <h2 id="06-逻辑运算">06 逻辑运算</h2>
-<p>逻辑运算组合或改变真假条件，结果仍然是 <code>true</code> 或 <code>false</code>。</p>
+<p>逻辑运算组合或改变真假条件，结果仍然是 <code dir="auto">true</code> 或 <code dir="auto">false</code>。</p>
 <table>
 <thead>
 <tr>
@@ -783,7 +804,7 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>&amp;&amp;</code></td>
+<td><code dir="auto">&amp;&amp;</code></td>
 <td>并且</td>
 <td>左右两个条件都为真</td>
 </tr>
@@ -793,7 +814,7 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <td>至少一个条件为真</td>
 </tr>
 <tr>
-<td><code>!</code></td>
+<td><code dir="auto">!</code></td>
 <td>取反</td>
 <td>原条件为假</td>
 </tr>
@@ -805,41 +826,41 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <tr>
 <th>条件 A</th>
 <th>条件 B</th>
-<th><code>A &amp;&amp; B</code></th>
+<th><code dir="auto">A &amp;&amp; B</code></th>
 <th><code>A || B</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>false</code></td>
-<td><code>false</code></td>
-<td><code>false</code></td>
-<td><code>false</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">false</code></td>
 </tr>
 <tr>
-<td><code>false</code></td>
-<td><code>true</code></td>
-<td><code>false</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 <tr>
-<td><code>true</code></td>
-<td><code>false</code></td>
-<td><code>false</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 <tr>
-<td><code>true</code></td>
-<td><code>true</code></td>
-<td><code>true</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 </tbody>
 </table>
-<p><code>!true</code> 的结果是 <code>false</code>，<code>!false</code> 的结果是 <code>true</code>。</p>
-<p>范围判断需要同时满足上下界，因此使用 <code>&amp;&amp;</code>：</p>
+<p><code dir="auto">!true</code> 的结果是 <code dir="auto">false</code>，<code dir="auto">!false</code> 的结果是 <code dir="auto">true</code>。</p>
+<p>范围判断需要同时满足上下界，因此使用 <code dir="auto">&amp;&amp;</code>：</p>
 <pre><code>bool inRange = (x &gt;= 1) &amp;&amp; (x &lt;= 10);</code></pre>
-<p>当 <code>x = 7</code> 时，左右条件都为真，<code>inRange</code> 得到 <code>true</code>；当 <code>x = 12</code> 时，右侧条件为假，整体得到 <code>false</code>。</p>
+<p>当 <code dir="auto">x = 7</code> 时，左右条件都为真，<code dir="auto">inRange</code> 得到 <code dir="auto">true</code>；当 <code dir="auto">x = 12</code> 时，右侧条件为假，整体得到 <code dir="auto">false</code>。</p>
 <h3 id="短路决定右侧是否执行">短路决定右侧是否执行</h3>
 <p>C++ 先计算左侧条件。如果只看左侧就能确定整体结果，右侧不会继续计算。</p>
 <table>
@@ -853,32 +874,32 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>A &amp;&amp; B</code></td>
-<td><code>false</code></td>
+<td><code dir="auto">A &amp;&amp; B</code></td>
+<td><code dir="auto">false</code></td>
 <td>不计算</td>
-<td><code>false</code></td>
+<td><code dir="auto">false</code></td>
 </tr>
 <tr>
-<td><code>A &amp;&amp; B</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">A &amp;&amp; B</code></td>
+<td><code dir="auto">true</code></td>
 <td>继续计算</td>
 <td>由 B 决定</td>
 </tr>
 <tr>
 <td><code>A || B</code></td>
-<td><code>true</code></td>
+<td><code dir="auto">true</code></td>
 <td>不计算</td>
-<td><code>true</code></td>
+<td><code dir="auto">true</code></td>
 </tr>
 <tr>
 <td><code>A || B</code></td>
-<td><code>false</code></td>
+<td><code dir="auto">false</code></td>
 <td>继续计算</td>
 <td>由 B 决定</td>
 </tr>
 </tbody>
 </table>
-<p>短路还会决定右侧运算是否真的发生。假设 <code>a = 10</code>、<code>b = 0</code>：</p>
+<p>短路还会决定右侧运算是否真的发生。假设 <code dir="auto">a = 10</code>、<code dir="auto">b = 0</code>：</p>
 <pre><code>bool safe = (b != 0) &amp;&amp; (a / b &gt; 2);</code></pre>
 <p>执行过程：</p>
 <table>
@@ -893,38 +914,38 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>b != 0</code></td>
-<td><code>false</code></td>
-<td><code>&amp;&amp;</code> 的整体结果已经确定为假</td>
+<td><code dir="auto">b != 0</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">&amp;&amp;</code> 的整体结果已经确定为假</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>a / b &gt; 2</code></td>
+<td><code dir="auto">a / b &gt; 2</code></td>
 <td>不执行</td>
 <td>不会发生除以 0</td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
 <td>保存结果</td>
-<td><code>safe = false</code></td>
+<td><code dir="auto">safe = false</code></td>
 <td>表达式结束</td>
 </tr>
 </tbody>
 </table>
-<p>如果把左右两部分交换，程序就可能先执行 <code>a / b</code>，失去保护。因此短路表达式的顺序必须符合实际目的。</p>
+<p>如果把左右两部分交换，程序就可能先执行 <code dir="auto">a / b</code>，失去保护。因此短路表达式的顺序必须符合实际目的。</p>
 <h2 id="07-条件运算符">07 条件运算符</h2>
 <p>条件运算符也叫三目运算符。它根据一个条件，从两个结果中选择一个：</p>
 <pre><code>条件 ? 条件为真时的结果 : 条件为假时的结果</code></pre>
 <p>例如：</p>
 <pre><code>int maximum = (a &gt; b) ? a : b;</code></pre>
-<p>当 <code>a = 3</code>、<code>b = 5</code> 时：</p>
+<p>当 <code dir="auto">a = 3</code>、<code dir="auto">b = 5</code> 时：</p>
 <ol>
-<li>先计算条件 <code>a &gt; b</code>，结果为 <code>false</code>；</li>
-<li>条件为假，选择冒号后的 <code>b</code>；</li>
-<li><code>b</code> 的值是 5，所以 <code>maximum</code> 得到 5；</li>
-<li>没被选中的 <code>a</code> 不作为这次表达式的结果。</li>
+<li>先计算条件 <code dir="auto">a &gt; b</code>，结果为 <code dir="auto">false</code>；</li>
+<li>条件为假，选择冒号后的 <code dir="auto">b</code>；</li>
+<li><code dir="auto">b</code> 的值是 5，所以 <code dir="auto">maximum</code> 得到 5；</li>
+<li>没被选中的 <code dir="auto">a</code> 不作为这次表达式的结果。</li>
 </ol>
-<p>一级只要求看懂这种简单二选一。需要执行多条语句时，后面的分支结构会使用更清楚的 <code>if-else</code>；本页不学习嵌套三目运算。</p>
+<p>一级只要求看懂这种简单二选一。需要执行多条语句时，后面的分支结构会使用更清楚的 <code dir="auto">if-else</code>；本页不学习嵌套三目运算。</p>
 <h2 id="08-优先级与结合方向">08 优先级与结合方向</h2>
 <p>一个表达式中出现多个运算符时，优先级决定哪一类先算；优先级相同时，结合方向决定从哪边开始。</p>
 <h3 id="一级常用优先级">一级常用优先级</h3>
@@ -939,42 +960,42 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>()</code></td>
+<td><code dir="auto">()</code></td>
 <td>括号内先计算</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td>后置 <code>++</code>、<code>--</code></td>
+<td>后置 <code dir="auto">++</code>、<code dir="auto">--</code></td>
 <td>表达式取得旧值后再更新</td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td>前置 <code>++</code>、<code>--</code>、<code>!</code>、单目 <code>+</code>、<code>-</code></td>
+<td>前置 <code dir="auto">++</code>、<code dir="auto">--</code>、<code dir="auto">!</code>、单目 <code dir="auto">+</code>、<code dir="auto">-</code></td>
 <td>只作用于紧邻的一个对象或条件</td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td><code>*</code>、<code>/</code>、<code>%</code></td>
+<td><code dir="auto">*</code>、<code dir="auto">/</code>、<code dir="auto">%</code></td>
 <td>乘、除、取余</td>
 </tr>
 <tr>
 <td style="text-align: right">5</td>
-<td><code>+</code>、<code>-</code></td>
+<td><code dir="auto">+</code>、<code dir="auto">-</code></td>
 <td>加、减</td>
 </tr>
 <tr>
 <td style="text-align: right">6</td>
-<td><code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code></td>
+<td><code dir="auto">&lt;</code>、<code dir="auto">&lt;=</code>、<code dir="auto">&gt;</code>、<code dir="auto">&gt;=</code></td>
 <td>大小关系</td>
 </tr>
 <tr>
 <td style="text-align: right">7</td>
-<td><code>==</code>、<code>!=</code></td>
+<td><code dir="auto">==</code>、<code dir="auto">!=</code></td>
 <td>相等与不等</td>
 </tr>
 <tr>
 <td style="text-align: right">8</td>
-<td><code>&amp;&amp;</code></td>
+<td><code dir="auto">&amp;&amp;</code></td>
 <td>逻辑与</td>
 </tr>
 <tr>
@@ -984,12 +1005,12 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 </tr>
 <tr>
 <td style="text-align: right">10</td>
-<td><code>? :</code></td>
+<td><code dir="auto">? :</code></td>
 <td>简单二选一</td>
 </tr>
 <tr>
 <td style="text-align: right">11</td>
-<td><code>=</code>、<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code></td>
+<td><code dir="auto">=</code>、<code dir="auto">+=</code>、<code dir="auto">-=</code>、<code dir="auto">*=</code>、<code dir="auto">/=</code>、<code dir="auto">%=</code></td>
 <td>赋值与复合赋值</td>
 </tr>
 </tbody>
@@ -997,7 +1018,7 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <p>不要把整张表当成死记任务。做题时先找括号，再按“算术 → 关系 → 逻辑 → 赋值”分层；拿不准就补括号或拆成多条语句。</p>
 <h3 id="同级算术运算通常从左到右">同级算术运算通常从左到右</h3>
 <pre><code>20 / 5 * 2 = 4 * 2 = 810 - 3 - 2 = 7 - 2 = 5</code></pre>
-<p>赋值则从右向左结合，所以 <code>a = b = 3</code> 先修改 <code>b</code>，再修改 <code>a</code>。</p>
+<p>赋值则从右向左结合，所以 <code dir="auto">a = b = 3</code> 先修改 <code dir="auto">b</code>，再修改 <code dir="auto">a</code>。</p>
 <h3 id="一步一步计算混合表达式">一步一步计算混合表达式</h3>
 <p>计算：</p>
 <pre><code>3 + 2 * 4 &gt; 10 &amp;&amp; !false</code></pre>
@@ -1013,43 +1034,43 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td><code>2 * 4</code></td>
+<td><code dir="auto">2 * 4</code></td>
 <td>8</td>
 <td>整数</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>3 + 8</code></td>
+<td><code dir="auto">3 + 8</code></td>
 <td>11</td>
 <td>整数</td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td><code>11 &gt; 10</code></td>
-<td><code>true</code></td>
-<td><code>bool</code></td>
+<td><code dir="auto">11 &gt; 10</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">bool</code></td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td><code>!false</code></td>
-<td><code>true</code></td>
-<td><code>bool</code></td>
+<td><code dir="auto">!false</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">bool</code></td>
 </tr>
 <tr>
 <td style="text-align: right">5</td>
-<td><code>true &amp;&amp; true</code></td>
-<td><code>true</code></td>
-<td><code>bool</code></td>
+<td><code dir="auto">true &amp;&amp; true</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">bool</code></td>
 </tr>
 </tbody>
 </table>
 <p>普通输出最终结果时会看到 1。</p>
 <h3 id="比较先算赋值最后发生">比较先算，赋值最后发生</h3>
-<p>假设 <code>b = 5</code>：</p>
+<p>假设 <code dir="auto">b = 5</code>：</p>
 <pre><code>int a;a = b &gt; 3;  // 等价于 a = (b &gt; 3)，比较为 true，a 得到 1a = b == 3; // 等价于 a = (b == 3)，比较为 false，a 得到 0</code></pre>
-<p>关系运算和相等比较都高于赋值，所以先得到 <code>true</code> 或 <code>false</code>，再把真假值转换成普通整数 1 或 0 写入 <code>a</code>。更容易阅读的写法是直接保存为 <code>bool</code>：</p>
+<p>关系运算和相等比较都高于赋值，所以先得到 <code dir="auto">true</code> 或 <code dir="auto">false</code>，再把真假值转换成普通整数 1 或 0 写入 <code dir="auto">a</code>。更容易阅读的写法是直接保存为 <code dir="auto">bool</code>：</p>
 <pre><code>bool greaterThanThree = (b &gt; 3);bool equalToThree = (b == 3);</code></pre>
-<p>括号和准确的变量名能直接写出含义，也能减少把 <code>=</code> 与 <code>==</code> 看错的机会。</p>
+<p>括号和准确的变量名能直接写出含义，也能减少把 <code dir="auto">=</code> 与 <code dir="auto">==</code> 看错的机会。</p>
 <h2 id="做运算题的统一检查顺序">做运算题的统一检查顺序</h2>
 <p>面对一个表达式，可以按下面的顺序检查：</p>
 <ol>
@@ -1057,17 +1078,17 @@ int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <li>找出会写回变量的运算：赋值、复合赋值、自增、自减。</li>
 <li>先算括号，再按优先级分层计算。</li>
 <li>每完成一步，就写下当前结果和结果类型。</li>
-<li>遇到 <code>/</code>、<code>%</code> 检查除数；遇到 <code>&amp;&amp;</code>、<code>||</code> 检查右侧是否真的执行。</li>
+<li>遇到 <code dir="auto">/</code>、<code dir="auto">%</code> 检查除数；遇到 <code dir="auto">&amp;&amp;</code>、<code dir="auto">||</code> 检查右侧是否真的执行。</li>
 </ol>
 <h2 id="典型例题">典型例题</h2>
-<p>学校有 <code>n</code> 名学生参加活动，每个完整小组安排 <code>k</code> 人，场地最多允许 <code>limit</code> 个小组。程序需要计算：</p>
+<p>学校有 <code dir="auto">n</code> 名学生参加活动，每个完整小组安排 <code dir="auto">k</code> 人，场地最多允许 <code dir="auto">limit</code> 个小组。程序需要计算：</p>
 <ul>
 <li>能组成多少个完整小组，还剩多少人；</li>
 <li>场地最多提供多少个座位；</li>
 <li>容量是否足够、是否恰好分完，以及这两个条件是否同时成立。</li>
 </ul>
-<p>输入保证 <code>n</code>、<code>k</code>、<code>limit</code> 都是 <code>int</code> 范围内的正整数，<code>k</code> 不为 0，且 <code>k * limit</code> 不超过常见 <code>int</code> 上限。</p>
-<p>对于输入 <code>23 5 5</code>，先手算：</p>
+<p>输入保证 <code dir="auto">n</code>、<code dir="auto">k</code>、<code dir="auto">limit</code> 都是 <code dir="auto">int</code> 范围内的正整数，<code dir="auto">k</code> 不为 0，且 <code dir="auto">k * limit</code> 不超过常见 <code dir="auto">int</code> 上限。</p>
+<p>对于输入 <code dir="auto">23 5 5</code>，先手算：</p>
 <pre><code>完整小组数 = 23 / 5 = 4剩余人数 = 23 % 5 = 3总座位数 = 5 * 5 = 25容量足够：23 &lt;= 25，为 true恰好分完：3 == 0，为 false两个条件同时成立：true &amp;&amp; false，为 false</code></pre>
 <h3 id="完成程序">完成程序</h3>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
@@ -1094,53 +1115,53 @@ int main() {    int n;    int k; // 题目保证 k 是正整数，可以作为�
 <td style="text-align: right">1</td>
 <td>读入三个数</td>
 <td>无计算结果</td>
-<td><code>n = 23</code>、<code>k = 5</code>、<code>limit = 5</code></td>
+<td><code dir="auto">n = 23</code>、<code dir="auto">k = 5</code>、<code dir="auto">limit = 5</code></td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td><code>n / k</code></td>
+<td><code dir="auto">n / k</code></td>
 <td>完整商为 4</td>
-<td><code>fullGroups = 4</code></td>
+<td><code dir="auto">fullGroups = 4</code></td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td><code>n % k</code></td>
+<td><code dir="auto">n % k</code></td>
 <td>余数 3</td>
-<td><code>remaining = 3</code></td>
+<td><code dir="auto">remaining = 3</code></td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td><code>k * limit</code></td>
+<td><code dir="auto">k * limit</code></td>
 <td>25</td>
-<td><code>totalSeats = 25</code></td>
+<td><code dir="auto">totalSeats = 25</code></td>
 </tr>
 <tr>
 <td style="text-align: right">5</td>
-<td><code>n &lt;= totalSeats</code></td>
-<td><code>true</code></td>
-<td><code>capacityEnough = true</code></td>
+<td><code dir="auto">n &lt;= totalSeats</code></td>
+<td><code dir="auto">true</code></td>
+<td><code dir="auto">capacityEnough = true</code></td>
 </tr>
 <tr>
 <td style="text-align: right">6</td>
-<td><code>remaining == 0</code></td>
-<td><code>false</code></td>
-<td><code>dividedExactly = false</code></td>
+<td><code dir="auto">remaining == 0</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">dividedExactly = false</code></td>
 </tr>
 <tr>
 <td style="text-align: right">7</td>
-<td><code>true &amp;&amp; false</code></td>
-<td><code>false</code></td>
-<td><code>canArrange = false</code></td>
+<td><code dir="auto">true &amp;&amp; false</code></td>
+<td><code dir="auto">false</code></td>
+<td><code dir="auto">canArrange = false</code></td>
 </tr>
 <tr>
 <td style="text-align: right">8</td>
 <td>依次输出</td>
-<td><code>4 3</code>、<code>25</code>、<code>1 0 0</code></td>
+<td><code dir="auto">4 3</code>、<code dir="auto">25</code>、<code dir="auto">1 0 0</code></td>
 <td>程序结束</td>
 </tr>
 </tbody>
 </table>
-<p>可以用 <code>23 = 4 × 5 + 3</code> 核对：完整商是 4，余数是 3。这个等式也能帮助我们发现把商和余数写反的错误。</p>
+<p>可以用 <code dir="auto">23 = 4 × 5 + 3</code> 核对：完整商是 4，余数是 3。这个等式也能帮助我们发现把商和余数写反的错误。</p>
 <p>还可以检查三个边界：</p>
 <table>
 <thead>
@@ -1154,47 +1175,74 @@ int main() {    int n;    int k; // 题目保证 k 是正整数，可以作为�
 </thead>
 <tbody>
 <tr>
-<td><code>23 5 5</code></td>
-<td><code>4 3</code></td>
+<td><code dir="auto">23 5 5</code></td>
+<td><code dir="auto">4 3</code></td>
 <td style="text-align: right">25</td>
-<td><code>1 0 0</code></td>
+<td><code dir="auto">1 0 0</code></td>
 <td>有余数但容量足够</td>
 </tr>
 <tr>
-<td><code>20 5 3</code></td>
-<td><code>4 0</code></td>
+<td><code dir="auto">20 5 3</code></td>
+<td><code dir="auto">4 0</code></td>
 <td style="text-align: right">15</td>
-<td><code>0 1 0</code></td>
+<td><code dir="auto">0 1 0</code></td>
 <td>恰好分组但容量不足</td>
 </tr>
 <tr>
-<td><code>20 5 4</code></td>
-<td><code>4 0</code></td>
+<td><code dir="auto">20 5 4</code></td>
+<td><code dir="auto">4 0</code></td>
 <td style="text-align: right">20</td>
-<td><code>1 1 1</code></td>
+<td><code dir="auto">1 1 1</code></td>
 <td>两个条件都成立</td>
 </tr>
 </tbody>
 </table>
 <h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
-<p>取 <code>a = 17</code>、<code>b = 5</code>，分别求 <code>a / b</code> 和 <code>a % b</code>。先判断两侧都是整数，再写出完整商 3 和余数 2，最后用 <code>17 = 3 × 5 + 2</code> 反向核对。</p>
+<p>取 <code dir="auto">a = 17</code>、<code dir="auto">b = 5</code>，分别求 <code dir="auto">a / b</code> 和 <code dir="auto">a % b</code>。先判断两侧都是整数，再写出完整商 3 和余数 2，最后用 <code dir="auto">17 = 3 × 5 + 2</code> 反向核对。</p>
 <p><strong>成功标准：</strong> 商、余数和反向等式必须同时成立，并确认除数不是 0。完成后不看提示独立完成页末“整页综合测试”；提交后逐题按括号、优先级、结合方向和写回顺序复演错题。</p>
 <h2 id="常见错误">常见错误</h2>
 <ol>
-<li><strong>认为整数除法会自动得到小数。</strong> <code>7 / 2</code> 得 3。自查时先看除法发生前两侧的数据类型。</li>
-<li><strong>用 0 作除数。</strong> <code>/</code> 和 <code>%</code> 的右侧都不能为 0；看到这两个符号先检查除数范围。</li>
-<li><strong>对浮点数使用 <code>%</code>。</strong> <code>%</code> 两侧必须是整数，它不是小数运算符，也不是百分号。</li>
-<li><strong>把 <code>=</code> 与 <code>==</code> 混淆。</strong> 先问这一步要“保存新值”还是“判断相等”，再决定写一个或两个等号。</li>
-<li><strong>把 <code>+=</code> 错写成 <code>=+</code>。</strong> 复合赋值的算术符号写在等号前；<code>a =+ 3</code> 只是把正数 3 赋给 <code>a</code>。</li>
-<li><strong>认为 <code>i + 1</code> 会更新 <code>i</code>。</strong> 检查计算结果有没有写回，或者是否使用了 <code>+=</code>、<code>++</code>。</li>
-<li><strong>照写数学中的 <code>1 &lt;= x &lt;= 10</code>。</strong> 在 C++ 中应把上下界分别比较，再用 <code>&amp;&amp;</code> 连接。</li>
-<li><strong>把逻辑运算符写少一个符号。</strong> 并且写 <code>&amp;&amp;</code>，或者写 <code>||</code>；单个 <code>&amp;</code>、<code>|</code> 属于本页不讲的位运算。</li>
-<li><strong>短路保护顺序写反。</strong> 要先检查除数不为 0，再把除法放到 <code>&amp;&amp;</code> 右侧。</li>
+<li><strong>认为整数除法会自动得到小数。</strong> <code dir="auto">7 / 2</code> 得 3。自查时先看除法发生前两侧的数据类型。</li>
+<li><strong>用 0 作除数。</strong> <code dir="auto">/</code> 和 <code dir="auto">%</code> 的右侧都不能为 0；看到这两个符号先检查除数范围。</li>
+<li><strong>对浮点数使用 <code dir="auto">%</code>。</strong> <code dir="auto">%</code> 两侧必须是整数，它不是小数运算符，也不是百分号。</li>
+<li><strong>把 <code dir="auto">=</code> 与 <code dir="auto">==</code> 混淆。</strong> 先问这一步要“保存新值”还是“判断相等”，再决定写一个或两个等号。</li>
+<li><strong>把 <code dir="auto">+=</code> 错写成 <code dir="auto">=+</code>。</strong> 复合赋值的算术符号写在等号前；<code dir="auto">a =+ 3</code> 只是把正数 3 赋给 <code dir="auto">a</code>。</li>
+<li><strong>认为 <code dir="auto">i + 1</code> 会更新 <code dir="auto">i</code>。</strong> 检查计算结果有没有写回，或者是否使用了 <code dir="auto">+=</code>、<code dir="auto">++</code>。</li>
+<li><strong>照写数学中的 <code dir="auto">1 &lt;= x &lt;= 10</code>。</strong> 在 C++ 中应把上下界分别比较，再用 <code dir="auto">&amp;&amp;</code> 连接。</li>
+<li><strong>把逻辑运算符写少一个符号。</strong> 并且写 <code dir="auto">&amp;&amp;</code>，或者写 <code dir="auto">||</code>；单个 <code dir="auto">&amp;</code>、<code dir="auto">|</code> 属于本页不讲的位运算。</li>
+<li><strong>短路保护顺序写反。</strong> 要先检查除数不为 0，再把除法放到 <code dir="auto">&amp;&amp;</code> 右侧。</li>
 <li><strong>凭直觉猜混合表达式。</strong> 先找括号，再分算术、关系、逻辑和赋值；仍不确定就主动补括号或拆行。</li>
 </ol>
 <h2 id="关联学习">关联学习</h2>
 <p><a href="/gesp/level1/sequential/">顺序结构</a>会把表达式放进完整的输入、计算、输出过程。</p>
-<section aria-labelledby="related-knowledge-operations"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-operations" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/data-types/" class="astro-mkwt4ymd">数据类型</a></li></ul></section></div></section>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能判断表达式得到什么结果，以及它是否会修改变量。</label><label class="q-check"><input type="checkbox"> 我能计算整数除法、取余、赋值、自增和逻辑短路的真实过程。</label><label class="q-check"><input type="checkbox"> 我能用括号、优先级和结合方向逐步拆解混合表达式。</label>
+<h2 id="整页综合测试">整页综合测试</h2>
+<span>8 题</span>
+<p class="q-title">第 1 题表达式 4 * (11 + 12) / 4 的值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题表达式 4 * (11 + 1" value="A"><b>A.</b> 47</label><label class="q-opt"><input type="radio" name="第 1 题表达式 4 * (11 + 1" value="B"><b>B.</b> 20</label><label class="q-opt"><input type="radio" name="第 1 题表达式 4 * (11 + 1" value="C"><b>C.</b> 23</label><label class="q-opt"><input type="radio" name="第 1 题表达式 4 * (11 + 1" value="D"><b>D.</b> 56</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>先算括号得 23，再按从左到右计算乘法和除法，结果仍为 23。<br><span class="q-kp">对应知识点：08 优先级与结合方向</span></p>
+<p class="q-title">第 2 题int a = 6; 执行 a %= 4; 后，a 的值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题int a = 6; 执行 a" value="A"><b>A.</b> 1</label><label class="q-opt"><input type="radio" name="第 2 题int a = 6; 执行 a" value="B"><b>B.</b> 2</label><label class="q-opt"><input type="radio" name="第 2 题int a = 6; 执行 a" value="C"><b>C.</b> 3</label><label class="q-opt"><input type="radio" name="第 2 题int a = 6; 执行 a" value="D"><b>D.</b> 4</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>a %= 4 等价于 a = a % 4，6 除以 4 的余数是 2。<br><span class="q-kp">对应知识点：04 复合赋值</span></p>
+<p class="q-title">第 3 题当 x = 12 时，表达式 x &gt;= 1 &amp;&amp; x &lt;= 10 的结果是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题当 x = 12 时，表达式 " value="A"><b>A.</b> 真</label><label class="q-opt"><input type="radio" name="第 3 题当 x = 12 时，表达式 " value="B"><b>B.</b> 假</label><label class="q-opt"><input type="radio" name="第 3 题当 x = 12 时，表达式 " value="C"><b>C.</b> 12</label><label class="q-opt"><input type="radio" name="第 3 题当 x = 12 时，表达式 " value="D"><b>D.</b> 编译错误</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 06 逻辑运算。x >= 1 为真，x <= 10 为假；&& 要求两边都为真，因此整体为假。两个关系表达式都只进行比较，不会修改 x。<br><span class="q-kp">对应知识点：06 逻辑运算</span></p>
+<p class="q-title">第 4 题整数表达式 37 / 4 的结果是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题整数表达式 37 / 4 的结" value="A"><b>A.</b> 9</label><label class="q-opt"><input type="radio" name="第 4 题整数表达式 37 / 4 的结" value="B"><b>B.</b> 9.25</label><label class="q-opt"><input type="radio" name="第 4 题整数表达式 37 / 4 的结" value="C"><b>C.</b> 10</label><label class="q-opt"><input type="radio" name="第 4 题整数表达式 37 / 4 的结" value="D"><b>D.</b> 1</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>两个整数相除执行整数除法，小数部分被舍去，结果为 9。<br><span class="q-kp">对应知识点：03 整数除法与取余</span></p>
+<p class="q-title">第 5 题int a = 5; 单独执行 a++; 后，a 的值是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题int a = 5; 单独执行" value="A"><b>A.</b> 4</label><label class="q-opt"><input type="radio" name="第 5 题int a = 5; 单独执行" value="B"><b>B.</b> 5</label><label class="q-opt"><input type="radio" name="第 5 题int a = 5; 单独执行" value="C"><b>C.</b> 6</label><label class="q-opt"><input type="radio" name="第 5 题int a = 5; 单独执行" value="D"><b>D.</b> 10</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>a++ 单独使用时让 a 增加 1，所以 a 从 5 变为 6。<br><span class="q-kp">对应知识点：05 自增与自减</span></p>
+<p class="q-title">第 6 题a = 3、b = 5 时，表达式 (a + b) * 2 的结果是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题a = 3、b = 5 时，表" value="A"><b>A.</b> 11</label><label class="q-opt"><input type="radio" name="第 6 题a = 3、b = 5 时，表" value="B"><b>B.</b> 13</label><label class="q-opt"><input type="radio" name="第 6 题a = 3、b = 5 时，表" value="C"><b>C.</b> 16</label><label class="q-opt"><input type="radio" name="第 6 题a = 3、b = 5 时，表" value="D"><b>D.</b> 30</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 01 算术运算。先算括号中的 3 + 5 = 8，再乘 2 得 16。<br><span class="q-kp">对应知识点：01 算术运算</span></p>
+<p class="q-title">第 7 题a = 3、b = 5 时，下面哪个关系表达式的结果为假？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题a = 3、b = 5 时，下" value="A"><b>A.</b> a &lt; b</label><label class="q-opt"><input type="radio" name="第 7 题a = 3、b = 5 时，下" value="B"><b>B.</b> a != b</label><label class="q-opt"><input type="radio" name="第 7 题a = 3、b = 5 时，下" value="C"><b>C.</b> a == b</label><label class="q-opt"><input type="radio" name="第 7 题a = 3、b = 5 时，下" value="D"><b>D.</b> b &gt;= a</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 02 关系运算。3 不等于 5，所以 a == b 为假；比较只得到真假结果，不会修改变量。<br><span class="q-kp">对应知识点：02 关系运算</span></p>
+<p class="q-title">第 8 题a = 3、b = 5 时，int maximum = (a &gt; b) ? a : b; 会把哪个值保存到 maximum？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 8 题a = 3、b = 5 时，i" value="A"><b>A.</b> 3</label><label class="q-opt"><input type="radio" name="第 8 题a = 3、b = 5 时，i" value="B"><b>B.</b> 5</label><label class="q-opt"><input type="radio" name="第 8 题a = 3、b = 5 时，i" value="C"><b>C.</b> 8</label><label class="q-opt"><input type="radio" name="第 8 题a = 3、b = 5 时，i" value="D"><b>D.</b> 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 07 条件运算符。条件 a > b 为假，所以选择冒号后的 b，maximum 最终保存 5。<br><span class="q-kp">对应知识点：07 条件运算符</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/data-types/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 06</small><strong>数据类型</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/sequential/" rel="next"><span><small>下一知识点 · 08</small><strong>顺序结构</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -1203,7 +1251,7 @@ int main() {    int n;    int k; // 题目保证 k 是正整数，可以作为�
       <a class="kp-nav" href="kp8.html">下一个：顺序结构 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-算术运算">01 算术运算</a></li><li><a href="#五种基本算术运算" class="lvl3">五种基本算术运算</a></li><li><a href="#加号减号也能表示正负" class="lvl3">加号、减号也能表示正负</a></li><li><a href="#02-关系运算">02 关系运算</a></li><li><a href="#赋值等号和相等比较不是一回事" class="lvl3">赋值等号和相等比较不是一回事</a></li><li><a href="#c-不能照写数学中的链式比较" class="lvl3">C++ 不能照写数学中的链式比较</a></li><li><a href="#03-整数除法与取余">03 整数除法与取余</a></li><li><a href="#两个整数相除得到整数商" class="lvl3">两个整数相除得到整数商</a></li><li><a href="#取余得到没有分完的部分" class="lvl3">取余得到没有分完的部分</a></li><li><a href="#除法和取余的使用条件" class="lvl3">除法和取余的使用条件</a></li><li><a href="#04-赋值与复合赋值">04 赋值与复合赋值</a></li><li><a href="#复合赋值把计算和写回合在一起" class="lvl3">复合赋值把计算和写回合在一起</a></li><li><a href="#连续赋值从右向左执行" class="lvl3">连续赋值从右向左执行</a></li><li><a href="#05-自增与自减">05 自增与自减</a></li><li><a href="#单独使用时前置和后置结果相同" class="lvl3">单独使用时，前置和后置结果相同</a></li><li><a href="#放进表达式时取得的值不同" class="lvl3">放进表达式时，取得的值不同</a></li><li><a href="#06-逻辑运算">06 逻辑运算</a></li><li><a href="#真假表" class="lvl3">真假表</a></li><li><a href="#短路决定右侧是否执行" class="lvl3">短路决定右侧是否执行</a></li><li><a href="#07-条件运算符">07 条件运算符</a></li><li><a href="#08-优先级与结合方向">08 优先级与结合方向</a></li><li><a href="#一级常用优先级" class="lvl3">一级常用优先级</a></li><li><a href="#同级算术运算通常从左到右" class="lvl3">同级算术运算通常从左到右</a></li><li><a href="#一步一步计算混合表达式" class="lvl3">一步一步计算混合表达式</a></li><li><a href="#比较先算赋值最后发生" class="lvl3">比较先算，赋值最后发生</a></li><li><a href="#做运算题的统一检查顺序">做运算题的统一检查顺序</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-operations">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-算术运算">01 算术运算</a></li><li><a href="#五种基本算术运算" class="lvl3">五种基本算术运算</a></li><li><a href="#加号减号也能表示正负" class="lvl3">加号、减号也能表示正负</a></li><li><a href="#02-关系运算">02 关系运算</a></li><li><a href="#赋值等号和相等比较不是一回事" class="lvl3">赋值等号和相等比较不是一回事</a></li><li><a href="#c-不能照写数学中的链式比较" class="lvl3">C++ 不能照写数学中的链式比较</a></li><li><a href="#03-整数除法与取余">03 整数除法与取余</a></li><li><a href="#两个整数相除得到整数商" class="lvl3">两个整数相除得到整数商</a></li><li><a href="#取余得到没有分完的部分" class="lvl3">取余得到没有分完的部分</a></li><li><a href="#除法和取余的使用条件" class="lvl3">除法和取余的使用条件</a></li><li><a href="#04-赋值与复合赋值">04 赋值与复合赋值</a></li><li><a href="#复合赋值把计算和写回合在一起" class="lvl3">复合赋值把计算和写回合在一起</a></li><li><a href="#连续赋值从右向左执行" class="lvl3">连续赋值从右向左执行</a></li><li><a href="#05-自增与自减">05 自增与自减</a></li><li><a href="#单独使用时前置和后置结果相同" class="lvl3">单独使用时，前置和后置结果相同</a></li><li><a href="#放进表达式时取得的值不同" class="lvl3">放进表达式时，取得的值不同</a></li><li><a href="#06-逻辑运算">06 逻辑运算</a></li><li><a href="#真假表" class="lvl3">真假表</a></li><li><a href="#短路决定右侧是否执行" class="lvl3">短路决定右侧是否执行</a></li><li><a href="#07-条件运算符">07 条件运算符</a></li><li><a href="#08-优先级与结合方向">08 优先级与结合方向</a></li><li><a href="#一级常用优先级" class="lvl3">一级常用优先级</a></li><li><a href="#同级算术运算通常从左到右" class="lvl3">同级算术运算通常从左到右</a></li><li><a href="#一步一步计算混合表达式" class="lvl3">一步一步计算混合表达式</a></li><li><a href="#比较先算赋值最后发生" class="lvl3">比较先算，赋值最后发生</a></li><li><a href="#做运算题的统一检查顺序">做运算题的统一检查顺序</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -1215,6 +1263,31 @@ int main() {    int n;    int k; // 题目保证 k 是正整数，可以作为�
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

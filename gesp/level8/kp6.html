@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,35 +489,36 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 常见图形的周长与面积</a><a href="#kp-02" class="astro-obblnf2s">02 三角形面积</a><a href="#kp-03" class="astro-obblnf2s">03 坐标距离</a><a href="#kp-04" class="astro-obblnf2s">04 共线与退化边界</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方八级平面几何包括长方形、正方形、三角形、圆的周长与面积，以及点坐标、欧几里得距离、曼哈顿距离和基础坐标移动。本页只处理平面上的基础计算，不扩展计算几何高级算法。</p>
 <h2 id="kp-01">01 常见图形的周长与面积</h2>
 <ul>
-<li>长方形：周长 <code>2(a+b)</code>，面积 <code>ab</code>；</li>
-<li>正方形：周长 <code>4a</code>，面积 <code>a²</code>；</li>
-<li>圆：周长 <code>2πr</code>，面积 <code>πr²</code>。</li>
+<li>长方形：周长 <code dir="auto">2(a+b)</code>，面积 <code dir="auto">ab</code>；</li>
+<li>正方形：周长 <code dir="auto">4a</code>，面积 <code dir="auto">a²</code>；</li>
+<li>圆：周长 <code dir="auto">2πr</code>，面积 <code dir="auto">πr²</code>。</li>
 </ul>
-<p>题目给直径时先换成半径。使用 <code>double</code> 计算圆，并按题目要求设置输出精度；不要把圆周长与面积公式混淆。</p>
+<p>题目给直径时先换成半径。使用 <code dir="auto">double</code> 计算圆，并按题目要求设置输出精度；不要把圆周长与面积公式混淆。</p>
 <h2 id="kp-02">02 三角形面积</h2>
-<p>已知底和高时，面积为 <code>base×height/2</code>。已知三点坐标时，可计算两倍有向面积：</p>
-<p><code>cross=(x2-x1)(y3-y1)-(y2-y1)(x3-x1)</code></p>
-<p>普通面积是 <code>|cross|/2</code>。点的顺序可能改变符号，所以必须取绝对值。</p>
+<p>已知底和高时，面积为 <code dir="auto">base×height/2</code>。已知三点坐标时，可计算两倍有向面积：</p>
+<p><code dir="auto">cross=(x2-x1)(y3-y1)-(y2-y1)(x3-x1)</code></p>
+<p>普通面积是 <code dir="auto">|cross|/2</code>。点的顺序可能改变符号，所以必须取绝对值。</p>
 <h2 id="kp-03">03 欧几里得距离与曼哈顿距离</h2>
-<p>两点 <code>(x1,y1)</code>、<code>(x2,y2)</code> 的欧几里得距离是：</p>
-<p><code>sqrt((x2-x1)²+(y2-y1)²)</code></p>
+<p>两点 <code dir="auto">(x1,y1)</code>、<code dir="auto">(x2,y2)</code> 的欧几里得距离是：</p>
+<p><code dir="auto">sqrt((x2-x1)²+(y2-y1)²)</code></p>
 <p>曼哈顿距离是：</p>
-<p><code>|x2-x1|+|y2-y1|</code></p>
+<p><code dir="auto">|x2-x1|+|y2-y1|</code></p>
 <p>前者表示直线距离，后者表示只能水平、竖直移动的最少路程。必须根据题目允许的移动方式选择。</p>
 <h2 id="kp-04">04 共线与退化边界</h2>
 <p>三点的叉积为 0，说明三点共线；点重合也是共线的特殊情况。此时“三角形”面积为 0，不是公式失效。</p>
-<p>浮点坐标经过运算后可用 <code>fabs(cross)&lt;EPS</code> 判断接近 0；整数坐标且范围安全时，可用整数叉积避免浮点误差。</p>
-<p><strong>几何计算追踪。</strong> 半径为 <code>2.5</code> 的圆，按“公式 → 代入 → 计算”处理：周长 <code>C=2πr=2×π×2.5=5π</code>，面积 <code>S=πr²=π×2.5×2.5=6.25π</code>。不要在中途把 <code>π</code> 或小数截成整数。</p>
-<p>几何题先做单位换算，再选择公式。若直径为 50 厘米而答案要求米，应先得到半径 <code>0.25</code> 米；坐标范围较大时，平方前要使用足够宽的类型；输出有精度要求时统一在最后设置位数，避免每一步舍入累积误差。</p>
+<p>浮点坐标经过运算后可用 <code dir="auto">fabs(cross)&lt;EPS</code> 判断接近 0；整数坐标且范围安全时，可用整数叉积避免浮点误差。</p>
+<p><strong>几何计算追踪。</strong> 半径为 <code dir="auto">2.5</code> 的圆，按“公式 → 代入 → 计算”处理：周长 <code dir="auto">C=2πr=2×π×2.5=5π</code>，面积 <code dir="auto">S=πr²=π×2.5×2.5=6.25π</code>。不要在中途把 <code dir="auto">π</code> 或小数截成整数。</p>
+<p>几何题先做单位换算，再选择公式。若直径为 50 厘米而答案要求米，应先得到半径 <code dir="auto">0.25</code> 米；坐标范围较大时，平方前要使用足够宽的类型；输出有精度要求时统一在最后设置位数，避免每一步舍入累积误差。</p>
 <p><strong>逐段具体推演（对应 01—04）。</strong></p>
-<p><strong>01 周长与面积。</strong> 长方形长 6、宽 4，周长是 <code>(6+4)×2=20</code>，面积是 <code>6×4=24</code>。两者一个是长度、一个是面积，不能因使用同样的边长就混用公式。</p>
-<p><strong>02 三角形面积。</strong> 底 6、高 4，先算 <code>6×4=24</code>，再除以 2，得到 <code>6×4÷2=12</code>。若题目没给高，不能把另一条边直接当高。</p>
-<p><strong>03 坐标距离。</strong> 从 <code>(1,2)</code> 到 <code>(4,6)</code>，横差 3、纵差 4。允许直线移动时距离是 <code>sqrt(3²+4²)=5</code>；只能横竖移动时是 <code>3+4=7</code>。</p>
-<p><strong>04 退化图形。</strong> 三点 <code>(0,0)、(1,1)、(2,2)</code> 的两倍面积为 <code>|1×2-1×2|=0</code>，说明三点共线。程序应按题意输出 0，而不是把它当作计算失败。</p>
+<p><strong>01 周长与面积。</strong> 长方形长 6、宽 4，周长是 <code dir="auto">(6+4)×2=20</code>，面积是 <code dir="auto">6×4=24</code>。两者一个是长度、一个是面积，不能因使用同样的边长就混用公式。</p>
+<p><strong>02 三角形面积。</strong> 底 6、高 4，先算 <code dir="auto">6×4=24</code>，再除以 2，得到 <code dir="auto">6×4÷2=12</code>。若题目没给高，不能把另一条边直接当高。</p>
+<p><strong>03 坐标距离。</strong> 从 <code dir="auto">(1,2)</code> 到 <code dir="auto">(4,6)</code>，横差 3、纵差 4。允许直线移动时距离是 <code dir="auto">sqrt(3²+4²)=5</code>；只能横竖移动时是 <code dir="auto">3+4=7</code>。</p>
+<p><strong>04 退化图形。</strong> 三点 <code dir="auto">(0,0)、(1,1)、(2,2)</code> 的两倍面积为 <code dir="auto">|1×2-1×2|=0</code>，说明三点共线。程序应按题意输出 0，而不是把它当作计算失败。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -510,15 +530,15 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>圆周长</td>
-<td><code>2πr</code></td>
+<td><code dir="auto">2πr</code></td>
 </tr>
 <tr>
 <td>圆面积</td>
-<td><code>πr²</code></td>
+<td><code dir="auto">πr²</code></td>
 </tr>
 <tr>
 <td>两点直线距离</td>
-<td><code>sqrt(dx²+dy²)</code></td>
+<td><code dir="auto">sqrt(dx²+dy²)</code></td>
 </tr>
 <tr>
 <td>曼哈顿距离</td>
@@ -531,15 +551,15 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>输入三个点，输出前两点的欧几里得距离和三点组成的三角形面积。坐标绝对值不超过 <code>10^4</code>。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<p>输入三个点，输出前两点的欧几里得距离和三点组成的三角形面积。坐标绝对值不超过 <code dir="auto">10^4</code>。</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    double x1, y1, x2, y2, x3, y3;    cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2 &gt;&gt; x3 &gt;&gt; y3;
     double dx = x2 - x1;    double dy = y2 - y1;    double distance = sqrt(dx * dx + dy * dy);
     // 叉积绝对值是对应平行四边形面积。    double cross = (x2 - x1) * (y3 - y1)                 - (y2 - y1) * (x3 - x1);    double area = fabs(cross) / 2.0;
     cout &lt;&lt; fixed &lt;&lt; setprecision(6);    cout &lt;&lt; distance &lt;&lt; '\n' &lt;&lt; area &lt;&lt; '\n';    return 0;}</code></pre>
-<p>程序时间与额外空间复杂度均为 <code>O(1)</code>。样例点 <code>(1,2)、(4,6)、(5,2)</code> 的前两点距离为 5，三角形面积为 8。</p>
+<p>程序时间与额外空间复杂度均为 <code dir="auto">O(1)</code>。样例点 <code dir="auto">(1,2)、(4,6)、(5,2)</code> 的前两点距离为 5，三角形面积为 8。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>单位混用反例。</strong> 长方形长 2 米、宽 50 厘米，直接算 <code>2×50=100</code> 并写成平方米是错的。先把 50 厘米换成 0.5 米，面积才是 <code>2×0.5=1</code> 平方米。</p>
+<p><strong>单位混用反例。</strong> 长方形长 2 米、宽 50 厘米，直接算 <code dir="auto">2×50=100</code> 并写成平方米是错的。先把 50 厘米换成 0.5 米，面积才是 <code dir="auto">2×0.5=1</code> 平方米。</p>
 <ul>
 <li>把直径直接代入半径公式。</li>
 <li>三角形底高公式忘记除以 2。</li>
@@ -552,7 +572,25 @@ int main() {    double x1, y1, x2, y2, x3, y3;    cin &gt;&gt; x1 &gt;&gt; y1 &g
 <li><a href="/gesp/level8/algebra-basics/">代数基础</a>：检查公式括号、数据类型和浮点边界。</li>
 <li><a href="/gesp/level8/graph-modeling/">图论综合应用</a>：几何距离可以作为图的边权。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能区分常见图形的周长和面积公式</label><label class="q-check"><input type="checkbox"> 能选择欧几里得距离或曼哈顿距离</label><label class="q-check"><input type="checkbox"> 能用叉积绝对值计算面积并识别退化情况</label><span>6 题</span>
+<p class="q-title">第 1 题平面上两点 (1,2) 与 (4,6) 的欧几里得距离是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题平面上两点 (1,2) 与 (" value="A"><b>A.</b> 5</label><label class="q-opt"><input type="radio" name="第 1 题平面上两点 (1,2) 与 (" value="B"><b>B.</b> 7</label><label class="q-opt"><input type="radio" name="第 1 题平面上两点 (1,2) 与 (" value="C"><b>C.</b> 12</label><label class="q-opt"><input type="radio" name="第 1 题平面上两点 (1,2) 与 (" value="D"><b>D.</b> 25</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>横坐标差为 3，纵坐标差为 4，距离为 sqrt(3²+4²)=sqrt(25)=5。计算时应使用 double 并注意平方和范围。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 2 题用坐标公式计算三角形面积时，为什么最后要取绝对值？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题用坐标公式计算三角形面积时，为" value="A"><b>A.</b> 让周长变小</label><label class="q-opt"><input type="radio" name="第 2 题用坐标公式计算三角形面积时，为" value="B"><b>B.</b> 顶点顺序可能使有向面积为负，但普通面积应非负</label><label class="q-opt"><input type="radio" name="第 2 题用坐标公式计算三角形面积时，为" value="C"><b>C.</b> 避免除以 2</label><label class="q-opt"><input type="radio" name="第 2 题用坐标公式计算三角形面积时，为" value="D"><b>D.</b> 把小数变整数</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>叉积形式先得到带方向的两倍面积。顺时针和逆时针排列会产生相反符号，但几何面积都应为非负数，所以要对结果取绝对值后再除以 2。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 3 题半径为 r 的圆，周长公式是哪一项？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题半径为 r 的圆，周长公式是哪" value="A"><b>A.</b> πr²</label><label class="q-opt"><input type="radio" name="第 3 题半径为 r 的圆，周长公式是哪" value="B"><b>B.</b> 2πr</label><label class="q-opt"><input type="radio" name="第 3 题半径为 r 的圆，周长公式是哪" value="C"><b>C.</b> 4r</label><label class="q-opt"><input type="radio" name="第 3 题半径为 r 的圆，周长公式是哪" value="D"><b>D.</b> r²</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>圆周长为 2πr，圆面积才是 πr²。编程时应区分两个公式，并根据题目精度要求输出。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 4 题点 (1,2) 与点 (4,6) 的曼哈顿距离是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题点 (1,2) 与点 (4,6" value="A"><b>A.</b> 5</label><label class="q-opt"><input type="radio" name="第 4 题点 (1,2) 与点 (4,6" value="B"><b>B.</b> 7</label><label class="q-opt"><input type="radio" name="第 4 题点 (1,2) 与点 (4,6" value="C"><b>C.</b> 12</label><label class="q-opt"><input type="radio" name="第 4 题点 (1,2) 与点 (4,6" value="D"><b>D.</b> 25</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>曼哈顿距离是横坐标差绝对值与纵坐标差绝对值之和，即 |4-1|+|6-2|=3+4=7。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 5 题用坐标面积公式算出三角形面积为 0，最直接说明什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题用坐标面积公式算出三角形面积为" value="A"><b>A.</b> 三个点一定相同</label><label class="q-opt"><input type="radio" name="第 5 题用坐标面积公式算出三角形面积为" value="B"><b>B.</b> 三个点共线或存在重合，图形发生退化</label><label class="q-opt"><input type="radio" name="第 5 题用坐标面积公式算出三角形面积为" value="C"><b>C.</b> 周长也一定为 0</label><label class="q-opt"><input type="radio" name="第 5 题用坐标面积公式算出三角形面积为" value="D"><b>D.</b> 计算机出现错误</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>三点的叉积绝对值为 0，说明三点共线；点重合也是共线的特殊情况。此时不能形成有正面积的三角形。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 6 题圆的直径是 50 厘米，若统一用米计算，半径应是多少米？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题圆的直径是 50 厘米，若统一" value="A"><b>A.</b> 0.25</label><label class="q-opt"><input type="radio" name="第 6 题圆的直径是 50 厘米，若统一" value="B"><b>B.</b> 0.5</label><label class="q-opt"><input type="radio" name="第 6 题圆的直径是 50 厘米，若统一" value="C"><b>C.</b> 25</label><label class="q-opt"><input type="radio" name="第 6 题圆的直径是 50 厘米，若统一" value="D"><b>D.</b> 50</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>50 厘米等于 0.5 米，半径是直径的一半，所以是 0.25 米，对应页内知识点 01。<br><span class="q-kp">对应知识点：01</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/algebra-basics/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 05</small><strong>代数基础</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/gesp/level8/graph-modeling/" rel="next"><span><small>下一知识点 · 07</small><strong>图论综合应用</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -561,7 +599,7 @@ int main() {    double x1, y1, x2, y2, x3, y3;    cin &gt;&gt; x1 &gt;&gt; y1 &g
       <a class="kp-nav" href="kp7.html">下一个：图算法选择 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 常见图形的周长与面积</a></li><li><a href="#kp-02">02 三角形面积</a></li><li><a href="#kp-03">03 欧几里得距离与曼哈顿距离</a></li><li><a href="#kp-04">04 共线与退化边界</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 常见图形的周长与面积</a></li><li><a href="#kp-02">02 三角形面积</a></li><li><a href="#kp-03">03 欧几里得距离与曼哈顿距离</a></li><li><a href="#kp-04">04 共线与退化边界</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -573,6 +611,31 @@ int main() {    double x1, y1, x2, y2, x3, y3;    cin &gt;&gt; x1 &gt;&gt; y1 &g
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

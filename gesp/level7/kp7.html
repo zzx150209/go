@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,22 +489,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 遍历与标记</a><a href="#kp-02" class="astro-obblnf2s">02 深度优先遍历</a><a href="#kp-03" class="astro-obblnf2s">03 广度优先遍历</a><a href="#kp-04" class="astro-obblnf2s">04 非连通图</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心检查</a><a href="#page-test" class="astro-obblnf2s">综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方七级大纲要求掌握图的遍历。深度优先遍历（DFS）沿一条分支尽量深入，广度优先遍历（BFS）按与起点的边数分层扩展。两者都必须使用访问标记避免在环中重复处理。</p>
 <h2 id="kp-01">01 遍历目标与访问标记</h2>
 <p>遍历是从起点出发，系统访问所有可达顶点。顶点第一次被发现时就应标记，后续遇到它直接跳过。无向图的一条边存了两个方向，如果没有标记，程序会在两个端点之间往返。</p>
-<p><strong>具体推演：</strong> 无向边只有 <code>1—2</code> 时，从 <code>1</code> 出发先标记 <code>1</code>，再发现并标记 <code>2</code>；处理 <code>2</code> 时又看到邻点 <code>1</code>，因为 <code>visited[1]=true</code>，所以直接跳过。若没有访问标记，程序会沿 <code>1→2→1→2……</code> 不断往返。</p>
+<p><strong>具体推演：</strong> 无向边只有 <code dir="auto">1—2</code> 时，从 <code dir="auto">1</code> 出发先标记 <code dir="auto">1</code>，再发现并标记 <code dir="auto">2</code>；处理 <code dir="auto">2</code> 时又看到邻点 <code dir="auto">1</code>，因为 <code dir="auto">visited[1]=true</code>，所以直接跳过。若没有访问标记，程序会沿 <code dir="auto">1→2→1→2……</code> 不断往返。</p>
 <h2 id="kp-02">02 深度优先遍历 DFS</h2>
 <p>DFS 访问顶点后，依次递归访问尚未访问的相邻点：</p>
-<p>进入 <code>dfs(u)</code> 后先执行 <code>visited[u] = true</code>，再枚举 <code>graph[u]</code> 中的相邻点；只有 <code>visited[v]</code> 为假时才递归。DFS 适合连通性、连通分量和需要沿路径深入的路径搜索。若只需判断能否到达目标，发现目标后可以结束当前搜索；若要记录一条具体路径，还需保存每个顶点从哪个前驱到达。</p>
-<p><strong>具体推演：</strong> 图有边 <code>1—2</code>、<code>1—3</code>、<code>2—4</code>，邻点按编号递增。DFS 从 <code>1</code> 先进入 <code>2</code>，再进入 <code>4</code>；<code>4</code> 没有新邻点后回溯到 <code>2</code>、再回到 <code>1</code>，最后访问 <code>3</code>。首次访问顺序是 <code>1,2,4,3</code>，递归路径的“进入—回溯”解释了为什么不是按层访问。</p>
+<p>进入 <code dir="auto">dfs(u)</code> 后先执行 <code dir="auto">visited[u] = true</code>，再枚举 <code dir="auto">graph[u]</code> 中的相邻点；只有 <code dir="auto">visited[v]</code> 为假时才递归。DFS 适合连通性、连通分量和需要沿路径深入的路径搜索。若只需判断能否到达目标，发现目标后可以结束当前搜索；若要记录一条具体路径，还需保存每个顶点从哪个前驱到达。</p>
+<p><strong>具体推演：</strong> 图有边 <code dir="auto">1—2</code>、<code dir="auto">1—3</code>、<code dir="auto">2—4</code>，邻点按编号递增。DFS 从 <code dir="auto">1</code> 先进入 <code dir="auto">2</code>，再进入 <code dir="auto">4</code>；<code dir="auto">4</code> 没有新邻点后回溯到 <code dir="auto">2</code>、再回到 <code dir="auto">1</code>，最后访问 <code dir="auto">3</code>。首次访问顺序是 <code dir="auto">1,2,4,3</code>，递归路径的“进入—回溯”解释了为什么不是按层访问。</p>
 <h2 id="kp-03">03 广度优先遍历 BFS</h2>
-<p>BFS 使用队列。起点入队时距离为 <code>0</code>；每次取出队首，把未访问邻点的距离设为当前距离加 <code>1</code>，并立即标记、入队。无权图中第一次到达顶点时的距离，就是起点到它的最少边数。</p>
-<p>执行顺序是：起点入队并标记；反复取出队首；把每个未访问邻点标记，令它的距离等于当前距离加 <code>1</code>，再入队。标记必须发生在入队时。</p>
-<p><strong>具体推演：</strong> 对同一张图，从 <code>1</code> 开始时队列 <code>[1]</code>、<code>dist[1]=0</code>；取出 <code>1</code> 后把 <code>2、3</code> 入队，队列变为 <code>[2,3]</code>，距离都为 <code>1</code>；取出 <code>2</code> 后发现 <code>4</code>，队列变为 <code>[3,4]</code>，<code>dist[4]=2</code>。第一次到达 <code>4</code> 经过两条边，因此最少边数为 <code>2</code>。</p>
+<p>BFS 使用队列。起点入队时距离为 <code dir="auto">0</code>；每次取出队首，把未访问邻点的距离设为当前距离加 <code dir="auto">1</code>，并立即标记、入队。无权图中第一次到达顶点时的距离，就是起点到它的最少边数。</p>
+<p>执行顺序是：起点入队并标记；反复取出队首；把每个未访问邻点标记，令它的距离等于当前距离加 <code dir="auto">1</code>，再入队。标记必须发生在入队时。</p>
+<p><strong>具体推演：</strong> 对同一张图，从 <code dir="auto">1</code> 开始时队列 <code dir="auto">[1]</code>、<code dir="auto">dist[1]=0</code>；取出 <code dir="auto">1</code> 后把 <code dir="auto">2、3</code> 入队，队列变为 <code dir="auto">[2,3]</code>，距离都为 <code dir="auto">1</code>；取出 <code dir="auto">2</code> 后发现 <code dir="auto">4</code>，队列变为 <code dir="auto">[3,4]</code>，<code dir="auto">dist[4]=2</code>。第一次到达 <code dir="auto">4</code> 经过两条边，因此最少边数为 <code dir="auto">2</code>。</p>
 <h2 id="kp-04">04 非连通图与连通分量</h2>
-<p>从一个起点只能访问同一连通分量。要遍历整张非连通图，应从 <code>1</code> 到 <code>n</code> 检查每个未访问顶点，每启动一次 DFS 或 BFS，连通分量数加 <code>1</code>。</p>
-<p><strong>具体推演：</strong> <code>n=5</code>，边为 <code>1—2</code>、<code>2—3</code>、<code>4—5</code>。外层遇到顶点 <code>1</code> 时计数变为 <code>1</code>，一次遍历标记 <code>1、2、3</code>；继续检查到 <code>4</code> 时仍未访问，计数变为 <code>2</code>，第二次遍历标记 <code>4、5</code>。最终所有顶点都被处理，连通分量数为 <code>2</code>。</p>
+<p>从一个起点只能访问同一连通分量。要遍历整张非连通图，应从 <code dir="auto">1</code> 到 <code dir="auto">n</code> 检查每个未访问顶点，每启动一次 DFS 或 BFS，连通分量数加 <code dir="auto">1</code>。</p>
+<p><strong>具体推演：</strong> <code dir="auto">n=5</code>，边为 <code dir="auto">1—2</code>、<code dir="auto">2—3</code>、<code dir="auto">4—5</code>。外层遇到顶点 <code dir="auto">1</code> 时计数变为 <code dir="auto">1</code>，一次遍历标记 <code dir="auto">1、2、3</code>；继续检查到 <code dir="auto">4</code> 时仍未访问，计数变为 <code dir="auto">2</code>，第二次遍历标记 <code dir="auto">4、5</code>。最终所有顶点都被处理，连通分量数为 <code dir="auto">2</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -508,19 +528,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>两种方法在邻接表上完整遍历时，时间复杂度均为 <code>O(n+m)</code>，访问标记和队列/递归空间为 <code>O(n)</code>。</p>
+<p>两种方法在邻接表上完整遍历时，时间复杂度均为 <code dir="auto">O(n+m)</code>，访问标记和队列/递归空间为 <code dir="auto">O(n)</code>。</p>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="基础例题">基础例题</h3>
-<p>无向图有边 <code>1—2</code>、<code>1—3</code>。若邻接点按 <code>2,3</code> 的顺序保存，从 1 开始 DFS 会访问 <code>1,2,3</code>；BFS 也会先访问 1，再发现同一层的 2 和 3。这个例子中顺序可能相同，但原因不同：DFS 沿分支深入，BFS 按距离分层。</p>
+<p>无向图有边 <code dir="auto">1—2</code>、<code dir="auto">1—3</code>。若邻接点按 <code dir="auto">2,3</code> 的顺序保存，从 1 开始 DFS 会访问 <code dir="auto">1,2,3</code>；BFS 也会先访问 1，再发现同一层的 2 和 3。这个例子中顺序可能相同，但原因不同：DFS 沿分支深入，BFS 按距离分层。</p>
 <h3 id="典型应用例题">典型应用例题</h3>
 <p>统计无向图连通分量：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 vector&lt;int&gt; graph[1005];bool visited[1005];
 void dfs(int u) {    // 顶点第一次进入 DFS 时立即标记，避免在无向边或环上重复递归。    visited[u] = true;    for (int i = 0; i &lt; graph[u].size(); i++) {        int v = graph[u][i];        // 只沿尚未访问的邻点继续深入。        if (!visited[v]) {            dfs(v);        }    }}
 int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    // 无向图的每条边要存入两个方向。    for (int i = 1; i &lt;= m; i++) {        int u, v;        cin &gt;&gt; u &gt;&gt; v;        graph[u].push_back(v);        graph[v].push_back(u);    }    int answer = 0;    // 每遇到一个未访问顶点，就发现了一个新的连通分量。    for (int u = 1; u &lt;= n; u++) {        if (!visited[u]) {            answer++;            dfs(u);        }    }    cout &lt;&lt; answer &lt;&lt; endl;    return 0;}</code></pre>
-<p>输入 <code>5 3</code>，边为 <code>1 2</code>、<code>2 3</code>、<code>4 5</code> 时输出 <code>2</code>。一次 DFS 会标记一个完整分量，因此不会重复计数。时间复杂度为 <code>O(n+m)</code>，空间复杂度为 <code>O(n+m)</code>。</p>
+<p>输入 <code dir="auto">5 3</code>，边为 <code dir="auto">1 2</code>、<code dir="auto">2 3</code>、<code dir="auto">4 5</code> 时输出 <code dir="auto">2</code>。一次 DFS 会标记一个完整分量，因此不会重复计数。时间复杂度为 <code dir="auto">O(n+m)</code>，空间复杂度为 <code dir="auto">O(n+m)</code>。</p>
 <h3 id="dfs-与-bfs-过程追踪">DFS 与 BFS 过程追踪</h3>
-<p>对边 <code>1—2</code>、<code>1—3</code>、<code>2—4</code>，从顶点 1 出发：</p>
+<p>对边 <code dir="auto">1—2</code>、<code dir="auto">1—3</code>、<code dir="auto">2—4</code>，从顶点 1 出发：</p>
 <table>
 <thead>
 <tr>
@@ -534,38 +554,38 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    // 无向图的每条
 <tr>
 <td>DFS</td>
 <td>进入 1，再递归到 2</td>
-<td>递归路径 <code>1 → 2</code></td>
-<td><code>1,2</code></td>
+<td>递归路径 <code dir="auto">1 → 2</code></td>
+<td><code dir="auto">1,2</code></td>
 </tr>
 <tr>
 <td>DFS</td>
 <td>从 2 递归到 4</td>
-<td>递归路径 <code>1 → 2 → 4</code></td>
-<td><code>1,2,4</code></td>
+<td>递归路径 <code dir="auto">1 → 2 → 4</code></td>
+<td><code dir="auto">1,2,4</code></td>
 </tr>
 <tr>
 <td>DFS</td>
 <td>回到 1，再访问 3</td>
-<td>递归路径 <code>1 → 3</code></td>
-<td><code>1,2,3,4</code></td>
+<td>递归路径 <code dir="auto">1 → 3</code></td>
+<td><code dir="auto">1,2,3,4</code></td>
 </tr>
 <tr>
 <td>BFS</td>
 <td>1 入队并出队，发现 2、3</td>
-<td>队列变化：<code>[1] → [2,3]</code></td>
-<td><code>1,2,3</code></td>
+<td>队列变化：<code dir="auto">[1] → [2,3]</code></td>
+<td><code dir="auto">1,2,3</code></td>
 </tr>
 <tr>
 <td>BFS</td>
 <td>2 出队，发现 4</td>
-<td>队列变化：<code>[2,3] → [3,4]</code></td>
-<td><code>1,2,3,4</code></td>
+<td>队列变化：<code dir="auto">[2,3] → [3,4]</code></td>
+<td><code dir="auto">1,2,3,4</code></td>
 </tr>
 <tr>
 <td>BFS</td>
 <td>3、4 依次出队</td>
-<td><code>[3,4] → [4] → []</code></td>
-<td><code>1,2,3,4</code></td>
+<td><code dir="auto">[3,4] → [4] → []</code></td>
+<td><code dir="auto">1,2,3,4</code></td>
 </tr>
 </tbody>
 </table>
@@ -582,17 +602,17 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    // 无向图的每条
 <tbody>
 <tr>
 <td>基础</td>
-<td><code>5</code> 个顶点，边为 <code>1 2</code>、<code>2 3</code>、<code>4 5</code></td>
-<td>连通分量数为 <code>2</code></td>
+<td><code dir="auto">5</code> 个顶点，边为 <code dir="auto">1 2</code>、<code dir="auto">2 3</code>、<code dir="auto">4 5</code></td>
+<td>连通分量数为 <code dir="auto">2</code></td>
 </tr>
 <tr>
 <td>边界</td>
-<td><code>n = 1, m = 0</code></td>
-<td>连通分量数为 <code>1</code></td>
+<td><code dir="auto">n = 1, m = 0</code></td>
+<td>连通分量数为 <code dir="auto">1</code></td>
 </tr>
 <tr>
 <td>易错</td>
-<td>三角形 <code>1—2—3—1</code></td>
+<td>三角形 <code dir="auto">1—2—3—1</code></td>
 <td>每个顶点只访问一次，不发生无限递归</td>
 </tr>
 </tbody>
@@ -640,10 +660,37 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    // 无向图的每条
 </tbody>
 </table>
 <h3 id="错误反例推演">错误反例推演</h3>
-<p>在菱形图 <code>1—2、1—3、2—4、3—4</code> 中，若 BFS 等到出队才标记顶点，处理 <code>2</code> 时会把 <code>4</code> 入队，处理 <code>3</code> 时又会把尚未出队、仍未标记的 <code>4</code> 再入队，队列出现两个 <code>4</code>。改为发现 <code>4</code> 时立即标记，第二次遇到它就会跳过，既避免重复处理，也保留第一次到达的最少边数。</p>
+<p>在菱形图 <code dir="auto">1—2、1—3、2—4、3—4</code> 中，若 BFS 等到出队才标记顶点，处理 <code dir="auto">2</code> 时会把 <code dir="auto">4</code> 入队，处理 <code dir="auto">3</code> 时又会把尚未出队、仍未标记的 <code dir="auto">4</code> 再入队，队列出现两个 <code dir="auto">4</code>。改为发现 <code dir="auto">4</code> 时立即标记，第二次遇到它就会跳过，既避免重复处理，也保留第一次到达的最少边数。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>泛洪算法本质上是在网格图上执行 DFS 或 BFS；区别只是相邻点由方向数组现场计算，而不是预先存入邻接表。</p>
-<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能说明访问标记的设置时机</label><label class="q-check"><input type="checkbox"> 能区分 DFS 深入与 BFS 分层</label><label class="q-check"><input type="checkbox"> 能通过多次遍历处理非连通图</label><span>9 题</span>
+<p class="q-title">第 1 题在可能含环的图上执行 DFS，访问标记的主要作用是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题在可能含环的图上执行 DFS，" value="A"><b>A.</b> 避免同一顶点被反复递归访问</label><label class="q-opt"><input type="radio" name="第 1 题在可能含环的图上执行 DFS，" value="B"><b>B.</b> 让每条边自动变成有向边</label><label class="q-opt"><input type="radio" name="第 1 题在可能含环的图上执行 DFS，" value="C"><b>C.</b> 把所有顶点编号改为 0</label><label class="q-opt"><input type="radio" name="第 1 题在可能含环的图上执行 DFS，" value="D"><b>D.</b> 保证图一定没有环</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 01：图中可能通过不同路径再次到达同一顶点，环还可能造成无限递归。访问标记让已经处理的顶点被跳过，从而保证每个顶点只需进入一次。</p>
+<p class="q-title">第 2 题DFS 枚举到顶点 u 的相邻顶点 v 时，什么时候应该递归调用 dfs(v)？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题DFS 枚举到顶点 u 的相邻" value="A"><b>A.</b> v 尚未访问时</label><label class="q-opt"><input type="radio" name="第 2 题DFS 枚举到顶点 u 的相邻" value="B"><b>B.</b> v 已经访问时</label><label class="q-opt"><input type="radio" name="第 2 题DFS 枚举到顶点 u 的相邻" value="C"><b>C.</b> 每次都调用且不检查</label><label class="q-opt"><input type="radio" name="第 2 题DFS 枚举到顶点 u 的相邻" value="D"><b>D.</b> 只有 v 等于 u 时</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：只有 v 尚未访问，递归才会发现新的顶点。已访问顶点应直接跳过，否则在无向边或环上会来回递归并产生重复处理。</p>
+<p class="q-title">第 3 题统计无向图连通分量时，应在什么情况下把答案加 1 并启动一次 DFS？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题统计无向图连通分量时，应在什么" value="A"><b>A.</b> 外层枚举到一个尚未访问的顶点时</label><label class="q-opt"><input type="radio" name="第 3 题统计无向图连通分量时，应在什么" value="B"><b>B.</b> 每检查一条边时</label><label class="q-opt"><input type="radio" name="第 3 题统计无向图连通分量时，应在什么" value="C"><b>C.</b> 每返回上一层递归时</label><label class="q-opt"><input type="radio" name="第 3 题统计无向图连通分量时，应在什么" value="D"><b>D.</b> 只在顶点编号为 1 时</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 04：一次 DFS 会访问起点所在的整个连通分量。外层循环再次遇到未访问顶点，说明它不属于此前任何分量，因此发现了一个新分量，应计数一次并从它继续 DFS。</p>
+<p class="q-title">第 4 题无向图中，1 邻接 2、3，2 还邻接 4。从 1 开始 DFS，相邻点按编号从小到大处理，首次访问顺序是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题无向图中，1 邻接 2、3，2" value="A"><b>A.</b> 1，2，4，3</label><label class="q-opt"><input type="radio" name="第 4 题无向图中，1 邻接 2、3，2" value="B"><b>B.</b> 1，2，3，4</label><label class="q-opt"><input type="radio" name="第 4 题无向图中，1 邻接 2、3，2" value="C"><b>C.</b> 1，3，2，4</label><label class="q-opt"><input type="radio" name="第 4 题无向图中，1 邻接 2、3，2" value="D"><b>D.</b> 4，3，2，1</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：从 1 先进入较小邻点 2，再从 2 深入到尚未访问的 4；4 没有新邻点后回溯到 1，最后访问 3，所以顺序为 1，2，4，3。</p>
+<p class="q-title">第 5 题BFS 使用队列的哪项性质，使较早发现的顶点先被处理？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题BFS 使用队列的哪项性质，使" value="A"><b>A.</b> 先进先出</label><label class="q-opt"><input type="radio" name="第 5 题BFS 使用队列的哪项性质，使" value="B"><b>B.</b> 后进先出</label><label class="q-opt"><input type="radio" name="第 5 题BFS 使用队列的哪项性质，使" value="C"><b>C.</b> 随机取出</label><label class="q-opt"><input type="radio" name="第 5 题BFS 使用队列的哪项性质，使" value="D"><b>D.</b> 只进不出</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：队列按先进先出工作：先发现并入队的顶点先出队，因而 BFS 会先处理距离起点较近的一层，再处理更远的一层。</p>
+<p class="q-title">第 6 题BFS 发现尚未访问的相邻顶点 v 时，为什么应在 v 入队时立即标记？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题BFS 发现尚未访问的相邻顶点" value="A"><b>A.</b> 防止 v 在出队前被其他顶点重复加入队列</label><label class="q-opt"><input type="radio" name="第 6 题BFS 发现尚未访问的相邻顶点" value="B"><b>B.</b> 让 v 永远不能出队</label><label class="q-opt"><input type="radio" name="第 6 题BFS 发现尚未访问的相邻顶点" value="C"><b>C.</b> 把队列变成栈</label><label class="q-opt"><input type="radio" name="第 6 题BFS 发现尚未访问的相邻顶点" value="D"><b>D.</b> 让所有距离都变为 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：如果等到出队才标记，同一层的多个顶点可能都发现 v 并把它重复入队。入队时立即标记，能保证 v 只入队一次，同时首次得到的层数或距离保持最短。</p>
+<p class="q-title">第 7 题在每条边代价都相同的无权图中，从起点执行 BFS，第一次到达顶点 v 时得到的 distance[v] 表示什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题在每条边代价都相同的无权图中，" value="A"><b>A.</b> 从起点到 v 的最少边数</label><label class="q-opt"><input type="radio" name="第 7 题在每条边代价都相同的无权图中，" value="B"><b>B.</b> v 的度数</label><label class="q-opt"><input type="radio" name="第 7 题在每条边代价都相同的无权图中，" value="C"><b>C.</b> 图中的边总数</label><label class="q-opt"><input type="radio" name="第 7 题在每条边代价都相同的无权图中，" value="D"><b>D.</b> DFS 的递归深度上限</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：BFS 按经过 0 条边、1 条边、2 条边的层次依次扩展。顶点第一次被发现时，不可能还存在边数更少而尚未处理的路线，所以 distance[v] 是最少边数。</p>
+<p class="q-title">第 8 题无向图中，1 邻接 2、3，2 和 3 都邻接 4。从 1 开始 BFS，相邻点按编号从小到大入队，首次出队顺序是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 8 题无向图中，1 邻接 2、3，2" value="A"><b>A.</b> 1，2，3，4</label><label class="q-opt"><input type="radio" name="第 8 题无向图中，1 邻接 2、3，2" value="B"><b>B.</b> 1，2，4，3</label><label class="q-opt"><input type="radio" name="第 8 题无向图中，1 邻接 2、3，2" value="C"><b>C.</b> 1，3，4，2</label><label class="q-opt"><input type="radio" name="第 8 题无向图中，1 邻接 2、3，2" value="D"><b>D.</b> 4，2，3，1</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：处理 1 时依次把 2、3 入队；2 出队时发现 4 并立即标记、入队，此时 3 仍在 4 前面；3 不会重复加入 4，最终顺序是 1，2，3，4。</p>
+<p class="q-title">第 9 题无权图中要求从起点到终点经过的最少边数，应优先选择哪种遍历？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="A"><b>A.</b> BFS</label><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="B"><b>B.</b> DFS 后遇到终点立即停止</label><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="C"><b>C.</b> 只统计顶点度数</label><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="D"><b>D.</b> 只建立哈希表</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：BFS 按距离层次扩展，第一次到达终点时经过的边数最少。DFS 先深入一条路线，首次到达的路线不保证边数最少。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level7-pager" aria-label="七级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level7-pager__link gesp-level7-pager__link--previous" href="/gesp/level7/graph-storage/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 06</small><strong>图的存储</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level7-pager__link gesp-level7-pager__link--next" href="/gesp/level7/flood-fill/" rel="next"><span><small>下一知识点 · 08</small><strong>泛洪算法</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -652,7 +699,7 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    // 无向图的每条
       <a class="kp-nav" href="kp8.html">下一个：网格搜索 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 遍历目标与访问标记</a></li><li><a href="#kp-02">02 深度优先遍历 DFS</a></li><li><a href="#kp-03">03 广度优先遍历 BFS</a></li><li><a href="#kp-04">04 非连通图与连通分量</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#dfs-与-bfs-过程追踪" class="lvl3">DFS 与 BFS 过程追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 遍历目标与访问标记</a></li><li><a href="#kp-02">02 深度优先遍历 DFS</a></li><li><a href="#kp-03">03 广度优先遍历 BFS</a></li><li><a href="#kp-04">04 非连通图与连通分量</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#dfs-与-bfs-过程追踪" class="lvl3">DFS 与 BFS 过程追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -664,6 +711,31 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    // 无向图的每条
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,11 +489,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页覆盖六级大纲“树的构造与遍历”：根据父子或边关系建树、四种二叉树遍历、递归与队列实现，以及遍历序列还原入门和基础统计。树的术语放在上一页，特殊二叉树性质放在下一页。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-tree-traversal-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-tree-traversal-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">3 个子页</span></header><div><article><div><span class="astro-aidf4k4y">02</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/tree-traversal/">树的构造与遍历</a></h3><p class="astro-aidf4k4y">根据父子关系构造小树，推演前序、中序、后序和层序遍历，并完成基础统计。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/tree-traversal/construction-recursive-traversal/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">树的构造与递归遍历</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/tree-traversal/level-order-traversal/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">层序遍历</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/tree-traversal/traversal-reconstruction/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">03</span><strong class="astro-aidf4k4y">根据遍历序列还原二叉树</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 根据关系构造树</h2><p>根据父子关系建树时，先确定唯一根，再把每个孩子连接到唯一父结点。根据边关系建树时还要结合题意判断边是否有方向；若是无向输入，遍历时需要记住父结点或访问状态，避免沿原边返回。</p><p>下面的二叉树将用于比较四种遍历：</p><pre><code>1      /   \     2     3    / \   / \   4   5 6   7</code></pre><h2 id="kp-02">02 三种递归遍历</h2><p>“前、中、后”描述根相对左右子树的访问位置：前序是根、左、右；中序是左、根、右；后序是左、右、根。递归函数必须先判断空指针，再访问结点。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 根据关系构造树</a><a href="#kp-02" class="astro-obblnf2s">02 三种递归遍历</a><a href="#kp-03" class="astro-obblnf2s">03 层序遍历</a><a href="#kp-04" class="astro-obblnf2s">04 还原与基础统计</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页覆盖六级大纲“树的构造与遍历”：根据父子或边关系建树、四种二叉树遍历、递归与队列实现，以及遍历序列还原入门和基础统计。树的术语放在上一页，特殊二叉树性质放在下一页。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><header class="gesp-level6-knowledge-grid__heading"><h2 id="gesp-level6-tree-traversal-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p><span class="astro-aidf4k4y">3 个子页</span></header><article class="gesp-level6-parent-card"><span class="astro-aidf4k4y">02</span><span data-course-status class="astro-aidf4k4y">未复习</span>
+<h3 class="astro-aidf4k4y"><a class="gesp-level6-parent-card__primary" href="/gesp/level6/tree-traversal/">树的构造与遍历</a></h3><p class="astro-aidf4k4y">根据父子关系构造小树，推演前序、中序、后序和层序遍历，并完成基础统计。</p><ul aria-label="树的构造与遍历子知识点" class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/tree-traversal/construction-recursive-traversal/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">树的构造与递归遍历</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/tree-traversal/level-order-traversal/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">层序遍历</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/tree-traversal/traversal-reconstruction/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">03</span><strong class="astro-aidf4k4y">根据遍历序列还原二叉树</strong></a></li></ul></article></gesp-course-grid><h2 id="kp-01">01 根据关系构造树</h2><p>根据父子关系建树时，先确定唯一根，再把每个孩子连接到唯一父结点。根据边关系建树时还要结合题意判断边是否有方向；若是无向输入，遍历时需要记住父结点或访问状态，避免沿原边返回。</p><p>下面的二叉树将用于比较四种遍历：</p><link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>1      /   \     2     3    / \   / \   4   5 6   7</code></pre>
+<h2 id="kp-02">02 三种递归遍历</h2><p>“前、中、后”描述根相对左右子树的访问位置：前序是根、左、右；中序是左、根、右；后序是左、右、根。递归函数必须先判断空指针，再访问结点。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 struct Node {    int value;    Node* left;    Node* right;};
 void preorder(Node* root) {    if (root == nullptr) {  // 当前子树为空，没有结点需要访问        return;    }    // 前序遍历先访问根，再依次处理左、右子树    cout &lt;&lt; root-&gt;value &lt;&lt; ' ';    preorder(root-&gt;left);    preorder(root-&gt;right);}
 int countNodes(Node* root) {    if (root == nullptr) {  // 空树的结点数为 0        return 0;    }    // 当前根计 1，再加上左右子树的结点数    return 1 + countNodes(root-&gt;left) + countNodes(root-&gt;right);}
-int main() {    Node n4{4, nullptr, nullptr};    Node n5{5, nullptr, nullptr};    Node n2{2, &amp;n4, &amp;n5};    Node n3{3, nullptr, nullptr};    Node n1{1, &amp;n2, &amp;n3};    preorder(&amp;n1);    cout &lt;&lt; '\n' &lt;&lt; countNodes(&amp;n1) &lt;&lt; '\n';    return 0;}</code></pre><p>输出第一行为 <code>1 2 4 5 3</code>，第二行为 <code>5</code>。每个结点只处理一次，时间复杂度 <code>O(n)</code>；递归额外空间与树高有关。</p><h3 id="测试案例">测试案例</h3><table>
+int main() {    Node n4{4, nullptr, nullptr};    Node n5{5, nullptr, nullptr};    Node n2{2, &amp;n4, &amp;n5};    Node n3{3, nullptr, nullptr};    Node n1{1, &amp;n2, &amp;n3};    preorder(&amp;n1);    cout &lt;&lt; '\n' &lt;&lt; countNodes(&amp;n1) &lt;&lt; '\n';    return 0;}</code></pre><p>输出第一行为 <code dir="auto">1 2 4 5 3</code>，第二行为 <code dir="auto">5</code>。每个结点只处理一次，时间复杂度 <code dir="auto">O(n)</code>；递归额外空间与树高有关。</p><h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -486,7 +507,7 @@ int main() {    Node n4{4, nullptr, nullptr};    Node n5{5, nullptr, nullptr};  
 <tr>
 <td>基础</td>
 <td>根 1，左孩子 2，右孩子 3</td>
-<td>前序 <code>1 2 3</code>，中序 <code>2 1 3</code>，后序 <code>2 3 1</code></td>
+<td>前序 <code dir="auto">1 2 3</code>，中序 <code dir="auto">2 1 3</code>，后序 <code dir="auto">2 3 1</code></td>
 </tr>
 <tr>
 <td>边界</td>
@@ -496,15 +517,31 @@ int main() {    Node n4{4, nullptr, nullptr};    Node n5{5, nullptr, nullptr};  
 <tr>
 <td>特殊</td>
 <td>单结点树 8</td>
-<td>四种遍历都只输出 <code>8</code>；它既是根也是叶结点</td>
+<td>四种遍历都只输出 <code dir="auto">8</code>；它既是根也是叶结点</td>
 </tr>
 <tr>
 <td>特殊</td>
 <td>7 个结点的完全二叉树</td>
-<td>层序为 <code>1 2 3 4 5 6 7</code>，可检查同层从左到右</td>
+<td>层序为 <code dir="auto">1 2 3 4 5 6 7</code>，可检查同层从左到右</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>先访问结点再判断空指针</h3><div><div><strong><span>×</span> 错误写法</strong><code>cout &lt;&lt; root-&gt;value; if (root == nullptr) return;</code></div><div><strong><span>✓</span> 正确写法</strong><code>函数开头先判断 root == nullptr，再读取成员</code></div></div><p><strong>原因：</strong>root 为空时已经先发生非法访问。</p><p><strong>检查方法：</strong>把空树出口写成每个树递归函数的第一段。</p></section><section><h3>只背前中后名称，不看根的位置</h3><div><div><strong><span>×</span> 错误写法</strong><code>把中序也写成先输出根，再遍历左右子树</code></div><div><strong><span>✓</span> 正确写法</strong><code>先写出规则，再把访问根的语句放到相应位置</code></div></div><p><strong>原因：</strong>前、中、后表示根分别在左右子树之前、中间或之后访问。</p><p><strong>检查方法：</strong>用只有三个结点的小树手算一次最容易发现顺序错误。</p></section><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>先访问结点再判断空指针</h3><p><strong>原因：</strong>root 为空时已经先发生非法访问。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>把空树出口写成每个树递归函数的第一段。</p><h3>只背前中后名称，不看根的位置</h3><p><strong>原因：</strong>前、中、后表示根分别在左右子树之前、中间或之后访问。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>用只有三个结点的小树手算一次最容易发现顺序错误。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能根据父子或边关系连接一棵小树</label><label class="q-check"><input type="checkbox"> 能推演前序、中序、后序和层序结果</label><label class="q-check"><input type="checkbox"> 能用递归统计结点、叶子和树高</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题根据父子关系建树时，哪种情况会违反树的定义？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题根据父子关系建树时，哪种情况会" value="A"><b>A.</b> 根没有父结点</label><label class="q-opt"><input type="radio" name="第 1 题根据父子关系建树时，哪种情况会" value="B"><b>B.</b> 叶结点没有孩子</label><label class="q-opt"><input type="radio" name="第 1 题根据父子关系建树时，哪种情况会" value="C"><b>C.</b> 同一结点被连接到两个父结点</label><label class="q-opt"><input type="radio" name="第 1 题根据父子关系建树时，哪种情况会" value="D"><b>D.</b> 一个父结点有两个孩子</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>根以外每个结点恰好有一个父结点，同一结点连接到两个父结点会破坏树结构。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题前序遍历的访问顺序是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题前序遍历的访问顺序是什么？" value="A"><b>A.</b> 左、根、右</label><label class="q-opt"><input type="radio" name="第 2 题前序遍历的访问顺序是什么？" value="B"><b>B.</b> 根、左、右</label><label class="q-opt"><input type="radio" name="第 2 题前序遍历的访问顺序是什么？" value="C"><b>C.</b> 左、右、根</label><label class="q-opt"><input type="radio" name="第 2 题前序遍历的访问顺序是什么？" value="D"><b>D.</b> 按层从左到右</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>前序中的“前”表示根在左右子树之前访问，固定顺序是根、左子树、右子树。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 3 题下图的中序遍历结果是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题下图的中序遍历结果是什么？" value="A"><b>A.</b> A B C</label><label class="q-opt"><input type="radio" name="第 3 题下图的中序遍历结果是什么？" value="B"><b>B.</b> B A C</label><label class="q-opt"><input type="radio" name="第 3 题下图的中序遍历结果是什么？" value="C"><b>C.</b> B C A</label><label class="q-opt"><input type="radio" name="第 3 题下图的中序遍历结果是什么？" value="D"><b>D.</b> C A B</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>中序遍历按左、根、右进行，先访问左孩子 B，再访问根 A，最后访问右孩子 C。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题层序遍历通常借助哪种结构保存等待访问的结点？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题层序遍历通常借助哪种结构保存等" value="A"><b>A.</b> 栈</label><label class="q-opt"><input type="radio" name="第 4 题层序遍历通常借助哪种结构保存等" value="B"><b>B.</b> 队列</label><label class="q-opt"><input type="radio" name="第 4 题层序遍历通常借助哪种结构保存等" value="C"><b>C.</b> 集合</label><label class="q-opt"><input type="radio" name="第 4 题层序遍历通常借助哪种结构保存等" value="D"><b>D.</b> 字符串</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>层序遍历要让先发现的结点先处理，队列的先进先出规则正好维持逐层顺序。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 5 题递归统计二叉树结点数，空指针应返回多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题递归统计二叉树结点数，空指针应" value="A"><b>A.</b> -1</label><label class="q-opt"><input type="radio" name="第 5 题递归统计二叉树结点数，空指针应" value="B"><b>B.</b> 0</label><label class="q-opt"><input type="radio" name="第 5 题递归统计二叉树结点数，空指针应" value="C"><b>C.</b> 1</label><label class="q-opt"><input type="radio" name="第 5 题递归统计二叉树结点数，空指针应" value="D"><b>D.</b> 当前深度</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>空树不含结点，所以空指针返回 0；非空结点再计算 1 加左右子树结点数。<br><span class="q-kp">对应知识点：04</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/tree-basics/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">上一父知识点 · 01</small><strong class="astro-23ojxnem">树的基础知识</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/special-binary-trees/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 03</small><strong class="astro-23ojxnem">特殊二叉树</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -513,7 +550,7 @@ int main() {    Node n4{4, nullptr, nullptr};    Node n5{5, nullptr, nullptr};  
       <a class="kp-nav" href="kp3.html">下一个：层序遍历 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-tree-traversal-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 根据关系构造树</a></li><li><a href="#kp-02">02 三种递归遍历</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-tree-traversal-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 根据关系构造树</a></li><li><a href="#kp-02">02 三种递归遍历</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -525,6 +562,31 @@ int main() {    Node n4{4, nullptr, nullptr};    Node n5{5, nullptr, nullptr};  
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

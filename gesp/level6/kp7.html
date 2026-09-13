@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,10 +489,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“二叉树搜索算法”，集中讲二叉排序树的查找、插入与遍历。结构定义已在“03 特殊二叉树”出现，这里固定采用左小右大、重复值不插入。</p><h2 id="kp-01">01 按大小关系查找</h2><p>从根开始：目标等于当前值时成功；目标更小就只进入左子树；目标更大就只进入右子树；走到空指针仍未相等则不存在。</p><p>直观记忆是“左边更小，右边更大”。这个方向来自二叉排序树的结构性质，不是随意选择；每比较一次，就能排除另一整棵子树。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;struct Node { int value; Node* left; Node* right; };
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 按大小关系查找</a><a href="#kp-02" class="astro-obblnf2s">02 递归插入</a><a href="#kp-03" class="astro-obblnf2s">03 中序验证与复杂度</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“二叉树搜索算法”，集中讲二叉排序树的查找、插入与遍历。结构定义已在“03 特殊二叉树”出现，这里固定采用左小右大、重复值不插入。</p><h2 id="kp-01">01 按大小关系查找</h2><p>从根开始：目标等于当前值时成功；目标更小就只进入左子树；目标更大就只进入右子树；走到空指针仍未相等则不存在。</p><p>直观记忆是“左边更小，右边更大”。这个方向来自二叉排序树的结构性质，不是随意选择；每比较一次，就能排除另一整棵子树。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;struct Node { int value; Node* left; Node* right; };
 Node* insert(Node* root, int value) {    if (root == nullptr) {  // 找到空位置，在这里连接新结点        return new Node{value, nullptr, nullptr};    }    if (value &lt; root-&gt;value) {  // 新值更小，应插入左子树        root-&gt;left = insert(root-&gt;left, value);    } else if (value &gt; root-&gt;value) {  // 新值更大，应插入右子树        root-&gt;right = insert(root-&gt;right, value);    }    return root;}
 bool search(Node* root, int value) {    if (root == nullptr) {  // 已走到空位置，说明查找不存在        return false;    }    if (value == root-&gt;value) {  // 当前结点就是目标，查找成功        return true;    }    if (value &lt; root-&gt;value) {  // 目标更小，只需继续查找左子树        return search(root-&gt;left, value);    }    // 目标更大，只需继续查找右子树    return search(root-&gt;right, value);}
-int main() {    int a[8] = {0, 8, 4, 12, 2, 6, 10, 14};  // 下标 0 占位，数据从 1 开始    Node* root = nullptr;    for (int i = 1; i &lt;= 7; i++) {  // 按给定顺序逐个建立二叉排序树        root = insert(root, a[i]);    }    cout &lt;&lt; (search(root, 10) ? "found" : "not found") &lt;&lt; '\n';    return 0;}</code></pre><h3 id="测试案例">测试案例</h3><table>
+int main() {    int a[8] = {0, 8, 4, 12, 2, 6, 10, 14};  // 下标 0 占位，数据从 1 开始    Node* root = nullptr;    for (int i = 1; i &lt;= 7; i++) {  // 按给定顺序逐个建立二叉排序树        root = insert(root, a[i]);    }    cout &lt;&lt; (search(root, 10) ? "found" : "not found") &lt;&lt; '\n';    return 0;}</code></pre>
+<h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -484,8 +504,8 @@ int main() {    int a[8] = {0, 8, 4, 12, 2, 6, 10, 14};  // 下标 0 占位，�
 <tbody>
 <tr>
 <td>基础</td>
-<td>插入 <code>5、3、8、2、6</code> 后查找 6</td>
-<td>路径 <code>5→8→6</code>，查找成功</td>
+<td>插入 <code dir="auto">5、3、8、2、6</code> 后查找 6</td>
+<td>路径 <code dir="auto">5→8→6</code>，查找成功</td>
 </tr>
 <tr>
 <td>边界</td>
@@ -500,10 +520,26 @@ int main() {    int a[8] = {0, 8, 4, 12, 2, 6, 10, 14};  // 下标 0 占位，�
 <tr>
 <td>特殊</td>
 <td>上述树中查找不存在的 7</td>
-<td>路径 <code>5→8→6→空</code>，返回不存在</td>
+<td>路径 <code dir="auto">5→8→6→空</code>，返回不存在</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>插入结果没有接回孩子</h3><div><div><strong><span>×</span> 错误写法</strong><code>insert(root-&gt;left, value);</code></div><div><strong><span>✓</span> 正确写法</strong><code>root-&gt;left = insert(root-&gt;left, value);</code></div></div><p><strong>原因：</strong>空位置创建的新结点返回后没有保存，会丢失。</p><p><strong>检查方法：</strong>递归插入返回更新后的子树根。</p></section><section><h3>把任意二叉树都按大小方向查找</h3><div><div><strong><span>×</span> 错误写法</strong><code>普通二叉树也根据目标小就向左、大就向右</code></div><div><strong><span>✓</span> 正确写法</strong><code>先确认整棵树满足二叉排序树规则，再使用比较搜索</code></div></div><p><strong>原因：</strong>只有二叉排序树保证左小右大，普通二叉树没有这个性质。</p><p><strong>检查方法：</strong>中序严格递增是本页约定下的一种检查方法。</p></section><h2 id="related-learning">关联学习</h2><p>二叉排序树的结构性质、中序有序结论见“03 特殊二叉树”；普通二叉树遍历见“02 树的构造与遍历”。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>插入结果没有接回孩子</h3><p><strong>原因：</strong>空位置创建的新结点返回后没有保存，会丢失。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>递归插入返回更新后的子树根。</p><h3>把任意二叉树都按大小方向查找</h3><p><strong>原因：</strong>只有二叉排序树保证左小右大，普通二叉树没有这个性质。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>中序严格递增是本页约定下的一种检查方法。</p><h2 id="related-learning">关联学习</h2><p>二叉排序树的结构性质、中序有序结论见“03 特殊二叉树”；普通二叉树遍历见“02 树的构造与遍历”。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能沿比较结果追踪查找路径</label><label class="q-check"><input type="checkbox"> 能在空位置创建结点并接回递归结果</label><label class="q-check"><input type="checkbox"> 能用中序结果和树高检查搜索树</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题在根值 8 处查找 5，下一步应走哪边？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题在根值 8 处查找 5，下一步" value="A"><b>A.</b> 左子树</label><label class="q-opt"><input type="radio" name="第 1 题在根值 8 处查找 5，下一步" value="B"><b>B.</b> 右子树</label><label class="q-opt"><input type="radio" name="第 1 题在根值 8 处查找 5，下一步" value="C"><b>C.</b> 同时走两边</label><label class="q-opt"><input type="radio" name="第 1 题在根值 8 处查找 5，下一步" value="D"><b>D.</b> 立即失败</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>5 小于当前结点 8，按二叉排序树性质只可能在左子树中继续查找。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题查找走到空指针仍未相等，说明什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题查找走到空指针仍未相等，说明什" value="A"><b>A.</b> 目标不存在</label><label class="q-opt"><input type="radio" name="第 2 题查找走到空指针仍未相等，说明什" value="B"><b>B.</b> 目标在根</label><label class="q-opt"><input type="radio" name="第 2 题查找走到空指针仍未相等，说明什" value="C"><b>C.</b> 必须层序遍历</label><label class="q-opt"><input type="radio" name="第 2 题查找走到空指针仍未相等，说明什" value="D"><b>D.</b> 树一定为空</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>沿大小关系走到空位置仍没有相等结点，说明该搜索路径已经证明目标不存在。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 3 题递归插入到空指针位置时应做什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题递归插入到空指针位置时应做什么" value="A"><b>A.</b> 创建并返回新结点</label><label class="q-opt"><input type="radio" name="第 3 题递归插入到空指针位置时应做什么" value="B"><b>B.</b> 删除父结点</label><label class="q-opt"><input type="radio" name="第 3 题递归插入到空指针位置时应做什么" value="C"><b>C.</b> 回到根重新开始</label><label class="q-opt"><input type="radio" name="第 3 题递归插入到空指针位置时应做什么" value="D"><b>D.</b> 不做任何事</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>空指针就是新关键字应连接的位置，创建新结点并返回，父层再接回对应孩子指针。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题按“重复值不插入”约定，遇到相等值怎样处理？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题按“重复值不插入”约定，遇到相" value="A"><b>A.</b> 接到左边</label><label class="q-opt"><input type="radio" name="第 4 题按“重复值不插入”约定，遇到相" value="B"><b>B.</b> 接到右边</label><label class="q-opt"><input type="radio" name="第 4 题按“重复值不插入”约定，遇到相" value="C"><b>C.</b> 直接返回当前子树根</label><label class="q-opt"><input type="radio" name="第 4 题按“重复值不插入”约定，遇到相" value="D"><b>D.</b> 清空整棵树</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>相等时直接返回当前子树根，不创建新结点，才能保持严格左小右大的统一规则。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 5 题二叉排序树完全退化成单链时，查找最坏复杂度是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题二叉排序树完全退化成单链时，查" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 5 题二叉排序树完全退化成单链时，查" value="B"><b>B.</b> O(log n)</label><label class="q-opt"><input type="radio" name="第 5 题二叉排序树完全退化成单链时，查" value="C"><b>C.</b> O(n)</label><label class="q-opt"><input type="radio" name="第 5 题二叉排序树完全退化成单链时，查" value="D"><b>D.</b> O(n²)</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>退化单链的树高与结点数同阶，查找可能依次比较全部结点，因此最坏为 O(n)。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/bfs/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">上一父知识点 · 06</small><strong class="astro-23ojxnem">宽度优先搜索 BFS</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/one-dimensional-dp/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 08</small><strong class="astro-23ojxnem">简单动态规划</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -512,7 +548,7 @@ int main() {    int a[8] = {0, 8, 4, 12, 2, 6, 10, 14};  // 下标 0 占位，�
       <a class="kp-nav" href="kp8.html">下一个：路径枚举与回溯 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#kp-01">01 按大小关系查找</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#kp-01">01 按大小关系查找</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -524,6 +560,31 @@ int main() {    int a[8] = {0, 8, 4, 12, 2, 6, 10, 14};  // 下标 0 占位，�
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

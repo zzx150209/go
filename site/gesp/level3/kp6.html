@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -472,35 +491,35 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <article class="article-body">
     <h2 id="本课先记住">本课先记住</h2>
 <ul>
-<li><strong>核心结论：</strong> 一个字符也没有、长度为 0 的字符串，叫作空串。原字符串中连续的一段字符，叫作子串。字符数组中有效文本最后一个字符后面的 <code>\0</code> 用来告诉程序字符串在哪里结束，因此它叫作结束标记。</li>
-<li><strong>常用语法：</strong> 用 <code>getline(cin, s)</code> 读取包含空格的一整行；用 <code>s.length()</code> 得到字符个数；合法下标是 <code>0</code> 到 <code>s.length() - 1</code>；用 <code>find</code>、<code>substr</code> 和 <code>replace</code> 处理连续文本。</li>
-<li><strong>最小示例：</strong> <code>string s = "aB2";</code> 中，<code>s[0]</code> 是 <code>'a'</code>。把小写字母逐个改成大写后得到 <code>"AB2"</code>，原来的大写字母和数字保持不变。</li>
-<li><strong>关键易错点：</strong> 空串不能访问 <code>s[0]</code>；<code>find</code> 返回 0 也表示在开头找到，失败才返回 <code>string::npos</code>；字符数组容量为 <code>N</code> 时最多保存 <code>N - 1</code> 个普通字符，最后要留给 <code>\0</code>。</li>
+<li><strong>核心结论：</strong> 一个字符也没有、长度为 0 的字符串，叫作空串。原字符串中连续的一段字符，叫作子串。字符数组中有效文本最后一个字符后面的 <code dir="auto">\0</code> 用来告诉程序字符串在哪里结束，因此它叫作结束标记。</li>
+<li><strong>常用语法：</strong> 用 <code dir="auto">getline(cin, s)</code> 读取包含空格的一整行；用 <code dir="auto">s.length()</code> 得到字符个数；合法下标是 <code dir="auto">0</code> 到 <code dir="auto">s.length() - 1</code>；用 <code dir="auto">find</code>、<code dir="auto">substr</code> 和 <code dir="auto">replace</code> 处理连续文本。</li>
+<li><strong>最小示例：</strong> <code dir="auto">string s = "aB2";</code> 中，<code dir="auto">s[0]</code> 是 <code dir="auto">'a'</code>。把小写字母逐个改成大写后得到 <code dir="auto">"AB2"</code>，原来的大写字母和数字保持不变。</li>
+<li><strong>关键易错点：</strong> 空串不能访问 <code dir="auto">s[0]</code>；<code dir="auto">find</code> 返回 0 也表示在开头找到，失败才返回 <code dir="auto">string::npos</code>；字符数组容量为 <code dir="auto">N</code> 时最多保存 <code dir="auto">N - 1</code> 个普通字符，最后要留给 <code dir="auto">\0</code>。</li>
 </ul>
-
+<nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 字符、string 与字符数组</a><a href="#kp-02" class="astro-obblnf2s">02 字符串输入</a><a href="#kp-03" class="astro-obblnf2s">03 长度、空串与下标</a><a href="#kp-04" class="astro-obblnf2s">04 字符串遍历</a><a href="#kp-05" class="astro-obblnf2s">05 大小写转换</a><a href="#kp-06" class="astro-obblnf2s">06 通过下标修改字符</a><a href="#kp-07" class="astro-obblnf2s">07 字符串比较与字典序</a><a href="#kp-08" class="astro-obblnf2s">08 连接、截取、查找与替换</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
 <h2 id="知识范围与使用边界">知识范围与使用边界</h2>
 <p>字符串用来保存和处理文本。本课先区分一个字符、一串字符和固定容量字符数组，再学习输入、长度、下标、拼接、查找和替换。</p>
 <h2 id="核心概念">核心概念</h2>
 <p>本课只解决三个核心问题：<strong>核心一：文本表示与安全输入</strong>，先判断数据是一个字符、一段文本还是固定容量字符数组，再选择不会丢失空格的输入方式；<strong>核心二：按下标遍历、修改与比较</strong>，只访问合法位置并解释每轮怎样改变文本；<strong>核心三：连接、截取、查找、替换与分割</strong>，根据位置、数量和修改后的新长度检查边界。八个知识章节完整保留，但都服务于这三个核心。</p>
 <p>学完本课，你需要会：</p>
 <ul>
-<li>使用 <code>char</code> 保存一个字符，使用 <code>string</code> 保存一段文本；</li>
-<li>根据文本是否包含空格选择 <code>cin &gt;&gt;</code> 或 <code>getline</code>；</li>
+<li>使用 <code dir="auto">char</code> 保存一个字符，使用 <code dir="auto">string</code> 保存一段文本；</li>
+<li>根据文本是否包含空格选择 <code dir="auto">cin &gt;&gt;</code> 或 <code dir="auto">getline</code>；</li>
 <li>使用长度和下标遍历字符串，并在访问前检查边界；</li>
-<li>使用 <code>+</code>、<code>find</code>、<code>substr</code> 和 <code>replace</code> 处理文本；</li>
-<li>为字符数组保留 <code>\0</code> 结束标记，避免写出缓冲区。</li>
+<li>使用 <code dir="auto">+</code>、<code dir="auto">find</code>、<code dir="auto">substr</code> 和 <code dir="auto">replace</code> 处理文本；</li>
+<li>为字符数组保留 <code dir="auto">\0</code> 结束标记，避免写出缓冲区。</li>
 </ul>
 <p>本课不使用指针、函数、递归、文件、异常处理或更高等级的字符串算法。</p>
 <pre><code>char letter = 'A'; // 用 letter 保存单个英文字母字符；当前值由 'A' 得到char digit = '7'; // 用 digit 保存字符形式的数字 7，而不是整数 7；当前值由 '7' 得到</code></pre>
-<p><code>string</code> 保存一串字符，字符串使用双引号：</p>
+<p><code dir="auto">string</code> 保存一串字符，字符串使用双引号：</p>
 <pre><code>string word = "Apple"; // 用 word 保存不含空格的单词文本；当前值由 "Apple" 得到string sentence = "I like C++"; // 用 sentence 保存可能包含空格的一整行文本；当前值由 "I like C++" 得到</code></pre>
-<p><code>'A'</code> 是一个字符，<code>"A"</code> 是长度为 1 的字符串。比较当前位置的单个字符时写 <code>text[i] == 'A'</code>；查找一段文本时写 <code>text.find("cat")</code>。</p>
+<p><code dir="auto">'A'</code> 是一个字符，<code dir="auto">"A"</code> 是长度为 1 的字符串。比较当前位置的单个字符时写 <code dir="auto">text[i] == 'A'</code>；查找一段文本时写 <code dir="auto">text.find("cat")</code>。</p>
 <p>字符数组也能保存文本，但它的容量在声明时已经固定：</p>
 <pre><code>char word[10] = "go"; // 字符串字面量依次写入 'g'、'o'、'\0'，其余位置补 0</code></pre>
-<p>数组中依次保存 <code>'g'</code>、<code>'o'</code> 和 <code>\0</code>。<code>\0</code> 是数值为 0 的结束标记，不是可显示的字符 <code>'0'</code>。</p>
-<p>在 C++ 中，<code>sizeof(char)</code> 规定为 1 字节，所以 <code>char word[10]</code> 一共占 10 字节。用 <code>"go"</code> 初始化后，前 3 个位置依次是 <code>'g'</code>、<code>'o'</code>、<code>'\0'</code>，其余位置也会被初始化为 0。这里要分清三个量：数组容量是 10，文本长度是 2，为文本和结束标记实际用到的位置数是 3。</p>
-<p>对这个完整字符数组，<code>sizeof(word)</code> 得到固定容量 10；<code>strlen(word)</code> 需要 <code>&lt;cstring&gt;</code>，它从开头数到第一个 <code>\0</code>，结果是文本长度 2。若使用 <code>string text = "go";</code>，应写 <code>text.size()</code> 或 <code>text.length()</code> 得到 2，不能用 <code>sizeof(text)</code> 当作字符个数，因为 <code>string</code> 对象还要保存自己的管理信息。</p>
-<p>容量为 10 的字符数组若要保存以 <code>\0</code> 结尾的普通文本，最多只能放 9 个可显示字符。<code>word[9]</code> 是最后一个存储位置，不能在已经放满 10 个可显示字符后再把 <code>\0</code> 写到 <code>word[10]</code>，因为下标 10 已经越界。</p>
+<p>数组中依次保存 <code dir="auto">'g'</code>、<code dir="auto">'o'</code> 和 <code dir="auto">\0</code>。<code dir="auto">\0</code> 是数值为 0 的结束标记，不是可显示的字符 <code dir="auto">'0'</code>。</p>
+<p>在 C++ 中，<code dir="auto">sizeof(char)</code> 规定为 1 字节，所以 <code dir="auto">char word[10]</code> 一共占 10 字节。用 <code dir="auto">"go"</code> 初始化后，前 3 个位置依次是 <code dir="auto">'g'</code>、<code dir="auto">'o'</code>、<code dir="auto">'\0'</code>，其余位置也会被初始化为 0。这里要分清三个量：数组容量是 10，文本长度是 2，为文本和结束标记实际用到的位置数是 3。</p>
+<p>对这个完整字符数组，<code dir="auto">sizeof(word)</code> 得到固定容量 10；<code dir="auto">strlen(word)</code> 需要 <code dir="auto">&lt;cstring&gt;</code>，它从开头数到第一个 <code dir="auto">\0</code>，结果是文本长度 2。若使用 <code dir="auto">string text = "go";</code>，应写 <code dir="auto">text.size()</code> 或 <code dir="auto">text.length()</code> 得到 2，不能用 <code dir="auto">sizeof(text)</code> 当作字符个数，因为 <code dir="auto">string</code> 对象还要保存自己的管理信息。</p>
+<p>容量为 10 的字符数组若要保存以 <code dir="auto">\0</code> 结尾的普通文本，最多只能放 9 个可显示字符。<code dir="auto">word[9]</code> 是最后一个存储位置，不能在已经放满 10 个可显示字符后再把 <code dir="auto">\0</code> 写到 <code dir="auto">word[10]</code>，因为下标 10 已经越界。</p>
 <table>
 <thead>
 <tr>
@@ -512,55 +531,55 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>char</code></td>
+<td><code dir="auto">char</code></td>
 <td>一个字符</td>
-<td><code>char c = 'x';</code></td>
+<td><code dir="auto">char c = 'x';</code></td>
 <td>使用单引号</td>
 </tr>
 <tr>
-<td><code>string</code></td>
+<td><code dir="auto">string</code></td>
 <td>可变长度文本</td>
-<td><code>string s = "cat";</code></td>
+<td><code dir="auto">string s = "cat";</code></td>
 <td>空串不能访问首尾字符</td>
 </tr>
 <tr>
-<td><code>char s[105]</code></td>
+<td><code dir="auto">char s[105]</code></td>
 <td>固定容量字符序列</td>
-<td><code>char s[105] = {};</code></td>
-<td>最后要为 <code>\0</code> 留一个位置</td>
+<td><code dir="auto">char s[105] = {};</code></td>
+<td>最后要为 <code dir="auto">\0</code> 留一个位置</td>
 </tr>
 </tbody>
 </table>
 <h2 id="kp-02">02 字符串输入</h2>
 <h3 id="字符串输入">字符串输入</h3>
-<p><code>cin &gt;&gt; text</code> 读到空格、制表符或换行时停止，适合读取一个不含空格的单词：</p>
+<p><code dir="auto">cin &gt;&gt; text</code> 读到空格、制表符或换行时停止，适合读取一个不含空格的单词：</p>
 <pre><code>string word; // 用 word 保存不含空格的单词文本；值将在紧接着的输入或判断分支中确定cin &gt;&gt; word; // 依次读入 word（不含空格的单词文本）</code></pre>
-<p><code>getline(cin, text)</code> 会读取一整行，空格也是文本的一部分：</p>
+<p><code dir="auto">getline(cin, text)</code> 会读取一整行，空格也是文本的一部分：</p>
 <pre><code>string sentence; // 用 sentence 保存可能包含空格的一整行文本；值将在紧接着的输入或判断分支中确定getline(cin, sentence); // 读取一整行文本（包括中间的空格）并保存到 sentence</code></pre>
-<p>如果前面刚使用 <code>cin &gt;&gt; n</code> 读过数据，输入流中通常还留着一个换行符。在题目保证数字后立即换行时，可以先忽略这个换行，再读取下一整行：</p>
+<p>如果前面刚使用 <code dir="auto">cin &gt;&gt; n</code> 读过数据，输入流中通常还留着一个换行符。在题目保证数字后立即换行时，可以先忽略这个换行，再读取下一整行：</p>
 <pre><code>int n; // 用 n 保存数字输入，用来演示 getline 前的换行处理；值将在紧接着的输入或判断分支中确定cin &gt;&gt; n; // 依次读入 n（数字输入，用来演示 getline 前的换行处理）cin.ignore(); // 忽略数字后留下的一个换行符，避免 getline 立即读到空行
 string sentence; // 用 sentence 保存可能包含空格的一整行文本；值将在紧接着的输入或判断分支中确定getline(cin, sentence); // 读取一整行文本（包括中间的空格）并保存到 sentence</code></pre>
-<p>这里 <code>ignore()</code> 只处理紧跟在数字后的一个字符，因此这段写法依赖“数字后立即换行”的输入格式。若题目输入格式不同，要按题意处理分隔字符。</p>
+<p>这里 <code dir="auto">ignore()</code> 只处理紧跟在数字后的一个字符，因此这段写法依赖“数字后立即换行”的输入格式。若题目输入格式不同，要按题意处理分隔字符。</p>
 <h2 id="kp-03">03 长度、空串与下标</h2>
 <h3 id="字符串长度空串和下标">字符串长度、空串和下标</h3>
-<p><code>size()</code> 和 <code>length()</code> 都返回字符串中的字符个数。本站示例统一使用 <code>length()</code>；官方题中看到 <code>size()</code> 时，要知道它们在这里作用相同。</p>
-<p><code>empty()</code> 用来判断字符串是否为空：</p>
+<p><code dir="auto">size()</code> 和 <code dir="auto">length()</code> 都返回字符串中的字符个数。本站示例统一使用 <code dir="auto">length()</code>；官方题中看到 <code dir="auto">size()</code> 时，要知道它们在这里作用相同。</p>
+<p><code dir="auto">empty()</code> 用来判断字符串是否为空：</p>
 <pre><code>if (text.empty()) { // empty() 为 true 表示长度为 0，此时没有任何字符可访问    cout &lt;&lt; "Empty"; // 输出提示 Empty，表示当前判断分支的结果} else { // 条件“text.empty()”不成立时，改走这一条处理路径    cout &lt;&lt; text[0]; // 字符串非空，输出下标 0 的首字符} // 条件“text.empty()”不成立时的替代动作到此完成</code></pre>
 <p>如果要读取首个字符，也要先保护空串：</p>
 <pre><code>string s; // 用 s 保存本例正在遍历或修改的字符串；值将在紧接着的输入或判断分支中确定getline(cin, s); // 读取一整行文本（包括中间的空格）并保存到 s
 if (!s.empty()) { // 只有字符串非空时才能安全访问下标 0    char first = s[0]; // 用 first 保存字符串的第一个字符；当前值由 s[0] 得到    cout &lt;&lt; first; // 输出非空字符串的首字符} // 空串不会访问 s[0]；非空时 first 已保存首字符</code></pre>
-<p>字符串位置和长度使用 <code>string::size_type</code> 保存。这是 <code>string</code> 专门提供的非负整数类型，<code>length()</code> 的返回值也是这个类型。先了解它，再用它遍历字符串，就不会把普通 <code>int</code> 和字符串长度混在一起比较。</p>
-<p>长度为 5 的字符串，有效下标是 0、1、2、3、4。不存在下标 5。访问首项 <code>text[0]</code> 或末项 <code>text[text.length() - 1]</code> 前，必须先确认字符串不是空串。</p>
+<p>字符串位置和长度使用 <code dir="auto">string::size_type</code> 保存。这是 <code dir="auto">string</code> 专门提供的非负整数类型，<code dir="auto">length()</code> 的返回值也是这个类型。先了解它，再用它遍历字符串，就不会把普通 <code dir="auto">int</code> 和字符串长度混在一起比较。</p>
+<p>长度为 5 的字符串，有效下标是 0、1、2、3、4。不存在下标 5。访问首项 <code dir="auto">text[0]</code> 或末项 <code dir="auto">text[text.length() - 1]</code> 前，必须先确认字符串不是空串。</p>
 <p><strong>核心二：按下标遍历、修改与比较</strong></p>
 <h2 id="kp-04">04 字符串遍历</h2>
 <h3 id="字符串遍历">字符串遍历</h3>
-<p>下面的片段读取一整行，并统计字符 <code>'a'</code> 出现的次数。它复用本课的合法下标循环，但不是另一份完整程序：</p>
+<p>下面的片段读取一整行，并统计字符 <code dir="auto">'a'</code> 出现的次数。它复用本课的合法下标循环，但不是另一份完整程序：</p>
 <pre><code>string text;getline(cin, text);int count = 0;for (string::size_type i = 0; i &lt; text.length(); i++) {    if (text[i] == 'a') {        count++;    }}</code></pre>
-<p>空格和标点也各占一个位置。空串的长度为 0，循环第一次判断就不成立，因此不会访问 <code>text[0]</code>。</p>
+<p>空格和标点也各占一个位置。空串的长度为 0，循环第一次判断就不成立，因此不会访问 <code dir="auto">text[0]</code>。</p>
 <pre><code>char lower = tolower(ch); // 用 lower 保存把当前字符转换成小写后的结果；当前值由 tolower(ch) 得到char upper = toupper(ch); // 用 upper 保存把当前字符转换成大写后的结果；当前值由 toupper(ch) 得到</code></pre>
-<p>例如，字符串已经保存在 <code>s</code> 中时，可以用下面的局部片段统一改成小写：</p>
+<p>例如，字符串已经保存在 <code dir="auto">s</code> 中时，可以用下面的局部片段统一改成小写：</p>
 <pre><code>for (string::size_type i = 0; i &lt; s.size(); i++) { // 从下标 0 开始逐个处理有效字符    s[i] = tolower(s[i]); // 接住转换后的字符，再写回原来的位置}</code></pre>
-<p>如果只想判断而不转换，可以写 <code>if (islower(ch))</code> 或 <code>if (isupper(ch))</code>。它们回答的是“这个字符是不是英文小写/大写字母”，不是比较两个字符串。</p>
+<p>如果只想判断而不转换，可以写 <code dir="auto">if (islower(ch))</code> 或 <code dir="auto">if (isupper(ch))</code>。它们回答的是“这个字符是不是英文小写/大写字母”，不是比较两个字符串。</p>
 <p><h2 id="kp-06">06 通过下标修改字符</h2>
 字符串下标不仅可以读取字符，也可以直接修改合法位置上的字符。下面的完整程序把一行文本中的小写英文字母改成大写：</p>
 <h3 id="完整程序逐字符转成大写">完整程序：逐字符转成大写</h3>
@@ -568,93 +587,93 @@ if (!s.empty()) { // 只有字符串非空时才能安全访问下标 0    char 
 int main() { // 程序从这里开始，把字符串中的小写字母改成大写    string s; // 用 s 保存本例正在遍历或修改的字符串；值将在紧接着的输入或判断分支中确定    getline(cin, s); // 读取一整行文本（包括中间的空格）并保存到 s
     // 从下标 0 到最后一个有效位置，逐个检查并修改小写英文字母。    for (string::size_type i = 0; i &lt; s.size(); i++) { // 让下标覆盖每个有效字符：继续条件是 i &lt; s.size()，每轮结束执行 i++        if (s[i] &gt;= 'a' &amp;&amp; s[i] &lt;= 'z') {  // 当前字符是小写字母，把它改成对应大写字母            s[i] = s[i] - 'a' + 'A'; // 保持字母序号不变，把当前小写字母映射到对应大写字母        } // 小写字母已经转成对应大写，其他字符保持原样    } // s[i] 是否需要转成大写已处理，i++ 后继续下一字符
     cout &lt;&lt; s &lt;&lt; '\n'; // 输出修改后的完整字符串并换行    return 0; // 修改后的大写文本已输出，向运行环境返回成功状态 0} // 通过下标原地修改字符串的完整过程结束</code></pre>
-<p>表达式 <code>s[i] - 'a'</code> 得到当前小写字母与 <code>'a'</code> 的编码距离，再加上 <code>'A'</code> 就得到对应的大写字母。这个转换依据英文字母编码连续排列的特点；字符编码基础可回看<a href="/gesp/level2/ascii/">二级 ASCII 编码课程</a>。</p>
-<p>长度为 <code>s.size()</code> 的字符串，最后一个合法下标是 <code>s.size() - 1</code>。<code>s[s.size()]</code> 已经越过最后一个字符，不能读取也不能修改。空串没有任何合法下标，所以访问前仍要先检查 <code>s.empty()</code>。</p>
+<p>表达式 <code dir="auto">s[i] - 'a'</code> 得到当前小写字母与 <code dir="auto">'a'</code> 的编码距离，再加上 <code dir="auto">'A'</code> 就得到对应的大写字母。这个转换依据英文字母编码连续排列的特点；字符编码基础可回看<a href="/gesp/level2/ascii/">二级 ASCII 编码课程</a>。</p>
+<p>长度为 <code dir="auto">s.size()</code> 的字符串，最后一个合法下标是 <code dir="auto">s.size() - 1</code>。<code dir="auto">s[s.size()]</code> 已经越过最后一个字符，不能读取也不能修改。空串没有任何合法下标，所以访问前仍要先检查 <code dir="auto">s.empty()</code>。</p>
 <h3 id="两端交换完成字符串反转">两端交换完成字符串反转</h3>
 <p>字符串反转和数组反转使用同一过程：左下标从 0 开始，右下标从最后一个字符开始，每轮交换一对字符后同时向中间移动。</p>
 <pre><code>int left = 0; // 左下标从字符串首字符开始int right = (int)s.length() - 1; // 先把长度转成 int 再减 1，空串时得到 -1 而不会访问字符while (left &lt; right) { // 左右下标尚未相遇时，继续交换一对字符    char temporary = s[left]; // 暂存左侧字符，避免下一行覆盖后丢失    s[left] = s[right]; // 把右侧字符写到当前左侧位置    s[right] = temporary; // 把原左侧字符写到当前右侧位置    left++; // 左下标向中间移动一格    right--; // 右下标向中间移动一格} // 左右下标相遇或交错时，整个字符串已经反转</code></pre>
-<p>对 <code>"abcd"</code>，第一次交换下标 0 和 3 得到 <code>"dbca"</code>，第二次交换下标 1 和 2 得到 <code>"dcba"</code>，然后 <code>left = 2</code>、<code>right = 1</code>，条件不成立并停止。空串或长度为 1 的字符串一开始就不满足 <code>left &lt; right</code>，不会访问不存在的位置。</p>
+<p>对 <code dir="auto">"abcd"</code>，第一次交换下标 0 和 3 得到 <code dir="auto">"dbca"</code>，第二次交换下标 1 和 2 得到 <code dir="auto">"dcba"</code>，然后 <code dir="auto">left = 2</code>、<code dir="auto">right = 1</code>，条件不成立并停止。空串或长度为 1 的字符串一开始就不满足 <code dir="auto">left &lt; right</code>，不会访问不存在的位置。</p>
 <h3 id="简单密码转换每个小写字母后移一位">简单密码转换：每个小写字母后移一位</h3>
-<p>简单密码题通常会明确给出字符映射规则。下面只处理常见 GCC/OJ 的 ASCII 小写英文字母：<code>a</code> 变成 <code>b</code>，……，<code>y</code> 变成 <code>z</code>，<code>z</code> 回到 <code>a</code>。输入若含空格、数字或大写字母，必须另按题意决定是否保留，不能擅自套用这段规则。</p>
+<p>简单密码题通常会明确给出字符映射规则。下面只处理常见 GCC/OJ 的 ASCII 小写英文字母：<code dir="auto">a</code> 变成 <code dir="auto">b</code>，……，<code dir="auto">y</code> 变成 <code dir="auto">z</code>，<code dir="auto">z</code> 回到 <code dir="auto">a</code>。输入若含空格、数字或大写字母，必须另按题意决定是否保留，不能擅自套用这段规则。</p>
 <pre><code>for (string::size_type i = 0; i &lt; s.size(); i++) { // 从左到右处理每个待加密字符    if (s[i] == 'z') { // z 已在小写字母末尾，后移一位要回到 a        s[i] = 'a'; // 按首尾相接规则把 z 替换成 a    } else if (s[i] &gt;= 'a' &amp;&amp; s[i] &lt;= 'y') { // a 到 y 都有紧邻的下一个小写字母        s[i] = s[i] + 1; // 利用 ASCII 连续编码，把当前字符后移一位    } // 其他字符不满足两个分支，因此保持原样} // 所有字符处理完后，s 保存完整密码转换结果</code></pre>
-<p>例如 <code>"az by"</code> 依次变为 <code>"ba cz"</code>：<code>a → b</code>、<code>z → a</code>、空格保持、<code>b → c</code>、<code>y → z</code>。这类题的关键不是背代码，而是先把“哪些字符会变、怎样变、边界字符怎样回绕”写成完整规则。</p>
-<p>片段 <code>s[1] = 'd';</code> 会让 abc 修改为 adc：下标 1 是第二个字符，赋值只改变这个位置，原来的 <code>a</code> 和 <code>c</code> 保持不变。</p>
+<p>例如 <code dir="auto">"az by"</code> 依次变为 <code dir="auto">"ba cz"</code>：<code dir="auto">a → b</code>、<code dir="auto">z → a</code>、空格保持、<code dir="auto">b → c</code>、<code dir="auto">y → z</code>。这类题的关键不是背代码，而是先把“哪些字符会变、怎样变、边界字符怎样回绕”写成完整规则。</p>
+<p>片段 <code dir="auto">s[1] = 'd';</code> 会让 abc 修改为 adc：下标 1 是第二个字符，赋值只改变这个位置，原来的 <code dir="auto">a</code> 和 <code dir="auto">c</code> 保持不变。</p>
 <h2 id="kp-07">07 字符串比较与字典序</h2>
 <h3 id="字符串比较与字典序">字符串比较与字典序</h3>
-<p>两个字符串可以使用 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code>、<code>&gt;=</code> 比较。<code>==</code> 和 <code>!=</code> 判断整段文本是否相同；大小关系按字典序比较，也就是从左到右找到第一对不同字符，再比较它们的字符编码。若前面的字符都相同，较短的字符串排在前面。</p>
+<p>两个字符串可以使用 <code dir="auto">==</code>、<code dir="auto">!=</code>、<code dir="auto">&lt;</code>、<code dir="auto">&gt;</code>、<code dir="auto">&lt;=</code>、<code dir="auto">&gt;=</code> 比较。<code dir="auto">==</code> 和 <code dir="auto">!=</code> 判断整段文本是否相同；大小关系按字典序比较，也就是从左到右找到第一对不同字符，再比较它们的字符编码。若前面的字符都相同，较短的字符串排在前面。</p>
 <pre><code>string firstName = "Xiao"; // 用 firstName 保存名字的前半部分；当前值由 "Xiao" 得到string lastName = "Dengzi"; // 用 lastName 保存名字的后半部分；当前值由 "Dengzi" 得到string fullName = firstName + " " + lastName; // 用 fullName 保存加入空格后拼接成的完整名字；当前值由 firstName + " " + lastName 得到</code></pre>
-<p>结果是 <code>"Xiao Dengzi"</code>。中间的空格也要明确写入，不能假定程序会自动添加。</p>
+<p>结果是 <code dir="auto">"Xiao Dengzi"</code>。中间的空格也要明确写入，不能假定程序会自动添加。</p>
 <h3 id="字符串截取-substr">字符串截取 substr()</h3>
-<p><code>substr(position, count)</code> 从下标 <code>position</code> 开始，截取至多 <code>count</code> 个字符。</p>
+<p><code dir="auto">substr(position, count)</code> 从下标 <code dir="auto">position</code> 开始，截取至多 <code dir="auto">count</code> 个字符。</p>
 <h2 id="substr-截取位置示意">substr() 截取位置示意</h2>
 <pre><code>string text = "ABCDE123"; // 原字符串共 8 个字符，下面将从下标 2 开始截取string part = text.substr(2, 3); // 从下标 2 开始连续截取 3 个字符，part 得到 "CDE"</code></pre>
-<p>下标 2 对应字符 <code>'C'</code>，向后取 3 个字符，<code>part</code> 得到 <code>"CDE"</code>。本课只在已经确认起点不超过字符串长度时使用 <code>substr</code>，不讨论非法起点引发的异常。</p>
+<p>下标 2 对应字符 <code dir="auto">'C'</code>，向后取 3 个字符，<code dir="auto">part</code> 得到 <code dir="auto">"CDE"</code>。本课只在已经确认起点不超过字符串长度时使用 <code dir="auto">substr</code>，不讨论非法起点引发的异常。</p>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="字符串查找-find">字符串查找 find()</h3>
-<p><code>find(target)</code> 查找目标字符串第一次出现的位置。找到时返回起始下标，找不到时返回特殊标记 <code>string::npos</code>。</p>
-<p>前面已经用 <code>string::size_type</code> 保存长度和下标。<code>find</code> 还会在失败时返回同一类型的特殊标记 <code>string::npos</code>，所以查找位置也继续使用这个类型。</p>
+<p><code dir="auto">find(target)</code> 查找目标字符串第一次出现的位置。找到时返回起始下标，找不到时返回特殊标记 <code dir="auto">string::npos</code>。</p>
+<p>前面已经用 <code dir="auto">string::size_type</code> 保存长度和下标。<code dir="auto">find</code> 还会在失败时返回同一类型的特殊标记 <code dir="auto">string::npos</code>，所以查找位置也继续使用这个类型。</p>
 <pre><code>string text = "red blue red"; // 原文本中 red 出现两次，find 默认只返回第一次的位置string::size_type position = text.find("red"); // 查找 red 第一次出现的位置；找不到时保存 string::npos</code></pre>
-<p>这里第一次出现的位置是 0。位置 0 仍然表示查找成功，所以不能把 <code>find</code> 的结果直接当成真假值。</p>
+<p>这里第一次出现的位置是 0。位置 0 仍然表示查找成功，所以不能把 <code dir="auto">find</code> 的结果直接当成真假值。</p>
 <h3 id="字符串替换-replace">字符串替换 replace()</h3>
-<p><code>replace(position, count, newText)</code> 从 <code>position</code> 开始，替换 <code>count</code> 个字符。使用前必须先确认已经找到目标：</p>
+<p><code dir="auto">replace(position, count, newText)</code> 从 <code dir="auto">position</code> 开始，替换 <code dir="auto">count</code> 个字符。使用前必须先确认已经找到目标：</p>
 <pre><code>if (position != string::npos) { // position 不是 npos，说明 find 确实找到了目标词    text.replace(position, 3, "green"); // 从找到的位置开始删去 3 个字符，再写入 green} // 找到时已完成首次替换；未找到时不进入分支，原文本保持不变</code></pre>
-<p>替换后 <code>text</code> 变成 <code>"green blue red"</code>。新文本可能比旧文本更长或更短，后续访问必须根据替换后的新长度判断。</p>
+<p>替换后 <code dir="auto">text</code> 变成 <code dir="auto">"green blue red"</code>。新文本可能比旧文本更长或更短，后续访问必须根据替换后的新长度判断。</p>
 <p>下面的局部片段把查找、截取、替换和拼接连在一起，并且只替换第一次出现的目标词：</p>
 <h3 id="查找并替换片段">查找并替换片段</h3>
 <pre><code>string oldWord = "cat"; // oldWord 是待查找的旧词string newWord = "dog"; // newWord 是替换后写入的新词string::size_type position = text.find(oldWord); // 保存第一次出现的位置if (position != string::npos) { // 只有确实找到时才能使用这个位置    string piece = text.substr(position, oldWord.length()); // 截取被替换的旧片段    text.replace(position, oldWord.length(), newWord); // 在原位置写入新词    string result = "Result: " + text; // 用修改后的文本完成拼接}</code></pre>
 <h3 id="字符串分割">字符串分割</h3>
-<p>C++14 的 <code>string</code> 没有 split() 成员函数。字符串分割是按一个分隔字符把原字符串拆成若干片段。</p>
-<p>例如把 club.code.org 按 <code>.</code> 分割。开始时 <code>part</code> 为空；依次读到 <code>c</code>、<code>l</code>、<code>u</code>、<code>b</code> 后，<code>part</code> 变成 <code>club</code>。读到第一个 <code>.</code> 时输出 <code>club</code> 并清空 <code>part</code>；随后同样得到并输出 <code>code</code>；循环结束时 <code>part</code> 里还剩 <code>org</code>，最后再输出一次。</p>
+<p>C++14 的 <code dir="auto">string</code> 没有 split() 成员函数。字符串分割是按一个分隔字符把原字符串拆成若干片段。</p>
+<p>例如把 club.code.org 按 <code dir="auto">.</code> 分割。开始时 <code dir="auto">part</code> 为空；依次读到 <code dir="auto">c</code>、<code dir="auto">l</code>、<code dir="auto">u</code>、<code dir="auto">b</code> 后，<code dir="auto">part</code> 变成 <code dir="auto">club</code>。读到第一个 <code dir="auto">.</code> 时输出 <code dir="auto">club</code> 并清空 <code dir="auto">part</code>；随后同样得到并输出 <code dir="auto">code</code>；循环结束时 <code dir="auto">part</code> 里还剩 <code dir="auto">org</code>，最后再输出一次。</p>
 <table>
 <thead>
 <tr>
 <th>当前读到的字符</th>
-<th><code>part</code> 的变化</th>
+<th><code dir="auto">part</code> 的变化</th>
 <th>输出</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>c</code>、<code>l</code>、<code>u</code>、<code>b</code></td>
-<td>逐个累积为 <code>club</code></td>
+<td><code dir="auto">c</code>、<code dir="auto">l</code>、<code dir="auto">u</code>、<code dir="auto">b</code></td>
+<td>逐个累积为 <code dir="auto">club</code></td>
 <td>暂不输出</td>
 </tr>
 <tr>
-<td><code>.</code></td>
+<td><code dir="auto">.</code></td>
 <td>输出后清空</td>
-<td><code>club</code></td>
+<td><code dir="auto">club</code></td>
 </tr>
 <tr>
-<td><code>c</code>、<code>o</code>、<code>d</code>、<code>e</code></td>
-<td>逐个累积为 <code>code</code></td>
+<td><code dir="auto">c</code>、<code dir="auto">o</code>、<code dir="auto">d</code>、<code dir="auto">e</code></td>
+<td>逐个累积为 <code dir="auto">code</code></td>
 <td>暂不输出</td>
 </tr>
 <tr>
-<td><code>.</code></td>
+<td><code dir="auto">.</code></td>
 <td>输出后清空</td>
-<td><code>code</code></td>
+<td><code dir="auto">code</code></td>
 </tr>
 <tr>
-<td><code>o</code>、<code>r</code>、<code>g</code></td>
-<td>逐个累积为 <code>org</code></td>
-<td>循环后输出 <code>org</code></td>
+<td><code dir="auto">o</code>、<code dir="auto">r</code>、<code dir="auto">g</code></td>
+<td>逐个累积为 <code dir="auto">org</code></td>
+<td>循环后输出 <code dir="auto">org</code></td>
 </tr>
 </tbody>
 </table>
 <p>下面的局部片段会保留空片段：</p>
 <pre><code>string part = ""; // part 保存当前正在累积的片段for (string::size_type i = 0; i &lt; s.size(); i++) { // 从左到右检查每个字符    if (s[i] == '.') { // 遇到分隔符时，一个片段结束        cout &lt;&lt; part &lt;&lt; '\n'; // 空片段也会输出一个空行        part = ""; // 清空后开始收集下一段    } else {        part = part + s[i]; // 普通字符接到当前片段末尾    }}cout &lt;&lt; part &lt;&lt; '\n'; // 循环后别漏掉最后一个片段</code></pre>
-<p>因此开头分隔符、末尾分隔符或连续分隔符都会输出空行。例如 <code>.a</code> 的第一段为空，<code>a.</code> 的最后一段为空，<code>a..b</code> 的中间一段为空。空片段应不应该保留，必须按照题目要求决定，不能自己悄悄丢掉或保留。</p>
+<p>因此开头分隔符、末尾分隔符或连续分隔符都会输出空行。例如 <code dir="auto">.a</code> 的第一段为空，<code dir="auto">a.</code> 的最后一段为空，<code dir="auto">a..b</code> 的中间一段为空。空片段应不应该保留，必须按照题目要求决定，不能自己悄悄丢掉或保留。</p>
 <h3 id="字符数组与结束标记">字符数组与结束标记</h3>
-<p>字符数组容量固定，而且文本末尾必须保留 <code>\0</code>。<code>char text[105]</code> 的下标是 0 到 104，因此最多安全保存 104 个普通字符。</p>
-<p><code>cin.getline(text, CAPACITY)</code> 会读取一整行，最多写入 <code>CAPACITY - 1</code> 个普通字符，并在后面补上 <code>\0</code>。下面的局部片段统计数字字符：</p>
+<p>字符数组容量固定，而且文本末尾必须保留 <code dir="auto">\0</code>。<code dir="auto">char text[105]</code> 的下标是 0 到 104，因此最多安全保存 104 个普通字符。</p>
+<p><code dir="auto">cin.getline(text, CAPACITY)</code> 会读取一整行，最多写入 <code dir="auto">CAPACITY - 1</code> 个普通字符，并在后面补上 <code dir="auto">\0</code>。下面的局部片段统计数字字符：</p>
 <pre><code>const int CAPACITY = 105; // 最后一个位置留给结束标记char text[CAPACITY] = {}; // 先把字符数组全部初始化为 0cin.getline(text, CAPACITY); // 最多读入 CAPACITY - 1 个普通字符int digitCount = 0; // 从还没有统计到数字开始for (int i = 0; text[i] != '\0'; i++) { // 遇到结束标记时停止    if (text[i] &gt;= '0' &amp;&amp; text[i] &lt;= '9') {        digitCount++; // 当前字符是数字，计数增加 1    }}</code></pre>
-<p>循环遇到 <code>\0</code> 时停止，因此不会把结束标记当成普通文本。若输入可能超过 104 个字符，题目必须另外说明如何处理过长输入；程序不能把字符写到数组外面。</p>
+<p>循环遇到 <code dir="auto">\0</code> 时停止，因此不会把结束标记当成普通文本。若输入可能超过 104 个字符，题目必须另外说明如何处理过长输入；程序不能把字符写到数组外面。</p>
 <h3 id="官方真题少见写法append-的三个参数">官方真题少见写法：append 的三个参数</h3>
 <p>官方题中可能出现：</p>
 <pre><code>s.append(other, 0, 2); // 取 other 从下标 0 开始的 2 个字符，追加到 s 末尾</code></pre>
 <p>先用本课已经学过的操作写成直白等价形式：</p>
 <pre><code>string piece = other.substr(0, 2); // 用 piece 保存从原字符串截取出的局部文本；当前值由 other.substr(0, 2) 得到s = s + piece; // 把截取出的 piece 接到 s 末尾，形成新的字符串内容</code></pre>
-<p>它的作用是取出 <code>other</code> 从下标 0 开始的两个字符，再追加到 <code>s</code> 末尾。原写法把“从哪个字符串取、从哪里开始、取几个字符”压进一次 <code>append</code> 调用中，是官方真题少见写法。</p>
+<p>它的作用是取出 <code dir="auto">other</code> 从下标 0 开始的两个字符，再追加到 <code dir="auto">s</code> 末尾。原写法把“从哪个字符串取、从哪里开始、取几个字符”压进一次 <code dir="auto">append</code> 调用中，是官方真题少见写法。</p>
 <p>容易误读的地方是把第二个参数 0 当成“追加 0 个字符”，或把第三个参数 2 当成结束下标。实际上 0 是起始下标，2 是字符个数。日常编程和本站主示例优先使用上面的两句直白写法。</p>
 <h3 id="字符串常用函数速查表">字符串常用函数速查表</h3>
 <table>
@@ -667,43 +686,43 @@ int main() { // 程序从这里开始，把字符串中的小写字母改成大�
 </thead>
 <tbody>
 <tr>
-<td><code>size()</code> / <code>length()</code></td>
+<td><code dir="auto">size()</code> / <code dir="auto">length()</code></td>
 <td>得到字符个数</td>
 <td>首尾访问前先确认非空；两者这里作用相同</td>
 </tr>
 <tr>
-<td><code>empty()</code></td>
+<td><code dir="auto">empty()</code></td>
 <td>判断是否为空串</td>
-<td>空串时不要访问 <code>s[0]</code></td>
+<td>空串时不要访问 <code dir="auto">s[0]</code></td>
 </tr>
 <tr>
-<td><code>substr(pos, count)</code></td>
-<td>从 <code>pos</code> 开始截取</td>
+<td><code dir="auto">substr(pos, count)</code></td>
+<td>从 <code dir="auto">pos</code> 开始截取</td>
 <td>先确认起点不超过长度</td>
 </tr>
 <tr>
-<td><code>find(target)</code></td>
+<td><code dir="auto">find(target)</code></td>
 <td>查找第一次出现的位置</td>
-<td>与 <code>string::npos</code> 比较，位置 0 也表示找到</td>
+<td>与 <code dir="auto">string::npos</code> 比较，位置 0 也表示找到</td>
 </tr>
 <tr>
-<td><code>replace(pos, count, text)</code></td>
+<td><code dir="auto">replace(pos, count, text)</code></td>
 <td>替换指定范围</td>
 <td>先确认已经找到合法位置</td>
 </tr>
 <tr>
-<td><code>islower(ch)</code> / <code>isupper(ch)</code></td>
+<td><code dir="auto">islower(ch)</code> / <code dir="auto">isupper(ch)</code></td>
 <td>判断英文字符是否为小写/大写</td>
 <td>返回判断结果，不会转换字符</td>
 </tr>
 <tr>
-<td><code>tolower(ch)</code> / <code>toupper(ch)</code></td>
+<td><code dir="auto">tolower(ch)</code> / <code dir="auto">toupper(ch)</code></td>
 <td>转换一个英文字符的大小写</td>
-<td>要接住返回值，例如 <code>ch = tolower(ch)</code></td>
+<td>要接住返回值，例如 <code dir="auto">ch = tolower(ch)</code></td>
 </tr>
 </tbody>
 </table>
-<div tabindex="0" role="region"><table>
+<table>
 <thead>
 <tr>
 <th>测试类型</th>
@@ -714,41 +733,58 @@ int main() { // 程序从这里开始，把字符串中的小写字母改成大�
 <tbody>
 <tr>
 <td>基础：普通字符串</td>
-<td><code>cat and cat</code></td>
-<td><code>find("cat")</code> 返回 0，只替换第一次出现的位置</td>
+<td><code dir="auto">cat and cat</code></td>
+<td><code dir="auto">find("cat")</code> 返回 0，只替换第一次出现的位置</td>
 </tr>
 <tr>
 <td>边界：空字符串</td>
 <td>空行</td>
-<td>长度为 0，遍历不执行，也不能访问 <code>s[0]</code></td>
+<td>长度为 0，遍历不执行，也不能访问 <code dir="auto">s[0]</code></td>
 </tr>
 <tr>
 <td>特殊：大小写混合与特殊字符</td>
-<td><code>HeLLo 2026!</code></td>
-<td>转成大写后为 <code>HELLO 2026!</code>，数字、空格和 <code>!</code> 等标点保持不变</td>
+<td><code dir="auto">HeLLo 2026!</code></td>
+<td>转成大写后为 <code dir="auto">HELLO 2026!</code>，数字、空格和 <code dir="auto">!</code> 等标点保持不变</td>
 </tr>
 <tr>
 <td>易错：查找失败</td>
-<td><code>blue sky</code> 中查找 <code>cat</code></td>
-<td>结果等于 <code>string::npos</code>，不能继续对该位置调用 <code>replace</code></td>
+<td><code dir="auto">blue sky</code> 中查找 <code dir="auto">cat</code></td>
+<td>结果等于 <code dir="auto">string::npos</code>，不能继续对该位置调用 <code dir="auto">replace</code></td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p><section><h3>find 返回 0 也表示找到了</h3><div><div><strong><span>×</span> 错误写法</strong><code>if (text.find(&quot;cat&quot;)) 认为条件为真才找到 cat</code></div><div><strong><span>✓</span> 正确写法</strong><code>先保存位置，再判断 position != string::npos；成功后才对这个位置使用 substr 或 replace。</code></div></div><p><strong>原因：</strong>目标位于开头时 find 返回 0，而 0 在条件中会被当作假；找不到时返回的才是 string::npos。</p><p><strong>检查方法：</strong>把 find 的结果当作下标处理，不要直接当成真假答案。</p></section><h2 id="common-errors">常见错误</h2><div><ol>
-<li>混用字符和字符串。单个字符写 <code>'a'</code>，一段文本写 <code>"a"</code> 或 <code>"cat"</code>。</li>
-<li>用 <code>cin &gt;&gt; text</code> 读取带空格句子。它在第一个空白处停止，整行文本应使用 <code>getline</code>。</li>
-<li>前一次 <code>cin &gt;&gt;</code> 后直接 <code>getline</code>。输入流中的换行可能被立即读走，要按输入格式先处理分隔字符。</li>
-<li>空串仍访问首尾字符。访问 <code>text[0]</code> 或 <code>text[text.length() - 1]</code> 前先检查 <code>empty()</code>。</li>
-<li>把 <code>find</code> 返回的 0 当成失败。0 是第一个合法下标，失败标记是 <code>string::npos</code>。</li>
-<li>未确认查找成功就调用 <code>replace</code>。必须先判断位置不等于 <code>string::npos</code>。</li>
+</table><p class="gesp-course-teaching-table__hint">横向滑动查看完整表格</p><h3>find 返回 0 也表示找到了</h3><p><strong>原因：</strong>目标位于开头时 find 返回 0，而 0 在条件中会被当作假；找不到时返回的才是 string::npos。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>把 find 的结果当作下标处理，不要直接当成真假答案。</p><h2 id="common-errors">常见错误</h2><ol>
+<li>混用字符和字符串。单个字符写 <code dir="auto">'a'</code>，一段文本写 <code dir="auto">"a"</code> 或 <code dir="auto">"cat"</code>。</li>
+<li>用 <code dir="auto">cin &gt;&gt; text</code> 读取带空格句子。它在第一个空白处停止，整行文本应使用 <code dir="auto">getline</code>。</li>
+<li>前一次 <code dir="auto">cin &gt;&gt;</code> 后直接 <code dir="auto">getline</code>。输入流中的换行可能被立即读走，要按输入格式先处理分隔字符。</li>
+<li>空串仍访问首尾字符。访问 <code dir="auto">text[0]</code> 或 <code dir="auto">text[text.length() - 1]</code> 前先检查 <code dir="auto">empty()</code>。</li>
+<li>把 <code dir="auto">find</code> 返回的 0 当成失败。0 是第一个合法下标，失败标记是 <code dir="auto">string::npos</code>。</li>
+<li>未确认查找成功就调用 <code dir="auto">replace</code>。必须先判断位置不等于 <code dir="auto">string::npos</code>。</li>
 <li>替换后仍使用旧长度。替换可能改变字符个数，后续访问要按新长度判断。</li>
-<li>访问 <code>s[s.size()]</code>。字符串最后一个合法下标是 <code>s.size() - 1</code>，空串则没有合法下标。</li>
+<li>访问 <code dir="auto">s[s.size()]</code>。字符串最后一个合法下标是 <code dir="auto">s.size() - 1</code>，空串则没有合法下标。</li>
 <li>把字典序误认为长度比较。字符串从左到右比较第一对不同字符，只有一方是另一方前缀时才由长度决定先后。</li>
-<li>把 <code>char text[105]</code> 当作能保存 105 个普通字符。必须为末尾的 <code>\0</code> 留一个位置。</li>
-<li>以为 <code>string</code> 自带 <code>split()</code>。C++14 的 <code>string</code> 没有这个成员函数；本课按分隔字符遍历、累积并在合适的位置输出片段。</li>
-<li>调用 <code>tolower()</code> 或 <code>toupper()</code> 后不保存返回值。这两个函数返回转换后的字符，要写成 <code>ch = tolower(ch)</code> 或 <code>s[i] = toupper(s[i])</code>。</li>
-<li>没有判断空串就访问 <code>s[0]</code>。先写 <code>if (!s.empty())</code>，确认存在首个字符后再访问。</li>
+<li>把 <code dir="auto">char text[105]</code> 当作能保存 105 个普通字符。必须为末尾的 <code dir="auto">\0</code> 留一个位置。</li>
+<li>以为 <code dir="auto">string</code> 自带 <code dir="auto">split()</code>。C++14 的 <code dir="auto">string</code> 没有这个成员函数；本课按分隔字符遍历、累积并在合适的位置输出片段。</li>
+<li>调用 <code dir="auto">tolower()</code> 或 <code dir="auto">toupper()</code> 后不保存返回值。这两个函数返回转换后的字符，要写成 <code dir="auto">ch = tolower(ch)</code> 或 <code dir="auto">s[i] = toupper(s[i])</code>。</li>
+<li>没有判断空串就访问 <code dir="auto">s[0]</code>。先写 <code dir="auto">if (!s.empty())</code>，确认存在首个字符后再访问。</li>
 <li>分割时没有阅读题意就丢弃或保留空片段。开头、末尾和连续分隔字符都可能产生空片段，输出规则由题目决定。</li>
-</ol></div><h2 id="core-check">核心内容检查</h2><h2 id="page-test-title">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</ol>
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能根据文本是否含空格选择 cin 或 getline，并保护字符数组的容量与结束标记</label><label class="q-check"><input type="checkbox"> 能按合法下标遍历、修改和比较字符串，并说明空串为什么不能访问 s[0]</label><label class="q-check"><input type="checkbox"> 能在确认位置后使用拼接、截取、查找、替换与分割，并按修改后的新长度继续判断</label>
+<h2 id="page-test-title">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题执行代码后，part 的值是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题执行代码后，part 的值是什" value="A"><b>A.</b> AB</label><label class="q-opt"><input type="radio" name="第 1 题执行代码后，part 的值是什" value="B"><b>B.</b> CDE12</label><label class="q-opt"><input type="radio" name="第 1 题执行代码后，part 的值是什" value="C"><b>C.</b> CDE</label><label class="q-opt"><input type="radio" name="第 1 题执行代码后，part 的值是什" value="D"><b>D.</b> DE1</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>位置 2 是字符 C，substr(2, 3) 从这里开始取三个字符，结果为 CDE。</p>
+<p class="q-title">第 2 题执行 string s = &quot;cat&quot;, t = &quot;car&quot;; 后，关于 s 的长度、判空和字典序，哪一项正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题执行 string s = &" value="A"><b>A.</b> s.size() 为 3，s.empty() 为 false，且 s &gt; t</label><label class="q-opt"><input type="radio" name="第 2 题执行 string s = &" value="B"><b>B.</b> s.size() 为 3，s.empty() 为 true，且 s &lt; t</label><label class="q-opt"><input type="radio" name="第 2 题执行 string s = &" value="C"><b>C.</b> s.size() 为 2，且 s == t</label><label class="q-opt"><input type="radio" name="第 2 题执行 string s = &" value="D"><b>D.</b> s.size() 为 0，且 s &lt; t</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>s 有三个字符且不是空串。比较时前两个字符 ca 相同，首个不同字符是 s 中的 t 和 t 中的 r；t 的编码更大，所以 s > t。</p>
+<p class="q-title">第 3 题在字符数组中，关于 &#39;\0&#39; 与字符 &#39;0&#39; 的说法哪一项正确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题在字符数组中，关于 &#39;" value="A"><b>A.</b> &#39;\0&#39; 可作为文本结束标记，它与可显示字符 &#39;0&#39; 不同</label><label class="q-opt"><input type="radio" name="第 3 题在字符数组中，关于 &#39;" value="B"><b>B.</b> &#39;\0&#39; 和 &#39;0&#39; 的编码完全相同</label><label class="q-opt"><input type="radio" name="第 3 题在字符数组中，关于 &#39;" value="C"><b>C.</b> 只有 string 才能使用 &#39;\0&#39;</label><label class="q-opt"><input type="radio" name="第 3 题在字符数组中，关于 &#39;" value="D"><b>D.</b> &#39;0&#39; 才是字符数组的结束标记</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>'\0' 的数值为 0，用来标识 C 风格字符串结束；'0' 是可显示的数字字符。</p>
+<p class="q-title">第 4 题输入的一整行是 red apple。执行 cin &gt;&gt; s; 时，s 得到什么内容？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题输入的一整行是 red app" value="A"><b>A.</b> red</label><label class="q-opt"><input type="radio" name="第 4 题输入的一整行是 red app" value="B"><b>B.</b> apple</label><label class="q-opt"><input type="radio" name="第 4 题输入的一整行是 red app" value="C"><b>C.</b> red apple</label><label class="q-opt"><input type="radio" name="第 4 题输入的一整行是 red app" value="D"><b>D.</b> 空字符串</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>cin >> s 会跳过开头空白，并在下一个空白处停止，所以只读到 red。若要保留中间的空格并读完整行，应使用 getline(cin, s)。</p>
+<p class="q-title">第 5 题字符串 s 初值为 &quot;aB2&quot;。从左到右遍历每个下标，把 &#39;a&#39;～&#39;z&#39; 中的小写字母改成对应大写字母，最终 s 是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="A"><b>A.</b> aB2</label><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="B"><b>B.</b> AB2</label><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="C"><b>C.</b> Ab2</label><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="D"><b>D.</b> AB</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>下标 0 的 a 在小写范围内，按编码差改为 A；下标 1 的 B 和下标 2 的 2 不在小写范围内，保持不变，所以最终是 AB2。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level3-pager" aria-label="三级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level3-pager__link gesp-level3-pager__link--previous" href="/gesp/level3/one-dimensional-arrays/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 05</small><strong>一维数组</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level3-pager__link gesp-level3-pager__link--next" href="/gesp/level3/enumeration/" rel="next"><span><small>下一知识点 · 07</small><strong>枚举法</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -757,7 +793,7 @@ int main() { // 程序从这里开始，把字符串中的小写字母改成大�
       <a class="kp-nav" href="kp7.html">下一个：枚举算法 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与使用边界">知识范围与使用边界</a></li><li><a href="#核心概念">核心概念</a></li><li><a href="#kp-02">02 字符串输入</a></li><li><a href="#字符串输入" class="lvl3">字符串输入</a></li><li><a href="#kp-03">03 长度、空串与下标</a></li><li><a href="#字符串长度空串和下标" class="lvl3">字符串长度、空串和下标</a></li><li><a href="#kp-04">04 字符串遍历</a></li><li><a href="#字符串遍历" class="lvl3">字符串遍历</a></li><li><a href="#kp-06">06 通过下标修改字符</a></li><li><a href="#完整程序逐字符转成大写" class="lvl3">完整程序：逐字符转成大写</a></li><li><a href="#两端交换完成字符串反转" class="lvl3">两端交换完成字符串反转</a></li><li><a href="#简单密码转换每个小写字母后移一位" class="lvl3">简单密码转换：每个小写字母后移一位</a></li><li><a href="#kp-07">07 字符串比较与字典序</a></li><li><a href="#字符串比较与字典序" class="lvl3">字符串比较与字典序</a></li><li><a href="#字符串截取-substr" class="lvl3">字符串截取 substr()</a></li><li><a href="#substr-截取位置示意">substr() 截取位置示意</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#字符串查找-find" class="lvl3">字符串查找 find()</a></li><li><a href="#字符串替换-replace" class="lvl3">字符串替换 replace()</a></li><li><a href="#查找并替换片段" class="lvl3">查找并替换片段</a></li><li><a href="#字符串分割" class="lvl3">字符串分割</a></li><li><a href="#字符数组与结束标记" class="lvl3">字符数组与结束标记</a></li><li><a href="#官方真题少见写法append-的三个参数" class="lvl3">官方真题少见写法：append 的三个参数</a></li><li><a href="#字符串常用函数速查表" class="lvl3">字符串常用函数速查表</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与使用边界">知识范围与使用边界</a></li><li><a href="#核心概念">核心概念</a></li><li><a href="#kp-02">02 字符串输入</a></li><li><a href="#字符串输入" class="lvl3">字符串输入</a></li><li><a href="#kp-03">03 长度、空串与下标</a></li><li><a href="#字符串长度空串和下标" class="lvl3">字符串长度、空串和下标</a></li><li><a href="#kp-04">04 字符串遍历</a></li><li><a href="#字符串遍历" class="lvl3">字符串遍历</a></li><li><a href="#kp-06">06 通过下标修改字符</a></li><li><a href="#完整程序逐字符转成大写" class="lvl3">完整程序：逐字符转成大写</a></li><li><a href="#两端交换完成字符串反转" class="lvl3">两端交换完成字符串反转</a></li><li><a href="#简单密码转换每个小写字母后移一位" class="lvl3">简单密码转换：每个小写字母后移一位</a></li><li><a href="#kp-07">07 字符串比较与字典序</a></li><li><a href="#字符串比较与字典序" class="lvl3">字符串比较与字典序</a></li><li><a href="#字符串截取-substr" class="lvl3">字符串截取 substr()</a></li><li><a href="#substr-截取位置示意">substr() 截取位置示意</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#字符串查找-find" class="lvl3">字符串查找 find()</a></li><li><a href="#字符串替换-replace" class="lvl3">字符串替换 replace()</a></li><li><a href="#查找并替换片段" class="lvl3">查找并替换片段</a></li><li><a href="#字符串分割" class="lvl3">字符串分割</a></li><li><a href="#字符数组与结束标记" class="lvl3">字符数组与结束标记</a></li><li><a href="#官方真题少见写法append-的三个参数" class="lvl3">官方真题少见写法：append 的三个参数</a></li><li><a href="#字符串常用函数速查表" class="lvl3">字符串常用函数速查表</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -769,6 +805,31 @@ int main() { // 程序从这里开始，把字符串中的小写字母改成大�
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

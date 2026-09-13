@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -473,10 +492,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <h2 id="本课先记住">本课先记住</h2>
 <ul>
 <li><strong>核心结论：</strong> 变量由类型、名称和当前值组成；表达式先按括号与优先级得到结果，赋值再把结果保存到左侧变量。</li>
-<li><strong>常用语法：</strong> 定义并初始化可写 <code>int count = 0;</code>，固定值可写 <code>const int DAYS = 7;</code>，后续赋值写 <code>count = count + 1;</code>。</li>
-<li><strong>最小示例：</strong> <code>int a = 2; int b = a + 3;</code> 先取得 <code>a</code> 的当前值 2，算出 5，再把 5 保存到 <code>b</code>。</li>
-<li><strong>关键易错点：</strong> 普通局部变量必须先初始化再读取；<code>=</code> 表示赋值而不是相等判断，连续赋值要从右向左解释。</li>
+<li><strong>常用语法：</strong> 定义并初始化可写 <code dir="auto">int count = 0;</code>，固定值可写 <code dir="auto">const int DAYS = 7;</code>，后续赋值写 <code dir="auto">count = count + 1;</code>。</li>
+<li><strong>最小示例：</strong> <code dir="auto">int a = 2; int b = a + 3;</code> 先取得 <code dir="auto">a</code> 的当前值 2，算出 5，再把 5 保存到 <code dir="auto">b</code>。</li>
+<li><strong>关键易错点：</strong> 普通局部变量必须先初始化再读取；<code dir="auto">=</code> 表示赋值而不是相等判断，连续赋值要从右向左解释。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-标识符" class="astro-6dte4xza">01 标识符</a></li><li class="astro-6dte4xza"><a href="#02-关键字" class="astro-6dte4xza">02 关键字</a></li><li class="astro-6dte4xza"><a href="#03-常量" class="astro-6dte4xza">03 常量</a></li><li class="astro-6dte4xza"><a href="#04-变量与初始化" class="astro-6dte4xza">04 变量</a></li><li class="astro-6dte4xza"><a href="#05-赋值与连续赋值" class="astro-6dte4xza">05 赋值</a></li><li class="astro-6dte4xza"><a href="#06-表达式" class="astro-6dte4xza">06 表达式</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>本页对应 GESP C++ 一级大纲中的“程序基本概念”。前面已经学过完整程序骨架和输入输出；现在要弄清程序里的数据叫什么、放在哪里、怎样变化。</p>
 <p>本页集中解决三个问题：</p>
@@ -487,7 +508,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <p>数据类型的范围、精度和转换由<a href="/gesp/level1/data-types/">基本数据类型</a>系统讲解；运算符种类、优先级和结合方向由<a href="/gesp/level1/operations/">基本运算</a>负责。本页只把变量从“建立”到“改变”的过程讲清楚。</p>
 <p>先看一句简单代码：</p>
-<pre><code>int score = 60;</code></pre>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>int score = 60;</code></pre>
 <p>它包含四个关键信息：</p>
 <table>
 <thead>
@@ -499,37 +520,37 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>int</code></td>
+<td><code dir="auto">int</code></td>
 <td>C++ 关键字，也是这里的数据类型</td>
-<td>说明 <code>score</code> 按整数保存和解释</td>
+<td>说明 <code dir="auto">score</code> 按整数保存和解释</td>
 </tr>
 <tr>
-<td><code>score</code></td>
+<td><code dir="auto">score</code></td>
 <td>程序员起的标识符</td>
 <td>给这个变量一个可引用的名字</td>
 </tr>
 <tr>
-<td><code>60</code></td>
+<td><code dir="auto">60</code></td>
 <td>整数字面量常量</td>
 <td>提供最初要保存的值</td>
 </tr>
 <tr>
-<td><code>=</code></td>
+<td><code dir="auto">=</code></td>
 <td>初始化写法的一部分</td>
 <td>在变量建立时把右侧结果作为初值</td>
 </tr>
 </tbody>
 </table>
-<p>执行这条定义以后，可以把变量状态记成：<strong>名字是 <code>score</code>，类型是 <code>int</code>，当前值是 60。</strong></p>
+<p>执行这条定义以后，可以把变量状态记成：<strong>名字是 <code dir="auto">score</code>，类型是 <code dir="auto">int</code>，当前值是 60。</strong></p>
 <h2 id="01-标识符">01 标识符</h2>
 <h3 id="标识符是程序中的名字">标识符是程序中的名字</h3>
-<p>程序需要用名字指向变量等对象，这类名字叫<strong>标识符</strong>。<code>score</code>、<code>studentCount</code>、<code>total_price</code> 都是标识符。</p>
+<p>程序需要用名字指向变量等对象，这类名字叫<strong>标识符</strong>。<code dir="auto">score</code>、<code dir="auto">studentCount</code>、<code dir="auto">total_price</code> 都是标识符。</p>
 <p>一级题目通常按下面的规则判断：</p>
 <ol>
-<li>只使用英文字母、数字和下划线 <code>_</code>；</li>
+<li>只使用英文字母、数字和下划线 <code dir="auto">_</code>；</li>
 <li>第一个字符不能是数字；</li>
 <li>不能使用 C++ 关键字；</li>
-<li>区分大小写，<code>score</code>、<code>Score</code> 和 <code>SCORE</code> 是三个不同名字。</li>
+<li>区分大小写，<code dir="auto">score</code>、<code dir="auto">Score</code> 和 <code dir="auto">SCORE</code> 是三个不同名字。</li>
 </ol>
 <p>逐个判断几个例子：</p>
 <table>
@@ -542,34 +563,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>number_of_students</code></td>
+<td><code dir="auto">number_of_students</code></td>
 <td>可以</td>
 <td>只含字母和下划线，开头不是数字</td>
 </tr>
 <tr>
-<td><code>score2</code></td>
+<td><code dir="auto">score2</code></td>
 <td>可以</td>
 <td>数字不在开头</td>
 </tr>
 <tr>
-<td><code>360AntiVirus</code></td>
+<td><code dir="auto">360AntiVirus</code></td>
 <td>不可以</td>
 <td>以数字开头</td>
 </tr>
 <tr>
-<td><code>Man&amp;Woman</code></td>
+<td><code dir="auto">Man&amp;Woman</code></td>
 <td>不可以</td>
-<td>含有 <code>&amp;</code></td>
+<td>含有 <code dir="auto">&amp;</code></td>
 </tr>
 <tr>
-<td><code>student score</code></td>
+<td><code dir="auto">student score</code></td>
 <td>不可以</td>
 <td>含有空格</td>
 </tr>
 <tr>
-<td><code>break</code></td>
+<td><code dir="auto">break</code></td>
 <td>不可以</td>
-<td><code>break</code> 是 C++ 关键字</td>
+<td><code dir="auto">break</code> 是 C++ 关键字</td>
 </tr>
 </tbody>
 </table>
@@ -578,12 +599,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>看到一个候选名称时，可以按固定顺序检查：</p>
 <ol>
 <li>**查开头：**第一个字符是字母或下划线吗？如果是数字，立即不合法。</li>
-<li>**查其余字符：**是否只由字母、数字、下划线组成？空格、<code>&amp;</code>、<code>-</code> 等不能直接放进普通标识符。</li>
+<li>**查其余字符：**是否只由字母、数字、下划线组成？空格、<code dir="auto">&amp;</code>、<code dir="auto">-</code> 等不能直接放进普通标识符。</li>
 <li>**查关键字：**整个名称是否正好是 C++ 关键字？</li>
 </ol>
-<p>例如 <code>score2</code> 三步都通过；<code>2score</code> 在第一步就失败；<code>student-score</code> 在第二步失败；<code>while</code> 在第三步失败。</p>
+<p>例如 <code dir="auto">score2</code> 三步都通过；<code dir="auto">2score</code> 在第一步就失败；<code dir="auto">student-score</code> 在第二步失败；<code dir="auto">while</code> 在第三步失败。</p>
 <h3 id="合法还不够名字还要能表达用途">合法还不够，名字还要能表达用途</h3>
-<p><code>a</code>、<code>x1</code> 可能合法，但在较长程序中不一定容易理解。一级程序也应尽量让名字说明保存的内容：</p>
+<p><code dir="auto">a</code>、<code dir="auto">x1</code> 可能合法，但在较长程序中不一定容易理解。一级程序也应尽量让名字说明保存的内容：</p>
 <table>
 <thead>
 <tr>
@@ -595,18 +616,18 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>学生人数</td>
-<td><code>studentCount</code></td>
-<td>写成 <code>x</code> 后，稍后很难确认它保存什么</td>
+<td><code dir="auto">studentCount</code></td>
+<td>写成 <code dir="auto">x</code> 后，稍后很难确认它保存什么</td>
 </tr>
 <tr>
 <td>总价</td>
-<td><code>totalPrice</code></td>
-<td>写成 <code>price</code> 容易与单价混淆</td>
+<td><code dir="auto">totalPrice</code></td>
+<td>写成 <code dir="auto">price</code> 容易与单价混淆</td>
 </tr>
 <tr>
 <td>是否准备好</td>
-<td><code>ready</code></td>
-<td>写成 <code>number</code> 看不出真假含义</td>
+<td><code dir="auto">ready</code></td>
+<td>写成 <code dir="auto">number</code> 看不出真假含义</td>
 </tr>
 </tbody>
 </table>
@@ -624,25 +645,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>数据类型与逻辑值</td>
-<td><code>int</code>、<code>double</code>、<code>char</code>、<code>bool</code>、<code>true</code>、<code>false</code></td>
+<td><code dir="auto">int</code>、<code dir="auto">double</code>、<code dir="auto">char</code>、<code dir="auto">bool</code>、<code dir="auto">true</code>、<code dir="auto">false</code></td>
 </tr>
 <tr>
 <td>条件与循环</td>
-<td><code>if</code>、<code>else</code>、<code>switch</code>、<code>case</code>、<code>for</code>、<code>while</code>、<code>do</code></td>
+<td><code dir="auto">if</code>、<code dir="auto">else</code>、<code dir="auto">switch</code>、<code dir="auto">case</code>、<code dir="auto">for</code>、<code dir="auto">while</code>、<code dir="auto">do</code></td>
 </tr>
 <tr>
 <td>流程和返回</td>
-<td><code>break</code>、<code>continue</code>、<code>return</code></td>
+<td><code dir="auto">break</code>、<code dir="auto">continue</code>、<code dir="auto">return</code></td>
 </tr>
 <tr>
 <td>声明相关</td>
-<td><code>const</code>、<code>using</code>、<code>namespace</code></td>
+<td><code dir="auto">const</code>、<code dir="auto">using</code>、<code dir="auto">namespace</code></td>
 </tr>
 </tbody>
 </table>
 <p>关键字不能再次当作变量名。例如：</p>
 <pre><code>int int = 3;</code></pre>
-<p>第一个 <code>int</code> 表示整数类型，第二个位置本应填写变量名；但第二个 <code>int</code> 仍会被编译器当作关键字，所以这行不能通过编译。可以改为：</p>
+<p>第一个 <code dir="auto">int</code> 表示整数类型，第二个位置本应填写变量名；但第二个 <code dir="auto">int</code> 仍会被编译器当作关键字，所以这行不能通过编译。可以改为：</p>
 <pre><code>int number = 3;</code></pre>
 <h3 id="常见名称不一定是关键字">常见名称不一定是关键字</h3>
 <p>经常出现，不代表它属于 C++ 关键字：</p>
@@ -655,25 +676,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>main</code></td>
+<td><code dir="auto">main</code></td>
 <td>具有特殊规则的程序入口名称，不是关键字</td>
 </tr>
 <tr>
-<td><code>cin</code>、<code>cout</code></td>
+<td><code dir="auto">cin</code>、<code dir="auto">cout</code></td>
 <td>标准库中的输入输出对象名称</td>
 </tr>
 <tr>
-<td><code>endl</code></td>
+<td><code dir="auto">endl</code></td>
 <td>标准库提供的输出操纵符名称</td>
 </tr>
 <tr>
-<td><code>score</code></td>
+<td><code dir="auto">score</code></td>
 <td>程序员自己选择的标识符</td>
 </tr>
 </tbody>
 </table>
-<p>因此，在 <code>double</code>、<code>else</code>、<code>while</code>、<code>endl</code> 中，前三个是关键字，<code>endl</code> 不是。</p>
-<p>C++ 区分大小写。把 <code>int</code> 改成 <code>Int</code> 并不会创造“同一个整数关键字”；<code>Int</code> 只是另一个名称，而且编译器不会自动把它理解成 <code>int</code>。</p>
+<p>因此，在 <code dir="auto">double</code>、<code dir="auto">else</code>、<code dir="auto">while</code>、<code dir="auto">endl</code> 中，前三个是关键字，<code dir="auto">endl</code> 不是。</p>
+<p>C++ 区分大小写。把 <code dir="auto">int</code> 改成 <code dir="auto">Int</code> 并不会创造“同一个整数关键字”；<code dir="auto">Int</code> 只是另一个名称，而且编译器不会自动把它理解成 <code dir="auto">int</code>。</p>
 <h2 id="03-常量">03 常量</h2>
 <h3 id="字面量把固定值直接写进代码">字面量把固定值直接写进代码</h3>
 <p>直接写在代码中的固定值叫<strong>字面量常量</strong>，常见形式有：</p>
@@ -687,51 +708,51 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>10</code>、<code>-3</code></td>
+<td><code dir="auto">10</code>、<code dir="auto">-3</code></td>
 <td>整数值</td>
 <td>没有小数点</td>
 </tr>
 <tr>
-<td><code>3.14</code></td>
+<td><code dir="auto">3.14</code></td>
 <td>浮点值</td>
 <td>带小数点</td>
 </tr>
 <tr>
-<td><code>'A'</code></td>
+<td><code dir="auto">'A'</code></td>
 <td>单个字符</td>
 <td>使用单引号</td>
 </tr>
 <tr>
-<td><code>true</code>、<code>false</code></td>
+<td><code dir="auto">true</code>、<code dir="auto">false</code></td>
 <td>逻辑真、逻辑假</td>
 <td>两者也是 C++ 关键字</td>
 </tr>
 <tr>
-<td><code>"GESP"</code></td>
+<td><code dir="auto">"GESP"</code></td>
 <td>一段文字</td>
-<td>使用双引号，不能当成单个 <code>char</code></td>
+<td>使用双引号，不能当成单个 <code dir="auto">char</code></td>
 </tr>
 </tbody>
 </table>
-<p>它们可以参与初始化或表达式。例如 <code>int count = 10;</code> 中的 10 为 <code>count</code> 提供初值；<code>price * 2 + 5</code> 中的 2 和 5 直接参与计算。</p>
+<p>它们可以参与初始化或表达式。例如 <code dir="auto">int count = 10;</code> 中的 10 为 <code dir="auto">count</code> 提供初值；<code dir="auto">price * 2 + 5</code> 中的 2 和 5 直接参与计算。</p>
 <p>各种字面量具体属于什么类型、能表示多大范围，放在“基本数据类型”页理解。本页先认清写法和用途。</p>
-<h3 id="用-const-给固定值起名字">用 <code>const</code> 给固定值起名字</h3>
-<p>如果一个固定值会多次使用，可以给它一个有含义的名字，并用 <code>const</code> 限制后续修改：</p>
+<h3 id="用-const-给固定值起名字">用 <code dir="auto">const</code> 给固定值起名字</h3>
+<p>如果一个固定值会多次使用，可以给它一个有含义的名字，并用 <code dir="auto">const</code> 限制后续修改：</p>
 <pre><code>const int bonus = 5;</code></pre>
-<p>这行建立了名为 <code>bonus</code> 的具名常量：</p>
+<p>这行建立了名为 <code dir="auto">bonus</code> 的具名常量：</p>
 <ul>
-<li>名字：<code>bonus</code>；</li>
-<li>类型：<code>const int</code>；</li>
+<li>名字：<code dir="auto">bonus</code>；</li>
+<li>类型：<code dir="auto">const int</code>；</li>
 <li>值：5；</li>
 <li>约束：建立后不能再通过赋值改变。</li>
 </ul>
-<p>本页这种局部 <code>const</code> 对象应在定义时给出初值。后面再写 <code>bonus = 8;</code> 会编译失败，因为它违背了“不允许修改”的约束。</p>
-<p><code>const</code> 没有把数字 5 变成另一种数据。它做的是：让名为 <code>bonus</code> 的对象保持建立时的值，防止程序后面误改。</p>
+<p>本页这种局部 <code dir="auto">const</code> 对象应在定义时给出初值。后面再写 <code dir="auto">bonus = 8;</code> 会编译失败，因为它违背了“不允许修改”的约束。</p>
+<p><code dir="auto">const</code> 没有把数字 5 变成另一种数据。它做的是：让名为 <code dir="auto">bonus</code> 的对象保持建立时的值，防止程序后面误改。</p>
 <h3 id="什么时候用字面量什么时候用具名常量">什么时候用字面量，什么时候用具名常量</h3>
 <p>一次性、含义非常直接的值可以写成字面量。一个值在题目中有明确含义、会重复出现或不应被修改时，具名常量更容易检查。</p>
 <p>例如“每盒固定装 12 支笔”可以写：</p>
 <pre><code>const int pensPerBox = 12;int totalPens = boxCount * pensPerBox;</code></pre>
-<p>看到 <code>pensPerBox</code> 就知道 12 表示每盒数量；如果以后题目改成每盒 10 支，只需检查这个固定含义的位置。</p>
+<p>看到 <code dir="auto">pensPerBox</code> 就知道 12 表示每盒数量；如果以后题目改成每盒 10 支，只需检查这个固定含义的位置。</p>
 <h2 id="04-变量与初始化">04 变量与初始化</h2>
 <h3 id="变量由名字类型和当前值组成">变量由名字、类型和当前值组成</h3>
 <p>变量可以理解为程序中一个有名字、能保存数据的对象。查看一个变量时，总要同时问三件事：</p>
@@ -740,19 +761,19 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <th>组成</th>
 <th>要回答的问题</th>
-<th>例子 <code>int age = 12;</code></th>
+<th>例子 <code dir="auto">int age = 12;</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>名字</td>
 <td>后面的代码用什么名称找到它？</td>
-<td><code>age</code></td>
+<td><code dir="auto">age</code></td>
 </tr>
 <tr>
 <td>类型</td>
 <td>这份数据按什么规则保存和解释？</td>
-<td><code>int</code></td>
+<td><code dir="auto">int</code></td>
 </tr>
 <tr>
 <td>当前值</td>
@@ -765,13 +786,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h3 id="声明定义和初始化的区别">声明、定义和初始化的区别</h3>
 <p>在本页的简单局部变量中：</p>
 <pre><code>int age;</code></pre>
-<p>这行告诉编译器“这里有一个名为 <code>age</code>、类型为 <code>int</code> 的变量”，并建立这个变量。它既完成了声明，也完成了定义，但还没有给普通局部整数一个可安全读取的初值。</p>
+<p>这行告诉编译器“这里有一个名为 <code dir="auto">age</code>、类型为 <code dir="auto">int</code> 的变量”，并建立这个变量。它既完成了声明，也完成了定义，但还没有给普通局部整数一个可安全读取的初值。</p>
 <p>下面这行同时建立变量并给出初值：</p>
 <pre><code>int age = 12;</code></pre>
-<p>这叫<strong>初始化</strong>。执行完成后，<code>age</code> 已经拥有确定状态：名字是 <code>age</code>，类型是 <code>int</code>，当前值是 12。</p>
+<p>这叫<strong>初始化</strong>。执行完成后，<code dir="auto">age</code> 已经拥有确定状态：名字是 <code dir="auto">age</code>，类型是 <code dir="auto">int</code>，当前值是 12。</p>
 <p>初始化只发生在变量建立时。变量已经存在以后再写：</p>
 <pre><code>age = 13;</code></pre>
-<p>这是<strong>赋值</strong>，它把当前值从 12 改为 13，并没有重新定义一个新的 <code>age</code>。</p>
+<p>这是<strong>赋值</strong>，它把当前值从 12 改为 13，并没有重新定义一个新的 <code dir="auto">age</code>。</p>
 <table>
 <thead>
 <tr>
@@ -782,24 +803,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>int age;</code></td>
+<td><code dir="auto">int age;</code></td>
 <td>声明并定义变量，没有给可靠初值</td>
 <td>名字和类型确定，值不可读取</td>
 </tr>
 <tr>
-<td><code>int age = 12;</code></td>
+<td><code dir="auto">int age = 12;</code></td>
 <td>定义并初始化变量</td>
-<td><code>age</code> 当前值为 12</td>
+<td><code dir="auto">age</code> 当前值为 12</td>
 </tr>
 <tr>
-<td><code>age = 13;</code></td>
+<td><code dir="auto">age = 13;</code></td>
 <td>给已经存在的变量赋新值</td>
-<td>类型仍为 <code>int</code>，当前值变为 13</td>
+<td>类型仍为 <code dir="auto">int</code>，当前值变为 13</td>
 </tr>
 </tbody>
 </table>
 <h3 id="为什么不能读取未初始化的普通局部变量">为什么不能读取未初始化的普通局部变量</h3>
-<p>在 <code>main</code> 内写下 <code>int score;</code> 后，不能直接把 <code>score</code> 用于输出、比较或计算。对本页这种未初始化的普通局部整数，读取其不确定值会导致<strong>未定义行为</strong>：程序结果没有可靠保证，不能根据某次运行猜它“默认等于 0”。</p>
+<p>在 <code dir="auto">main</code> 内写下 <code dir="auto">int score;</code> 后，不能直接把 <code dir="auto">score</code> 用于输出、比较或计算。对本页这种未初始化的普通局部整数，读取其不确定值会导致<strong>未定义行为</strong>：程序结果没有可靠保证，不能根据某次运行猜它“默认等于 0”。</p>
 <p>错误过程是：</p>
 <pre><code>int score;cout &lt;&lt; score;</code></pre>
 <p>安全做法是先让它得到确定值：</p>
@@ -807,9 +828,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>检查变量时，不只看“是否写过变量名”，还要沿执行顺序确认：在第一次读取之前，它是否已经初始化或赋值。</p>
 <h2 id="05-赋值与连续赋值">05 赋值与连续赋值</h2>
 <h3 id="赋值先算右边再写左边">赋值先算右边，再写左边</h3>
-<p>赋值号 <code>=</code> 的任务是：先得到右侧结果，再把结果保存到左侧变量。</p>
+<p>赋值号 <code dir="auto">=</code> 的任务是：先得到右侧结果，再把结果保存到左侧变量。</p>
 <pre><code>int score = 60;score = 85;</code></pre>
-<p>第一行建立并初始化 <code>score</code>；第二行才是后续赋值，用 85 覆盖旧值 60。类型没有改变，改变的是当前值。</p>
+<p>第一行建立并初始化 <code dir="auto">score</code>；第二行才是后续赋值，用 85 覆盖旧值 60。类型没有改变，改变的是当前值。</p>
 <p>当左右两边都出现同一个变量时，仍按“先右后左”执行：</p>
 <pre><code>int a = 5;a = a + 2;</code></pre>
 <p>执行第二行的过程是：</p>
@@ -818,38 +839,38 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tr>
 <th style="text-align: right">步骤</th>
 <th>动作</th>
-<th style="text-align: right"><code>a</code> 的状态</th>
+<th style="text-align: right"><code dir="auto">a</code> 的状态</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td>读取右侧 <code>a</code> 的旧值</td>
+<td>读取右侧 <code dir="auto">a</code> 的旧值</td>
 <td style="text-align: right">仍为 5</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td>计算 <code>5 + 2</code></td>
+<td>计算 <code dir="auto">5 + 2</code></td>
 <td style="text-align: right">得到结果 7，尚未写回</td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td>把 7 保存到左侧 <code>a</code></td>
+<td>把 7 保存到左侧 <code dir="auto">a</code></td>
 <td style="text-align: right">当前值变为 7</td>
 </tr>
 </tbody>
 </table>
-<p>这里不是在解数学方程“<code>a</code> 等于 <code>a + 2</code>”。<code>=</code> 表示一次有先后顺序的写入操作，所以同一个变量能够由 5 变成 7。</p>
+<p>这里不是在解数学方程“<code dir="auto">a</code> 等于 <code dir="auto">a + 2</code>”。<code dir="auto">=</code> 表示一次有先后顺序的写入操作，所以同一个变量能够由 5 变成 7。</p>
 <h3 id="赋值复制当前值不会建立自动连接">赋值复制当前值，不会建立自动连接</h3>
 <p>假设依次执行：</p>
 <pre><code>int a = 2;int b = 5;a = b;b = 8;</code></pre>
-<p>执行 <code>a = b;</code> 时，程序读取 <code>b</code> 当时的值 5，再把 5 保存给 <code>a</code>。接着把 <code>b</code> 改成 8，并不会自动把 <code>a</code> 一起改成 8。</p>
+<p>执行 <code dir="auto">a = b;</code> 时，程序读取 <code dir="auto">b</code> 当时的值 5，再把 5 保存给 <code dir="auto">a</code>。接着把 <code dir="auto">b</code> 改成 8，并不会自动把 <code dir="auto">a</code> 一起改成 8。</p>
 <table>
 <thead>
 <tr>
 <th>执行后</th>
-<th style="text-align: right"><code>a</code></th>
-<th style="text-align: right"><code>b</code></th>
+<th style="text-align: right"><code dir="auto">a</code></th>
+<th style="text-align: right"><code dir="auto">b</code></th>
 </tr>
 </thead>
 <tbody>
@@ -859,12 +880,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td style="text-align: right">5</td>
 </tr>
 <tr>
-<td><code>a = b;</code></td>
+<td><code dir="auto">a = b;</code></td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">5</td>
 </tr>
 <tr>
-<td><code>b = 8;</code></td>
+<td><code dir="auto">b = 8;</code></td>
 <td style="text-align: right">5</td>
 <td style="text-align: right">8</td>
 </tr>
@@ -876,14 +897,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <pre><code>int a;int b;a = b = 3;</code></pre>
 <p>赋值运算按右结合解释，等价于分成两步：</p>
 <pre><code>b = 3;a = b;</code></pre>
-<p>第一步先让 <code>b</code> 得到 3；这一赋值表达式的结果再交给左边，于是第二步让 <code>a</code> 也得到 3。最终 <code>a = 3</code>、<code>b = 3</code>。</p>
-<p>若写成 <code>int a = b = 3;</code>，<code>b</code> 仍必须提前定义。只在这一行定义了 <code>a</code>，并不会顺便定义 <code>b</code>。</p>
+<p>第一步先让 <code dir="auto">b</code> 得到 3；这一赋值表达式的结果再交给左边，于是第二步让 <code dir="auto">a</code> 也得到 3。最终 <code dir="auto">a = 3</code>、<code dir="auto">b = 3</code>。</p>
+<p>若写成 <code dir="auto">int a = b = 3;</code>，<code dir="auto">b</code> 仍必须提前定义。只在这一行定义了 <code dir="auto">a</code>，并不会顺便定义 <code dir="auto">b</code>。</p>
 <p>一级主程序优先使用分步写法，因为执行顺序更容易检查。连续赋值需要会读，不必为了缩短一行而频繁使用。</p>
-<h3 id="-和--的职责不同"><code>=</code> 和 <code>==</code> 的职责不同</h3>
+<h3 id="-和--的职责不同"><code dir="auto">=</code> 和 <code dir="auto">==</code> 的职责不同</h3>
 <pre><code>a = b;a == b;</code></pre>
 <ul>
-<li><code>a = b</code>：把 <code>b</code> 的当前值写入 <code>a</code>，会修改 <code>a</code>；</li>
-<li><code>a == b</code>：判断两者是否相等，得到真或假，不负责修改 <code>a</code>、<code>b</code>。</li>
+<li><code dir="auto">a = b</code>：把 <code dir="auto">b</code> 的当前值写入 <code dir="auto">a</code>，会修改 <code dir="auto">a</code>；</li>
+<li><code dir="auto">a == b</code>：判断两者是否相等，得到真或假，不负责修改 <code dir="auto">a</code>、<code dir="auto">b</code>。</li>
 </ul>
 <p>两者只差一个等号，程序作用却完全不同。具体关系运算放在“基本运算”页展开。</p>
 <h2 id="06-表达式">06 表达式</h2>
@@ -899,30 +920,30 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </thead>
 <tbody>
 <tr>
-<td><code>a + b</code></td>
-<td><code>a</code>、<code>b</code> 的当前值</td>
+<td><code dir="auto">a + b</code></td>
+<td><code dir="auto">a</code>、<code dir="auto">b</code> 的当前值</td>
 <td>两数之和</td>
 </tr>
 <tr>
-<td><code>price * count</code></td>
+<td><code dir="auto">price * count</code></td>
 <td>当前单价和数量</td>
 <td>总价数值</td>
 </tr>
 <tr>
-<td><code>score &gt;= 60</code></td>
-<td><code>score</code> 的当前值</td>
+<td><code dir="auto">score &gt;= 60</code></td>
+<td><code dir="auto">score</code> 的当前值</td>
 <td>真或假</td>
 </tr>
 <tr>
-<td><code>(a + b) * 2</code></td>
-<td><code>a</code>、<code>b</code> 的当前值</td>
+<td><code dir="auto">(a + b) * 2</code></td>
+<td><code dir="auto">a</code>、<code dir="auto">b</code> 的当前值</td>
 <td>先求和再乘 2 的数值</td>
 </tr>
 </tbody>
 </table>
-<p>只计算 <code>a + b</code> 不会自动修改 <code>a</code>、<code>b</code>。要保存结果，需要初始化一个新变量，或赋值给已经存在的变量。</p>
+<p>只计算 <code dir="auto">a + b</code> 不会自动修改 <code dir="auto">a</code>、<code dir="auto">b</code>。要保存结果，需要初始化一个新变量，或赋值给已经存在的变量。</p>
 <h3 id="从当前值到结果再保存">从当前值到结果，再保存</h3>
-<p>假设当前状态是 <code>price = 8</code>、<code>count = 3</code>、<code>bonus = 5</code>，执行：</p>
+<p>假设当前状态是 <code dir="auto">price = 8</code>、<code dir="auto">count = 3</code>、<code dir="auto">bonus = 5</code>，执行：</p>
 <pre><code>int total = price * count + bonus;</code></pre>
 <p>真实过程可以拆成四步：</p>
 <table>
@@ -936,36 +957,36 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td style="text-align: right">1</td>
-<td>读取 <code>price</code>、<code>count</code>、<code>bonus</code> 的当前值</td>
+<td>读取 <code dir="auto">price</code>、<code dir="auto">count</code>、<code dir="auto">bonus</code> 的当前值</td>
 <td style="text-align: right">8、3、5</td>
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td>计算 <code>8 * 3</code></td>
+<td>计算 <code dir="auto">8 * 3</code></td>
 <td style="text-align: right">24</td>
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td>计算 <code>24 + 5</code></td>
+<td>计算 <code dir="auto">24 + 5</code></td>
 <td style="text-align: right">29</td>
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td>用结果 29 初始化 <code>total</code></td>
-<td style="text-align: right"><code>total = 29</code></td>
+<td>用结果 29 初始化 <code dir="auto">total</code></td>
+<td style="text-align: right"><code dir="auto">total = 29</code></td>
 </tr>
 </tbody>
 </table>
-<p>表达式先产生结果，保存动作随后发生。若只写 <code>price * count + bonus;</code>，虽然表达式可以算出 29，却没有把这个结果交给一个后续要用的变量。</p>
+<p>表达式先产生结果，保存动作随后发生。若只写 <code dir="auto">price * count + bonus;</code>，虽然表达式可以算出 29，却没有把这个结果交给一个后续要用的变量。</p>
 <h3 id="变量变化后旧结果不会自动重算">变量变化后，旧结果不会自动重算</h3>
-<p>继续上一例。<code>total</code> 已经得到 29 后，把 <code>price</code> 赋成 10：</p>
+<p>继续上一例。<code dir="auto">total</code> 已经得到 29 后，把 <code dir="auto">price</code> 赋成 10：</p>
 <pre><code>price = 10;</code></pre>
-<p>此时 <code>price</code> 变为 10，<code>total</code> 仍是之前保存的 29。只有再次执行：</p>
+<p>此时 <code dir="auto">price</code> 变为 10，<code dir="auto">total</code> 仍是之前保存的 29。只有再次执行：</p>
 <pre><code>total = price * count + bonus;</code></pre>
-<p>程序才会用当前值 <code>10、3、5</code> 重新计算，得到 35 并覆盖 <code>total</code>。</p>
+<p>程序才会用当前值 <code dir="auto">10、3、5</code> 重新计算，得到 35 并覆盖 <code dir="auto">total</code>。</p>
 <p>这条边界很重要：变量保存的是某次执行得到的结果，不是会随公式右侧自动更新的数学符号。</p>
 <h3 id="括号和优先级决定计算顺序">括号和优先级决定计算顺序</h3>
-<p>表达式中有多个运算符时，先处理括号，再按运算符优先级和结合方向计算。例如 <code>price * count + bonus</code> 先乘后加；<code>(price + bonus) * count</code> 先算括号，结果会不同。</p>
+<p>表达式中有多个运算符时，先处理括号，再按运算符优先级和结合方向计算。例如 <code dir="auto">price * count + bonus</code> 先乘后加；<code dir="auto">(price + bonus) * count</code> 先算括号，结果会不同。</p>
 <p>本页追踪的重点是“取当前值 → 按规则计算 → 保存结果”。完整的算术、关系、逻辑、赋值优先级表放在“基本运算”页。拿不准时，优先补括号或拆成多条直白语句。</p>
 <h2 id="建立变量时的统一检查顺序">建立变量时的统一检查顺序</h2>
 <p>从题意建立一个变量，可以按下面的顺序检查：</p>
@@ -974,7 +995,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li><strong>叫什么？</strong> 选择合法且能说明用途的标识符。</li>
 <li><strong>用什么类型？</strong> 根据数据形式和范围选择；具体范围查“基本数据类型”。</li>
 <li><strong>初值从哪里来？</strong> 来自固定值、输入，还是另一个表达式？</li>
-<li><strong>以后允许改变吗？</strong> 不应修改的固定值可以使用 <code>const</code>。</li>
+<li><strong>以后允许改变吗？</strong> 不应修改的固定值可以使用 <code dir="auto">const</code>。</li>
 <li><strong>第一次读取前有确定值吗？</strong> 没有就先初始化或赋值。</li>
 </ol>
 <p>例如“每盒 12 支笔，盒数可以变化”：</p>
@@ -989,17 +1010,17 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>每盒支数</td>
-<td><code>const int pensPerBox = 12;</code></td>
+<td><code dir="auto">const int pensPerBox = 12;</code></td>
 <td>固定含义，不应修改</td>
 </tr>
 <tr>
 <td>盒数</td>
-<td><code>int boxCount = 3;</code></td>
+<td><code dir="auto">int boxCount = 3;</code></td>
 <td>当前值为 3，以后可能改变</td>
 </tr>
 <tr>
 <td>总支数</td>
-<td><code>int totalPens = pensPerBox * boxCount;</code></td>
+<td><code dir="auto">int totalPens = pensPerBox * boxCount;</code></td>
 <td>由当前两个值计算并保存</td>
 </tr>
 </tbody>
@@ -1016,42 +1037,42 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>标识符</td>
-<td><code>studentCount</code></td>
+<td><code dir="auto">studentCount</code></td>
 <td>字母开头、字符合法、不是关键字、区分大小写</td>
 </tr>
 <tr>
 <td>关键字</td>
-<td><code>int</code>、<code>return</code></td>
+<td><code dir="auto">int</code>、<code dir="auto">return</code></td>
 <td>C++ 已规定用途，不能用作变量名</td>
 </tr>
 <tr>
 <td>字面量常量</td>
-<td><code>10</code>、<code>3.14</code>、<code>'A'</code>、<code>true</code></td>
+<td><code dir="auto">10</code>、<code dir="auto">3.14</code>、<code dir="auto">'A'</code>、<code dir="auto">true</code></td>
 <td>把固定值直接写进代码</td>
 </tr>
 <tr>
 <td>具名常量</td>
-<td><code>const int bonus = 5;</code></td>
+<td><code dir="auto">const int bonus = 5;</code></td>
 <td>定义时给值，后面不再赋新值</td>
 </tr>
 <tr>
 <td>变量</td>
-<td><code>int age;</code></td>
+<td><code dir="auto">int age;</code></td>
 <td>具有名字、类型和当前值状态</td>
 </tr>
 <tr>
 <td>初始化</td>
-<td><code>int age = 12;</code></td>
+<td><code dir="auto">int age = 12;</code></td>
 <td>建立变量时给初值</td>
 </tr>
 <tr>
 <td>赋值</td>
-<td><code>age = 13;</code></td>
+<td><code dir="auto">age = 13;</code></td>
 <td>先算右侧，再覆盖左侧当前值</td>
 </tr>
 <tr>
 <td>表达式</td>
-<td><code>price * count + bonus</code></td>
+<td><code dir="auto">price * count + bonus</code></td>
 <td>读取当前值，按规则计算出结果</td>
 </tr>
 </tbody>
@@ -1072,10 +1093,10 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 <tr>
 <th style="text-align: right">顺序</th>
 <th>执行内容</th>
-<th style="text-align: right"><code>price</code></th>
-<th style="text-align: right"><code>count</code></th>
-<th style="text-align: right"><code>bonus</code></th>
-<th style="text-align: right"><code>total</code></th>
+<th style="text-align: right"><code dir="auto">price</code></th>
+<th style="text-align: right"><code dir="auto">count</code></th>
+<th style="text-align: right"><code dir="auto">bonus</code></th>
+<th style="text-align: right"><code dir="auto">total</code></th>
 <th style="text-align: right">本次输出</th>
 </tr>
 </thead>
@@ -1091,7 +1112,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 </tr>
 <tr>
 <td style="text-align: right">2</td>
-<td>用 <code>8 * 3 + 5</code> 初始化 <code>total</code></td>
+<td>用 <code dir="auto">8 * 3 + 5</code> 初始化 <code dir="auto">total</code></td>
 <td style="text-align: right">8</td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
@@ -1100,7 +1121,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 </tr>
 <tr>
 <td style="text-align: right">3</td>
-<td>输出 <code>total</code></td>
+<td>输出 <code dir="auto">total</code></td>
 <td style="text-align: right">8</td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
@@ -1109,7 +1130,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 </tr>
 <tr>
 <td style="text-align: right">4</td>
-<td><code>price = 10;</code></td>
+<td><code dir="auto">price = 10;</code></td>
 <td style="text-align: right">10</td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
@@ -1118,7 +1139,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 </tr>
 <tr>
 <td style="text-align: right">5</td>
-<td>再次输出尚未重算的 <code>total</code></td>
+<td>再次输出尚未重算的 <code dir="auto">total</code></td>
 <td style="text-align: right">10</td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
@@ -1127,7 +1148,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 </tr>
 <tr>
 <td style="text-align: right">6</td>
-<td>重新计算并赋值给 <code>total</code></td>
+<td>重新计算并赋值给 <code dir="auto">total</code></td>
 <td style="text-align: right">10</td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
@@ -1136,7 +1157,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 </tr>
 <tr>
 <td style="text-align: right">7</td>
-<td>输出新的 <code>total</code></td>
+<td>输出新的 <code dir="auto">total</code></td>
 <td style="text-align: right">10</td>
 <td style="text-align: right">3</td>
 <td style="text-align: right">5</td>
@@ -1145,36 +1166,57 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
 </tr>
 </tbody>
 </table>
-<p>第二行输出仍是 29，正好证明 <code>total</code> 没有与右侧公式永久绑定。第三行变为 35，是因为重新执行了表达式，并把新结果赋给 <code>total</code>。</p>
+<p>第二行输出仍是 29，正好证明 <code dir="auto">total</code> 没有与右侧公式永久绑定。第三行变为 35，是因为重新执行了表达式，并把新结果赋给 <code dir="auto">total</code>。</p>
 <h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
-<p>依次执行 <code>int a = 2; int b = a; a = 5;</code>。每句后记录两个变量的当前值：第二句把当时的 2 复制给 <code>b</code>，第三句只修改 <code>a</code>，所以最终 <code>a = 5</code>、<code>b = 2</code>。</p>
+<p>依次执行 <code dir="auto">int a = 2; int b = a; a = 5;</code>。每句后记录两个变量的当前值：第二句把当时的 2 复制给 <code dir="auto">b</code>，第三句只修改 <code dir="auto">a</code>，所以最终 <code dir="auto">a = 5</code>、<code dir="auto">b = 2</code>。</p>
 <p><strong>成功标准：</strong> 能说明赋值复制的是执行当时的值，不会建立自动连接。完成后不看提示独立完成页末“整页综合测试”；提交后按“右侧求值 → 左侧写回”重新推演每道错题。</p>
 <h2 id="常见错误">常见错误</h2>
 <h3 id="变量名不符合规则">变量名不符合规则</h3>
-<p><strong>错误：</strong> 使用 <code>2score</code>、<code>student-score</code>、<code>break</code> 作为变量名。</p>
+<p><strong>错误：</strong> 使用 <code dir="auto">2score</code>、<code dir="auto">student-score</code>、<code dir="auto">break</code> 作为变量名。</p>
 <p><strong>检查：</strong> 依次查开头、其余字符和关键字；再确认大小写是否与定义时一致。</p>
 <h3 id="读取未初始化的普通局部变量">读取未初始化的普通局部变量</h3>
-<p><strong>错误：</strong> 只写 <code>int score;</code> 就参与输出或计算。</p>
+<p><strong>错误：</strong> 只写 <code dir="auto">int score;</code> 就参与输出或计算。</p>
 <p><strong>后果：</strong> 读取这种不确定值会造成未定义行为，结果不能信任，也不能假定为 0。</p>
 <p><strong>检查：</strong> 沿执行路径找到第一次读取，确认此前已经初始化或赋值。</p>
 <h3 id="把初始化和赋值混成一件事">把初始化和赋值混成一件事</h3>
-<p><strong>错误理解：</strong> 认为 <code>int age = 12;</code> 与后面的 <code>age = 13;</code> 都在重新创建变量。</p>
+<p><strong>错误理解：</strong> 认为 <code dir="auto">int age = 12;</code> 与后面的 <code dir="auto">age = 13;</code> 都在重新创建变量。</p>
 <p><strong>检查：</strong> 看这一行是否同时出现类型和新变量名。建立时给值是初始化；变量已经存在后改值是赋值。</p>
-<h3 id="把--当成数学等号">把 <code>=</code> 当成数学等号</h3>
-<p><strong>错误理解：</strong> 看到 <code>a = a + 2;</code> 就认为等式不可能成立。</p>
-<p><strong>检查：</strong> 按时间顺序读：取旧值、算右侧、写回左侧。相等比较使用 <code>==</code>。</p>
+<h3 id="把--当成数学等号">把 <code dir="auto">=</code> 当成数学等号</h3>
+<p><strong>错误理解：</strong> 看到 <code dir="auto">a = a + 2;</code> 就认为等式不可能成立。</p>
+<p><strong>检查：</strong> 按时间顺序读：取旧值、算右侧、写回左侧。相等比较使用 <code dir="auto">==</code>。</p>
 <h3 id="认为赋值会让两个变量永久联动">认为赋值会让两个变量永久联动</h3>
-<p><strong>错误理解：</strong> 执行 <code>a = b;</code> 后再改 <code>b</code>，以为 <code>a</code> 也会跟着变。</p>
+<p><strong>错误理解：</strong> 执行 <code dir="auto">a = b;</code> 后再改 <code dir="auto">b</code>，以为 <code dir="auto">a</code> 也会跟着变。</p>
 <p><strong>检查：</strong> 在每次赋值后记录两个变量的当前值。普通整数赋值只复制执行当时的值。</p>
 <h3 id="从左向右误读连续赋值">从左向右误读连续赋值</h3>
-<p><strong>错误：</strong> 把 <code>a = b = 3;</code> 理解成先处理 <code>a = b</code>。</p>
-<p><strong>检查：</strong> 按右结合拆为 <code>b = 3;</code>、<code>a = b;</code>。若写 <code>int a = b = 3;</code>，还要确认 <code>b</code> 已提前定义。</p>
+<p><strong>错误：</strong> 把 <code dir="auto">a = b = 3;</code> 理解成先处理 <code dir="auto">a = b</code>。</p>
+<p><strong>检查：</strong> 按右结合拆为 <code dir="auto">b = 3;</code>、<code dir="auto">a = b;</code>。若写 <code dir="auto">int a = b = 3;</code>，还要确认 <code dir="auto">b</code> 已提前定义。</p>
 <h3 id="只改公式里的变量却忘了重新计算结果">只改公式里的变量，却忘了重新计算结果</h3>
-<p><strong>错误：</strong> <code>price</code> 已变化，却直接使用上一次保存的 <code>total</code>。</p>
-<p><strong>检查：</strong> 找到产生 <code>total</code> 的表达式，确认在所需的最新变量值出现后，它是否再次执行并写回结果。</p>
+<p><strong>错误：</strong> <code dir="auto">price</code> 已变化，却直接使用上一次保存的 <code dir="auto">total</code>。</p>
+<p><strong>检查：</strong> 找到产生 <code dir="auto">total</code> 的表达式，确认在所需的最新变量值出现后，它是否再次执行并写回结果。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>下一页<a href="/gesp/level1/data-types/">基本数据类型</a>负责判断变量能保存什么范围和精度；随后<a href="/gesp/level1/operations/">基本运算</a>会讲表达式中的运算符与优先级；学完这两页后，<a href="/gesp/level1/sequential/">顺序结构</a>会把多条赋值和计算语句连起来，逐行追踪完整程序状态。</p>
-<section aria-labelledby="related-knowledge-variables-expressions"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-variables-expressions" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/program-structure/" class="astro-mkwt4ymd">程序结构</a></li></ul></section></div></section>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能判断一个名称是否为合法标识符，并区分关键字与普通名称。</label><label class="q-check"><input type="checkbox"> 我能用名字、类型、当前值说明变量状态，并区分声明、初始化和赋值。</label><label class="q-check"><input type="checkbox"> 我能按取值、计算、保存的顺序追踪表达式，并按右结合解释 a = b = 3。</label>
+<h2 id="整页综合测试">整页综合测试</h2>
+<span>6 题</span>
+<p class="q-title">第 1 题下面哪个名称可以作为 C++ 标识符？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题下面哪个名称可以作为 C++ " value="A"><b>A.</b> number_of_students</label><label class="q-opt"><input type="radio" name="第 1 题下面哪个名称可以作为 C++ " value="B"><b>B.</b> 360AntiVirus</label><label class="q-opt"><input type="radio" name="第 1 题下面哪个名称可以作为 C++ " value="C"><b>C.</b> Man&amp;Woman</label><label class="q-opt"><input type="radio" name="第 1 题下面哪个名称可以作为 C++ " value="D"><b>D.</b> break</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>标识符可由字母、数字和下划线组成，不能以数字开头，也不能使用关键字。<br><span class="q-kp">对应知识点：01 标识符</span></p>
+<p class="q-title">第 2 题关于变量，下面哪项说法更准确？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题关于变量，下面哪项说法更准确？" value="A"><b>A.</b> 变量使用前无需定义</label><label class="q-opt"><input type="radio" name="第 2 题关于变量，下面哪项说法更准确？" value="B"><b>B.</b> 赋值语句会自动定义变量</label><label class="q-opt"><input type="radio" name="第 2 题关于变量，下面哪项说法更准确？" value="C"><b>C.</b> 变量的数据类型可随时改变</label><label class="q-opt"><input type="radio" name="第 2 题关于变量，下面哪项说法更准确？" value="D"><b>D.</b> 变量保存的值可以在程序中保持不变</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>变量要先定义，类型在定义后固定；它的值可以改变，也可以在一段程序中保持不变。<br><span class="q-kp">对应知识点：04 变量与初始化</span></p>
+<p class="q-title">第 3 题已提前定义 int b;，执行 int a; a = b = 3; 后，a 和 b 分别是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题已提前定义 int b;，执行" value="A"><b>A.</b> 3 和 3</label><label class="q-opt"><input type="radio" name="第 3 题已提前定义 int b;，执行" value="B"><b>B.</b> 3 和 0</label><label class="q-opt"><input type="radio" name="第 3 题已提前定义 int b;，执行" value="C"><b>C.</b> 0 和 3</label><label class="q-opt"><input type="radio" name="第 3 题已提前定义 int b;，执行" value="D"><b>D.</b> 都未定义</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 05 赋值与连续赋值。连续赋值按右结合执行：先做 b = 3，再做 a = b，所以两个变量最终都是 3。若直接写 int a = b = 3;，b 仍必须提前定义。<br><span class="q-kp">对应知识点：05 赋值与连续赋值</span></p>
+<p class="q-title">第 4 题为什么 int int = 3; 不能通过编译？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题为什么 int int = 3" value="A"><b>A.</b> 第二个 int 是关键字，不能作变量名</label><label class="q-opt"><input type="radio" name="第 4 题为什么 int int = 3" value="B"><b>B.</b> 数字 3 不能保存</label><label class="q-opt"><input type="radio" name="第 4 题为什么 int int = 3" value="C"><b>C.</b> 每行必须有两个分号</label><label class="q-opt"><input type="radio" name="第 4 题为什么 int int = 3" value="D"><b>D.</b> 变量名必须以数字开头</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02 关键字。关键字由 C++ 规定了专门用途，不能再拿来充当标识符；这里第二个 int 本应是变量名。<br><span class="q-kp">对应知识点：02 关键字</span></p>
+<p class="q-title">第 5 题a = 3、b = 4 时，表达式 a * 2 + b 的结果是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题a = 3、b = 4 时，表" value="A"><b>A.</b> 7</label><label class="q-opt"><input type="radio" name="第 5 题a = 3、b = 4 时，表" value="B"><b>B.</b> 10</label><label class="q-opt"><input type="radio" name="第 5 题a = 3、b = 4 时，表" value="C"><b>C.</b> 11</label><label class="q-opt"><input type="radio" name="第 5 题a = 3、b = 4 时，表" value="D"><b>D.</b> 14</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 06 表达式。先算 3 * 2 得 6，再加 4 得 10；只计算表达式不会自动修改 a、b。<br><span class="q-kp">对应知识点：06 表达式</span></p>
+<p class="q-title">第 6 题在表达式 price * 2 + 5 中，哪两个是整数常量？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题在表达式 price * 2 " value="A"><b>A.</b> 2 和 5</label><label class="q-opt"><input type="radio" name="第 6 题在表达式 price * 2 " value="B"><b>B.</b> price 和 2</label><label class="q-opt"><input type="radio" name="第 6 题在表达式 price * 2 " value="C"><b>C.</b> price 和 5</label><label class="q-opt"><input type="radio" name="第 6 题在表达式 price * 2 " value="D"><b>D.</b> price、2 和 5</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03 常量。2 和 5 是直接写出的固定整数；price 是变量，运行中可以保存不同的值。<br><span class="q-kp">对应知识点：03 常量</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level1-pager" aria-label="一级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level1-pager__link gesp-level1-pager__link--previous" href="/gesp/level1/input-output/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 04</small><strong>输入输出</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level1-pager__link gesp-level1-pager__link--next" href="/gesp/level1/data-types/" rel="next"><span><small>下一知识点 · 06</small><strong>数据类型</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -1183,7 +1225,7 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
       <a class="kp-nav" href="kp6.html">下一个：基本数据类型 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-标识符">01 标识符</a></li><li><a href="#标识符是程序中的名字" class="lvl3">标识符是程序中的名字</a></li><li><a href="#三步判断一个名称是否合法" class="lvl3">三步判断一个名称是否合法</a></li><li><a href="#合法还不够名字还要能表达用途" class="lvl3">合法还不够，名字还要能表达用途</a></li><li><a href="#02-关键字">02 关键字</a></li><li><a href="#关键字已经由-c-规定用途" class="lvl3">关键字已经由 C++ 规定用途</a></li><li><a href="#常见名称不一定是关键字" class="lvl3">常见名称不一定是关键字</a></li><li><a href="#03-常量">03 常量</a></li><li><a href="#字面量把固定值直接写进代码" class="lvl3">字面量把固定值直接写进代码</a></li><li><a href="#用-const-给固定值起名字" class="lvl3">用 const 给固定值起名字</a></li><li><a href="#什么时候用字面量什么时候用具名常量" class="lvl3">什么时候用字面量，什么时候用具名常量</a></li><li><a href="#04-变量与初始化">04 变量与初始化</a></li><li><a href="#变量由名字类型和当前值组成" class="lvl3">变量由名字、类型和当前值组成</a></li><li><a href="#声明定义和初始化的区别" class="lvl3">声明、定义和初始化的区别</a></li><li><a href="#为什么不能读取未初始化的普通局部变量" class="lvl3">为什么不能读取未初始化的普通局部变量</a></li><li><a href="#05-赋值与连续赋值">05 赋值与连续赋值</a></li><li><a href="#赋值先算右边再写左边" class="lvl3">赋值先算右边，再写左边</a></li><li><a href="#赋值复制当前值不会建立自动连接" class="lvl3">赋值复制当前值，不会建立自动连接</a></li><li><a href="#连续赋值从右边开始" class="lvl3">连续赋值从右边开始</a></li><li><a href="#-和--的职责不同" class="lvl3">= 和 == 的职责不同</a></li><li><a href="#06-表达式">06 表达式</a></li><li><a href="#表达式会产生一个结果" class="lvl3">表达式会产生一个结果</a></li><li><a href="#从当前值到结果再保存" class="lvl3">从当前值到结果，再保存</a></li><li><a href="#变量变化后旧结果不会自动重算" class="lvl3">变量变化后，旧结果不会自动重算</a></li><li><a href="#括号和优先级决定计算顺序" class="lvl3">括号和优先级决定计算顺序</a></li><li><a href="#建立变量时的统一检查顺序">建立变量时的统一检查顺序</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#变量名不符合规则" class="lvl3">变量名不符合规则</a></li><li><a href="#读取未初始化的普通局部变量" class="lvl3">读取未初始化的普通局部变量</a></li><li><a href="#把初始化和赋值混成一件事" class="lvl3">把初始化和赋值混成一件事</a></li><li><a href="#把--当成数学等号" class="lvl3">把 = 当成数学等号</a></li><li><a href="#认为赋值会让两个变量永久联动" class="lvl3">认为赋值会让两个变量永久联动</a></li><li><a href="#从左向右误读连续赋值" class="lvl3">从左向右误读连续赋值</a></li><li><a href="#只改公式里的变量却忘了重新计算结果" class="lvl3">只改公式里的变量，却忘了重新计算结果</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#related-knowledge-variables-expressions">关联知识与资源</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-标识符">01 标识符</a></li><li><a href="#标识符是程序中的名字" class="lvl3">标识符是程序中的名字</a></li><li><a href="#三步判断一个名称是否合法" class="lvl3">三步判断一个名称是否合法</a></li><li><a href="#合法还不够名字还要能表达用途" class="lvl3">合法还不够，名字还要能表达用途</a></li><li><a href="#02-关键字">02 关键字</a></li><li><a href="#关键字已经由-c-规定用途" class="lvl3">关键字已经由 C++ 规定用途</a></li><li><a href="#常见名称不一定是关键字" class="lvl3">常见名称不一定是关键字</a></li><li><a href="#03-常量">03 常量</a></li><li><a href="#字面量把固定值直接写进代码" class="lvl3">字面量把固定值直接写进代码</a></li><li><a href="#用-const-给固定值起名字" class="lvl3">用 const 给固定值起名字</a></li><li><a href="#什么时候用字面量什么时候用具名常量" class="lvl3">什么时候用字面量，什么时候用具名常量</a></li><li><a href="#04-变量与初始化">04 变量与初始化</a></li><li><a href="#变量由名字类型和当前值组成" class="lvl3">变量由名字、类型和当前值组成</a></li><li><a href="#声明定义和初始化的区别" class="lvl3">声明、定义和初始化的区别</a></li><li><a href="#为什么不能读取未初始化的普通局部变量" class="lvl3">为什么不能读取未初始化的普通局部变量</a></li><li><a href="#05-赋值与连续赋值">05 赋值与连续赋值</a></li><li><a href="#赋值先算右边再写左边" class="lvl3">赋值先算右边，再写左边</a></li><li><a href="#赋值复制当前值不会建立自动连接" class="lvl3">赋值复制当前值，不会建立自动连接</a></li><li><a href="#连续赋值从右边开始" class="lvl3">连续赋值从右边开始</a></li><li><a href="#-和--的职责不同" class="lvl3">= 和 == 的职责不同</a></li><li><a href="#06-表达式">06 表达式</a></li><li><a href="#表达式会产生一个结果" class="lvl3">表达式会产生一个结果</a></li><li><a href="#从当前值到结果再保存" class="lvl3">从当前值到结果，再保存</a></li><li><a href="#变量变化后旧结果不会自动重算" class="lvl3">变量变化后，旧结果不会自动重算</a></li><li><a href="#括号和优先级决定计算顺序" class="lvl3">括号和优先级决定计算顺序</a></li><li><a href="#建立变量时的统一检查顺序">建立变量时的统一检查顺序</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#引导练习不记录进度">引导练习（不记录进度）</a></li><li><a href="#常见错误">常见错误</a></li><li><a href="#变量名不符合规则" class="lvl3">变量名不符合规则</a></li><li><a href="#读取未初始化的普通局部变量" class="lvl3">读取未初始化的普通局部变量</a></li><li><a href="#把初始化和赋值混成一件事" class="lvl3">把初始化和赋值混成一件事</a></li><li><a href="#把--当成数学等号" class="lvl3">把 = 当成数学等号</a></li><li><a href="#认为赋值会让两个变量永久联动" class="lvl3">认为赋值会让两个变量永久联动</a></li><li><a href="#从左向右误读连续赋值" class="lvl3">从左向右误读连续赋值</a></li><li><a href="#只改公式里的变量却忘了重新计算结果" class="lvl3">只改公式里的变量，却忘了重新计算结果</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#整页综合测试">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -1195,6 +1237,31 @@ int main() {    int price = 8;    int count = 3;    const int bonus = 5;
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,33 +489,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 倍增思想</a><a href="#kp-02" class="astro-obblnf2s">02 状态含义与转移</a><a href="#kp-03" class="astro-obblnf2s">03 二进制拆分</a><a href="#kp-04" class="astro-obblnf2s">04 预处理与查询</a><a href="#kp-05" class="astro-obblnf2s">05 快速幂思想辨析</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方八级要求掌握倍增思想、二进制拆分、倍增预处理和倍增查询。本页使用“一维后继快速跳转”讲清状态，不把 LCA 作为核心专题；树上祖先只是同一状态含义的应用。</p>
 <h2 id="kp-01">01 倍增思想</h2>
-<p>若每次只向后走一步，多次询问“走 <code>k</code> 步到哪里”会重复大量相同跳转。倍增预先保存走 <code>1、2、4、8……</code> 步的结果，再用少量长跳转组合答案。</p>
-<p>当 <code>k=13</code> 时，不必走 13 次一步跳转，因为 <code>13=8+4+1</code>。只需使用预处理好的三段跳转。</p>
+<p>若每次只向后走一步，多次询问“走 <code dir="auto">k</code> 步到哪里”会重复大量相同跳转。倍增预先保存走 <code dir="auto">1、2、4、8……</code> 步的结果，再用少量长跳转组合答案。</p>
+<p>当 <code dir="auto">k=13</code> 时，不必走 13 次一步跳转，因为 <code dir="auto">13=8+4+1</code>。只需使用预处理好的三段跳转。</p>
 <h2 id="kp-02">02 状态含义与转移</h2>
-<p>定义 <code>jump[i][j]</code> 为从位置 <code>i</code> 出发走 <code>2^j</code> 步后的到达位置。第 0 层就是题目给出的下一位置。</p>
-<p>走 <code>2^j</code> 步可拆成两段 <code>2^(j-1)</code> 步，因此：</p>
-<p><code>jump[i][j] = jump[jump[i][j-1]][j-1]</code></p>
-<p>若前半段已经到达哨兵 <code>0</code>，完整跳转也记为 <code>0</code>。写转移前必须先用一句话固定状态含义，否则很容易交换“起点”和“层数”下标。</p>
+<p>定义 <code dir="auto">jump[i][j]</code> 为从位置 <code dir="auto">i</code> 出发走 <code dir="auto">2^j</code> 步后的到达位置。第 0 层就是题目给出的下一位置。</p>
+<p>走 <code dir="auto">2^j</code> 步可拆成两段 <code dir="auto">2^(j-1)</code> 步，因此：</p>
+<p><code dir="auto">jump[i][j] = jump[jump[i][j-1]][j-1]</code></p>
+<p>若前半段已经到达哨兵 <code dir="auto">0</code>，完整跳转也记为 <code dir="auto">0</code>。写转移前必须先用一句话固定状态含义，否则很容易交换“起点”和“层数”下标。</p>
 <h2 id="kp-03">03 二进制拆分查询步数</h2>
-<p>任何非负整数都能写成若干不同的 2 的幂之和。查询时检查 <code>k</code> 的每个二进制位：第 <code>j</code> 位为 1，就执行一次 <code>2^j</code> 步跳转。</p>
-<p>例如 <code>13</code> 的二进制为 <code>1101</code>，对应第 <code>3、2、0</code> 位。各段跳转前后衔接，步数之和恰好为 13。</p>
+<p>任何非负整数都能写成若干不同的 2 的幂之和。查询时检查 <code dir="auto">k</code> 的每个二进制位：第 <code dir="auto">j</code> 位为 1，就执行一次 <code dir="auto">2^j</code> 步跳转。</p>
+<p>例如 <code dir="auto">13</code> 的二进制为 <code dir="auto">1101</code>，对应第 <code dir="auto">3、2、0</code> 位。各段跳转前后衔接，步数之和恰好为 13。</p>
 <h2 id="kp-04">04 倍增预处理与查询</h2>
-<p>下面处理一维后继关系。<code>next[i]=0</code> 表示离开有效范围，<code>0 &lt;= k &lt;= 10^9</code>，因此保存第 0 到 30 层。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+<p>下面处理一维后继关系。<code dir="auto">next[i]=0</code> 表示离开有效范围，<code dir="auto">0 &lt;= k &lt;= 10^9</code>，因此保存第 0 到 30 层。</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 const int MAX_N = 100000 + 5;const int LOG = 31;int jumpTable[MAX_N][LOG];
 int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
     for (int position = 1; position &lt;= n; position++) {        cin &gt;&gt; jumpTable[position][0];    }
     // 两个连续的 2^(bit-1) 步合成一次 2^bit 步。    for (int bit = 1; bit &lt; LOG; bit++) {        for (int position = 1; position &lt;= n; position++) {            int middle = jumpTable[position][bit - 1];            if (middle == 0) {                jumpTable[position][bit] = 0;            } else {                jumpTable[position][bit] = jumpTable[middle][bit - 1];            }        }    }
     for (int query = 1; query &lt;= q; query++) {        int position;        long long steps;        cin &gt;&gt; position &gt;&gt; steps;
         // 第 bit 位为 1 时，使用对应的长跳转。        for (int bit = 0; bit &lt; LOG &amp;&amp; position != 0; bit++) {            if ((steps &amp; (1LL &lt;&lt; bit)) != 0) {                position = jumpTable[position][bit];            }        }        cout &lt;&lt; position &lt;&lt; '\n';    }    return 0;}</code></pre>
-<p>预处理时间和空间都是 <code>O(n log K)</code>，单次查询时间为 <code>O(log K)</code>。<code>LOG</code> 必须覆盖最大步数的最高二进制位。</p>
+<p>预处理时间和空间都是 <code dir="auto">O(n log K)</code>，单次查询时间为 <code dir="auto">O(log K)</code>。<code dir="auto">LOG</code> 必须覆盖最大步数的最高二进制位。</p>
 <h2 id="kp-05">05 与快速幂的联系</h2>
-<p>快速幂同样把指数拆成二进制位。若当前 <code>base</code> 表示 <code>a^(2^j)</code>，执行 <code>base=base×base</code> 后得到 <code>a^(2^(j+1))</code>。这里是“所代表的指数翻倍”，不是数值简单乘 2。</p>
+<p>快速幂同样把指数拆成二进制位。若当前 <code dir="auto">base</code> 表示 <code dir="auto">a^(2^j)</code>，执行 <code dir="auto">base=base×base</code> 后得到 <code dir="auto">a^(2^(j+1))</code>。这里是“所代表的指数翻倍”，不是数值简单乘 2。</p>
 <p>倍增跳转保存位置，快速幂保存乘法贡献；两者共同思想都是预先准备二的幂次结果，再按二进制位组合。</p>
-<p><strong>13 步查询追踪。</strong> 设从起点 <code>x</code> 出发，预处理表已经保存走 <code>1、2、4、8</code> 步的位置。因为 <code>13=(1101)₂=8+4+1</code>，查询依次使用第 3、2、0 层：</p>
+<p><strong>13 步查询追踪。</strong> 设从起点 <code dir="auto">x</code> 出发，预处理表已经保存走 <code dir="auto">1、2、4、8</code> 步的位置。因为 <code dir="auto">13=(1101)₂=8+4+1</code>，查询依次使用第 3、2、0 层：</p>
 <table>
 <thead>
 <tr>
@@ -511,7 +531,7 @@ int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
 <td>0</td>
 <td>3</td>
 <td>8 步</td>
-<td><code>jump[x][3]</code></td>
+<td><code dir="auto">jump[x][3]</code></td>
 </tr>
 <tr>
 <td>8</td>
@@ -527,13 +547,13 @@ int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
 </tr>
 </tbody>
 </table>
-<p>基础边界中，<code>k=0</code> 不使用任何层，答案仍是起点；<code>k=1</code> 只查第 0 层。面对最大 <code>k</code>，先确认 <code>LOG</code> 能覆盖它的最高二进制位，并检查跳转中途到达哨兵 <code>0</code> 后是否立即停止。</p>
+<p>基础边界中，<code dir="auto">k=0</code> 不使用任何层，答案仍是起点；<code dir="auto">k=1</code> 只查第 0 层。面对最大 <code dir="auto">k</code>，先确认 <code dir="auto">LOG</code> 能覆盖它的最高二进制位，并检查跳转中途到达哨兵 <code dir="auto">0</code> 后是否立即停止。</p>
 <p><strong>逐段具体推演（对应 01—05）。</strong></p>
-<p><strong>01 二的幂跳跃。</strong> 走 13 步若逐步更新要 13 次；准备 1、2、4、8 步跳转后，只需组合 <code>8+4+1</code> 三段。任何非负整数都能这样拆分。</p>
-<p><strong>02 状态转移。</strong> 链为 <code>1→2→3→4→5→0</code> 时，<code>jump[1][0]=2</code>；走 2 步先到 2 再到 3，所以 <code>jump[1][1]=3</code>；走 4 步是两个 2 步，得到 <code>jump[1][2]=5</code>。</p>
-<p><strong>03 查询。</strong> 从 1 出发走 3 步，<code>3=2+1</code>。先用 2 步表从 1 到 3，再用 1 步表从 3 到 4，最终是 4；走 0 步时不执行跳转，答案仍是 1。</p>
-<p><strong>04 层数。</strong> 最大 <code>k=13</code> 时必须有 8 步层，因为 13 的最高位是 8。每层先检查中间位置是否为 0，0 表示已经不能继续。</p>
-<p><strong>05 快速幂。</strong> 求 <code>3¹³</code> 时依次准备 <code>3¹、3²、3⁴、3⁸</code>，只把指数位为 1 的 <code>3¹、3⁴、3⁸</code> 乘入答案，得到 <code>3¹³</code>。</p>
+<p><strong>01 二的幂跳跃。</strong> 走 13 步若逐步更新要 13 次；准备 1、2、4、8 步跳转后，只需组合 <code dir="auto">8+4+1</code> 三段。任何非负整数都能这样拆分。</p>
+<p><strong>02 状态转移。</strong> 链为 <code dir="auto">1→2→3→4→5→0</code> 时，<code dir="auto">jump[1][0]=2</code>；走 2 步先到 2 再到 3，所以 <code dir="auto">jump[1][1]=3</code>；走 4 步是两个 2 步，得到 <code dir="auto">jump[1][2]=5</code>。</p>
+<p><strong>03 查询。</strong> 从 1 出发走 3 步，<code dir="auto">3=2+1</code>。先用 2 步表从 1 到 3，再用 1 步表从 3 到 4，最终是 4；走 0 步时不执行跳转，答案仍是 1。</p>
+<p><strong>04 层数。</strong> 最大 <code dir="auto">k=13</code> 时必须有 8 步层，因为 13 的最高位是 8。每层先检查中间位置是否为 0，0 表示已经不能继续。</p>
+<p><strong>05 快速幂。</strong> 求 <code dir="auto">3¹³</code> 时依次准备 <code dir="auto">3¹、3²、3⁴、3⁸</code>，只把指数位为 1 的 <code dir="auto">3¹、3⁴、3⁸</code> 乘入答案，得到 <code dir="auto">3¹³</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -544,12 +564,12 @@ int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
 </thead>
 <tbody>
 <tr>
-<td><code>jump[i][0]</code></td>
+<td><code dir="auto">jump[i][0]</code></td>
 <td>从 i 走 1 步</td>
 </tr>
 <tr>
-<td><code>jump[i][j]</code></td>
-<td>从 i 走 <code>2^j</code> 步</td>
+<td><code dir="auto">jump[i][j]</code></td>
+<td>从 i 走 <code dir="auto">2^j</code> 步</td>
 </tr>
 <tr>
 <td>层数</td>
@@ -562,14 +582,14 @@ int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>后继关系为 <code>1→2→3→4→0</code>。从 1 走 3 步到 4；走 4 步到 0；走 0 步仍在 1。最后一种边界提醒我们：查询初始答案必须是起点本身，不能先无条件走一步。</p>
+<p>后继关系为 <code dir="auto">1→2→3→4→0</code>。从 1 走 3 步到 4；走 4 步到 0；走 0 步仍在 1。最后一种边界提醒我们：查询初始答案必须是起点本身，不能先无条件走一步。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>层数不足反例。</strong> 最大查询为 13 步，却只预处理 1、2、4 步三层。执行到二进制的 8 位时没有表项，程序会漏掉 8 步并错误地只走 5 步。正确做法是让预处理覆盖最大 <code>k</code> 的最高位。</p>
+<p><strong>层数不足反例。</strong> 最大查询为 13 步，却只预处理 1、2、4 步三层。执行到二进制的 8 位时没有表项，程序会漏掉 8 步并错误地只走 5 步。正确做法是让预处理覆盖最大 <code dir="auto">k</code> 的最高位。</p>
 <ul>
-<li>没有先说明 <code>jump[i][j]</code> 的含义，导致转移下标颠倒。</li>
-<li><code>LOG</code> 太小，最大查询的最高位没有被处理。</li>
-<li>到达 <code>0</code> 后仍把它当作普通位置继续查表。</li>
-<li>查询 <code>k=0</code> 时仍执行一步跳转。</li>
+<li>没有先说明 <code dir="auto">jump[i][j]</code> 的含义，导致转移下标颠倒。</li>
+<li><code dir="auto">LOG</code> 太小，最大查询的最高位没有被处理。</li>
+<li>到达 <code dir="auto">0</code> 后仍把它当作普通位置继续查表。</li>
+<li>查询 <code dir="auto">k=0</code> 时仍执行一步跳转。</li>
 <li>把快速幂的平方写成数值乘 2。</li>
 </ul>
 <h2 id="关联学习">关联学习</h2>
@@ -577,7 +597,25 @@ int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
 <li><a href="/template/data-structure/doubling/">倍增程序模板</a>：查看倍增表的可复用结构。</li>
 <li><a href="/template/math/quick-pow/">快速幂程序模板</a>：比较相同的二进制拆分思想。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能准确解释倍增状态和两段转移</label><label class="q-check"><input type="checkbox"> 能按 k 的二进制位组合查询</label><label class="q-check"><input type="checkbox"> 能选择 LOG 并处理 k=0 与 0 哨兵</label><span>6 题</span>
+<p class="q-title">第 1 题若 jump[i][j] 表示从 i 出发跳 2^j 步后的位置，那么 jump[i][j] 应怎样由上一层得到？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题若 jump[i][j] 表示" value="A"><b>A.</b> jump[i][j-1] + 1</label><label class="q-opt"><input type="radio" name="第 1 题若 jump[i][j] 表示" value="B"><b>B.</b> jump[jump[i][j-1]][j-1]</label><label class="q-opt"><input type="radio" name="第 1 题若 jump[i][j] 表示" value="C"><b>C.</b> jump[i-1][j] × 2</label><label class="q-opt"><input type="radio" name="第 1 题若 jump[i][j] 表示" value="D"><b>D.</b> jump[i][0] + j</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>先从 i 跳 2^(j-1) 步到达 mid=jump[i][j-1]，再从 mid 跳同样的 2^(j-1) 步，两段合起来正好是 2^j 步。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 2 题要完成 13 步跳转，可以按二进制拆成哪三段？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题要完成 13 步跳转，可以按二" value="A"><b>A.</b> 1、3、9</label><label class="q-opt"><input type="radio" name="第 2 题要完成 13 步跳转，可以按二" value="B"><b>B.</b> 1、4、8</label><label class="q-opt"><input type="radio" name="第 2 题要完成 13 步跳转，可以按二" value="C"><b>C.</b> 2、5、6</label><label class="q-opt"><input type="radio" name="第 2 题要完成 13 步跳转，可以按二" value="D"><b>D.</b> 3、4、6</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>13 的二进制是 1101，即 13=8+4+1。查询时只需依次采用已经预处理好的 2^3、2^2 和 2^0 步跳转。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 3 题预处理 n 个位置、约 log K 层倍增表的时间复杂度通常是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题预处理 n 个位置、约 log" value="A"><b>A.</b> O(1)</label><label class="q-opt"><input type="radio" name="第 3 题预处理 n 个位置、约 log" value="B"><b>B.</b> O(log K)</label><label class="q-opt"><input type="radio" name="第 3 题预处理 n 个位置、约 log" value="C"><b>C.</b> O(n log K)</label><label class="q-opt"><input type="radio" name="第 3 题预处理 n 个位置、约 log" value="D"><b>D.</b> O(n²K)</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>每一层都要为 n 个位置计算一次转移，总层数约为 log K，因此预处理总工作量是 O(n log K)。单次查询再按二进制位处理。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 4 题快速幂中执行 base = base * base，这一步准确表示什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题快速幂中执行 base = b" value="A"><b>A.</b> 底数加倍</label><label class="q-opt"><input type="radio" name="第 4 题快速幂中执行 base = b" value="B"><b>B.</b> 当前幂次对应的底数平方，使指数代表从 2^j 变为 2^(j+1)</label><label class="q-opt"><input type="radio" name="第 4 题快速幂中执行 base = b" value="C"><b>C.</b> 答案清零</label><label class="q-opt"><input type="radio" name="第 4 题快速幂中执行 base = b" value="D"><b>D.</b> 指数乘二</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>如果当前 base 表示 a^(2^j)，平方后得到 a^(2×2^j)=a^(2^(j+1))。它是“平方并让所代表的指数翻倍”，不能写成数值本身简单翻倍。<br><span class="q-kp">对应知识点：05</span></p>
+<p class="q-title">第 5 题倍增法把一次走 1 步逐层扩展为 2、4、8 步，最核心的作用是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题倍增法把一次走 1 步逐层扩展" value="A"><b>A.</b> 增加查询次数</label><label class="q-opt"><input type="radio" name="第 5 题倍增法把一次走 1 步逐层扩展" value="B"><b>B.</b> 预先合成二的幂次跳转，减少重复的一步步移动</label><label class="q-opt"><input type="radio" name="第 5 题倍增法把一次走 1 步逐层扩展" value="C"><b>C.</b> 把所有数字改成偶数</label><label class="q-opt"><input type="radio" name="第 5 题倍增法把一次走 1 步逐层扩展" value="D"><b>D.</b> 只处理长度为 8 的数据</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>倍增把许多重复的短跳转预先合成为 2 的幂次长跳转，查询时按二进制位组合这些结果，从而把大量逐步移动降为对数次跳转。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 6 题倍增查询要求从位置 7 出发走 0 步，正确答案是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题倍增查询要求从位置 7 出发走" value="A"><b>A.</b> 0</label><label class="q-opt"><input type="radio" name="第 6 题倍增查询要求从位置 7 出发走" value="B"><b>B.</b> 1</label><label class="q-opt"><input type="radio" name="第 6 题倍增查询要求从位置 7 出发走" value="C"><b>C.</b> 7</label><label class="q-opt"><input type="radio" name="第 6 题倍增查询要求从位置 7 出发走" value="D"><b>D.</b> 必须查 jump[7][0] 后才知道</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>0 的二进制没有任何一位为 1，因此不执行跳转，答案仍是起点 7，对应页内知识点 03。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/pascal-triangle/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 03</small><strong>杨辉三角</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/gesp/level8/algebra-basics/" rel="next"><span><small>下一知识点 · 05</small><strong>代数基础</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -586,7 +624,7 @@ int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
       <a class="kp-nav" href="kp5.html">下一个：数列与代数 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 倍增思想</a></li><li><a href="#kp-02">02 状态含义与转移</a></li><li><a href="#kp-03">03 二进制拆分查询步数</a></li><li><a href="#kp-04">04 倍增预处理与查询</a></li><li><a href="#kp-05">05 与快速幂的联系</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 倍增思想</a></li><li><a href="#kp-02">02 状态含义与转移</a></li><li><a href="#kp-03">03 二进制拆分查询步数</a></li><li><a href="#kp-04">04 倍增预处理与查询</a></li><li><a href="#kp-05">05 与快速幂的联系</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -598,6 +636,31 @@ int main() {    int n, q;    cin &gt;&gt; n &gt;&gt; q;
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

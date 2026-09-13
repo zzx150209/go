@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,7 +489,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“简单动态规划”：记录子问题答案、状态定义、转移、初始化、计算顺序和答案位置，覆盖数列 DP、爬楼梯、简单路径计数和最大连续和入门。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-one-dimensional-dp-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-one-dimensional-dp-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">2 个子页</span></header><div><article><div><span class="astro-aidf4k4y">08</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/one-dimensional-dp/">简单动态规划</a></h3><p class="astro-aidf4k4y">按状态定义、初值、转移、顺序和答案五步建立一维动态规划。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/one-dimensional-dp/dp-basics/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">动态规划基础</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/one-dimensional-dp/linear-dp/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">线性动态规划</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 状态定义</h2><p>动态规划保存已经求出的子问题答案，避免重复计算。第一步必须写清 <code>dp[i]</code> 的唯一含义，例如“走到第 i 级台阶的方案数”。状态含义决定后面的所有公式。</p><h2 id="kp-02">02 初值与转移</h2><p>爬楼梯每次走 1 或 2 级时，<code>dp[1]=1、dp[2]=2</code>。到第 <code>i</code> 级的最后一步来自 <code>i-1</code> 或 <code>i-2</code>，两类方案互不重复，所以 <code>dp[i]=dp[i-1]+dp[i-2]</code>。</p><h2 id="kp-03">03 顺序与答案</h2><p>因为当前状态依赖更小下标，必须从小到大计算。题目问第 <code>n</code> 级，答案就是 <code>dp[n]</code>，不能凭数组习惯改成 <code>dp[n-1]</code>。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;int main() {    int n;    cin &gt;&gt; n;    int dp[46] = {};    // 初始化最小的两个状态，避免转移时访问不存在的下标    dp[1] = 1;    if (n &gt;= 2) {  // n 至少为 2 时，第二个初值才会成为有效状态        dp[2] = 2;    }    for (int i = 3; i &lt;= n; i++) {  // 从小到大计算每一级的方案数        dp[i] = dp[i - 1] + dp[i - 2];  // 最后一步分别来自前一级或前两级    }    cout &lt;&lt; dp[n] &lt;&lt; '\n';    return 0;}</code></pre><p>限定 <code>1 &lt;= n &lt;= 45</code> 时答案在 <code>int</code> 范围内。时间与空间复杂度均为 <code>O(n)</code>。</p><h3 id="测试案例">测试案例</h3><table>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 状态定义</a><a href="#kp-02" class="astro-obblnf2s">02 初值与转移</a><a href="#kp-03" class="astro-obblnf2s">03 顺序与答案</a><a href="#kp-04" class="astro-obblnf2s">04 常见一维模型</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“简单动态规划”：记录子问题答案、状态定义、转移、初始化、计算顺序和答案位置，覆盖数列 DP、爬楼梯、简单路径计数和最大连续和入门。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><header class="gesp-level6-knowledge-grid__heading"><h2 id="gesp-level6-one-dimensional-dp-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p><span class="astro-aidf4k4y">2 个子页</span></header><article class="gesp-level6-parent-card"><span class="astro-aidf4k4y">08</span><span data-course-status class="astro-aidf4k4y">未复习</span>
+<h3 class="astro-aidf4k4y"><a class="gesp-level6-parent-card__primary" href="/gesp/level6/one-dimensional-dp/">简单动态规划</a></h3><p class="astro-aidf4k4y">按状态定义、初值、转移、顺序和答案五步建立一维动态规划。</p><ul aria-label="简单动态规划子知识点" class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/one-dimensional-dp/dp-basics/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">动态规划基础</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/one-dimensional-dp/linear-dp/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">线性动态规划</strong></a></li></ul></article></gesp-course-grid><h2 id="kp-01">01 状态定义</h2><p>动态规划保存已经求出的子问题答案，避免重复计算。第一步必须写清 <code dir="auto">dp[i]</code> 的唯一含义，例如“走到第 i 级台阶的方案数”。状态含义决定后面的所有公式。</p><h2 id="kp-02">02 初值与转移</h2><p>爬楼梯每次走 1 或 2 级时，<code dir="auto">dp[1]=1、dp[2]=2</code>。到第 <code dir="auto">i</code> 级的最后一步来自 <code dir="auto">i-1</code> 或 <code dir="auto">i-2</code>，两类方案互不重复，所以 <code dir="auto">dp[i]=dp[i-1]+dp[i-2]</code>。</p><h2 id="kp-03">03 顺序与答案</h2><p>因为当前状态依赖更小下标，必须从小到大计算。题目问第 <code dir="auto">n</code> 级，答案就是 <code dir="auto">dp[n]</code>，不能凭数组习惯改成 <code dir="auto">dp[n-1]</code>。</p><pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;int main() {    int n;    cin &gt;&gt; n;    int dp[46] = {};    // 初始化最小的两个状态，避免转移时访问不存在的下标    dp[1] = 1;    if (n &gt;= 2) {  // n 至少为 2 时，第二个初值才会成为有效状态        dp[2] = 2;    }    for (int i = 3; i &lt;= n; i++) {  // 从小到大计算每一级的方案数        dp[i] = dp[i - 1] + dp[i - 2];  // 最后一步分别来自前一级或前两级    }    cout &lt;&lt; dp[n] &lt;&lt; '\n';    return 0;}</code></pre><p>限定 <code dir="auto">1 &lt;= n &lt;= 45</code> 时答案在 <code dir="auto">int</code> 范围内。时间与空间复杂度均为 <code dir="auto">O(n)</code>。</p><h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -481,26 +501,42 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>边界</td>
-<td><code>n=1</code></td>
+<td><code dir="auto">n=1</code></td>
 <td>只有一步走 1 级，共 1 种</td>
 </tr>
 <tr>
 <td>边界</td>
-<td><code>n=2</code></td>
-<td>走 <code>1+1</code> 或直接走 2，共 2 种</td>
+<td><code dir="auto">n=2</code></td>
+<td>走 <code dir="auto">1+1</code> 或直接走 2，共 2 种</td>
 </tr>
 <tr>
 <td>基础</td>
-<td><code>n=5</code></td>
-<td>状态依次为 <code>1、2、3、5、8</code>，答案 8</td>
+<td><code dir="auto">n=5</code></td>
+<td>状态依次为 <code dir="auto">1、2、3、5、8</code>，答案 8</td>
 </tr>
 <tr>
 <td>特殊</td>
-<td>较大的 <code>n=45</code></td>
-<td>应在 <code>int</code> 范围内得到正确结果，并检查数组空间和溢出边界</td>
+<td>较大的 <code dir="auto">n=45</code></td>
+<td>应在 <code dir="auto">int</code> 范围内得到正确结果，并检查数组空间和溢出边界</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>状态定义与答案下标不一致</h3><div><div><strong><span>×</span> 错误写法</strong><code>定义到第 i 级的方案数，最后输出 dp[n-1]</code></div><div><strong><span>✓</span> 正确写法</strong><code>按定义输出 dp[n]，并处理最小输入</code></div></div><p><strong>原因：</strong>题目目标是第 n 级，答案位置应与定义一致。</p><p><strong>检查方法：</strong>公式写完后重新读一遍 dp[i] 表示什么。</p></section><section><h3>先套转移再补初值</h3><div><div><strong><span>×</span> 错误写法</strong><code>从 i=1 开始统一计算 dp[i]=dp[i-1]+dp[i-2]</code></div><div><strong><span>✓</span> 正确写法</strong><code>先确定不能由转移推出的最小状态，再从第一个可转移位置开始循环</code></div></div><p><strong>原因：</strong>最小状态没有更小的合法来源，会访问负下标或未定义状态。</p><p><strong>检查方法：</strong>把初始化、转移起点和数组下标放在一起检查。</p></section><h2 id="related-learning">关联学习</h2><p>下一页 01 背包把状态增加“物品选择”含义，并进一步讲解一维数组的更新方向。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>状态定义与答案下标不一致</h3><p><strong>原因：</strong>题目目标是第 n 级，答案位置应与定义一致。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>公式写完后重新读一遍 dp[i] 表示什么。</p><h3>先套转移再补初值</h3><p><strong>原因：</strong>最小状态没有更小的合法来源，会访问负下标或未定义状态。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>把初始化、转移起点和数组下标放在一起检查。</p><h2 id="related-learning">关联学习</h2><p>下一页 01 背包把状态增加“物品选择”含义，并进一步讲解一维数组的更新方向。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能用完整句子定义 dp[i]</label><label class="q-check"><input type="checkbox"> 能从最后一步推导初值和转移</label><label class="q-check"><input type="checkbox"> 能按依赖顺序计算并找到答案位置</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题动态规划第一步最应写清什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题动态规划第一步最应写清什么？" value="A"><b>A.</b> 状态表示什么</label><label class="q-opt"><input type="radio" name="第 1 题动态规划第一步最应写清什么？" value="B"><b>B.</b> 输出颜色</label><label class="q-opt"><input type="radio" name="第 1 题动态规划第一步最应写清什么？" value="C"><b>C.</b> 变量名长度</label><label class="q-opt"><input type="radio" name="第 1 题动态规划第一步最应写清什么？" value="D"><b>D.</b> 递归层数必须为 0</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>状态含义决定初值、转移和答案位置；含义不清时，后续公式即使形式相似也容易出错。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题爬楼梯每次走 1 或 2 级，dp[i] 表示到第 i 级方案数，转移是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题爬楼梯每次走 1 或 2 级，" value="A"><b>A.</b> dp[i]=i</label><label class="q-opt"><input type="radio" name="第 2 题爬楼梯每次走 1 或 2 级，" value="B"><b>B.</b> dp[i]=dp[i-1]+dp[i-2]</label><label class="q-opt"><input type="radio" name="第 2 题爬楼梯每次走 1 或 2 级，" value="C"><b>C.</b> dp[i]=dp[i-1]-dp[i-2]</label><label class="q-opt"><input type="radio" name="第 2 题爬楼梯每次走 1 或 2 级，" value="D"><b>D.</b> dp[i]=0</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>最后一步来自 i-1 或 i-2，两类方案互不重复，因此方案数相加。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 3 题同一状态定义下，dp[1]、dp[2] 应是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题同一状态定义下，dp[1]、d" value="A"><b>A.</b> 0、1</label><label class="q-opt"><input type="radio" name="第 3 题同一状态定义下，dp[1]、d" value="B"><b>B.</b> 1、1</label><label class="q-opt"><input type="radio" name="第 3 题同一状态定义下，dp[1]、d" value="C"><b>C.</b> 1、2</label><label class="q-opt"><input type="radio" name="第 3 题同一状态定义下，dp[1]、d" value="D"><b>D.</b> 2、3</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>到第 1 级只有一种走法，到第 2 级有 1+1 和 2 两种走法，所以是 1、2。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 4 题转移读取 dp[i-1] 和 dp[i-2] 时，应按什么顺序计算？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题转移读取 dp[i-1] 和 " value="A"><b>A.</b> 从小到大</label><label class="q-opt"><input type="radio" name="第 4 题转移读取 dp[i-1] 和 " value="B"><b>B.</b> 从大到小</label><label class="q-opt"><input type="radio" name="第 4 题转移读取 dp[i-1] 和 " value="C"><b>C.</b> 只算偶数</label><label class="q-opt"><input type="radio" name="第 4 题转移读取 dp[i-1] 和 " value="D"><b>D.</b> 任意顺序</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>从小到大才能保证计算当前状态前，依赖的两个较小下标已经得到正确结果。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 5 题最大连续和入门中，dp[i] 表示“以第 i 个数结尾的最大和”，答案应怎样取得？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题最大连续和入门中，dp[i] " value="A"><b>A.</b> 只看 dp[1]</label><label class="q-opt"><input type="radio" name="第 5 题最大连续和入门中，dp[i] " value="B"><b>B.</b> 取所有 dp[i] 的最大值</label><label class="q-opt"><input type="radio" name="第 5 题最大连续和入门中，dp[i] " value="C"><b>C.</b> 固定输出 0</label><label class="q-opt"><input type="radio" name="第 5 题最大连续和入门中，dp[i] " value="D"><b>D.</b> 取所有 dp[i] 的和</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>最优连续段可能在任意位置结束，因此要在所有“以 i 结尾”的状态中取最大值。<br><span class="q-kp">对应知识点：04</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/binary-search-tree/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">上一父知识点 · 07</small><strong class="astro-23ojxnem">二叉树搜索</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/complex-dp/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 09</small><strong class="astro-23ojxnem">复杂动态规划</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -509,7 +545,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp9.html">下一个：深度优先搜索 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-one-dimensional-dp-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 状态定义</a></li><li><a href="#kp-02">02 初值与转移</a></li><li><a href="#kp-03">03 顺序与答案</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-one-dimensional-dp-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 状态定义</a></li><li><a href="#kp-02">02 初值与转移</a></li><li><a href="#kp-03">03 顺序与答案</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -521,6 +557,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

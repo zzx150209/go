@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,24 +489,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <div data-gesp-level2-ui data-gesp-level2-detail></div>
-<h2 id="本课先记住">本课先记住</h2>
+    <h2 id="本课先记住">本课先记住</h2>
 <ul>
-<li><strong>核心结论：</strong> 外层控制组或行，内层完成每组的重复动作；每轮外层开始都要重置内层状态，总次数按各轮实际次数求和，并补上内外层最后一次失败判断；<code>break</code> 和 <code>continue</code> 只影响最近一层。</li>
-<li><strong>常用语法：</strong> 双层循环先认清每层变量、初值、条件和更新：外层 <code>for (int i = 1; i &lt;= rows; i++)</code> 控制行，内层 <code>for (int j = 1; j &lt;= columns; j++)</code> 完成每行。</li>
-<li><strong>最小示例：</strong> 固定两行、每行三次时共有六次输出；每行到 <code>j = 4</code> 时内层判断为假，最后到 <code>i = 3</code> 时外层判断为假。</li>
-<li><strong>关键易错点：</strong> 不要把内层初值放到外层之外；内层次数变化时不能直接相乘；不要把内层 <code>break</code> 当成结束所有循环；<code>while</code> 中的 <code>continue</code> 不能跳过必要更新。</li>
+<li><strong>核心结论：</strong> 外层控制组或行，内层完成每组的重复动作；每轮外层开始都要重置内层状态，总次数按各轮实际次数求和，并补上内外层最后一次失败判断；<code dir="auto">break</code> 和 <code dir="auto">continue</code> 只影响最近一层。</li>
+<li><strong>常用语法：</strong> 双层循环先认清每层变量、初值、条件和更新：外层 <code dir="auto">for (int i = 1; i &lt;= rows; i++)</code> 控制行，内层 <code dir="auto">for (int j = 1; j &lt;= columns; j++)</code> 完成每行。</li>
+<li><strong>最小示例：</strong> 固定两行、每行三次时共有六次输出；每行到 <code dir="auto">j = 4</code> 时内层判断为假，最后到 <code dir="auto">i = 3</code> 时外层判断为假。</li>
+<li><strong>关键易错点：</strong> 不要把内层初值放到外层之外；内层次数变化时不能直接相乘；不要把内层 <code dir="auto">break</code> 当成结束所有循环；<code dir="auto">while</code> 中的 <code dir="auto">continue</code> 不能跳过必要更新。</li>
 </ul>
+<h2 id="本页速查">本页速查</h2>
+<nav class="gesp-level1-quick-nav" aria-label="本页速查"><strong class="astro-6dte4xza">本页速查</strong><ul class="astro-6dte4xza"><li class="astro-6dte4xza"><a href="#01-forms" class="astro-6dte4xza">01 嵌套循环的基本形式</a></li><li class="astro-6dte4xza"><a href="#02-count" class="astro-6dte4xza">02 循环次数与行列角色</a></li><li class="astro-6dte4xza"><a href="#03-jump" class="astro-6dte4xza">03 break 与 continue</a></li><li class="astro-6dte4xza"><a href="#04-character" class="astro-6dte4xza">04 嵌套循环中的字符与数位</a></li><li class="astro-6dte4xza"><a href="#05-application" class="astro-6dte4xza">05 综合循环应用</a></li></ul></nav>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
-<p>本页对应二级大纲中的多层循环结构：掌握 <code>for</code>、<code>while</code>、<code>do-while</code> 的嵌套形式，能够计算执行次数、输出图形或数列，并理解内层 <code>break</code>、<code>continue</code> 的影响。</p>
+<p>本页对应二级大纲中的多层循环结构：掌握 <code dir="auto">for</code>、<code dir="auto">while</code>、<code dir="auto">do-while</code> 的嵌套形式，能够计算执行次数、输出图形或数列，并理解内层 <code dir="auto">break</code>、<code dir="auto">continue</code> 的影响。</p>
 <p>循环嵌套就是在一个循环体中再放循环。外层通常控制“做几组”，内层控制“每组做几次”；总次数必须按每一轮内层实际次数求和。</p>
-<p>本页先用矩形输出理解“外层一轮，内层完整执行一遍”，再追踪内层变量重新初始化、最后一次失败判断，以及 <code>break</code>、<code>continue</code> 只影响最近一层循环的规则；最后把行列、字符周期和数位处理放回同一套过程表中检查。</p>
+<p>本页先用矩形输出理解“外层一轮，内层完整执行一遍”，再追踪内层变量重新初始化、最后一次失败判断，以及 <code dir="auto">break</code>、<code dir="auto">continue</code> 只影响最近一层循环的规则；最后把行列、字符周期和数位处理放回同一套过程表中检查。</p>
 <p><strong>循环嵌套</strong>是把一个完整循环写在另一个循环的循环体里。外层每进入一轮，内层都要从自己的初始化开始，经历判断、执行、更新，直到内层结束，控制权才回到外层。判断代码属于哪一层时看大括号范围，不能只看变量名或缩进。</p>
 <a id="01-forms"></a>
 <h2 id="01-嵌套循环的基本形式">01 嵌套循环的基本形式</h2>
-<p>最常见的是双重 <code>for</code>。下面外层控制 3 行，内层在第 <code>i</code> 行输出 <code>i</code> 个数字：</p>
-<pre><code>for (int i = 1; i &lt;= 3; i++) {  // 外层控制行号    for (int j = 1; j &lt;= i; j++) {  // 第 i 行输出 i 次        cout &lt;&lt; j;    }    cout &lt;&lt; endl;}</code></pre>
-<p>输出为 <code>1</code>、<code>12</code>、<code>123</code> 三行。内层每完成一次，外层才进入下一轮；进入新的外层轮次时，内层循环变量重新初始化。</p>
+<p>最常见的是双重 <code dir="auto">for</code>。下面外层控制 3 行，内层在第 <code dir="auto">i</code> 行输出 <code dir="auto">i</code> 个数字：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>for (int i = 1; i &lt;= 3; i++) {  // 外层控制行号    for (int j = 1; j &lt;= i; j++) {  // 第 i 行输出 i 次        cout &lt;&lt; j;    }    cout &lt;&lt; endl;}</code></pre>
+<p>输出为 <code dir="auto">1</code>、<code dir="auto">12</code>、<code dir="auto">123</code> 三行。内层每完成一次，外层才进入下一轮；进入新的外层轮次时，内层循环变量重新初始化。</p>
 <p>观察下面这个固定执行 2 行、每行 3 次的双层循环，最容易看清“外层一次，内层完整执行一次”：</p>
 <table>
 <thead>
@@ -530,42 +550,42 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>当 <code>i=1</code> 时，<code>j</code> 要从 1 完整走到 3；之后外层才令 <code>i=2</code>，内层的 <code>j</code> 又从 1 开始。</p>
-<p><code>for</code> 和 <code>while</code> 也可以混合嵌套。下面外层 <code>for</code> 控制两行，内层 <code>while</code> 每行输出三个星号：</p>
+<p>当 <code dir="auto">i=1</code> 时，<code dir="auto">j</code> 要从 1 完整走到 3；之后外层才令 <code dir="auto">i=2</code>，内层的 <code dir="auto">j</code> 又从 1 开始。</p>
+<p><code dir="auto">for</code> 和 <code dir="auto">while</code> 也可以混合嵌套。下面外层 <code dir="auto">for</code> 控制两行，内层 <code dir="auto">while</code> 每行输出三个星号：</p>
 <pre><code>for (int i = 1; i &lt;= 2; i++) {    int j = 1;  // 每行开始时重置内层变量    while (j &lt;= 3) {        cout &lt;&lt; '*';        j++;  // 内层循环的更新    }    cout &lt;&lt; endl;}</code></pre>
-<p><code>while</code> 嵌套时，每进入一轮外层循环，也要重新设置内层循环的初值。若把 <code>int j = 1;</code> 放到外层循环之前，第一行结束后 <code>j</code> 已经变成 4，第二行将不会进入内层循环。</p>
-<p>两层都使用 <code>while</code> 时，初始化和更新不会集中写在循环头里，更要逐项检查：</p>
+<p><code dir="auto">while</code> 嵌套时，每进入一轮外层循环，也要重新设置内层循环的初值。若把 <code dir="auto">int j = 1;</code> 放到外层循环之前，第一行结束后 <code dir="auto">j</code> 已经变成 4，第二行将不会进入内层循环。</p>
+<p>两层都使用 <code dir="auto">while</code> 时，初始化和更新不会集中写在循环头里，更要逐项检查：</p>
 <pre><code>int row = 1;while (row &lt;= 2) {    int column = 1;  // 每行重新初始化列变量    while (column &lt;= 3) {        cout &lt;&lt; '*';        column++;  // 更新内层变量    }    cout &lt;&lt; endl;    row++;  // 更新外层变量}</code></pre>
-<p>这段代码中有两次初始化和两次更新：<code>row</code> 只在整个结构开始前初始化一次，<code>column</code> 却在每轮外层开始时重新初始化；漏掉任意一层的更新都可能造成该层无法结束。</p>
-<p><code>do-while</code> 嵌套同样遵守“外层一轮，内层完整执行”的规则，而且每层循环体都至少执行一次：</p>
+<p>这段代码中有两次初始化和两次更新：<code dir="auto">row</code> 只在整个结构开始前初始化一次，<code dir="auto">column</code> 却在每轮外层开始时重新初始化；漏掉任意一层的更新都可能造成该层无法结束。</p>
+<p><code dir="auto">do-while</code> 嵌套同样遵守“外层一轮，内层完整执行”的规则，而且每层循环体都至少执行一次：</p>
 <pre><code>int i = 1;do {    int j = 1;  // 每轮外层开始时重置内层变量    do {        cout &lt;&lt; j;        j++;    } while (j &lt;= 3);  // 内层末尾判断    cout &lt;&lt; endl;    i++;} while (i &lt;= 2);  // 外层末尾判断</code></pre>
-<p>程序输出两行 <code>123</code>。读嵌套 <code>do-while</code> 时要分别找到内层和外层末尾的条件，不能把两个 <code>while</code> 误认为同一层。</p>
+<p>程序输出两行 <code dir="auto">123</code>。读嵌套 <code dir="auto">do-while</code> 时要分别找到内层和外层末尾的条件，不能把两个 <code dir="auto">while</code> 误认为同一层。</p>
 <h2 id="过程演示">过程演示</h2>
-<p>已经看过双重 <code>for</code>、混合嵌套、双重 <code>while</code> 和双重 <code>do-while</code> 的基本形式，再把最常用的双重 <code>for</code> 放进唯一完整程序。程序输入行数、列数和一个字符，输出对应矩形；外层每轮开始时，内层变量 <code>column</code> 都重新从 1 开始。</p>
+<p>已经看过双重 <code dir="auto">for</code>、混合嵌套、双重 <code dir="auto">while</code> 和双重 <code dir="auto">do-while</code> 的基本形式，再把最常用的双重 <code dir="auto">for</code> 放进唯一完整程序。程序输入行数、列数和一个字符，输出对应矩形；外层每轮开始时，内层变量 <code dir="auto">column</code> 都重新从 1 开始。</p>
 <h3 id="完成程序">完成程序</h3>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int rows, columns;    char mark;    cin &gt;&gt; rows &gt;&gt; columns &gt;&gt; mark;    for (int row = 1; row &lt;= rows; row++) {  // 外层控制行        for (int column = 1; column &lt;= columns; column++) {  // 每行都从第 1 列开始            cout &lt;&lt; mark;        }        cout &lt;&lt; endl;    }    return 0;}</code></pre>
-<p>输入 <code>2 3 #</code> 时，内层判断的完整轨迹是：第 1 行令 <code>column</code> 依次为 1、2、3 并输出三个 <code>#</code>，随后 <code>column=4</code> 的最后一次判断为假；第 2 行重新初始化 <code>column=1</code>，再次到 <code>column=4</code> 为假。外层完成第 2 行后，<code>row=3</code> 的最后一次判断为假，程序结束。</p>
-<p>**跟着做：先画轨迹表，再预测输出。**把输入改成 <code>2 3 @</code>，不要先运行程序。先写出第 1 行的三组 <code>(row, column)</code>，再写出第 2 行，并补上内层 <code>column=4</code> 与外层 <code>row=3</code> 的失败判断。提示：进入第 2 行时，<code>column</code> 会重新从 1 开始。你的表中应有 6 次输出，程序结果应是两行 <code>@@@</code>；实际运行后，若少了一行，就检查内层变量是否在每轮外层开始时重新建立。</p>
+<p>输入 <code dir="auto">2 3 #</code> 时，内层判断的完整轨迹是：第 1 行令 <code dir="auto">column</code> 依次为 1、2、3 并输出三个 <code dir="auto">#</code>，随后 <code dir="auto">column=4</code> 的最后一次判断为假；第 2 行重新初始化 <code dir="auto">column=1</code>，再次到 <code dir="auto">column=4</code> 为假。外层完成第 2 行后，<code dir="auto">row=3</code> 的最后一次判断为假，程序结束。</p>
+<p>**跟着做：先画轨迹表，再预测输出。**把输入改成 <code dir="auto">2 3 @</code>，不要先运行程序。先写出第 1 行的三组 <code dir="auto">(row, column)</code>，再写出第 2 行，并补上内层 <code dir="auto">column=4</code> 与外层 <code dir="auto">row=3</code> 的失败判断。提示：进入第 2 行时，<code dir="auto">column</code> 会重新从 1 开始。你的表中应有 6 次输出，程序结果应是两行 <code dir="auto">@@@</code>；实际运行后，若少了一行，就检查内层变量是否在每轮外层开始时重新建立。</p>
 <a id="02-count"></a>
 <h2 id="02-循环次数与行列角色">02 循环次数与行列角色</h2>
-<p>若外层每轮内层次数相同，总次数可以相乘；若内层次数依赖 <code>i</code>，要逐轮相加。例如第 1 到第 4 行分别执行 1、2、3、4 次，总次数是 <code>1+2+3+4=10</code>。</p>
-<p>更通用的计算写法是：<strong>总次数 = 每一轮外层对应的内层次数之和</strong>。当每轮内层都执行 <code>m</code> 次、外层执行 <code>n</code> 次时，这个和才可以简写成 <code>n × m</code>。例如 3 行每行 4 次是 <code>4+4+4=12</code>；三角形四行则是 <code>1+2+3+4=10</code>，不能误算成 <code>4×4</code>。</p>
-<p>网格题常用 <code>i</code> 表示行、<code>j</code> 表示列。本站主教学默认使用 1 下标：行列都从 1 到 <code>N</code> 时，主对角线满足 <code>i==j</code>，副对角线满足 <code>i+j==N+1</code>。例如 <code>N=3</code> 时，副对角线坐标依次是 <code>(1,3)、(2,2)、(3,1)</code>，三组坐标的和都是 4。</p>
-<p>官方题若明确从 0 开始，则行列范围改为 0 到 <code>N-1</code>，副对角线公式相应变为 <code>i+j==N-1</code>。这属于题目明确给定的坐标约定，不应反过来改变本站网格主教学的 1 下标写法。</p>
+<p>若外层每轮内层次数相同，总次数可以相乘；若内层次数依赖 <code dir="auto">i</code>，要逐轮相加。例如第 1 到第 4 行分别执行 1、2、3、4 次，总次数是 <code dir="auto">1+2+3+4=10</code>。</p>
+<p>更通用的计算写法是：<strong>总次数 = 每一轮外层对应的内层次数之和</strong>。当每轮内层都执行 <code dir="auto">m</code> 次、外层执行 <code dir="auto">n</code> 次时，这个和才可以简写成 <code dir="auto">n × m</code>。例如 3 行每行 4 次是 <code dir="auto">4+4+4=12</code>；三角形四行则是 <code dir="auto">1+2+3+4=10</code>，不能误算成 <code dir="auto">4×4</code>。</p>
+<p>网格题常用 <code dir="auto">i</code> 表示行、<code dir="auto">j</code> 表示列。本站主教学默认使用 1 下标：行列都从 1 到 <code dir="auto">N</code> 时，主对角线满足 <code dir="auto">i==j</code>，副对角线满足 <code dir="auto">i+j==N+1</code>。例如 <code dir="auto">N=3</code> 时，副对角线坐标依次是 <code dir="auto">(1,3)、(2,2)、(3,1)</code>，三组坐标的和都是 4。</p>
+<p>官方题若明确从 0 开始，则行列范围改为 0 到 <code dir="auto">N-1</code>，副对角线公式相应变为 <code dir="auto">i+j==N-1</code>。这属于题目明确给定的坐标约定，不应反过来改变本站网格主教学的 1 下标写法。</p>
 <a id="03-jump"></a>
 <h2 id="03-break-与-continue">03 break 与 continue</h2>
-<p><code>break</code> 只结束它所在的最近一层循环。内层遇到 <code>break</code> 后，外层仍可进入下一轮。<code>continue</code> 跳过当前这一轮剩余语句，进入该层循环的下一轮。</p>
+<p><code dir="auto">break</code> 只结束它所在的最近一层循环。内层遇到 <code dir="auto">break</code> 后，外层仍可进入下一轮。<code dir="auto">continue</code> 跳过当前这一轮剩余语句，进入该层循环的下一轮。</p>
 <pre><code>for (int i = 1; i &lt;= 3; i++) {    for (int j = 1; j &lt;= 5; j++) {        if (j == 3) {            break;  // 只结束最近的内层循环        }        cout &lt;&lt; j;    }    cout &lt;&lt; endl;}</code></pre>
-<p>每行输出 <code>12</code>，共三行。<code>break</code> 没有直接结束外层循环。</p>
-<p><code>continue</code> 逐轮追踪可以看下面的内层循环：</p>
+<p>每行输出 <code dir="auto">12</code>，共三行。<code dir="auto">break</code> 没有直接结束外层循环。</p>
+<p><code dir="auto">continue</code> 逐轮追踪可以看下面的内层循环：</p>
 <pre><code>for (int j = 1; j &lt;= 5; j++) {    if (j == 3) {        continue;  // 跳过本轮 cout，随后仍执行 for 的更新    }    cout &lt;&lt; j;}cout &lt;&lt; endl;</code></pre>
-<p><code>break</code> 和 <code>continue</code> 都作用于它们所在的<strong>最近一层循环</strong>：<code>break</code> 直接离开该层；<code>continue</code> 只跳过该层当前轮剩余语句。在 <code>for</code> 中执行 <code>continue</code> 后仍会先执行更新部分，再回到条件判断；在 <code>while</code> 中若把必要的更新写在 <code>continue</code> 后面，则更新可能被跳过，必须特别检查是否会形成死循环。</p>
+<p><code dir="auto">break</code> 和 <code dir="auto">continue</code> 都作用于它们所在的<strong>最近一层循环</strong>：<code dir="auto">break</code> 直接离开该层；<code dir="auto">continue</code> 只跳过该层当前轮剩余语句。在 <code dir="auto">for</code> 中执行 <code dir="auto">continue</code> 后仍会先执行更新部分，再回到条件判断；在 <code dir="auto">while</code> 中若把必要的更新写在 <code dir="auto">continue</code> 后面，则更新可能被跳过，必须特别检查是否会形成死循环。</p>
 <table>
 <thead>
 <tr>
-<th><code>j</code></th>
-<th><code>j==3</code></th>
+<th><code dir="auto">j</code></th>
+<th><code dir="auto">j==3</code></th>
 <th>本轮动作</th>
 </tr>
 </thead>
@@ -583,7 +603,7 @@ int main() {    int rows, columns;    char mark;    cin &gt;&gt; rows &gt;&gt; c
 <tr>
 <td>3</td>
 <td>真</td>
-<td>跳过 <code>cout</code>，进入下一轮</td>
+<td>跳过 <code dir="auto">cout</code>，进入下一轮</td>
 </tr>
 <tr>
 <td>4</td>
@@ -597,27 +617,27 @@ int main() {    int rows, columns;    char mark;    cin &gt;&gt; rows &gt;&gt; c
 </tr>
 </tbody>
 </table>
-<p>最终输出 <code>1245</code>。<code>continue</code> 不会结束循环，也不会把 <code>j</code> 永远停在 3；在 <code>for</code> 中会先执行更新部分 <code>j++</code>，再开始下一次条件判断。</p>
-<p>官方真题少见写法 <code>if (i % 5) break;</code> 把非零整数直接当作真。它等价于更直白的 <code>if (i % 5 != 0) break;</code>。二级主教学优先写完整比较，读官方题时再把余数代入 0 或非 0 判断。</p>
+<p>最终输出 <code dir="auto">1245</code>。<code dir="auto">continue</code> 不会结束循环，也不会把 <code dir="auto">j</code> 永远停在 3；在 <code dir="auto">for</code> 中会先执行更新部分 <code dir="auto">j++</code>，再开始下一次条件判断。</p>
+<p>官方真题少见写法 <code dir="auto">if (i % 5) break;</code> 把非零整数直接当作真。它等价于更直白的 <code dir="auto">if (i % 5 != 0) break;</code>。二级主教学优先写完整比较，读官方题时再把余数代入 0 或非 0 判断。</p>
 <a id="04-character"></a>
 <h2 id="04-嵌套循环中的字符与数位">04 嵌套循环中的字符与数位</h2>
-<p>取余可以生成周期。例如 <code>j % 3</code> 依次产生 0、1、2，可配合字符编码输出 <code>X、Y、Z</code> 的重复序列。写成直白形式更适合二级阅读：</p>
+<p>取余可以生成周期。例如 <code dir="auto">j % 3</code> 依次产生 0、1、2，可配合字符编码输出 <code dir="auto">X、Y、Z</code> 的重复序列。写成直白形式更适合二级阅读：</p>
 <pre><code>for (int row = 1; row &lt;= 2; row++) {    for (int j = 0; j &lt; 6; j++) {        char letter = 'X' + j % 3;  // 余数 0、1、2 映射为 X、Y、Z        cout &lt;&lt; letter;    }    cout &lt;&lt; endl;}</code></pre>
-<p>外层循环执行 2 行，内层每行按余数 <code>0、1、2、0、1、2</code> 输出 <code>XYZXYZ</code>。字符周期由内层产生，换行由外层每轮末尾产生。</p>
-<p>数位处理中，<code>n % 10</code> 取得个位，<code>n /= 10</code> 去掉个位。若外层处理多个整数，内层 <code>while</code> 可以逐位处理每个数；每个数开始前要重新设置计数或备份变量。例如依次处理 12 和 305 时，12 的数位轨迹是 <code>12→1→0</code>，305 的轨迹必须从 305 重新开始，不能沿用前一个数结束后的 0。</p>
+<p>外层循环执行 2 行，内层每行按余数 <code dir="auto">0、1、2、0、1、2</code> 输出 <code dir="auto">XYZXYZ</code>。字符周期由内层产生，换行由外层每轮末尾产生。</p>
+<p>数位处理中，<code dir="auto">n % 10</code> 取得个位，<code dir="auto">n /= 10</code> 去掉个位。若外层处理多个整数，内层 <code dir="auto">while</code> 可以逐位处理每个数；每个数开始前要重新设置计数或备份变量。例如依次处理 12 和 305 时，12 的数位轨迹是 <code dir="auto">12→1→0</code>，305 的轨迹必须从 305 重新开始，不能沿用前一个数结束后的 0。</p>
 <a id="05-application"></a>
 <h2 id="05-综合循环应用">05 综合循环应用</h2>
 <h3 id="九九乘法表内层上界跟随行号">九九乘法表：内层上界跟随行号</h3>
 <pre><code>for (int i = 1; i &lt;= 9; i++) {    for (int j = 1; j &lt;= i; j++) {  // 第 i 行输出 i 项        cout &lt;&lt; j &lt;&lt; "*" &lt;&lt; i &lt;&lt; "=" &lt;&lt; i * j &lt;&lt; " ";    }    cout &lt;&lt; endl;}</code></pre>
-<p>第 1 到第 9 行分别输出 1、2、3、……、9 项，总项数是 <code>1+2+...+9=45</code>，不是 <code>9×9</code>。每次外层进入新行，内层 <code>j</code> 都重新从 1 开始。</p>
+<p>第 1 到第 9 行分别输出 1、2、3、……、9 项，总项数是 <code dir="auto">1+2+...+9=45</code>，不是 <code dir="auto">9×9</code>。每次外层进入新行，内层 <code dir="auto">j</code> 都重新从 1 开始。</p>
 <h3 id="多组数据每组重新统计">多组数据：每组重新统计</h3>
 <pre><code>for (int group = 1; group &lt;= t; group++) {    int n;    cin &gt;&gt; n;    int count = 0;  // 每组开始时重新统计    for (int i = 1; i &lt;= n; i++) {        int value;        cin &gt;&gt; value;        if (value % 2 == 0) {            count++;        }    }    cout &lt;&lt; count &lt;&lt; endl;}</code></pre>
-<p><code>count</code> 必须定义在外层循环体内，因此每组开始都会重新变成 0。若把它移到外层循环之前而又不手动清零，第二组输出会包含第一组已经统计的偶数，得到的是累计结果而不是“本组结果”。</p>
-<p>判断回文数时，逐位反转会不断修改 <code>n</code>，所以要先保存原值：</p>
-<p>下面的局部示例约定 <code>n</code> 是非负整数，并且反转后的值仍在 <code>int</code> 可表示范围内；真实题目必须先查看输入范围。</p>
+<p><code dir="auto">count</code> 必须定义在外层循环体内，因此每组开始都会重新变成 0。若把它移到外层循环之前而又不手动清零，第二组输出会包含第一组已经统计的偶数，得到的是累计结果而不是“本组结果”。</p>
+<p>判断回文数时，逐位反转会不断修改 <code dir="auto">n</code>，所以要先保存原值：</p>
+<p>下面的局部示例约定 <code dir="auto">n</code> 是非负整数，并且反转后的值仍在 <code dir="auto">int</code> 可表示范围内；真实题目必须先查看输入范围。</p>
 <pre><code>int original = n;  // 保存原数，n 作为工作副本int reversed = 0;while (n &gt; 0) {    reversed = reversed * 10 + n % 10;    n /= 10;}if (original == reversed) {    cout &lt;&lt; "yes";} else {    cout &lt;&lt; "no";}</code></pre>
-<p>枚举多个数并判断是否符合条件时，外层负责枚举候选，内层负责检查。内层一旦找到反例，可直接 <code>break</code>，不要继续做无用检查。</p>
-<p>例如要依次判断 121、123 是否为回文数，外层负责读入两个候选，内层分别反转。121 的中间反转值是 <code>1→12→121</code>，比较后为回文；123 的中间反转值是 <code>3→32→321</code>，比较后不是回文。每次进入内层前都要重新设置 <code>original</code> 和 <code>reversed=0</code>。</p>
+<p>枚举多个数并判断是否符合条件时，外层负责枚举候选，内层负责检查。内层一旦找到反例，可直接 <code dir="auto">break</code>，不要继续做无用检查。</p>
+<p>例如要依次判断 121、123 是否为回文数，外层负责读入两个候选，内层分别反转。121 的中间反转值是 <code dir="auto">1→12→121</code>，比较后为回文；123 的中间反转值是 <code dir="auto">3→32→321</code>，比较后不是回文。每次进入内层前都要重新设置 <code dir="auto">original</code> 和 <code dir="auto">reversed=0</code>。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -636,48 +656,113 @@ int main() {    int rows, columns;    char mark;    cin &gt;&gt; rows &gt;&gt; c
 <td>外层看行，内层看每行元素</td>
 </tr>
 <tr>
-<td><code>break</code> 影响</td>
+<td><code dir="auto">break</code> 影响</td>
 <td>只结束最近一层循环</td>
 </tr>
 <tr>
-<td><code>continue</code> 影响</td>
+<td><code dir="auto">continue</code> 影响</td>
 <td>跳过当前层当前轮剩余语句</td>
 </tr>
 <tr>
 <td>数位处理</td>
-<td>先备份，再 <code>%10</code> 与 <code>/=10</code></td>
+<td>先备份，再 <code dir="auto">%10</code> 与 <code dir="auto">/=10</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="典型例题">典型例题</h2>
 <p>**题目：**输入 3 和 4，输出 3 行、每行 4 个星号。</p>
-<p>**推演：**外层循环控制 3 行；每一轮外层开始后，内层 <code>j</code> 都从 1 重新走到 4，共输出 4 个星号；内层结束后再换行。三轮内层次数是 <code>4+4+4=12</code>。</p>
+<p>**推演：**外层循环控制 3 行；每一轮外层开始后，内层 <code dir="auto">j</code> 都从 1 重新走到 4，共输出 4 个星号；内层结束后再换行。三轮内层次数是 <code dir="auto">4+4+4=12</code>。</p>
 <pre><code>for (int i = 1; i &lt;= rows; i++) {  // 外层控制行    for (int j = 1; j &lt;= columns; j++) {  // 内层控制列        cout &lt;&lt; '*';    }    cout &lt;&lt; endl;}</code></pre>
 <p>输入：</p>
 <pre><code>3 4</code></pre>
 <p>输出：</p>
 <pre><code>************</code></pre>
-<p>**结论：**输出是 3×4 的星号矩形，共 12 个星号。固定内层次数时总次数可以相乘；若内层上界依赖 <code>i</code>，则应逐轮相加。</p>
-<p>另一个常见追踪是：外层 <code>i</code> 从 1 到 4，内层 <code>j</code> 从 1 到 <code>i</code>，连续输出 <code>j</code>。四轮分别输出 <code>1</code>、<code>12</code>、<code>123</code>、<code>1234</code>，连接后得到 <code>1121231234</code>。</p>
+<p>**结论：**输出是 3×4 的星号矩形，共 12 个星号。固定内层次数时总次数可以相乘；若内层上界依赖 <code dir="auto">i</code>，则应逐轮相加。</p>
+<p>另一个常见追踪是：外层 <code dir="auto">i</code> 从 1 到 4，内层 <code dir="auto">j</code> 从 1 到 <code dir="auto">i</code>，连续输出 <code dir="auto">j</code>。四轮分别输出 <code dir="auto">1</code>、<code dir="auto">12</code>、<code dir="auto">123</code>、<code dir="auto">1234</code>，连接后得到 <code dir="auto">1121231234</code>。</p>
 <a id="常见错误"></a>
 <h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
 <ul>
 <li>直接把外层次数和内层上界相乘，忽略内层次数会变化；</li>
 <li>忘记内层变量每轮重新初始化；</li>
-<li>认为内层 <code>break</code> 会结束所有循环；</li>
-<li><code>continue</code> 前后的累计顺序判断错误；</li>
+<li>认为内层 <code dir="auto">break</code> 会结束所有循环；</li>
+<li><code dir="auto">continue</code> 前后的累计顺序判断错误；</li>
 <li>反转数字后忘记原变量已变为 0。</li>
 </ul>
-<p>**错误写法：**把 <code>int j = 1;</code> 放在外层 <code>while</code> 之前，第一行结束后不再把 <code>j</code> 设回 1。</p>
-<p>**错误原因：**第一轮结束时 <code>j</code> 已经超过上界，后续外层轮次不会再次进入内层循环。</p>
-<p>**正确写法：**每次进入新的外层轮次时，在内层循环之前重新设置 <code>j = 1</code>。</p>
-<p>**错误写法：**内层循环条件误写成 <code>j &lt;= rows</code>，输出矩形时把行数当成列数。</p>
+<p>**错误写法：**把 <code dir="auto">int j = 1;</code> 放在外层 <code dir="auto">while</code> 之前，第一行结束后不再把 <code dir="auto">j</code> 设回 1。</p>
+<p>**错误原因：**第一轮结束时 <code dir="auto">j</code> 已经超过上界，后续外层轮次不会再次进入内层循环。</p>
+<p>**正确写法：**每次进入新的外层轮次时，在内层循环之前重新设置 <code dir="auto">j = 1</code>。</p>
+<p>**错误写法：**内层循环条件误写成 <code dir="auto">j &lt;= rows</code>，输出矩形时把行数当成列数。</p>
 <p>**错误原因：**外层变量和内层上界角色混乱。外层控制行，内层应按列数执行。</p>
-<p>**正确写法：**外层使用 <code>i &lt;= rows</code>，内层使用 <code>j &lt;= columns</code>；再用 1×1、单行和单列检查边界。</p>
+<p>**正确写法：**外层使用 <code dir="auto">i &lt;= rows</code>，内层使用 <code dir="auto">j &lt;= columns</code>；再用 1×1、单行和单列检查边界。</p>
 <h2 id="本节总结">本节总结</h2>
-<p>外层决定有多少组或多少行，内层决定每组做多少次；每轮外层开始时都要重新建立内层初值。计算次数要逐轮记录，过程表必须包含内层和外层的最后一次失败判断。<code>break</code> 只结束最近一层循环，<code>continue</code> 只跳过当前层当前轮的剩余语句。</p>
+<p>外层决定有多少组或多少行，内层决定每组做多少次；每轮外层开始时都要重新建立内层初值。计算次数要逐轮记录，过程表必须包含内层和外层的最后一次失败判断。<code dir="auto">break</code> 只结束最近一层循环，<code dir="auto">continue</code> 只跳过当前层当前轮的剩余语句。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>多层分支决定循环体内哪些操作执行；ASCII 页面解释字符周期输出；类型转换页面帮助判断整数除法和复合赋值结果。</p>
+<h2 id="核心内容检查">核心内容检查</h2>
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 我能区分外层与内层循环的角色并计算次数。</label><label class="q-check"><input type="checkbox"> 我能说明 break 和 continue 只影响所在循环层。</label><label class="q-check"><input type="checkbox"> 我会在数位处理前备份原值，并逐步追踪更新。</label><span>9 题</span><gesp-comprehensive-test class="gesp-comprehensive-test gesp-level2-comprehensive-test" data-level="2" data-progress-event="xdz:gesp-level2-progress" data-lesson-id="nested-loops"><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-review-01"><fieldset><legend><span>第 1 题</span>程序反转正整数 n 的各位后，直接用 n == reversed 判断是否为回文数。以下说法正确的是哪一项？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int n = 1221, reversed = 0;
+    while (n &gt; 0) {
+        reversed = reversed * 10 + n % 10;
+        n /= 10;
+    }
+    cout &lt;&lt; (n == reversed) &lt;&lt; endl;
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>D</p><p>逐位反转会不断修改 n，循环结束后 n 为 0。应在循环前保存 original = n，最后比较 original 与 reversed。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-loops-01"><fieldset><legend><span>第 2 题</span>一个 N 行 N 列方阵使用从 0 开始的行号 i 和列号 j。要定位从右上到左下的副对角线，条件应写成什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>D</p><p>从 0 开始编号时，副对角线上每个位置的行号与列号之和都是 N-1；比较相等必须使用 ==。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-loops-02"><fieldset><legend><span>第 3 题</span>下面程序输出的 cnt 是多少？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int cnt = 0;
+    for (int i = 1; i &lt; 8; i++) {
+        for (int j = 1; j &lt; i; j += 2) {
+            cnt++;
+        }
+    }
+    cout &lt;&lt; cnt &lt;&lt; endl;
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>原真题使用了省略大括号的少见写法；页面代码已改成等价的完整大括号形式。i 为 1 到 7 时，内层次数依次为 0、1、1、2、2、3、3，合计 12 次。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-loops-03"><fieldset><legend><span>第 4 题</span>下面程序输出的 cnt 是多少？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int cnt = 0;
+    for (int i = 2; i &lt; 14; i += 3) {
+        for (int j = 1; j &lt; i; j += 2) {
+            if (i % 2 == 1) {
+                cnt++;
+            }
+        }
+    }
+    cout &lt;&lt; cnt &lt;&lt; endl;
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>原真题连续省略了大括号；页面代码已改成等价的完整形式。i 依次为 2、5、8、11，只有奇数 i 计数；i=5 时有 2 次，i=11 时有 5 次，合计 7 次。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-loops-04"><fieldset><legend><span>第 5 题</span>内层循环变量 k 从 0 开始。要让每行字符按 X、Y、Z、X、Y、Z……重复，输出表达式应选哪一个？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>D</p><p>官方真题少见写法：选项使用 C 风格的 (char) 强制转换，容易误判为直接输出整数编码。按二级知识理解，k % 3 依次得到 0、1、2，与 &#39;X&#39; 的编码相加后得到 X、Y、Z 对应的编码，再转换为 char 输出字符。日常编程可先写 char letter = &#39;X&#39; + k % 3;，再写 cout &lt;&lt; letter;，变量含义更清楚。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-loops-05"><fieldset><legend><span>第 6 题</span>关于嵌套 do-while 循环，下列说法正确的是哪一项？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>do-while 在循环体执行后才判断条件，所以内层和外层的循环体都至少执行一次；之后是否继续由各自末尾的条件决定。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-nested-loops-06"><fieldset><legend><span>第 7 题</span>外层循环执行 rows 次，内层每轮执行 columns 次。rows×columns 分别为 1×1、1×4、4×1 时，内层语句总执行次数依次是多少？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>固定矩形循环的总次数是 rows×columns。1×1 为 1 次；单行 1×4 为 4 次；单列 4×1 也为 4 次。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-review-03"><fieldset><legend><span>第 8 题</span>下面程序连续输出的字符串是什么？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    for (int i = 1; i &lt;= 4; i++) {
+        for (int j = 1; j &lt;= i; j++) {
+            cout &lt;&lt; j;
+        }
+    }
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>外层四轮分别输出 1、12、123、1234，连续连接后得到 1121231234。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-review-04"><fieldset><legend><span>第 9 题</span>下面程序输出什么？</legend><pre class="gesp-course-question__code gesp-level2-question__code"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int sum = 0;
+    for (int i = 2; i &lt; 12; i++) {
+        sum += i;
+        if (i % 2 == 0) {
+            continue;
+        }
+        if (i % 5) {
+            break;
+        }
+    }
+    cout &lt;&lt; sum &lt;&lt; endl;
+    return 0;
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>i=2 时 sum=2，因 i 为偶数执行 continue；i=3 时 sum=5，随后 i%5 的余数为 3。官方真题少见写法会把非零整数当作真，它等价于更直白的 i % 5 != 0，因此执行 break，最终输出 5。</p></article><button type="button" data-test-submit>提交全部答案</button><button type="button" class="secondary" hidden data-test-retry>重新测试</button><p aria-live="polite" data-test-status>共 9 题，请全部作答后提交。</p></gesp-comprehensive-test><nav class="gesp-course-pager gesp-level2-pager" aria-label="二级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level2-pager__link gesp-level2-pager__link--previous" href="/gesp/level2/nested-branches/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 06</small><strong>多层分支</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level2-pager__link gesp-level2-pager__link--next" href="/gesp/level2/math-functions/" rel="next"><span><small>下一知识点 · 08</small><strong>数学函数</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -686,7 +771,7 @@ int main() {    int rows, columns;    char mark;    cin &gt;&gt; rows &gt;&gt; c
       <a class="kp-nav" href="kp8.html">下一个：程序调试 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-嵌套循环的基本形式">01 嵌套循环的基本形式</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#02-循环次数与行列角色">02 循环次数与行列角色</a></li><li><a href="#03-break-与-continue">03 break 与 continue</a></li><li><a href="#04-嵌套循环中的字符与数位">04 嵌套循环中的字符与数位</a></li><li><a href="#05-综合循环应用">05 综合循环应用</a></li><li><a href="#九九乘法表内层上界跟随行号" class="lvl3">九九乘法表：内层上界跟随行号</a></li><li><a href="#多组数据每组重新统计" class="lvl3">多组数据：每组重新统计</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#本页速查">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#01-嵌套循环的基本形式">01 嵌套循环的基本形式</a></li><li><a href="#过程演示">过程演示</a></li><li><a href="#完成程序" class="lvl3">完成程序</a></li><li><a href="#02-循环次数与行列角色">02 循环次数与行列角色</a></li><li><a href="#03-break-与-continue">03 break 与 continue</a></li><li><a href="#04-嵌套循环中的字符与数位">04 嵌套循环中的字符与数位</a></li><li><a href="#05-综合循环应用">05 综合循环应用</a></li><li><a href="#九九乘法表内层上界跟随行号" class="lvl3">九九乘法表：内层上界跟随行号</a></li><li><a href="#多组数据每组重新统计" class="lvl3">多组数据：每组重新统计</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#典型例题">典型例题</a></li><li><a href="#容易混淆的几个问题">容易混淆的几个问题</a></li><li><a href="#本节总结">本节总结</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#核心内容检查">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -698,6 +783,31 @@ int main() {    int rows, columns;    char mark;    cin &gt;&gt; rows &gt;&gt; c
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

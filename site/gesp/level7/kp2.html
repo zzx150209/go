@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,25 +489,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 复杂状态设计</a><a href="#kp-02" class="astro-obblnf2s">02 分阶段转移</a><a href="#kp-03" class="astro-obblnf2s">03 区间动态规划</a><a href="#kp-04" class="astro-obblnf2s">04 顺序与边界</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心检查</a><a href="#page-test" class="astro-obblnf2s">综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方七级大纲把复杂动态规划列为独立知识点。这里的“复杂”不是追求难写，而是指一个状态需要记录更多信息，或转移要按阶段、区间长度等特定顺序进行。本页在基础 DP 上继续扩展，每次都要说明状态含义、初始状态、状态转移、计算顺序和答案位置。</p>
 <p><strong>什么时候使用复杂 DP？</strong> 当一个下标不能完整描述问题、当前阶段只能依赖上一阶段，或者答案由区间内部的分割方式决定时，应考虑增加状态维度、分离阶段或使用区间 DP。先确认确实缺少必要信息，再增加维度，不能看到二维数组就直接套模板。</p>
 <h2 id="kp-01">01 复杂状态设计</h2>
-<p>当 <code>dp[i]</code> 无法区分后续会用到的情况时，需要增加一维状态。例如 <code>dp[i][0]</code> 与 <code>dp[i][1]</code> 可以分别表示处理到第 <code>i</code> 个位置且“未选择/已选择”某种状态。每一维都必须能用一句完整的话解释，不能先写数组再猜含义。</p>
+<p>当 <code dir="auto">dp[i]</code> 无法区分后续会用到的情况时，需要增加一维状态。例如 <code dir="auto">dp[i][0]</code> 与 <code dir="auto">dp[i][1]</code> 可以分别表示处理到第 <code dir="auto">i</code> 个位置且“未选择/已选择”某种状态。每一维都必须能用一句完整的话解释，不能先写数组再猜含义。</p>
 <p>状态设计的判断顺序是：答案需要什么信息；这些信息能否由更小问题得到；转移时是否还缺少条件。缺少的必要信息才进入状态，和未来无关的信息不应保留。</p>
-<p><strong>具体推演：</strong> 某条路线有一次“免付通行费”机会，到达位置 <code>i</code> 时即使总代价同为 <code>8</code>，仍要区分机会是否已经使用。可以令 <code>dp[i][0] = 8</code> 表示机会未用、<code>dp[i][1] = 8</code> 表示机会已用；下一段费用为 <code>5</code> 时，前者还能选择免费通过，后者只能变成 <code>13</code>。只记录一个 <code>dp[i] = 8</code> 会丢失影响后续选择的信息。</p>
+<p><strong>具体推演：</strong> 某条路线有一次“免付通行费”机会，到达位置 <code dir="auto">i</code> 时即使总代价同为 <code dir="auto">8</code>，仍要区分机会是否已经使用。可以令 <code dir="auto">dp[i][0] = 8</code> 表示机会未用、<code dir="auto">dp[i][1] = 8</code> 表示机会已用；下一段费用为 <code dir="auto">5</code> 时，前者还能选择免费通过，后者只能变成 <code dir="auto">13</code>。只记录一个 <code dir="auto">dp[i] = 8</code> 会丢失影响后续选择的信息。</p>
 <h2 id="kp-02">02 分阶段转移</h2>
-<p>有些问题天然分成若干阶段。第 <code>i</code> 阶段的状态只能从已经完成的阶段转移，不能在同一轮错误读取刚更新、原本属于下一阶段的数据。</p>
-<p>常见写法使用两个数组：<code>previous</code> 保存上一阶段，<code>current</code> 计算当前阶段；一轮结束后再交换或复制。这样牺牲少量代码长度，却能清楚保证依赖关系。</p>
-<p><strong>具体推演：</strong> 假设上一阶段只有 <code>previous[0] = 1</code>、<code>previous[1] = 4</code>，当前阶段规定 <code>current[j] = previous[j] + previous[j - 1]</code>。先得到 <code>current[0] = 1</code>，再得到 <code>current[1] = 4 + 1 = 5</code>；整个计算始终读取旧数组。若直接原地把 <code>previous[0]</code> 改成别的当前值，后面的状态就可能读到“半新半旧”的数据。</p>
+<p>有些问题天然分成若干阶段。第 <code dir="auto">i</code> 阶段的状态只能从已经完成的阶段转移，不能在同一轮错误读取刚更新、原本属于下一阶段的数据。</p>
+<p>常见写法使用两个数组：<code dir="auto">previous</code> 保存上一阶段，<code dir="auto">current</code> 计算当前阶段；一轮结束后再交换或复制。这样牺牲少量代码长度，却能清楚保证依赖关系。</p>
+<p><strong>具体推演：</strong> 假设上一阶段只有 <code dir="auto">previous[0] = 1</code>、<code dir="auto">previous[1] = 4</code>，当前阶段规定 <code dir="auto">current[j] = previous[j] + previous[j - 1]</code>。先得到 <code dir="auto">current[0] = 1</code>，再得到 <code dir="auto">current[1] = 4 + 1 = 5</code>；整个计算始终读取旧数组。若直接原地把 <code dir="auto">previous[0]</code> 改成别的当前值，后面的状态就可能读到“半新半旧”的数据。</p>
 <h2 id="kp-03">03 区间动态规划</h2>
-<p>区间 DP 用 <code>dp[left][right]</code> 表示闭区间 <code>[left, right]</code> 的答案。短区间是长区间的子问题，所以计算顺序必须按区间长度从小到大：</p>
-<pre><code>for (int length = 2; length &lt;= n; length++) {    for (int left = 1; left + length - 1 &lt;= n; left++) {        int right = left + length - 1;        for (int split = left; split &lt; right; split++) {            // 用 [left, split] 和 [split + 1, right] 更新当前区间        }    }}</code></pre>
-<p>分割点必须满足 <code>left &lt;= split &lt; right</code>，否则会产生空区间或重复当前区间。</p>
-<p><strong>具体推演：</strong> 区间 <code>[1,3]</code> 的长度为 <code>3</code>，合法分割点只有 <code>1</code> 和 <code>2</code>：分别拆成 <code>[1,1] + [2,3]</code>、<code>[1,2] + [3,3]</code>。必须先算长度为 <code>1、2</code> 的状态，才能比较这两个候选；若把 <code>split = 3</code> 也算进去，右段会变成空区间 <code>[4,3]</code>，已经不符合原问题。</p>
+<p>区间 DP 用 <code dir="auto">dp[left][right]</code> 表示闭区间 <code dir="auto">[left, right]</code> 的答案。短区间是长区间的子问题，所以计算顺序必须按区间长度从小到大：</p>
+<link rel="stylesheet" href="/_astro/ec.v4551.css"><pre><code>for (int length = 2; length &lt;= n; length++) {    for (int left = 1; left + length - 1 &lt;= n; left++) {        int right = left + length - 1;        for (int split = left; split &lt; right; split++) {            // 用 [left, split] 和 [split + 1, right] 更新当前区间        }    }}</code></pre>
+<p>分割点必须满足 <code dir="auto">left &lt;= split &lt; right</code>，否则会产生空区间或重复当前区间。</p>
+<p><strong>具体推演：</strong> 区间 <code dir="auto">[1,3]</code> 的长度为 <code dir="auto">3</code>，合法分割点只有 <code dir="auto">1</code> 和 <code dir="auto">2</code>：分别拆成 <code dir="auto">[1,1] + [2,3]</code>、<code dir="auto">[1,2] + [3,3]</code>。必须先算长度为 <code dir="auto">1、2</code> 的状态，才能比较这两个候选；若把 <code dir="auto">split = 3</code> 也算进去，右段会变成空区间 <code dir="auto">[4,3]</code>，已经不符合原问题。</p>
 <h2 id="kp-04">04 计算顺序、初值与不可达状态</h2>
-<p>动态规划不是“循环越多越复杂”，关键是每次读取的子状态已经算好。求最小值时，可把暂不可达状态初始化为足够大的 <code>INF</code>，但做加法前要确认它不是 <code>INF</code>，避免溢出。区间长度为 <code>1</code> 的边界通常单独初始化。</p>
-<p><strong>具体推演：</strong> 设 <code>INF = 1000000000</code>，状态 <code>dp[2]</code> 暂不可达，转移费用为 <code>7</code>。此时不能把 <code>INF + 7</code> 当作候选值，因为它不代表一条真实路线；程序应先判断 <code>dp[2] != INF</code>。若另一条可达路线代价为 <code>12</code>，当前最小值就应更新为 <code>12</code>，而不是让“不可达哨兵”参与比较。</p>
+<p>动态规划不是“循环越多越复杂”，关键是每次读取的子状态已经算好。求最小值时，可把暂不可达状态初始化为足够大的 <code dir="auto">INF</code>，但做加法前要确认它不是 <code dir="auto">INF</code>，避免溢出。区间长度为 <code dir="auto">1</code> 的边界通常单独初始化。</p>
+<p><strong>具体推演：</strong> 设 <code dir="auto">INF = 1000000000</code>，状态 <code dir="auto">dp[2]</code> 暂不可达，转移费用为 <code dir="auto">7</code>。此时不能把 <code dir="auto">INF + 7</code> 当作候选值，因为它不代表一条真实路线；程序应先判断 <code dir="auto">dp[2] != INF</code>。若另一条可达路线代价为 <code dir="auto">12</code>，当前最小值就应更新为 <code dir="auto">12</code>，而不是让“不可达哨兵”参与比较。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
 <table>
 <thead>
@@ -518,14 +538,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <h2 id="typical-example">典型例题</h2>
 <h3 id="基础例题">基础例题</h3>
-<p>区间中只有两堆石子 <code>4 6</code> 时，只能把它们合并一次，代价就是 <code>4 + 6 = 10</code>。因此 <code>dp[1][1] = dp[2][2] = 0</code>，<code>dp[1][2] = 10</code>。这个最小例子能直接核对“长度为 1 不需要合并”和“长度为 2 只有一个分割点”两个边界。</p>
+<p>区间中只有两堆石子 <code dir="auto">4 6</code> 时，只能把它们合并一次，代价就是 <code dir="auto">4 + 6 = 10</code>。因此 <code dir="auto">dp[1][1] = dp[2][2] = 0</code>，<code dir="auto">dp[1][2] = 10</code>。这个最小例子能直接核对“长度为 1 不需要合并”和“长度为 2 只有一个分割点”两个边界。</p>
 <h3 id="典型应用例题">典型应用例题</h3>
-<p>石子合并的基础模型：每次合并相邻两堆，代价为区间石子总数，求最小总代价。设 <code>sum[i]</code> 为前缀和，<code>dp[left][right]</code> 为合并区间的最小代价：</p>
+<p>石子合并的基础模型：每次合并相邻两堆，代价为区间石子总数，求最小总代价。设 <code dir="auto">sum[i]</code> 为前缀和，<code dir="auto">dp[left][right]</code> 为合并区间的最小代价：</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
 int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[205][205] = {};    cin &gt;&gt; n;    for (int i = 1; i &lt;= n; i++) {        cin &gt;&gt; stone[i];        // sum[i] 保存前 i 堆石子的总重量，用来 O(1) 求区间重量。        sum[i] = sum[i - 1] + stone[i];    }    // 长区间依赖更短区间，因此必须按区间长度从小到大计算。    for (int length = 2; length &lt;= n; length++) {        for (int left = 1; left + length - 1 &lt;= n; left++) {            int right = left + length - 1;            dp[left][right] = 1000000000;            // 枚举最后一次合并的分割点，左右两段都必须非空。            for (int split = left; split &lt; right; split++) {                int cost = dp[left][split] + dp[split + 1][right]                    + sum[right] - sum[left - 1];                dp[left][right] = min(dp[left][right], cost);            }        }    }    // 完整区间 [1,n] 的状态就是最终最小合并代价。    cout &lt;&lt; dp[1][n] &lt;&lt; endl;    return 0;}</code></pre>
-<p>输入 <code>3</code> 和 <code>1 2 3</code> 时输出 <code>9</code>。外层按长度递增，保证两个子区间已经求出。三层循环的时间复杂度为 <code>O(n^3)</code>，空间复杂度为 <code>O(n^2)</code>。</p>
+<p>输入 <code dir="auto">3</code> 和 <code dir="auto">1 2 3</code> 时输出 <code dir="auto">9</code>。外层按长度递增，保证两个子区间已经求出。三层循环的时间复杂度为 <code dir="auto">O(n^3)</code>，空间复杂度为 <code dir="auto">O(n^2)</code>。</p>
 <h3 id="状态追踪">状态追踪</h3>
-<p>对石子 <code>1 2 3</code>，先算短区间，再算长区间：</p>
+<p>对石子 <code dir="auto">1 2 3</code>，先算短区间，再算长区间：</p>
 <table>
 <thead>
 <tr>
@@ -538,31 +558,31 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
 <tr>
 <td>长度 1</td>
 <td>单堆不需要合并</td>
-<td><code>dp[1][1] = dp[2][2] = dp[3][3] = 0</code></td>
+<td><code dir="auto">dp[1][1] = dp[2][2] = dp[3][3] = 0</code></td>
 </tr>
 <tr>
 <td>长度 2</td>
-<td><code>1 + 2 = 3</code></td>
-<td><code>dp[1][2] = 3</code></td>
+<td><code dir="auto">1 + 2 = 3</code></td>
+<td><code dir="auto">dp[1][2] = 3</code></td>
 </tr>
 <tr>
 <td>长度 2</td>
-<td><code>2 + 3 = 5</code></td>
-<td><code>dp[2][3] = 5</code></td>
+<td><code dir="auto">2 + 3 = 5</code></td>
+<td><code dir="auto">dp[2][3] = 5</code></td>
 </tr>
 <tr>
 <td>长度 3，分割点 1</td>
-<td><code>0 + 5 + 6 = 11</code></td>
-<td>候选值 <code>11</code></td>
+<td><code dir="auto">0 + 5 + 6 = 11</code></td>
+<td>候选值 <code dir="auto">11</code></td>
 </tr>
 <tr>
 <td>长度 3，分割点 2</td>
-<td><code>3 + 0 + 6 = 9</code></td>
-<td><code>dp[1][3] = 9</code></td>
+<td><code dir="auto">3 + 0 + 6 = 9</code></td>
+<td><code dir="auto">dp[1][3] = 9</code></td>
 </tr>
 </tbody>
 </table>
-<p>最后一次合并的区间重量总是 <code>1 + 2 + 3 = 6</code>，区别在于左右子区间此前已经付出的代价。</p>
+<p>最后一次合并的区间重量总是 <code dir="auto">1 + 2 + 3 = 6</code>，区别在于左右子区间此前已经付出的代价。</p>
 <h3 id="建议测试案例">建议测试案例</h3>
 <table>
 <thead>
@@ -575,18 +595,18 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
 <tbody>
 <tr>
 <td>基础</td>
-<td><code>n = 2</code>，石子为 <code>4 6</code></td>
-<td>输出 <code>10</code></td>
+<td><code dir="auto">n = 2</code>，石子为 <code dir="auto">4 6</code></td>
+<td>输出 <code dir="auto">10</code></td>
 </tr>
 <tr>
 <td>边界</td>
-<td><code>n = 1</code>，石子为 <code>7</code></td>
-<td>输出 <code>0</code></td>
+<td><code dir="auto">n = 1</code>，石子为 <code dir="auto">7</code></td>
+<td>输出 <code dir="auto">0</code></td>
 </tr>
 <tr>
 <td>易错</td>
-<td><code>n = 3</code>，石子为 <code>1 2 3</code></td>
-<td>输出 <code>9</code>，不能按固定从左到右得到 <code>11</code></td>
+<td><code dir="auto">n = 3</code>，石子为 <code dir="auto">1 2 3</code></td>
+<td>输出 <code dir="auto">9</code>，不能按固定从左到右得到 <code dir="auto">11</code></td>
 </tr>
 </tbody>
 </table>
@@ -601,7 +621,7 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
 </thead>
 <tbody>
 <tr>
-<td>状态只写“前 <code>i</code> 个的答案”</td>
+<td>状态只写“前 <code dir="auto">i</code> 个的答案”</td>
 <td>没有说明其余维度，转移无法核对</td>
 <td>用完整句子说明每一维和状态值的含义</td>
 </tr>
@@ -611,13 +631,13 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
 <td>按区间长度从小到大计算</td>
 </tr>
 <tr>
-<td>分割点写成 <code>split &lt;= right</code></td>
+<td>分割点写成 <code dir="auto">split &lt;= right</code></td>
 <td>会产生空的右区间</td>
-<td>保证 <code>left &lt;= split &lt; right</code></td>
+<td>保证 <code dir="auto">left &lt;= split &lt; right</code></td>
 </tr>
 <tr>
-<td>求最小值时把初值设为 <code>0</code></td>
-<td><code>0</code> 会被错误选成最小值</td>
+<td>求最小值时把初值设为 <code dir="auto">0</code></td>
+<td><code dir="auto">0</code> 会被错误选成最小值</td>
 <td>初始化为足够大的合法上界</td>
 </tr>
 <tr>
@@ -628,10 +648,31 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
 </tbody>
 </table>
 <h3 id="错误反例推演">错误反例推演</h3>
-<p>石子 <code>1 2 3</code> 若错误地按左端点递增、在短区间尚未完成时就计算 <code>dp[1][3]</code>，读取到的 <code>dp[2][3]</code> 仍可能是初始 <code>0</code>，候选会被算成 <code>0 + 0 + 6 = 6</code>；真实的 <code>dp[2][3]</code> 是 <code>5</code>，正确两个候选为 <code>11</code> 和 <code>9</code>，答案应为 <code>9</code>。错误结果 <code>6</code> 比一次最终合并的重量还小，正好暴露了计算顺序问题。</p>
+<p>石子 <code dir="auto">1 2 3</code> 若错误地按左端点递增、在短区间尚未完成时就计算 <code dir="auto">dp[1][3]</code>，读取到的 <code dir="auto">dp[2][3]</code> 仍可能是初始 <code dir="auto">0</code>，候选会被算成 <code dir="auto">0 + 0 + 6 = 6</code>；真实的 <code dir="auto">dp[2][3]</code> 是 <code dir="auto">5</code>，正确两个候选为 <code dir="auto">11</code> 和 <code dir="auto">9</code>，答案应为 <code dir="auto">9</code>。错误结果 <code dir="auto">6</code> 比一次最终合并的重量还小，正好暴露了计算顺序问题。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>二维动态规划也使用二维数组，但两个下标不一定是区间端点；“二维”描述状态形状，“区间 DP”描述子问题结构。下一页会专门比较两者。</p>
-<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能用完整句子解释状态的每一维</label><label class="q-check"><input type="checkbox"> 能按区间长度从小到大计算</label><label class="q-check"><input type="checkbox"> 能正确处理最小值初值和不可达状态</label><span>7 题</span>
+<p class="q-title">第 1 题若区间状态 dp[l][r] 依赖更短的子区间，最稳妥的外层枚举顺序是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题若区间状态 dp[l][r] " value="A"><b>A.</b> 区间长度从小到大</label><label class="q-opt"><input type="radio" name="第 1 题若区间状态 dp[l][r] " value="B"><b>B.</b> 区间长度从大到小</label><label class="q-opt"><input type="radio" name="第 1 题若区间状态 dp[l][r] " value="C"><b>C.</b> 只枚举奇数长度</label><label class="q-opt"><input type="radio" name="第 1 题若区间状态 dp[l][r] " value="D"><b>D.</b> 端点完全随机</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：长区间由短区间合并而来，因此必须先算短区间，再算长区间。按长度从小到大枚举能保证转移读取的子区间已经计算完成。</p>
+<p class="q-title">第 2 题一个区间左端点为 l、长度为 len，右端点 r 应怎样计算？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题一个区间左端点为 l、长度为 " value="A"><b>A.</b> r = l + len</label><label class="q-opt"><input type="radio" name="第 2 题一个区间左端点为 l、长度为 " value="B"><b>B.</b> r = l + len - 1</label><label class="q-opt"><input type="radio" name="第 2 题一个区间左端点为 l、长度为 " value="C"><b>C.</b> r = len - l</label><label class="q-opt"><input type="radio" name="第 2 题一个区间左端点为 l、长度为 " value="D"><b>D.</b> r = l - len + 1</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 03：闭区间 [l,r] 的元素个数是 r-l+1。令它等于 len，移项得到 r=l+len-1；例如 l=3、len=2 时区间是 [3,4]。</p>
+<p class="q-title">第 3 题把闭区间 [l, r] 分成 [l, k] 与 [k + 1, r] 两个非空区间时，k 的合法范围是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题把闭区间 [l, r] 分成 " value="A"><b>A.</b> l 到 r</label><label class="q-opt"><input type="radio" name="第 3 题把闭区间 [l, r] 分成 " value="B"><b>B.</b> l 到 r - 1</label><label class="q-opt"><input type="radio" name="第 3 题把闭区间 [l, r] 分成 " value="C"><b>C.</b> l + 1 到 r + 1</label><label class="q-opt"><input type="radio" name="第 3 题把闭区间 [l, r] 分成 " value="D"><b>D.</b> 只允许 k = r</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 03：左子区间需要 k>=l，右子区间需要 k+1<=r，也就是 k<=r-1。因此分割点应枚举 l，l+1，…，r-1。</p>
+<p class="q-title">第 4 题合并石子时，合并相邻两堆的代价等于两堆重量之和。两堆重量分别为 4 和 6，则区间 [1, 2] 的最小合并代价是多少？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题合并石子时，合并相邻两堆的代价" value="A"><b>A.</b> 2</label><label class="q-opt"><input type="radio" name="第 4 题合并石子时，合并相邻两堆的代价" value="B"><b>B.</b> 4</label><label class="q-opt"><input type="radio" name="第 4 题合并石子时，合并相邻两堆的代价" value="C"><b>C.</b> 6</label><label class="q-opt"><input type="radio" name="第 4 题合并石子时，合并相邻两堆的代价" value="D"><b>D.</b> 10</label>
+</div><p class="q-ans" style="display:none"><b>答案：D</b><br>对应本页 03：长度为 2 的区间只有一个分割点，只能把重量 4 与 6 的两堆直接合并。本次代价为 4+6=10，没有其他方案可比较。</p>
+<p class="q-title">第 5 题dp[i] 无法区分“已经选择”和“尚未选择”两种必要情况时，最合理的处理是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题dp[i] 无法区分“已经选择" value="A"><b>A.</b> 删除状态数组</label><label class="q-opt"><input type="radio" name="第 5 题dp[i] 无法区分“已经选择" value="B"><b>B.</b> 增加一维状态并分别说明含义</label><label class="q-opt"><input type="radio" name="第 5 题dp[i] 无法区分“已经选择" value="C"><b>C.</b> 所有初值改为 0</label><label class="q-opt"><input type="radio" name="第 5 题dp[i] 无法区分“已经选择" value="D"><b>D.</b> 任意改变循环顺序</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 01：后续转移确实需要区分两种情况时，应增加必要状态维度，并完整解释每个取值的含义。</p>
+<p class="q-title">第 6 题当前阶段只能依赖上一阶段，而原地更新会覆盖旧值。哪种写法最清楚安全？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题当前阶段只能依赖上一阶段，而原" value="A"><b>A.</b> 分别使用 previous 和 current</label><label class="q-opt"><input type="radio" name="第 6 题当前阶段只能依赖上一阶段，而原" value="B"><b>B.</b> 取消所有初值</label><label class="q-opt"><input type="radio" name="第 6 题当前阶段只能依赖上一阶段，而原" value="C"><b>C.</b> 随机选择方向</label><label class="q-opt"><input type="radio" name="第 6 题当前阶段只能依赖上一阶段，而原" value="D"><b>D.</b> 跳过当前阶段</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：分开保存上一阶段和当前阶段，能保证本轮只读取完整的上一阶段，避免新值污染旧依赖。</p>
+<p class="q-title">第 7 题求最小代价时，某状态暂时不可达。下面哪种处理更稳妥？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="A"><b>A.</b> 初始化为 0</label><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="B"><b>B.</b> 设为 INF，并在相加前检查可达性</label><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="C"><b>C.</b> 直接输出</label><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="D"><b>D.</b> 改求最大值</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 04：最小值问题不能用 0 表示不可达；使用 INF 时还要在加法前检查，避免无意义计算和溢出。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level7-pager" aria-label="七级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level7-pager__link gesp-level7-pager__link--previous" href="/gesp/level7/math-library-functions/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 01</small><strong>数学库常用函数</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level7-pager__link gesp-level7-pager__link--next" href="/gesp/level7/two-dimensional-grid-dp/" rel="next"><span><small>下一知识点 · 03</small><strong>二维动态规划</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -640,7 +681,7 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
       <a class="kp-nav" href="kp3.html">下一个：二维动态规划 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 复杂状态设计</a></li><li><a href="#kp-02">02 分阶段转移</a></li><li><a href="#kp-03">03 区间动态规划</a></li><li><a href="#kp-04">04 计算顺序、初值与不可达状态</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#状态追踪" class="lvl3">状态追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 复杂状态设计</a></li><li><a href="#kp-02">02 分阶段转移</a></li><li><a href="#kp-03">03 区间动态规划</a></li><li><a href="#kp-04">04 计算顺序、初值与不可达状态</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础例题" class="lvl3">基础例题</a></li><li><a href="#典型应用例题" class="lvl3">典型应用例题</a></li><li><a href="#状态追踪" class="lvl3">状态追踪</a></li><li><a href="#建议测试案例" class="lvl3">建议测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#错误反例推演" class="lvl3">错误反例推演</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -652,6 +693,31 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

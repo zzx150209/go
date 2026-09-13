@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,54 +489,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="本课先记住">本课先记住</h2>
-<h3 id="核心结论">核心结论</h3>
-<p>模拟法把题目给出的过程按原顺序执行，并把下一步仍要使用的信息保存在状态变量中。只保存完成任务所需的最小状态，并给出明确初值；严格按照 <code>day++ → 上爬 → 立即判断 → 未到才下滑</code> 的顺序更新；先处理边界和停止条件，再从最终状态输出答案。</p>
-<h3 id="常用语法">常用语法</h3>
-<p>本课只使用三级已经学过的变量、分支、循环、<code>break</code>、一维数组、字符串、取模和位运算。典型的一轮写法是：先修改状态，再用 <code>if</code> 判断是否停止；只有未停止时，才执行本轮剩余操作。</p>
-<h3 id="最小示例">最小示例</h3>
-<p>青蛙清晨高度是 0，白天上爬 5 米后到达 5 米；因为 <code>5 &lt; 15</code>，夜晚才下滑 2 米，下一天从 3 米开始。这个小过程已经包含“读旧状态、更新、判断、决定下一步”。</p>
-<h3 id="关键易错点">关键易错点</h3>
-<ul>
-<li>最后一天到达井口后不再下滑，不能把每一天都简单写成 <code>up - down</code>。</li>
-<li>第一天已经到达时，即使 <code>up &lt;= down</code>，答案仍是 1，不能误判为 <code>Impossible</code>。</li>
-<li>候选状态必须先检查再写回；计分板累加、光标移动和字符串分割也遵守同一原则。</li>
-</ul>
-
-<h2 id="知识范围与使用边界">知识范围与使用边界</h2>
-<p>模拟法不是背模板，而是把题目的每条规则变成可核对的一次动作。一次完整模拟可以概括为：<strong>读取当前状态 → 执行一次操作 → 更新状态 → 判断是否结束</strong>。本课只处理规则明确、状态数量少、能够用三级已学语法逐步执行的问题，不引入自定义函数、指针、二维数组、容器、排序、递归、搜索或状态机术语。</p>
-<p>贯穿全课的代表问题是<strong>青蛙爬井</strong>：一口井深 <code>target</code> 米，青蛙白天上爬 <code>up</code> 米；若已到达井口就立即结束，否则夜晚下滑 <code>down</code> 米。程序输出首次到达所需天数；永远无法到达时输出 <code>Impossible</code>。</p>
-<p>教学程序公开支持：<code>1 &lt;= target, up, down &lt;= 1000000</code>。最多只输出一个不超过 <code>target</code> 的正整数或单词 <code>Impossible</code>；循环中的高度小于 <code>target + up</code>，最大不超过 1999999，所以 <code>int</code> 安全。</p>
-<h2 id="kp-01">01 模拟思想</h2>
-<p>模拟时先问：下一步还需要知道什么？青蛙问题只需要井深 <code>target</code>、白天上爬量 <code>up</code>、夜晚下滑量 <code>down</code>、当前高度 <code>height</code> 和已经开始的天数 <code>day</code>。其中前三个量来自输入，后两个量会在执行中变化。</p>
-<p>主样例 S1 的输入是 <code>15 5 2</code>，输出是 <code>5</code>。第一天从高度 0 开始，上爬到 5，没有到达 15，才下滑到 3；后一天必须从 3 接着算，不能回到初值 0。</p>
-<p>这说明模拟法的关键不是循环写几层，而是后一轮必须读取前一轮完成后的真实状态。</p>
-<span id="kp-02"></span>
-<h2 id="枚举与模拟的区别">枚举与模拟的区别</h2>
-<p>枚举法和模拟法都可能使用循环，但每一轮含义不同。枚举法每轮检查一个候选，重点是不重不漏；模拟法每轮执行一条操作或一个时刻，重点是状态变量与更新顺序。青蛙问题的一轮表示“一天”，不是在猜一个答案。</p>
-<p>如果一道题先枚举候选、再对候选执行若干规则，要分别说清两部分职责，不能因为都使用循环就把它们混为一种方法。</p>
-<span id="kp-03"></span>
-<h2 id="状态变量与更新顺序">状态变量与更新顺序</h2>
-<p>只保存下一步确实需要的信息，叫作最小状态。<code>height</code> 只表示当前高度，初值为 0；<code>day</code> 只表示已经开始了几天，初值为 0。进入新一天时才执行 <code>day++</code>，白天上爬时才改变 <code>height</code>。</p>
-<p>当前分数、当前位置、当前字符，都是下一步还要继续使用的信息；在别的模拟题里，它们同样应由职责清楚的状态变量保存。</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
-int main() {    int target, up, down;    cin &gt;&gt; target &gt;&gt; up &gt;&gt; down;
-    // 第一天未到达且完整昼夜没有正增长，才会永远无法到达。    if (up &lt; target &amp;&amp; up &lt;= down) {        cout &lt;&lt; "Impossible" &lt;&lt; '\n';        return 0;    }
-    int height = 0;    int day = 0;
-    while (height &lt; target) {        day++;        height = height + up;
-        // 白天到达后立即停止，不能继续执行本日夜晚下滑。        if (height &gt;= target) {            break;        }
-        height = height - down;    }
-    cout &lt;&lt; day &lt;&lt; '\n';    return 0;}</code></pre>
-<p>程序与八步方法逐项对应。首日到达不会进入无解分支；进入循环后，每轮要么到达并停止，要么在完整昼夜后取得正增长。因此合法输入不会无限循环，输出就是首次到达时的天数。</p>
-<h2 id="common-errors">常见错误</h2><div><ol>
-<li><strong>把每天都写成净增长。</strong> 现象：样例天数偏大或最后一天高度被再次减小。→原因：到达后仍计算 <code>up - down</code>。→修正：先上爬再判断，未到才下滑。→复验：<code>5 5 3</code> 必须输出 1。</li>
-<li><strong>把判断放在下滑之后。</strong> 现象：<code>15 5 2</code> 第 5 天上爬到 17 后又变成 15。→原因：没有在白天到达时立即停止。→修正：把 <code>if (height &gt;= target)</code> 放在下滑之前。→复验：追踪第 5 天的“未到才下滑”必须是不执行。</li>
-<li><strong>首日到达仍判无解。</strong> 现象：<code>5 5 5</code> 输出 <code>Impossible</code>。→原因：只检查 <code>up &lt;= down</code>。→修正：无解条件写成 <code>up &lt; target &amp;&amp; up &lt;= down</code>。→复验：<code>5 5 5</code> 输出 1。</li>
-<li><strong>无解不等号写错。</strong> 现象：<code>10 3 3</code> 进入死循环。→原因：把 <code>up &lt;= down</code> 错写成 <code>up &lt; down</code>。→修正：净增长为 0 也无法到达。→复验：<code>10 3 3</code> 输出 <code>Impossible</code>。</li>
-<li><strong>把累加写成覆盖。</strong> 现象：同一玩家后一次得分抹掉旧分数。→原因：写成 <code>score[player] = value</code>。→修正：读取当前分数后使用 <code>score[player] += value</code>。→复验：初值 4 再加 4 应得到 8。</li>
-<li><strong>候选状态未检查就写回。</strong> 现象：光标可能保存越界位置。→原因：先修改 <code>position</code>，再检查是否合法。→修正：先计算 <code>nextPosition</code>，检查通过后再执行 <code>position = nextPosition</code>。→复验：位置 4 再向后 1、有效范围 0 到 4 时仍保持 4。</li>
-<li><strong>后一步读取旧值。</strong> 现象：Q5 得到的分数不是 8。→原因：没有先完成 <code>code ^= 2</code>。→修正：严格按输入顺序写回每一步状态。→复验：<code>code</code> 为 6、分数为 4 时，先得到 4，再累计为 8。</li>
-</ol></div><section><h3>到达后仍下滑会破坏真实停止时机</h3><div><div><strong><span>×</span> 错误写法</strong><code>每一天都先执行 height = height + up - down</code></div><div><strong><span>✓</span> 正确写法</strong><code>day++，上爬，立即判断；只有未到达时才下滑</code></div></div><p><strong>原因：</strong>最后一天白天已经到达井口，题目规定立即结束；合并更新会多执行一次本不该发生的下滑。</p><p><strong>检查方法：</strong>把题目中的时间顺序写在代码旁，再逐项核对每个判断位于哪个动作之前。</p></section><h2 id="core-check">核心内容检查</h2><h2 id="page-test-title">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    
     </article>
 
     <div class="kp-nav-row">
@@ -526,7 +498,7 @@ int main() {    int target, up, down;    cin &gt;&gt; target &gt;&gt; up &gt;&gt
       
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#本课先记住">本课先记住</a></li><li><a href="#核心结论" class="lvl3">核心结论</a></li><li><a href="#常用语法" class="lvl3">常用语法</a></li><li><a href="#最小示例" class="lvl3">最小示例</a></li><li><a href="#关键易错点" class="lvl3">关键易错点</a></li><li><a href="#知识范围与使用边界">知识范围与使用边界</a></li><li><a href="#kp-01">01 模拟思想</a></li><li><a href="#枚举与模拟的区别">枚举与模拟的区别</a></li><li><a href="#状态变量与更新顺序">状态变量与更新顺序</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul></ul></div>
 </div>
 </main>
 
@@ -538,6 +510,31 @@ int main() {    int target, up, down;    cin &gt;&gt; target &gt;&gt; up &gt;&gt
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

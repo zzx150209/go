@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,25 +489,78 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">参数传递方式决定函数得到的是数据副本，还是能够直接访问调用处的对象。设计修改、交换或只读函数时，要先确定是否需要改变原变量，再选择值、引用或指针。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">值传递改副本，引用传递改原对象，指针传递通过地址改对象；数组传参还必须单独给出长度。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">void byValue(int value); // 值参数接收一个新副本
+    <article class="level4-dictionary-article"><p class="level4-dictionary-article__intro">参数传递方式决定函数得到的是数据副本，还是能够直接访问调用处的对象。设计修改、交换或只读函数时，要先确定是否需要改变原变量，再选择值、引用或指针。</p><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">值传递改副本，引用传递改原对象，指针传递通过地址改对象；数组传参还必须单独给出长度。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">void byValue(int value); // 值参数接收一个新副本
 void byReference(int&amp; value); // 引用参数成为实参的别名
 void byPointer(int* pointer); // 指针参数接收实参地址</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int&amp; value) { // value 直接代表调用处的整数对象
     value = value + 1; // 修改引用也就修改了原对象
-} // 函数结束后，修改结果保留在实参中</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">想修改实参却使用值传递</li><li class="astro-e22r5uwj">指针参数未判空就解引用</li><li class="astro-e22r5uwj">在函数内用 sizeof 推算数组参数长度</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：用同一组数据对照值、引用和指针传递；追踪调用前、函数内、返回后的对象变化；为数组和只读大对象选择边界清楚的接口。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">值传递像把资料复印件交给别人，引用像允许对方直接在原件上修改，指针像把原件的存放地址交出去。三种方式都能传信息，但修改结果完全不同。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要比较值传递、引用传递和指针传递，理解数组作为参数时的特点，并根据是否需要修改实参选择方式。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 值传递</h2><p class="astro-e22r5uwj">值参数得到实参当前值的副本。调用 addOne(number) 时，先创建新的形参 value，再把 number 的值复制进去；两者数值可能相同，但属于不同对象。</p><p class="astro-e22r5uwj">函数内修改 value 只改变副本。返回后副本销毁，number 保持原值。它适合 int 等较小数据的只读计算，或本来就只想在副本上处理的任务。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int value) { // 创建形参副本并接收实参当前值
+} // 函数结束后，修改结果保留在实参中</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">想修改实参却使用值传递</li><li class="astro-e22r5uwj">指针参数未判空就解引用</li><li class="astro-e22r5uwj">在函数内用 sizeof 推算数组参数长度</li></ul></article><nav class="dictionary-page-quick-nav" aria-labelledby="dictionary-page-quick-nav-title"><h2 id="dictionary-page-quick-nav-title" class="astro-nnvy3ny7">本页速查</h2><a href="#topic-01" class="astro-nnvy3ny7">01 值传递</a><a href="#topic-02" class="astro-nnvy3ny7">02 引用传递</a><a href="#topic-03" class="astro-nnvy3ny7">03 指针传递</a><a href="#topic-04" class="astro-nnvy3ny7">04 数组作为参数</a><a href="#topic-05" class="astro-nnvy3ny7">05 const 引用与方式选择</a><a href="#examples" class="astro-nnvy3ny7">典型例题</a><a href="#practice" class="astro-nnvy3ny7">分层练习</a><a href="#mistakes" class="astro-nnvy3ny7">常见错误</a><a href="#core-check" class="astro-nnvy3ny7">核心内容检查</a><a href="#test" class="astro-nnvy3ny7">整页综合测试</a><a href="#page-top" class="astro-nnvy3ny7">返回本页顶部</a></nav><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：用同一组数据对照值、引用和指针传递；追踪调用前、函数内、返回后的对象变化；为数组和只读大对象选择边界清楚的接口。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">值传递像把资料复印件交给别人，引用像允许对方直接在原件上修改，指针像把原件的存放地址交出去。三种方式都能传信息，但修改结果完全不同。</p><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要比较值传递、引用传递和指针传递，理解数组作为参数时的特点，并根据是否需要修改实参选择方式。</p><h2 id="topic-01" class="astro-e22r5uwj">01 值传递</h2><p class="astro-e22r5uwj">值参数得到实参当前值的副本。调用 addOne(number) 时，先创建新的形参 value，再把 number 的值复制进去；两者数值可能相同，但属于不同对象。</p><p class="astro-e22r5uwj">函数内修改 value 只改变副本。返回后副本销毁，number 保持原值。它适合 int 等较小数据的只读计算，或本来就只想在副本上处理的任务。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int value) { // 创建形参副本并接收实参当前值
     value = value + 1; // 只修改函数内部的副本
-} // 副本销毁，调用处原变量不变</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-02"><h2 id="topic-02" class="astro-e22r5uwj">02 引用传递</h2><p class="astro-e22r5uwj">引用参数不是新副本，而是调用处对象的另一个名字。`int&amp; value` 中的 &amp; 表示引用类型；调用时直接写 addOne(number)，不写 &amp;number。</p><p class="astro-e22r5uwj">函数内给 value 赋值就是给 number 赋值，所以接口应让读者一眼看出它可能修改实参。引用必须绑定有效对象，不能用 nullptr 表示“没有对象”。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int&amp; value) { // 让 value 成为调用处整数对象的别名
+} // 副本销毁，调用处原变量不变</code></pre><h2 id="topic-02" class="astro-e22r5uwj">02 引用传递</h2><p class="astro-e22r5uwj">引用参数不是新副本，而是调用处对象的另一个名字。`int&amp; value` 中的 &amp; 表示引用类型；调用时直接写 addOne(number)，不写 &amp;number。</p><p class="astro-e22r5uwj">函数内给 value 赋值就是给 number 赋值，所以接口应让读者一眼看出它可能修改实参。引用必须绑定有效对象，不能用 nullptr 表示“没有对象”。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int&amp; value) { // 让 value 成为调用处整数对象的别名
     value = value + 1; // 通过别名直接修改原对象
-} // 引用结束，但原对象的新值仍然保留</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-03"><h2 id="topic-03" class="astro-e22r5uwj">03 指针传递</h2><p class="astro-e22r5uwj">指针参数自身仍是值传递：函数得到一份地址副本。虽然修改这个指针副本的指向不会自动改调用处指针，但解引用它可以访问地址对应的原对象。</p><p class="astro-e22r5uwj">调用时用 &amp;number 取得地址，函数内先检查 pointer 是否为 nullptr，再用 *pointer 读写。指针适合接口确实需要表示“可能没有对象”的情况。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int* pointer) { // 接收一个 int 对象的地址副本
+} // 引用结束，但原对象的新值仍然保留</code></pre><h2 id="topic-03" class="astro-e22r5uwj">03 指针传递</h2><p class="astro-e22r5uwj">指针参数自身仍是值传递：函数得到一份地址副本。虽然修改这个指针副本的指向不会自动改调用处指针，但解引用它可以访问地址对应的原对象。</p><p class="astro-e22r5uwj">调用时用 &amp;number 取得地址，函数内先检查 pointer 是否为 nullptr，再用 *pointer 读写。指针适合接口确实需要表示“可能没有对象”的情况。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int* pointer) { // 接收一个 int 对象的地址副本
     if (pointer != nullptr) { // 解引用前确认地址不是空指针
         *pointer = *pointer + 1; // 沿地址读取、加一并写回原对象
     } // 结束非空指针处理分支
-} // 结束指针参数函数</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-04"><h2 id="topic-04" class="astro-e22r5uwj">04 数组作为参数</h2><p class="astro-e22r5uwj">一维数组作为实参时，函数参数接收首元素地址，原数组不会被整体复制；因此修改 values[i] 会修改调用处对应元素。</p><p class="astro-e22r5uwj">首地址本身不带元素个数。`const int values[]` 与 `const int* values` 在函数参数位置表达同类接口，`sizeof(values)` 只反映参数本身，不是原数组总字节数。</p><p class="astro-e22r5uwj">长度必须单独传入，并让循环严格满足 0≤i&lt;length。const 表示本函数只读取元素，既保护数据，也清楚表达职责。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int sumArray(const int values[], int length) { // 接收只读首地址和明确长度
+} // 结束指针参数函数</code></pre><h2 id="topic-04" class="astro-e22r5uwj">04 数组作为参数</h2><p class="astro-e22r5uwj">一维数组作为实参时，函数参数接收首元素地址，原数组不会被整体复制；因此修改 values[i] 会修改调用处对应元素。</p><p class="astro-e22r5uwj">首地址本身不带元素个数。`const int values[]` 与 `const int* values` 在函数参数位置表达同类接口，`sizeof(values)` 只反映参数本身，不是原数组总字节数。</p><p class="astro-e22r5uwj">长度必须单独传入，并让循环严格满足 0≤i&lt;length。const 表示本函数只读取元素，既保护数据，也清楚表达职责。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int sumArray(const int values[], int length) { // 接收只读首地址和明确长度
     int sum = 0; // 初始化累计和
     for (int i = 0; i &lt; length; i++) { // 只遍历下标 0 到 length-1
         sum = sum + values[i]; // 把当前合法元素加入累计和
     } // 结束数组遍历
     return sum; // 返回全部元素之和
-} // 结束数组求和函数</code></pre><aside
+} // 结束数组求和函数</code></pre><aside class="level4-dictionary-article__warning"><strong class="astro-e22r5uwj">关键提醒：</strong>数组长度必须由参数明确传入，不能在函数里用 sizeof 推回原长度。</aside><h2 id="topic-05" class="astro-e22r5uwj">05 const 引用与方式选择</h2><p class="astro-e22r5uwj">较长的 string 或结构体只需读取时，可以使用 const 引用：引用避免复制整份对象，const 禁止函数通过这个形参修改原对象。</p><p class="astro-e22r5uwj">例如 printText(message) 的形参写成 `const string&amp; text`。调用语法仍直接传对象，不写地址符号；函数内可以读取 text，却不能给 text 赋新值。</p><p class="astro-e22r5uwj">选择时先问“要不要改原对象”，再问“有没有可能不存在”，最后考虑复制是否明显：只读小数据用值；必须修改用引用；可能为空用指针；只读较大对象用 const 引用。</p><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">const 不可省略，否则接口允许修改原字符串</li><li class="astro-e22r5uwj">&amp; 可以省略成值传递，但会复制整个 string</li><li class="astro-e22r5uwj">调用处直接写 printText(message)，不写 &amp;message</li></ul><pre class="astro-e22r5uwj"><code class="language-cpp">void printText(const string&amp; text) { // 以只读引用接收原字符串
+    cout &lt;&lt; text &lt;&lt; &#39;\n&#39;; // 读取并输出，但不能修改 text
+} // 结束后原字符串保持不变
+
+printText(message); // 调用处直接传对象，不写 &amp;message</code></pre><h2 id="quick-table" class="astro-e22r5uwj">知识点速查表</h2><table class="astro-e22r5uwj"><thead class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><th class="astro-e22r5uwj">项目</th><th class="astro-e22r5uwj">含义</th><th class="astro-e22r5uwj">检查重点</th></tr></thead><tbody class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">值参数</td><td class="astro-e22r5uwj">得到副本</td><td class="astro-e22r5uwj">函数内修改不影响实参</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">引用参数</td><td class="astro-e22r5uwj">实参的别名</td><td class="astro-e22r5uwj">接口明确会修改实参</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">指针参数</td><td class="astro-e22r5uwj">接收地址</td><td class="astro-e22r5uwj">先检查是否为空</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">数组参数</td><td class="astro-e22r5uwj">接收首元素地址</td><td class="astro-e22r5uwj">另传长度</td></tr></tbody></table>
+<h2 id="examples" class="astro-e22r5uwj">典型例题</h2><h3 class="astro-e22r5uwj">比较三种方式交换变量</h3><p class="astro-e22r5uwj">程序使用固定整数 3 和 5，让三个函数分别尝试交换，观察调用处变量是否改变。</p><h3 class="astro-e22r5uwj">完成程序</h3><pre class="astro-e22r5uwj"><code class="language-cpp">#include &lt;bits/stdc++.h&gt; // 引入本程序需要的标准库
+using namespace std; // 允许直接使用 cin、cout、string 等标准库名称
+
+void swapByValue(int left, int right) { // 使用值参数尝试交换两个副本
+    int temporary = left; // 暂存左侧副本的原值
+    left = right; // 把右侧副本的值赋给左侧副本
+    right = temporary; // 把暂存值赋给右侧副本
+} // 结束值传递函数，副本销毁且不会写回实参
+
+void swapByReference(int&amp; left, int&amp; right) { // 使用引用参数直接操作两个实参
+    int temporary = left; // 暂存第一个实参的原值
+    left = right; // 把第二个实参的值写入第一个实参
+    right = temporary; // 把暂存值写入第二个实参
+} // 结束引用传递函数，交换结果保留在原变量中
+
+void swapByPointer(int* left, int* right) { // 接收两个整数对象的地址
+    if (left != nullptr &amp;&amp; right != nullptr) { // 确认两个指针都能安全解引用
+        int temporary = *left; // 沿 left 地址读出并暂存第一个对象的原值
+        *left = *right; // 沿两个地址读写，把第二个对象的值写给第一个
+        *right = temporary; // 把暂存值写入第二个对象
+    } // 结束非空指针处理分支
+} // 结束指针传递函数
+
+int main() { // 主函数是程序的入口
+    int left = 3; // 定义第一个待交换变量
+    int right = 5; // 定义第二个待交换变量
+
+    swapByValue(left, right); // 只交换副本，main 中两个变量保持不变
+    cout &lt;&lt; left &lt;&lt; &#39; &#39; &lt;&lt; right &lt;&lt; &#39;\n&#39;; // 输出 3 5，验证值传递没有写回
+
+    swapByReference(left, right); // 通过引用交换 main 中的两个变量
+    cout &lt;&lt; left &lt;&lt; &#39; &#39; &lt;&lt; right &lt;&lt; &#39;\n&#39;; // 输出 5 3，验证引用修改了实参
+
+    swapByPointer(&amp;left, &amp;right); // 传入地址，再次交换两个原变量
+    cout &lt;&lt; left &lt;&lt; &#39; &#39; &lt;&lt; right &lt;&lt; &#39;\n&#39;; // 输出 3 5，验证指针也能修改实参
+    return 0; // 返回 0，表示程序正常结束
+} // 结束 main 函数</code></pre><h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">值传递复制出 left = 3、right = 5，函数只交换副本，main 中仍是 3 和 5。</li><li class="astro-e22r5uwj">引用形参是 main 中两个变量的别名，交换后原变量变为 5 和 3。</li><li class="astro-e22r5uwj">指针形参分别接收两个原变量的地址，通过 *left 和 *right 完成交换。</li><li class="astro-e22r5uwj">三次输出依次说明：值传递不能写回，引用和有效指针都能修改原变量。</li></ol><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">判断会不会改原值</h3><p class="astro-e22r5uwj">分别判断值参数、引用参数、指针参数中的赋值是否会改变 main 里的变量。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">值参数是新副本；引用和有效指针都能找到原对象。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">实现引用交换</h3><p class="astro-e22r5uwj">编写 swapByReference，交换两个整数并用一组输入验证。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">先用 temporary 保存其中一个原值。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">选择只读接口</h3><p class="astro-e22r5uwj">为只读取长字符串并统计字符数的函数选择参数形式，并说明理由。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">既要避免复制，又要禁止函数误改原字符串。</p></details></article>
+<h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><h3 class="astro-e22r5uwj">期望值参数修改实参</h3><p class="astro-e22r5uwj">错误写法：用 void swap(int left, int right) 交换后期待原变量改变。原因：left 和 right 只是副本。正确写法：需要写回时使用引用或有效指针。</p><h3 class="astro-e22r5uwj">引用声明位置错误</h3><p class="astro-e22r5uwj">错误写法：把调用写成 swap(&amp;left, &amp;right)，却让函数接收 int&amp;。原因：引用调用直接传变量，不传地址。正确写法：引用函数调用 swap(left, right)。</p><h3 class="astro-e22r5uwj">数组参数缺少长度</h3><p class="astro-e22r5uwj">错误写法：函数只接收 int values[]，却假设能自动知道元素个数。原因：数组参数只保留首元素地址。正确写法：把合法长度作为独立参数传入。</p><h3 class="astro-e22r5uwj">指针参数忘记解引用或检查</h3><p class="astro-e22r5uwj">错误写法：直接给 pointer 赋整数，或不检查 nullptr 就访问 *pointer。原因：pointer 保存地址。正确写法：先确认指针有效，再通过 *pointer 修改对象。</p>
+<h2 id="related-learning" class="astro-e22r5uwj">关联学习</h2><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj"><a href="/gesp/level4/structures/" class="astro-e22r5uwj">结构体</a>：结构体对象常通过引用或指针传入函数。</li></ul><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="parameter-passing" data-progress-event="xdz:gesp-level4-progress"><fieldset class="astro-l37rdmqc"><legend class="astro-l37rdmqc">完成全部核心内容检查，再记录本页已经复习</legend><label class="astro-l37rdmqc"><input type="checkbox" value="0" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能判断三种传递方式是否修改实参</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="1" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能写出带长度的一维数组参数</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="2" class="astro-l37rdmqc"><span class="astro-l37rdmqc">知道 sizeof 不能在数组参数中恢复原长度</span></label><label class="astro-l37rdmqc"><input type="checkbox" value="3" class="astro-l37rdmqc"><span class="astro-l37rdmqc">能按任务选择值、引用、指针或 const 引用</span></label></fieldset><button type="button" disabled data-review-button class="astro-l37rdmqc">标记为已复习</button><span aria-live="polite" data-review-status class="astro-l37rdmqc">勾选全部检查项后即可标记。</span></gesp-dictionary-review><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="parameter-passing" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 6 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><fieldset class="dictionary-test__question" data-question-id="l4-parameter-passing-01"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">01</span>【基础测试】运行下列程序片段后，main 中的 value 是多少？</legend><pre class="astro-h6wltfcv"><code class="astro-h6wltfcv">void increase(int number) {
+    number += 3;
+}
+
+int value = 8;
+increase(value);</code></pre><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-01" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 3</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-01" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> 8</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-01" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 11</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-01" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 无法确定</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">四级：值传递修改效果（代码改编）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameter-passing-02"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">02</span>【基础测试】运行下列程序片段后，score 的值是多少？</legend><pre class="astro-h6wltfcv"><code class="astro-h6wltfcv">void addBonus(int&amp; number) {
+    number += 5;
+}
+
+int score = 70;
+addBonus(score);</code></pre><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-02" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 5</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-02" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> 65</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-02" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 70</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-02" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 75</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级引用传递修改效果条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameter-passing-03"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">03</span>【边界测试】函数只需读取一个整数，调用时还允许没有可读对象。哪种接口和函数体组合更合适？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-03" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> int read(const int* pointer) { return pointer ? *pointer : 0; }</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-03" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> int read(int* pointer) { return *pointer; }</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-03" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> int read(int&amp; value) { value = 0; return value; }</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-03" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> int read(int value) { value++; return value; }</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">四级参数传递与 const 安全边界改编</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameter-passing-04"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">04</span>【易错测试】函数必须把调用者的两个整数交换，并且两个对象一定存在。下列形参形式最直接的是哪项？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-04" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> void exchange(int first, int second)</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-04" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> void exchange(const int&amp; first, const int&amp; second)</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-04" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> void exchange(int&amp; first, int&amp; second)</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-04" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> int exchange(int first, int second)</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级参数传递方式选择条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameter-passing-05"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">05</span>【易错测试】若函数只需要读取一个较长的 string 参数而不应修改它，哪种参数形式更合适？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-05" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> const string&amp; text</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-05" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> string text</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-05" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> string&amp; text 并随意修改</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-05" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> 不传参数，改用同名全局变量</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级参数传递选择条目）</a></p></fieldset><fieldset class="dictionary-test__question" data-question-id="l4-parameter-passing-06"><legend class="astro-h6wltfcv"><span class="astro-h6wltfcv">06</span>【综合测试】函数声明为 `int sumArray(const int values[], int length)`，为什么还要传入 length？</legend><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-06" value="A" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">A.</strong> 数组参数只接收首元素地址，函数不能自动知道原数组长度</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-06" value="B" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">B.</strong> length 用来保存数组首元素</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-06" value="C" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">C.</strong> 不传 length 时数组会自动清空</span></label><label class="astro-h6wltfcv"><input type="radio" name="l4-parameter-passing-06" value="D" class="astro-h6wltfcv"><span class="astro-h6wltfcv"><strong class="astro-h6wltfcv">D.</strong> const 会把数组长度改成 0</span></label><p class="dictionary-test__source">来源：<a href="https://gesp.ccf.org.cn/101/attach/1725701770182688.pdf" target="_blank" rel="noreferrer" class="astro-h6wltfcv">标准条目自编题（四级数组参数与长度条目）</a></p></fieldset><button type="button" data-submit-test class="astro-h6wltfcv">提交答案</button><button type="button" data-retry-test hidden class="astro-h6wltfcv">重新测试</button><span data-test-status aria-live="polite" class="astro-h6wltfcv">尚未提交。本页测试只保留最近一次有效结果。</span></gesp-dictionary-test><nav class="dictionary-lesson-pager" aria-label="知识点翻页"><a href="/gesp/level4/pointers/" rel="prev" class="astro-hl664apc"><span class="astro-hl664apc">上一知识点</span><strong class="astro-hl664apc">指针基础</strong></a><a href="/gesp/level4/structures/" rel="next" class="astro-hl664apc"><span class="astro-hl664apc">下一知识点</span><strong class="astro-hl664apc">结构体</strong></a></nav></article><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -497,7 +569,7 @@ void byPointer(int* pointer); // 指针参数接收实参地址</code></pre></ar
       <a class="kp-nav" href="kp5.html">下一个：结构体 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#quick-review-title">本课先记住</a></li><li><a href="#learning-goal">这节课要会什么</a></li><li><a href="#knowledge-range">知识范围与官方定位</a></li><li><a href="#topic-01">01 值传递</a></li><li><a href="#topic-02">02 引用传递</a></li><li><a href="#topic-03">03 指针传递</a></li><li><a href="#topic-04">04 数组作为参数</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#quick-review-title">本课先记住</a></li><li><a href="#dictionary-page-quick-nav-title">本页速查</a></li><li><a href="#learning-goal">这节课要会什么</a></li><li><a href="#knowledge-range">知识范围与官方定位</a></li><li><a href="#topic-01">01 值传递</a></li><li><a href="#topic-02">02 引用传递</a></li><li><a href="#topic-03">03 指针传递</a></li><li><a href="#topic-04">04 数组作为参数</a></li><li><a href="#topic-05">05 const 引用与方式选择</a></li><li><a href="#quick-table">知识点速查表</a></li><li><a href="#examples">典型例题</a></li><li><a href="#practice">分层练习</a></li><li><a href="#mistakes">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#test">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -509,6 +581,31 @@ void byPointer(int* pointer); // 指针参数接收实参地址</code></pre></ar
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

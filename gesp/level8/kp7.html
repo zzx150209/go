@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,7 +489,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 图的基本元素</a><a href="#kp-02" class="astro-obblnf2s">02 方向、权值与存储</a><a href="#kp-03" class="astro-obblnf2s">03 从任务目标选择算法</a><a href="#kp-04" class="astro-obblnf2s">04 连通、路径与代价</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>官方八级要求能够根据实际问题建立图模型，理解图的基本概念和性质，并综合运用已经学习的搜索、并查集、最小生成树和最短路算法。本页重点不是背算法名称，而是把题意中的对象、关系、费用和目标准确地翻译成图。</p>
 <h2 id="kp-01">01 图的基本元素</h2>
 <p>图由顶点和边组成。通常把“对象”看作顶点，把对象之间的“关系”看作边。例如城市是顶点，道路是边；学生是顶点，朋友关系是边。</p>
@@ -483,13 +503,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <p>同一段题意可能有不同模型。例如“课程先修关系”有方向，而“双向道路”没有方向。模型一旦建错，后面的算法即使写对也得不到正确答案。</p>
 <h2 id="kp-02">02 方向、权值与存储</h2>
-<p>无向边表示关系可以双向使用；有向边 <code>u → v</code> 只表示从 <code>u</code> 到 <code>v</code>。带权图的边还保存一个数值，如路程、费用或耗时；无权图只关心是否相连。</p>
+<p>无向边表示关系可以双向使用；有向边 <code dir="auto">u → v</code> 只表示从 <code dir="auto">u</code> 到 <code dir="auto">v</code>。带权图的边还保存一个数值，如路程、费用或耗时；无权图只关心是否相连。</p>
 <ul>
-<li>邻接矩阵 <code>g[u][v]</code> 查询一条边方便，空间通常为 <code>O(n²)</code>，适合顶点较少或边很密的图。</li>
-<li>邻接表只保存实际存在的边，空间通常为 <code>O(n+m)</code>，适合边较少的图。</li>
+<li>邻接矩阵 <code dir="auto">g[u][v]</code> 查询一条边方便，空间通常为 <code dir="auto">O(n²)</code>，适合顶点较少或边很密的图。</li>
+<li>邻接表只保存实际存在的边，空间通常为 <code dir="auto">O(n+m)</code>，适合边较少的图。</li>
 <li>边集直接保存每条边的两个端点和权值，适合 Kruskal 这类按边处理的算法。</li>
 </ul>
-<p>无向边写入邻接矩阵或邻接表时，通常要同时保存 <code>u → v</code> 和 <code>v → u</code>。</p>
+<p>无向边写入邻接矩阵或邻接表时，通常要同时保存 <code dir="auto">u → v</code> 和 <code dir="auto">v → u</code>。</p>
 <h2 id="kp-03">03 从任务目标选择算法</h2>
 <p>算法由任务目标决定，而不是由“题目里出现了图”决定：</p>
 <table>
@@ -522,7 +542,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tr>
 </tbody>
 </table>
-<p>选择前还要检查数据范围和边权条件。Dijkstra 不能直接处理负权边；Floyd 的 <code>O(n³)</code> 时间也不适合很大的 <code>n</code>。</p>
+<p>选择前还要检查数据范围和边权条件。Dijkstra 不能直接处理负权边；Floyd 的 <code dir="auto">O(n³)</code> 时间也不适合很大的 <code dir="auto">n</code>。</p>
 <h2 id="kp-04">04 连通、路径与代价</h2>
 <p>“连通”只说明能否从一个顶点到达另一个顶点；“路径”是一串首尾相接的边；“路径代价”是路径上各边权值之和。三者不能混为一谈。</p>
 <p>如果题目只问是否可达，就不必计算最短距离；如果要求最低费用，就不能只找到任意一条路径。最小生成树求的是连接全部顶点的最小总边权，最短路求的是指定顶点之间的最小路径代价，两者目标不同。</p>
@@ -559,8 +579,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <p>建模后的自检顺序是：方向是否正确、重边如何处理、边权是否满足算法条件、数据规模是否允许该存储与复杂度。先完成这四项，再写算法。</p>
 <p><strong>逐段具体推演（对应 01—04）。</strong></p>
-<p><strong>01 先找对象和关系。</strong> 校园有地点 A、B、C、D，道路为 A—B、A—C、C—D。模型中的顶点是 <code>{A,B,C,D}</code>，边是这 3 条道路；“A 能否到 D”被转成“图中是否存在 A 到 D 的路径”，答案是 A—C—D。</p>
-<p><strong>02 决定方向、权值和存储。</strong> 若 A 到 B 只允许单向通行，就只建 <code>A→B</code>；双向道路要同时表达两个方向。道路长度分别为 5、2、4 时，权值保存这些长度。4 个点的示例可用邻接矩阵，点多边少时邻接表更节省空间。</p>
+<p><strong>01 先找对象和关系。</strong> 校园有地点 A、B、C、D，道路为 A—B、A—C、C—D。模型中的顶点是 <code dir="auto">{A,B,C,D}</code>，边是这 3 条道路；“A 能否到 D”被转成“图中是否存在 A 到 D 的路径”，答案是 A—C—D。</p>
+<p><strong>02 决定方向、权值和存储。</strong> 若 A 到 B 只允许单向通行，就只建 <code dir="auto">A→B</code>；双向道路要同时表达两个方向。道路长度分别为 5、2、4 时，权值保存这些长度。4 个点的示例可用邻接矩阵，点多边少时邻接表更节省空间。</p>
 <p><strong>03 根据目标选择算法。</strong> 同一张图若问“从 A 到 D 最少花费”，且边权非负，选择 Dijkstra；若问“修哪些道路让四地全部连通且总造价最低”，选择最小生成树；若问很多组任意两点最短路且点数较小，才考虑 Floyd。</p>
 <p><strong>04 把答案翻译回题意。</strong> 在 A—B、A—C、C—D 中，A 与 D 连通，路径 A—C—D 经过 2 条边；若边权为 2 和 4，路径代价是 6。连通、边数最少和权值和最小是三个不同目标，必须按题目要求输出。</p>
 <h2 id="知识点速查表">知识点速查表</h2>
@@ -595,15 +615,15 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <h2 id="typical-example">典型例题</h2>
-<p>有 <code>n</code> 个城市和 <code>m</code> 条双向道路，每条道路有费用。若要求从城市 <code>1</code> 到城市 <code>n</code> 的最低费用，应把城市建成顶点、道路建成无向带权边，目标是固定起点到终点的最短路。若所有费用非负，可选择 Dijkstra；不能因为题目出现“连接城市”就误选最小生成树。</p>
+<p>有 <code dir="auto">n</code> 个城市和 <code dir="auto">m</code> 条双向道路，每条道路有费用。若要求从城市 <code dir="auto">1</code> 到城市 <code dir="auto">n</code> 的最低费用，应把城市建成顶点、道路建成无向带权边，目标是固定起点到终点的最短路。若所有费用非负，可选择 Dijkstra；不能因为题目出现“连接城市”就误选最小生成树。</p>
 <h2 id="common-errors">常见错误</h2>
-<p><strong>模型选错反例。</strong> 题目要求“用最低总造价连接所有村庄”，若误用 Dijkstra 从 1 号村求最短路树，在边 <code>(1,2,2)、(1,3,2)、(2,3,1)</code> 中会选两条代价 2 的边，总价 4；最小生成树应选权值 1 和 2，总价 3。两者目标不同，不能只因都出现“最小”就混用。</p>
+<p><strong>模型选错反例。</strong> 题目要求“用最低总造价连接所有村庄”，若误用 Dijkstra 从 1 号村求最短路树，在边 <code dir="auto">(1,2,2)、(1,3,2)、(2,3,1)</code> 中会选两条代价 2 的边，总价 4；最小生成树应选权值 1 和 2，总价 3。两者目标不同，不能只因都出现“最小”就混用。</p>
 <ul>
 <li>把双向道路只存一次，导致只能单向到达。</li>
 <li>只看“最小费用”四个字，不区分最小生成树与最短路。</li>
 <li>忽略边权是否为负，直接使用 Dijkstra。</li>
-<li>顶点编号是 <code>1～n</code>，数组却只开到 <code>n-1</code>。</li>
-<li>没有结合 <code>n</code>、<code>m</code> 判断邻接矩阵、邻接表和算法复杂度是否可行。</li>
+<li>顶点编号是 <code dir="auto">1～n</code>，数组却只开到 <code dir="auto">n-1</code>。</li>
+<li>没有结合 <code dir="auto">n</code>、<code dir="auto">m</code> 判断邻接矩阵、邻接表和算法复杂度是否可行。</li>
 </ul>
 <h2 id="关联学习">关联学习</h2>
 <ul>
@@ -611,7 +631,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li><a href="/gesp/level8/shortest-path/">单源最短路</a>：解决起点到其他顶点的最短距离。</li>
 <li><a href="/gesp/level8/time-efficiency/">时间效率分析</a>：用数据范围检验算法是否可行。</li>
 </ul>
-<h2 id="core-check">核心内容检查</h2><div id="page-test"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+<h2 id="core-check">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能从题意中确定顶点、边、方向和权值</label><label class="q-check"><input type="checkbox"> 能根据任务目标区分连通性、最小生成树与最短路</label><label class="q-check"><input type="checkbox"> 能结合图的规模选择合适的存储方式和算法</label><span>6 题</span>
+<p class="q-title">第 1 题把城市和双向道路建模为图时，通常怎样对应？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题把城市和双向道路建模为图时，通" value="A"><b>A.</b> 城市是边，道路是顶点</label><label class="q-opt"><input type="radio" name="第 1 题把城市和双向道路建模为图时，通" value="B"><b>B.</b> 城市是顶点，道路是无向边</label><label class="q-opt"><input type="radio" name="第 1 题把城市和双向道路建模为图时，通" value="C"><b>C.</b> 城市和道路都只作为边权</label><label class="q-opt"><input type="radio" name="第 1 题把城市和双向道路建模为图时，通" value="D"><b>D.</b> 不需要顶点</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>需要先明确对象和关系。城市是被连接的对象，对应顶点；双向道路表示两个城市互相可达，对应无向边。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题要求用最低总代价把所有村庄连接起来，最适合优先考虑哪类算法？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题要求用最低总代价把所有村庄连接" value="A"><b>A.</b> 最小生成树</label><label class="q-opt"><input type="radio" name="第 2 题要求用最低总代价把所有村庄连接" value="B"><b>B.</b> 全排列输出</label><label class="q-opt"><input type="radio" name="第 2 题要求用最低总代价把所有村庄连接" value="C"><b>C.</b> 字符串匹配</label><label class="q-opt"><input type="radio" name="第 2 题要求用最低总代价把所有村庄连接" value="D"><b>D.</b> 组合枚举</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>目标是让全部顶点连通且总边权最小，不要求固定起点到终点，因此应建立无向带权图并考虑最小生成树。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 3 题要求从一个仓库到其他地点的最低运输费用，且边权非负，应优先考虑什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题要求从一个仓库到其他地点的最低" value="A"><b>A.</b> Dijkstra 单源最短路</label><label class="q-opt"><input type="radio" name="第 3 题要求从一个仓库到其他地点的最低" value="B"><b>B.</b> Kruskal</label><label class="q-opt"><input type="radio" name="第 3 题要求从一个仓库到其他地点的最低" value="C"><b>C.</b> 杨辉三角</label><label class="q-opt"><input type="radio" name="第 3 题要求从一个仓库到其他地点的最低" value="D"><b>D.</b> 全排列</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>题目有固定起点，目标是该起点到其他顶点的最短费用，并且边权非负，符合 Dijkstra 的单源最短路条件。<br><span class="q-kp">对应知识点：03</span></p>
+<p class="q-title">第 4 题只需要判断若干对象是否属于同一连通块，边没有费用，首先应考虑什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题只需要判断若干对象是否属于同一" value="A"><b>A.</b> DFS、BFS 或并查集</label><label class="q-opt"><input type="radio" name="第 4 题只需要判断若干对象是否属于同一" value="B"><b>B.</b> Floyd 必须使用</label><label class="q-opt"><input type="radio" name="第 4 题只需要判断若干对象是否属于同一" value="C"><b>C.</b> 组合数递推</label><label class="q-opt"><input type="radio" name="第 4 题只需要判断若干对象是否属于同一" value="D"><b>D.</b> 浮点方程求解</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>问题只关心连通关系，不需要比较路径长度或总连接代价。可根据输入方式选择 DFS、BFS 或并查集。<br><span class="q-kp">对应知识点：04</span></p>
+<p class="q-title">第 5 题道路只能从 A 通往 B，不能从 B 返回 A，建图时应使用什么边？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题道路只能从 A 通往 B，不能" value="A"><b>A.</b> 无向边</label><label class="q-opt"><input type="radio" name="第 5 题道路只能从 A 通往 B，不能" value="B"><b>B.</b> A 指向 B 的有向边</label><label class="q-opt"><input type="radio" name="第 5 题道路只能从 A 通往 B，不能" value="C"><b>C.</b> B 指向 A 的有向边</label><label class="q-opt"><input type="radio" name="第 5 题道路只能从 A 通往 B，不能" value="D"><b>D.</b> 不需要边</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>单向通行具有明确方向，应建立 A→B 的有向边；不能因为两个地点之间存在关系就自动补上反向边。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 6 题要用最低总费用让所有基站互相连通，最匹配的任务模型是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题要用最低总费用让所有基站互相连" value="A"><b>A.</b> 单源最短路</label><label class="q-opt"><input type="radio" name="第 6 题要用最低总费用让所有基站互相连" value="B"><b>B.</b> 最小生成树</label><label class="q-opt"><input type="radio" name="第 6 题要用最低总费用让所有基站互相连" value="C"><b>C.</b> 只统计顶点数</label><label class="q-opt"><input type="radio" name="第 6 题要用最低总费用让所有基站互相连" value="D"><b>D.</b> 字符串匹配</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>目标是连接全部顶点且总边权最小，因此应建立无向带权图并求最小生成树，对应页内知识点 03。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level8-pager" aria-label="八级知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous gesp-level8-pager__link gesp-level8-pager__link--previous" href="/gesp/level8/plane-geometry/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span><small>上一知识点 · 06</small><strong>平面几何</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next gesp-level8-pager__link gesp-level8-pager__link--next" href="/gesp/level8/minimum-spanning-tree/" rel="next"><span><small>下一知识点 · 08</small><strong>最小生成树</strong></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -620,7 +658,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp8.html">下一个：最小生成树 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 图的基本元素</a></li><li><a href="#kp-02">02 方向、权值与存储</a></li><li><a href="#kp-03">03 从任务目标选择算法</a></li><li><a href="#kp-04">04 连通、路径与代价</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#知识范围与官方定位">知识范围与官方定位</a></li><li><a href="#kp-01">01 图的基本元素</a></li><li><a href="#kp-02">02 方向、权值与存储</a></li><li><a href="#kp-03">03 从任务目标选择算法</a></li><li><a href="#kp-04">04 连通、路径与代价</a></li><li><a href="#知识点速查表">知识点速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#关联学习">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -632,6 +670,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

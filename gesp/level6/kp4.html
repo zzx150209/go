@@ -321,6 +321,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 文章正文样式 */
 .article-body{font-size:15px;line-height:1.85;color:var(--text)}
 .article-body *{box-sizing:border-box}
+.article-body > *{width:100%;max-width:100%}
 .article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
 .article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
@@ -347,6 +348,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .article-body a:hover{text-decoration:underline}
 .article-body figure{margin:16px 0}
 .article-body figcaption{display:none}
+
+/* 选择题 */
+.q-title{font-weight:600;font-size:15px;margin:20px 0 10px;
+  background:var(--card);border:1px solid var(--line);border-radius:8px 8px 0 0;
+  padding:14px 18px 8px}
+.q-opts{background:var(--card);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 8px 8px;padding:4px 18px 14px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:8px 0;
+  cursor:pointer;font-size:14px;line-height:1.5}
+.q-opt:hover{background:var(--bg-2)}
+.q-opt input{margin:0}
+.q-ans{margin:0;padding:12px 18px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.7}
+.q-kp{color:var(--text-3);font-size:12px}
+.quiz-check{background:var(--bg-2);border-radius:8px;padding:16px 20px;margin:16px 0}
+.quiz-check p{margin:0 0 10px;font-weight:600}
+.q-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;cursor:pointer}
+.q-check input{margin:0}
 
 /* 右侧目录 */
 .toc{position:sticky;top:78px;align-self:start;font-size:12.5px}
@@ -470,7 +489,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“编码知识”，合并哈夫曼编码和格雷编码。哈夫曼树的权值合并与 WPL 已在上一页讲解；本页关注怎样由树得到前缀编码，以及怎样构造和识别格雷编码。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-coding-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-coding-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">2 个子页</span></header><div><article><div><span class="astro-aidf4k4y">04</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/coding/">编码知识</a></h3><p class="astro-aidf4k4y">理解哈夫曼前缀编码与格雷编码，能完成编码、译码和相邻一位变化判断。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/huffman-coding/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">哈夫曼编码</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/gray-code/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">格雷码</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 哈夫曼编码</h2><p>字符放在哈夫曼树叶结点，约定向左写 <code>0</code>、向右写 <code>1</code>，根到叶的完整路径就是字符编码。因为字符只在叶结点，任何完整字符编码都不会成为另一个字符编码的前缀，可以从左到右无分隔译码：走到叶结点就输出字符并回到根。</p><p>字符出现频率越高，权值越大，通常越靠近根，因此编码越短；频率较低的字符可以使用更长编码。这样能减少整段消息的总编码长度，但不能只按频率直接指定编码，仍要先构造哈夫曼树并保证前缀条件。</p><p>若只有一种字符，根到自身路径为空，实际编码格式通常把唯一字符约定为 <code>0</code>，才能保留重复次数。交换左右孩子或改变相同权值的平局顺序，可能得到不同但仍有效的编码。</p><pre><code>000, 001, 011, 010, 110, 111, 101, 100</code></pre><p>二进制整数转格雷码可计算 <code>gray = binary ^ (binary &gt;&gt; 1)</code>。例如 <code>110 ^ 011 = 101</code>。还原时不能直接重复同一公式：最高二进制位等于最高格雷位，后续每个二进制位等于上一位已还原二进制位与当前格雷位异或。</p><p>格雷码还原示例 <code>101 → 110</code>：最高位直接得到 <code>b1=1</code>；下一位 <code>b2=b1^g2=1^0=1</code>；最后一位 <code>b3=b2^g3=1^1=0</code>，所以二进制为 <code>110</code>。每一步都要使用“上一位已经还原的二进制位”，不能使用上一位格雷码。</p><h2 id="quick-table">编码速查表</h2><div tabindex="0" role="region"><table>
+    <nav class="gesp-page-quick-nav" aria-labelledby="page-quick-nav-title"><h2 id="page-quick-nav-title" class="astro-obblnf2s">本页速查</h2><a href="#kp-01" class="astro-obblnf2s">01 哈夫曼编码</a><a href="#kp-02" class="astro-obblnf2s">02 格雷编码</a><a href="#quick-table" class="astro-obblnf2s">编码速查表</a><a href="#typical-example" class="astro-obblnf2s">典型例题</a><a href="#common-errors" class="astro-obblnf2s">常见错误</a><a href="#core-check" class="astro-obblnf2s">核心内容检查</a><a href="#page-test" class="astro-obblnf2s">整页综合测试</a></nav><h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“编码知识”，合并哈夫曼编码和格雷编码。哈夫曼树的权值合并与 WPL 已在上一页讲解；本页关注怎样由树得到前缀编码，以及怎样构造和识别格雷编码。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><header class="gesp-level6-knowledge-grid__heading"><h2 id="gesp-level6-coding-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p><span class="astro-aidf4k4y">2 个子页</span></header><article class="gesp-level6-parent-card"><span class="astro-aidf4k4y">04</span><span data-course-status class="astro-aidf4k4y">未复习</span>
+<h3 class="astro-aidf4k4y"><a class="gesp-level6-parent-card__primary" href="/gesp/level6/coding/">编码知识</a></h3><p class="astro-aidf4k4y">理解哈夫曼前缀编码与格雷编码，能完成编码、译码和相邻一位变化判断。</p><ul aria-label="编码知识子知识点" class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/huffman-coding/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">哈夫曼编码</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/gray-code/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">格雷码</strong></a></li></ul></article></gesp-course-grid><h2 id="kp-01">01 哈夫曼编码</h2><p>字符放在哈夫曼树叶结点，约定向左写 <code dir="auto">0</code>、向右写 <code dir="auto">1</code>，根到叶的完整路径就是字符编码。因为字符只在叶结点，任何完整字符编码都不会成为另一个字符编码的前缀，可以从左到右无分隔译码：走到叶结点就输出字符并回到根。</p><p>字符出现频率越高，权值越大，通常越靠近根，因此编码越短；频率较低的字符可以使用更长编码。这样能减少整段消息的总编码长度，但不能只按频率直接指定编码，仍要先构造哈夫曼树并保证前缀条件。</p><p>若只有一种字符，根到自身路径为空，实际编码格式通常把唯一字符约定为 <code dir="auto">0</code>，才能保留重复次数。交换左右孩子或改变相同权值的平局顺序，可能得到不同但仍有效的编码。</p><pre><code>000, 001, 011, 010, 110, 111, 101, 100</code></pre><p>二进制整数转格雷码可计算 <code dir="auto">gray = binary ^ (binary &gt;&gt; 1)</code>。例如 <code dir="auto">110 ^ 011 = 101</code>。还原时不能直接重复同一公式：最高二进制位等于最高格雷位，后续每个二进制位等于上一位已还原二进制位与当前格雷位异或。</p><p>格雷码还原示例 <code dir="auto">101 → 110</code>：最高位直接得到 <code dir="auto">b1=1</code>；下一位 <code dir="auto">b2=b1^g2=1^0=1</code>；最后一位 <code dir="auto">b3=b2^g3=1^1=0</code>，所以二进制为 <code dir="auto">110</code>。每一步都要使用“上一位已经还原的二进制位”，不能使用上一位格雷码。</p><h2 id="quick-table">编码速查表</h2><table>
 <thead>
 <tr>
 <th>内容</th>
@@ -490,7 +510,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>相邻两项异或结果是否只有一个 1</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>编码表 <code>A=0、B=10、C=11</code>，译码 <code>01011</code>：先读 <code>0</code> 得 A，回根；读 <code>10</code> 得 B，回根；读 <code>11</code> 得 C，结果为 <code>ABC</code>。若最后只剩 <code>1</code>，它停在内部结点，说明编码串不完整。</p><h3 id="典型应用">典型应用</h3><p>二进制 <code>110</code> 转格雷码：右移得到 <code>011</code>，逐位异或得到 <code>101</code>。检查镜像序列连接处 <code>010 → 110</code>，异或为 <code>100</code>，只有一位为 1，因此连接合法。</p><h3 id="测试案例">测试案例</h3><table>
+</table><p class="gesp-course-teaching-table__hint">横向滑动查看完整表格</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>编码表 <code dir="auto">A=0、B=10、C=11</code>，译码 <code dir="auto">01011</code>：先读 <code dir="auto">0</code> 得 A，回根；读 <code dir="auto">10</code> 得 B，回根；读 <code dir="auto">11</code> 得 C，结果为 <code dir="auto">ABC</code>。若最后只剩 <code dir="auto">1</code>，它停在内部结点，说明编码串不完整。</p><h3 id="典型应用">典型应用</h3><p>二进制 <code dir="auto">110</code> 转格雷码：右移得到 <code dir="auto">011</code>，逐位异或得到 <code dir="auto">101</code>。检查镜像序列连接处 <code dir="auto">010 → 110</code>，异或为 <code dir="auto">100</code>，只有一位为 1，因此连接合法。</p><h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -501,23 +521,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <tbody>
 <tr>
 <td>基础</td>
-<td><code>A=0、B=10、C=11</code>，译码 <code>01011</code></td>
-<td>结果为 <code>ABC</code></td>
+<td><code dir="auto">A=0、B=10、C=11</code>，译码 <code dir="auto">01011</code></td>
+<td>结果为 <code dir="auto">ABC</code></td>
 </tr>
 <tr>
 <td>边界</td>
 <td>只有一个字符 A</td>
-<td>实际编码约定为 <code>0</code>，两个 A 编成 <code>00</code></td>
+<td>实际编码约定为 <code dir="auto">0</code>，两个 A 编成 <code dir="auto">00</code></td>
 </tr>
 <tr>
 <td>特殊</td>
 <td>只有两个字符 A、B</td>
-<td>两者都使用 1 位编码，例如 <code>A=0、B=1</code></td>
+<td>两者都使用 1 位编码，例如 <code dir="auto">A=0、B=1</code></td>
 </tr>
 <tr>
 <td>特殊</td>
 <td>3 位格雷序列</td>
-<td>任意相邻两项都只有一位不同，包括 <code>010→110</code></td>
+<td>任意相邻两项都只有一位不同，包括 <code dir="auto">010→110</code></td>
 </tr>
 <tr>
 <td>特殊</td>
@@ -525,7 +545,23 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>可能得到不同编码表，但都必须满足前缀条件</td>
 </tr>
 </tbody>
-</table><h2 id="common-errors">常见错误</h2><section><h3>在哈夫曼树内部结点提前结束</h3><div><div><strong><span>×</span> 错误写法</strong><code>走到路径 1 就直接输出字符</code></div><div><strong><span>✓</span> 正确写法</strong><code>只有到达叶结点才完成一个字符编码</code></div></div><p><strong>原因：</strong>内部结点下面仍有多个叶结点，路径还不能唯一确定字符。</p><p><strong>检查方法：</strong>译码后若停在内部结点，说明编码串不完整。</p></section><section><h3>只看格雷码中 0 和 1 的数量</h3><div><div><strong><span>×</span> 错误写法</strong><code>两项都含两个 1，所以它们一定相邻合法</code></div><div><strong><span>✓</span> 正确写法</strong><code>把相邻两项逐位比较，确认恰好一位不同</code></div></div><p><strong>原因：</strong>格雷码检查的是相同位置上有几位发生改变，与 1 的总数是否相同无关。</p><p><strong>检查方法：</strong>也可以异或两项，结果应只有一个二进制位为 1。</p></section><h2 id="related-learning">关联学习</h2><p>哈夫曼树的构造与 WPL 见“03 特殊二叉树”；格雷码转换会用到三级学习的异或和右移。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+</table><h2 id="common-errors">常见错误</h2><h3>在哈夫曼树内部结点提前结束</h3><p><strong>原因：</strong>内部结点下面仍有多个叶结点，路径还不能唯一确定字符。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>译码后若停在内部结点，说明编码串不完整。</p><h3>只看格雷码中 0 和 1 的数量</h3><p><strong>原因：</strong>格雷码检查的是相同位置上有几位发生改变，与 1 的总数是否相同无关。</p><p class="gesp-course-mistake-box__tip"><strong>检查方法：</strong>也可以异或两项，结果应只有一个二进制位为 1。</p><h2 id="related-learning">关联学习</h2><p>哈夫曼树的构造与 WPL 见“03 特殊二叉树”；格雷码转换会用到三级学习的异或和右移。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><p>完成下面核心内容检查：</p><label class="q-check"><input type="checkbox"> 能沿哈夫曼树根到叶路径写出编码并逐位译码</label><label class="q-check"><input type="checkbox"> 能判断一组编码是否满足前缀条件</label><label class="q-check"><input type="checkbox"> 能构造格雷序列并完成二进制到格雷码转换</label>
+<h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2><span>5 题</span>
+<p class="q-title">第 1 题哪组编码满足前缀编码要求？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 1 题哪组编码满足前缀编码要求？" value="A"><b>A.</b> 0、01、11</label><label class="q-opt"><input type="radio" name="第 1 题哪组编码满足前缀编码要求？" value="B"><b>B.</b> 0、10、11</label><label class="q-opt"><input type="radio" name="第 1 题哪组编码满足前缀编码要求？" value="C"><b>C.</b> 1、10、100</label><label class="q-opt"><input type="radio" name="第 1 题哪组编码满足前缀编码要求？" value="D"><b>D.</b> 00、0、11</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>0、10、11 中没有一个编码是另一个编码的前缀，因此可以从左到右无歧义译码。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 2 题约定左边写 0、右边写 1，路径“右、左、右”的编码是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 2 题约定左边写 0、右边写 1，路" value="A"><b>A.</b> 010</label><label class="q-opt"><input type="radio" name="第 2 题约定左边写 0、右边写 1，路" value="B"><b>B.</b> 101</label><label class="q-opt"><input type="radio" name="第 2 题约定左边写 0、右边写 1，路" value="C"><b>C.</b> 110</label><label class="q-opt"><input type="radio" name="第 2 题约定左边写 0、右边写 1，路" value="D"><b>D.</b> 111</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>沿根到叶路径依次记录右 1、左 0、右 1，连接后得到 101。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 3 题编码表 A=0、B=10、C=11，编码串 01011 译码结果是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 3 题编码表 A=0、B=10、C=" value="A"><b>A.</b> ABC</label><label class="q-opt"><input type="radio" name="第 3 题编码表 A=0、B=10、C=" value="B"><b>B.</b> ACB</label><label class="q-opt"><input type="radio" name="第 3 题编码表 A=0、B=10、C=" value="C"><b>C.</b> BAC</label><label class="q-opt"><input type="radio" name="第 3 题编码表 A=0、B=10、C=" value="D"><b>D.</b> CAB</label>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>从左读出 0、10、11，依次对应 A、B、C；每得到一个字符就回到根继续。<br><span class="q-kp">对应知识点：01</span></p>
+<p class="q-title">第 4 题格雷编码相邻一位变化指什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 4 题格雷编码相邻一位变化指什么？" value="A"><b>A.</b> 十进制值相差 1</label><label class="q-opt"><input type="radio" name="第 4 题格雷编码相邻一位变化指什么？" value="B"><b>B.</b> 恰好一个二进制位置不同</label><label class="q-opt"><input type="radio" name="第 4 题格雷编码相邻一位变化指什么？" value="C"><b>C.</b> 每个编码只有一个 1</label><label class="q-opt"><input type="radio" name="第 4 题格雷编码相邻一位变化指什么？" value="D"><b>D.</b> 编码长度不同</label>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>逐位比较相邻编码时恰好只有一个 0/1 位置变化，这是格雷编码的核心性质。<br><span class="q-kp">对应知识点：02</span></p>
+<p class="q-title">第 5 题二进制 110 转为格雷编码，结果是什么？</p>
+<div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题二进制 110 转为格雷编码，" value="A"><b>A.</b> 011</label><label class="q-opt"><input type="radio" name="第 5 题二进制 110 转为格雷编码，" value="B"><b>B.</b> 100</label><label class="q-opt"><input type="radio" name="第 5 题二进制 110 转为格雷编码，" value="C"><b>C.</b> 101</label><label class="q-opt"><input type="radio" name="第 5 题二进制 110 转为格雷编码，" value="D"><b>D.</b> 111</label>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>把 110 与右移一位的 011 逐位异或，得到 101，因此答案为 101。<br><span class="q-kp">对应知识点：02</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p><nav class="gesp-course-pager gesp-level6-parent-pager" aria-label="六级父知识点前后导航"><a class="gesp-course-pager__link gesp-course-pager__link--previous" href="/gesp/level6/special-binary-trees/" rel="prev"><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m15 18-6-6 6-6" class="astro-23ojxnem"></path></svg><span class="astro-23ojxnem"><small class="astro-23ojxnem">上一父知识点 · 03</small><strong class="astro-23ojxnem">特殊二叉树</strong></span></a><a class="gesp-course-pager__link gesp-course-pager__link--next" href="/gesp/level6/dfs/" rel="next"><span class="astro-23ojxnem"><small class="astro-23ojxnem">下一父知识点 · 05</small><strong class="astro-23ojxnem">深度优先搜索 DFS</strong></span><svg viewBox="0 0 24 24" aria-hidden="true" class="astro-23ojxnem"><path d="m9 18 6-6-6-6" class="astro-23ojxnem"></path></svg></a></nav><footer class="sl-flex"></footer><footer class="xd-shell-footer" data-shell-footer><strong>XDZOI 小邓子信息学</strong><p>帮助学生学习信息学、查找知识、解决做题卡点并回到 OJ 独立完成。</p><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-learning"><h2 id="xd-footer-learning" data-shell-footer-group-title>学习路线</h2><a href="/" data-shell-footer-nav-link>首页</a><a href="/gesp/" aria-current="page" data-shell-footer-nav-link>GESP 1–8级</a><a href="/csp/" data-shell-footer-nav-link>CSP-J/S</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-tools"><h2 id="xd-footer-tools" data-shell-footer-group-title>工具</h2><a href="/template/" data-shell-footer-nav-link>程序模板</a><a href="/sol/" data-shell-footer-nav-link>题解</a></nav><nav class="xd-shell-footer__group" aria-labelledby="xd-footer-resources"><h2 id="xd-footer-resources" data-shell-footer-group-title>资源</h2><a href="/nav/" data-shell-footer-nav-link>OJ与资源</a><a href="https://oj.qonnwolf.com/" data-shell-footer-external>穷狼 OJ</a><a href="https://www.luogu.com.cn/" data-shell-footer-external>洛谷</a></nav><p class="xd-shell-footer__legal" data-shell-footer-legal>本站原创教学内容及代码归小邓子所有，未经许可不得批量复制、镜像、整理或用于商业课程。</p></footer></main>
     </article>
 
     <div class="kp-nav-row">
@@ -534,7 +570,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       <a class="kp-nav" href="kp5.html">下一个：特殊二叉树 →</a>
     </div>
   </div>
-  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-coding-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 哈夫曼编码</a></li><li><a href="#quick-table">编码速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础示例" class="lvl3">基础示例</a></li><li><a href="#典型应用" class="lvl3">典型应用</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li></ul></div>
+  <div class="toc"><div class="toc-title">本页内容</div><ul><li><a href="#page-quick-nav-title">本页速查</a></li><li><a href="#official-position">知识范围与官方定位</a></li><li><a href="#gesp-level6-coding-children-title">本专题子知识点</a></li><li><a href="#kp-01">01 哈夫曼编码</a></li><li><a href="#quick-table">编码速查表</a></li><li><a href="#typical-example">典型例题</a></li><li><a href="#基础示例" class="lvl3">基础示例</a></li><li><a href="#典型应用" class="lvl3">典型应用</a></li><li><a href="#测试案例" class="lvl3">测试案例</a></li><li><a href="#common-errors">常见错误</a></li><li><a href="#related-learning">关联学习</a></li><li><a href="#core-check">核心内容检查</a></li><li><a href="#page-test-title">整页综合测试</a></li><li><a href="#xd-footer-learning">学习路线</a></li><li><a href="#xd-footer-tools">工具</a></li><li><a href="#xd-footer-resources">资源</a></li></ul></div>
 </div>
 </main>
 
@@ -546,6 +582,31 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     var arr=seen[n]||[];
     if(arr.indexOf(kp)===-1){arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}
   }catch(e){}
+  // 选择题交互
+  document.querySelectorAll('.q-title').forEach(function(title){
+    var ans=title.nextElementSibling;
+    while(ans && !ans.classList.contains('q-ans')) ans=ans.nextElementSibling;
+    if(!ans) return;
+    var answer=ans.querySelector('b').textContent.replace('答案：','').trim();
+    var opts=title.parentElement.querySelectorAll('.q-opt');
+    document.querySelectorAll('.q-opt input[type=radio]').forEach(function(r){
+      r.addEventListener('change',function(){
+        // 找到同组的选项
+        var group=r.closest('.q-opts');
+        if(!group) return;
+        group.querySelectorAll('.q-opt').forEach(function(o){
+          o.style.background='';o.style.borderLeft='';
+        });
+        var lbl=r.closest('.q-opt');
+        if(r.value===answer){
+          lbl.style.background='#dcfce7';lbl.style.borderLeft='3px solid #16a34a';
+        } else {
+          lbl.style.background='#fee2e2';lbl.style.borderLeft='3px solid #dc2626';
+        }
+        ans.style.display='block';
+      });
+    });
+  });
 })();
 </script>
 

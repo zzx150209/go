@@ -284,38 +284,36 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .progress .p-lbl{font-size:11.5px;color:var(--text-3);margin-top:2px}
 
 .kp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.kp{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px 18px;box-shadow:var(--shadow-sm);transition:.2s;display:flex;flex-direction:column}
-.kp:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.kp-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.kp-top .no{font-size:11.5px;font-weight:700;color:var(--text-3);letter-spacing:.06em}
-.kp-top .badge{font-size:10.5px;font-weight:700;background:var(--brand-soft);
-  color:var(--brand);border-radius:4px;padding:2px 7px}
-.kp-top .state{margin-left:auto;font-size:10.5px;color:var(--text-3);
-  background:var(--bg-2);border-radius:4px;padding:2px 7px}
-.kp h4{margin:0 0 7px;font-size:15.5px;font-weight:700}
-.kp p{margin:0 0 11px;font-size:12.5px;color:var(--text-2);line-height:1.7;flex:1}
-.kp .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
-.kp .tags span{font-size:10.5px;color:var(--text-3);background:var(--bg-2);
-  border-radius:4px;padding:2px 8px}
+.kp{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:18px 18px 16px;transition:.18s;display:flex;flex-direction:column}
+.kp:hover{border-color:var(--line-2);box-shadow:var(--shadow-sm)}
+.kp-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.kp-top .no{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.kp-top .badge{font-size:10.5px;font-weight:600;background:#fef3e8;
+  color:#c0392b;border-radius:3px;padding:2px 7px}
+.kp-top .state{margin-left:auto;font-size:10.5px;color:var(--text-3)}
+.kp h4{margin:0 0 7px;font-size:16px;font-weight:700}
+.kp p{margin:0 0 10px;font-size:13px;color:var(--text-2);line-height:1.7;flex:1}
+.kp .tags{margin-bottom:12px;font-size:12px;color:var(--text-3)}
+.kp .tags span{margin-right:10px}
 
 /* 知识点详细内容（可展开） */
 .kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.kp-detail.open{max-height:1200px}
-.kp-detail-body{padding-top:4px;border-top:1px solid var(--line);margin-top:4px}
+.kp-detail.open{max-height:1500px}
+.kp-detail-body{padding-top:12px;border-top:1px solid var(--line);margin-top:4px}
 .kp-section{margin:14px 0 0}
-.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--brand)}
+.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--text)}
 .kp-pts,.kp-tips{margin:0;padding-left:18px;font-size:12.5px;color:var(--text-2);line-height:1.75}
 .kp-pts li,.kp-tips li{margin-bottom:4px}
 .kp-tips li{color:var(--accent-text)}
-.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:var(--radius-sm);
+.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:6px;
   padding:12px 14px;margin:12px 0 0;overflow-x:auto}
 .kp-code pre{margin:0;font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;
   font-size:12px;line-height:1.7;color:#c9d1d9;white-space:pre}
-.kp-toggle{width:100%;margin-top:12px;padding:8px;border:1px solid var(--line-2);
-  border-radius:8px;background:var(--bg-2);color:var(--brand);font-size:13px;
-  font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
-.kp-toggle:hover{border-color:var(--brand);color:var(--brand-2)}
+.kp-toggle{width:100%;margin-top:auto;padding:0;border:0;background:none;
+  color:var(--accent);font-size:12.5px;font-weight:500;cursor:pointer;
+  transition:.15s;font-family:inherit;text-align:left}
+.kp-toggle:hover{text-decoration:underline}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -777,7 +775,7 @@ def build_level(n):
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips">{tips}</ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>"""
 
     others = ""
@@ -811,8 +809,9 @@ def build_level(n):
     </div>
 
     <div class="progress">
-      <div><div class="p-title">本机复习记录</div>
-        <div class="p-desc">只记录当前设备上的复习与自测情况，不代表考试成绩。</div></div>
+      <div><div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px">学习进度</div>
+        <div class="p-title">本机复习记录</div>
+        <div class="p-desc">只记录当前设备上的复习与自测情况，不代表考试成绩或真实掌握程度。</div></div>
       <div><div class="p-num" id="p1">0/{total}</div><div class="p-lbl">已复习知识点</div></div>
       <div><div class="p-num" id="p2">0/{total}</div><div class="p-lbl">已完成自测</div></div>
       <div><div class="p-num">暂无记录</div><div class="p-lbl">自测正确率</div></div>

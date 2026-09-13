@@ -263,38 +263,36 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .progress .p-lbl{font-size:11.5px;color:var(--text-3);margin-top:2px}
 
 .kp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.kp{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px 18px;box-shadow:var(--shadow-sm);transition:.2s;display:flex;flex-direction:column}
-.kp:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.kp-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.kp-top .no{font-size:11.5px;font-weight:700;color:var(--text-3);letter-spacing:.06em}
-.kp-top .badge{font-size:10.5px;font-weight:700;background:var(--brand-soft);
-  color:var(--brand);border-radius:4px;padding:2px 7px}
-.kp-top .state{margin-left:auto;font-size:10.5px;color:var(--text-3);
-  background:var(--bg-2);border-radius:4px;padding:2px 7px}
-.kp h4{margin:0 0 7px;font-size:15.5px;font-weight:700}
-.kp p{margin:0 0 11px;font-size:12.5px;color:var(--text-2);line-height:1.7;flex:1}
-.kp .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
-.kp .tags span{font-size:10.5px;color:var(--text-3);background:var(--bg-2);
-  border-radius:4px;padding:2px 8px}
+.kp{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:18px 18px 16px;transition:.18s;display:flex;flex-direction:column}
+.kp:hover{border-color:var(--line-2);box-shadow:var(--shadow-sm)}
+.kp-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.kp-top .no{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.kp-top .badge{font-size:10.5px;font-weight:600;background:#fef3e8;
+  color:#c0392b;border-radius:3px;padding:2px 7px}
+.kp-top .state{margin-left:auto;font-size:10.5px;color:var(--text-3)}
+.kp h4{margin:0 0 7px;font-size:16px;font-weight:700}
+.kp p{margin:0 0 10px;font-size:13px;color:var(--text-2);line-height:1.7;flex:1}
+.kp .tags{margin-bottom:12px;font-size:12px;color:var(--text-3)}
+.kp .tags span{margin-right:10px}
 
 /* 知识点详细内容（可展开） */
 .kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.kp-detail.open{max-height:1200px}
-.kp-detail-body{padding-top:4px;border-top:1px solid var(--line);margin-top:4px}
+.kp-detail.open{max-height:1500px}
+.kp-detail-body{padding-top:12px;border-top:1px solid var(--line);margin-top:4px}
 .kp-section{margin:14px 0 0}
-.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--brand)}
+.kp-section>b{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--text)}
 .kp-pts,.kp-tips{margin:0;padding-left:18px;font-size:12.5px;color:var(--text-2);line-height:1.75}
 .kp-pts li,.kp-tips li{margin-bottom:4px}
 .kp-tips li{color:var(--accent-text)}
-.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:var(--radius-sm);
+.kp-code{background:#0f172a;border:1px solid var(--line);border-radius:6px;
   padding:12px 14px;margin:12px 0 0;overflow-x:auto}
 .kp-code pre{margin:0;font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;
   font-size:12px;line-height:1.7;color:#c9d1d9;white-space:pre}
-.kp-toggle{width:100%;margin-top:12px;padding:8px;border:1px solid var(--line-2);
-  border-radius:8px;background:var(--bg-2);color:var(--brand);font-size:13px;
-  font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
-.kp-toggle:hover{border-color:var(--brand);color:var(--brand-2)}
+.kp-toggle{width:100%;margin-top:auto;padding:0;border:0;background:none;
+  color:var(--accent);font-size:12.5px;font-weight:500;cursor:pointer;
+  transition:.15s;font-family:inherit;text-align:left}
+.kp-toggle:hover{text-decoration:underline}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -401,8 +399,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <div class="progress">
-      <div><div class="p-title">本机复习记录</div>
-        <div class="p-desc">只记录当前设备上的复习与自测情况，不代表考试成绩。</div></div>
+      <div><div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px">学习进度</div>
+        <div class="p-title">本机复习记录</div>
+        <div class="p-desc">只记录当前设备上的复习与自测情况，不代表考试成绩或真实掌握程度。</div></div>
       <div><div class="p-num" id="p1">0/8</div><div class="p-lbl">已复习知识点</div></div>
       <div><div class="p-num" id="p2">0/8</div><div class="p-lbl">已完成自测</div></div>
       <div><div class="p-num">暂无记录</div><div class="p-lbl">自测正确率</div></div>
@@ -424,7 +423,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>8 位无符号数范围 0~255，8 位有符号数范围 -128~127。</li><li>不要搞混 ASCII 值和字符：&#x27;0&#x27; 不是数字 0，而是 48。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>
       <div class="kp" id="kp2">
         <div class="kp-top"><span class="no">02</span>
@@ -450,7 +449,7 @@ for (char c : s) dec = dec * 2 + (c - &#x27;0&#x27;);</pre></div>
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>除基取余时先得到的是低位，结果要逆序排列。</li><li>十六进制中 A=10, B=11, ..., F=15，不区分大小写。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>
       <div class="kp" id="kp3">
         <div class="kp-top"><span class="no">03</span>
@@ -471,7 +470,7 @@ a &gt;&gt; 1       // 10 = 2（除2）</pre></div>
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>异或同一个数两次等于原值：a ^ b ^ b = a。</li><li>位运算优先级低于加减乘除，建议加括号。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>
       <div class="kp" id="kp4">
         <div class="kp-top"><span class="no">04</span>
@@ -486,7 +485,7 @@ a &gt;&gt; 1       // 10 = 2（除2）</pre></div>
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>判断算法是否正确，要检查边界情况和特殊输入。</li><li>好的算法不仅要正确，还要效率高、容易理解。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>
       <div class="kp" id="kp5">
         <div class="kp-top"><span class="no">05</span>
@@ -509,7 +508,7 @@ cout &lt;&lt; mx &lt;&lt; &quot; &quot; &lt;&lt; pos &lt;&lt; endl;</pre></div>
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>数组越界是常见错误，定义大一点（如 1005 防止越界 1 个）。</li><li>全局数组默认初始化为 0，局部数组需要手动初始化。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>
       <div class="kp" id="kp6">
         <div class="kp-top"><span class="no">06</span>
@@ -530,7 +529,7 @@ string t = s + &quot;!&quot;;             // 拼接</pre></div>
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>cin &gt;&gt; s 遇到空格就停止，读整行用 getline(cin, s)。</li><li>下标越界同样危险，s.length() 是长度，最后一个字符下标是 length()-1。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>
       <div class="kp" id="kp7">
         <div class="kp-top"><span class="no">07</span>
@@ -558,7 +557,7 @@ for (int x = 0; x &lt;= 20; x++)
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>枚举范围要算好上界，太大可能超时。</li><li>枚举时注意题目是否要求去重或顺序。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div>
       <div class="kp" id="kp8">
         <div class="kp-top"><span class="no">08</span>
@@ -588,7 +587,7 @@ while (cnt &lt; n) {
             <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>模拟题代码通常较长，注意分步写函数。</li><li>方向变化、边界折返等细节要仔细读题。</li></ul></div>
           </div>
         </div>
-        <button class="kp-toggle" type="button">查看详细内容 ↓</button>
+        <button class="kp-toggle" type="button">查看知识点 →</button>
       </div></div>
 
     <section class="sec" style="margin-top:46px">

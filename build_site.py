@@ -244,17 +244,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 
 /* 资源条目 */
 .res-item{display:flex;align-items:center;gap:15px;background:var(--card);
-  border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px;
-  box-shadow:var(--shadow-sm);transition:.2s;margin-bottom:9px}
-.res-item:hover{border-color:var(--line-2);transform:translateX(3px)}
-.res-item .ic{width:34px;height:34px;border-radius:9px;flex:0 0 auto;display:grid;
-  place-items:center;font-size:14px;font-weight:700;color:#fff}
+  border:1px solid var(--line);border-radius:6px;padding:16px 18px;
+  transition:.18s;margin-bottom:10px;text-decoration:none}
+.res-item:hover{border-color:var(--line-2);box-shadow:var(--shadow-sm)}
+.res-item .ic{width:36px;height:36px;border-radius:8px;flex:0 0 auto;display:grid;
+  place-items:center;font-size:15px;font-weight:700;color:#fff}
 .res-item .tx{flex:1;min-width:0}
-.res-item .tx b{font-size:14.5px;font-weight:600;margin-right:8px}
+.res-item .tx b{font-size:15px;font-weight:700;margin-right:8px;color:var(--text)}
 .res-item .tx em{font-style:normal;font-size:11px;font-weight:600;color:var(--brand);
   background:var(--brand-soft);border-radius:4px;padding:2px 7px}
-.res-item .tx p{margin:3px 0 0;font-size:12.5px;color:var(--text-3);line-height:1.6}
-.res-item .go{color:var(--text-3);flex:0 0 auto}
+.res-item .tx p{margin:3px 0 0;font-size:13px;color:var(--text-2);line-height:1.6}
 
 /* 等级页 */
 .layout{display:grid;grid-template-columns:250px 1fr;gap:38px;align-items:start}
@@ -1149,40 +1148,50 @@ def build_solutions():
 
 def build_resources():
     groups = ""
-    for gtitle, gdesc, _, items in RESOURCE_GROUPS:
+    nav_items = ""
+    for idx, (gtitle, gdesc, _, items) in enumerate(RESOURCE_GROUPS):
+        anchor = f"sec{idx+1}"
+        nav_items += f'<li><a href="#{anchor}">{E(gtitle)}</a></li>'
         lis = ""
         for initial, name, badge, desc, color in items:
+            badge_html = f'<em class="res-badge">{E(badge)}</em>' if badge else ""
             lis += f"""
         <a class="res-item" href="#" >
           <div class="ic" style="background:{color}">{E(initial)}</div>
-          <div class="tx"><b>{E(name)}</b><em>{E(badge)}</em><p>{E(desc)}</p></div>
-          <div class="go">↗</div>
+          <div class="tx"><b>{E(name)}</b>{badge_html}<p>{E(desc)}</p></div>
         </a>"""
         groups += f"""
-      <section class="sec">
+      <section class="sec" id="{anchor}">
         <h2>{E(gtitle)}</h2>
         <p class="sec-sub">{E(gdesc)}</p>
         {lis}
       </section>"""
 
     body = f"""
-<main class="wrap" style="padding-top:48px">
-  <div class="crumb"><a href="index.html">{SITE_NAME}</a> · OJ 与资源</div>
+<main class="wrap" style="padding-top:40px">
+<div class="layout">
+  <aside class="side">
+    <div class="side-box">
+      <div class="side-h">网站导航</div>
+      <ul class="side-list">
+        <li><a href="#" class="active">网站导航</a></li>
+        {nav_items}
+      </ul>
+    </div>
+  </aside>
 
-  <div class="split-top">
-    <div>
-      <h1 class="page">先说你 现在要做什么</h1>
-      <p class="lead">资源按四种常见任务整理。每组只有一个首选入口，其他网站放在后面，避免在长串链接里反复比较。</p>
-      <div style="margin-top:20px"><a class="btn btn-blue" href="#today">准备刷题 →</a></div>
-    </div>
-    <div class="note-box">
-      <b>适合现在？</b>
-      适合准备刷题、查考试通知、学算法，或配置 C++ 编程环境。
-    </div>
+  <div>
+    <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:8px">常用学习网站</div>
+    <h1 class="page" style="margin-bottom:12px">先说你现在要做什么</h1>
+    <p class="lead" style="margin-bottom:16px">资源按四种常见任务整理。每组只有一个首选入口，其他网站放在后面，避免在一长串链接里反复比较。</p>
+    <p style="font-size:14px;color:var(--text-2);margin-bottom:18px">适合现在：准备刷题、查考试通知、学习算法，或配置 C++ 编程环境。</p>
+    <a class="btn btn-primary" href="#sec1">去穷狼 OJ 开始练习 →</a>
+
+    <hr class="rule" style="margin:32px 0">
+
+    {groups}
   </div>
-  <hr class="rule">
-
-  {groups}
+</div>
 </main>
 """
     return page(f"OJ 与资源 | {SITE_NAME}", "常用在线评测平台与学习资料。", body, "res")

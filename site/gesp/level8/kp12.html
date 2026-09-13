@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -621,7 +624,7 @@ int main() {    int n;    long long target;    cin &gt;&gt; n &gt;&gt; target;
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>两个不同位置可以保存相同数值。[3,3]、目标 6 能检查优化后是否错误地把“数值相同”当成“位置相同”，对应页内知识点 04。<br><span class="q-kp">对应知识点：04</span></p>
 <p class="q-title">第 7 题对数组区间 [l,r] 内每个数都加 x，使用差分数组时应怎样记录？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="A"><b>A.</b> diff[l]+=x，diff[r+1]-=x</label><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="B"><b>B.</b> diff[l]-=x，diff[r]+=x</label><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="C"><b>C.</b> 只修改 diff[r]</label><label class="q-opt"><input type="radio" name="第 7 题对数组区间 [l,r] 内每个" value="D"><b>D.</b> 把每个位置立即排序</label>
-</div><p class="q-ans" style="display:none"><b>答案：A</b><br>diff[l]+=x 表示从 l 开始增加 x，diff[r+1]-=x 表示从 r+1 起取消这次增加。完成所有修改后做一次前缀累加即可还原结果。对应页内知识点 03。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>diff[l]+=x 表示从 l 开始增加 x，diff[r+1]-=x 表示从 r+1 起取消这次增加。完成所有修改后做一次前缀累加即可还原结果。对应页内知识点 03。<br><span class="q-kp">对应知识点：03</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

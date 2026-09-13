@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -703,7 +706,7 @@ int main() {
     int a = 8, b = 3, c = 6;
     cout &lt;&lt; min(max(a, b), c) &lt;&lt; endl;
     return 0;
-}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>max(8, 3) 先得到 8，随后 min(8, 6) 得到 6。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-04"><fieldset><legend><span>第 4 题</span>先执行 srand(seed) 后，表达式 rand() % 6 + 1 可能产生的整数范围是什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>rand() % 6 的余数只能是 0、1、2、3、4、5；每个结果再加 1 后，可能值变为 1、2、3、4、5、6。srand 只设置伪随机序列的种子，不直接产生随机数。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-05"><fieldset><legend><span>第 5 题</span>表达式 abs(-15) 的结果是多少？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>abs 返回参数的绝对值，负数 -15 到 0 的距离是 15，所以结果为 15。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-06"><fieldset><legend><span>第 6 题</span>关于 0 和伪随机函数，下列说法正确的是哪一项？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>0 的绝对值和算术平方根都为 0。srand(seed) 只设置伪随机序列的种子，真正取得伪随机整数要调用 rand()。</p></article><button type="button" data-test-submit>提交全部答案</button><button type="button" class="secondary" hidden data-test-retry>重新测试</button><p aria-live="polite" data-test-status>共 6 题，请全部作答后提交。</p></gesp-comprehensive-test></main>
+}</code></pre></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>max(8, 3) 先得到 8，随后 min(8, 6) 得到 6。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-04"><fieldset><legend><span>第 4 题</span>先执行 srand(seed) 后，表达式 rand() % 6 + 1 可能产生的整数范围是什么？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>B</p><p>rand() % 6 的余数只能是 0、1、2、3、4、5；每个结果再加 1 后，可能值变为 1、2、3、4、5、6。srand 只设置伪随机序列的种子，不直接产生随机数。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-05"><fieldset><legend><span>第 5 题</span>表达式 abs(-15) 的结果是多少？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>C</p><p>abs 返回参数的绝对值，负数 -15 到 0 的距离是 15，所以结果为 15。</p></article><article class="gesp-course-question gesp-level2-question" data-comprehensive-question data-question-id="l2-math-functions-06"><fieldset><legend><span>第 6 题</span>关于 0 和伪随机函数，下列说法正确的是哪一项？</legend></fieldset><strong data-question-result></strong><p><strong>正确答案：</strong>A</p><p>0 的绝对值和算术平方根都为 0。srand(seed) 只设置伪随机序列的种子，真正取得伪随机整数要调用 rand()。</p></article><button type="button" data-test-submit>提交全部答案</button><button type="button" class="secondary" hidden data-test-retry>重新测试</button><p aria-live="polite" data-test-status>共 6 题，请全部作答后提交。</p></gesp-comprehensive-test>
     </article>
 
     <div class="kp-nav-row">

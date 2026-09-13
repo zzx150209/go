@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -600,7 +603,7 @@ int main() {    int heads, legs;    cin &gt;&gt; heads &gt;&gt; legs;
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>本题要逐个检查数组元素，最清楚的做法是枚举有效下标 i=0、1、2，再读取 a[i]。这样候选范围与数组有效位置完全对应，不会越界。</p>
 <p class="q-title">第 5 题枚举非负整数对 x+y=10，并规定 x&lt;=y。让 x 从 0 递增到 5，共检查几次并得到几种不重复方案？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题枚举非负整数对 x+y=10，" value="A"><b>A.</b> 检查 5 次，得到 5 种</label><label class="q-opt"><input type="radio" name="第 5 题枚举非负整数对 x+y=10，" value="B"><b>B.</b> 检查 6 次，得到 6 种</label><label class="q-opt"><input type="radio" name="第 5 题枚举非负整数对 x+y=10，" value="C"><b>C.</b> 检查 10 次，得到 6 种</label><label class="q-opt"><input type="radio" name="第 5 题枚举非负整数对 x+y=10，" value="D"><b>D.</b> 检查 11 次，得到 11 种</label>
-</div><p class="q-ans" style="display:none"><b>答案：B</b><br>x 依次为 0、1、2、3、4、5，共 6 次；对应 (0,10) 到 (5,5) 六种方案。继续到 x=6 只会得到前面方案的反向重复。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>x 依次为 0、1、2、3、4、5，共 6 次；对应 (0,10) 到 (5,5) 六种方案。继续到 x=6 只会得到前面方案的反向重复。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

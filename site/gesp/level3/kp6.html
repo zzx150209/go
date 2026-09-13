@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -784,7 +787,7 @@ int main() { // 程序从这里开始，把字符串中的小写字母改成大�
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>cin >> s 会跳过开头空白，并在下一个空白处停止，所以只读到 red。若要保留中间的空格并读完整行，应使用 getline(cin, s)。</p>
 <p class="q-title">第 5 题字符串 s 初值为 &quot;aB2&quot;。从左到右遍历每个下标，把 &#39;a&#39;～&#39;z&#39; 中的小写字母改成对应大写字母，最终 s 是什么？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="A"><b>A.</b> aB2</label><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="B"><b>B.</b> AB2</label><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="C"><b>C.</b> Ab2</label><label class="q-opt"><input type="radio" name="第 5 题字符串 s 初值为 &quot" value="D"><b>D.</b> AB</label>
-</div><p class="q-ans" style="display:none"><b>答案：B</b><br>下标 0 的 a 在小写范围内，按编码差改为 A；下标 1 的 B 和下标 2 的 2 不在小写范围内，保持不变，所以最终是 AB2。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>下标 0 的 a 在小写范围内，按编码差改为 A；下标 1 的 B 和下标 2 的 2 不在小写范围内，保持不变，所以最终是 AB2。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

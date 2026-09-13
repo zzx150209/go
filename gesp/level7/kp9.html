@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -667,7 +670,7 @@ int main() {    int n;    cin &gt;&gt; n;    map&lt;int, int&gt; count;    // �
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：哈希分布良好时可平均直接定位桶，查找为 O(1)；若大量键发生严重冲突，可能需要检查同一桶中的许多元素，最坏退化到 O(n)。</p>
 <p class="q-title">第 5 题只需要快速统计大量字符串各自出现次数，不要求按键有序输出，通常优先考虑哪个容器？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题只需要快速统计大量字符串各自出" value="A"><b>A.</b> unordered_map&lt;string, int&gt;</label><label class="q-opt"><input type="radio" name="第 5 题只需要快速统计大量字符串各自出" value="B"><b>B.</b> queue&lt;string&gt;</label><label class="q-opt"><input type="radio" name="第 5 题只需要快速统计大量字符串各自出" value="C"><b>C.</b> stack&lt;string&gt;</label><label class="q-opt"><input type="radio" name="第 5 题只需要快速统计大量字符串各自出" value="D"><b>D.</b> 一个 int 变量</label>
-</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：出现次数是“字符串键→整数计数”的映射，又不要求有序遍历，因此 unordered_map 直接表达需求，并提供平均 O(1) 的按键访问。队列和栈不适合按字符串查找计数。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：出现次数是“字符串键→整数计数”的映射，又不要求有序遍历，因此 unordered_map 直接表达需求，并提供平均 O(1) 的按键访问。队列和栈不适合按字符串查找计数。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

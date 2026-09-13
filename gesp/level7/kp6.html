@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -666,7 +669,7 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    vector&lt;int&gt; gra
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：head[u] 是顶点 u 的边链入口，to 保存终点，next 连接同一起点的下一条边，w 保存可选权值；没有出边时 head[u] 通常为 -1。</p>
 <p class="q-title">第 6 题使用邻接表存储无向边 u—v 时，应怎样加入？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="A"><b>A.</b> 只加入 u 到 v</label><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="B"><b>B.</b> 只加入 v 到 u</label><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="C"><b>C.</b> 两个方向都加入</label><label class="q-opt"><input type="radio" name="第 6 题使用邻接表存储无向边 u—v " value="D"><b>D.</b> 不保存端点</label>
-</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 04：无向边可从任一端走向另一端，因此邻接表必须同时保存 u 到 v 和 v 到 u。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>对应本页 04：无向边可从任一端走向另一端，因此邻接表必须同时保存 u 到 v 和 v 到 u。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

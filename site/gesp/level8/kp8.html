@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -687,7 +690,7 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    memset(graph, 0x3f, s
 </div><p class="q-ans" style="display:none"><b>答案：B</b><br>生成树需要连接全部 n 个顶点且不能有环，树的边数恒为顶点数减一。Kruskal 或 Prim 最终都应恰好选取 n-1 条边。<br><span class="q-kp">对应知识点：01</span></p>
 <p class="q-title">第 10 题一个只有 1 个顶点、没有边的图，其最小生成树应包含多少条边，总权值是多少？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 10 题一个只有 1 个顶点、没有边" value="A"><b>A.</b> 0 条边，总权值 0</label><label class="q-opt"><input type="radio" name="第 10 题一个只有 1 个顶点、没有边" value="B"><b>B.</b> 1 条边，总权值 0</label><label class="q-opt"><input type="radio" name="第 10 题一个只有 1 个顶点、没有边" value="C"><b>C.</b> 0 条边，但不存在生成树</label><label class="q-opt"><input type="radio" name="第 10 题一个只有 1 个顶点、没有边" value="D"><b>D.</b> 必须补一条自环</label>
-</div><p class="q-ans" style="display:none"><b>答案：A</b><br>单个顶点已经连通，不需要任何边。生成树边数 n-1=0，总权值也为 0；Kruskal 和 Prim 都应正确处理这个边界。对应页内知识点 05。<br><span class="q-kp">对应知识点：05</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>单个顶点已经连通，不需要任何边。生成树边数 n-1=0，总权值也为 0；Kruskal 和 Prim 都应正确处理这个边界。对应页内知识点 05。<br><span class="q-kp">对应知识点：05</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

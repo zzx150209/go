@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -672,7 +675,7 @@ int main() {    int n;    int stone[205] = {};    int sum[205] = {};    int dp[2
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 02：分开保存上一阶段和当前阶段，能保证本轮只读取完整的上一阶段，避免新值污染旧依赖。</p>
 <p class="q-title">第 7 题求最小代价时，某状态暂时不可达。下面哪种处理更稳妥？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="A"><b>A.</b> 初始化为 0</label><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="B"><b>B.</b> 设为 INF，并在相加前检查可达性</label><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="C"><b>C.</b> 直接输出</label><label class="q-opt"><input type="radio" name="第 7 题求最小代价时，某状态暂时不可达" value="D"><b>D.</b> 改求最大值</label>
-</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 04：最小值问题不能用 0 表示不可达；使用 INF 时还要在加法前检查，避免无意义计算和溢出。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>对应本页 04：最小值问题不能用 0 表示不可达；使用 INF 时还要在加法前检查，避免无意义计算和溢出。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -616,7 +619,7 @@ int main() {    unsigned int value; // 保存要读取或修改的非负整数  
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>官方真题少见写法：先拆成直白步骤理解，令 mask = 7u，再令 clearMask = ~mask，最后计算 result = a & clearMask。7 的低三位全为 1，取反后的 clearMask 低三位全为 0、其余位为 1，因此按位与只会清除 a 的低三位，结果就是不大于 a 的最大 8 的倍数。原选项把三步压成 a & (~7u)，其中 u 表示无符号整数；日常编程更推荐先写出有意义的掩码变量。</p>
 <p class="q-title">第 5 题8 位数 value 的二进制是 10101100₂。执行 high = value &gt;&gt; 4; low = value &amp; 15u; 后，high 和 low 分别是多少？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题8 位数 value 的二进制" value="A"><b>A.</b> 10 和 12</label><label class="q-opt"><input type="radio" name="第 5 题8 位数 value 的二进制" value="B"><b>B.</b> 12 和 10</label><label class="q-opt"><input type="radio" name="第 5 题8 位数 value 的二进制" value="C"><b>C.</b> 10 和 15</label><label class="q-opt"><input type="radio" name="第 5 题8 位数 value 的二进制" value="D"><b>D.</b> 172 和 12</label>
-</div><p class="q-ans" style="display:none"><b>答案：A</b><br>右移 4 位把高四位 1010₂ 移到最低位，得到十进制 10；15 的低四位全为 1，按位与只保留 1100₂，得到十进制 12。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>右移 4 位把高四位 1010₂ 移到最低位，得到十进制 10；15 的低四位全为 1，按位与只保留 1100₂，得到十进制 12。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

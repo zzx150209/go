@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -690,7 +693,7 @@ int main() {    int n, m;    cin &gt;&gt; n &gt;&gt; m;    // 无向图的每条
 </div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：处理 1 时依次把 2、3 入队；2 出队时发现 4 并立即标记、入队，此时 3 仍在 4 前面；3 不会重复加入 4，最终顺序是 1，2，3，4。</p>
 <p class="q-title">第 9 题无权图中要求从起点到终点经过的最少边数，应优先选择哪种遍历？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="A"><b>A.</b> BFS</label><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="B"><b>B.</b> DFS 后遇到终点立即停止</label><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="C"><b>C.</b> 只统计顶点度数</label><label class="q-opt"><input type="radio" name="第 9 题无权图中要求从起点到终点经过的" value="D"><b>D.</b> 只建立哈希表</label>
-</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：BFS 按距离层次扩展，第一次到达终点时经过的边数最少。DFS 先深入一条路线，首次到达的路线不保证边数最少。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：A</b><br>对应本页 03：BFS 按距离层次扩展，第一次到达终点时经过的边数最少。DFS 先深入一条路线，首次到达的路线不保证边数最少。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

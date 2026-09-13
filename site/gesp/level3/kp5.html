@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -644,7 +647,7 @@ int main() {    const int CAPACITY = 100;    int a[CAPACITY] = {};
 </div><p class="q-ans" style="display:none"><b>答案：B</b><br>下标 0 的元素是 4，不匹配；下标 1 的元素是 8，第一次匹配后立即停止，所以返回 1，不能继续走到第二个 8 的下标 2。</p>
 <p class="q-title">第 5 题数组初值为 {1, 4, 0}。执行 values[2] = values[0] &lt;&lt; 3; 后，再遍历数组求最大值，结果是多少？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 5 题数组初值为 {1, 4, 0}" value="A"><b>A.</b> 1</label><label class="q-opt"><input type="radio" name="第 5 题数组初值为 {1, 4, 0}" value="B"><b>B.</b> 4</label><label class="q-opt"><input type="radio" name="第 5 题数组初值为 {1, 4, 0}" value="C"><b>C.</b> 8</label><label class="q-opt"><input type="radio" name="第 5 题数组初值为 {1, 4, 0}" value="D"><b>D.</b> 16</label>
-</div><p class="q-ans" style="display:none"><b>答案：C</b><br>1 左移 3 位得到 8，数组先从 {1,4,0} 变为 {1,4,8}；随后从左到右比较，最大值依次为 1、4、8，最终结果是 8。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：C</b><br>1 左移 3 位得到 8，数组先从 {1,4,0} 变为 {1,4,8}；随后从左到右比较，最大值依次为 1、4、8，最终结果是 8。</p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

@@ -405,7 +405,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 响应式 */
 @media (max-width:1200px){
   .layout{grid-template-columns:250px 1fr}
+}
+@media (max-width:1100px){
   .toc{display:none}
+  .layout{grid-template-columns:250px 1fr}
 }
 @media (max-width:1060px){
   .lv-grid{grid-template-columns:repeat(2,1fr)}
@@ -605,7 +608,7 @@ int main() {    cin &gt;&gt; n &gt;&gt; m;    choose(1, 1);    return 0;}</code>
 </div><p class="q-ans" style="display:none"><b>答案：B</b><br>小组内没有不同职位，交换三人的选择顺序不会产生新方案，因此顺序不影响结果，应使用组合数 C(8,3) 而不是排列数。<br><span class="q-kp">对应知识点：01</span></p>
 <p class="q-title">第 10 题只有 1 个互不相同的元素时，它的全排列数量和唯一排列分别是什么？</p>
 <div class="q-opts"><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="A"><b>A.</b> 0，没有排列</label><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="B"><b>B.</b> 1，排列为 1</label><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="C"><b>C.</b> 1，排列为空</label><label class="q-opt"><input type="radio" name="第 10 题只有 1 个互不相同的元素时" value="D"><b>D.</b> 2，排列为 1 和 11</label>
-</div><p class="q-ans" style="display:none"><b>答案：B</b><br>唯一元素只能放在唯一位置，因此 1!=1，唯一排列就是 1。DFS 放入这个元素后达到递归终点，应恰好输出一次。对应页内知识点 02。<br><span class="q-kp">对应知识点：02</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></main>
+</div><p class="q-ans" style="display:none"><b>答案：B</b><br>唯一元素只能放在唯一位置，因此 1!=1，唯一排列就是 1。DFS 放入这个元素后达到递归终点，应恰好输出一次。对应页内知识点 02。<br><span class="q-kp">对应知识点：02</span></p><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p>
     </article>
 
     <div class="kp-nav-row">

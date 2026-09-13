@@ -1148,7 +1148,6 @@ def build_solutions():
 
 def build_resources():
     URLS = {
-        "穷狼 OJ": "https://oj.qonnwolf.com/",
         "洛谷": "https://www.luogu.com.cn/",
         "GESP 官方网站": "https://gesp.ccf.org.cn/",
         "NOI 官方网站": "https://www.noi.cn/",
@@ -1196,7 +1195,7 @@ def build_resources():
     <h1 class="page" style="margin-bottom:12px">先说你现在要做什么</h1>
     <p class="lead" style="margin-bottom:16px">资源按四种常见任务整理。每组只有一个首选入口，其他网站放在后面，避免在一长串链接里反复比较。</p>
     <p style="font-size:14px;color:var(--text-2);margin-bottom:18px">适合现在：准备刷题、查考试通知、学习算法，或配置 C++ 编程环境。</p>
-    <a class="btn btn-primary" href="https://oj.qonnwolf.com/" target="_blank" rel="noopener">去穷狼 OJ 开始练习 →</a>
+    <a class="btn btn-primary" href="https://www.luogu.com.cn/" target="_blank" rel="noopener">去洛谷开始练习 →</a>
 
     <hr class="rule" style="margin:32px 0">
 

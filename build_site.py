@@ -257,7 +257,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 
 /* 等级页 */
 .layout{display:grid;grid-template-columns:200px 1fr 200px;gap:40px;align-items:start;
-  max-width:1440px;margin:0 auto;padding:24px 32px 60px}
+  margin:0;padding:24px 40px 60px}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}

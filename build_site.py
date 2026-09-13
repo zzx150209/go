@@ -115,10 +115,11 @@ footer{background:#0f172a;color:#94a3b8;padding:38px 20px 26px;font-size:13px;ma
 .pill i{width:6px;height:6px;border-radius:50%;background:var(--accent);display:block;flex:0 0 auto}
 .pill-plain{display:inline-block;background:var(--brand-soft);color:var(--brand);
   border-radius:6px;padding:4px 11px;font-size:12px;font-weight:600;margin-bottom:14px}
-.crumb{font-size:12.5px;color:var(--text-3);margin-bottom:12px}
-.crumb a{color:var(--brand)}
-.crumb a:hover{border-bottom:1px solid var(--brand)}
-h1.page{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.02em;
+.crumb{font-size:12.5px;color:var(--accent);margin-bottom:12px}
+.crumb a{color:var(--accent)}
+.crumb a:hover{border-bottom:1px solid var(--accent)}
+h1.page{font-size:clamp(30px,5vw,46px);font-weight:700;letter-spacing:-.01em;
+  font-family:Georgia,"Songti SC","SimSun",serif;margin:0 0 24px;line-height:1.15}
   line-height:1.24;margin:0 0 14px}
 .lead{color:var(--text-2);font-size:15px;max-width:660px;margin:0 0 22px;line-height:1.8}
 .sec{margin-bottom:54px}
@@ -275,12 +276,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .intro p{color:var(--text-2);font-size:14px;margin:0;line-height:1.9}
 
 .progress{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:1px;
-  background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--line);border:1px solid var(--line);border-radius:6px;
   overflow:hidden;margin-bottom:38px}
 .progress>div{background:var(--card);padding:17px 20px}
-.progress .p-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.progress .p-title{font-size:16px;font-weight:700;margin-bottom:4px}
 .progress .p-desc{font-size:12px;color:var(--text-3);line-height:1.6}
-.progress .p-num{font-size:22px;font-weight:800;color:var(--brand);font-variant-numeric:tabular-nums}
+.progress .p-num{font-size:22px;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
 .progress .p-lbl{font-size:11.5px;color:var(--text-3);margin-top:2px}
 
 .kp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -295,7 +296,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp h4{margin:0 0 7px;font-size:16px;font-weight:700}
 .kp p{margin:0 0 10px;font-size:13px;color:var(--text-2);line-height:1.7;flex:1}
 .kp .tags{margin-bottom:12px;font-size:12px;color:var(--text-3)}
-.kp .tags span{margin-right:10px}
+.kp .tags span+span::before{content:" · ";margin-right:10px;color:var(--line-2)}
 
 /* 知识点详细内容（可展开） */
 .kp-detail{max-height:0;overflow:hidden;transition:max-height .3s ease}

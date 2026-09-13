@@ -481,13 +481,25 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </section>
 
     <section class="sec">
-      <div class="sec-head"><h3>CSP-J/S</h3>
-        <a class="link-red" href="csp.html">查看 CSP 学习路线 →</a></div>
-      <div class="rows">
-        <a class="row" href="csp.html"><span class="tag">J</span>
-        <span class="t">CSP-J 初赛</span><span class="d">计算机基础、C++ 语法、算法阅读与选择填空。</span><span class="go">→</span></a><a class="row" href="csp.html"><span class="tag">J</span>
-        <span class="t">CSP-J 复赛</span><span class="d">模拟、枚举、排序、搜索、简单动态规划与代码规范。</span><span class="go">→</span></a><a class="row" href="csp.html"><span class="tag">S</span>
-        <span class="t">CSP-S 进阶</span><span class="d">图论、树结构、数论、复杂动态规划与复杂度控制。</span><span class="go">→</span></a>
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start">
+        <div>
+          <h3 style="font-size:20px;font-weight:700;margin:0 0 6px">CSP-J/S</h3>
+          <p style="font-size:13.5px;color:var(--text-2);margin:0;line-height:1.7">按考试阶段准备，从初赛基础走向复赛与进阶。</p>
+        </div>
+        <div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+            <a class="row" href="csp.html" style="padding:12px 14px"><span class="tag">01</span>
+            <span class="t" style="font-size:13.5px">CSP-J 初赛</span>
+            <span class="go">→</span></a><a class="row" href="csp.html" style="padding:12px 14px"><span class="tag">02</span>
+            <span class="t" style="font-size:13.5px">CSP-J 复赛</span>
+            <span class="go">→</span></a><a class="row" href="csp.html" style="padding:12px 14px"><span class="tag">03</span>
+            <span class="t" style="font-size:13.5px">CSP-S 进阶</span>
+            <span class="go">→</span></a>
+          </div>
+          <div style="text-align:right;margin-top:12px">
+            <a class="link-red" href="csp.html">查看 CSP 学习路线 →</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -505,15 +517,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
           <span class="go">去 OJ 与资源 →</span></a>
         </div>
         <div>
-          <div class="code"><span class="c">// 二分答案：先确定单调性，再缩小范围</span>
-<span class="k">int</span> <span class="f">check</span>(<span class="k">int</span> x) { <span class="k">return</span> x &gt;= target; }
-
-<span class="k">int</span> l = <span class="t">0</span>, r = n, ans = -<span class="t">1</span>;
-<span class="k">while</span> (l &lt;= r) {
-    <span class="k">int</span> mid = l + (r - l) / <span class="t">2</span>;
-    <span class="k">if</span> (<span class="f">check</span>(mid)) { ans = mid; r = mid - <span class="t">1</span>; }
-    <span class="k">else</span> l = mid + <span class="t">1</span>;
-}</div>
+          <div class="step" style="margin-bottom:10px;cursor:default">
+            <span class="tx"><b>程序出错</b><span>按编译、运行、逻辑和格式错误逐项检查</span></span>
+            <span class="go" style="color:var(--brand)">查看调试方法 →</span>
+          </div>
+          <div class="step" style="cursor:default">
+            <span class="tx"><b>运行超时</b><span>先判断操作次数和时间复杂度</span></span>
+            <span class="go" style="color:var(--brand)">学习复杂度分析 →</span>
+          </div>
         </div>
       </div>
     </section>
@@ -521,28 +532,33 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <section class="sec">
       <h2>常用工具</h2>
       <p class="sec-sub">知道自己需要什么时，直接进入对应工具。</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-        <div>
-          <a class="step" href="templates.html"><span class="no">01</span>
-            <span class="tx"><b>程序模板</b><span>已经有思路、需要可直接复制的框架时使用</span></span>
-            <span class="go">打开程序模板 →</span></a>
-          <div style="height:10px"></div>
-          <a class="step" href="solutions.html"><span class="no">02</span>
-            <span class="tx"><b>题解库</b><span>从选题读题、突破口到写代码过程使用</span></span>
-            <span class="go">打开题解 →</span></a>
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:20px">
+        <div style="display:grid;grid-template-columns:1fr 1.3fr;border:1px solid var(--line);
+          border-radius:var(--radius);overflow:hidden;background:var(--card)">
+          <div style="padding:20px">
+            <span style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase">主要工具</span>
+            <h3 style="margin:8px 0 6px;font-size:18px;font-weight:700">程序模板</h3>
+            <p style="font-size:13px;color:var(--text-2);margin:0 0 14px;line-height:1.6">已经有思路，需要可靠代码框架时使用</p>
+            <a class="link-red" href="templates.html">打开程序模板 →</a>
+          </div>
+          <div style="background:#0f172a;padding:16px 18px;display:flex;align-items:center">
+            <pre style="margin:0;font-family:'SF Mono',Monaco,Menlo,Consolas,monospace;
+              font-size:12.5px;line-height:1.8;color:#c9d1d9;white-space:pre">for (int i = 1; i &lt;= 5; i++) {
+    cout &lt;&lt; i &lt;&lt; " ";
+}</pre>
+          </div>
         </div>
-        <div>
-          <div class="code"><span class="c">// 快读快写（大数据量必备）</span>
-<span class="k">inline int</span> <span class="f">read</span>() {
-    <span class="k">int</span> x = <span class="t">0</span>, f = <span class="t">1</span>; <span class="k">char</span> c = <span class="f">getchar</span>();
-    <span class="k">while</span> (c &lt; <span class="t">'0'</span> || c &gt; <span class="t">'9'</span>) {
-        <span class="k">if</span> (c == <span class="t">'-'</span>) f = -<span class="t">1</span>; c = <span class="f">getchar</span>();
-    }
-    <span class="k">while</span> (c &gt;= <span class="t">'0'</span> &amp;&amp; c &lt;= <span class="t">'9'</span>) {
-        x = x * <span class="t">10</span> + c - <span class="t">'0'</span>; c = <span class="f">getchar</span>();
-    }
-    <span class="k">return</span> x * f;
-}</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a class="row" href="solutions.html" style="flex:1">
+            <span class="t">题解库</span>
+            <span class="d">需要学习读题、突破口和推导过程时使用</span>
+            <span class="go">→</span>
+          </a>
+          <a class="row" href="resources.html" style="flex:1">
+            <span class="t">OJ 与学习资源</span>
+            <span class="d">返回题库练习或查找权威资料</span>
+            <span class="go">→</span>
+          </a>
         </div>
       </div>
     </section>

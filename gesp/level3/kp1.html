@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -469,7 +473,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li><strong>本课新学：</strong> 固定 8 位下的正负编码动作；原码、反码、补码的差异和补码用途；补码范围、真值读取与越界判断。</li>
 <li><strong>暂不展开：</strong> C++ 对象在内存中的真实字节顺序、有符号整数溢出的语言规则、位运算语法、浮点数编码，以及函数、指针、作用域和递归。</li>
 </ul>
-<figure data-density="standard"><figcaption>术语速查</figcaption><div tabindex="0" role="region"><table>
+<div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>术语</th>
@@ -499,10 +503,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td><code>11111011</code> 表示 <code>-5</code></td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure><p><h2 id="kp-01">01 原码、反码与补码</h2>
+</table></div><p>横向滑动查看完整表格</p><p><h2 id="kp-01">01 原码、反码与补码</h2>
 先从正数开始。正数的原码、反码和补码完全相同：符号位为 <code>0</code>，其余位写出数的二进制。例如十进制 <code>5</code> 的二进制为 <code>101</code>，写成 8 位就是 <code>00000101</code>。因此 <code>+5</code> 的原码、反码、补码都是 <code>00000101</code>。</p>
 <p>负数才会出现差别。对 <strong>-1 到 -127</strong>，先写出与其绝对值对应的 8 位正数表示；把最左位改为 <code>1</code> 得到原码；除符号位外其余每一位 0、1 互换得到反码；反码再加 1 得到补码。以 <code>-5</code> 为例，过程必须完整写出：</p>
-<figure data-density="standard"><figcaption>-5 的三种编码过程</figcaption><div tabindex="0" role="region"><table>
+<div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>表示方法</th>
@@ -532,14 +536,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>反码 <code>11111010</code> 加 1</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure>
+</table></div><p>横向滑动查看完整表格</p>
 <p>所以必须记住这组三个关键结果：<code>10000101</code> 是 8 位 <code>-5</code> 的原码，<code>11111010</code> 是反码，<code>11111011</code> 才是补码。不要把“取反加一”直接用在原码上；它的起点是对应正数的二进制，或等价地先得到反码再加一。</p>
 <p><h2 id="kp-02">02 三种编码的差异</h2>
 理解三种编码时，可以把它们看成逐步改进的三种方案。先从最直观的想法开始：留出最高位表示正负，其余位保存绝对值，这就是原码。原码容易读写，但如果把所有位直接送入普通二进制加法器，结果不一定符合有符号整数运算。</p>
 <p>以 4 位表示为例，原码中的 <code>+1</code> 是 <code>0001</code>，<code>-1</code> 是 <code>1001</code>。直接相加得到 <code>0001 + 1001 = 1010</code>。若仍按 4 位原码解释，<code>1010</code> 表示 <code>-2</code>，而不是应有的 0。问题在于：原码的最高位只负责标记符号，不能和其余位一起按普通二进制权值参加加法。</p>
 <p>一种改进思路是把负数除符号位外的各位取反，得到反码。4 位反码中，<code>-1</code> 是 <code>1110</code>，于是 <code>0001 + 1110 = 1111</code>。这个结果在反码中表示“负零”；反码确实改善了正负数运算的对应关系，却保留了 <code>0000</code>（正零）和 <code>1111</code>（负零）两种零。相同的数值有两种编码，会让判断和运算规则不够统一。</p>
 <p>补码在负数反码的基础上再加 1。4 位补码中的 <code>-1</code> 是 <code>1111</code>，所以 <code>0001 + 1111 = 1 0000</code>。在固定 4 位中只能保留低 4 位，结果为 <code>0000</code>，正好是 0。此时最高位也成为数值权值的一部分，正数和负数能够使用同一套定宽加法规则。</p>
-<figure data-density="standard"><figcaption>三种编码的运算对比</figcaption><div tabindex="0" role="region"><table>
+<div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>编码</th>
@@ -568,13 +572,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>保留低 4 位得到唯一的 0</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure><p><h2 id="kp-03">03 补码的运算与范围</h2>
+</table></div><p>横向滑动查看完整表格</p><p><h2 id="kp-03">03 补码的运算与范围</h2>
 补码最重要的作用，是把减法转成加法：<code>a - b</code> 可以按 <code>a + (-b)</code> 处理。仍用 4 位补码验证 <code>5 - 3</code>：<code>+5</code> 是 <code>0101</code>，<code>-3</code> 是 <code>1101</code>，相加得到 <code>0101 + 1101 = 1 0010</code>；保留低 4 位 <code>0010</code>，结果就是 2。这样，加法和减法都可以复用同一套定宽加法电路，不需要为原码的符号位另外设计一套加减规则。</p>
 <p>不过，“保留低 4 位”有明确前提：题目正在讨论固定 4 位，并且真实结果 2 落在 4 位补码的范围 -8 到 7 内。补码并不会让溢出消失；如果真实结果超出当前位宽的范围，截去高位后可能得到另一个数，必须另行判断是否溢出。</p>
 <p>回到 8 位，<code>11111011</code>（-5）与 <code>00000101</code>（+5）相加得到 <code>1 00000000</code>；固定 8 位保留低 8 位就是 <code>00000000</code>。这与前面的 4 位示例遵循同一条规则，也说明补码为何能让正数和负数共用加法过程。</p>
 <p>三种编码的 8 位范围并不完全相同：</p>
 <p>把 8 位推广到 <code>N</code> 位后，补码只有一个 0，表示范围是 <code>-2^(N - 1)</code> 到 <code>2^(N - 1) - 1</code>。代入 <code>N = 8</code>，得到 <code>-128</code> 到 <code>127</code>；总数仍是 <code>256</code> 个，恰好对应全部 <code>2^8</code> 种位串。左端比右端多一个绝对值，是因为补码没有“负零”，把这个编码位置留给了 <code>-128</code>。</p>
-<figure data-density="standard"><figcaption>8 位编码范围</figcaption><div tabindex="0" role="region"><table>
+<div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>编码</th>
@@ -599,12 +603,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>只有一个 0；<code>10000000</code> 专门表示 -128</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure>
+</table></div><p>横向滑动查看完整表格</p>
 <p>原码和反码都存在“正零”和“负零”两种编码，这会让同一个数值 0 有两种写法；补码把 0 统一为 <code>00000000</code>，并把空出来的一个编码用于 -128。</p>
 <p>因此，上面的“绝对值 → 原码 → 反码 → 补码”对 -1 到 -127 适用，不能机械套到 -128：<code>128</code> 的绝对值需要 8 个数值位，已经放不进“1 位符号 + 7 位数值”的 8 位原码或反码。8 位补码则把 <code>10000000</code> 用作 -128，从而获得 <strong>-128 到 127</strong> 的完整范围。</p>
 <p>从补码角度看，首位为 <code>0</code> 时，有 7 个数值位可变化，得到 <code>00000000</code> 到 <code>01111111</code>，即 0 到 127；首位为 <code>1</code> 时，得到 <code>10000000</code> 到 <code>11111111</code>，即 -128 到 -1。注意负数比正数多一个：<code>10000000</code> 表示 -128，但没有对应的 <code>+128</code>。</p>
 <p>读补码真值有两条稳定规则。首位是 <code>0</code>，它是非负数，直接按二进制权值展开；首位是 <code>1</code>，它是负数，可以“按位取反再加 1”，得到绝对值后加负号。还可以把最高位看成 <code>-128</code>，其余七位仍按 64、32、16、8、4、2、1 相加。两种方法应该给出同一个答案。</p>
-<figure data-density="standard"><figcaption>8 位补码首位判断</figcaption><div tabindex="0" role="region"><table>
+<div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>最高位</th>
@@ -627,18 +631,18 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td><code>10000000</code> 表示 -128</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure><p><h2 id="kp-04">04 补码转换与真值</h2>
-下面把 <code>-5</code> 的编码过程逐行跟踪。每次都保留 8 位，才不会把符号位和数值位混在一起。</p><figure><div tabindex="0" role="region"><table><caption>8 位补码：从真值 -5 到位串</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">操作</th><th scope="col">8 位结果</th><th scope="col">当前含义</th></tr></thead><tbody><tr><th scope="row">1. 写出绝对值</th><td>5 = 4 + 1</td><td>00000101</td><td>+5 的二进制</td></tr><tr><th scope="row">2. 得到原码</th><td>最高位改为 1</td><td>10000101</td><td>-5 的原码</td></tr><tr><th scope="row">3. 得到反码</th><td>数值位 0、1 互换</td><td>11111010</td><td>-5 的反码</td></tr><tr><th scope="row">4. 得到补码</th><td>反码 + 1</td><td>11111011</td><td>-5 的补码</td></tr></tbody></table></div><figcaption>原码、反码、补码是三种不同的编码；题目没有说明时，程序中看到的有符号整数通常按补码理解。</figcaption></figure>
+</table></div><p>横向滑动查看完整表格</p><p><h2 id="kp-04">04 补码转换与真值</h2>
+下面把 <code>-5</code> 的编码过程逐行跟踪。每次都保留 8 位，才不会把符号位和数值位混在一起。</p><div tabindex="0" role="region"><table><caption>8 位补码：从真值 -5 到位串</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">操作</th><th scope="col">8 位结果</th><th scope="col">当前含义</th></tr></thead><tbody><tr><th scope="row">1. 写出绝对值</th><td>5 = 4 + 1</td><td>00000101</td><td>+5 的二进制</td></tr><tr><th scope="row">2. 得到原码</th><td>最高位改为 1</td><td>10000101</td><td>-5 的原码</td></tr><tr><th scope="row">3. 得到反码</th><td>数值位 0、1 互换</td><td>11111010</td><td>-5 的反码</td></tr><tr><th scope="row">4. 得到补码</th><td>反码 + 1</td><td>11111011</td><td>-5 的补码</td></tr></tbody></table></div>
 <p>现在反向读 <code>11111011</code>。首位是 <code>1</code>，先确定它一定是负数；取反得到 <code>00000100</code>，再加 1 得到 <code>00000101</code>，其绝对值为 5，所以真值是 <code>-5</code>。不能把 <code>11111011</code> 直接当作无符号数 251，也不能只把首位删掉后读成 123。</p>
 <h3 id="从位串一步步读回--5">从位串一步步读回 -5</h3>
-<figure><div tabindex="0" role="region"><table><caption>8 位补码：从位串 11111011 读回真值</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">操作</th><th scope="col">本步结果</th><th scope="col">为什么这样做</th></tr></thead><tbody><tr><th scope="row">1. 检查首位</th><td>首位是 1</td><td>11111011</td><td>按 8 位补码解释时，它表示负数</td></tr><tr><th scope="row">2. 保持 8 位逐位取反</th><td>0、1 全部互换</td><td>00000100</td><td>得到加 1 之前的中间位串</td></tr><tr><th scope="row">3. 加 1</th><td>00000100 + 1</td><td>00000101</td><td>4 + 1 = 5，绝对值是 5</td></tr><tr><th scope="row">4. 恢复负号</th><td>给绝对值加负号</td><td>-5</td><td>原位串首位是 1，所以最终真值为 -5</td></tr></tbody></table></div><figcaption>判断符号、保持 8 位取反、加 1、恢复负号，每一步都能由上一行重新算出；不需要用预先写好的变量值冒充验证。</figcaption></figure>
+<div tabindex="0" role="region"><table><caption>8 位补码：从位串 11111011 读回真值</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">操作</th><th scope="col">本步结果</th><th scope="col">为什么这样做</th></tr></thead><tbody><tr><th scope="row">1. 检查首位</th><td>首位是 1</td><td>11111011</td><td>按 8 位补码解释时，它表示负数</td></tr><tr><th scope="row">2. 保持 8 位逐位取反</th><td>0、1 全部互换</td><td>00000100</td><td>得到加 1 之前的中间位串</td></tr><tr><th scope="row">3. 加 1</th><td>00000100 + 1</td><td>00000101</td><td>4 + 1 = 5，绝对值是 5</td></tr><tr><th scope="row">4. 恢复负号</th><td>给绝对值加负号</td><td>-5</td><td>原位串首位是 1，所以最终真值为 -5</td></tr></tbody></table></div>
 <p>另一种心算方法是权值法：<code>11111011 = -128 + 64 + 32 + 16 + 8 + 2 + 1 = -5</code>。最高位不是 <code>+128</code>，而是 <code>-128</code>；这是补码读真值最容易遗漏的一点。对于 <code>10000000</code>，权值法立刻得到 <code>-128</code>，也解释了 8 位补码范围的左端点。</p>
 <p><h2 id="typical-example">典型例题</h2>
 例题：某题给出 8 位补码 <code>10110110</code>，求它表示的十进制真值；再判断十进制 <code>130</code> 能否用 8 位补码表示。</p>
 <p>第一问，首位为 <code>1</code>，所以它是负数。按位取反：<code>01001001</code>；再加 1：<code>01001010</code>。<code>01001010 = 64 + 8 + 2 = 74</code>，故原补码的真值为 <code>-74</code>。用权值法核对：<code>-128 + 32 + 16 + 4 + 2 = -74</code>，结果一致。</p>
 <p>第二问，8 位补码范围为 -128 到 127，<code>130</code> 大于 127，不能表示。不要因为 130 的无符号二进制可以写成 <code>10000010</code> 就认为可行；若把这个 8 位串按补码读取，它的真值是 <code>-126</code>，已经不是 130。题目只要强调“有符号 8 位补码”，就必须先做范围判断。</p>
 <p>再看一个加法检查：<code>-5</code> 的补码为 <code>11111011</code>，<code>+5</code> 的补码为 <code>00000101</code>。逐位相加会产生第 9 位进位，保留 8 位结果 <code>00000000</code>，即 0。固定宽度意味着超出范围的高位不能保存在这个 8 位格子中；在真实程序里，是否溢出及其后果要看类型和语言规则，做题时先按题目给定的位宽分析。</p>
-<figure data-density="standard"><figcaption>8 位数据编码测试案例</figcaption><div tabindex="0" role="region"><table>
+<div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>测试类型</th>
@@ -679,7 +683,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>先检查 -128 到 127 的范围，不能把无符号位串当成答案</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure>
+</table></div><p>横向滑动查看完整表格</p>
 <h3 id="完成这类判断的成功标准">完成这类判断的成功标准</h3>
 <p>完成上面的典型例题后，可以按四点检查自己的过程：先写清“8 位补码”这一解释规则；编码前先判断十进制数是否在 -128 到 127；读负数补码时保留 8 位写完取反和加 1；最后用最高位 <code>-128</code> 的权值法复核，两种读法必须得到同一个真值。四点都能在纸面过程里找到，才算完成判断。</p>
 <section><h3>把补码当成普通二进制</h3><div><div><strong><span>×</span> 错误写法</strong><code>11111011 = 128 + 64 + 32 + 16 + 8 + 2 + 1 = 251，所以它表示 251</code></div><div><strong><span>✓</span> 正确写法</strong><code>11111011 = -128 + 64 + 32 + 16 + 8 + 2 + 1 = -5</code></div></div><p><strong>原因：</strong>251 是把该位串按无符号整数读取的结果。题设若说明是 8 位补码，最高位的权值应为 -128，位串表示的是负数。</p><p><strong>检查方法：</strong>先看题目给的是无符号数、原码还是补码；编码规则不同，同一串 0 和 1 的真值也不同。</p></section>

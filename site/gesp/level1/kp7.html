@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -542,13 +546,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <p>C++ 中的乘法必须写成 <code>*</code>，不能写数学中的 <code>×</code>，也不能省略乘号：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> area </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> length </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> width;</span><span style="--0:#919F9F;--1:#5D6376"> // 正确：用 * 计算长方形面积</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int area = length * width; // 正确：用 * 计算长方形面积</code></pre>
 <p><code>2x</code> 不是 C++ 的乘法写法，必须写成 <code>2 * x</code>。</p>
 <h3 id="加号减号也能表示正负">加号、减号也能表示正负</h3>
 <p>当 <code>+</code> 或 <code>-</code> 只作用于一个操作数时，它们表示正号或负号：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> positive </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376"> // positive 得到 5，a 不变</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> negative </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376"> // negative 得到 -5，a 仍然不变</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a = 5;int positive = +a; // positive 得到 5，a 不变int negative = -a; // negative 得到 -5，a 仍然不变</code></pre>
 <p><code>-a</code> 只是计算出 <code>a</code> 的相反数。若要修改 <code>a</code>，必须把结果重新写回：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376"> // 先求 -a，再把结果保存回 a</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>a = -a; // 先求 -a，再把结果保存回 a</code></pre>
 <p>所以判断表达式是否改变变量时，要找有没有赋值、复合赋值、自增或自减，不能看到一次计算就认为原变量已经变化。</p>
 <h2 id="02-关系运算">02 关系运算</h2>
 <p>关系运算比较两个数据，结果只有 <code>true</code> 或 <code>false</code>。</p>
@@ -602,14 +606,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <p>关系运算只负责比较，不会修改参与比较的变量。普通 <code>cout</code> 输出真假值时，<code>true</code> 通常显示为 1，<code>false</code> 通常显示为 0。</p>
 <h3 id="赋值等号和相等比较不是一回事">赋值等号和相等比较不是一回事</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span><span style="--0:#919F9F;--1:#5D6376">  // 赋值：把 b 的值保存到 a，会修改 a</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span><span style="--0:#919F9F;--1:#5D6376"> // 比较：判断 a 与 b 是否相等，不修改变量</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>a = b;  // 赋值：把 b 的值保存到 a，会修改 aa == b; // 比较：判断 a 与 b 是否相等，不修改变量</code></pre>
 <p>读到等号时，先看是一个 <code>=</code> 还是两个 <code>==</code>。一个表示“保存”，两个表示“是否相等”。</p>
 <h3 id="c-不能照写数学中的链式比较">C++ 不能照写数学中的链式比较</h3>
 <p>数学中可以写 <code>1 ≤ x ≤ 10</code>。C++ 中不要写成：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#919F9F;--1:#5D6376"> // 不能按“x 在 1 到 10 之间”理解</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>1 &lt;= x &lt;= 10 // 不能按“x 在 1 到 10 之间”理解</code></pre>
 <p>C++ 会先计算 <code>1 &lt;= x</code>，结果只能是 <code>false</code> 或 <code>true</code>；参与后面的数值比较时，它们分别相当于 0 或 1。于是第二次比较实际是 <code>0 &lt;= 10</code> 或 <code>1 &lt;= 10</code>，结果都会为真，当然不能正确检查范围。</p>
 <p>正确写法是把两个关系分别写清，再用逻辑与连接：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">(x </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53">)</span><span style="--0:#919F9F;--1:#5D6376"> // 下界和上界都满足，x 才在范围内</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>(x &gt;= 1) &amp;&amp; (x &lt;= 10) // 下界和上界都满足，x 才在范围内</code></pre>
 <h2 id="03-整数除法与取余">03 整数除法与取余</h2>
 <p>上一页已经看到 <code>7 / 2</code> 和 <code>7 % 2</code>。本节把整数除法的“商”和“余数”放在一起讲清楚。</p>
 <h3 id="两个整数相除得到整数商">两个整数相除得到整数商</h3>
@@ -643,9 +647,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>若要得到小数结果，必须让浮点数在除法发生前参与运算。例如 <code>7.0 / 2.0</code> 得到 3.5。整数与小数混合运算的完整类型转换规则会在后续等级继续学习。</p>
 <h3 id="取余得到没有分完的部分">取余得到没有分完的部分</h3>
 <p><code>%</code> 计算整数相除后的余数：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">17 / 5 = 3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">17 % 5 = 2</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>17 / 5 = 317 % 5 = 2</code></pre>
 <p>可以用下面的关系反向核对：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">被除数 = 商 × 除数 + 余数</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">17 = 3 × 5 + 2</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>被除数 = 商 × 除数 + 余数17 = 3 × 5 + 2</code></pre>
 <p>对于正整数，余数满足 <code>0 &lt;= 余数 &lt; 除数</code>。如果算出的余数等于或大于除数，就说明商或余数算错了。</p>
 <h3 id="除法和取余的使用条件">除法和取余的使用条件</h3>
 <ul>
@@ -654,11 +658,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>本页主教学只处理非负整数。负数整数除法和负数取余的完整规则不在本课展开。</li>
 </ul>
 <p>取余常用于：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">n </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#919F9F;--1:#5D6376">  // 检查非负整数 n 除以 2 的余数</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">n </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#919F9F;--1:#5D6376"> // 取得非负整数 n 的个位数字</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">n </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> k</span><span style="--0:#919F9F;--1:#5D6376">  // 计算每组 k 个时剩余多少个</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>n % 2  // 检查非负整数 n 除以 2 的余数n % 10 // 取得非负整数 n 的个位数字n % k  // 计算每组 k 个时剩余多少个</code></pre>
 <p>这里的 <code>%</code> 表示取余，不是数学中的百分号。</p>
 <h2 id="04-赋值与复合赋值">04 赋值与复合赋值</h2>
 <p>赋值的执行顺序是：<strong>先计算右侧，再把结果保存到左侧变量。</strong></p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 右侧先用旧值 10 算出 13，再把 13 写回 a</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a = 10;a = a + 3; // 右侧先用旧值 10 算出 13，再把 13 写回 a</code></pre>
 <p>执行后 <code>a</code> 从 10 变成 13。左侧必须是可以修改的变量，不能写 <code>3 = a</code>。</p>
 <h3 id="复合赋值把计算和写回合在一起">复合赋值把计算和写回合在一起</h3>
 <table>
@@ -698,33 +702,33 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <p>例如：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">20</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">score </span><span style="--0:#C792EA;--1:#8844AE">+=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // score = score + 5，score 变成 25</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">score </span><span style="--0:#C792EA;--1:#8844AE">*=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // score = score * 2，score 变成 50</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">score </span><span style="--0:#C792EA;--1:#8844AE">-=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">8</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // score = score - 8，score 变成 42</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">score </span><span style="--0:#C792EA;--1:#8844AE">/=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 整数除法 42 / 5 得 8，score 变成 8</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">score </span><span style="--0:#C792EA;--1:#8844AE">%=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 8 % 3 得 2，score 变成 2</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int score = 20;score += 5; // score = score + 5，score 变成 25score *= 2; // score = score * 2，score 变成 50score -= 8; // score = score - 8，score 变成 42score /= 5; // 整数除法 42 / 5 得 8，score 变成 8score %= 3; // 8 % 3 得 2，score 变成 2</code></pre>
 <p>这五条语句必须从上到下执行。后一条看到的是前一条已经写回的新值，不能每次都从 20 重新计算。</p>
 <h3 id="连续赋值从右向左执行">连续赋值从右向左执行</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a;int b;a = b = 3;</code></pre>
 <p>执行过程是：</p>
 <ol>
 <li>先执行 <code>b = 3</code>，此时 <code>b</code> 得到 3；</li>
 <li>再执行 <code>a = b</code>，此时 <code>a</code> 也得到 3。</li>
 </ol>
 <p>等价的直白写法是：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>b = 3;a = b;</code></pre>
 <p><code>int a = b = 3;</code> 中的 <code>b</code> 必须提前定义，否则程序找不到要赋值的变量。一级主代码优先使用分步写法，连续赋值只要求能按从右到左读懂。</p>
 <p>还要注意：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">+=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // a 在原值上增加 3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 相当于 a = +3，直接把正数 3 赋给 a</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>a += 3; // a 在原值上增加 3a =+ 3; // 相当于 a = +3，直接把正数 3 赋给 a</code></pre>
 <p>符号顺序不同，含义完全不同。</p>
 <h2 id="05-自增与自减">05 自增与自减</h2>
 <p>单独计算 <code>i + 1</code> 不会修改 <code>i</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">i </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 只产生结果 6，没有写回，i 仍为 5</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int i = 5;i + 1; // 只产生结果 6，没有写回，i 仍为 5</code></pre>
 <p>要让 <code>i</code> 增加 1，可以写：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 完整写法</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">i </span><span style="--0:#C792EA;--1:#8844AE">+=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">    // 复合赋值</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">       // 自增</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>i = i + 1; // 完整写法i += 1;    // 复合赋值i++;       // 自增</code></pre>
 <p>相应地，<code>i--</code> 让 <code>i</code> 减少 1。循环变量每轮只增加 1 时可以优先写 <code>i++</code>；普通累计量或增加量不是 1 时，仍用完整赋值或复合赋值表达清楚。</p>
 <h3 id="单独使用时前置和后置结果相同">单独使用时，前置和后置结果相同</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376"> // a 先增加 1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">b</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // b 也增加 1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#7FDBCA;--1:#096E72">--</span><span style="--0:#D6DEEB;--1:#403F53">c;</span><span style="--0:#919F9F;--1:#5D6376"> // c 减少 1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">d</span><span style="--0:#7FDBCA;--1:#096E72">--</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // d 也减少 1</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>++a; // a 先增加 1b++; // b 也增加 1--c; // c 减少 1d--; // d 也减少 1</code></pre>
 <p>当它们各自单独占一条语句时，前置和后置的最终效果相同。</p>
 <h3 id="放进表达式时取得的值不同">放进表达式时，取得的值不同</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> a</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // x 先取得旧值 5，然后 a 变成 6</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> y </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">b;</span><span style="--0:#919F9F;--1:#5D6376"> // b 先变成 6，然后 y 取得新值 6</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a = 5;int x = a++; // x 先取得旧值 5，然后 a 变成 6
+int b = 5;int y = ++b; // b 先变成 6，然后 y 取得新值 6</code></pre>
 <table>
 <thead>
 <tr>
@@ -817,7 +821,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <p><code>!true</code> 的结果是 <code>false</code>，<code>!false</code> 的结果是 <code>true</code>。</p>
 <p>范围判断需要同时满足上下界，因此使用 <code>&amp;&amp;</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> inRange </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>bool inRange = (x &gt;= 1) &amp;&amp; (x &lt;= 10);</code></pre>
 <p>当 <code>x = 7</code> 时，左右条件都为真，<code>inRange</code> 得到 <code>true</code>；当 <code>x = 12</code> 时，右侧条件为假，整体得到 <code>false</code>。</p>
 <h3 id="短路决定右侧是否执行">短路决定右侧是否执行</h3>
 <p>C++ 先计算左侧条件。如果只看左侧就能确定整体结果，右侧不会继续计算。</p>
@@ -858,7 +862,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <p>短路还会决定右侧运算是否真的发生。假设 <code>a = 10</code>、<code>b = 0</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> safe </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (b </span><span style="--0:#C792EA;--1:#8844AE">!=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> (a </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>bool safe = (b != 0) &amp;&amp; (a / b &gt; 2);</code></pre>
 <p>执行过程：</p>
 <table>
 <thead>
@@ -893,9 +897,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>如果把左右两部分交换，程序就可能先执行 <code>a / b</code>，失去保护。因此短路表达式的顺序必须符合实际目的。</p>
 <h2 id="07-条件运算符">07 条件运算符</h2>
 <p>条件运算符也叫三目运算符。它根据一个条件，从两个结果中选择一个：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">条件 ? 条件为真时的结果 : 条件为假时的结果</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>条件 ? 条件为真时的结果 : 条件为假时的结果</code></pre>
 <p>例如：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> maximum </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (a </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> b) </span><span style="--0:#C792EA;--1:#8844AE">?</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">:</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int maximum = (a &gt; b) ? a : b;</code></pre>
 <p>当 <code>a = 3</code>、<code>b = 5</code> 时：</p>
 <ol>
 <li>先计算条件 <code>a &gt; b</code>，结果为 <code>false</code>；</li>
@@ -975,11 +979,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <p>不要把整张表当成死记任务。做题时先找括号，再按“算术 → 关系 → 逻辑 → 赋值”分层；拿不准就补括号或拆成多条语句。</p>
 <h3 id="同级算术运算通常从左到右">同级算术运算通常从左到右</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">20 / 5 * 2 = 4 * 2 = 8</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">10 - 3 - 2 = 7 - 2 = 5</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>20 / 5 * 2 = 4 * 2 = 810 - 3 - 2 = 7 - 2 = 5</code></pre>
 <p>赋值则从右向左结合，所以 <code>a = b = 3</code> 先修改 <code>b</code>，再修改 <code>a</code>。</p>
 <h3 id="一步一步计算混合表达式">一步一步计算混合表达式</h3>
 <p>计算：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">4</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">!</span><span style="--0:#82AAFF;--1:#3B61B0">false</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>3 + 2 * 4 &gt; 10 &amp;&amp; !false</code></pre>
 <table>
 <thead>
 <tr>
@@ -1025,9 +1029,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>普通输出最终结果时会看到 1。</p>
 <h3 id="比较先算赋值最后发生">比较先算，赋值最后发生</h3>
 <p>假设 <code>b = 5</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 等价于 a = (b &gt; 3)，比较为 true，a 得到 1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 等价于 a = (b == 3)，比较为 false，a 得到 0</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a;a = b &gt; 3;  // 等价于 a = (b &gt; 3)，比较为 true，a 得到 1a = b == 3; // 等价于 a = (b == 3)，比较为 false，a 得到 0</code></pre>
 <p>关系运算和相等比较都高于赋值，所以先得到 <code>true</code> 或 <code>false</code>，再把真假值转换成普通整数 1 或 0 写入 <code>a</code>。更容易阅读的写法是直接保存为 <code>bool</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> greaterThanThree </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (b </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> equalToThree </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (b </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>bool greaterThanThree = (b &gt; 3);bool equalToThree = (b == 3);</code></pre>
 <p>括号和准确的变量名能直接写出含义，也能减少把 <code>=</code> 与 <code>==</code> 看错的机会。</p>
 <h2 id="做运算题的统一检查顺序">做运算题的统一检查顺序</h2>
 <p>面对一个表达式，可以按下面的顺序检查：</p>
@@ -1047,17 +1051,17 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ul>
 <p>输入保证 <code>n</code>、<code>k</code>、<code>limit</code> 都是 <code>int</code> 范围内的正整数，<code>k</code> 不为 0，且 <code>k * limit</code> 不超过常见 <code>int</code> 上限。</p>
 <p>对于输入 <code>23 5 5</code>，先手算：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">完整小组数 = 23 / 5 = 4</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">剩余人数 = 23 % 5 = 3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">总座位数 = 5 * 5 = 25</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">容量足够：23 &lt;= 25，为 true</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">恰好分完：3 == 0，为 false</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">两个条件同时成立：true &amp;&amp; false，为 false</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>完整小组数 = 23 / 5 = 4剩余人数 = 23 % 5 = 3总座位数 = 5 * 5 = 25容量足够：23 &lt;= 25，为 true恰好分完：3 == 0，为 false两个条件同时成立：true &amp;&amp; false，为 false</code></pre>
 <h3 id="完成程序">完成程序</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> k;</span><span style="--0:#919F9F;--1:#5D6376"> // 题目保证 k 是正整数，可以作为除数</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> limit;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> k </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> limit;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> fullGroups </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> k;</span><span style="--0:#919F9F;--1:#5D6376"> // 整数除法得到完整小组数</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> remaining </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> k;</span><span style="--0:#919F9F;--1:#5D6376"> // 取余得到未进入完整小组的人数</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> totalSeats </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> k </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> limit;</span><span style="--0:#919F9F;--1:#5D6376"> // 计算场地最多提供的座位数</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> capacityEnough </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (n </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> totalSeats);</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> dividedExactly </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (remaining </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> canArrange </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> capacityEnough </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> dividedExactly;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> fullGroups </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> remaining </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> totalSeats </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> capacityEnough </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> dividedExactly </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> canArrange </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+int main() {    int n;    int k; // 题目保证 k 是正整数，可以作为除数    int limit;    cin &gt;&gt; n &gt;&gt; k &gt;&gt; limit;
+    int fullGroups = n / k; // 整数除法得到完整小组数    int remaining = n % k; // 取余得到未进入完整小组的人数    int totalSeats = k * limit; // 计算场地最多提供的座位数
+    bool capacityEnough = (n &lt;= totalSeats);    bool dividedExactly = (remaining == 0);    bool canArrange = capacityEnough &amp;&amp; dividedExactly;
+    cout &lt;&lt; fullGroups &lt;&lt; " " &lt;&lt; remaining &lt;&lt; endl;    cout &lt;&lt; totalSeats &lt;&lt; endl;    cout &lt;&lt; capacityEnough &lt;&lt; " " &lt;&lt; dividedExactly &lt;&lt; " " &lt;&lt; canArrange &lt;&lt; endl;    return 0;}</code></pre>
 <p>输入：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">23 5 5</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>23 5 5</code></pre>
 <p>输出：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">4 3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">25</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">1 0 0</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>4 3251 0 0</code></pre>
 <p>执行过程：</p>
 <table>
 <thead>
@@ -1173,7 +1177,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <h2 id="关联学习">关联学习</h2>
 <p><a href="/gesp/level1/sequential/">顺序结构</a>会把表达式放进完整的输入、计算、输出过程。</p>
-<section aria-labelledby="related-knowledge-operations"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-operations" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/data-types/" class="astro-mkwt4ymd">数据类型</a></li></ul></section>
+<section aria-labelledby="related-knowledge-operations"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-operations" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/data-types/" class="astro-mkwt4ymd">数据类型</a></li></ul></section></div></section>
     </article>
 
     <div class="kp-nav-row">

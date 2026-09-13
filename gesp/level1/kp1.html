@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -458,7 +462,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ul>
 <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
 <p>计算机不只是桌面上的主机和显示器。手机、自助挂号机、汽车导航和学校成绩系统也在接收、保存、处理和输出信息。要看懂它们怎样工作，可以先记住一条主线：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">外部信息 → 输入 → 存储与处理 → 输出 → 外部</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>外部信息 → 输入 → 存储与处理 → 输出 → 外部</code></pre>
 <p>本页对应 GESP C++ 一级大纲中的“计算机基础知识”，重点回答六个问题：</p>
 <ol>
 <li>计算机为什么从专门的计算工具发展成了通用信息处理工具？</li>
@@ -658,7 +662,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="03-输入设备与输出设备">03 输入设备与输出设备</h2>
 <h3 id="以计算机为中心看信息方向">以计算机为中心看信息方向</h3>
 <p>设备的名称和外形不一定能直接说明类别。更可靠的方法是先把“计算机系统”放在中间，再画信息箭头：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">外部世界 ──信息进入──&gt; 计算机    输入</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">外部世界 &lt;──信息离开── 计算机    输出</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>外部世界 ──信息进入──&gt; 计算机    输入外部世界 &lt;──信息离开── 计算机    输出</code></pre>
 <table>
 <thead>
 <tr>
@@ -716,7 +720,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>这并不表示计算机只会处理数字 0 和 1。屏幕上的汉字、照片中的颜色和扬声器播放的声音，都会按照相应规则转换成二进制数据，再由计算机保存和处理。不同类型的信息使用不同的表示规则，具体编码方法会在后续知识中学习。</p>
 <h3 id="相同字符不一定表示相同数值">相同字符不一定表示相同数值</h3>
 <p>二进制采用“逢二进一”。例如二进制 <code>101</code> 可以按位置拆开：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">二进制 101 = 1 × 4 + 0 × 2 + 1 × 1 = 十进制 5</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>二进制 101 = 1 × 4 + 0 × 2 + 1 × 1 = 十进制 5</code></pre>
 <p>二进制 <code>101</code> 与十进制 <code>101</code> 看起来都由字符 1、0、1 组成，数值却不同：前者表示十进制 5，后者表示一百零一。因此，读一个数时除了看写了哪些数字，还要确认它采用什么进制。</p>
 <p>一级只要求理解二进制由 0 和 1 组成，并能看懂这种简单的位置意义，不需要进行复杂进制转换。遇到 <code>10201</code> 这样的写法，可以立刻判断它不是合法的二进制数，因为其中出现了数字 2。</p>
 <h2 id="05-软件与操作系统">05 软件与操作系统</h2>
@@ -746,7 +750,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>操作系统属于系统软件。它不是输入设备、输出设备或编程语言。浏览器和 IDE 虽然功能很多，仍然是帮助用户完成具体任务的应用软件。</p>
 <h3 id="操作系统站在应用与硬件之间">操作系统站在应用与硬件之间</h3>
 <p>双击浏览器图标后，并不是浏览器自己直接接管整台计算机。操作系统先找到程序文件，把运行所需内容装入内存，分配处理时间，管理窗口和设备；浏览器再完成打开网页、显示内容等具体任务。</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">用户操作 → 应用软件 → 操作系统 → 硬件</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>用户操作 → 应用软件 → 操作系统 → 硬件</code></pre>
 <table>
 <thead>
 <tr>
@@ -1030,7 +1034,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <h2 id="关联学习">关联学习</h2>
 <p>下一页的<a href="/gesp/level1/ide/">集成开发环境</a>会继续使用源文件、可执行程序和操作系统中的文件操作，并讲清编辑、保存、编译、运行与调试的区别。</p>
-<section aria-labelledby="related-knowledge-computer-basics"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-computer-basics" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><p>暂无前置知识</p></section>
+<section aria-labelledby="related-knowledge-computer-basics"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-computer-basics" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><p>暂无前置知识</p></section></div></section>
     </article>
 
     <div class="kp-nav-row">

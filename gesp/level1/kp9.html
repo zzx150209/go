@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -460,7 +464,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>两个子课分别讲清 <code>if</code> 和 <code>switch-case</code> 的语法与真实执行。先按顺序学完它们，再用本章的选择与验证方法把知识连起来：看懂题目的判断方式，选对结构，用测试数据确认每条路线都正确。</p>
 <h2 id="从顺序执行到选择路线">从顺序执行到选择路线</h2>
 <p>分支不会取消顺序执行。程序到达选择点以前，普通语句仍按顺序完成；得到判断结果以后，只执行本次选中的路线；离开分支后，又从后续语句继续向下执行。</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">前面的顺序语句</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">↓</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">读取变量当前值，完成条件判断或固定值匹配</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">↓</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">   </span></span><span style="--0:#d6deeb;--1:#403f53">选择本次路线</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">↙         ↘</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53"> </span></span><span style="--0:#d6deeb;--1:#403f53">路线 A      路线 B</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">↘         ↙</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">   </span></span><span style="--0:#d6deeb;--1:#403f53">回到共同的后续语句</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>前面的顺序语句        ↓读取变量当前值，完成条件判断或固定值匹配        ↓   选择本次路线    ↙         ↘ 路线 A      路线 B    ↘         ↙   回到共同的后续语句</code></pre>
 <p>读一段分支时，可以按五步追踪：</p>
 <ol>
 <li>记录到达分支前各变量的当前值；</li>
@@ -768,7 +772,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>具体语法错误、条件形成过程和代码块范围在 <code>if</code> 子课中检查；<code>case</code>、<code>break</code>、<code>default</code> 与贯穿问题在 <code>switch-case</code> 子课中检查。父页不重复两套语法，只把选择与验证方法合在一起。</p>
 <h2 id="关联学习">关联学习</h2>
 <p><a href="/gesp/level1/sequential/">顺序结构</a>提供分支前后仍要遵守的逐句执行规则。学完本章后，<a href="/gesp/level1/loop/">循环结构</a>会让一段语句在条件控制下重复执行；循环的“是否继续”同样要把变量当前值代入条件，但本章不提前展开循环过程。</p>
-<section aria-labelledby="related-knowledge-branch"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-branch" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/sequential/" class="astro-mkwt4ymd">顺序结构</a></li></ul></section>
+<section aria-labelledby="related-knowledge-branch"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-branch" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/sequential/" class="astro-mkwt4ymd">顺序结构</a></li></ul></section></div></section>
     </article>
 
     <div class="kp-nav-row">

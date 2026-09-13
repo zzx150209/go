@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -464,7 +468,7 @@ if (r &lt; 0) {
 <li><code>b</code> 整除 <code>a</code>；</li>
 <li><code>b</code> 是 <code>a</code> 的约数；</li>
 <li><code>a</code> 是 <code>b</code> 的倍数。</li>
-</ul><p>三句话说的是同一个事实，方向不能交换。判断“4 是否整除 36”时，要算的是：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#F78C6C;--1:#AA0982">36</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">4</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>余数是 0，所以 4 整除 36，4 是 36 的约数，36 是 4 的倍数。相反，<code>4 % 36</code> 的余数是 4，它回答的是“36 是否整除 4”，不是原来的问题。</p><h3 id="正约数为什么成对出现">正约数为什么成对出现</h3><p>本页讨论正约数时，先规定 <code>n &gt; 0</code>。如果正整数 <code>d</code> 能整除 <code>n</code>，那么 <code>n / d</code> 也是 <code>n</code> 的正约数，因为二者相乘正好得到 <code>n</code>。</p><p>以 <code>n=36</code> 为例，按较小的一项从 1 开始检查。每次先保证 <code>d</code> 不为 0，再计算 <code>36 % d</code>；只有余数为 0 时，才写出一对约数。</p><table>
+</ul><p>三句话说的是同一个事实，方向不能交换。判断“4 是否整除 36”时，要算的是：</p><pre><code>36 % 4 == 0</code></pre><p>余数是 0，所以 4 整除 36，4 是 36 的约数，36 是 4 的倍数。相反，<code>4 % 36</code> 的余数是 4，它回答的是“36 是否整除 4”，不是原来的问题。</p><h3 id="正约数为什么成对出现">正约数为什么成对出现</h3><p>本页讨论正约数时，先规定 <code>n &gt; 0</code>。如果正整数 <code>d</code> 能整除 <code>n</code>，那么 <code>n / d</code> 也是 <code>n</code> 的正约数，因为二者相乘正好得到 <code>n</code>。</p><p>以 <code>n=36</code> 为例，按较小的一项从 1 开始检查。每次先保证 <code>d</code> 不为 0，再计算 <code>36 % d</code>；只有余数为 0 时，才写出一对约数。</p><table>
 <thead>
 <tr>
 <th style="text-align: right"><code>d</code></th>
@@ -511,7 +515,7 @@ if (r &lt; 0) {
 <td><code>6 * 6</code></td>
 </tr>
 </tbody>
-</table><p>到 <code>6 * 6</code> 后就可以停止：如果一对因数的两项都大于 6，乘积一定大于 36；如果只有一项大于 6，另一项就小于 6，前面已经检查过。这样不会漏掉新约数。</p><p>前四对各贡献两个不同约数，最后一对的两个 6 是同一个数，只能记一次。因此 36 的不同正约数有：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">1, 2, 3, 4, 6, 9, 12, 18, 36</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>约数个数是 <code>2+2+2+2+1=9</code>，约数和是 <code>(1+36)+(2+18)+(3+12)+(4+9)+6=91</code>。这里直接根据配对计数、求和，不需要其他公式。</p><h3 id="k1-当场检查与纠错">K1 当场检查与纠错</h3><p>错误做法一：算 <code>4 % 36</code> 后说“4 不整除 36”。原因是把被除数和除数放反了。修正时先把问题翻译成“用 36 除以 4”，再算 <code>36 % 4</code>。重新检查的结果必须同时支持“4 整除 36、4 是 36 的约数、36 是 4 的倍数”。</p><p>错误做法二：尝试计算 <code>36 % 0</code>。0 不能作除数，前提检查已经失败，不能继续执行 <code>%</code>。</p><p>错误做法三：把 <code>6 * 6</code> 记成两个不同的 6。修正后只记录一个 6，重新得到 9 个不同正约数，约数和为 91。</p><h2 id="k2-素数合数互质与-1-的边界">K2 素数、合数、互质与 1 的边界</h2><h3 id="单个数的分类先看两个条件">单个数的分类先看两个条件</h3><p>讨论素数和合数时，先看这个整数是否大于 1：</p><ul>
+</table><p>到 <code>6 * 6</code> 后就可以停止：如果一对因数的两项都大于 6，乘积一定大于 36；如果只有一项大于 6，另一项就小于 6，前面已经检查过。这样不会漏掉新约数。</p><p>前四对各贡献两个不同约数，最后一对的两个 6 是同一个数，只能记一次。因此 36 的不同正约数有：</p><pre><code>1, 2, 3, 4, 6, 9, 12, 18, 36</code></pre><p>约数个数是 <code>2+2+2+2+1=9</code>，约数和是 <code>(1+36)+(2+18)+(3+12)+(4+9)+6=91</code>。这里直接根据配对计数、求和，不需要其他公式。</p><h3 id="k1-当场检查与纠错">K1 当场检查与纠错</h3><p>错误做法一：算 <code>4 % 36</code> 后说“4 不整除 36”。原因是把被除数和除数放反了。修正时先把问题翻译成“用 36 除以 4”，再算 <code>36 % 4</code>。重新检查的结果必须同时支持“4 整除 36、4 是 36 的约数、36 是 4 的倍数”。</p><p>错误做法二：尝试计算 <code>36 % 0</code>。0 不能作除数，前提检查已经失败，不能继续执行 <code>%</code>。</p><p>错误做法三：把 <code>6 * 6</code> 记成两个不同的 6。修正后只记录一个 6，重新得到 9 个不同正约数，约数和为 91。</p><h2 id="k2-素数合数互质与-1-的边界">K2 素数、合数、互质与 1 的边界</h2><h3 id="单个数的分类先看两个条件">单个数的分类先看两个条件</h3><p>讨论素数和合数时，先看这个整数是否大于 1：</p><ul>
 <li><strong>素数</strong>：大于 1，并且恰好有两个正约数，即 1 和它本身。</li>
 <li><strong>合数</strong>：大于 1，并且除了 1 和它本身，还有其他正约数。</li>
 <li><strong>整数 1</strong>：只有一个正约数 1，不满足上面任何一个定义，所以既不是素数，也不是合数。</li>
@@ -549,7 +553,7 @@ if (r &lt; 0) {
 <li>分别列出两数的正约数。</li>
 <li>取公共部分。</li>
 <li>公共部分只有 1 才能得出互质结论。</li>
-</ol><p>以后看到“两数的最大公约数为 1”，可以把它识读为“两数互质”；怎样快速求最大公约数留到下一页学习，本页只按定义判断。</p><h3 id="k2-当场检查与纠错">K2 当场检查与纠错</h3><p>错误做法一：“1 只有一个正约数，所以它是素数。”原因是漏掉“恰有两个正约数”，也漏掉“大于 1”。修正后重新数：1 的正约数只有 1，因此它既不是素数，也不是合数。</p><p>错误做法二：“8 和 15 都是合数，所以不互质。”原因是把单个数的分类和两个数的关系混在一起。修正后重新比较约数清单，公共部分只有 1，因此 8 与 15 互质。</p><p>自检时要能说清：素数、合数在判断一个数；互质在比较两个数。这两种问题的判断对象不同。</p><h2 id="k3-同余模运算与规范余数">K3 同余、模运算与规范余数</h2><h3 id="同余表示落在同一个周期位置">同余表示落在同一个周期位置</h3><p>先规定模数 <code>m &gt; 0</code>。整数 <code>a</code>、<code>b</code> 除以 <code>m</code> 后得到相同的<strong>规范余数</strong>，就说 <code>a</code> 与 <code>b</code> 模 <code>m</code> 同余。规范余数必须落在 <code>0</code> 到 <code>m-1</code> 之间，也就是满足 <code>0 &lt;= r &lt; m</code>。</p><p>例如模 12 时，23 的规范余数是 11，11 的规范余数也是 11，所以 23 与 11 模 12 同余。还可以检查差：<code>23-11=12</code>，12 能被模数 12 整除，得到同样的结论。</p><h3 id="c-负余数要再规范化">C++ 负余数要再规范化</h3><p>C++14 使用正模数时，负整数的 <code>%</code> 结果可能是负数。例如：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">1</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p><code>-1</code> 不是模 5 的规范余数，因为它不在 0 到 4 之间。先算语言实际余数，再在余数为负时加一次模数：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> m </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> r </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> m;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (r </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">r </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> r </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> m;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>这段局部计算结束后，<code>r=4</code>。在 <code>m &gt; 0</code> 时，C++ 的余数绝对值小于 <code>m</code>，所以负余数加一次 <code>m</code> 就会进入 <code>0..m-1</code>。规范化后的 4 才能用来表示环形位置；不能把原来的 <code>-1</code> 直接当数组下标。</p><p>用同一套五步流程比较 <code>-1</code> 与 4：</p><table>
+</ol><p>以后看到“两数的最大公约数为 1”，可以把它识读为“两数互质”；怎样快速求最大公约数留到下一页学习，本页只按定义判断。</p><h3 id="k2-当场检查与纠错">K2 当场检查与纠错</h3><p>错误做法一：“1 只有一个正约数，所以它是素数。”原因是漏掉“恰有两个正约数”，也漏掉“大于 1”。修正后重新数：1 的正约数只有 1，因此它既不是素数，也不是合数。</p><p>错误做法二：“8 和 15 都是合数，所以不互质。”原因是把单个数的分类和两个数的关系混在一起。修正后重新比较约数清单，公共部分只有 1，因此 8 与 15 互质。</p><p>自检时要能说清：素数、合数在判断一个数；互质在比较两个数。这两种问题的判断对象不同。</p><h2 id="k3-同余模运算与规范余数">K3 同余、模运算与规范余数</h2><h3 id="同余表示落在同一个周期位置">同余表示落在同一个周期位置</h3><p>先规定模数 <code>m &gt; 0</code>。整数 <code>a</code>、<code>b</code> 除以 <code>m</code> 后得到相同的<strong>规范余数</strong>，就说 <code>a</code> 与 <code>b</code> 模 <code>m</code> 同余。规范余数必须落在 <code>0</code> 到 <code>m-1</code> 之间，也就是满足 <code>0 &lt;= r &lt; m</code>。</p><p>例如模 12 时，23 的规范余数是 11，11 的规范余数也是 11，所以 23 与 11 模 12 同余。还可以检查差：<code>23-11=12</code>，12 能被模数 12 整除，得到同样的结论。</p><h3 id="c-负余数要再规范化">C++ 负余数要再规范化</h3><p>C++14 使用正模数时，负整数的 <code>%</code> 结果可能是负数。例如：</p><pre><code>-1 % 5 == -1</code></pre><p><code>-1</code> 不是模 5 的规范余数，因为它不在 0 到 4 之间。先算语言实际余数，再在余数为负时加一次模数：</p><pre><code>int x = -1;int m = 5;int r = x % m;if (r &lt; 0) {    r = r + m;}</code></pre><p>这段局部计算结束后，<code>r=4</code>。在 <code>m &gt; 0</code> 时，C++ 的余数绝对值小于 <code>m</code>，所以负余数加一次 <code>m</code> 就会进入 <code>0..m-1</code>。规范化后的 4 才能用来表示环形位置；不能把原来的 <code>-1</code> 直接当数组下标。</p><p>用同一套五步流程比较 <code>-1</code> 与 4：</p><table>
 <thead>
 <tr>
 <th>步骤</th>

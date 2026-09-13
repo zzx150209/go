@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -563,7 +567,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="02-编译">02 编译</h2>
 <h3 id="编译器做了什么">编译器做了什么</h3>
 <p>编译器读取源代码，检查它是否符合 C++ 的规则，并把能够通过检查的代码翻译成可执行程序。</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">已保存的 .cpp 源文件</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">          </span></span><span style="--0:#d6deeb;--1:#403f53">↓ 编译器读取、检查和翻译</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">编译成功：得到新的可执行程序</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">编译失败：得到错误信息，不会得到这次的新程序</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>已保存的 .cpp 源文件          ↓ 编译器读取、检查和翻译编译成功：得到新的可执行程序编译失败：得到错误信息，不会得到这次的新程序</code></pre>
 <p>编译失败时，旧的可执行程序可能还留在电脑里。此时如果 IDE 仍允许运行，你看到的可能是旧版本结果。因此，不能把“运行窗口弹出来了”误当成“刚才的修改已经编译成功”。</p>
 <p>C++ 主要采用“先编译，再运行”的方式。有些语言会使用解释器边读取边执行；一级只需知道两者的基本区别，不需要研究解释器内部怎样工作。</p>
 <h3 id="怎样阅读编译错误">怎样阅读编译错误</h3>
@@ -576,9 +580,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <p>为什么还要看上一行？编译器按顺序读取代码。有时上一行已经出错，但它读到下一行时才确定前面的结构无法成立。</p>
 <p>下面只观察“漏写分号”怎样影响编译，不要求现在掌握两条语句的完整含义：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int number = 3cout &lt;&lt; number &lt;&lt; endl;</code></pre>
 <p>第一行末尾缺少 <code>;</code>。编译器可能在读取第二行时才报告错误，所以提示位置不一定就是真正需要修改的位置。正确写法是：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int number = 3;cout &lt;&lt; number &lt;&lt; endl;</code></pre>
 <p>语句、分号和完整程序结构会在下一页详细学习。本页先记住：<strong>错误提示是线索，不是替你直接给出的答案。</strong></p>
 <h3 id="编译成功说明了什么">编译成功说明了什么</h3>
 <p>编译成功说明编译器没有发现阻止本次翻译继续进行的错误，并且生成了新的可执行程序。它不保证：</p>
@@ -593,7 +597,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h3 id="运行的是可执行程序">运行的是可执行程序</h3>
 <p>运行时，操作系统加载最近一次成功编译得到的可执行程序。程序再按代码规定读取输入、进行计算并产生输出。</p>
 <p>这里有一条很重要的版本关系：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">源文件版本 A ──编译成功──→ 可执行程序版本 A</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">源文件改成版本 B ──只保存──→ 可执行程序仍是版本 A</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">源文件版本 B ──重新编译成功──→ 可执行程序才变成版本 B</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>源文件版本 A ──编译成功──→ 可执行程序版本 A源文件改成版本 B ──只保存──→ 可执行程序仍是版本 A源文件版本 B ──重新编译成功──→ 可执行程序才变成版本 B</code></pre>
 <p>假设旧程序计算 <code>3 + 4</code>，输出 7。你把运算改成乘法并保存，但没有重新编译，运行的仍是旧可执行程序，所以仍可能输出 7。只有重新编译成功后，新程序才会输出 12。</p>
 <p>这正是修改代码后必须重复“保存 → 编译 → 运行”的原因。</p>
 <h3 id="运行时要保存三份证据">运行时要保存三份证据</h3>
@@ -625,11 +629,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <p>例如，任务要求输入两个整数并输出它们的和：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">输入：3 4</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">期望输出：7</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">实际输出：12</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>输入：3 4期望输出：7实际输出：12</code></pre>
 <p>只看 12，无法判断它为什么错；把输入和期望结果放在旁边，就能提出更具体的检查方向：程序是否误做了乘法？两个输入变量是否读反或被改动？</p>
 <h3 id="重新编译前后怎样确认版本">重新编译前后怎样确认版本</h3>
 <p>每次修改后都执行同一条短流程：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">修改代码 → 保存文件 → 重新编译</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">       </span></span><span style="--0:#d6deeb;--1:#403f53">→ 确认编译成功 → 用同一组输入运行 → 对照期望输出</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>修改代码 → 保存文件 → 重新编译       → 确认编译成功 → 用同一组输入运行 → 对照期望输出</code></pre>
 <p>如果编译失败，就先处理编译错误，不要拿旧程序的运行结果判断刚才的修改。只有出现“本次编译成功”的证据，运行结果才属于当前源代码。</p>
 <h2 id="04-错误类型与调试">04 错误类型与调试</h2>
 <h3 id="先按现象判断错误发生在哪个阶段">先按现象判断错误发生在哪个阶段</h3>
@@ -900,7 +904,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p><strong>怎样检查：</strong> 清理临时输出，重新编译，再逐字核对最终输出格式。</p>
 <h2 id="关联学习">关联学习</h2>
 <p><a href="/gesp/level1/program-structure/">程序基本结构</a>会继续解释头文件、<code>main</code>、语句、分号、代码块和注释。学会这些结构后，你就能读懂编译器经常指出的具体位置。</p>
-<section aria-labelledby="related-knowledge-ide"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-ide" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/computer-basics/" class="astro-mkwt4ymd">计算机基础</a></li></ul></section>
+<section aria-labelledby="related-knowledge-ide"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-ide" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/computer-basics/" class="astro-mkwt4ymd">计算机基础</a></li></ul></section></div></section>
     </article>
 
     <div class="kp-nav-row">

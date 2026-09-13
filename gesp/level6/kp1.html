@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -455,7 +459,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>叶结点：没有孩子的结点；单结点树的根也同时是叶结点。</li>
 <li>祖先与后代：从某结点沿父子关系向上或向下能够到达的结点。</li>
 <li>子树：某个结点以及它的全部后代组成的树。</li>
-</ul><h2 id="kp-02">02 深度、高度与度</h2><p>本字典统一采用：根深度为 <code>0</code>，孩子深度等于父结点深度加 <code>1</code>；叶结点高度为 <code>0</code>，非叶结点高度等于孩子高度最大值加 <code>1</code>；树高等于根结点高度。若题目把根深度记为 <code>1</code>，必须按题目口径重新计算。</p><p>结点的度是孩子数量，树的度是所有结点度的最大值。叶结点度为 <code>0</code>。二叉树只表示每个结点至多有两个孩子，不代表每个结点一定有两个孩子。</p><figure data-density="standard"><figcaption>树的术语速查</figcaption><div tabindex="0" role="region"><table>
+</ul><h2 id="kp-02">02 深度、高度与度</h2><p>本字典统一采用：根深度为 <code>0</code>，孩子深度等于父结点深度加 <code>1</code>；叶结点高度为 <code>0</code>，非叶结点高度等于孩子高度最大值加 <code>1</code>；树高等于根结点高度。若题目把根深度记为 <code>1</code>，必须按题目口径重新计算。</p><p>结点的度是孩子数量，树的度是所有结点度的最大值。叶结点度为 <code>0</code>。二叉树只表示每个结点至多有两个孩子，不代表每个结点一定有两个孩子。</p><div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>术语</th>
@@ -485,7 +489,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>不是树高</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure><h2 id="kp-03">03 树的常见存储</h2><p>父亲数组用 <code>father[child] = parent</code> 保存每个非根结点的父亲，适合向上查询；孩子列表为每个父结点保存全部直接孩子，适合向下遍历。孩子列表也叫树的邻接表：例如边为 <code>1→2、1→3、2→4</code> 时，可写成 <code>children[1] = {2, 3}</code>、<code>children[2] = {4}</code>，3 和 4 的列表为空。读入一对 <code>parent child</code>，就把 <code>child</code> 加到 <code>children[parent]</code> 末尾；这里存的是直接孩子，不能把孙结点 4 直接放进 1 的列表。</p><p>普通树还可以用“左孩子右兄弟”表示：<code>leftChild[u]</code> 指向第一个孩子，<code>rightSibling[u]</code> 指向下一个兄弟。这样每个结点只保留两个位置，却仍能依次找到全部孩子。这里要求能读懂关系，不要求把它当作二叉排序树。</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>已知 <code>father[2]=1、father[3]=1、father[4]=2、father[5]=2</code>。根是 1；2 和 3 是兄弟；4 和 5 是兄弟；1 的度为 2，2 的度也为 2，树的度为 2。按根深度为 0，4 的深度为 2；4 是叶结点，高度为 0；2 的高度为 1；整棵树高度为 2。</p><figure><div tabindex="0" role="region"><table><caption>从根向下统计结点和叶结点</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本步观察</th><th scope="col">累计结点数</th><th scope="col">累计叶结点数</th></tr></thead><tbody><tr><th scope="row">访问 1</th><td>有孩子 2、3，不是叶结点</td><td>1</td><td>0</td></tr><tr><th scope="row">访问 2</th><td>有孩子 4、5，不是叶结点</td><td>2</td><td>0</td></tr><tr><th scope="row">访问 4、5</th><td>都没有孩子，各计一个叶结点</td><td>4</td><td>2</td></tr><tr><th scope="row">访问 3</th><td>没有孩子，计一个叶结点</td><td>5</td><td>3</td></tr></tbody></table></div><figcaption>整棵树共有 5 个结点、3 个叶结点；判断叶结点只看孩子数量是否为 0。</figcaption></figure><h3 id="典型应用">典型应用</h3><p>文件目录就是树：总文件夹是根，直接包含的文件夹是孩子，同一文件夹下的项目互为兄弟。若要找到某个文件的完整路径，就从该结点沿父亲数组不断向上，直到根；若要列出一个文件夹内的全部内容，则从它向下访问各棵子树。</p><h3 id="测试案例">测试案例</h3><table>
+</table></div><p>横向滑动查看完整表格</p><h2 id="kp-03">03 树的常见存储</h2><p>父亲数组用 <code>father[child] = parent</code> 保存每个非根结点的父亲，适合向上查询；孩子列表为每个父结点保存全部直接孩子，适合向下遍历。孩子列表也叫树的邻接表：例如边为 <code>1→2、1→3、2→4</code> 时，可写成 <code>children[1] = {2, 3}</code>、<code>children[2] = {4}</code>，3 和 4 的列表为空。读入一对 <code>parent child</code>，就把 <code>child</code> 加到 <code>children[parent]</code> 末尾；这里存的是直接孩子，不能把孙结点 4 直接放进 1 的列表。</p><p>普通树还可以用“左孩子右兄弟”表示：<code>leftChild[u]</code> 指向第一个孩子，<code>rightSibling[u]</code> 指向下一个兄弟。这样每个结点只保留两个位置，却仍能依次找到全部孩子。这里要求能读懂关系，不要求把它当作二叉排序树。</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>已知 <code>father[2]=1、father[3]=1、father[4]=2、father[5]=2</code>。根是 1；2 和 3 是兄弟；4 和 5 是兄弟；1 的度为 2，2 的度也为 2，树的度为 2。按根深度为 0，4 的深度为 2；4 是叶结点，高度为 0；2 的高度为 1；整棵树高度为 2。</p><div tabindex="0" role="region"><table><caption>从根向下统计结点和叶结点</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本步观察</th><th scope="col">累计结点数</th><th scope="col">累计叶结点数</th></tr></thead><tbody><tr><th scope="row">访问 1</th><td>有孩子 2、3，不是叶结点</td><td>1</td><td>0</td></tr><tr><th scope="row">访问 2</th><td>有孩子 4、5，不是叶结点</td><td>2</td><td>0</td></tr><tr><th scope="row">访问 4、5</th><td>都没有孩子，各计一个叶结点</td><td>4</td><td>2</td></tr><tr><th scope="row">访问 3</th><td>没有孩子，计一个叶结点</td><td>5</td><td>3</td></tr></tbody></table></div><h3 id="典型应用">典型应用</h3><p>文件目录就是树：总文件夹是根，直接包含的文件夹是孩子，同一文件夹下的项目互为兄弟。若要找到某个文件的完整路径，就从该结点沿父亲数组不断向上，直到根；若要列出一个文件夹内的全部内容，则从它向下访问各棵子树。</p><h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>

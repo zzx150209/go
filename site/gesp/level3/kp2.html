@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -468,56 +472,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>判断方法可以先压缩成一张路线图：目标是十进制，就按权展开；从十进制整数转换出去，就除以目标基数并逆序读余数；二进制与八、十六进制互转，就分别按 3 位或 4 位分组。无论选哪种方法，第一步都应先检查数位是否合法。</p>
 <h2 id="kp-01">01 合法数位与位权</h2>
 <p>一种进制规定“逢几进一”，其中的“几”就是这套记数法的基数。基数为 <code>b</code> 时，每个数位只能取 <code>0</code> 到 <code>b-1</code>。如果某个数位超出范围，整个写法就不合法，后面的计算也没有意义。</p>
-<figure data-density="standard"><figcaption>常用进制与合法数位</figcaption><div tabindex="0" role="region"><table>
-<thead>
-<tr>
-<th>进制</th>
-<th style="text-align: right">基数</th>
-<th>合法数位</th>
-<th>合法示例</th>
-<th>非法示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>二进制</td>
-<td style="text-align: right">2</td>
-<td><code>0</code>、<code>1</code></td>
-<td><code>(101101)₂</code></td>
-<td><code>(102)₂</code>，因为 <code>2∉{0,1}</code></td>
-</tr>
-<tr>
-<td>八进制</td>
-<td style="text-align: right">8</td>
-<td><code>0</code> 到 <code>7</code></td>
-<td><code>(55)₈</code></td>
-<td><code>(78)₈</code>，因为数位 8 不合法</td>
-</tr>
-<tr>
-<td>十进制</td>
-<td style="text-align: right">10</td>
-<td><code>0</code> 到 <code>9</code></td>
-<td><code>45₁₀</code></td>
-<td>不使用 A 到 F</td>
-</tr>
-<tr>
-<td>十六进制</td>
-<td style="text-align: right">16</td>
-<td><code>0</code> 到 <code>9</code>、<code>A</code> 到 <code>F</code></td>
-<td><code>(2D)₁₆</code></td>
-<td><code>(1G)₁₆</code>，因为只允许到 F</td>
-</tr>
-</tbody>
-</table></div><p>横向滑动查看完整表格</p></figure>
-<p>十六进制中的 <code>A、B、C、D、E、F</code> 分别表示十进制的 10、11、12、13、14、15，它们各自都是一个数位。于是 <code>(2D)₁₆</code> 的 <code>D</code> 是单个数位 13，不是两个字符拼出的十进制 13。书写答案时使用大写字母更容易辨认。</p>
-<p>数位是否合法只由基数决定，数位实际表示多大的数量还要看位置。同一个数字放在个位和更高位，代表的大小不同；这个由位置决定的大小就是位权。整数部分从右向左的位权依次是 <code>b⁰、b¹、b²……</code>，最右一位永远从 <code>b⁰=1</code> 开始。</p>
-<h2 id="kp-02">02 按权展开</h2>
-<p>把每个数位换成它的数值，乘以所在位置的位权，再把结果相加，就能读出这个进制数表示的十进制数量。例如：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">(101101)₂</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 1×2⁵ + 0×2⁴ + 1×2³ + 1×2² + 0×2¹ + 1×2⁰</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 32 + 8 + 4 + 1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 45₁₀</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">(2D)₁₆</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 2×16¹ + 13×16⁰</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 32 + 13</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 45₁₀</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>(101101)₂= 1×2⁵ + 0×2⁴ + 1×2³ + 1×2² + 0×2¹ + 1×2⁰= 32 + 8 + 4 + 1= 45₁₀
+(2D)₁₆= 2×16¹ + 13×16⁰= 32 + 13= 45₁₀</code></pre>
 <p>两个展开式都得到 <code>45₁₀</code>，所以 <code>(101101)₂=45₁₀=(2D)₁₆</code>。右下角的基数只说明采用哪套位权，不是要再乘一次 2 或 16。</p>
 <p>再用较短的数检查起始位置：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">(1011)₂</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 1×2³ + 0×2² + 1×2¹ + 1×2⁰</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 8 + 2 + 1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">= 11₁₀</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>(1011)₂= 1×2³ + 0×2² + 1×2¹ + 1×2⁰= 8 + 2 + 1= 11₁₀</code></pre>
 <p>如果误从 <code>2⁴</code> 开始，所有位权都会整体放大一倍。可靠做法是先在最右位下方标出 <code>2⁰</code>，再逐位向左提高指数。</p>
 <h3 id="进制内加减只是同一规则的应用">进制内加减只是同一规则的应用</h3>
 <p>加减竖式仍然逐列进行，只是“逢 10 进 1”要改成“逢基数进 1”。例如 <code>(2D)₁₆+(0F)₁₆</code> 的个位是 <code>13+15=28</code>，而 <code>28=1×16+12</code>，所以本位写十六进制数位 <code>C</code>，向左进 1；左一列得到 <code>2+0+1=3</code>，结果为 <code>(3C)₁₆</code>。按权复验：<code>45+15=60</code>，而 <code>(3C)₁₆=3×16+12=60</code>。</p>
@@ -528,59 +487,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="kp-03">03 除基取余</h2>
 <p>把十进制整数 <code>N</code> 转成 <code>b</code> 进制时，反复计算 <code>N÷b</code>。每轮余数都在 <code>0</code> 到 <code>b-1</code> 之间，正好是目标进制的一个合法数位；商交给下一轮继续处理。第一次余数对应最低位，后面的余数依次对应更高位，因此结束后必须从最后一枚余数向前读。</p>
 <h3 id="13-转二进制看清余数方向">13₁₀ 转二进制：看清余数方向</h3>
-<figure><div tabindex="0" role="region"><table><caption>13₁₀ 转二进制：除 2 取余</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本轮除法</th><th scope="col">商（下一轮）</th><th scope="col">余数（当前最低位）</th></tr></thead><tbody><tr><th scope="row">第 1 轮</th><td>13 ÷ 2</td><td>6</td><td>1</td></tr><tr><th scope="row">第 2 轮</th><td>6 ÷ 2</td><td>3</td><td>0</td></tr><tr><th scope="row">第 3 轮</th><td>3 ÷ 2</td><td>1</td><td>1</td></tr><tr><th scope="row">第 4 轮</th><td>1 ÷ 2</td><td>0</td><td>1</td></tr></tbody></table></div><figcaption>余数依次是 1、0、1、1；从最后一轮向前读得到 1101，所以 13₁₀→(1101)₂。</figcaption></figure>
-<p>如果按产生顺序抄成 <code>(1011)₂</code>，按权展开会得到 <code>11₁₀</code>，与原数 13 不相等。这个反例说明“逆序”不是排版习惯，而是由每轮余数对应低位决定的。</p>
-<h3 id="45-转换到二八十六进制">45₁₀ 转换到二、八、十六进制</h3>
-<figure><div tabindex="0" role="region"><table><caption>45₁₀ 转二进制：完整除基取余</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本轮除法</th><th scope="col">商（下一轮）</th><th scope="col">余数（当前最低位）</th></tr></thead><tbody><tr><th scope="row">第 1 轮</th><td>45 ÷ 2</td><td>22</td><td>1</td></tr><tr><th scope="row">第 2 轮</th><td>22 ÷ 2</td><td>11</td><td>0</td></tr><tr><th scope="row">第 3 轮</th><td>11 ÷ 2</td><td>5</td><td>1</td></tr><tr><th scope="row">第 4 轮</th><td>5 ÷ 2</td><td>2</td><td>1</td></tr><tr><th scope="row">第 5 轮</th><td>2 ÷ 2</td><td>1</td><td>0</td></tr><tr><th scope="row">第 6 轮</th><td>1 ÷ 2</td><td>0</td><td>1</td></tr></tbody></table></div><figcaption>从最后一轮向前读余数，得到101101，所以45₁₀→(101101)₂。</figcaption></figure>
-<p>同一个 45 除以 8：<code>45÷8=5……5</code>，再算 <code>5÷8=0……5</code>，逆序得到 <code>(55)₈</code>。除以 16：<code>45÷16=2……13</code>，余数 13 写作 <code>D</code>，再算 <code>2÷16=0……2</code>，逆序得到 <code>(2D)₁₆</code>。因此：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">45₁₀→(101101)₂=(55)₈=(2D)₁₆</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>45₁₀→(101101)₂=(55)₈=(2D)₁₆</code></pre>
 <p>去掉十进制起点后，分组关系仍可写成 <code>(101101)₂=(55)₈=(2D)₁₆</code>，三种表示的值完全相同。</p>
 <p>整数 0 是必须单独记住的边界。它没有可继续做的除法轮次，但答案不能是空白，必须直接写成 <code>0₁₀→0₂</code>；转成八进制或十六进制时也仍然写一个数位 0。</p>
 <h2 id="kp-04">04 二进制分组转换</h2>
 <p>因为 <code>8=2³</code>，一位八进制恰好对应三位二进制；因为 <code>16=2⁴</code>，一位十六进制恰好对应四位二进制。整数部分必须从最右端对齐分组，不足一组时只在左侧补 0，补出的前导 0 不改变数值。</p>
 <h3 id="二进制转八进制每-3-位压缩">二进制转八进制：每 3 位压缩</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">(101101)₂→101 101→(55)₈</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>(101101)₂→101 101→(55)₈</code></pre>
 <p>两个三位组 <code>101</code> 都表示 5，所以结果为 <code>(55)₈</code>。反向转换时，每个八进制数位固定展开为三位：<code>5→101</code>，于是 <code>(55)₈→101 101→(101101)₂</code>。</p>
 <h3 id="八进制转二进制每-1-位展开成-3-位">八进制转二进制：每 1 位展开成 3 位</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">(55)₈→5 5→101 101→(101101)₂</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>(55)₈→5 5→101 101→(101101)₂</code></pre>
 <p>展开过程中要先保留每组完整的三位，全部拼好后才可删掉整数最左侧多余的 0。</p>
 <h3 id="二进制转十六进制每-4-位压缩">二进制转十六进制：每 4 位压缩</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">(101101)₂→0010 1101→(2D)₁₆</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>(101101)₂→0010 1101→(2D)₁₆</code></pre>
 <p>从右端分组后，左组不足四位，在左侧补成 <code>0010</code>。<code>0010</code> 对应 2，<code>1101</code> 对应 13，也就是数位 D。</p>
 <h3 id="十六进制转二进制每-1-位展开成-4-位">十六进制转二进制：每 1 位展开成 4 位</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">(2D)₁₆→2 D→0010 1101→(101101)₂</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>(2D)₁₆→2 D→0010 1101→(101101)₂</code></pre>
 <p>每个十六进制数位先完整展开四位，最后删除整数最左侧多余的前导 0。用同样方法，<code>(111011)₂→111 011→(73)₈</code>。</p>
 <h2 id="kp-05">05 有限小数的乘基取整</h2>
 <p>这一节是为既有第 1 题保留的<strong>本站补充</strong>，不计入本课三个核心，也不写入 MasteryCheck。十进制小数部分转到 <code>b</code> 进制时，每轮把当前小数部分乘以 <code>b</code>，取乘积的整数部分作为从左到右的下一位，再把新的小数部分交给下一轮。它与整数除基取余的记录方向正好不同。</p>
-<figure data-density="standard" data-column-dividers><figcaption>整数与小数转换方向</figcaption><div tabindex="0" role="region"><table>
-<thead>
-<tr>
-<th>转换对象</th>
-<th>每轮操作</th>
-<th>取得的数位</th>
-<th>记录方向</th>
-<th>停止条件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>十进制整数转 <code>b</code> 进制</td>
-<td>除以 <code>b</code></td>
-<td>余数</td>
-<td>逆序读取</td>
-<td>商变为 0</td>
-</tr>
-<tr>
-<td>十进制小数转 <code>b</code> 进制</td>
-<td>乘以 <code>b</code></td>
-<td>乘积的整数部分</td>
-<td>顺序记录</td>
-<td>小数部分变为 0，或达到题目精度</td>
-</tr>
-</tbody>
-</table></div><p>横向滑动查看完整表格</p></figure>
-<h3 id="0625-转二进制">0.625₁₀ 转二进制</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">0.625×2=1.250 → 取整数位1，留下0.250</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">0.250×2=0.500 → 取整数位0，留下0.500</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">0.500×2=1.000 → 取整数位1，留下0</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>0.625×2=1.250 → 取整数位1，留下0.2500.250×2=0.500 → 取整数位0，留下0.5000.500×2=1.000 → 取整数位1，留下0</code></pre>
 <p>整数位按出现顺序是 <code>1、0、1</code>，所以 <code>0.625₁₀→(0.101)₂</code>。按权复验：<code>(0.101)₂=1×2⁻¹+0×2⁻²+1×2⁻³=0.5+0.125=0.625₁₀</code>。有些十进制有限小数换到二进制后不能有限写完，遇到这种情况应按题目要求保留位数，本课不展开无限循环小数。</p>
 <h2 id="typical-example">典型例题</h2>
 <p>题目：把 <code>45₁₀</code> 分别转换为二进制、八进制和十六进制，并说明怎样交叉核对。</p>
@@ -593,7 +519,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <li>二进制分组从右端开始，缺位只在整数左侧补 0。</li>
 <li>至少用按权展开或反向分组复验一次，结果能回到原数。</li>
 </ul>
-<figure data-density="standard"><figcaption>进制转换边界与复验</figcaption><div tabindex="0" role="region"><table>
+<div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>检查类型</th>
@@ -634,7 +560,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>十六进制只到 F</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure><h2 id="common-errors">常见错误</h2>
+</table></div><p>横向滑动查看完整表格</p><h2 id="common-errors">常见错误</h2>
 <ol>
 <li><strong>现象：</strong> 看见 <code>(102)₂</code> 就直接按权计算。<strong>原因：</strong> 忘了二进制数位只能是 0 和 1。<strong>修正：</strong> 先逐位检查合法范围，发现 <code>2∉{0,1}</code> 就停止。<strong>复验：</strong> <code>(101)₂</code> 合法，而 <code>(102)₂</code> 不合法。</li>
 <li><strong>现象：</strong> 把 13 的余数按 <code>1、0、1、1</code> 顺序写成 <code>(1011)₂</code>。<strong>原因：</strong> 第一次余数是最低位，却被放到了最左边。<strong>修正：</strong> 沿余数列自下而上读取，得到 <code>(1101)₂</code>。<strong>复验：</strong> <code>(1101)₂=13₁₀</code>，而 <code>(1011)₂=11₁₀</code>。</li>

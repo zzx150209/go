@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -525,7 +529,7 @@ int main() { // 主函数是程序的入口
     } // 结束结果输出循环
     return 0; // 返回 0，表示程序正常结束
 } // 结束 main 函数</code></pre><div class="level4-dictionary-article__io"><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输入</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">5
-4 2 5 1 3</code></pre></div><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输出</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">1 2 3 4 5</code></pre></div></div><h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">初始数组是 4 2 5 1 3，比较条件 values[i] &gt; values[i + 1] 表示目标为升序。</li><li class="astro-e22r5uwj">第一趟相邻比较后得到 2 4 1 3 5，最大值 5 到达末尾。</li><li class="astro-e22r5uwj">第二趟只检查前 4 个位置，得到 2 1 3 4 5；后续每趟继续缩小未排序区。</li><li class="astro-e22r5uwj">所有趟完成后数组为 1 2 3 4 5，输出时按下标 1 到 n 访问。</li></ol></section><section aria-labelledby="practice" class="astro-e22r5uwj"><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><div class="level4-dictionary-article__practice-grid"><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">手算一趟冒泡</h3><p class="astro-e22r5uwj">对 6 2 4 1 执行一趟从左到右的冒泡，写出每次比较后的序列。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">只在左数大于右数时交换。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">补全插入排序</h3><p class="astro-e22r5uwj">补全“保存 current—右移—插入”三步代码，并说明每一步防止了什么错误。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">移动前一定要保存 values[i]。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">按结构体成员排序</h3><p class="astro-e22r5uwj">把 Student 数组按 score 升序排列，并说明为什么交换时不能只交换 score。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">比较 students[i].score，位置调整时交换整个 Student 对象，保持姓名与分数对应。</p></details></article></div></section><section aria-labelledby="mistakes" class="astro-e22r5uwj"><h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">内层循环访问 i+1 越界</h3><p class="astro-e22r5uwj">错误写法：冒泡内层写 i &lt;= end 后仍访问 values[i + 1]。原因：i = end 时访问越过当前范围。正确写法：保证 i &lt; end。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">排序趟数和未排序区不缩小</h3><p class="astro-e22r5uwj">错误写法：每一趟都重复检查整个数组末尾。原因：已就位元素被无谓重复处理。正确写法：让 end 或 start 随趟数缩小未排序区。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">插入前没有保存 current</h3><p class="astro-e22r5uwj">错误写法：先右移 values[i - 1] 覆盖 values[i]，之后才读取待插入值。原因：原值已经丢失。正确写法：右移前先保存 current。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">选择排序只保存最小值、不保存下标</h3><p class="astro-e22r5uwj">错误写法：只记 minimumValue，最后不知道和哪个位置交换。原因：交换需要位置。正确写法：保存 minimum 下标，再交换 values[start] 与 values[minimum]。</p></div></section><section aria-labelledby="core-check" class="astro-e22r5uwj"><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="sorting" data-progress-event="xdz:gesp-level4-progress"><section class="astro-l37rdmqc"></section></gesp-dictionary-review></section><section aria-labelledby="test" class="astro-e22r5uwj"><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="sorting" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 6 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><div class="dictionary-test__questions"></div><div class="dictionary-test__result" data-test-result hidden aria-live="polite"></div><div class="dictionary-test__actions"></div></gesp-dictionary-test></section></article></div><footer
+4 2 5 1 3</code></pre><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输出</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">1 2 3 4 5</code></pre></div><h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">初始数组是 4 2 5 1 3，比较条件 values[i] &gt; values[i + 1] 表示目标为升序。</li><li class="astro-e22r5uwj">第一趟相邻比较后得到 2 4 1 3 5，最大值 5 到达末尾。</li><li class="astro-e22r5uwj">第二趟只检查前 4 个位置，得到 2 1 3 4 5；后续每趟继续缩小未排序区。</li><li class="astro-e22r5uwj">所有趟完成后数组为 1 2 3 4 5，输出时按下标 1 到 n 访问。</li></ol></section><section aria-labelledby="practice" class="astro-e22r5uwj"><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><div class="level4-dictionary-article__practice-grid"><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">手算一趟冒泡</h3><p class="astro-e22r5uwj">对 6 2 4 1 执行一趟从左到右的冒泡，写出每次比较后的序列。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">只在左数大于右数时交换。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">补全插入排序</h3><p class="astro-e22r5uwj">补全“保存 current—右移—插入”三步代码，并说明每一步防止了什么错误。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">移动前一定要保存 values[i]。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">按结构体成员排序</h3><p class="astro-e22r5uwj">把 Student 数组按 score 升序排列，并说明为什么交换时不能只交换 score。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">比较 students[i].score，位置调整时交换整个 Student 对象，保持姓名与分数对应。</p></details></article></div></section><section aria-labelledby="mistakes" class="astro-e22r5uwj"><h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">内层循环访问 i+1 越界</h3><p class="astro-e22r5uwj">错误写法：冒泡内层写 i &lt;= end 后仍访问 values[i + 1]。原因：i = end 时访问越过当前范围。正确写法：保证 i &lt; end。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">排序趟数和未排序区不缩小</h3><p class="astro-e22r5uwj">错误写法：每一趟都重复检查整个数组末尾。原因：已就位元素被无谓重复处理。正确写法：让 end 或 start 随趟数缩小未排序区。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">插入前没有保存 current</h3><p class="astro-e22r5uwj">错误写法：先右移 values[i - 1] 覆盖 values[i]，之后才读取待插入值。原因：原值已经丢失。正确写法：右移前先保存 current。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">选择排序只保存最小值、不保存下标</h3><p class="astro-e22r5uwj">错误写法：只记 minimumValue，最后不知道和哪个位置交换。原因：交换需要位置。正确写法：保存 minimum 下标，再交换 values[start] 与 values[minimum]。</p></div></section><section aria-labelledby="core-check" class="astro-e22r5uwj"><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="sorting" data-progress-event="xdz:gesp-level4-progress"><section class="astro-l37rdmqc"></section></gesp-dictionary-review></section><section aria-labelledby="test" class="astro-e22r5uwj"><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="sorting" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 6 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><div class="dictionary-test__questions"></div><div class="dictionary-test__result" data-test-result hidden aria-live="polite"></div><div class="dictionary-test__actions"></div></gesp-dictionary-test></section></article></div><footer
     </article>
 
     <div class="kp-nav-row">

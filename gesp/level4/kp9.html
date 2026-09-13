@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -486,7 +490,7 @@ int main() { // 主函数是程序的入口
 
     cout &lt;&lt; singleCount &lt;&lt; &#39; &#39; &lt;&lt; doubleCount &lt;&lt; &#39;\n&#39;; // 输出 n 与 n×n 两种实际次数
     return 0; // 返回 0，表示程序正常结束
-} // 结束 main 函数</code></pre><div class="level4-dictionary-article__io"><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输入</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">3</code></pre></div><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输出</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">3 9</code></pre></div></div><h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">单层循环执行 n 次；n = 3 时 singleCount 从 0 变到 3，属于 O(n)。</li><li class="astro-e22r5uwj">双层循环的外层和内层都执行 n 次，总次数是 n×n；n = 3 时 doubleCount 为 9，属于 O(n²)。</li><li class="astro-e22r5uwj">如果 n 扩大 10 倍，线性次数约扩大 10 倍，平方次数约扩大 100 倍。</li><li class="astro-e22r5uwj">程序只使用固定数量的计数变量，没有随 n 增长的辅助数组，额外空间是 O(1)。</li></ol></section><section aria-labelledby="practice" class="astro-e22r5uwj"><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><div class="level4-dictionary-article__practice-grid"><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">判断并列循环</h3><p class="astro-e22r5uwj">两个先后执行、各遍历 n 次的循环，写出总次数和复杂度。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">先后执行要相加：n+n。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">分析三角形循环</h3><p class="astro-e22r5uwj">外层 i=1..n，内层 j=1..i，估算总执行次数与数量级。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">次数是 1+2+...+n，增长最快的项是 n²。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">结合数据范围选程序</h3><p class="astro-e22r5uwj">当 n=100000 时，比较 O(n) 与 O(n²) 方案的主要操作数量级。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">分别代入 n 和 n²，先看数量级差距，不猜具体秒数。</p></details></article></div></section><section aria-labelledby="mistakes" class="astro-e22r5uwj"><h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">只看代码长度</h3><p class="astro-e22r5uwj">错误写法：代码行数少就判断运行一定快。原因：短代码也可能执行大量循环。正确写法：选择主要操作并统计它随输入规模的次数。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">看到两个循环就判 O(n²)</h3><p class="astro-e22r5uwj">错误写法：两个先后执行的 n 次循环直接相乘。原因：先后执行应相加。正确写法：先判断循环是嵌套还是并列，再核对各自边界。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">忽略嵌套循环的乘法关系</h3><p class="astro-e22r5uwj">错误写法：两层都执行 n 次却记为 O(n)。原因：内层会被外层重复完整执行。正确写法：把相关层次数相乘得到 n×n。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">保留所有低阶项和常数</h3><p class="astro-e22r5uwj">错误写法：把 3n + 5 记成 O(3n + 5)。原因：复杂度描述增长数量级。正确写法：省略常数倍和低阶项，记为 O(n)。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">把数组元素值当成空间规模</h3><p class="astro-e22r5uwj">错误写法：数组中数字很大就判断空间复杂度更高。原因：空间取决于元素数量和类型。正确写法：按额外变量、数组或矩阵的数量级估算。</p></div></section><section aria-labelledby="related-learning" class="astro-e22r5uwj"><h2 id="related-learning" class="astro-e22r5uwj">关联学习</h2><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj"><a href="/gesp/level4/sorting/" class="astro-e22r5uwj">排序算法</a>：基础排序是分析 O(n²) 的典型例子。</li></ul></section><section aria-labelledby="core-check" class="astro-e22r5uwj"><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="complexity" data-progress-event="xdz:gesp-level4-progress"><section class="astro-l37rdmqc"></section></gesp-dictionary-review></section><section aria-labelledby="test" class="astro-e22r5uwj"><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="complexity" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 6 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><div class="dictionary-test__questions"></div><div class="dictionary-test__result" data-test-result hidden aria-live="polite"></div><div class="dictionary-test__actions"></div></gesp-dictionary-test></section><nav class="dictionary-lesson-pager"><a href="/gesp/level4/sorting/" rel="prev" class="astro-hl664apc"><span class="astro-hl664apc">上一知识点</span><strong class="astro-hl664apc">排序算法</strong></a><a href="/gesp/level4/file-operations/" rel="next" class="astro-hl664apc"><span class="astro-hl664apc">下一知识点</span><strong class="astro-hl664apc">文件操作</strong></a></nav></article></div><footer
+} // 结束 main 函数</code></pre><div class="level4-dictionary-article__io"><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输入</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">3</code></pre><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输出</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">3 9</code></pre></div><h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">单层循环执行 n 次；n = 3 时 singleCount 从 0 变到 3，属于 O(n)。</li><li class="astro-e22r5uwj">双层循环的外层和内层都执行 n 次，总次数是 n×n；n = 3 时 doubleCount 为 9，属于 O(n²)。</li><li class="astro-e22r5uwj">如果 n 扩大 10 倍，线性次数约扩大 10 倍，平方次数约扩大 100 倍。</li><li class="astro-e22r5uwj">程序只使用固定数量的计数变量，没有随 n 增长的辅助数组，额外空间是 O(1)。</li></ol></section><section aria-labelledby="practice" class="astro-e22r5uwj"><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><div class="level4-dictionary-article__practice-grid"><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">判断并列循环</h3><p class="astro-e22r5uwj">两个先后执行、各遍历 n 次的循环，写出总次数和复杂度。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">先后执行要相加：n+n。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">分析三角形循环</h3><p class="astro-e22r5uwj">外层 i=1..n，内层 j=1..i，估算总执行次数与数量级。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">次数是 1+2+...+n，增长最快的项是 n²。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">结合数据范围选程序</h3><p class="astro-e22r5uwj">当 n=100000 时，比较 O(n) 与 O(n²) 方案的主要操作数量级。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">分别代入 n 和 n²，先看数量级差距，不猜具体秒数。</p></details></article></div></section><section aria-labelledby="mistakes" class="astro-e22r5uwj"><h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">只看代码长度</h3><p class="astro-e22r5uwj">错误写法：代码行数少就判断运行一定快。原因：短代码也可能执行大量循环。正确写法：选择主要操作并统计它随输入规模的次数。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">看到两个循环就判 O(n²)</h3><p class="astro-e22r5uwj">错误写法：两个先后执行的 n 次循环直接相乘。原因：先后执行应相加。正确写法：先判断循环是嵌套还是并列，再核对各自边界。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">忽略嵌套循环的乘法关系</h3><p class="astro-e22r5uwj">错误写法：两层都执行 n 次却记为 O(n)。原因：内层会被外层重复完整执行。正确写法：把相关层次数相乘得到 n×n。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">保留所有低阶项和常数</h3><p class="astro-e22r5uwj">错误写法：把 3n + 5 记成 O(3n + 5)。原因：复杂度描述增长数量级。正确写法：省略常数倍和低阶项，记为 O(n)。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">把数组元素值当成空间规模</h3><p class="astro-e22r5uwj">错误写法：数组中数字很大就判断空间复杂度更高。原因：空间取决于元素数量和类型。正确写法：按额外变量、数组或矩阵的数量级估算。</p></div></section><section aria-labelledby="related-learning" class="astro-e22r5uwj"><h2 id="related-learning" class="astro-e22r5uwj">关联学习</h2><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj"><a href="/gesp/level4/sorting/" class="astro-e22r5uwj">排序算法</a>：基础排序是分析 O(n²) 的典型例子。</li></ul></section><section aria-labelledby="core-check" class="astro-e22r5uwj"><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="complexity" data-progress-event="xdz:gesp-level4-progress"><section class="astro-l37rdmqc"></section></gesp-dictionary-review></section><section aria-labelledby="test" class="astro-e22r5uwj"><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="complexity" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 6 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><div class="dictionary-test__questions"></div><div class="dictionary-test__result" data-test-result hidden aria-live="polite"></div><div class="dictionary-test__actions"></div></gesp-dictionary-test></section><nav class="dictionary-lesson-pager"><a href="/gesp/level4/sorting/" rel="prev" class="astro-hl664apc"><span class="astro-hl664apc">上一知识点</span><strong class="astro-hl664apc">排序算法</strong></a><a href="/gesp/level4/file-operations/" rel="next" class="astro-hl664apc"><span class="astro-hl664apc">下一知识点</span><strong class="astro-hl664apc">文件操作</strong></a></nav></article></div><footer
     </article>
 
     <div class="kp-nav-row">

@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -504,251 +508,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="过程演示">过程演示</h2>
 <p>下面十张标准图按“符号 → 顺序 → 分支 → 循环 → 嵌套 → 综合”的顺序，把前面的定义落到具体流程中。每张图都沿箭头阅读，判断框的“是/否”必须由具体条件值决定。</p>
 <h3 id="从符号顺序到分支">从符号、顺序到分支</h3>
-<figure data-flow-variant="symbol-legend" aria-labelledby="standard-flow-title-37-3d-31-2q-33-30-19-30-2t-2v-2t-32-2s-19-im0-n54-obq-gl3-h6m-fpn"><div><h3 id="standard-flow-title-37-3d-31-2q-33-30-19-30-2t-2v-2t-32-2s-19-im0-n54-obq-gl3-h6m-fpn">常用符号图例</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>起止框、输入输出框、处理框、判断框和流程线的标准作用。</figcaption></figure><figure data-flow-variant="sequence-sum" aria-labelledby="standard-flow-title-37-2t-35-39-2t-32-2r-2t-19-37-39-31-19-u4a-iof-p1v-kg4-1ee2-ffo-k1c-ldu-gp8"><div><h3 id="standard-flow-title-37-2t-35-39-2t-32-2r-2t-19-37-39-31-19-u4a-iof-p1v-kg4-1ee2-ffo-k1c-ldu-gp8">顺序结构：两数求和</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>输入 a、b，计算 sum，再输出 sum；每个框只执行一次。</figcaption></figure><figure data-flow-variant="sign-classification" aria-labelledby="standard-flow-title-37-2x-2v-32-19-2r-30-2p-37-37-2x-2u-2x-2r-2p-38-2x-33-32-19-fex-g7a-jzj-1ee2-g84-k31-l7n-k1c-9hd-rvj-k1c-jdi-tti"><div><h3 id="standard-flow-title-37-2x-2v-32-19-2r-30-2p-37-37-2x-2u-2x-2r-2p-38-2x-33-32-19-fex-g7a-jzj-1ee2-g84-k31-l7n-k1c-9hd-rvj-k1c-jdi-tti">三分支：判断正数、负数或零</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>先判断 x 是否大于 0；只有第一问为否时，才继续判断 x 是否小于 0。</figcaption></figure>
-<p>三分支必须追踪到唯一结果：输入 <code>x=4</code> 时第一问为真，输出“正数”；输入 <code>x=-2</code> 时第一问为假、第二问为真，输出“负数”；输入 <code>x=0</code> 时两次判断都为假，输出“零”。没有任何一次输入会同时走两条输出路径。</p>
-<p>对应的局部分支结构如下；它只负责展示三个出口怎样一一映射，不是本页的完整程序：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 第一个判断框先检查正数路径</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">正数</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 只有第一问为假才检查负数路径</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">负数</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span><span style="--0:#919F9F;--1:#5D6376">  // 前两问都为假时只剩 x 等于 0</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">零</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>if (x &gt; 0) {  // 第一个判断框先检查正数路径    cout &lt;&lt; "正数";} else if (x &lt; 0) {  // 只有第一问为假才检查负数路径    cout &lt;&lt; "负数";} else {  // 前两问都为假时只剩 x 等于 0    cout &lt;&lt; "零";}</code></pre>
 <h3 id="从循环追踪到嵌套与综合">从循环追踪到嵌套与综合</h3>
-<figure data-flow-variant="sum-one-to-n" aria-labelledby="standard-flow-title-37-39-31-19-33-32-2t-19-38-33-19-32-19-iwa-mun-1ee2-rkx-oev-w-1d-w-g8g-w-32-w-nes-gp8"><div><h3 id="standard-flow-title-37-39-31-19-33-32-2t-19-38-33-19-32-19-iwa-mun-1ee2-rkx-oev-w-1d-w-g8g-w-32-w-nes-gp8">循环：计算 1 到 n 的和</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>先初始化 i 和 sum，每轮先判断 i&lt;=n，再累加、更新并返回判断。</figcaption></figure>
-<p>当 <code>n=6</code> 时，完整追踪不能停在第六次累加：</p>
-<table>
-<thead>
-<tr>
-<th>到达判断框时的 <code>i</code></th>
-<th><code>i &lt;= 6</code></th>
-<th>本轮结束后的 <code>sum</code></th>
-<th>下一步</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>真</td>
-<td>1</td>
-<td><code>i</code> 变为 2</td>
-</tr>
-<tr>
-<td>2</td>
-<td>真</td>
-<td>3</td>
-<td><code>i</code> 变为 3</td>
-</tr>
-<tr>
-<td>3</td>
-<td>真</td>
-<td>6</td>
-<td><code>i</code> 变为 4</td>
-</tr>
-<tr>
-<td>4</td>
-<td>真</td>
-<td>10</td>
-<td><code>i</code> 变为 5</td>
-</tr>
-<tr>
-<td>5</td>
-<td>真</td>
-<td>15</td>
-<td><code>i</code> 变为 6</td>
-</tr>
-<tr>
-<td>6</td>
-<td>真</td>
-<td>21</td>
-<td><code>i</code> 变为 7</td>
-</tr>
-<tr>
-<td>7</td>
-<td>假</td>
-<td>21</td>
-<td>离开循环并输出 21</td>
-</tr>
-</tbody>
-</table>
-<p>最后一行 <code>7 &lt;= 6</code> 为假，才是循环真正结束的证据。</p>
-<p>用学生自己的话收束这段过程就是：<code>i=6</code> 时完成最后一次累加，得到 <code>sum=21</code>；随后 <code>i</code> 更新为 7，条件 <code>7&lt;=6</code> 为假，循环结束并输出 21。</p>
-<figure data-flow-variant="while-order" aria-labelledby="standard-flow-title-3b-2w-2x-30-2t-19-33-36-2s-2t-36-19-3b-2w-2x-30-2t-1ee2-g20-g84-k31-g3x-jfr-qx8"><div><h3 id="standard-flow-title-3b-2w-2x-30-2t-19-33-36-2s-2t-36-19-3b-2w-2x-30-2t-1ee2-g20-g84-k31-g3x-jfr-qx8">while：先判断再执行</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>初值 i=5 时先判断 i&lt;=3；条件一开始为假，循环体一次也不执行。</figcaption></figure><figure data-flow-variant="do-while-order" aria-labelledby="standard-flow-title-2s-33-19-3b-2w-2x-30-2t-19-33-36-2s-2t-36-19-2s-33-19-3b-2w-2x-30-2t-1ee2-g20-jfr-qx8-g3x-g84-k31"><div><h3 id="standard-flow-title-2s-33-19-3b-2w-2x-30-2t-19-33-36-2s-2t-36-19-2s-33-19-3b-2w-2x-30-2t-1ee2-g20-jfr-qx8-g3x-g84-k31">do-while：先执行再判断</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>初值 i=5 时先输出并更新，再判断 i&lt;=3，因此循环体至少执行一次。</figcaption></figure>
-<p>把代码步骤与流程图节点放在同一张两列表中比较。两组使用相同节点，但实际到达顺序不同：</p>
-<table>
-<thead>
-<tr>
-<th>代码步骤</th>
-<th>对应流程图节点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong><code>while</code>：先判断</strong></td>
-<td><strong>初值 <code>i=5</code> 时，先算 <code>5&lt;=3</code>，结果为假；循环体没有进入，所以下面两个节点都不执行。</strong></td>
-</tr>
-<tr>
-<td><code>cout &lt;&lt; i &lt;&lt; '\n'</code></td>
-<td>输入输出框：输出 <code>i</code></td>
-</tr>
-<tr>
-<td><code>i = i + 1</code></td>
-<td>处理框：更新 <code>i</code></td>
-</tr>
-<tr>
-<td><strong><code>do-while</code>：先执行</strong></td>
-<td><strong>初值 <code>i=5</code> 时，先输出 5，再更新为 6，最后判断 <code>6&lt;=3</code> 为假并离开循环。</strong></td>
-</tr>
-<tr>
-<td><code>cout &lt;&lt; i &lt;&lt; '\n'</code></td>
-<td>输入输出框：输出 <code>i</code></td>
-</tr>
-<tr>
-<td><code>i = i + 1</code></td>
-<td>处理框：更新 <code>i</code></td>
-</tr>
-</tbody>
-</table>
-<figure data-flow-variant="nested-branch" aria-labelledby="standard-flow-title-32-2t-37-38-2t-2s-19-2q-36-2p-32-2r-2w-19-ifg-hnb-g7a-jzj-1ee2-jdc-p2h-g7a-ol7"><div><h3 id="standard-flow-title-32-2t-37-38-2t-2s-19-2q-36-2p-32-2r-2w-19-ifg-hnb-g7a-jzj-1ee2-jdc-p2h-g7a-ol7">嵌套分支：成绩分类</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>外层先判断是否及格，只有及格时才进入内层判断是否优秀。</figcaption></figure><figure data-flow-variant="nested-loop" aria-labelledby="standard-flow-title-32-2t-37-38-2t-2s-19-30-33-33-34-19-ifg-hnb-iwa-mun-1ee2-scz-g6y-qx8-g7r-p3q-gl3"><div><h3 id="standard-flow-title-32-2t-37-38-2t-2s-19-30-33-33-34-19-ifg-hnb-iwa-mun-1ee2-scz-g6y-qx8-g7r-p3q-gl3">嵌套循环：输出行列编号</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>外层控制 i，内层每次从 j=1 开始；内层结束后才更新外层。</figcaption></figure><figure data-flow-variant="parity" aria-labelledby="standard-flow-title-34-2p-36-2x-38-3d-19-g7a-jzj-p30-glk-1ee2-g84-k31-hmv-fw6"><div><h3 id="standard-flow-title-34-2p-36-2x-38-3d-19-g7a-jzj-p30-glk-1ee2-g84-k31-hmv-fw6">分支综合：判断奇偶</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>计算 n%2==0 的实际结果，只选择偶数或奇数中的一条路径。</figcaption></figure><figure data-flow-variant="even-sum" aria-labelledby="standard-flow-title-2t-3a-2t-32-19-37-39-31-19-iwa-mun-ff2-g7a-jzj-p30-glk-1ee2-oq7-gbk-fw6-k1c"><div><h3 id="standard-flow-title-2t-3a-2t-32-19-37-39-31-19-iwa-mun-ff2-g7a-jzj-p30-glk-1ee2-oq7-gbk-fw6-k1c">循环与分支综合：累加偶数</h3><span>沿箭头阅读</span></div><div tabindex="0" role="region"></div><figcaption>循环检查范围，分支决定是否累加，最后一次范围判断为假后输出 sum。</figcaption></figure><a id="01-reading"></a>
-<h2 id="01-流程图的作用与读法">01 流程图的作用与读法</h2>
-<p>流程图把“先做什么、条件成立走哪条路、什么时候重复”画出来。阅读时从“开始”出发，沿箭头移动；每经过一个处理框就执行一次操作，不能跳过箭头方向或凭位置猜顺序。</p>
-<p>例如流程为“开始 → 输入 <code>a</code> → <code>a=a+2</code> → 输出 <code>a</code> → 结束”。输入 <code>a=5</code> 时，顺序追踪得到：先保存 5，再计算 7，最后输出 7。读图时可以在纸上记录每一步之后的变量值。</p>
-<p>一张简单变量表能防止漏步骤：</p>
-<table>
-<thead>
-<tr>
-<th>到达的步骤</th>
-<th><code>a</code> 的值</th>
-<th>是否输出</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>输入 <code>a</code></td>
-<td>5</td>
-<td>否</td>
-</tr>
-<tr>
-<td><code>a=a+2</code></td>
-<td>7</td>
-<td>否</td>
-</tr>
-<tr>
-<td>输出 <code>a</code></td>
-<td>7</td>
-<td>输出 7</td>
-</tr>
-</tbody>
-</table>
-<p>每走过一个框才更新一次状态。箭头还没到输出框时，不应提前写输出。</p>
-<a id="02-symbols"></a>
-<h2 id="02-常用流程图符号">02 常用流程图符号</h2>
-<table>
-<thead>
-<tr>
-<th>图形</th>
-<th>常见作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>圆角矩形或椭圆</td>
-<td>开始、结束</td>
-</tr>
-<tr>
-<td>平行四边形</td>
-<td>输入、输出</td>
-</tr>
-<tr>
-<td>矩形</td>
-<td>计算、赋值等处理</td>
-</tr>
-<tr>
-<td>菱形</td>
-<td>条件判断</td>
-</tr>
-<tr>
-<td>箭头</td>
-<td>流程方向</td>
-</tr>
-</tbody>
-</table>
-<p>判断框通常有“是/否”或“真/假”两个出口。菱形本身负责判断，不表示普通计算。</p>
-<p>画图时可以按七步检查：先写开始和结束；再列输入与最终输出；把普通计算放进处理框；把条件写进判断框；给判断出口标清真/假；需要重复时画回到判断之前的箭头；最后用至少一个普通值和一个边界值沿箭头走完整遍。每个框尽量只承担一种职责，图才容易与代码逐项对应。</p>
-<p>例如“开始 → 输入 7 和 5 → 计算 <code>sum=7+5</code> → 判断 <code>sum&gt;=10</code> → 输出结果 → 结束”中，输入框接收 7 和 5，处理框得到 <code>sum=12</code>，判断框算出真，再沿“是”出口走。相同数字放进不同形状会改变含义：把 <code>sum=7+5</code> 放进判断框，就缺少了一个能得到真或假的条件。</p>
-<a id="03-sequence"></a>
-<h2 id="03-顺序结构流程图">03 顺序结构流程图</h2>
-<p>顺序结构从上到下依次执行。例如“输入长和宽 → 计算面积 → 输出面积”。每一步只执行一次，没有选择路径，也不会返回前面的步骤。</p>
-<p>若输入长 6、宽 4，流程依次得到 <code>area=6×4=24</code>，最后输出 24。不能在输入之前计算面积，也不能因为输出框在旁边就越过中间的处理框。</p>
-<p>这类流程没有可选路径。具体顺序是：输入后 <code>length=6、width=4</code>；处理后 <code>area=24</code>；输出后屏幕出现 24。若把计算框放到输入框之前，<code>length</code> 和 <code>width</code> 还没有本次输入值，流程就无法按题意完成计算。</p>
-<a id="04-branch"></a>
-<h2 id="04-分支结构流程图">04 分支结构流程图</h2>
-<p>分支结构先判断条件，再从多条路径中选择一条。例如输入 <code>score</code> 后判断 <code>score &gt;= 60</code>：成立输出“通过”，否则输出“继续练习”。追踪时要先代入具体值算出真假，再沿对应箭头执行。</p>
-<p>多个条件可以由多个判断框连接。要特别检查两条路径是否最后重新汇合，以及边界值是否被正确包含。</p>
-<p>例如判断成绩时，输入 60 后，第一次判断 <code>score&gt;=90</code> 为假，走“否”出口；第二次判断 <code>score&gt;=60</code> 为真，走“是”出口并输出“及格”。输入 90 时，第一次判断已经为真，直接输出“优秀”，不会再进入第二个判断框。</p>
-<a id="05-loop"></a>
-<h2 id="05-循环结构流程图">05 循环结构流程图</h2>
-<p>循环结构中会有箭头返回先前的判断或处理。以 <code>while</code> 为例：先判断条件，成立就执行循环体并返回判断；不成立则离开循环。若更新变量的处理框没有位于返回路径上，可能形成死循环。</p>
-<p>例如“<code>i=1</code> → 判断 <code>i&lt;=3</code> → 输出 <code>i</code> → <code>i=i+1</code> → 返回判断”。条件依次为真、真、真、假，所以输出 1、2、3，更新后的 <code>i=4</code> 使流程离开循环。</p>
-<p>逐轮记录如下：</p>
-<table>
-<thead>
-<tr>
-<th>到达判断框时的 <code>i</code></th>
-<th><code>i&lt;=3</code></th>
-<th>本轮动作</th>
-<th>更新后的 <code>i</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>真</td>
-<td>输出 1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>2</td>
-<td>真</td>
-<td>输出 2</td>
-<td>3</td>
-</tr>
-<tr>
-<td>3</td>
-<td>真</td>
-<td>输出 3</td>
-<td>4</td>
-</tr>
-<tr>
-<td>4</td>
-<td>假</td>
-<td>离开循环</td>
-<td>不再更新</td>
-</tr>
-</tbody>
-</table>
-<p>条件为假时不会再执行输出和更新。若漏掉 <code>i=i+1</code>，变量一直是 1，判断永远为真，流程就无法结束。</p>
-<a id="06-conversion"></a>
-<h2 id="06-流程图与代码互译">06 流程图与代码互译</h2>
-<p>从流程图到代码时，先找判断框和返回箭头：</p>
-<table>
-<thead>
-<tr>
-<th>流程图特征</th>
-<th>常见代码结构</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>判断后只选择一次路径</td>
-<td><code>if ... else</code></td>
-</tr>
-<tr>
-<td>先判断，成立后执行并返回判断</td>
-<td><code>while</code></td>
-</tr>
-<tr>
-<td>有初始化、条件、更新三个固定位置</td>
-<td><code>for</code></td>
-</tr>
-</tbody>
-</table>
-<p>把“输入整数并判断正负”的流程翻译成代码时，判断框对应 <code>if ... else</code>。这里只展示与图中判断和两条路径对应的局部片段：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 判断框决定从哪一个出口离开</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">non-negative</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">negative</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>if (x &gt;= 0) {  // 判断框决定从哪一个出口离开    cout &lt;&lt; "non-negative" &lt;&lt; endl;} else {    cout &lt;&lt; "negative" &lt;&lt; endl;}</code></pre>
 <p>对应流程是“开始 → 输入 x → 判断 x&gt;=0 → 两条输出路径 → 结束”。代码中的条件、真假分支和汇合位置都应在图中找到对应关系。</p>
 <p>把具体输入代入后，路径可以这样追踪：</p>
 <table>
@@ -777,11 +539,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <p>判断框只选择其中一条路径，不会把两个输出都执行。</p>
 <p>循环流程“<code>i=1</code> → 判断 <code>i&lt;=3</code> → 输出 <code>i</code> → <code>i=i+1</code> → 返回判断”可以写成：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">while</span><span style="--0:#D6DEEB;--1:#403F53"> (i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 判断框先检查当前 i 是否仍在范围内</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 更新后返回判断，避免停在同一个状态</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int i = 1;while (i &lt;= 3) {  // 判断框先检查当前 i 是否仍在范围内    cout &lt;&lt; i &lt;&lt; endl;    i++;  // 更新后返回判断，避免停在同一个状态}</code></pre>
 <p>也可以把初始化、条件和更新集中写成 <code>for (int i = 1; i &lt;= 3; i++)</code>。互译时不是看到返回箭头就固定写某一种循环，而是确认初始化、判断、循环体和更新分别在哪里。</p>
 <h3 id="从代码反推流程图">从代码反推流程图</h3>
 <p>先看一段“计算 1 到 <code>n</code> 的和”的局部代码：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> sum </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">while</span><span style="--0:#D6DEEB;--1:#403F53"> (i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n) {</span><span style="--0:#919F9F;--1:#5D6376">  // 判断为真才进入本轮</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">sum </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> sum </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> i;</span><span style="--0:#919F9F;--1:#5D6376">  // 保存加入当前 i 后的新结果</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> sum </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int i = 1;int sum = 0;while (i &lt;= n) {  // 判断为真才进入本轮    sum = sum + i;  // 保存加入当前 i 后的新结果    i++;}cout &lt;&lt; sum &lt;&lt; endl;</code></pre>
 <p>反推时不要一行代码随意画一个框，而要先判断每行承担什么职责：</p>
 <table>
 <thead>

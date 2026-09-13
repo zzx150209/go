@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -466,7 +470,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <p>数据类型的范围、精度和转换由<a href="/gesp/level1/data-types/">基本数据类型</a>系统讲解；运算符种类、优先级和结合方向由<a href="/gesp/level1/operations/">基本运算</a>负责。本页只把变量从“建立”到“改变”的过程讲清楚。</p>
 <p>先看一句简单代码：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int score = 60;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int score = 60;</code></pre>
 <p>它包含四个关键信息：</p>
 <table>
 <thead>
@@ -620,9 +624,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <p>关键字不能再次当作变量名。例如：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int int = 3;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int int = 3;</code></pre>
 <p>第一个 <code>int</code> 表示整数类型，第二个位置本应填写变量名；但第二个 <code>int</code> 仍会被编译器当作关键字，所以这行不能通过编译。可以改为：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int number = 3;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int number = 3;</code></pre>
 <h3 id="常见名称不一定是关键字">常见名称不一定是关键字</h3>
 <p>经常出现，不代表它属于 C++ 关键字：</p>
 <table>
@@ -696,7 +700,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>各种字面量具体属于什么类型、能表示多大范围，放在“基本数据类型”页理解。本页先认清写法和用途。</p>
 <h3 id="用-const-给固定值起名字">用 <code>const</code> 给固定值起名字</h3>
 <p>如果一个固定值会多次使用，可以给它一个有含义的名字，并用 <code>const</code> 限制后续修改：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">const int bonus = 5;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>const int bonus = 5;</code></pre>
 <p>这行建立了名为 <code>bonus</code> 的具名常量：</p>
 <ul>
 <li>名字：<code>bonus</code>；</li>
@@ -709,7 +713,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h3 id="什么时候用字面量什么时候用具名常量">什么时候用字面量，什么时候用具名常量</h3>
 <p>一次性、含义非常直接的值可以写成字面量。一个值在题目中有明确含义、会重复出现或不应被修改时，具名常量更容易检查。</p>
 <p>例如“每盒固定装 12 支笔”可以写：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">const int pensPerBox = 12;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int totalPens = boxCount * pensPerBox;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>const int pensPerBox = 12;int totalPens = boxCount * pensPerBox;</code></pre>
 <p>看到 <code>pensPerBox</code> 就知道 12 表示每盒数量；如果以后题目改成每盒 10 支，只需检查这个固定含义的位置。</p>
 <h2 id="04-变量与初始化">04 变量与初始化</h2>
 <h3 id="变量由名字类型和当前值组成">变量由名字、类型和当前值组成</h3>
@@ -743,13 +747,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>变量的类型在定义后固定，当前值可以被后续赋值改变，也可以一直保持不变。“变量”表示它<strong>允许</strong>变化，不表示它每次运行都必须变化。</p>
 <h3 id="声明定义和初始化的区别">声明、定义和初始化的区别</h3>
 <p>在本页的简单局部变量中：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int age;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int age;</code></pre>
 <p>这行告诉编译器“这里有一个名为 <code>age</code>、类型为 <code>int</code> 的变量”，并建立这个变量。它既完成了声明，也完成了定义，但还没有给普通局部整数一个可安全读取的初值。</p>
 <p>下面这行同时建立变量并给出初值：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int age = 12;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int age = 12;</code></pre>
 <p>这叫<strong>初始化</strong>。执行完成后，<code>age</code> 已经拥有确定状态：名字是 <code>age</code>，类型是 <code>int</code>，当前值是 12。</p>
 <p>初始化只发生在变量建立时。变量已经存在以后再写：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">age = 13;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>age = 13;</code></pre>
 <p>这是<strong>赋值</strong>，它把当前值从 12 改为 13，并没有重新定义一个新的 <code>age</code>。</p>
 <table>
 <thead>
@@ -780,17 +784,17 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h3 id="为什么不能读取未初始化的普通局部变量">为什么不能读取未初始化的普通局部变量</h3>
 <p>在 <code>main</code> 内写下 <code>int score;</code> 后，不能直接把 <code>score</code> 用于输出、比较或计算。对本页这种未初始化的普通局部整数，读取其不确定值会导致<strong>未定义行为</strong>：程序结果没有可靠保证，不能根据某次运行猜它“默认等于 0”。</p>
 <p>错误过程是：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int score;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">cout &lt;&lt; score;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int score;cout &lt;&lt; score;</code></pre>
 <p>安全做法是先让它得到确定值：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int score = 0;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">cout &lt;&lt; score;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int score = 0;cout &lt;&lt; score;</code></pre>
 <p>检查变量时，不只看“是否写过变量名”，还要沿执行顺序确认：在第一次读取之前，它是否已经初始化或赋值。</p>
 <h2 id="05-赋值与连续赋值">05 赋值与连续赋值</h2>
 <h3 id="赋值先算右边再写左边">赋值先算右边，再写左边</h3>
 <p>赋值号 <code>=</code> 的任务是：先得到右侧结果，再把结果保存到左侧变量。</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int score = 60;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">score = 85;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int score = 60;score = 85;</code></pre>
 <p>第一行建立并初始化 <code>score</code>；第二行才是后续赋值，用 85 覆盖旧值 60。类型没有改变，改变的是当前值。</p>
 <p>当左右两边都出现同一个变量时，仍按“先右后左”执行：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int a = 5;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">a = a + 2;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a = 5;a = a + 2;</code></pre>
 <p>执行第二行的过程是：</p>
 <table>
 <thead>
@@ -821,7 +825,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>这里不是在解数学方程“<code>a</code> 等于 <code>a + 2</code>”。<code>=</code> 表示一次有先后顺序的写入操作，所以同一个变量能够由 5 变成 7。</p>
 <h3 id="赋值复制当前值不会建立自动连接">赋值复制当前值，不会建立自动连接</h3>
 <p>假设依次执行：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int a = 2;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int b = 5;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">a = b;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">b = 8;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a = 2;int b = 5;a = b;b = 8;</code></pre>
 <p>执行 <code>a = b;</code> 时，程序读取 <code>b</code> 当时的值 5，再把 5 保存给 <code>a</code>。接着把 <code>b</code> 改成 8，并不会自动把 <code>a</code> 一起改成 8。</p>
 <table>
 <thead>
@@ -852,14 +856,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>普通整数赋值复制的是当时的值，不是给两个变量拴上一根永久连线。</p>
 <h3 id="连续赋值从右边开始">连续赋值从右边开始</h3>
 <p>自测中会遇到连续赋值，因此要能识别它的执行顺序：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int a;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int b;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">a = b = 3;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int a;int b;a = b = 3;</code></pre>
 <p>赋值运算按右结合解释，等价于分成两步：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">b = 3;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">a = b;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>b = 3;a = b;</code></pre>
 <p>第一步先让 <code>b</code> 得到 3；这一赋值表达式的结果再交给左边，于是第二步让 <code>a</code> 也得到 3。最终 <code>a = 3</code>、<code>b = 3</code>。</p>
 <p>若写成 <code>int a = b = 3;</code>，<code>b</code> 仍必须提前定义。只在这一行定义了 <code>a</code>，并不会顺便定义 <code>b</code>。</p>
 <p>一级主程序优先使用分步写法，因为执行顺序更容易检查。连续赋值需要会读，不必为了缩短一行而频繁使用。</p>
 <h3 id="-和--的职责不同"><code>=</code> 和 <code>==</code> 的职责不同</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">a = b;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">a == b;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>a = b;a == b;</code></pre>
 <ul>
 <li><code>a = b</code>：把 <code>b</code> 的当前值写入 <code>a</code>，会修改 <code>a</code>；</li>
 <li><code>a == b</code>：判断两者是否相等，得到真或假，不负责修改 <code>a</code>、<code>b</code>。</li>
@@ -902,7 +906,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>只计算 <code>a + b</code> 不会自动修改 <code>a</code>、<code>b</code>。要保存结果，需要初始化一个新变量，或赋值给已经存在的变量。</p>
 <h3 id="从当前值到结果再保存">从当前值到结果，再保存</h3>
 <p>假设当前状态是 <code>price = 8</code>、<code>count = 3</code>、<code>bonus = 5</code>，执行：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int total = price * count + bonus;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int total = price * count + bonus;</code></pre>
 <p>真实过程可以拆成四步：</p>
 <table>
 <thead>
@@ -938,9 +942,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>表达式先产生结果，保存动作随后发生。若只写 <code>price * count + bonus;</code>，虽然表达式可以算出 29，却没有把这个结果交给一个后续要用的变量。</p>
 <h3 id="变量变化后旧结果不会自动重算">变量变化后，旧结果不会自动重算</h3>
 <p>继续上一例。<code>total</code> 已经得到 29 后，把 <code>price</code> 赋成 10：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">price = 10;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>price = 10;</code></pre>
 <p>此时 <code>price</code> 变为 10，<code>total</code> 仍是之前保存的 29。只有再次执行：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">total = price * count + bonus;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>total = price * count + bonus;</code></pre>
 <p>程序才会用当前值 <code>10、3、5</code> 重新计算，得到 35 并覆盖 <code>total</code>。</p>
 <p>这条边界很重要：变量保存的是某次执行得到的结果，不是会随公式右侧自动更新的数学符号。</p>
 <h3 id="括号和优先级决定计算顺序">括号和优先级决定计算顺序</h3>
@@ -1038,13 +1042,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="典型例题">典型例题</h2>
 <p>下面用一个程序验证本页最容易混淆的边界：变量改变以后，之前保存的表达式结果不会自动更新。</p>
 <h3 id="完成程序">完成程序</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> price </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">8</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> count </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> bonus </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> price </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> count </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> bonus;</span><span style="--0:#919F9F;--1:#5D6376"> // 首次计算总价并把结果保存到 total</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">price </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 只修改 price，已经保存的 total 不会自动更新</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">total </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> price </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> count </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> bonus;</span><span style="--0:#919F9F;--1:#5D6376"> // 按当前价格重新计算，并用新结果覆盖 total</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+int main() {    int price = 8;    int count = 3;    const int bonus = 5;
+    int total = price * count + bonus; // 首次计算总价并把结果保存到 total    cout &lt;&lt; total &lt;&lt; endl;
+    price = 10; // 只修改 price，已经保存的 total 不会自动更新    cout &lt;&lt; total &lt;&lt; endl;
+    total = price * count + bonus; // 按当前价格重新计算，并用新结果覆盖 total    cout &lt;&lt; total &lt;&lt; endl;    return 0;}</code></pre>
 <p>程序不需要输入，输出为：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">29</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">29</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">35</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>292935</code></pre>
 <p>逐步追踪：</p>
 <table>
 <thead>
@@ -1153,7 +1157,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p><strong>检查：</strong> 找到产生 <code>total</code> 的表达式，确认在所需的最新变量值出现后，它是否再次执行并写回结果。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>下一页<a href="/gesp/level1/data-types/">基本数据类型</a>负责判断变量能保存什么范围和精度；随后<a href="/gesp/level1/operations/">基本运算</a>会讲表达式中的运算符与优先级；学完这两页后，<a href="/gesp/level1/sequential/">顺序结构</a>会把多条赋值和计算语句连起来，逐行追踪完整程序状态。</p>
-<section aria-labelledby="related-knowledge-variables-expressions"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-variables-expressions" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/program-structure/" class="astro-mkwt4ymd">程序结构</a></li></ul></section>
+<section aria-labelledby="related-knowledge-variables-expressions"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-variables-expressions" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/program-structure/" class="astro-mkwt4ymd">程序结构</a></li></ul></section></div></section>
     </article>
 
     <div class="kp-nav-row">

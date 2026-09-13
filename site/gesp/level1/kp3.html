@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -466,22 +470,22 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <p>本页只讲一级完整程序的公共骨架，不展开自定义函数、类、头文件内部实现等内容。输入输出语句会出现在代表程序中，但它怎样读取和组织数据，留到下一页专门讲。</p>
 <p>先看一张职责图：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">源文件顶部：准备编译需要的声明与名称规则</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">↓</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int main()：标出程序运行入口</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">↓</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">main 的 { }：装入真正依次执行的语句</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">↓</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">return 0;：正常结束 main</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>源文件顶部：准备编译需要的声明与名称规则        ↓int main()：标出程序运行入口        ↓main 的 { }：装入真正依次执行的语句        ↓return 0;：正常结束 main</code></pre>
 <p>这几层缺一处关键结构，编译器就可能无法把源文件正确分段。</p>
 <h2 id="01-头文件与命名空间">01 头文件与命名空间</h2>
 <h3 id="为什么使用头文件">为什么使用头文件</h3>
 <p>C++ 标准库已经准备了许多常用工具。使用这些工具前，源文件需要引入相应的<strong>声明</strong>，让编译器知道名称和基本用法。</p>
 <p>一级完整程序在本站统一写：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">#include &lt;bits/stdc++.h&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">using namespace std;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;</code></pre>
 <p>第一行是预处理指令。<code>#include</code> 表示引入头文件，尖括号中是头文件名。这一行从 <code>#</code> 开始，行末<strong>不写分号</strong>。</p>
 <p><code>&lt;bits/stdc++.h&gt;</code> 汇集了许多常用标准库头文件，在常见 GCC 和在线评测环境中通常可用。它不是 C++ 标准规定每个编译器都必须提供的头文件；换到不支持它的环境时，需要改用实际需要的标准头文件。</p>
 <p>例如，标准头文件 <code>&lt;iostream&gt;</code> 提供 <code>cin</code>、<code>cout</code>、<code>endl</code> 等输入输出工具所需的声明：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">#include &lt;iostream&gt;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>#include &lt;iostream&gt;</code></pre>
 <p>因此，自测题中看到 <code>#include &lt;iostream&gt;</code> 时，应判断它是在引入输入输出相关声明，而不是在定义 <code>main</code> 或创建循环。本站完整程序继续按照项目约定使用 <code>&lt;bits/stdc++.h&gt;</code>。</p>
 <h3 id="using-namespace-std-解决什么问题"><code>using namespace std;</code> 解决什么问题</h3>
 <p>标准库中的名称位于名为 <code>std</code> 的命名空间中。命名空间可以把不同来源的名称分开，减少重名冲突。</p>
 <p>写上：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">using namespace std;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>using namespace std;</code></pre>
 <p>以后就可以在本页程序里直接写 <code>cout</code>、<code>endl</code> 等标准库名称。这一行属于 using 指令，末尾<strong>需要分号</strong>。</p>
 <p>如果省略这行，标准库并没有消失，只是通常要在名称前写出 <code>std::</code>。一级主教学先统一保留 <code>using namespace std;</code>，不展开命名空间的更多用法。</p>
 <h3 id="两行的位置和执行边界">两行的位置和执行边界</h3>
@@ -683,7 +687,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="04-语句分号与代码块">04 语句、分号与代码块</h2>
 <h3 id="分号结束一条普通语句">分号结束一条普通语句</h3>
 <p>语句描述程序要完成的一项操作。很多简单语句以分号 <code>;</code> 结束，例如：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int age = 12;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">return 0;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int age = 12;return 0;</code></pre>
 <p>第一行定义一个整数并保存 12，第二行结束 <code>main</code> 并交回状态 0。两个分号都表示对应语句已经结束。</p>
 <p>但不能总结成“C++ 每一行都写分号”。是否需要分号取决于这段内容的语法职责：</p>
 <table>
@@ -730,7 +734,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>如果 <code>return 0</code> 后漏写分号，编译器可能在下一行或右大括号附近才确定结构不完整。仍应沿用上一页的方法：先看第一条错误，再检查提示行和上一行。</p>
 <h3 id="大括号围成代码块">大括号围成代码块</h3>
 <p>左大括号 <code>{</code> 表示代码块开始，右大括号 <code>}</code> 表示代码块结束。当前最重要的代码块是 <code>main</code> 的函数体。</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int main() {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">这里写属于 main 的语句</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int main() {    这里写属于 main 的语句}</code></pre>
 <p>左右大括号必须配对。漏写右大括号会让 <code>main</code> 的代码块结构不完整；多写一个右大括号，也会让编译器找不到与它配对的开始位置。</p>
 <p>缩进不改变 C++ 的执行结果，但能把从属关系显示出来。本站代码统一使用 4 个空格缩进：<code>main</code> 内的语句向右缩进一级，左右大括号保持对齐。这样检查配对时，比把所有内容挤在一列更可靠。</p>
 <h3 id="用结构配对检查编译错误">用“结构配对”检查编译错误</h3>
@@ -747,11 +751,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="05-注释">05 注释</h2>
 <h3 id="两种基本注释">两种基本注释</h3>
 <p>注释用于给读代码的人补充说明，不作为普通语句执行。C++ 常见两种注释：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">// 单行注释：从双斜杠开始，到这一行末尾结束</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">/* 多行注释：从斜杠星号开始，</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">   </span></span><span style="--0:#d6deeb;--1:#403f53">到星号斜杠结束 */</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>// 单行注释：从双斜杠开始，到这一行末尾结束
+/* 多行注释：从斜杠星号开始，   到星号斜杠结束 */</code></pre>
 <p>单行注释适合说明一行代码或一个短步骤。多行注释可以跨越多行，但必须同时有开始标记 <code>/*</code> 和结束标记 <code>*/</code>，而且不能随意嵌套另一组多行注释。</p>
 <p>注释行末不因为“像一句话”就补分号。若注释写在一条语句后面，需要分号的是前面的语句本身：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int age = 12; // age 保存学生年龄，初始值是 12</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int age = 12; // age 保存学生年龄，初始值是 12</code></pre>
 <h3 id="注释不会执行但会影响代码边界">注释不会执行，但会影响代码边界</h3>
 <p>编译器不会把注释内容当作普通 C++ 语句执行。因此，注释里写“输出答案”，屏幕不会真的出现答案。</p>
 <p>反过来，如果把真正需要执行的代码放进注释，它也不会执行。例如临时注释掉一条输出语句后，程序可能正常结束，却没有预期输出。</p>
@@ -766,10 +770,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="把各部分合成一个完整程序">把各部分合成一个完整程序</h2>
 <h3 id="完成程序">完成程序</h3>
 <p>下面是本页唯一的完整程序。它的任务很简单：在屏幕上输出一行问候，用来验证程序骨架能够正常编译、进入 <code>main</code>、执行语句并结束。</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 输出一句问候，确认程序已经进入 main</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Hello, C++!</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+int main() {    // 输出一句问候，确认程序已经进入 main    cout &lt;&lt; "Hello, C++!" &lt;&lt; endl;    return 0;}</code></pre>
 <p>运行时不需要输入。输出为：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">Hello, C++!</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>Hello, C++!</code></pre>
 <p>这里先把 <code>cout &lt;&lt; "Hello, C++!" &lt;&lt; endl;</code> 整体看作“一条输出语句”：它把问候文字送到屏幕并换行，末尾分号结束这条语句。<code>cout</code> 从左到右怎样连接内容、<code>endl</code> 为什么换行，会在下一页详细讲解。</p>
 <h3 id="从编译到结束逐步追踪">从编译到结束逐步追踪</h3>
 <table>
@@ -944,7 +948,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p><strong>检查：</strong> 为每个 <code>/*</code> 找到对应的 <code>*/</code>，并避免嵌套多行注释。</p>
 <h2 id="关联学习">关联学习</h2>
 <p>上一页<a href="/gesp/level1/ide/">集成开发环境</a>说明了怎样保存、编译、运行和调试这份源代码。下一页<a href="/gesp/level1/input-output/">输入输出语句</a>会拆解代表程序中的 <code>cout</code> 和 <code>endl</code>，并加入从外部读取数据的方法。</p>
-<section aria-labelledby="related-knowledge-program-structure"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-program-structure" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/ide/" class="astro-mkwt4ymd">开发环境</a></li></ul></section>
+<section aria-labelledby="related-knowledge-program-structure"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-program-structure" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/ide/" class="astro-mkwt4ymd">开发环境</a></li></ul></section></div></section>
     </article>
 
     <div class="kp-nav-row">

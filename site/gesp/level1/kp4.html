@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -480,9 +484,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <p>例如，输入依次给出学号和成绩：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">101 87</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>101 87</code></pre>
 <p>题目要求先输出成绩，再输出学号：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">87 101</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>87 101</code></pre>
 <p>这不只是“把两个数显示出来”。程序还要读对数据的数量和顺序，知道每个数据保存在哪里，再按照题目要求改变输出顺序，准确放入空格和换行。</p>
 <p>本页集中解决三个核心问题：</p>
 <ol>
@@ -495,9 +499,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p><code>cin</code> 的职责是从标准输入中读取数据，并把读到的内容保存到变量中。同一份程序因此可以处理不同的输入，而不需要把样例数字写死在代码里。</p>
 <h3 id="输入一个数据与多个数据">输入一个数据与多个数据</h3>
 <p>输入一个数据的基本写法是：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId;</span><span style="--0:#919F9F;--1:#5D6376"> // 读取一个数据，保存到 studentId</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cin &gt;&gt; studentId; // 读取一个数据，保存到 studentId</code></pre>
 <p>需要连续读取多个数据时，继续按照题目给出的顺序写 <code>&gt;&gt;</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span><span style="--0:#919F9F;--1:#5D6376"> // 依次读取学号和成绩</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cin &gt;&gt; studentId &gt;&gt; score; // 依次读取学号和成绩</code></pre>
 <p>这条语句可以按三个部分理解：</p>
 <table>
 <thead>
@@ -524,9 +528,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>一处 <code>&gt;&gt;</code> 对应一个保存位置。需要两个数据，就要准备两个位置并写出两次读取，不能用逗号代替后面的 <code>&gt;&gt;</code>。</p>
 <h3 id="cin-从左到右怎样读取">cin 从左到右怎样读取</h3>
 <p>假设代码是：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cin &gt;&gt; studentId &gt;&gt; score;</code></pre>
 <p>输入为：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">101 87</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>101 87</code></pre>
 <p>读取过程如下：</p>
 <table>
 <thead>
@@ -555,9 +559,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>变量名不会让 <code>cin</code> 自动寻找“像学号的数据”。真正决定对应关系的是代码中的位置：第一个数据给第一个变量，第二个数据给第二个变量，依次类推。</p>
 <h3 id="空格换行和制表符怎样分隔数据">空格、换行和制表符怎样分隔数据</h3>
 <p>对于本页使用的普通数字输入，<code>cin &gt;&gt;</code> 会先跳过数据前面的空格、制表符和换行，再读取下一个数据。因此下面三种输入都能得到相同结果：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">101 87</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">101</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">87</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">101     87</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>101 87</code></pre>
+<pre><code>10187</code></pre>
+<pre><code>101     87</code></pre>
 <p>所以 <code>cin &gt;&gt; a &gt;&gt; b;</code> 表示“依次读取两个数据”，不表示“每一行只能读取一个数据”。以后学习整行文字输入时，换行会有不同作用，本页暂不展开。</p>
 <h3 id="什么时候不能按预期读完">什么时候不能按预期读完</h3>
 <p>检查 <code>cin</code> 时要同时看四件事：数据数量、先后顺序、目标类型和保存位置。</p>
@@ -572,7 +576,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p><code>cout</code> 的职责是把内容送到标准输出。它不会替我们猜测应该输出哪些文字、空格或标点，代码写了什么，最终文本才会出现什么。</p>
 <h3 id="cout-可以连接哪些内容">cout 可以连接哪些内容</h3>
 <p>例如：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">score=</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cout &lt;&lt; "score=" &lt;&lt; score;</code></pre>
 <p>这条语句包含两类内容：</p>
 <table>
 <thead>
@@ -595,7 +599,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>如果 <code>score = 91</code>，最终形成的文本是 <code>score=91</code>。变量名 <code>score</code> 本身不会出现在屏幕上，除非把它写进双引号。</p>
 <h3 id="cout-从左到右怎样形成文本">cout 从左到右怎样形成文本</h3>
 <p>继续输出学号：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">score=</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">, id=</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cout &lt;&lt; "score=" &lt;&lt; score &lt;&lt; ", id=" &lt;&lt; studentId;</code></pre>
 <p>当 <code>score = 91</code>、<code>studentId = 205</code> 时：</p>
 <table>
 <thead>
@@ -662,10 +666,10 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>空格也属于双引号中的固定内容。题目要求几个空格，就要写出几个；<code>cout</code> 不会因为两个变量相邻而自动加空格。</p>
 <h3 id="endl-与换行符">endl 与换行符</h3>
 <p>下面两种写法都能在一级常见输出题中结束当前行：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376"> // 输出成绩后换行</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 输出学号后换行</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cout &lt;&lt; score &lt;&lt; endl; // 输出成绩后换行cout &lt;&lt; studentId &lt;&lt; "\n"; // 输出学号后换行</code></pre>
 <p><code>endl</code> 是换行写法；<code>"\n"</code> 中的 <code>\n</code> 是转义序列，也表示换行。双引号中的普通文字、空格和标点按写法输出，<code>\n</code> 这样的转义序列则按特殊含义执行，不会在屏幕上显示反斜杠和字母 n。</p>
 <p>换行放在哪里，下一段内容就从哪里开始：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 同一行输出两个值</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 两个值分成两行</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cout &lt;&lt; score &lt;&lt; " " &lt;&lt; studentId &lt;&lt; "\n"; // 同一行输出两个值cout &lt;&lt; score &lt;&lt; "\n" &lt;&lt; studentId &lt;&lt; "\n"; // 两个值分成两行</code></pre>
 <h3 id="oj-会检查最终文本">OJ 会检查最终文本</h3>
 <p>OJ 通常只接收题目要求的结果。题目没有要求时，不要擅自输出 <code>请输入数据</code>、<code>答案是</code> 等提示文字。</p>
 <p>提交前逐项检查：</p>
@@ -681,7 +685,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p><code>scanf</code>、<code>printf</code> 是另一套常见输入输出方式。它们把数据的格式写进第一个双引号中，再让后面的输入位置或输出数据与格式符一一对应。</p>
 <h3 id="scanf-怎样按照格式读取">scanf 怎样按照格式读取</h3>
 <p>读取两个 <code>int</code> 数据可以写成：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">scanf</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">%d%d</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53">studentId, </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53">score);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>scanf("%d%d", &amp;studentId, &amp;score);</code></pre>
 <table>
 <thead>
 <tr>
@@ -711,7 +715,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p><code>scanf</code> 要把数据写进变量，因此普通输入位置前要写 <code>&amp;</code>。一级阶段先把它记作必要写法，不在本页展开地址和指针。</p>
 <h3 id="printf-怎样按照格式输出">printf 怎样按照格式输出</h3>
 <p>输出成绩和学号可以写成：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">printf</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">%d</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#82AAFF;--1:#3B61B0">%d</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, score, studentId);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>printf("%d %d\n", score, studentId);</code></pre>
 <p>格式串从左到右决定最终文本：</p>
 <table>
 <thead>
@@ -779,13 +783,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </table>
 <p>最容易混淆的是 <code>double</code>：<code>scanf</code> 读取时使用 <code>%lf</code>，<code>printf</code> 输出时使用 <code>%f</code>。格式符数量、顺序或类型不对应，都可能让程序无法按预期工作。</p>
 <p>普通 <code>%c</code> 会直接读取下一个字符，空格和换行也可能被读入。如果题目要求下一个非空白字符，常见写法是在 <code>%c</code> 前放一个空格：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">scanf</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#82AAFF;--1:#3B61B0">%c</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53">grade);</span><span style="--0:#919F9F;--1:#5D6376"> // 先跳过空白，再读取一个字符</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>scanf(" %c", &amp;grade); // 先跳过空白，再读取一个字符</code></pre>
 <p>若题目本来就要读取空格字符，则不能这样跳过空白。</p>
 <h3 id="格式串中的固定字符也要匹配">格式串中的固定字符也要匹配</h3>
 <p>例如：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">scanf</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">%d</span><span style="--0:#ECC48D;--1:#984E4D">,</span><span style="--0:#82AAFF;--1:#3B61B0">%d</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53">studentId, </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53">score);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>scanf("%d,%d", &amp;studentId, &amp;score);</code></pre>
 <p>这条语句对应的输入是：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">205,91</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>205,91</code></pre>
 <p>英文逗号是格式串中的固定字符，输入中也必须在对应位置出现。类似地，<code>scanf("%d:%d:%d", ...)</code> 会要求三个整数之间出现冒号。固定字符只负责匹配，不会被保存到变量中。</p>
 <p>一级阶段选择 <code>cin</code>／<code>cout</code> 或 <code>scanf</code>／<code>printf</code> 中的一套写对、写一致即可。本页不展开底层缓冲、性能基准或输入失败后的恢复操作。</p>
 <h2 id="05-格式化输出与保留小数">05 格式化输出与保留小数</h2>
@@ -793,11 +797,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h3 id="固定显示小数位数">固定显示小数位数</h3>
 <p>数值 <code>3.5</code> 按要求显示两位小数时，应输出 <code>3.50</code>。</p>
 <p>使用 <code>cout</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> fixed </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">setprecision</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3.5</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; 3.5 &lt;&lt; "\n";</code></pre>
 <p>使用 <code>printf</code>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">printf</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">%.2f</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">3.5</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>printf("%.2f\n", 3.5);</code></pre>
 <p>两种写法都输出：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">3.50</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>3.50</code></pre>
 <p><code>fixed</code> 让 <code>setprecision(2)</code> 表示小数点后两位；<code>%.2f</code> 中的 <code>.2</code> 也表示小数点后两位。若后面还有更多数字，显示时会按规则舍入。例如 <code>3.456</code> 显示两位小数时得到 <code>3.46</code>。</p>
 <h3 id="先确认数值再检查显示">先确认数值，再检查显示</h3>
 <p>判断格式化输出时按两步走：</p>
@@ -849,13 +853,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>输入依次给出一名学生的学号和成绩。程序需要交换它们的输出顺序：先输出成绩，再输出学号，中间恰好一个空格，末尾换行。</p>
 <h3 id="题目与输入输出">题目与输入输出</h3>
 <p>输入两个整数：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">studentId score</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>studentId score</code></pre>
 <p>输出一行：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">成绩 学号</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>成绩 学号</code></pre>
 <p>输入样例：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">101 87</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>101 87</code></pre>
 <p>输出样例：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">87 101</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>87 101</code></pre>
 <h3 id="先手工确定数据去向">先手工确定数据去向</h3>
 <table>
 <thead>
@@ -881,13 +885,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>输出时先取 <code>score</code> 的值 87，再加入一个字面量空格，接着取 <code>studentId</code> 的值 101，最后换行。输入顺序和输出顺序不同，正好可以检查程序有没有把两个保存位置写反。</p>
 <h3 id="逐步写出关键语句">逐步写出关键语句</h3>
 <p>先准备两个保存位置并按题目顺序读取：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> studentId;</span><span style="--0:#919F9F;--1:#5D6376"> // 保存学号</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span><span style="--0:#919F9F;--1:#5D6376"> // 保存当前成绩</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span><span style="--0:#919F9F;--1:#5D6376"> // 依次读取学号和成绩</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int studentId; // 保存学号int score; // 保存当前成绩cin &gt;&gt; studentId &gt;&gt; score; // 依次读取学号和成绩</code></pre>
 <p>再按要求组成一行输出：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>cout &lt;&lt; score &lt;&lt; " " &lt;&lt; studentId &lt;&lt; "\n";</code></pre>
 <h3 id="完成程序">完成程序</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> studentId;</span><span style="--0:#919F9F;--1:#5D6376"> // 保存输入中的学号</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span><span style="--0:#919F9F;--1:#5D6376"> // 保存输入中的当前成绩</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span><span style="--0:#919F9F;--1:#5D6376"> // 按题目顺序读取两个数据</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> studentId </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 先输出成绩，再输出学号</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+int main() {    int studentId; // 保存输入中的学号    int score; // 保存输入中的当前成绩    cin &gt;&gt; studentId &gt;&gt; score; // 按题目顺序读取两个数据
+    cout &lt;&lt; score &lt;&lt; " " &lt;&lt; studentId &lt;&lt; "\n"; // 先输出成绩，再输出学号    return 0;}</code></pre>
 <h3 id="执行过程">执行过程</h3>
 <p>输入 <code>101 87</code> 时：</p>
 <table>
@@ -983,7 +987,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <h2 id="关联学习">关联学习</h2>
 <p><a href="/gesp/level1/variables-expressions/">程序基本概念</a>会说明变量如何定义、赋值和参与表达式；<a href="/gesp/level1/data-types/">基本数据类型</a>会解释 <code>int</code>、<code>double</code>、<code>char</code> 等类型为什么具有不同的读取规则。</p>
-<section aria-labelledby="related-knowledge-input-output"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-input-output" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/program-structure/" class="astro-mkwt4ymd">程序结构</a></li></ul></section>
+<section aria-labelledby="related-knowledge-input-output"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-input-output" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/program-structure/" class="astro-mkwt4ymd">程序结构</a></li></ul></section></div></section>
     </article>
 
     <div class="kp-nav-row">

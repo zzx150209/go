@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -449,7 +453,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     </div>
 
     <article class="article-body">
-    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“编码知识”，合并哈夫曼编码和格雷编码。哈夫曼树的权值合并与 WPL 已在上一页讲解；本页关注怎样由树得到前缀编码，以及怎样构造和识别格雷编码。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-coding-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-coding-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">2 个子页</span></header><div><article><div><span class="astro-aidf4k4y">04</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/coding/">编码知识</a></h3><p class="astro-aidf4k4y">理解哈夫曼前缀编码与格雷编码，能完成编码、译码和相邻一位变化判断。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/huffman-coding/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">哈夫曼编码</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/gray-code/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">格雷码</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 哈夫曼编码</h2><p>字符放在哈夫曼树叶结点，约定向左写 <code>0</code>、向右写 <code>1</code>，根到叶的完整路径就是字符编码。因为字符只在叶结点，任何完整字符编码都不会成为另一个字符编码的前缀，可以从左到右无分隔译码：走到叶结点就输出字符并回到根。</p><p>字符出现频率越高，权值越大，通常越靠近根，因此编码越短；频率较低的字符可以使用更长编码。这样能减少整段消息的总编码长度，但不能只按频率直接指定编码，仍要先构造哈夫曼树并保证前缀条件。</p><p>若只有一种字符，根到自身路径为空，实际编码格式通常把唯一字符约定为 <code>0</code>，才能保留重复次数。交换左右孩子或改变相同权值的平局顺序，可能得到不同但仍有效的编码。</p><figure><div tabindex="0" role="region"><table><caption>A:5、B:2、C:1 的哈夫曼构造</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">选择</th><th scope="col">新集合或编码</th></tr></thead><tbody><tr><th scope="row">第 1 轮</th><td>合并 C:1 与 B:2</td><td>得到内部结点 3，集合为 3、A:5</td></tr><tr><th scope="row">第 2 轮</th><td>合并 3 与 A:5</td><td>根权值为 8</td></tr><tr><th scope="row">分配 0/1</th><td>A 直接连接根，B、C 再分一层</td><td>A 为 1 位，B、C 为 2 位</td></tr></tbody></table></div><figcaption>高频字符 A 的路径最短；左右交换会改变具体 0/1，但不会改变编码长度。</figcaption></figure><h2 id="kp-02">02 格雷编码</h2><p>格雷编码序列中，每对相邻编码恰好只有一个二进制位置不同。镜像反射法从短序列构造长序列：原序列正序前加 <code>0</code>，原序列反序前加 <code>1</code>，再连接两部分。3 位结果为：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">000, 001, 011, 010, 110, 111, 101, 100</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>二进制整数转格雷码可计算 <code>gray = binary ^ (binary &gt;&gt; 1)</code>。例如 <code>110 ^ 011 = 101</code>。还原时不能直接重复同一公式：最高二进制位等于最高格雷位，后续每个二进制位等于上一位已还原二进制位与当前格雷位异或。</p><p>格雷码还原示例 <code>101 → 110</code>：最高位直接得到 <code>b1=1</code>；下一位 <code>b2=b1^g2=1^0=1</code>；最后一位 <code>b3=b2^g3=1^1=0</code>，所以二进制为 <code>110</code>。每一步都要使用“上一位已经还原的二进制位”，不能使用上一位格雷码。</p><h2 id="quick-table">编码速查表</h2><figure data-density="standard"><figcaption>两类编码对比</figcaption><div tabindex="0" role="region"><table>
+    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“编码知识”，合并哈夫曼编码和格雷编码。哈夫曼树的权值合并与 WPL 已在上一页讲解；本页关注怎样由树得到前缀编码，以及怎样构造和识别格雷编码。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-coding-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-coding-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">2 个子页</span></header><div><article><div><span class="astro-aidf4k4y">04</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/coding/">编码知识</a></h3><p class="astro-aidf4k4y">理解哈夫曼前缀编码与格雷编码，能完成编码、译码和相邻一位变化判断。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/huffman-coding/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">哈夫曼编码</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/gray-code/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">格雷码</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 哈夫曼编码</h2><p>字符放在哈夫曼树叶结点，约定向左写 <code>0</code>、向右写 <code>1</code>，根到叶的完整路径就是字符编码。因为字符只在叶结点，任何完整字符编码都不会成为另一个字符编码的前缀，可以从左到右无分隔译码：走到叶结点就输出字符并回到根。</p><p>字符出现频率越高，权值越大，通常越靠近根，因此编码越短；频率较低的字符可以使用更长编码。这样能减少整段消息的总编码长度，但不能只按频率直接指定编码，仍要先构造哈夫曼树并保证前缀条件。</p><p>若只有一种字符，根到自身路径为空，实际编码格式通常把唯一字符约定为 <code>0</code>，才能保留重复次数。交换左右孩子或改变相同权值的平局顺序，可能得到不同但仍有效的编码。</p><pre><code>000, 001, 011, 010, 110, 111, 101, 100</code></pre><p>二进制整数转格雷码可计算 <code>gray = binary ^ (binary &gt;&gt; 1)</code>。例如 <code>110 ^ 011 = 101</code>。还原时不能直接重复同一公式：最高二进制位等于最高格雷位，后续每个二进制位等于上一位已还原二进制位与当前格雷位异或。</p><p>格雷码还原示例 <code>101 → 110</code>：最高位直接得到 <code>b1=1</code>；下一位 <code>b2=b1^g2=1^0=1</code>；最后一位 <code>b3=b2^g3=1^1=0</code>，所以二进制为 <code>110</code>。每一步都要使用“上一位已经还原的二进制位”，不能使用上一位格雷码。</p><h2 id="quick-table">编码速查表</h2><div tabindex="0" role="region"><table>
 <thead>
 <tr>
 <th>内容</th>
@@ -469,7 +473,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <td>相邻两项异或结果是否只有一个 1</td>
 </tr>
 </tbody>
-</table></div><p>横向滑动查看完整表格</p></figure><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>编码表 <code>A=0、B=10、C=11</code>，译码 <code>01011</code>：先读 <code>0</code> 得 A，回根；读 <code>10</code> 得 B，回根；读 <code>11</code> 得 C，结果为 <code>ABC</code>。若最后只剩 <code>1</code>，它停在内部结点，说明编码串不完整。</p><h3 id="典型应用">典型应用</h3><p>二进制 <code>110</code> 转格雷码：右移得到 <code>011</code>，逐位异或得到 <code>101</code>。检查镜像序列连接处 <code>010 → 110</code>，异或为 <code>100</code>，只有一位为 1，因此连接合法。</p><h3 id="测试案例">测试案例</h3><table>
+</table></div><p>横向滑动查看完整表格</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>编码表 <code>A=0、B=10、C=11</code>，译码 <code>01011</code>：先读 <code>0</code> 得 A，回根；读 <code>10</code> 得 B，回根；读 <code>11</code> 得 C，结果为 <code>ABC</code>。若最后只剩 <code>1</code>，它停在内部结点，说明编码串不完整。</p><h3 id="典型应用">典型应用</h3><p>二进制 <code>110</code> 转格雷码：右移得到 <code>011</code>，逐位异或得到 <code>101</code>。检查镜像序列连接处 <code>010 → 110</code>，异或为 <code>100</code>，只有一位为 1，因此连接合法。</p><h3 id="测试案例">测试案例</h3><table>
 <thead>
 <tr>
 <th>类型</th>

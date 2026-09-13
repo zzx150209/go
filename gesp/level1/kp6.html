@@ -295,8 +295,8 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .kp-toggle:hover{text-decoration:underline}
 
 /* 知识点详情页 */
-.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
-  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary{background:linear-gradient(135deg,#f0f4ff,#f5f0ff);border:1px solid #e0e7ff;
+  border-radius:8px;padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
 .kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;font-weight:800;
   color:var(--accent);font-size:18px;flex:0 0 auto}
@@ -315,30 +315,34 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
 /* 文章正文样式 */
-.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
-.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+.article-body{font-size:15px;line-height:1.85;color:var(--text);max-width:780px}
+.article-body *{box-sizing:border-box}
+.article-body h2{font-size:24px;font-weight:700;margin:36px 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--line)}
-.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
-.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
-.article-body p{margin:0 0 14px}
-.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body h3{font-size:18px;font-weight:700;margin:28px 0 10px}
+.article-body h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+.article-body p{margin:0 0 16px}
+.article-body ul,.article-body ol{margin:0 0 16px;padding-left:24px}
 .article-body li{margin-bottom:6px}
 .article-body strong{font-weight:600}
 .article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
-  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13.5px;
   color:var(--accent)}
-.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
-  overflow-x:auto;margin:14px 0}
-.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+.article-body pre{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;margin:16px 0}
+.article-body pre code{background:none;padding:0;color:var(--text);font-size:13.5px;
   line-height:1.7;display:block}
-.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:10px 14px;text-align:left}
 .article-body th{background:var(--bg-2);font-weight:600}
 .article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
-  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
-.article-body .code-block{margin:14px 0}
+  padding:10px 18px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:16px 0}
+.article-body .code-block pre{margin:0}
 .article-body a{color:var(--brand)}
 .article-body a:hover{text-decoration:underline}
+.article-body figure{margin:16px 0}
+.article-body figcaption{display:none}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -528,12 +532,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>表中的字节数和范围以常见 GCC/OJ 环境为参考；选择时仍要以题目数据范围为准。一级竞赛代码需要保存较大整数时，直接检查是否应使用 <code>long long</code>，不扩展其他整数类型成员。</p>
 <h3 id="普通整数为什么优先用-int">普通整数为什么优先用 int</h3>
 <p><code>int</code> 能覆盖大多数一级题目的年龄、分数、计数和较小计算结果，写法也最直白：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> age </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">12</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 年龄是普通整数，12 远在 int 的常见范围内</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> studentCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">45</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 当前学生人数也适合用 int 保存</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int age = 12; // 年龄是普通整数，12 远在 int 的常见范围内int studentCount = 45; // 当前学生人数也适合用 int 保存</code></pre>
 <h3 id="什么时候需要-long-long">什么时候需要 long long</h3>
 <p>要同时检查<strong>输入值</strong>和<strong>计算结果</strong>。例如 100,000 个数，每个数最大是 100,000：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">最大总和 = 100000 × 100000 = 10000000000</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>最大总和 = 100000 × 100000 = 10000000000</code></pre>
 <p>每个输入都能放进 <code>int</code>，但总和 10,000,000,000 已经超过 <code>int</code> 的常见上限，所以保存总和的变量应使用 <code>long long</code>。</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">100000</span><span style="--0:#FFEB95">LL</span></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">100000</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 先按 long long 做乘法，再保存 10000000000</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>long long total = 100000LL * 100000; // 先按 long long 做乘法，再保存 10000000000</code></pre>
 <p><code>LL</code> 后缀说明这个整数常量按 <code>long long</code> 处理。不能只把左边改成 <code>long long</code>，却让右边先按范围较小的整数类型算完；<strong>中间结果溢出后，再放进更大的盒子也救不回来。</strong></p>
 <h3 id="怎样验证整数类型是否合适">怎样验证整数类型是否合适</h3>
 <ol>
@@ -601,7 +605,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </tbody>
 </table>
 <p>因此，“<code>float</code> 约有 6—7 位有效数字”不能理解成“永远保留小数点后 6—7 位”。把超过可靠位数的值保存进去时，末尾可能发生舍入：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">float</span><span style="--0:#D6DEEB;--1:#403F53"> roughValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">12345678.0</span><span style="--0:#FFEB95">f</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 8 位整数超过 float 常见可靠精度，末尾可能舍入</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> preciseValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">12345678.0</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // double 通常能可靠保留这 8 位数字</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>float roughValue = 12345678.0f; // 8 位整数超过 float 常见可靠精度，末尾可能舍入double preciseValue = 12345678.0; // double 通常能可靠保留这 8 位数字</code></pre>
 <p>小数常量 <code>3.14</code> 默认按 <code>double</code> 看待；写成 <code>3.14f</code> 才明确表示 <code>float</code> 常量。一级小数计算通常优先使用 <code>double</code>，除非题目明确要求其他类型。</p>
 <h3 id="为什么小数有时不是完全精确">为什么小数有时不是完全精确</h3>
 <p>计算机内部用二进制保存数据，很多十进制小数不能用有限位二进制准确写完。于是 <code>0.1</code>、<code>0.2</code> 这样的值在内部通常只是非常接近原数。</p>
@@ -621,7 +625,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <h2 id="03-char-字符类型">03 char 字符类型</h2>
 <p><code>char</code> 保存一个字符，常见大小是 1 字节。字符常量必须用<strong>单引号</strong>：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> grade </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // grade 保存单个等级字符 A</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> digit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">3</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // digit 保存字符 3，不是整数 3</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>char grade = 'A'; // grade 保存单个等级字符 Achar digit = '3'; // digit 保存字符 3，不是整数 3</code></pre>
 <p>下面三种写法表示的对象不同：</p>
 <table>
 <thead>
@@ -654,7 +658,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>普通 <code>char</code> 默认按有符号还是无符号解释，由编译器和平台决定。一级阶段把它用于普通单字符，不要依赖它保存负数，也不要把“1 字节”误解成“固定能保存 -128 到 127”。</p>
 <h2 id="04-bool-与逻辑值">04 bool 与逻辑值</h2>
 <p><code>bool</code> 只表示两种逻辑状态：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> recordReady </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 记录已经准备好，状态成立</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> answerCorrect </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">false</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 记录答案尚不正确，状态不成立</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>bool recordReady = true; // 记录已经准备好，状态成立bool answerCorrect = false; // 记录答案尚不正确，状态不成立</code></pre>
 <p><code>true</code> 和 <code>false</code> 必须小写。它们不是放在引号中的文字，也不是四种不同状态中的两个编号。</p>
 <p>在常见 GCC/OJ 环境中，<code>bool</code> 通常占 1 字节；这不表示它有 256 种逻辑状态，它的逻辑值仍只有 <code>false</code> 和 <code>true</code>。普通 <code>cout</code> 输出时，<code>false</code> 通常显示 0，<code>true</code> 通常显示 1。</p>
 <p>条件判断中，0 会被当作假，非 0 会被当作真。但写程序时应优先使用含义明确的状态名和比较条件，不要让读者猜一个数字代表什么。</p>
@@ -693,7 +697,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="05-类型转换">05 类型转换</h2>
 <p>有时已有数据的类型与当前需要的结果不同，程序会发生类型转换。本页只讲现有一级自测需要的三条规则，完整运算规则在下一页继续学习。</p>
 <h3 id="浮点数转整数向-0-截去小数部分">浮点数转整数：向 0 截去小数部分</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">3.8</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 原变量保存小数 -3.8</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> whole </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">(value);</span><span style="--0:#919F9F;--1:#5D6376"> // 转成 int 后向 0 截断，whole 得到 -3</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>double value = -3.8; // 原变量保存小数 -3.8int whole = int(value); // 转成 int 后向 0 截断，whole 得到 -3</code></pre>
 <table>
 <thead>
 <tr>
@@ -757,7 +761,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <p>判断结果时，要看小数<strong>在整数除法之前还是之后</strong>参与运算。整数除法已经算完后再出现 <code>0.0</code>，丢掉的小数部分不会回来。</p>
 <h3 id="取余只用于整数">取余只用于整数</h3>
 <p><code>%</code> 的两个操作数都必须是整数：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> remainder </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">7</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 7 除以 2 余 1，两个操作数都是整数</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>int remainder = 7 % 2; // 7 除以 2 余 1，两个操作数都是整数</code></pre>
 <p><code>7 % 2.5</code>、<code>3.14 % 2</code> 和 <code>8.0 % 3.0</code> 都不符合 C++ 的取余规则。需要处理浮点运算时，不能直接套用整数取余写法。</p>
 <h2 id="怎样选择类型">怎样选择类型</h2>
 <table>
@@ -800,14 +804,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 <h2 id="典型例题">典型例题</h2>
 <p>一个学习平台要保存一条统计记录：当前活跃学生数、历史提交总次数、平均分、等级字符，以及这条记录是否已经准备好。五项数据属于同一条记录，但含义和范围不同。</p>
 <h3 id="完成程序">完成程序</h3>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> activeStudents;</span><span style="--0:#919F9F;--1:#5D6376"> // 当前活跃人数是普通范围内的整数</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> totalSubmissions;</span><span style="--0:#919F9F;--1:#5D6376"> // 历史提交总次数可能超过 int 上限</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> averageScore;</span><span style="--0:#919F9F;--1:#5D6376"> // 平均分可能带小数，优先使用 double</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> level;</span><span style="--0:#919F9F;--1:#5D6376"> // 等级只需要保存一个字符</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> activeStudents </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> totalSubmissions </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> averageScore </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> level;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> recordReady </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 四项数据读入后，把“记录已准备”保存为真</span></div></div><div class="ec-line"><div class="code">
-</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">active students: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> activeStudents </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">total submissions: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> totalSubmissions </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">average score: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> averageScore </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">level: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> level </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">record ready: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> recordReady </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>#include &lt;bits/stdc++.h&gt;using namespace std;
+int main() {    int activeStudents; // 当前活跃人数是普通范围内的整数    long long totalSubmissions; // 历史提交总次数可能超过 int 上限    double averageScore; // 平均分可能带小数，优先使用 double    char level; // 等级只需要保存一个字符
+    cin &gt;&gt; activeStudents &gt;&gt; totalSubmissions &gt;&gt; averageScore &gt;&gt; level;    bool recordReady = true; // 四项数据读入后，把“记录已准备”保存为真
+    cout &lt;&lt; "active students: " &lt;&lt; activeStudents &lt;&lt; endl;    cout &lt;&lt; "total submissions: " &lt;&lt; totalSubmissions &lt;&lt; endl;    cout &lt;&lt; "average score: " &lt;&lt; averageScore &lt;&lt; endl;    cout &lt;&lt; "level: " &lt;&lt; level &lt;&lt; endl;    cout &lt;&lt; "record ready: " &lt;&lt; recordReady &lt;&lt; endl;    return 0;}</code></pre>
 <p>输入：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">45 8000000000 92.5 A</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>45 8000000000 92.5 A</code></pre>
 <p>输出：</p>
-<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">active students: 45</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">total submissions: 8000000000</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">average score: 92.5</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">level: A</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">record ready: 1</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<pre><code>active students: 45total submissions: 8000000000average score: 92.5level: Arecord ready: 1</code></pre>
 <p>执行过程：</p>
 <table>
 <thead>
@@ -867,7 +871,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 </ol>
 <h2 id="关联学习">关联学习</h2>
 <p><a href="/gesp/level1/operations/">基本运算</a>会继续讲整数除法、取余、运算顺序和不同类型共同参与计算时的结果。</p>
-<section aria-labelledby="related-knowledge-data-types"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-data-types" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/variables-expressions/" class="astro-mkwt4ymd">程序基本概念</a></li></ul></section>
+<section aria-labelledby="related-knowledge-data-types"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-data-types" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/variables-expressions/" class="astro-mkwt4ymd">程序基本概念</a></li></ul></section></div></section>
     </article>
 
     <div class="kp-nav-row">

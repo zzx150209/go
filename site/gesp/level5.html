@@ -295,6 +295,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   transition:.15s;font-family:inherit;text-align:left}
 .kp-toggle:hover{text-decoration:underline}
 
+/* 知识点详情页 */
+.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  color:var(--accent);font-size:18px;flex:0 0 auto}
+.kp-h2{font-size:20px;font-weight:700;margin:28px 0 12px}
+.kp-pts{margin:0;padding-left:20px;font-size:14px;color:var(--text);line-height:1.9}
+.kp-pts li{margin-bottom:8px}
+.kp-tips{margin:0;padding-left:20px;font-size:14px;color:var(--accent-text);line-height:1.9}
+.kp-tips li{margin-bottom:8px}
+.kp-nav-row{display:flex;justify-content:space-between;gap:12px;
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.kp-nav{font-size:13px;color:var(--brand);text-decoration:none}
+.kp-nav:hover{text-decoration:underline}
+.side-h{display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;font-weight:700;padding:10px 12px;border-radius:6px;
+  background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
+.side-h span{font-size:11px;color:var(--text-3);font-weight:500}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -386,7 +406,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <div class="side-box">
       <div class="side-h">五级总览 <span>12</span></div>
       <div class="side-g">5 级知识点</div>
-      <ul class="side-list"><li><a href="#kp1"><span class="n">01</span><span>初等数论基础</span></a></li><li><a href="#kp2"><span class="n">02</span><span>最大公约数</span></a></li><li><a href="#kp3"><span class="n">03</span><span>素数筛法</span></a></li><li><a href="#kp4"><span class="n">04</span><span>质因数分解</span></a></li><li><a href="#kp5"><span class="n">05</span><span>高精度运算</span></a></li><li><a href="#kp6"><span class="n">06</span><span>链表</span></a></li><li><a href="#kp7"><span class="n">07</span><span>顺序查找</span></a></li><li><a href="#kp8"><span class="n">08</span><span>二分答案</span></a></li><li><a href="#kp9"><span class="n">09</span><span>贪心算法</span></a></li><li><a href="#kp10"><span class="n">10</span><span>分治与排序</span></a></li><li><a href="#kp11"><span class="n">11</span><span>递归</span></a></li><li><a href="#kp12"><span class="n">12</span><span>复杂度与数据范围</span></a></li></ul>
+      <ul class="side-list"><li><a href="kp1.html"><span class="n">01</span><span>初等数论基础</span></a></li><li><a href="kp2.html"><span class="n">02</span><span>最大公约数</span></a></li><li><a href="kp3.html"><span class="n">03</span><span>素数筛法</span></a></li><li><a href="kp4.html"><span class="n">04</span><span>质因数分解</span></a></li><li><a href="kp5.html"><span class="n">05</span><span>高精度运算</span></a></li><li><a href="kp6.html"><span class="n">06</span><span>链表</span></a></li><li><a href="kp7.html"><span class="n">07</span><span>顺序查找</span></a></li><li><a href="kp8.html"><span class="n">08</span><span>二分答案</span></a></li><li><a href="kp9.html"><span class="n">09</span><span>贪心算法</span></a></li><li><a href="kp10.html"><span class="n">10</span><span>分治与排序</span></a></li><li><a href="kp11.html"><span class="n">11</span><span>递归</span></a></li><li><a href="kp12.html"><span class="n">12</span><span>复杂度与数据范围</span></a></li></ul>
     </div>
   </aside>
 
@@ -411,300 +431,102 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <div class="sec-head"><h3>5 级知识点</h3>
       <span class="hint">共 12 个知识点，按官方大纲顺序排列</span></div>
     <div class="kp-grid">
-      <div class="kp" id="kp1">
+      <a class="kp" href="kp1.html">
         <div class="kp-top"><span class="no">01</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>初等数论基础</h4>
         <p>掌握整除与约数、素数与互质、同余与余数。</p>
         <div class="tags"><span>整除约数</span><span>同余</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>整除：a 能被 b 整除（b|a）意味着 a = b×k 没有余数。</li><li>约数：如果 b|a，b 就是 a 的约数；倍数：a 是 b 的倍数。</li><li>素数（质数）：大于 1 且只有 1 和自身两个约数的数。</li><li>互质：两个数的最大公约数为 1。同余：a 和 b 除以 m 余数相同。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>1 不是素数，2 是最小的素数也是唯一的偶素数。</li><li>判断素数只需试除到 √n，因为因数成对出现。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp2">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp2.html">
         <div class="kp-top"><span class="no">02</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>最大公约数</h4>
         <p>用欧几里得算法求最大公约数，并推导最小公倍数与分数约分。</p>
         <div class="tags"><span>辗转相除</span><span>最小公倍数</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>欧几里得算法（辗转相除法）：gcd(a,b) = gcd(b, a%b)，直到 b=0。</li><li>最小公倍数 lcm(a,b) = a / gcd(a,b) * b（先除后乘防止溢出）。</li><li>分数约分：分子分母同除以 gcd。</li><li>C++17 有 std::gcd 和 std::lcm，需要 &lt;numeric&gt;。</li></ul></div>
-            <div class="kp-code"><pre>int gcd(int a, int b) {
-    return b == 0 ? a : gcd(b, a % b);
-}
-
-int lcm(int a, int b) {
-    return a / gcd(a, b) * b;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>a 和 b 顺序不影响结果，gcd(a,b)=gcd(b,a)。</li><li>用 long long 防止乘法溢出。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp3">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp3.html">
         <div class="kp-top"><span class="no">03</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>素数筛法</h4>
         <p>掌握埃氏筛与线性筛，实现素数表查询。</p>
         <div class="tags"><span>埃氏筛</span><span>线性筛</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>埃氏筛：从 2 开始，把每个素数的倍数标记为合数，O(n log log n)。</li><li>线性筛（欧拉筛）：每个合数只被最小质因子筛一次，O(n)。</li><li>筛法预处理后，O(1) 查询一个数是否为素数。</li><li>bool isPrime[N] 数组标记，初始全 true，0 和 1 标 false。</li></ul></div>
-            <div class="kp-code"><pre>const int N = 1000005;
-bool isPrime[N];
-vector&lt;int&gt; primes;
-
-void sieve(int n) {
-    fill(isPrime, isPrime+n+1, true);
-    isPrime[0] = isPrime[1] = false;
-    for (int i = 2; i &lt;= n; i++) {
-        if (isPrime[i]) {
-            primes.push_back(i);
-            for (long long j = 1LL*i*i; j &lt;= n; j += i)
-                isPrime[j] = false;
-        }
-    }
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>筛法从 i*i 开始标记更小倍数已被前面筛过。</li><li>i*i 可能溢出 int，用 long long。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp4">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp4.html">
         <div class="kp-top"><span class="no">04</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>质因数分解</h4>
         <p>写出标准分解式，求约数个数与约数和。</p>
         <div class="tags"><span>分解式</span><span>约数个数</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>任何大于 1 的整数都可以唯一分解为素数的乘积：n = p1^e1 × p2^e2 × ...。</li><li>分解方法：从最小素数开始试除，记录每个素因子的指数。</li><li>约数个数：(e1+1)(e2+1)...，每个质因子可取 0 到 ei 次。</li><li>约数和：(1+p1+...+p1^e1)(1+p2+...+p2^e2)...。</li></ul></div>
-            <div class="kp-code"><pre>map&lt;int,int&gt; factorize(int n) {
-    map&lt;int,int&gt; factors;
-    for (int i = 2; i*i &lt;= n; i++) {
-        while (n % i == 0) {
-            factors[i]++;
-            n /= i;
-        }
-    }
-    if (n &gt; 1) factors[n]++;
-    return factors;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>试除到 √n，如果最后 n&gt;1 说明 n 本身是素数。</li><li>约数个数可能很大，用 long long。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp5">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp5.html">
         <div class="kp-top"><span class="no">05</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>高精度运算</h4>
         <p>用数组存储大整数，处理进位借位以及与普通整数的乘除。</p>
         <div class="tags"><span>进位借位</span><span>大整数</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>超过 long long 范围的大整数用数组（或 string）逐位存储。</li><li>加法：从低位到高位逐位相加，处理进位。</li><li>乘法：大数乘以一位数，逐位乘加进位；大整数相乘用双重循环。</li><li>存储时通常低位在前（a[0] 存个位），方便进位。</li></ul></div>
-            <div class="kp-code"><pre>// 大数加法（低位在前）
-vector&lt;int&gt; add(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b) {
-    vector&lt;int&gt; c;
-    int carry = 0;
-    for (int i = 0; i &lt; max(a.size(), b.size()) || carry; i++) {
-        if (i &lt; a.size()) carry += a[i];
-        if (i &lt; b.size()) carry += b[i];
-        c.push_back(carry % 10);
-        carry /= 10;
-    }
-    return c;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>低位在前存储，输出时倒序打印。</li><li>注意前导零问题和负数处理。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp6">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp6.html">
         <div class="kp-top"><span class="no">06</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>链表</h4>
         <p>掌握单向与双向链表的插入、删除与反转，会用数组模拟。</p>
         <div class="tags"><span>链表操作</span><span>数组模拟</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>链表通过指针把节点串联，每个节点包含数据和指向下一节点的指针。</li><li>插入删除只需修改指针，不需要移动元素，但查找需从头遍历。</li><li>双向链表每个节点有前驱和后继指针。</li><li>数组模拟链表：用数组存数据和 next 指针，避免动态分配。</li></ul></div>
-            <div class="kp-code"><pre>struct Node {
-    int val;
-    Node* next;
-    Node(int v) : val(v), next(nullptr) {}
-};
-
-// 在头部插入
-Node* head = nullptr;
-void insertFront(int v) {
-    Node* p = new Node(v);
-    p-&gt;next = head;
-    head = p;
-}
-
-// 数组模拟链表
-int val[100005], nxt[100005], cnt = 0;</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>动态分配的节点要手动 delete，否则内存泄漏。</li><li>竞赛中推荐用数组模拟链表，更快更安全。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp7">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp7.html">
         <div class="kp-top"><span class="no">07</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>顺序查找</h4>
         <p>实现精确查找与左右边界查找，统计出现次数。</p>
         <div class="tags"><span>精确查找</span><span>左右边界</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>顺序查找：从头到尾逐个比较，O(n)，适合无序或小数据。</li><li>统计出现次数：遍历一遍计数。</li><li>左右边界查找：找到第一个 &gt;= x 的位置和第一个 &gt; x 的位置。</li><li>有序数组可用二分查找把 O(n) 降到 O(log n)。</li></ul></div>
-            <div class="kp-code"><pre>int search(int a[], int n, int x) {
-    for (int i = 0; i &lt; n; i++)
-        if (a[i] == x) return i;
-    return -1; // 未找到
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>顺序查找简单但效率低，大数据量用二分。</li><li>找到后不要忘记 break 或 return。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp8">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp8.html">
         <div class="kp-top"><span class="no">08</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>二分答案</h4>
         <p>判断单调性，求最小可行值与最大可行值。</p>
         <div class="tags"><span>单调判定</span><span>边界取值</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>二分答案适用于：答案具有单调性（满足条件后更大/更小也满足）。</li><li>二分范围 [l, r]，取 mid 判断 check(mid)，根据结果收缩区间。</li><li>求最小可行值：check(mid) 为真时尝试更小（r=mid-1），否则 l=mid+1。</li><li>check 函数是核心，要正确实现判定逻辑。</li></ul></div>
-            <div class="kp-code"><pre>bool check(int x) { /* 判断 x 是否可行 */ }
-
-int binaryAnswer(int lo, int hi) {
-    int ans = lo;
-    while (lo &lt;= hi) {
-        int mid = (lo + hi) / 2;
-        if (check(mid)) {
-            ans = mid;
-            hi = mid - 1;  // 尝试更小
-        } else {
-            lo = mid + 1;
-        }
-    }
-    return ans;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>上下界要根据题目确定好，答案可能是浮点型（浮点二分）。</li><li>mid = (l+r)/2 可能溢出，用 l+(r-l)/2。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp9">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp9.html">
         <div class="kp-top"><span class="no">09</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>贪心算法</h4>
         <p>完成贪心选择、排序后构造，并用交换论证说明正确性。</p>
         <div class="tags"><span>贪心选择</span><span>交换论证</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>贪心：每步选当前最优的选择，期望得到全局最优。</li><li>关键是证明贪心策略正确（交换论证：换一种选择不会更好）。</li><li>常见策略：按某关键字排序后依次选择，如区间调度、分数背包。</li><li>贪心不一定正确，必须证明或反例验证。</li></ul></div>
-            <div class="kp-code"><pre>// 区间调度：最多选多少个不重叠区间
-struct Interval { int l, r; };
-bool cmp(Interval a, Interval b) { return a.r &lt; b.r; }
-
-int maxIntervals(Interval v[], int n) {
-    sort(v, v+n, cmp);
-    int cnt = 0, lastEnd = -1e9;
-    for (int i = 0; i &lt; n; i++) {
-        if (v[i].l &gt;= lastEnd) {
-            cnt++;
-            lastEnd = v[i].r;
-        }
-    }
-    return cnt;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>贪心题先排序再决策，想清楚按什么关键字排序。</li><li>如果不确定贪心是否正确，考虑动态规划。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp10">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp10.html">
         <div class="kp-top"><span class="no">10</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>分治与排序</h4>
         <p>掌握分治三步，实现归并排序与快速排序。</p>
         <div class="tags"><span>分治三步</span><span>归并快排</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>分治三步：分解（把问题分成子问题）→ 解决（递归求解）→ 合并（合并结果）。</li><li>归并排序：分成两半分别排序，再合并两个有序数组，O(n log n)，稳定。</li><li>快速排序：选基准元素，小于放左边大于放右边，递归处理，平均 O(n log n)。</li><li>分治的关键是合并步骤要高效。</li></ul></div>
-            <div class="kp-code"><pre>// 归并排序核心
-void mergeSort(int a[], int l, int r) {
-    if (l &gt;= r) return;
-    int mid = (l + r) / 2;
-    mergeSort(a, l, mid);
-    mergeSort(a, mid+1, r);
-    // 合并 a[l..mid] 和 a[mid+1..r]
-    int i = l, j = mid+1, k = 0;
-    while (i &lt;= mid &amp;&amp; j &lt;= r) {
-        if (a[i] &lt;= a[j]) tmp[k++] = a[i++];
-        else tmp[k++] = a[j++];
-    }
-    while (i &lt;= mid) tmp[k++] = a[i++];
-    while (j &lt;= r) tmp[k++] = a[j++];
-    for (i = 0; i &lt; k; i++) a[l+i] = tmp[i];
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>归并排序需要 O(n) 额外空间存临时数组。</li><li>快排在最坏情况（已排序+选端点）退化为 O(n²)。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp11">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp11.html">
         <div class="kp-top"><span class="no">11</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>递归</h4>
         <p>明确递归出口，理解调用与返回过程，完成递归枚举。</p>
         <div class="tags"><span>递归出口</span><span>递归枚举</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>递归：函数直接或间接调用自己，必须有递归出口（base case）。</li><li>递归三要素：出口条件、递归关系、返回值。</li><li>递归过程：逐层调用 → 到达出口 → 逐层返回计算结果。</li><li>经典：阶乘、斐波那契、汉诺塔、二叉树遍历（后续学）。</li></ul></div>
-            <div class="kp-code"><pre>int factorial(int n) {
-    if (n &lt;= 1) return 1;       // 出口
-    return n * factorial(n - 1); // 递归
-}
-
-// 汉诺塔
-void hanoi(int n, char a, char b, char c) {
-    if (n == 0) return;
-    hanoi(n-1, a, c, b);
-    cout &lt;&lt; a &lt;&lt; &quot;-&gt;&quot; &lt;&lt; c &lt;&lt; endl;
-    hanoi(n-1, b, a, c);
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>没有出口或出口错误会导致栈溢出（无限递归）。</li><li>递归深度太大（如 10^6）会爆栈，改用循环。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp12">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp12.html">
         <div class="kp-top"><span class="no">12</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>复杂度与数据范围</h4>
         <p>根据数据范围判断算法是否可行，选择合适复杂度。</p>
         <div class="tags"><span>数据范围</span><span>复杂度判断</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>根据数据范围选择算法：n≤20 可用 O(2ⁿ) 枚举，n≤1000 可用 O(n²)，n≤10⁶ 用 O(n log n)。</li><li>空间复杂度也要考虑：数组大小不能超过内存限制（通常 256MB）。</li><li>long long 比 int 占一倍空间，注意数组大小。</li><li>常数因子也重要：O(n) 的沉重实现可能比 O(n log n) 慢。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>1秒时限：O(n) 可到 10⁷，O(n²) 可到 10000，O(n³) 可到 500。</li><li>内存 256MB 约可开 3×10⁷ 个 int 数组。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div></div>
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a></div>
 
     <section class="sec" style="margin-top:46px">
       <h2>其他等级</h2>
@@ -757,30 +579,9 @@ void hanoi(int n, char a, char b, char c) {
     localStorage.setItem("lastLevel", n);
     var seen=JSON.parse(localStorage.getItem("reviewed")||"{}");
     var c=(seen[n]||[]).length;
-    document.getElementById("p1").textContent=c+"/"+total;
+    var el=document.getElementById("p1");
+    if(el)el.textContent=c+"/"+total;
   }catch(e){}
-  var kps=[].slice.call(document.querySelectorAll(".kp"));
-  kps.forEach(function(el){
-    el.addEventListener("click",function(e){
-      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
-      var st=el.querySelector(".state");
-      st.textContent="已复习"; st.style.color="var(--brand)";
-      try{
-        var seen=JSON.parse(localStorage.getItem("reviewed")||"{}");
-        var arr=seen[n]||[];
-        if(arr.indexOf(el.id)===-1) arr.push(el.id);
-        seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
-        document.getElementById("p1").textContent=arr.length+"/"+total;
-      }catch(e){}
-    });
-  });
-  document.querySelectorAll(".kp-toggle").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var detail=this.previousElementSibling;
-      var open=detail.classList.toggle("open");
-      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
-    });
-  });
 })();
 </script>
 

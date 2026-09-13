@@ -316,6 +316,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   transition:.15s;font-family:inherit;text-align:left}
 .kp-toggle:hover{text-decoration:underline}
 
+/* 知识点详情页 */
+.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  color:var(--accent);font-size:18px;flex:0 0 auto}
+.kp-h2{font-size:20px;font-weight:700;margin:28px 0 12px}
+.kp-pts{margin:0;padding-left:20px;font-size:14px;color:var(--text);line-height:1.9}
+.kp-pts li{margin-bottom:8px}
+.kp-tips{margin:0;padding-left:20px;font-size:14px;color:var(--accent-text);line-height:1.9}
+.kp-tips li{margin-bottom:8px}
+.kp-nav-row{display:flex;justify-content:space-between;gap:12px;
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.kp-nav{font-size:13px;color:var(--brand);text-decoration:none}
+.kp-nav:hover{text-decoration:underline}
+.side-h{display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;font-weight:700;padding:10px 12px;border-radius:6px;
+  background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
+.side-h span{font-size:11px;color:var(--text-3);font-weight:500}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -750,34 +770,21 @@ def build_level(n):
     total = len(kps)
 
     side = "".join(
-        f'<li><a href="#kp{i}"><span class="n">{i:02d}</span><span>{E(k[0])}</span></a></li>'
+        f'<li><a href="kp{i}.html"><span class="n">{i:02d}</span><span>{E(k[0])}</span></a></li>'
         for i, k in enumerate(kps, 1))
 
     grid = ""
     for i, (t, d, tags) in enumerate(kps, 1):
         tg = "".join(f"<span>{E(x)}</span>" for x in tags)
-        det = KP_DETAILS.get(t, {"points": [], "code": None, "tips": []})
-        pts = "".join(f"<li>{E(p)}</li>" for p in det["points"])
-        tips = "".join(f"<li>{E(tp)}</li>" for tp in det["tips"])
-        code_block = ""
-        if det.get("code"):
-            code_block = (f'<div class="kp-code"><pre>{E(det["code"])}</pre></div>')
         grid += f"""
-      <div class="kp" id="kp{i}">
+      <a class="kp" href="kp{i}.html">
         <div class="kp-top"><span class="no">{i:02d}</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>{E(t)}</h4>
         <p>{E(d)}</p>
         <div class="tags">{tg}</div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts">{pts}</ul></div>
-            {code_block}
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips">{tips}</ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>"""
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>"""
 
     others = ""
     for i in range(1, 9):
@@ -838,35 +845,104 @@ def build_level(n):
     localStorage.setItem("lastLevel", n);
     var seen=JSON.parse(localStorage.getItem("reviewed")||"{{}}");
     var c=(seen[n]||[]).length;
-    document.getElementById("p1").textContent=c+"/"+total;
+    var el=document.getElementById("p1");
+    if(el)el.textContent=c+"/"+total;
   }}catch(e){{}}
-  var kps=[].slice.call(document.querySelectorAll(".kp"));
-  kps.forEach(function(el){{
-    el.addEventListener("click",function(e){{
-      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
-      var st=el.querySelector(".state");
-      st.textContent="已复习"; st.style.color="var(--brand)";
-      try{{
-        var seen=JSON.parse(localStorage.getItem("reviewed")||"{{}}");
-        var arr=seen[n]||[];
-        if(arr.indexOf(el.id)===-1) arr.push(el.id);
-        seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
-        document.getElementById("p1").textContent=arr.length+"/"+total;
-      }}catch(e){{}}
-    }});
-  }});
-  document.querySelectorAll(".kp-toggle").forEach(function(btn){{
-    btn.addEventListener("click",function(){{
-      var detail=this.previousElementSibling;
-      var open=detail.classList.toggle("open");
-      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
-    }});
-  }});
 }})();
 </script>
 """
     return page(f"GESP {n} 级 | {SITE_NAME}",
                 f"GESP {n} 级知识点整理：{intro_text}", body, "gesp", prefix="../")
+
+
+def build_kp_page(n, kp_idx):
+    """n=等级(1-8), kp_idx=知识点序号(1-based)"""
+    kicker = LEVELS[n][0]
+    kps = LEVELS[n][3]
+    total = len(kps)
+    title, desc, tags = kps[kp_idx - 1]
+    det = KP_DETAILS.get(title, {"points": [], "code": None, "tips": []})
+
+    # 侧边栏
+    side = "".join(
+        f'<li><a href="kp{i}.html"{" class=\"active\"" if i==kp_idx else ""}>'
+        f'<span class="n">{i:02d}</span><span>{E(k[0])}</span></a></li>'
+        for i, k in enumerate(kps, 1))
+
+    # 核心要点
+    pts_html = "".join(f"<li>{E(p)}</li>" for p in det["points"])
+    # 代码
+    code_html = ""
+    if det.get("code"):
+        code_html = f'<div class="kp-code"><pre>{E(det["code"])}</pre></div>'
+    # 注意事项
+    tips_html = "".join(f"<li>{E(tp)}</li>" for tp in det["tips"])
+    # 检索词
+    tags_html = "".join(f"<span>{E(x)}</span>" for x in tags)
+
+    # 上一个/下一个
+    prev_link = next_link = ""
+    if kp_idx > 1:
+        pt, pd, _ = kps[kp_idx - 2]
+        prev_link = f'<a class="kp-nav" href="kp{kp_idx-1}.html">← 上一个：{E(pt)}</a>'
+    if kp_idx < total:
+        nt, nd, _ = kps[kp_idx]
+        next_link = f'<a class="kp-nav" href="kp{kp_idx+1}.html">下一个：{E(nt)} →</a>'
+
+    body = f"""
+<main class="wrap" style="padding-top:40px">
+<div class="layout">
+  <aside class="side">
+    <div class="side-box">
+      <a class="side-h" href="level{n}.html">{CN_NUM[n-1]}级总览 <span>{total}</span></a>
+      <div class="side-g">{n} 级知识点</div>
+      <ul class="side-list">{side}</ul>
+    </div>
+  </aside>
+
+  <div class="kp-content">
+    <div class="crumb"><a href="../../index.html">{SITE_NAME}</a> · <a href="../gesp.html">GESP</a> · {n}级 · {E(title)}</div>
+    <h1 style="font-size:clamp(26px,4vw,38px);font-weight:700;margin:0 0 24px;line-height:1.2">{E(title)}</h1>
+
+    <div class="kp-summary">
+      <div class="kp-summary-no">{kp_idx:02d}</div>
+      <div>
+        <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px">GESP {n}级知识字典 · 知识点 {kp_idx:02d}</div>
+        <p style="margin:0;font-size:14px;color:var(--text);line-height:1.7">{E(desc)}</p>
+        <div style="margin-top:8px;font-size:12px;color:var(--text-3)">检索词：{tags_html}</div>
+      </div>
+    </div>
+
+    <h2 class="kp-h2">本课先记住</h2>
+    <ul class="kp-pts">{pts_html}</ul>
+
+    {code_html}
+
+    <h2 class="kp-h2">注意事项</h2>
+    <ul class="kp-tips">{tips_html}</ul>
+
+    <div class="kp-nav-row">
+      {prev_link}
+      <a class="kp-nav" href="level{n}.html">← 返回{n}级总览</a>
+      {next_link}
+    </div>
+  </div>
+</div>
+</main>
+
+<script>
+(function(){{
+  var n="{n}", kp="{kp_idx}";
+  try{{
+    var seen=JSON.parse(localStorage.getItem("reviewed")||"{{}}");
+    var arr=seen[n]||[];
+    if(arr.indexOf(kp)===-1){{arr.push(kp);seen[n]=arr;localStorage.setItem("reviewed",JSON.stringify(seen));}}
+  }}catch(e){{}}
+}})();
+</script>
+"""
+    return page(f"{title} | GESP {n}级 | {SITE_NAME}",
+                f"GESP {n}级知识点：{title}。{desc}", body, "gesp", prefix="../../")
 
 
 def build_csp():
@@ -1107,6 +1183,8 @@ def main():
     ]
     for n in range(1, 9):
         files.append((f"gesp/level{n}.html", build_level(n)))
+        for kp_i in range(1, len(LEVELS[n][3]) + 1):
+            files.append((f"gesp/level{n}/kp{kp_i}.html", build_kp_page(n, kp_i)))
 
     for rel, content in files:
         write(rel, content)

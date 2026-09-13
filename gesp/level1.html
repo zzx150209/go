@@ -295,6 +295,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   transition:.15s;font-family:inherit;text-align:left}
 .kp-toggle:hover{text-decoration:underline}
 
+/* 知识点详情页 */
+.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  color:var(--accent);font-size:18px;flex:0 0 auto}
+.kp-h2{font-size:20px;font-weight:700;margin:28px 0 12px}
+.kp-pts{margin:0;padding-left:20px;font-size:14px;color:var(--text);line-height:1.9}
+.kp-pts li{margin-bottom:8px}
+.kp-tips{margin:0;padding-left:20px;font-size:14px;color:var(--accent-text);line-height:1.9}
+.kp-tips li{margin-bottom:8px}
+.kp-nav-row{display:flex;justify-content:space-between;gap:12px;
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.kp-nav{font-size:13px;color:var(--brand);text-decoration:none}
+.kp-nav:hover{text-decoration:underline}
+.side-h{display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;font-weight:700;padding:10px 12px;border-radius:6px;
+  background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
+.side-h span{font-size:11px;color:var(--text-3);font-weight:500}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -386,7 +406,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <div class="side-box">
       <div class="side-h">一级总览 <span>10</span></div>
       <div class="side-g">1 级知识点</div>
-      <ul class="side-list"><li><a href="#kp1"><span class="n">01</span><span>计算机基础知识</span></a></li><li><a href="#kp2"><span class="n">02</span><span>集成开发环境</span></a></li><li><a href="#kp3"><span class="n">03</span><span>程序基本结构</span></a></li><li><a href="#kp4"><span class="n">04</span><span>输入输出语句</span></a></li><li><a href="#kp5"><span class="n">05</span><span>程序基本概念</span></a></li><li><a href="#kp6"><span class="n">06</span><span>基本数据类型</span></a></li><li><a href="#kp7"><span class="n">07</span><span>基本运算</span></a></li><li><a href="#kp8"><span class="n">08</span><span>顺序结构</span></a></li><li><a href="#kp9"><span class="n">09</span><span>分支结构</span></a></li><li><a href="#kp10"><span class="n">10</span><span>循环结构</span></a></li></ul>
+      <ul class="side-list"><li><a href="kp1.html"><span class="n">01</span><span>计算机基础知识</span></a></li><li><a href="kp2.html"><span class="n">02</span><span>集成开发环境</span></a></li><li><a href="kp3.html"><span class="n">03</span><span>程序基本结构</span></a></li><li><a href="kp4.html"><span class="n">04</span><span>输入输出语句</span></a></li><li><a href="kp5.html"><span class="n">05</span><span>程序基本概念</span></a></li><li><a href="kp6.html"><span class="n">06</span><span>基本数据类型</span></a></li><li><a href="kp7.html"><span class="n">07</span><span>基本运算</span></a></li><li><a href="kp8.html"><span class="n">08</span><span>顺序结构</span></a></li><li><a href="kp9.html"><span class="n">09</span><span>分支结构</span></a></li><li><a href="kp10.html"><span class="n">10</span><span>循环结构</span></a></li></ul>
     </div>
   </aside>
 
@@ -411,200 +431,86 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <div class="sec-head"><h3>1 级知识点</h3>
       <span class="hint">共 10 个知识点，按官方大纲顺序排列</span></div>
     <div class="kp-grid">
-      <div class="kp" id="kp1">
+      <a class="kp" href="kp1.html">
         <div class="kp-top"><span class="no">01</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>计算机基础知识</h4>
         <p>认识计算机的发展、组成、软硬件、操作系统与文件目录。</p>
         <div class="tags"><span>计算机组成</span><span>软硬件</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>硬件是计算机的实体部分，包括 CPU、内存、硬盘、主板、输入输出设备等，看得见摸得着。</li><li>软件是指挥硬件工作的程序和数据，分为系统软件（操作系统）和应用软件（浏览器、编辑器等）。</li><li>CPU 负责运算和控制，内存临时保存正在运行的程序和数据，硬盘长期保存文件。</li><li>输入设备把外部信息送入计算机（键盘、鼠标、麦克风），输出设备把结果呈现出来（显示器、打印机、扬声器）。</li><li>计算机内部用二进制（0 和 1）表示所有信息，因为电子元件只有通电和断电两种稳定状态。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>触摸屏既是输入设备也是输出设备，判断时看信息流向。</li><li>改文件扩展名不会改变文件内容，.cpp 源文件必须编译后才能运行。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp2">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp2.html">
         <div class="kp-top"><span class="no">02</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>集成开发环境</h4>
         <p>完成编辑、编译、运行和调试，判断常见程序错误。</p>
         <div class="tags"><span>IDE</span><span>编译调试</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>IDE（集成开发环境）把编辑、编译、运行、调试四个功能整合在一个软件中。</li><li>写代码用编辑器，保存后编译器把 .cpp 源文件翻译成可执行程序（.exe），再由运行环境执行。</li><li>常见错误有：语法错误（编译时报错）、链接错误（找不到函数）、运行时错误（程序崩溃）、逻辑错误（结果不对）。</li><li>调试时可以在关键位置打断点，逐行执行并查看变量值，定位逻辑问题。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>编译错误看行号和提示，先改第一个错误，后面的可能是连锁反应。</li><li>程序运行结果不对时，用 cout 输出中间变量值来追踪。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp3">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp3.html">
         <div class="kp-top"><span class="no">03</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>程序基本结构</h4>
         <p>理解头文件、命名空间、main 函数、语句、代码块和注释。</p>
         <div class="tags"><span>main函数</span><span>程序框架</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>一个最简单的 C++ 程序包含：头文件包含（#include）、命名空间声明（using namespace std）、main 函数。</li><li>main 函数是程序的入口，程序从 main 的第一条语句开始执行，到 return 0 结束。</li><li>每条语句以分号结尾，大括号 { } 表示一个代码块。</li><li>注释有两种：// 单行注释 和 /* 多行注释 */，编译器忽略注释内容。</li></ul></div>
-            <div class="kp-code"><pre>#include &lt;iostream&gt;
-using namespace std;
-
-int main() {
-    cout &lt;&lt; &quot;Hello, World!&quot; &lt;&lt; endl;
-    return 0;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>return 0 表示程序正常结束，main 函数必须有返回值类型 int。</li><li>cout 输出时需要换行用 endl 或 &#x27;\n&#x27;。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp4">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp4.html">
         <div class="kp-top"><span class="no">04</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>输入输出语句</h4>
         <p>使用 cin、cout、scanf、printf，并按题目要求控制输出格式。</p>
         <div class="tags"><span>cin-cout</span><span>scanf-printf</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>cin 用于从键盘读取数据，cout 用于向屏幕输出数据，都需要 #include &lt;iostream&gt;。</li><li>cin &gt;&gt; 变量 会跳过空格和换行，依次读取多个值。</li><li>cout &lt;&lt; 内容 可以连续输出，用 endl 换行。</li><li>scanf/printf 是 C 风格输入输出，格式化输出用 %d（整数）、%f（小数）、%c（字符）、%s（字符串）。</li></ul></div>
-            <div class="kp-code"><pre>int a, b;
-cin &gt;&gt; a &gt;&gt; b;              // 输入两个整数
-cout &lt;&lt; a + b &lt;&lt; endl;      // 输出和
-
-printf(&quot;%d %d\n&quot;, a, b);   // C 风格输出</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>cin 和 cin 不要混用 scanf/printf，避免不同步问题。</li><li>输出格式要严格按题目要求，包括空格、换行和小数位数。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp5">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp5.html">
         <div class="kp-top"><span class="no">05</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>程序基本概念</h4>
         <p>掌握标识符、关键字、常量、变量、赋值与表达式。</p>
         <div class="tags"><span>变量常量</span><span>标识符表达式</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>标识符是程序员自己起的名字（变量名、函数名），只能由字母、数字、下划线组成，不能以数字开头。</li><li>关键字是 C++ 保留的单词（int、if、for 等），不能用作标识符。</li><li>常量是程序运行中不改变的值（如 3.14、&#x27;hello&#x27;），变量是内存中可以改变的数据。</li><li>赋值语句 x = 5; 把右边的值存入左边的变量，等号是赋值不是数学等式。</li></ul></div>
-            <div class="kp-code"><pre>int a = 10;      // 定义变量a并赋初值
-int b = a + 5;   // b = 15
-a = a + 1;       // a = 11（自增）
-const double PI = 3.14159;  // 常量</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>变量必须先定义再使用，未初始化的变量值是随机的。</li><li>C++ 区分大小写，Age 和 age 是两个不同的变量。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp6">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp6.html">
         <div class="kp-top"><span class="no">06</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>基本数据类型</h4>
         <p>认识整型、浮点、字符和布尔类型的范围与选择方法。</p>
         <div class="tags"><span>int-double</span><span>char-bool</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>int 存储整数（约 -21 亿到 21 亿），double 存储小数（约 15 位有效数字）。</li><li>char 存储单个字符（如 &#x27;A&#x27;），bool 存储真（true）或假（false）。</li><li>整数除法会截断小数部分：7 / 2 = 3 而不是 3.5。</li><li>选择数据类型时看数值范围：小数用 double，超大整数用 long long。</li></ul></div>
-            <div class="kp-code"><pre>int a = 7, b = 2;
-double c = 7.0 / 2.0;   // c = 3.5
-double d = a / b;        // d = 3.0（整数除法先执行）
-char ch = &#x27;A&#x27;;           // 字符用单引号
-bool ok = true;          // 布尔值</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>整数除以整数结果还是整数，要得到小数至少有一个操作数是小数。</li><li>char 本质是整数，&#x27;A&#x27; 的 ASCII 值是 65。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp7">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp7.html">
         <div class="kp-top"><span class="no">07</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>基本运算</h4>
         <p>掌握算术、关系、逻辑、赋值、自增自减及优先级规则。</p>
         <div class="tags"><span>运算符</span><span>优先级</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>算术运算符：+、-、*、/、%（取余），注意整数除法和取余只对整数有效。</li><li>关系运算符：&gt;、&lt;、&gt;=、&lt;=、==（等于）、!=（不等于），结果为 true 或 false。</li><li>逻辑运算符：&amp;&amp;（并且）、||（或者）、!（非），优先级 ! &gt; &amp;&amp; &gt; ||。</li><li>赋值运算符：=、+=、-=、*=、/=，自增 ++ 和自减 --。</li></ul></div>
-            <div class="kp-code"><pre>int a = 10, b = 3;
-a + b   // 13
-a / b   // 3（整数除法）
-a % b   // 1（10除以3余1）
-(a &gt; 5) &amp;&amp; (b &lt; 5)  // true
-a++     // a变成11，先使用再加1
-++a     // a先加1再使用</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>== 是判断相等，= 是赋值，不要混淆。</li><li>负数取余的结果符号跟被除数有关，C++ 中 -7 % 3 = -1。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp8">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp8.html">
         <div class="kp-top"><span class="no">08</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>顺序结构</h4>
         <p>按顺序完成输入、计算和输出，并通过变量变化检查。</p>
         <div class="tags"><span>顺序执行</span><span>变量追踪</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>程序默认按语句书写顺序从上到下依次执行。</li><li>解题时通常三步：输入数据 → 计算处理 → 输出结果。</li><li>通过输出中间变量值可以追踪每一步发生了什么，帮助找错。</li><li>变量的最终值取决于最后一次赋值，之前的值会被覆盖。</li></ul></div>
-            <div class="kp-code"><pre>// 计算长方形面积和周长
-int length, width;
-cin &gt;&gt; length &gt;&gt; width;
-int area = length * width;       // 计算面积
-int peri = 2 * (length + width); // 计算周长
-cout &lt;&lt; area &lt;&lt; &quot; &quot; &lt;&lt; peri &lt;&lt; endl;</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>调试时在关键步骤加 cout 输出，确认变量值是否符合预期。</li><li>语句顺序很重要，先计算再输出，不要搞反。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp9">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp9.html">
         <div class="kp-top"><span class="no">09</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>分支结构</h4>
         <p>使用 if、if-else、else-if、switch 和三元运算处理不同情况。</p>
         <div class="tags"><span>if-else</span><span>switch-case</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>if (条件) { ... } 条件为真时执行大括号内的语句。</li><li>if-else 二选一：条件为真执行 if 块，否则执行 else 块。</li><li>else if 可以串联多个条件，从上到下依次判断，满足一个就执行。</li><li>switch 适合单值多分支判断，每个 case 后记得 break。</li></ul></div>
-            <div class="kp-code"><pre>int score;
-cin &gt;&gt; score;
-if (score &gt;= 90) cout &lt;&lt; &quot;A&quot; &lt;&lt; endl;
-else if (score &gt;= 80) cout &lt;&lt; &quot;B&quot; &lt;&lt; endl;
-else if (score &gt;= 60) cout &lt;&lt; &quot;C&quot; &lt;&lt; endl;
-else cout &lt;&lt; &quot;D&quot; &lt;&lt; endl;</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>if 后不要加分号，否则大括号内容不再受条件控制。</li><li>switch 中 case 不写 break 会继续执行后面的 case（穿透）。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp10">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp10.html">
         <div class="kp-top"><span class="no">10</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>循环结构</h4>
         <p>掌握三种循环与循环控制，解决累加、最值、位数、数列和枚举问题。</p>
         <div class="tags"><span>for-while</span><span>循环控制</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>for 循环适合已知次数：for(初始化; 条件; 更新) { ... }。</li><li>while 循环适合未知次数：while(条件) { ... }，条件为真时反复执行。</li><li>do-while 先执行一次再判断条件，至少执行一次。</li><li>break 跳出当前循环，continue 跳过本次循环直接进入下一次。</li></ul></div>
-            <div class="kp-code"><pre>// 计算 1 到 100 的和
-int sum = 0;
-for (int i = 1; i &lt;= 100; i++) {
-    sum += i;
-}
-cout &lt;&lt; sum &lt;&lt; endl;  // 5050
-
-// 累加输入直到输入0
-int x, total = 0;
-while (cin &gt;&gt; x &amp;&amp; x != 0) {
-    total += x;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>for 循环中循环变量建议在初始化处定义（for(int i=...）。</li><li>死循环：while(true) 需要用 break 退出，注意不要忘记出口。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div></div>
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a></div>
 
     <section class="sec" style="margin-top:46px">
       <h2>其他等级</h2>
@@ -657,30 +563,9 @@ while (cin &gt;&gt; x &amp;&amp; x != 0) {
     localStorage.setItem("lastLevel", n);
     var seen=JSON.parse(localStorage.getItem("reviewed")||"{}");
     var c=(seen[n]||[]).length;
-    document.getElementById("p1").textContent=c+"/"+total;
+    var el=document.getElementById("p1");
+    if(el)el.textContent=c+"/"+total;
   }catch(e){}
-  var kps=[].slice.call(document.querySelectorAll(".kp"));
-  kps.forEach(function(el){
-    el.addEventListener("click",function(e){
-      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
-      var st=el.querySelector(".state");
-      st.textContent="已复习"; st.style.color="var(--brand)";
-      try{
-        var seen=JSON.parse(localStorage.getItem("reviewed")||"{}");
-        var arr=seen[n]||[];
-        if(arr.indexOf(el.id)===-1) arr.push(el.id);
-        seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
-        document.getElementById("p1").textContent=arr.length+"/"+total;
-      }catch(e){}
-    });
-  });
-  document.querySelectorAll(".kp-toggle").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var detail=this.previousElementSibling;
-      var open=detail.classList.toggle("open");
-      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
-    });
-  });
 })();
 </script>
 

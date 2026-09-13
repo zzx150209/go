@@ -295,6 +295,26 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   transition:.15s;font-family:inherit;text-align:left}
 .kp-toggle:hover{text-decoration:underline}
 
+/* 知识点详情页 */
+.kp-summary{background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:18px 20px;display:flex;gap:16px;margin-bottom:32px}
+.kp-summary-no{width:44px;height:44px;border-radius:6px;background:var(--bg-2);
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  color:var(--accent);font-size:18px;flex:0 0 auto}
+.kp-h2{font-size:20px;font-weight:700;margin:28px 0 12px}
+.kp-pts{margin:0;padding-left:20px;font-size:14px;color:var(--text);line-height:1.9}
+.kp-pts li{margin-bottom:8px}
+.kp-tips{margin:0;padding-left:20px;font-size:14px;color:var(--accent-text);line-height:1.9}
+.kp-tips li{margin-bottom:8px}
+.kp-nav-row{display:flex;justify-content:space-between;gap:12px;
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.kp-nav{font-size:13px;color:var(--brand);text-decoration:none}
+.kp-nav:hover{text-decoration:underline}
+.side-h{display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;font-weight:700;padding:10px 12px;border-radius:6px;
+  background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
+.side-h span{font-size:11px;color:var(--text-3);font-weight:500}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -386,7 +406,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <div class="side-box">
       <div class="side-h">八级总览 <span>12</span></div>
       <div class="side-g">8 级知识点</div>
-      <ul class="side-list"><li><a href="#kp1"><span class="n">01</span><span>计数原理</span></a></li><li><a href="#kp2"><span class="n">02</span><span>排列与组合</span></a></li><li><a href="#kp3"><span class="n">03</span><span>杨辉三角</span></a></li><li><a href="#kp4"><span class="n">04</span><span>倍增</span></a></li><li><a href="#kp5"><span class="n">05</span><span>数列与代数</span></a></li><li><a href="#kp6"><span class="n">06</span><span>几何计算</span></a></li><li><a href="#kp7"><span class="n">07</span><span>图算法选择</span></a></li><li><a href="#kp8"><span class="n">08</span><span>最小生成树</span></a></li><li><a href="#kp9"><span class="n">09</span><span>单源最短路</span></a></li><li><a href="#kp10"><span class="n">10</span><span>复杂度分析</span></a></li><li><a href="#kp11"><span class="n">11</span><span>空间优化</span></a></li><li><a href="#kp12"><span class="n">12</span><span>算法优化</span></a></li></ul>
+      <ul class="side-list"><li><a href="kp1.html"><span class="n">01</span><span>计数原理</span></a></li><li><a href="kp2.html"><span class="n">02</span><span>排列与组合</span></a></li><li><a href="kp3.html"><span class="n">03</span><span>杨辉三角</span></a></li><li><a href="kp4.html"><span class="n">04</span><span>倍增</span></a></li><li><a href="kp5.html"><span class="n">05</span><span>数列与代数</span></a></li><li><a href="kp6.html"><span class="n">06</span><span>几何计算</span></a></li><li><a href="kp7.html"><span class="n">07</span><span>图算法选择</span></a></li><li><a href="kp8.html"><span class="n">08</span><span>最小生成树</span></a></li><li><a href="kp9.html"><span class="n">09</span><span>单源最短路</span></a></li><li><a href="kp10.html"><span class="n">10</span><span>复杂度分析</span></a></li><li><a href="kp11.html"><span class="n">11</span><span>空间优化</span></a></li><li><a href="kp12.html"><span class="n">12</span><span>算法优化</span></a></li></ul>
     </div>
   </aside>
 
@@ -411,258 +431,102 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
     <div class="sec-head"><h3>8 级知识点</h3>
       <span class="hint">共 12 个知识点，按官方大纲顺序排列</span></div>
     <div class="kp-grid">
-      <div class="kp" id="kp1">
+      <a class="kp" href="kp1.html">
         <div class="kp-top"><span class="no">01</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>计数原理</h4>
         <p>掌握加法原理与乘法原理，区分分类与分步。</p>
         <div class="tags"><span>加法原理</span><span>乘法原理</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>加法原理：完成一件事有多种互斥方案，方案数相加。</li><li>乘法原理：完成一件事分多个步骤，每步方法数相乘。</li><li>区分分类与分步：分类是&#x27;或&#x27;的关系，分步是&#x27;且&#x27;的关系。</li><li>容斥原理：|A∪B| = |A| + |B| - |A∩B|。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>先分类再分步，确保不重不漏。</li><li>题目有&#x27;至少&#x27;&#x27;至多&#x27;时考虑容斥。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp2">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp2.html">
         <div class="kp-top"><span class="no">02</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>排列与组合</h4>
         <p>计算排列数与阶乘，理解组合数的意义与性质。</p>
         <div class="tags"><span>排列数</span><span>组合数</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>排列 P(n,k) = n! / (n-k)!，从 n 个中选 k 个排列。</li><li>组合 C(n,k) = n! / (k!(n-k)!)，从 n 个中选 k 个不排序。</li><li>组合性质：C(n,k) = C(n,n-k)，C(n,k) = C(n-1,k-1) + C(n-1,k)。</li><li>阶乘增长极快，n=20 就超过 int，n=100 需高精度或模运算。</li></ul></div>
-            <div class="kp-code"><pre>// 用递推公式求组合数（杨辉三角）
-long long C[105][105];
-for (int i = 0; i &lt;= n; i++) {
-    C[i][0] = 1;
-    for (int j = 1; j &lt;= i; j++)
-        C[i][j] = C[i-1][j-1] + C[i-1][j];
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>n 不大时用递推，n 大时用乘法逆元求组合数。</li><li>C(n,0)=1, C(n,n)=1, C(n,1)=n。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp3">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp3.html">
         <div class="kp-top"><span class="no">03</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>杨辉三角</h4>
         <p>处理边界条件，用递推与预处理求组合数。</p>
         <div class="tags"><span>边界条件</span><span>组合数递推</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>杨辉三角第 i 行第 j 列等于 C(i,j)。</li><li>递推公式：C[i][j] = C[i-1][j-1] + C[i-1][j]。</li><li>边界：C[i][0] = C[i][i] = 1。</li><li>预处理后 O(1) 查询组合数。</li></ul></div>
-            <div class="kp-code"><pre>const int MOD = 1e9 + 7;
-long long C[1005][1005];
-for (int i = 0; i &lt;= 1000; i++) {
-    C[i][0] = 1;
-    for (int j = 1; j &lt;= i; j++)
-        C[i][j] = (C[i-1][j-1] + C[i-1][j]) % MOD;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>模运算要在每次加法后取模，防止溢出。</li><li>空间优化：每行只依赖上一行，可用一维数组倒序更新。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp4">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp4.html">
         <div class="kp-top"><span class="no">04</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>倍增</h4>
         <p>用二进制拆分与倍增预处理实现快速查询。</p>
         <div class="tags"><span>二进制拆分</span><span>倍增查询</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>倍增：把区间长度按 2 的幂次分解，预处理跳 2^k 步的结果。</li><li>经典应用：快速求 LCA（最近公共祖先）、ST 表求区间最值。</li><li>预处理 O(n log n)，查询 O(log n)。</li><li>二进制拆分：任何数都可表示为若干 2 的幂之和。</li></ul></div>
-            <div class="kp-code"><pre>// ST表求区间最大值（简述）
-int st[18][100005];
-for (int i = 1; i &lt;= n; i++) st[0][i] = a[i];
-for (int k = 1; (1&lt;&lt;k) &lt;= n; k++)
-    for (int i = 1; i + (1&lt;&lt;k) - 1 &lt;= n; i++)
-        st[k][i] = max(st[k-1][i], st[k-1][i+(1&lt;&lt;(k-1))]);
-
-int queryMax(int l, int r) {
-    int k = log2(r - l + 1);
-    return max(st[k][l], st[k][r-(1&lt;&lt;k)+1]);
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>ST 表适用于静态数组（不修改）的区间查询。</li><li>log2 用 __lg() 或循环计算，精度问题注意。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp5">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp5.html">
         <div class="kp-top"><span class="no">05</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>数列与代数</h4>
         <p>对表达式化简，处理等差数列与等比数列。</p>
         <div class="tags"><span>数列求和</span><span>表达式化简</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>等差数列：a_n = a_1 + (n-1)d，和 S_n = n(a_1+a_n)/2。</li><li>等比数列：a_n = a_1 * q^(n-1)，和 S_n = a_1(1-q^n)/(1-q)（q≠1）。</li><li>常见求和公式：Σi = n(n+1)/2，Σi² = n(n+1)(2n+1)/6。</li><li>代数化简：先化简表达式再计算，避免大数中间结果。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>等比数列求和 q=1 时单独处理，就是 n*a1。</li><li>取模除法要用乘法逆元。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp6">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp6.html">
         <div class="kp-top"><span class="no">06</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>几何计算</h4>
         <p>计算面积与周长、坐标距离，注意退化图形。</p>
         <div class="tags"><span>坐标距离</span><span>退化图形</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>两点距离：√((x2-x1)² + (y2-y1)²)，不开方用平方距离比较。</li><li>三角形面积：叉积公式 |(B-A)×(C-A)| / 2。</li><li>多边形面积： shoelace 公式，按顶点顺序累加叉积。</li><li>注意退化情况：三点共线面积为 0，点在边上。</li></ul></div>
-            <div class="kp-code"><pre>struct Point { double x, y; };
-double dist(Point a, Point b) {
-    return sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));
-}
-double cross(Point a, Point b, Point c) {
-    return (b.x-a.x)*(c.y-a.y) - (b.y-a.y)*(c.x-a.x);
-}
-double triangleArea(Point a, Point b, Point c) {
-    return fabs(cross(a,b,c)) / 2.0;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>浮点计算注意精度，用 epsilon 判断相等。</li><li>叉积正负表示方向（左转/右转）。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp7">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp7.html">
         <div class="kp-top"><span class="no">07</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>图算法选择</h4>
         <p>根据顶点、边、方向与权值选择合适的图算法。</p>
         <div class="tags"><span>图建模</span><span>算法选择</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>根据问题选算法：连通性→DFS/BFS，最短路→Dijkstra/SPFA/Floyd。</li><li>最小生成树→Prim（稠密图）或 Kruskal（稀疏图）。</li><li>边权正负决定算法：有负权用 SPFA，无负权用 Dijkstra。</li><li>顶点数小（n≤500）可用 Floyd O(n³)，顶点多用邻接表优化。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>先分析数据范围再选算法，不要套模板不思考。</li><li>建图时注意有向/无向、是否有权重。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp8">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp8.html">
         <div class="kp-top"><span class="no">08</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>最小生成树</h4>
         <p>理解生成树与最小生成树，实现 Prim 与 Kruskal。</p>
         <div class="tags"><span>Prim</span><span>Kruskal</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>生成树：连通所有顶点且无环，n 个顶点 n-1 条边。</li><li>最小生成树（MST）：所有生成树中边权之和最小的。</li><li>Kruskal：把边按权排序，依次加入不形成环的边（并查集）。</li><li>Prim：从一个点出发，每次选距离树最近的点加入。</li></ul></div>
-            <div class="kp-code"><pre>// Kruskal
-struct Edge { int u, v, w; };
-bool cmp(Edge a, Edge b) { return a.w &lt; b.w; }
-
-int kruskal(vector&lt;Edge&gt;&amp; edges, int n) {
-    sort(edges.begin(), edges.end(), cmp);
-    init(n);
-    int total = 0, cnt = 0;
-    for (auto&amp; e : edges) {
-        if (find(e.u) != find(e.v)) {
-            unite(e.u, e.v);
-            total += e.w;
-            if (++cnt == n-1) break;
-        }
-    }
-    return total;
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>Kruskal 适合稀疏图，Prim 适合稠密图。</li><li>MST 不唯一但权值和唯一。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp9">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp9.html">
         <div class="kp-top"><span class="no">09</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>单源最短路</h4>
         <p>理解松弛操作，实现 Dijkstra 与负权处理。</p>
         <div class="tags"><span>松弛操作</span><span>Dijkstra</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>Dijkstra：边权非负，用优先队列每次取最近点松弛，O((n+m)log n)。</li><li>松弛操作：若 dist[u]+w(u,v) &lt; dist[v]，则更新 dist[v]。</li><li>有负权边用 Bellman-Ford 或 SPFA。</li><li>多源最短路用 Floyd O(n³)，或把所有源点加入队列。</li></ul></div>
-            <div class="kp-code"><pre>// Dijkstra
-vector&lt;pair&lt;int,int&gt;&gt; adj[MAXN];
-int dist[MAXN];
-void dijkstra(int s) {
-    fill(dist, dist+MAXN, INF);
-    dist[s] = 0;
-    priority_queue&lt;pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, greater&lt;&gt;&gt; pq;
-    pq.push({0, s});
-    while (!pq.empty()) {
-        auto [d, u] = pq.top(); pq.pop();
-        if (d &gt; dist[u]) continue;
-        for (auto [v, w] : adj[u]) {
-            if (dist[u] + w &lt; dist[v]) {
-                dist[v] = dist[u] + w;
-                pq.push({dist[v], v});
-            }
-        }
-    }
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>Dijkstra 不能处理负权边，会死循环或结果错误。</li><li>优先队列里的旧条目用 if(d &gt; dist[u]) continue 跳过。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp10">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp10.html">
         <div class="kp-top"><span class="no">10</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>复杂度分析</h4>
         <p>分析常见算法复杂度，按数据范围选择算法。</p>
         <div class="tags"><span>复杂度</span><span>范围判断</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>常见图算法复杂度：Dijkstra O((n+m)log n)，Floyd O(n³)，Kruskal O(m log m)。</li><li>根据 n 和 m 选算法：n≤500 可用 Floyd，m 大用 Kruskal。</li><li>优化常数：邻接表比矩阵快，优先队列比朴素实现快。</li><li>空间复杂度也要考虑：邻接矩阵 O(n²)，邻接表 O(n+m)。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>时间紧时先写正确的暴力版，再想优化。</li><li>注意递归 DFS 的栈空间限制。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp11">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp11.html">
         <div class="kp-top"><span class="no">11</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>空间优化</h4>
         <p>优化数组空间与图存储，使用滚动数组。</p>
         <div class="tags"><span>滚动数组</span><span>图存储</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>滚动数组：DP 只依赖前一行/前一层时，用两个数组交替。</li><li>01 背包的一维数组本身就是空间优化（O(W)）。</li><li>图存储：链式前向星比邻接表数组更紧凑。</li><li>不必要的数组及时释放或用局部变量。</li></ul></div>
-            <div class="kp-code"><pre>// 滚动数组优化 DP
-int dp[2][MAXN];
-for (int i = 1; i &lt;= n; i++) {
-    int cur = i % 2, prev = 1 - cur;
-    for (int j = 1; j &lt;= m; j++) {
-        dp[cur][j] = max(dp[prev][j], dp[cur][j-1]) + a[i][j];
-    }
-}</pre></div>
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>滚动数组时注意当前行和上一行的交替关系。</li><li>内存不够时考虑用 short 或 char 代替 int。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div>
-      <div class="kp" id="kp12">
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a>
+      <a class="kp" href="kp12.html">
         <div class="kp-top"><span class="no">12</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>算法优化</h4>
         <p>在暴力与剪枝、预处理与数学优化之间做出选择。</p>
         <div class="tags"><span>暴力剪枝</span><span>预处理</span></div>
-        <div class="kp-detail">
-          <div class="kp-detail-body">
-            <div class="kp-section"><b>核心要点</b><ul class="kp-pts"><li>暴力→剪枝：提前排除不可能的情况，如 DFS 中当前解已劣于最优解则剪枝。</li><li>预处理→离线：把需要多次查询的量预处理出来。</li><li>数学优化：用公式或数论结论替代暴力枚举。</li><li>位运算优化：用位操作替代计数/标记。</li></ul></div>
-            
-            <div class="kp-section"><b>注意事项</b><ul class="kp-tips"><li>优化前先确认瓶颈在哪里，不要盲目优化。</li><li>常数优化：用快读、减少模运算次数、循环展开。</li></ul></div>
-          </div>
-        </div>
-        <button class="kp-toggle" type="button">查看知识点 →</button>
-      </div></div>
+        <span class="kp-toggle" style="display:inline-block">查看知识点 →</span>
+      </a></div>
 
     <section class="sec" style="margin-top:46px">
       <h2>其他等级</h2>
@@ -715,30 +579,9 @@ for (int i = 1; i &lt;= n; i++) {
     localStorage.setItem("lastLevel", n);
     var seen=JSON.parse(localStorage.getItem("reviewed")||"{}");
     var c=(seen[n]||[]).length;
-    document.getElementById("p1").textContent=c+"/"+total;
+    var el=document.getElementById("p1");
+    if(el)el.textContent=c+"/"+total;
   }catch(e){}
-  var kps=[].slice.call(document.querySelectorAll(".kp"));
-  kps.forEach(function(el){
-    el.addEventListener("click",function(e){
-      if(e.target.closest(".kp-toggle")||e.target.closest(".kp-detail"))return;
-      var st=el.querySelector(".state");
-      st.textContent="已复习"; st.style.color="var(--brand)";
-      try{
-        var seen=JSON.parse(localStorage.getItem("reviewed")||"{}");
-        var arr=seen[n]||[];
-        if(arr.indexOf(el.id)===-1) arr.push(el.id);
-        seen[n]=arr; localStorage.setItem("reviewed",JSON.stringify(seen));
-        document.getElementById("p1").textContent=arr.length+"/"+total;
-      }catch(e){}
-    });
-  });
-  document.querySelectorAll(".kp-toggle").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var detail=this.previousElementSibling;
-      var open=detail.classList.toggle("open");
-      this.textContent=open?"收起内容 ↑":"查看详细内容 ↓";
-    });
-  });
 })();
 </script>
 

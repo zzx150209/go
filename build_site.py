@@ -258,6 +258,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
 /* 等级页 */
 .layout{display:grid;grid-template-columns:200px 1fr 200px;gap:40px;align-items:start;
   margin:0;padding:24px 0 60px}
+.wrap-full{max-width:none;margin:0;padding:0}
 .side{position:sticky;top:78px;align-self:start}
 .side-box{background:transparent;border:none;border-radius:0;
   overflow:visible}
@@ -949,7 +950,7 @@ def build_kp_page(n, kp_idx):
         next_link = f'<a class="kp-nav" href="kp{kp_idx+1}.html">下一个：{E(nt)} →</a>'
 
     body = f"""
-<main class="wrap">
+<main class="wrap wrap-full">
 <div class="layout">
   <aside class="side">
     <div class="side-box">

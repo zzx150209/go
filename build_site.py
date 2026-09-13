@@ -770,14 +770,14 @@ def build_level(n):
     total = len(kps)
 
     side = "".join(
-        f'<li><a href="kp{i}.html"><span class="n">{i:02d}</span><span>{E(k[0])}</span></a></li>'
+        f'<li><a href="level{n}/kp{i}.html"><span class="n">{i:02d}</span><span>{E(k[0])}</span></a></li>'
         for i, k in enumerate(kps, 1))
 
     grid = ""
     for i, (t, d, tags) in enumerate(kps, 1):
         tg = "".join(f"<span>{E(x)}</span>" for x in tags)
         grid += f"""
-      <a class="kp" href="kp{i}.html">
+      <a class="kp" href="level{n}/kp{i}.html">
         <div class="kp-top"><span class="no">{i:02d}</span>
           <span class="badge">官方核心</span><span class="state">未复习</span></div>
         <h4>{E(t)}</h4>

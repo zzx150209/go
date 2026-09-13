@@ -1147,6 +1147,16 @@ def build_solutions():
 
 
 def build_resources():
+    URLS = {
+        "穷狼 OJ": "https://oj.qonnwolf.com/",
+        "洛谷": "https://www.luogu.com.cn/",
+        "GESP 官方网站": "https://gesp.ccf.org.cn/",
+        "NOI 官方网站": "https://www.noi.cn/",
+        "OI Wiki": "https://oi-wiki.org/",
+        "Hello 算法": "https://www.hello-algo.com/",
+        "VS Code 配置 C++": "https://code.visualstudio.com/docs/languages/cpp",
+        "cppreference": "https://en.cppreference.com/",
+    }
     groups = ""
     nav_items = ""
     for idx, (gtitle, gdesc, _, items) in enumerate(RESOURCE_GROUPS):
@@ -1154,9 +1164,10 @@ def build_resources():
         nav_items += f'<li><a href="#{anchor}">{E(gtitle)}</a></li>'
         lis = ""
         for initial, name, badge, desc, color in items:
+            href = URLS.get(name, "#")
             badge_html = f'<em class="res-badge">{E(badge)}</em>' if badge else ""
             lis += f"""
-        <a class="res-item" href="#" >
+        <a class="res-item" href="{href}" target="_blank" rel="noopener">
           <div class="ic" style="background:{color}">{E(initial)}</div>
           <div class="tx"><b>{E(name)}</b>{badge_html}<p>{E(desc)}</p></div>
         </a>"""
@@ -1185,7 +1196,7 @@ def build_resources():
     <h1 class="page" style="margin-bottom:12px">先说你现在要做什么</h1>
     <p class="lead" style="margin-bottom:16px">资源按四种常见任务整理。每组只有一个首选入口，其他网站放在后面，避免在一长串链接里反复比较。</p>
     <p style="font-size:14px;color:var(--text-2);margin-bottom:18px">适合现在：准备刷题、查考试通知、学习算法，或配置 C++ 编程环境。</p>
-    <a class="btn btn-primary" href="#sec1">去穷狼 OJ 开始练习 →</a>
+    <a class="btn btn-primary" href="https://oj.qonnwolf.com/" target="_blank" rel="noopener">去穷狼 OJ 开始练习 →</a>
 
     <hr class="rule" style="margin:32px 0">
 

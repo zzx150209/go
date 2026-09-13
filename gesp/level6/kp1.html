@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,70 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>树是 n 个结点的有限集合，有且仅有一个根结点，其余结点分成若干子树。</li><li>结点的度：子树个数；树的度：最大结点度。</li><li>深度：从根到该结点的层数；高度：结点到最远叶结点的路径长度。</li><li>叶结点：度为 0 的结点；父结点/子结点/兄弟结点按层次关系命名。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>树中 n 个结点有 n-1 条边。</li><li>根结点没有父结点，叶结点没有子结点。</li></ul>
+    <article class="article-body">
+    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级官方大纲“树的基础知识”：树的定义、基本属性和树的存储。重点是先建立准确术语，再为后续建树、遍历和搜索准备数据表示；本页不提前展开遍历算法。</p><h2 id="kp-01">01 树的定义与关系</h2><p>线性结构适合表达“前一个、后一个”的顺序关系，例如排队名单；当一个对象下面可能分出多个对象时，就需要树来表达层次关系，例如学校—年级—班级、文件夹—子文件夹。树由结点和连接结点的边组成。非空树有且只有一个根结点；根没有父结点；根以外每个结点恰好有一个父结点；沿父子关系不能绕一圈回到原结点。没有结点的树叫空树。</p><ul>
+<li>父结点与孩子结点：一条向下的边连接的直接关系。</li>
+<li>兄弟结点：拥有同一个父结点。</li>
+<li>叶结点：没有孩子的结点；单结点树的根也同时是叶结点。</li>
+<li>祖先与后代：从某结点沿父子关系向上或向下能够到达的结点。</li>
+<li>子树：某个结点以及它的全部后代组成的树。</li>
+</ul><h2 id="kp-02">02 深度、高度与度</h2><p>本字典统一采用：根深度为 <code>0</code>，孩子深度等于父结点深度加 <code>1</code>；叶结点高度为 <code>0</code>，非叶结点高度等于孩子高度最大值加 <code>1</code>；树高等于根结点高度。若题目把根深度记为 <code>1</code>，必须按题目口径重新计算。</p><p>结点的度是孩子数量，树的度是所有结点度的最大值。叶结点度为 <code>0</code>。二叉树只表示每个结点至多有两个孩子，不代表每个结点一定有两个孩子。</p><figure data-density="standard"><figcaption>树的术语速查</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>判断方法</th>
+<th>常见混淆</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>深度</td>
+<td>从根到该结点经过的边数</td>
+<td>先确认根记 0 还是 1</td>
+</tr>
+<tr>
+<td>高度</td>
+<td>从该结点向下到最深叶子的边数</td>
+<td>与深度方向相反</td>
+</tr>
+<tr>
+<td>结点的度</td>
+<td>该结点的孩子数</td>
+<td>不是相邻边总数</td>
+</tr>
+<tr>
+<td>树的度</td>
+<td>全树最大结点度</td>
+<td>不是树高</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure><h2 id="kp-03">03 树的常见存储</h2><p>父亲数组用 <code>father[child] = parent</code> 保存每个非根结点的父亲，适合向上查询；孩子列表为每个父结点保存全部直接孩子，适合向下遍历。孩子列表也叫树的邻接表：例如边为 <code>1→2、1→3、2→4</code> 时，可写成 <code>children[1] = {2, 3}</code>、<code>children[2] = {4}</code>，3 和 4 的列表为空。读入一对 <code>parent child</code>，就把 <code>child</code> 加到 <code>children[parent]</code> 末尾；这里存的是直接孩子，不能把孙结点 4 直接放进 1 的列表。</p><p>普通树还可以用“左孩子右兄弟”表示：<code>leftChild[u]</code> 指向第一个孩子，<code>rightSibling[u]</code> 指向下一个兄弟。这样每个结点只保留两个位置，却仍能依次找到全部孩子。这里要求能读懂关系，不要求把它当作二叉排序树。</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>已知 <code>father[2]=1、father[3]=1、father[4]=2、father[5]=2</code>。根是 1；2 和 3 是兄弟；4 和 5 是兄弟；1 的度为 2，2 的度也为 2，树的度为 2。按根深度为 0，4 的深度为 2；4 是叶结点，高度为 0；2 的高度为 1；整棵树高度为 2。</p><figure><div tabindex="0" role="region"><table><caption>从根向下统计结点和叶结点</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本步观察</th><th scope="col">累计结点数</th><th scope="col">累计叶结点数</th></tr></thead><tbody><tr><th scope="row">访问 1</th><td>有孩子 2、3，不是叶结点</td><td>1</td><td>0</td></tr><tr><th scope="row">访问 2</th><td>有孩子 4、5，不是叶结点</td><td>2</td><td>0</td></tr><tr><th scope="row">访问 4、5</th><td>都没有孩子，各计一个叶结点</td><td>4</td><td>2</td></tr><tr><th scope="row">访问 3</th><td>没有孩子，计一个叶结点</td><td>5</td><td>3</td></tr></tbody></table></div><figcaption>整棵树共有 5 个结点、3 个叶结点；判断叶结点只看孩子数量是否为 0。</figcaption></figure><h3 id="典型应用">典型应用</h3><p>文件目录就是树：总文件夹是根，直接包含的文件夹是孩子，同一文件夹下的项目互为兄弟。若要找到某个文件的完整路径，就从该结点沿父亲数组不断向上，直到根；若要列出一个文件夹内的全部内容，则从它向下访问各棵子树。</p><h3 id="测试案例">测试案例</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>树形</th>
+<th>应得到的关键结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td>根 1 有孩子 2、3</td>
+<td>结点数 3，叶结点 2、3 共 2 个，树高 1</td>
+</tr>
+<tr>
+<td>边界</td>
+<td>单结点树只有根 1</td>
+<td>根同时是叶结点，深度和高度都为 0，树的度为 0</td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>链式树 1→2→3→4</td>
+<td>只有结点 4 是叶结点，树高 3，不能误判成四层高度 4</td>
+</tr>
+</tbody>
+</table><h2 id="common-errors">常见错误</h2><section><h3>把深度和高度当成同一个方向</h3><div><div><strong><span>×</span> 错误写法</strong><code>结点越靠近根，高度和深度就同时越小</code></div><div><strong><span>✓</span> 正确写法</strong><code>先画出根到结点、结点到最深叶子的两条路径，再分别数边</code></div></div><p><strong>原因：</strong>深度从根向下数，高度从当前结点向最深叶子数，两者方向相反。</p><p><strong>检查方法：</strong>做题第一行写清根深度和叶高度的口径。</p></section><section><h3>把相邻结点都当成孩子</h3><div><div><strong><span>×</span> 错误写法</strong><code>结点 2 与父结点 1 相连，因此计算 2 的度时把 1 也算进去</code></div><div><strong><span>✓</span> 正确写法</strong><code>先确定边的父子方向，再只数从当前结点向下连接的孩子</code></div></div><p><strong>原因：</strong>树中结点的度只统计直接孩子数量，不统计父结点。</p><p><strong>检查方法：</strong>叶结点虽然与父结点相连，但它的度仍然是 0。</p></section><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       

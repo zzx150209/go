@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,119 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>暴力→剪枝：提前排除不可能的情况，如 DFS 中当前解已劣于最优解则剪枝。</li><li>预处理→离线：把需要多次查询的量预处理出来。</li><li>数学优化：用公式或数论结论替代暴力枚举。</li><li>位运算优化：用位操作替代计数/标记。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>优化前先确认瓶颈在哪里，不要盲目优化。</li><li>常数优化：用快读、减少模运算次数、循环展开。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级要求理解常见算法优化思路，能够从时间和空间角度改进算法。优化的前提是结果正确：先写清基础解法、分析瓶颈，再选择有依据的改进方法，并重新验证边界和复杂度。</p>
+<h2 id="kp-01">01 基础解法与瓶颈</h2>
+<p>先写出能保证正确的直接方法，再分析最耗时或最占空间的部分。瓶颈可能来自重复计算、无效枚举、不合适的数据结构、过大的状态表或不必要的高复杂度算法。</p>
+<p>优化目标必须具体。例如把两层枚举的 <code>O(n²)</code> 降为排序后的 <code>O(n log n)</code>，或者把只依赖上一行的 <code>O(n²)</code> 状态表压缩成 <code>O(n)</code> 空间。</p>
+<h2 id="kp-02">02 剪枝</h2>
+<p>剪枝是在搜索过程中提前停止不可能得到合法答案或更优答案的分支。常见条件有：</p>
+<ul>
+<li>当前选择已经违反限制；</li>
+<li>即使使用剩余全部资源也无法达到目标；</li>
+<li>当前代价已经不小于已知最优答案；</li>
+<li>相同状态已经处理过，不必重复搜索。</li>
+</ul>
+<p>剪枝必须有严格理由。错误地删除仍可能产生答案的分支，会让程序更快地得到错误结果。</p>
+<h2 id="kp-03">03 预处理与数学规律</h2>
+<p>当许多询问反复使用相同信息时，可以先统一计算一次。例如前缀和把每次区间求和从 <code>O(n)</code> 降为 <code>O(1)</code>；杨辉三角预处理后可以多次查询组合数。</p>
+<p>发现数学规律也能减少枚举。使用公式前必须核对适用条件、整数范围和取模要求，不能为了“看起来更快”直接套用未经证明的结论。</p>
+<h2 id="kp-04">04 数据结构与算法替换</h2>
+<p>如果基础方法的瓶颈是反复查找，可以选择更合适的查找方式；如果图很稀疏，可以用邻接表替代邻接矩阵；如果问题目标已经有成熟算法，应使用与条件匹配的算法，而不是继续暴力枚举。</p>
+<p>例如在有序数组中寻找和为目标值的一对数，可以用左右指针从两端向中间移动，把两层枚举的 <code>O(n²)</code> 降为排序后的 <code>O(n log n)</code>。</p>
+<h2 id="kp-05">05 时间与空间的权衡</h2>
+<p>有些优化用更多空间换时间，例如预处理表；有些优化用更多计算换空间，例如不保存全部中间结果。选择时要同时满足时间限制和内存限制。</p>
+<p>滚动数组可以降低空间，但可能让恢复完整方案变得困难；预处理可以加快询问，但若只查询一次，预处理成本未必划算。优化不是越复杂越好，而是让整体方案在题目约束下稳定通过。</p>
+<p><strong>优化前后追踪。</strong> “判断数组中是否存在两个不同位置的数之和为目标值”的基线方案枚举所有数对，最多检查 <code>n(n-1)/2</code> 对，时间为 <code>O(n²)</code>。优化方案先排序，再用左右指针：</p>
+<table>
+<thead>
+<tr>
+<th>当前和与目标的关系</th>
+<th>为什么这样移动</th>
+<th>排除的范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相等</td>
+<td>已找到答案</td>
+<td>结束</td>
+</tr>
+<tr>
+<td>小于目标</td>
+<td>左端太小，左指针右移</td>
+<td>当前左端与更小右端的组合</td>
+</tr>
+<tr>
+<td>大于目标</td>
+<td>右端太大，右指针左移</td>
+<td>当前右端与更大左端的组合</td>
+</tr>
+</tbody>
+</table>
+<p>排序后扫描只移动至多 <code>n-1</code> 次，总时间变为 <code>O(n log n)</code>。优化后必须做反例验证：包含重复元素、全为负数、只有一个元素、答案不存在；还要检查排序是否会破坏题目要求保留原下标的附加条件。</p>
+<p><strong>逐段具体推演（对应 01—05）。</strong></p>
+<p><strong>01 先量化基线。</strong> 对 <code>n=100000、q=100000</code> 的区间和查询，每次扫描整个区间最坏约做 <code>nq=10¹⁰</code> 次加法。结果虽然正确，但数量级说明瓶颈就在重复扫描，而不是输入输出格式。</p>
+<p><strong>02 剪枝。</strong> 从正整数中搜索和为 10 的方案，当前和已经是 12 时，后面继续加入正数只会更大，这条分支可以立刻返回。若允许负数，就不能用同一条件剪枝，因为后面可能用负数把和降回 10。</p>
+<p><strong>03 预处理、公式与差分数组。</strong> 静态区间和可先建前缀和，把一次查询从 <code>O(n)</code> 降为 <code>O(1)</code>。若有多次区间加法，可在差分数组中对区间 <code>[l,r]</code> 执行 <code>diff[l]+=x、diff[r+1]-=x</code>，最后一次前缀累加还原全部值；素数查询很多时则可先筛出素数表。</p>
+<p><strong>04 更换数据结构或算法。</strong> 有序数组中查一个数，顺序扫描最多比较 n 次，二分查找每次排除一半，只需约 <code>log₂n</code> 次。两数之和从双重枚举 <code>O(n²)</code> 改为排序加双指针后是 <code>O(n log n)</code>，但必须保留“两个不同位置”等边界。</p>
+<p><strong>05 时间与空间权衡。</strong> 长度 n 的前缀和多用 <code>O(n)</code> 空间，换来每次 <code>O(1)</code> 查询；滚动数组则在依赖允许时减少空间。优化后要用普通、边界和极限数据比较新旧答案，再确认复杂度确实下降。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>瓶颈</th>
+<th>常见方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>重复计算</td>
+<td>预处理、记忆结果</td>
+</tr>
+<tr>
+<td>大量无效搜索</td>
+<td>剪枝</td>
+</tr>
+<tr>
+<td>反复线性查找</td>
+<td>排序、二分或合适的数据结构</td>
+</tr>
+<tr>
+<td>稀疏图矩阵过大</td>
+<td>邻接表</td>
+</tr>
+<tr>
+<td>状态表只依赖少量前驱</td>
+<td>滚动数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>输入 <code>n</code> 个整数和目标值，判断是否存在两个不同位置的数之和等于目标值。先排序，再用左右指针判断：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> target;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> target;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">vector</span><span style="--0:#C792EA;--1:#8844AE">&lt;long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">(n);</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 双指针依赖单调性，必须先排序。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#82AAFF;--1:#3B61B0">sort</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">begin</span><span style="--0:#D6DEEB;--1:#403F53">(), </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">end</span><span style="--0:#D6DEEB;--1:#403F53">());</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> left </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> right </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> found </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">false</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">while</span><span style="--0:#D6DEEB;--1:#403F53"> (left </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> right) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> sum </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[left] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[right];</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (sum </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> target) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">found </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (sum </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> target) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">            </span></span><span style="--0:#919F9F;--1:#5D6376">// 当前和偏小，左端右移才可能增大总和。</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">left</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">            </span></span><span style="--0:#919F9F;--1:#5D6376">// 当前和偏大，右端左移才可能减小总和。</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">right</span><span style="--0:#7FDBCA;--1:#096E72">--</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (found) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">YES</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">NO</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>排序为 <code>O(n log n)</code>，双指针扫描为 <code>O(n)</code>，总时间复杂度为 <code>O(n log n)</code>。</p>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>优化后漏解反例。</strong> 两数之和目标为 6，数组是 <code>[3,3]</code>。若优化后错误规定“两个数值不能相等”，就会漏掉两个不同位置上的 3；正确限制是下标不同，而不是数值不同。新算法必须与基线在这个反例上都返回存在解。</p>
+<ul>
+<li>未证明剪枝条件正确就删除搜索分支。</li>
+<li>只比较某一行代码，不分析整体复杂度。</li>
+<li>优化后忘记重新检查边界、重复元素和整数溢出。</li>
+<li>为一次查询做代价很大的预处理，反而更慢。</li>
+<li>用超出内存限制的大表换取速度。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/gesp/level8/time-efficiency/">时间效率分析</a>：定位操作次数增长最快的部分。</li>
+<li><a href="/gesp/level8/space-efficiency/">空间效率分析</a>：检查优化后的额外存储。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2><div id="page-test"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp11.html">← 上一个：空间优化</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,21 +449,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>函数是完成特定任务的一段代码，有返回值类型、函数名、参数列表和函数体。</li><li>函数先声明（原型）再调用，或把定义放在调用之前。</li><li>return 值; 把结果返回给调用处，void 函数不需要 return 值。</li><li>把重复出现的代码写成函数，减少重复、方便修改。</li></ul>
-
-    <div class="kp-code"><pre>int add(int a, int b) {
-    return a + b;
-}
-
-int main() {
-    cout &lt;&lt; add(3, 5) &lt;&lt; endl;  // 8
-    cout &lt;&lt; add(10, 20) &lt;&lt; endl; // 30
-    return 0;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>函数名和变量名命名规则相同，不能与关键字冲突。</li><li>return 后的表达式类型要与函数返回值类型匹配。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">函数把一项有明确输入、处理和输出的任务命名。它既能避免重复代码，也能把长程序拆成容易检查的小部分。真正掌握函数，不是只会背格式，而是能说清声明、定义、调用和返回各在什么时候发生。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">声明让编译器先认识接口，定义给出任务做法，调用才开始一次真实执行；return 交回结果并立即结束本次调用。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int larger(int left, int right); // 声明：说明返回类型、函数名和参数类型
+int larger(int left, int right) { // 定义：给出相同接口和函数体
+    return left; // 返回一个 int 结果并结束本次调用
+} // 结束 larger 函数定义</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int square(int value) { // 接收一个整数副本并计算平方
+    return value * value; // 把平方结果返回调用处
+} // 结束 square 函数定义</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">把“写出函数定义”误认为函数已经执行</li><li class="astro-e22r5uwj">声明与定义的返回类型、函数名或参数列表不一致</li><li class="astro-e22r5uwj">有返回值的函数存在走到末尾却没有 return 的路径</li><li class="astro-e22r5uwj">把返回值当成自动输出，忘记在调用处接收或输出</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：看懂一个函数接口的每个组成部分；追踪“调用—进入—返回—继续”的执行路线；把一项重复任务拆成职责清楚的函数。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">班级系统要多次比较两名同学的分数。若每次都重新写一段 if，代码会重复；若把“接收两个整数并返回较大值”命名为 larger，main 只需把数据交给它并接回结果。全页都用这台“比较机器”理解函数。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握函数的作用、声明、定义、调用、参数列表、返回值、void 函数和嵌套调用。函数重载只作识别性补充：能根据参数列表判断调用哪个版本即可，不把复杂重载规则扩大为本级核心。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 声明与定义</h2><p class="astro-e22r5uwj">先拆开 `int larger(int left, int right)`：最前面的 `int` 是返回类型，说明调用完成后交回一个整数；`larger` 是函数名；圆括号里的两个 `int` 是形参类型，left、right 是函数体内使用的形参名。函数接口回答“接收什么、返回什么”，函数体回答“具体怎么做”。</p><p class="astro-e22r5uwj">函数声明只写接口并以分号结束，例如 `int larger(int, int);`。形参名在声明中可以省略，因为编译器此时只需要知道类型和数量；初学阶段保留 left、right 更容易阅读。声明没有函数体，也不会进行比较。</p><p class="astro-e22r5uwj">函数定义写出相同接口和一对大括号。若定义放在 main 前面，main 调用时编译器已经见过它，可以不另写声明；若定义放在 main 后面，就要先声明。C++ 编译器按源码顺序处理，调用前至少要看见声明或完整定义。</p><p class="astro-e22r5uwj">声明和定义描述的是同一个函数时，返回类型、函数名、参数个数、参数顺序和参数类型必须对应。只改一个位置，会让编译器把它们当成不同接口或报告错误。</p><p class="level4-dictionary-article__code-label">先声明接口，再把定义放到 main 后面</p><pre class="astro-e22r5uwj"><code class="language-cpp">int larger(int left, int right); // 先声明稍后会出现的两整数比较函数
+int main() { // 主函数可以在只见到声明时调用 larger
+    cout &lt;&lt; larger(3, 5) &lt;&lt; &#39;\n&#39;; // 传入两个实参并输出返回结果 5
+    return 0; // 返回 0 表示主程序正常结束
+} // 结束 main 函数
+int larger(int left, int right) { // 按声明给出完全一致的函数定义
+    if (left &gt; right) { // 左边分数更大时选择左边结果
+        return left; // 返回 left 并立即结束本次 larger 调用
+    } // 结束左边更大的返回分支
+    return right; // 前一条件不成立时返回 right
+} // 结束 larger 函数定义</code></pre><aside
+    </article>
 
     <div class="kp-nav-row">
       

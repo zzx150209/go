@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,26 +449,39 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>回溯：按决策树深度优先搜索，走不通就回退，撤销选择继续试。</li><li>在迷宫中：标记访问过的格子，DFS 搜索，递归返回后取消标记。</li><li>回溯三步：做选择 → 递归 → 撤销选择。</li><li>适用于：全排列、子集、迷宫路径、N 皇后等。</li></ul>
-
-    <div class="kp-code"><pre>int maze[15][15];
-bool visited[15][15];
-int dx[] = {0, 1, 0, -1};
-int dy[] = {1, 0, -1, 0};
-
-void dfs(int x, int y, int n, int m) {
-    if (x &lt; 0 || x &gt;= n || y &lt; 0 || y &gt;= m) return;
-    if (maze[x][y] == 1 || visited[x][y]) return;
-    visited[x][y] = true;
-    // 到达终点处理
-    for (int d = 0; d &lt; 4; d++)
-        dfs(x+dx[d], y+dy[d], n, m);
-    visited[x][y] = false;  // 撤销
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>回溯必须撤销选择（恢复现场），否则其他路径会误判。</li><li>方向数组简化四方向扩展。</li></ul>
+    <article class="article-body">
+    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“简单动态规划”：记录子问题答案、状态定义、转移、初始化、计算顺序和答案位置，覆盖数列 DP、爬楼梯、简单路径计数和最大连续和入门。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-one-dimensional-dp-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-one-dimensional-dp-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">2 个子页</span></header><div><article><div><span class="astro-aidf4k4y">08</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/one-dimensional-dp/">简单动态规划</a></h3><p class="astro-aidf4k4y">按状态定义、初值、转移、顺序和答案五步建立一维动态规划。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/one-dimensional-dp/dp-basics/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">动态规划基础</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/one-dimensional-dp/linear-dp/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">线性动态规划</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 状态定义</h2><p>动态规划保存已经求出的子问题答案，避免重复计算。第一步必须写清 <code>dp[i]</code> 的唯一含义，例如“走到第 i 级台阶的方案数”。状态含义决定后面的所有公式。</p><h2 id="kp-02">02 初值与转移</h2><p>爬楼梯每次走 1 或 2 级时，<code>dp[1]=1、dp[2]=2</code>。到第 <code>i</code> 级的最后一步来自 <code>i-1</code> 或 <code>i-2</code>，两类方案互不重复，所以 <code>dp[i]=dp[i-1]+dp[i-2]</code>。</p><h2 id="kp-03">03 顺序与答案</h2><p>因为当前状态依赖更小下标，必须从小到大计算。题目问第 <code>n</code> 级，答案就是 <code>dp[n]</code>，不能凭数组习惯改成 <code>dp[n-1]</code>。</p><figure><div tabindex="0" role="region"><table><caption>n=5 的状态表</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">来源</th><th scope="col">dp[i]</th></tr></thead><tbody><tr><th scope="row">i=1</th><td>初值</td><td>1</td></tr><tr><th scope="row">i=2</th><td>初值</td><td>2</td></tr><tr><th scope="row">i=3</th><td>1+2</td><td>3</td></tr><tr><th scope="row">i=4</th><td>2+3</td><td>5</td></tr><tr><th scope="row">i=5</th><td>3+5</td><td>8</td></tr></tbody></table></div></figure><h2 id="kp-04">04 常见一维模型</h2><p>简单路径计数同样从“最后一步从哪里来”相加。最大连续和入门可定义 <code>dp[i]</code> 为以第 <code>i</code> 个数结尾的最大连续和，比较“只选当前数”和“接在前一段后面”；由于最优段可能在任意位置结束，答案取所有 <code>dp[i]</code> 的最大值。</p><p>数组 <code>-2、3、-1、4</code> 的最大连续和推演如下：<code>dp[1]=-2</code>；到 3 时，单独开始比接在 -2 后更好，<code>dp[2]=3</code>；到 -1 时接在 3 后得到 2，<code>dp[3]=2</code>；到 4 时接在前一段后得到 6，<code>dp[4]=6</code>。最终答案是所有状态的最大值 6，对应连续段 <code>3、-1、4</code>。这也说明全是负数时不能把答案默认成 0。</p><p>网格路径计数是另一种简单动态规划。若只能向右或向下，令 <code>ways[x][y]</code> 表示走到 <code>(x,y)</code> 的方案数，那么最后一步来自上方或左方，所以 <code>ways[x][y]=ways[x-1][y]+ways[x][y-1]</code>。在 <code>2×3</code> 无障碍网格中，第一行和第一列都是 1，第二行依次得到 <code>1、2、3</code>，右下角答案为 3；障碍格的方案数应保持 0。</p><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>解决爬楼梯时，先写状态定义“<code>dp[i]</code> 表示到达第 i 级的方案数”，再从最后一步推出状态转移，最后确定初始化和计算顺序。若只记住公式而忘记 <code>dp[i]</code> 的含义，遇到“每次走 1、2、3 级”等变化时就无法正确修改。</p><h3 id="典型应用">典型应用</h3><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">46</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 初始化最小的两个状态，避免转移时访问不存在的下标</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (n </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // n 至少为 2 时，第二个初值才会成为有效状态</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 从小到大计算每一级的方案数</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">];</span><span style="--0:#919F9F;--1:#5D6376">  // 最后一步分别来自前一级或前两级</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[n] </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>限定 <code>1 &lt;= n &lt;= 45</code> 时答案在 <code>int</code> 范围内。时间与空间复杂度均为 <code>O(n)</code>。</p><h3 id="测试案例">测试案例</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>输入</th>
+<th>应得到的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>边界</td>
+<td><code>n=1</code></td>
+<td>只有一步走 1 级，共 1 种</td>
+</tr>
+<tr>
+<td>边界</td>
+<td><code>n=2</code></td>
+<td>走 <code>1+1</code> 或直接走 2，共 2 种</td>
+</tr>
+<tr>
+<td>基础</td>
+<td><code>n=5</code></td>
+<td>状态依次为 <code>1、2、3、5、8</code>，答案 8</td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>较大的 <code>n=45</code></td>
+<td>应在 <code>int</code> 范围内得到正确结果，并检查数组空间和溢出边界</td>
+</tr>
+</tbody>
+</table><h2 id="common-errors">常见错误</h2><section><h3>状态定义与答案下标不一致</h3><div><div><strong><span>×</span> 错误写法</strong><code>定义到第 i 级的方案数，最后输出 dp[n-1]</code></div><div><strong><span>✓</span> 正确写法</strong><code>按定义输出 dp[n]，并处理最小输入</code></div></div><p><strong>原因：</strong>题目目标是第 n 级，答案位置应与定义一致。</p><p><strong>检查方法：</strong>公式写完后重新读一遍 dp[i] 表示什么。</p></section><section><h3>先套转移再补初值</h3><div><div><strong><span>×</span> 错误写法</strong><code>从 i=1 开始统一计算 dp[i]=dp[i-1]+dp[i-2]</code></div><div><strong><span>✓</span> 正确写法</strong><code>先确定不能由转移推出的最小状态，再从第一个可转移位置开始循环</code></div></div><p><strong>原因：</strong>最小状态没有更小的合法来源，会访问负下标或未定义状态。</p><p><strong>检查方法：</strong>把初始化、转移起点和数组下标放在一起检查。</p></section><h2 id="related-learning">关联学习</h2><p>下一页 01 背包把状态增加“物品选择”含义，并进一步讲解一维数组的更新方向。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp7.html">← 上一个：格雷码</a>

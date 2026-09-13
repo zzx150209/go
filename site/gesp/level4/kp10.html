@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>freopen(&#x27;input.txt&#x27;,&#x27;r&#x27;,stdin) 把标准输入重定向到文件。</li><li>fstream 库支持文件读写：ifstream 读，ofstream 写。</li><li>输入校验：读取数据前检查是否成功打开。</li><li>try-catch 用于捕获异常，GESP 阶段了解基本写法即可。</li></ul>
-
-    <div class="kp-code"><pre>#include &lt;fstream&gt;
-ifstream fin(&quot;input.txt&quot;);
-ofstream fout(&quot;output.txt&quot;);
-int x;
-fin &gt;&gt; x;
-fout &lt;&lt; x * 2 &lt;&lt; endl;
-fin.close();
-fout.close();
-
-// 或用 freopen
-freopen(&quot;input.txt&quot;, &quot;r&quot;, stdin);
-freopen(&quot;output.txt&quot;, &quot;w&quot;, stdout);</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>文件名注意路径和拼写，文件不存在会导致读入失败。</li><li>竞赛中在线评测不用文件操作，直接用 cin/cout。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">文件让数据在程序结束后仍能保存。题目明确要求从指定文件读入、把结果长期保存或追加记录时，可以使用文件流；读写前要成功打开，操作后要检查状态并正常关闭。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">文件操作不能只写读写语句：打开是否成功、每次读取是否成功、写入后的流状态都要检查。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">ifstream input(&quot;data.txt&quot;); // 尝试建立连接 data.txt 的输入流
+if (!input.is_open()) { // 立即检查文件是否成功打开
+    return 0; // 打开失败就停止，不能继续读取
+} // 结束打开状态检查
+// 只有输入打开且内容读取成功后，才考虑打开输出文件</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int value; // 保存本次成功读取的整数
+while (input &gt;&gt; value) { // 先尝试读取，成功后才进入循环体
+    cout &lt;&lt; value; // 只处理这一次新读到的有效数据
+} // 读取失败或到达文件末尾时结束</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">打开失败后仍继续读写</li><li class="astro-e22r5uwj">使用 while (!input.eof()) 控制读取</li><li class="astro-e22r5uwj">需要追加旧内容却使用覆盖写模式</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">学完后，你能按“打开—检查—读写—再检查—关闭”完成文本文件操作，并区分重定向、文件流、追加和二进制模式。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">控制台里的数据像写在临时草稿纸上，程序结束后就不再保留。文件更像一本账本：程序先找到并打开它，再读入旧记录或写入新记录，最后确认操作成功。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要理解标准输入输出重定向、文本与二进制文件、文件流及常见打开模式，能够完成基本读写并处理失败状态。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 freopen 重定向</h2><p class="astro-e22r5uwj">`freopen` 可以把标准输入或输出重新连接到文件，成功后仍使用 cin、cout；&quot;r&quot; 表示读，&quot;w&quot; 表示从头写。</p><p class="astro-e22r5uwj">重定向调用也可能失败，正式使用时要检查返回结果。竞赛程序只在题目明确要求文件输入输出时使用；普通在线评测通常直接使用标准输入输出。</p><pre class="astro-e22r5uwj"><code class="language-cpp">FILE* inputResult = freopen(&quot;input.txt&quot;, &quot;r&quot;, stdin); // 尝试把标准输入重定向到文件
+FILE* outputResult = freopen(&quot;output.txt&quot;, &quot;w&quot;, stdout); // 尝试把标准输出重定向到文件
+if (inputResult == nullptr || outputResult == nullptr) { // 检查任一重定向是否失败
+    return 0; // 失败时停止后续标准输入输出操作
+} // 结束重定向结果检查</code></pre><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp9.html">← 上一个：复杂度估算</a>

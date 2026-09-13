@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,19 +449,14 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>指针是存储内存地址的变量，int* p 表示 p 指向一个 int。</li><li>&amp; 变量 取变量地址，* 指针 取指针指向的值（解引用）。</li><li>指针必须初始化后才能使用，空指针用 nullptr 表示。</li><li>数组名就是首元素的地址，int a[5]; a 等价于 &amp;a[0]。</li></ul>
-
-    <div class="kp-code"><pre>int x = 42;
-int* p = &amp;x;    // p 指向 x
-cout &lt;&lt; *p;     // 42（解引用）
-*p = 100;       // 通过指针修改 x
-cout &lt;&lt; x;      // 100
-
-int* q = nullptr; // 空指针，不能解引用</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>未初始化的指针值是随机的，解引用会崩溃。</li><li>指针类型要匹配，int* 不能指向 double。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">指针变量保存的是地址。需要间接访问对象、遍历数组或让函数通过地址修改实参时，可以先保存地址，再用解引用读取或修改对象。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">指针保存地址，解引用访问地址对应的对象；只有指向仍然存在的合法对象时才能解引用。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int value = 7; // 创建一个保存整数 7 的对象
+int* pointer = &amp;value; // 取得 value 的地址并保存到 int 指针中
+*pointer = 10; // 沿保存的地址找到 value，并把它改为 10</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int score = 80; // 定义分数对象，值为 80
+int* pointer = &amp;score; // 保存 score 的地址并建立指向关系
+cout &lt;&lt; *pointer; // 解引用 pointer，读取并输出 score 的值 80</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">未初始化或为 nullptr 时解引用</li><li class="astro-e22r5uwj">混淆 pointer、&amp;value 与 *pointer</li><li class="astro-e22r5uwj">指针偏移后越过数组合法元素范围</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：区分对象、地址和指针变量；理解解引用怎样读写同一对象；在数组和空指针场景中守住对象生命周期与合法边界。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">变量像一间放着数据的房间，地址像门牌号，指针则是专门保存门牌号的纸条。`&amp;` 用来抄下门牌号，`*` 用来顺着门牌号进入房间。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要理解变量地址、指针变量和解引用，能够判断指针指向的对象并避免空指针、失效指针等基本风险。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 地址与指针变量</h2><p class="astro-e22r5uwj">对象是实际保存数据的存储区域，地址用来标识这块区域的位置，指针变量则专门保存某种类型对象的地址。`&amp;value` 取得 value 的地址，`int* pointer` 声明一个能保存 int 对象地址的指针。</p><p class="astro-e22r5uwj">执行 `pointer = &amp;value` 后，pointer 的内容是地址，value 的内容仍是整数 7。假设讲解时把 value 的地址记作 1000，那么三栏应写成“value：7；&amp;value：1000；pointer：1000”。真实地址由运行环境决定，不能假定固定数值。</p><p class="astro-e22r5uwj">声明 `int* first, second;` 时只有 first 是指针，second 仍是 int。初学阶段一行只声明一个指针，或把星号贴近变量名，能减少误读。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int value = 7; // 创建整数对象 value，内容为 7
+int* pointer = &amp;value; // 创建指针对象 pointer，内容为 value 的地址</code></pre><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp2.html">← 上一个：参数与作用域</a>

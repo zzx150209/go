@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>递归：函数直接或间接调用自己，必须有递归出口（base case）。</li><li>递归三要素：出口条件、递归关系、返回值。</li><li>递归过程：逐层调用 → 到达出口 → 逐层返回计算结果。</li><li>经典：阶乘、斐波那契、汉诺塔、二叉树遍历（后续学）。</li></ul>
-
-    <div class="kp-code"><pre>int factorial(int n) {
-    if (n &lt;= 1) return 1;       // 出口
-    return n * factorial(n - 1); // 递归
-}
-
-// 汉诺塔
-void hanoi(int n, char a, char b, char c) {
-    if (n == 0) return;
-    hanoi(n-1, a, c, b);
-    cout &lt;&lt; a &lt;&lt; &quot;-&gt;&quot; &lt;&lt; c &lt;&lt; endl;
-    hanoi(n-1, b, a, c);
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>没有出口或出口错误会导致栈溢出（无限递归）。</li><li>递归深度太大（如 10^6）会爆栈，改用循环。</li></ul>
+    <article class="article-body">
+    <article id="top"><p>递归把一个问题交给规模更小的同类问题处理；每条调用路径都要有直接回答的出口，并且严格走向出口。</p><h2 id="知识范围与官方定位" class="astro-2i3ys3wc">知识范围与官方定位</h2><p class="astro-2i3ys3wc">对应五级大纲“递归”：理解递归函数含义、出口、严格推进、栈帧调用与返回，能识别阶乘、斐波那契、汉诺塔的递归形状，并用递归枚举和递归树分析时间、空间。</p><p>本页只使用一级至五级已经学习的语法和能力；小知识点按页内编号连续查询，不设置前置完成门槛。</p><dl><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">是什么</dt><dd class="astro-2i3ys3wc">递归函数不是“无限调用自己”，而是在当前合同下把更小的同类部分交给下一帧，出口直接完成最小状态。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">解决什么问题</dt><dd class="astro-2i3ys3wc">它能把“逐层决定、完成后回到原处继续”的问题写得清楚，例如阶乘的返回、汉诺塔的分步和本课的二进制串枚举。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">什么时候使用</dt><dd class="astro-2i3ys3wc">只有能写出精确函数含义、可到达出口和严格变小的下一状态时才使用；三者任缺一个都不能开始写递归。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">核心思想</dt><dd class="astro-2i3ys3wc">每个栈帧独立保存自己的参数和继续位置；共享 answer 数组保存当前路径，但只有 answer[0..pos-1] 是本帧承诺有效的前缀。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">C++ 实现方法</dt><dd class="astro-2i3ys3wc">先公开 0≤n≤20，再写 search(pos) 的前缀合同、pos==n 的出口和 pos+1 的推进；每个非叶帧固定先 0、返回本帧后再 1。</dd></div></dl><section aria-labelledby="01-递归的三个必要部分"><h2 id="01-递归的三个必要部分" class="astro-2i3ys3wc">01 递归的三个必要部分</h2><p class="astro-2i3ys3wc">一段递归先要写清函数合同：它当前解决什么同类问题。例如 search(pos) 的合同是：在 answer[0..pos-1] 已固定后，补全所有合法的后缀。合同清楚，调用者才知道这一层完成后会得到什么。</p><p class="astro-2i3ys3wc">第二部分是出口：遇到可以直接回答的最小状态就停止调用。第三部分是严格推进：每次递归后，离出口必须更近。若 factorial(n) 的出口是 n==1，却错误调用 factorial(n+1)，参数看似在变化却永远到不了出口。</p><div><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>先不写代码：为 search(pos) 补全函数合同、出口和严格推进；再用错误的 factorial(n+1) 检查“变化”不等于“靠近出口”。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">合同：answer[0..pos-1] 已固定，search(pos) 要枚举每一种合法后缀；因此 pos 不是任意数字，而是下一位的位置。</li><li class="astro-2i3ys3wc">出口：pos==n 时 n 位都已经确定，直接输出一行并 return；n=0 也在 search(0) 直接输出一行空行。</li><li class="astro-2i3ys3wc">推进：非出口只能调用 search(pos+1)，因为已确定的位置从 pos 个增加到 pos+1 个，必会到 n。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>自检题：把“函数完成什么、最小状态是什么、下一层为何更近”各说一句；三句缺一句就不要写递归。</p><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp10.html">← 上一个：分治与排序</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,245 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>机器语言由 0 和 1 组成，CPU 直接执行，但人很难读写。</li><li>汇编语言用助记符表示指令，需要汇编器翻译为机器码。</li><li>高级语言（C++、Python）接近自然语言，需要编译器或解释器翻译。</li><li>编译型语言（C++）先整体翻译为可执行文件再运行；解释型语言（Python）逐行翻译执行。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>C++ 是编译型语言，运行前需要编译，编译后运行速度快。</li><li>编译器报错信息中的行号对应源文件，不是翻译后的机器码。</li></ul>
+    <article class="article-body">
+    <div data-gesp-level2-ui data-gesp-level2-detail></div>
+<h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 机器语言由 CPU 直接执行，汇编语言用助记符但仍需汇编，高级语言更接近人的表达；C++ 源代码必须经过翻译和链接才能运行。</li>
+<li><strong>常用语法：</strong> C++ 程序按 <code>源代码 → 编译 → 目标文件 → 链接 → 可执行程序 → 运行</code> 的固定阶段形成可执行结果。</li>
+<li><strong>最小示例：</strong> <code>int c = a + b;</code> 仍只是高级语言源代码，CPU 不能直接执行 <code>.cpp</code> 文件；它还要经过目标文件和可执行程序阶段。</li>
+<li><strong>关键易错点：</strong> 编译错误、链接错误、运行错误和逻辑错误发生在不同阶段；程序能运行不等于答案正确。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>本页对应二级大纲中的程序设计语言分类与特点：认识机器语言、汇编语言和高级语言，知道常见高级语言，并理解 C++ 源程序通常需要经过编译和链接才能运行。</p>
+<p>程序设计语言是人向计算机表达处理步骤的工具。不同层次的语言写法不同，但最终都要让计算机得到能够执行的机器指令。</p>
+<p>本页用同一个“计算两个整数之和”任务比较机器语言、汇编语言和高级语言，再沿着“源代码、编译、链接、运行”追踪 C++ 程序从文字文件变成可执行程序的过程，并区分编译失败、链接失败、运行失败和答案错误。</p>
+<p><strong>程序设计语言</strong>是一套有明确词汇、语法和含义的表达规则，程序员用它写出处理步骤。这里的“语言”不只是若干英文单词：语法规定怎样写才合法，语义说明一条语句表示什么操作，翻译工具再把这些操作转换成计算机能够执行或处理的形式。</p>
+<a id="01-language-levels"></a>
+<h2 id="01-三类程序设计语言">01 三类程序设计语言</h2>
+<p><strong>机器语言</strong>由计算机能够直接执行的机器指令组成，常以二进制形式表示。它与具体硬件关系密切，难以阅读和编写。</p>
+<p><strong>汇编语言</strong>用助记符表示机器指令，比机器语言容易阅读，但仍与处理器密切相关，必须由汇编器翻译。</p>
+<p><strong>高级语言</strong>更接近人类表达和数学描述，通常更容易编写、阅读和维护。C++、Python、Java 都属于高级语言。高级语言源程序不能直接交给 CPU 执行，也需要翻译。</p>
+<p>可以用同一个“计算两个整数之和”任务比较三类语言：</p>
+<table>
+<thead>
+<tr>
+<th>语言层次</th>
+<th>人看到的表达</th>
+<th>计算机怎样处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器语言</td>
+<td>一串与处理器对应的 0 和 1</td>
+<td>CPU 可以直接执行对应指令</td>
+</tr>
+<tr>
+<td>汇编语言</td>
+<td>用助记符表示“取数、相加、保存”</td>
+<td>汇编器翻译成机器指令</td>
+</tr>
+<tr>
+<td>高级语言</td>
+<td>C++ 中可写成 <code>c = a + b;</code></td>
+<td>编译器等翻译工具处理</td>
+</tr>
+</tbody>
+</table>
+<p>三种写法表达的是同一件事，但抽象程度不同。高级语言更方便人阅读，不等于 CPU 能直接理解；机器语言能直接执行，也不等于适合人手工编写大型程序。</p>
+<p>“翻译工具”也要与语言层次对应：汇编器把汇编语言翻译成机器相关代码；编译器通常先把整份源程序翻译并检查，再生成后续可执行成果；解释器通常边读取边执行相应内容。实际语言可以有不同实现方式，二级只需掌握 C++ 通常先编译、Python 常见实现通常通过解释环境运行，不能据此断言一种高级语言永远只有一种执行方式。</p>
+<a id="02-high-level"></a>
+<h2 id="02-常见高级语言与-c">02 常见高级语言与 C++</h2>
+<p>C++ 是通用的高级程序设计语言，可以编写控制台程序、桌面软件、游戏和系统软件等。GESP C++ 认证以 C++ 为工具训练程序设计思维。</p>
+<p>C++ 编译后的程序通常运行效率高，因此常用于算法竞赛和对效率有要求的软件。它既支持按照步骤组织程序的<strong>过程式编程</strong>，也支持把数据和操作组织在一起的<strong>面向对象编程</strong>。二级只需要认识这些特点，不在本页展开类和对象的语法。</p>
+<p>常见名称可以这样辨认：</p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>都属于什么层次</th>
+<th>常见运行准备方式</th>
+<th>本页只需记住</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C</td>
+<td>高级语言</td>
+<td>通常先编译、链接</td>
+<td>接近系统开发，语法与 C++ 有联系但不是同一种语言</td>
+</tr>
+<tr>
+<td>C++</td>
+<td>高级语言</td>
+<td>通常先编译、链接</td>
+<td>效率高，支持过程式和面向对象等方式</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>高级语言</td>
+<td>常见实现通过解释环境执行</td>
+<td>写法较接近人的表达，不等于 CPU 直接执行源文件</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>高级语言</td>
+<td>常先编译成字节码，再由运行环境执行</td>
+<td>说明高级语言的执行准备方式并非只有一种</td>
+</tr>
+</tbody>
+</table>
+<p>“高级语言”是按表达抽象层次分类，不是按新旧、难易或运行速度排名。C++ 和 Python 都是高级语言，却不必采用完全相同的翻译和运行过程。</p>
+<p>下面的局部语句表达“把两个整数相加并保存结果”。这里只比较语言表达层次，不把完整程序作为本课的新核心：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> c </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span><span style="--0:#919F9F;--1:#5D6376">  // 读取 a、b 的当前整数值，相加后把结果保存到 c</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>.cpp</code> 文件保存的是源代码，不是 CPU 可以直接执行的机器指令。代码简单并不改变它需要翻译的事实。</p>
+<a id="03-translation"></a>
+<h2 id="03-源程序的翻译与运行">03 源程序的翻译与运行</h2>
+<p>使用编译型语言时，可以把过程简化为：</p>
+<p><strong>源代码 → 编译 → 目标代码 → 链接 → 可执行程序 → 运行</strong></p>
+<ol>
+<li><strong>编辑</strong>：编写并保存源代码；</li>
+<li><strong>编译</strong>：检查语法，把源代码翻译为目标代码；</li>
+<li><strong>链接</strong>：把目标代码和需要的库连接成可执行程序；</li>
+<li><strong>运行</strong>：操作系统加载程序，CPU 执行机器指令。</li>
+</ol>
+<p>若把 C++ 的常见过程再展开一步，可以看到每一阶段的输入和输出：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>读入什么</th>
+<th>主要工作</th>
+<th>产生或交给下一步什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编辑</td>
+<td>人的题意和设计</td>
+<td>写出 <code>.cpp</code> 源文件</td>
+<td>源代码</td>
+</tr>
+<tr>
+<td>预处理</td>
+<td><code>#include</code> 等指令和源代码</td>
+<td>展开头文件等预处理内容</td>
+<td>预处理后的源代码</td>
+</tr>
+<tr>
+<td>编译</td>
+<td>预处理后的代码</td>
+<td>检查语法、类型与名称并翻译</td>
+<td>目标代码</td>
+</tr>
+<tr>
+<td>链接</td>
+<td>目标代码和所需库</td>
+<td>找到各部分定义并组合</td>
+<td>可执行程序</td>
+</tr>
+<tr>
+<td>运行</td>
+<td>可执行程序和输入</td>
+<td>操作系统加载，CPU 执行</td>
+<td>输出或运行时现象</td>
+</tr>
+</tbody>
+</table>
+<p>预处理和编译在日常工具中常被一个“编译”按钮一起完成，但它们的职责不同。知道这个顺序能帮助定位错误：找不到头文件常发生在预处理附近，漏分号通常在编译阶段报告，缺少某个已声明功能的定义可能在链接阶段报告。</p>
+<p>编译报错通常说明语法、名称或类型等问题；程序能够运行但答案错误，属于逻辑错误；运行时出现除以 0 等问题，属于运行阶段错误。<strong>编译成功不等于答案一定正确。</strong></p>
+<p>把一份 C++ 文件想成沿着流水线前进：</p>
+<p><strong>源代码 → 编译器 → 目标代码 → 链接器 → 可执行程序 → 操作系统加载 → CPU 运行</strong></p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>停在哪一步</th>
+<th>具体例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>漏写分号，提示语法错误</td>
+<td>编译失败</td>
+<td>还没有生成可执行程序</td>
+</tr>
+<tr>
+<td>使用了找不到定义的功能</td>
+<td>链接失败</td>
+<td>已经编译，但不能组成完整程序</td>
+</tr>
+<tr>
+<td>程序启动后做了不允许的运算</td>
+<td>运行失败</td>
+<td>例如整数除数实际变成 0</td>
+</tr>
+<tr>
+<td>程序输出错误答案</td>
+<td>已运行，逻辑错误</td>
+<td>把 <code>a + b</code> 误写为 <code>a - b</code></td>
+</tr>
+</tbody>
+</table>
+<p>“保存成功”只说明源文件写入磁盘；“编译成功”只说明能生成后续程序；“运行成功”也只说明程序走到了结束。是否得到正确答案，还要用具体输入检查输出。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>表达特点</th>
+<th>是否需翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器语言</td>
+<td>机器指令，与硬件密切相关</td>
+<td>CPU 直接执行</td>
+</tr>
+<tr>
+<td>汇编语言</td>
+<td>助记符，与硬件关系较强</td>
+<td>需要汇编</td>
+</tr>
+<tr>
+<td>高级语言</td>
+<td>更接近人的表达</td>
+<td>需要编译或解释</td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<p>**题目：**判断“Python 与 C++ 都属于高级语言，所以 CPU 可以直接执行它们的源文件”是否正确。</p>
+<p><strong>推演：</strong></p>
+<ol>
+<li>Python 和 C++ 的确都比机器语言更接近人的表达，因此前半句正确；</li>
+<li>CPU 直接执行的是机器指令，不直接认识 <code>.cpp</code> 等高级语言源文件；</li>
+<li>C++ 源代码通常还要经过编译和链接，形成可执行程序后再运行；</li>
+<li>因而“属于高级语言”不能推出“CPU 直接执行源文件”。</li>
+</ol>
+<p>**结论：**整句话错误。前半句正确，后半句错误；语言越方便人阅读，越不能省略必要的翻译过程。</p>
+<p>**引导练习：**下面四个现象分别最先对应哪个阶段：① <code>.cpp</code> 文件漏写分号；② 已声明的函数始终找不到定义；③ 程序启动后除数变成 0；④ 程序顺利结束却把加法写成减法。请先按“编译—链接—运行—逻辑检查”的顺序逐项配对。提示：先问可执行程序是否已经生成，再问程序是否已经开始运行。核对结果依次是编译失败、链接失败、运行失败、逻辑错误；还要能说明第④项不能由“运行结束”证明答案正确。</p>
+<a id="常见错误"></a>
+<h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
+<ul>
+<li>认为汇编语言就是机器语言，因而不需要翻译；</li>
+<li>把编辑、保存和编译混为一谈；</li>
+<li>认为扩展名为 <code>.cpp</code> 的文件就是可执行程序；</li>
+<li>认为程序能运行就说明逻辑和输出一定正确。</li>
+</ul>
+<p><strong>错误判断：</strong>“C++ 是高级语言，所以 CPU 可以直接执行 <code>.cpp</code> 源文件。”</p>
+<p><strong>错误原因：</strong>“高级”表示更接近人的表达，不表示更接近 CPU 指令。C++ 源代码还要经过编译和链接。</p>
+<p>**正确结论：**C++ 的典型过程是“源代码 → 编译 → 目标代码 → 链接 → 可执行程序 → 运行”。</p>
+<p><strong>错误判断：</strong>“高级语言一定比机器语言运行得慢。”</p>
+<p>**错误原因：**源代码是否容易阅读和程序最终运行效率不是同一件事。高级语言经过翻译后也会变成机器指令，实际效率还与编译器和程序写法有关。</p>
+<p>**正确结论：**二级应掌握三类语言的表达特点和翻译方式，不用“高级”或“低级”两个词直接判断所有程序的运行速度。</p>
+<h2 id="本节总结">本节总结</h2>
+<p>机器语言能由 CPU 直接执行，汇编语言需要汇编，高级语言需要编译或解释。对 C++ 来说，保存 <code>.cpp</code> 文件不等于得到可执行程序；编译、链接、运行分别可能失败，即使程序顺利结束，也还要核对输出是否符合题意。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>流程图用于在写代码前描述算法步骤；数据类型转换解释 C++ 表达式中不同类型怎样参与运算。两者都建立在“源程序表达处理步骤”这一基础上。</p>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp1.html">← 上一个：计算机存储与网络</a>

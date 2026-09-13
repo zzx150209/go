@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,82 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>加法原理：完成一件事有多种互斥方案，方案数相加。</li><li>乘法原理：完成一件事分多个步骤，每步方法数相乘。</li><li>区分分类与分步：分类是&#x27;或&#x27;的关系，分步是&#x27;且&#x27;的关系。</li><li>容斥原理：|A∪B| = |A| + |B| - |A∩B|。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>先分类再分步，确保不重不漏。</li><li>题目有&#x27;至少&#x27;&#x27;至多&#x27;时考虑容斥。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>计数原理是八级组合数学的起点。官方要求掌握加法原理、乘法原理、分类计数、分步计数和基础混合计数。本页不引入容斥原理；遇到分类重叠时，先重新划分互不重叠的类别。</p>
+<h2 id="kp-01">01 完整方案与分类、分步</h2>
+<p>计数前先说明“一种完整方案”包含什么。若只需从若干互斥办法中选一种完成任务，这是分类；若必须依次完成若干环节，每种完整方案都要包含每一步，这是分步。</p>
+<p>例如“乘公交或地铁到校”是分类，“先选上衣再选裤子”是分步。判断的关键不是题目里有没有“或”“再”，而是完整方案到底选择一类，还是包含多个步骤。</p>
+<h2 id="kp-02">02 加法原理</h2>
+<p>完成同一件事有若干类互不重叠的办法，只需选择其中一类，总方案数是各类方案数之和。4 条公交线路和 3 条地铁线路都能直达学校，且没有重复线路，因此共有 <code>4 + 3 = 7</code> 种选择。</p>
+<p>使用加法前要检查两件事：分类覆盖所有合法方案；任意方案只属于一个类别。漏掉类别会少算，类别相交会重复计数。</p>
+<h2 id="kp-03">03 乘法原理</h2>
+<p>一件事必须分若干步完成，并且每一步的选择都能与后一步的每种选择组合，总方案数是各步方案数之积。3 种主食各配 2 种饮料，共有 <code>3 × 2 = 6</code> 种套餐。</p>
+<p>若后一步方案数随前一步改变，应分别计算各分支，不能机械地乘一个固定数字。例如选了不同入口后可走的出口数量不同，需要先按入口分类。</p>
+<h2 id="kp-04">04 混合计数与查重</h2>
+<p>复杂计数常同时出现分类和分步。从 A 到 B 可走 2 条陆路或 1 条水路，从 B 到 C 有 3 条路。A 到 B 先分类得到 <code>2 + 1 = 3</code> 种，全程再分步得到 <code>(2 + 1) × 3 = 9</code> 种。</p>
+<p>计算后可用小规模枚举核对：逐个写出完整方案，确认每个方案恰好出现一次。这个检查比只看算式更容易发现漏算和重复。</p>
+<h2 id="kp-05">05 程序中的方案计数</h2>
+<p>当类别很多时，可以用循环累加各类方案数。下面输入互不重叠的 <code>n</code> 类方案数并输出总数。约定 <code>1 &lt;= n &lt;= 100000</code>，结果不超过 <code>long long</code>。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 每次加入一个互斥类别的方案数，执行的是加法原理。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> category </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; category </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; category</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> ways;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> ways;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">total </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> ways;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>程序的时间复杂度为 <code>O(n)</code>，额外空间复杂度为 <code>O(1)</code>。代码只能完成“类别互不重叠”的求和，不能自动修正错误分类。</p>
+<p><strong>方案树追踪。</strong> 设密码依次填写“字母、数字、数字”，可选数分别为 <code>2、3、2</code>。第一层有 2 个分支；每个分支在第二层再分出 3 个分支；每个第二层分支又有 2 个叶子，所以叶子总数为 <code>2×3×2=12</code>。每个叶子对应一个完整密码，这正是乘法原理。</p>
+<p>再看路线计数：从家到中转站可乘 2 条公交线或 1 条地铁线，从中转站到学校有 4 条步行路线。前半程先按互斥方式相加，得到 <code>2+1=3</code>；全程必须连续完成两段，再相乘，得到 <code>(2+1)×4=12</code>。</p>
+<p>边界检查不能省略：若某一步可选数为 0，那么任何完整方案都无法完成，总数就是 0；若某一类本身有 0 种方案，它只在加法中贡献 0，不会让其他互斥类别消失。规模很大时还要先估算乘积是否超过 <code>long long</code>。</p>
+<p><strong>逐段具体推演（对应 01—05）。</strong></p>
+<p><strong>01 判断分类还是分步。</strong> 食堂提供米饭套餐 2 种和面条套餐 3 种，学生只买其中一类，完整选择是 <code>2+3=5</code> 种；如果一份套餐要先选 2 种主食之一，再选 3 种饮料之一，每份套餐必须完成两步，方案数才是 <code>2×3=6</code>。</p>
+<p><strong>02 加法原理。</strong> 从 A 到 B 可以坐 2 班公交或 3 班地铁，逐类列出是 <code>{公交1,公交2}</code> 与 <code>{地铁1,地铁2,地铁3}</code>，合并后正好 5 个不同方案。前提是一班车不会同时属于两类。</p>
+<p><strong>03 乘法原理。</strong> 百位可选 <code>{1,2}</code>，十位可选 <code>{0,3}</code>，个位可选 <code>{5,7}</code>。以百位 2 为例，会得到 <code>205、207、235、237</code>；百位 1 也有 4 个，共 <code>2×2×2=8</code> 个。密码 <code>205</code> 的形成顺序是先选 2，再选 0，最后选 5。</p>
+<p><strong>04 混合计数。</strong> A 到 B 有 2 条陆路和 1 条水路，B 到 C 有 3 条路。第一段先分类得到 <code>2+1=3</code>，再与第二段分步相乘，最终 <code>3×3=9</code>。中间结果 3 表示到达 B 的方式数，不是最终答案。</p>
+<p><strong>05 程序计数。</strong> 三层循环分别遍历 <code>2、2、2</code> 个候选，最内层执行 8 次，应输出 8 个数。如果增加“不能出现数字 0”的限制，十位只剩 3，结果变成 <code>2×1×2=4</code>；循环也必须同步跳过 0。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>任务结构</th>
+<th>运算</th>
+<th>使用前检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从互斥类别中选一种</td>
+<td>加法</td>
+<td>分类完整且不重叠</td>
+</tr>
+<tr>
+<td>依次完成所有步骤</td>
+<td>乘法</td>
+<td>每步选择能正确衔接</td>
+</tr>
+<tr>
+<td>既分类又分步</td>
+<td>分层写算式</td>
+<td>每一层分别检查</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>密码由 1 个大写字母和 2 个互不相同的数字组成。大写字母有 26 种；第一个数字有 10 种；第二个数字不能重复，只有 9 种。因此共有 <code>26 × 10 × 9 = 2340</code> 个密码。这里三个位置都必须填写，所以用乘法；“数字互不相同”改变了第二个数字的方案数。</p>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>重复计数反例。</strong> “到校方式”分成“乘公交”和“乘 1 号线”，但 1 号线本身就是公交线路。若公交共 4 条，其中包含 1 号线，再算 <code>4+1=5</code> 就把同一方案算了两次，真实答案仍是 4。正确做法是让分类互不重叠。</p>
+<ul>
+<li>把“二选一”的互斥类别相乘；正确做法是确认只选一类后相加。</li>
+<li>把“每一步都必须完成”的步骤相加；正确做法是逐步相乘。</li>
+<li>分类有交集却直接相加；应重新划分互斥类别或逐项查重。</li>
+<li>忽略前一步对后一步选择数的影响；应沿每个分支分别计数。</li>
+<li>使用 <code>int</code> 保存很大的方案数；应先估算上界并选择合适整数类型。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/gesp/level8/permutations-combinations/">排列与组合</a>：顺序限制会改变每一步的可选数量。</li>
+<li><a href="/gesp/level8/pascal-triangle/">杨辉三角</a>：用递推计算组合数。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       

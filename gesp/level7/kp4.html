@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,187 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>最大连续子段和：dp[i] 表示以 i 结尾的最大连续和，dp[i]=max(a[i], dp[i-1]+a[i])。</li><li>最长上升子序列（LIS）：O(n²) DP，O(n log n) 用二分优化。</li><li>01 背包：dp[j] 表示容量 j 时的最大价值，倒序枚举容量。</li><li>完全背包：正序枚举容量，每个物品可选多次。</li></ul>
-
-    <div class="kp-code"><pre>// 最大连续子段和
-int dp[100005], ans = -INF;
-dp[1] = a[1];
-for (int i = 2; i &lt;= n; i++) {
-    dp[i] = max(a[i], dp[i-1] + a[i]);
-    ans = max(ans, dp[i]);
-}
-
-// 01背包
-for (int i = 1; i &lt;= n; i++)
-    for (int j = W; j &gt;= w[i]; j--)
-        dp[j] = max(dp[j], dp[j-w[i]] + v[i]);</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>01 背包必须倒序枚举容量，正序就变成完全背包了。</li><li>LIS 二分优化用 lower_bound 找替换位置。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方七级大纲要求掌握动态规划最优解优化。本页从“为什么可以从子问题最优解得到当前最优解”出发，整理最长上升子序列、候选最值比较和空间压缩。优化必须保持原状态含义与依赖关系，不能只追求数组更小。</p>
+<p>当题目要求连续区间或子序列的最优值时，先写出能说明答案的基础状态；当基础写法已经正确、但重复枚举候选或保存了不再需要的旧阶段时，再考虑时间或空间优化。优化的判断依据是依赖关系，不是代码看起来更短。</p>
+<h2 id="kp-01">01 最优状态与最大连续和</h2>
+<p>若一个问题的最优解能由若干更小问题的最优解组合得到，就具有最优子结构。状态转移要枚举所有合法前驱，再取 <code>min</code> 或 <code>max</code>。求最小值时初值应足够大，求最大值时则应结合题意设为合法下界。</p>
+<p>最大连续和是典型的一维最值状态。设 <code>dp[i]</code> 表示<strong>必须以第 <code>i</code> 个数结尾</strong>的最大连续子段和，则 <code>dp[i] = max(a[i], dp[i - 1] + a[i])</code>：要么从当前数重新开始，要么接到前一段后面。最终答案是所有 <code>dp[i]</code> 的最大值；全负序列不能强行选择不存在的空子段 <code>0</code>。</p>
+<p><strong>具体推演：</strong> 对序列 <code>-2, 3, -1</code>，<code>dp[1] = -2</code>；到 <code>3</code> 时比较“单独从 <code>3</code> 开始”和“接在 <code>-2</code> 后得到 <code>1</code>”，选择 <code>3</code>；到 <code>-1</code> 时比较 <code>-1</code> 与 <code>3 + (-1) = 2</code>，选择 <code>2</code>。三个结尾状态为 <code>-2,3,2</code>，最终答案取最大值 <code>3</code>。</p>
+<h2 id="kp-02">02 最长上升子序列 LIS</h2>
+<p>设 <code>dp[i]</code> 表示<strong>以第 <code>i</code> 个数结尾</strong>的最长严格上升子序列长度。初值为 <code>1</code>；枚举 <code>j &lt; i</code>，若 <code>a[j] &lt; a[i]</code>，可以转移：</p>
+<p><code>dp[i] = max(dp[i], dp[j] + 1)</code></p>
+<p>最终答案是所有 <code>dp[i]</code> 的最大值，而不一定是 <code>dp[n]</code>。严格上升使用 <code>&lt;</code>，若题目说“不下降”才使用 <code>&lt;=</code>。</p>
+<p><strong>具体推演：</strong> 对序列 <code>3,1,2</code>，初值都是 <code>1</code>。<code>3</code> 不能接到任何更早元素后；<code>1</code> 也不能接在 <code>3</code> 后；处理 <code>2</code> 时，<code>1 &lt; 2</code>，所以由 <code>dp[2] + 1</code> 得到 <code>dp[3] = 2</code>。最终状态为 <code>1,1,2</code>，最长严格上升子序列是 <code>1,2</code>。</p>
+<h2 id="kp-03">03 01 背包与候选最值优化</h2>
+<p><code>01 背包</code> 的二维状态压成一维后，每件物品最多选一次，因此容量必须从大到小倒序更新。正序会读到本轮刚写入的新状态，造成同一物品被重复选择。</p>
+<p>当多个状态反复枚举同一批候选值时，还可以思考是否能维护前缀最值或其他汇总量。但必须先写出正确的基础转移，证明汇总量正好覆盖相同候选集合，不能因为变量更少就认为更优。网格最值也遵循同一原则：从可达的上方、左方等合法来源中取 <code>max</code> 或 <code>min</code>。</p>
+<p><strong>具体推演：</strong> 背包容量为 <code>4</code>，当前只有一件重量 <code>2</code>、价值 <code>3</code> 的物品。倒序先算容量 <code>4</code>，读取旧的 <code>dp[2] = 0</code>，得到 <code>3</code>；再算容量 <code>2</code>，得到 <code>3</code>，最终同一物品只用一次。若正序先把 <code>dp[2]</code> 改成 <code>3</code>，再算 <code>dp[4]</code> 就会读到这个本轮新值并得到 <code>6</code>，等于把唯一物品选了两次。</p>
+<h2 id="kp-04">04 空间优化与更新方向</h2>
+<p>如果当前阶段只依赖上一阶段，可以使用滚动数组；若压成一维数组，更新方向必须避免覆盖仍要读取的旧状态。依赖“上一行左侧旧值”的问题往往需要倒序，依赖“当前行左侧新值”的问题往往需要正序，最终以原转移为准。</p>
+<p><strong>具体推演：</strong> 网格路径压成一维后，处理第二行时 <code>dp[j]</code> 原本保存上方路径数，<code>dp[j - 1]</code> 已更新为当前行左方路径数，因此要从左到右。若上一行是 <code>1,1,1</code>，第二行依次更新为 <code>1,2,3</code>；反向更新会在计算右侧时读不到当前行已经得到的左方状态，结果不再对应原二维转移。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<p>先确认状态含义不变，再比较时间和空间。LIS 的状态以位置结尾；候选最值必须全部合法；滚动数组需要区分上一阶段与当前阶段；一维更新方向由依赖关系决定。</p>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="基础例题">基础例题</h3>
+<p>序列 <code>-2 3 -1 4 -5</code> 的最大连续子段和可以逐项计算：</p>
+<table>
+<thead>
+<tr>
+<th><code>i</code></th>
+<th><code>a[i]</code></th>
+<th><code>dp[i] = max(a[i], dp[i-1] + a[i])</code></th>
+<th>当前答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>-2</code></td>
+<td><code>-2</code></td>
+<td><code>-2</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>3</code></td>
+<td><code>3</code></td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>-1</code></td>
+<td><code>2</code></td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>4</code></td>
+<td><code>6</code></td>
+<td><code>6</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>-5</code></td>
+<td><code>1</code></td>
+<td><code>6</code></td>
+</tr>
+</tbody>
+</table>
+<p>最优连续子段是 <code>3 -1 4</code>，答案为 <code>6</code>。状态强调“必须以当前位置结尾”，最终答案再取所有状态的最大值。</p>
+<h3 id="典型应用例题">典型应用例题</h3>
+<p>求长度为 <code>n</code> 的序列的 LIS 长度：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1005</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1005</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// dp[i] 初始为 1：只选择 a[i] 自身也是合法上升子序列。</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> answer </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 按结尾位置从左到右计算，当前状态只读取更早的 j。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> i; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[j] </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[i]) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">                </span></span><span style="--0:#919F9F;--1:#5D6376">// 把 a[i] 接到以 j 结尾的严格上升子序列后面。</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">max</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i], </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[j] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// 最优结尾不一定是 n，所以每个 dp[i] 都要参与答案比较。</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">answer </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">max</span><span style="--0:#D6DEEB;--1:#403F53">(answer, </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i]);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> answer </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>6</code> 和 <code>3 1 2 5 4 6</code>，输出 <code>4</code>。时间复杂度为 <code>O(n^2)</code>，空间复杂度为 <code>O(n)</code>。</p>
+<h3 id="状态追踪">状态追踪</h3>
+<p>以容量为 <code>4</code>、只有一件重量 <code>2</code>、价值 <code>3</code> 的 01 背包为例：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>更新顺序</th>
+<th>容量 2 更新后</th>
+<th>容量 4 更新后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优化前：二维 <code>dp[item][capacity]</code></td>
+<td>从上一行读取</td>
+<td>选一次得到 <code>3</code></td>
+<td>仍只能选一次，得到 <code>3</code></td>
+</tr>
+<tr>
+<td>优化后：一维 <code>dp[capacity]</code> 倒序</td>
+<td><code>4 → 2</code></td>
+<td>得到 <code>3</code></td>
+<td>先更新容量 4，读取的仍是上一轮 <code>dp[2] = 0</code>，得到 <code>3</code></td>
+</tr>
+<tr>
+<td>错误的一维正序</td>
+<td><code>2 → 4</code></td>
+<td>先得到 <code>3</code></td>
+<td>又读取本轮的新 <code>dp[2] = 3</code>，错误得到 <code>6</code></td>
+</tr>
+</tbody>
+</table>
+<p>空间优化后状态含义不变；倒序的作用是阻止同一件物品在同一轮被重复使用。</p>
+<h3 id="建议测试案例">建议测试案例</h3>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>输入或条件</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td>LIS：<code>3 1 2 5 4 6</code></td>
+<td>长度为 <code>4</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td>LIS 只有一个数 <code>7</code></td>
+<td>长度为 <code>1</code></td>
+</tr>
+<tr>
+<td>易错</td>
+<td>最大连续和：<code>-5 -2 -8</code></td>
+<td>输出 <code>-2</code>，不能输出空子段的 <code>0</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-errors">常见错误</h2>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>为什么错</th>
+<th>正确方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>把 <code>dp[i]</code> 写成前 <code>i</code> 个数的统一答案，却使用“以 <code>i</code> 结尾”的转移</td>
+<td>状态含义和转移不一致</td>
+<td>明确 <code>dp[i]</code> 是否必须以第 <code>i</code> 个数结尾</td>
+</tr>
+<tr>
+<td>LIS 只输出 <code>dp[n]</code></td>
+<td>最优子序列不一定在最后一个位置结束</td>
+<td>取所有 <code>dp[i]</code> 的最大值</td>
+</tr>
+<tr>
+<td>严格上升使用 <code>&lt;=</code></td>
+<td>相等元素会被错误接入</td>
+<td>严格上升用 <code>&lt;</code>，不下降才用 <code>&lt;=</code></td>
+</tr>
+<tr>
+<td>最大连续和把答案初始化为 <code>0</code></td>
+<td>全负序列会错误选择空子段</td>
+<td>用第一个合法状态初始化答案</td>
+</tr>
+<tr>
+<td>01 背包一维状态正序更新</td>
+<td>同一物品会在一轮中被重复使用</td>
+<td>容量从大到小倒序更新</td>
+</tr>
+<tr>
+<td>没有分析依赖就改变更新方向</td>
+<td>可能覆盖后面仍要读取的旧状态</td>
+<td>先画清依赖，再决定正序或倒序</td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误反例推演">错误反例推演</h3>
+<p>全负序列 <code>-5,-2,-8</code> 若把最大连续和答案初始化为 <code>0</code>，每个合法非空子段都小于 <code>0</code>，程序最终会保留 <code>0</code>；但题目要求非空子段，真实候选中最大的是只选 <code>-2</code>。把答案改为第一个合法状态 <code>-5</code>，再依次比较，才会更新到正确结果 <code>-2</code>。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>二维动态规划与复杂动态规划提供基础状态；本页关注保持答案正确的优化。若无法证明覆盖相同候选集合，应保留清晰的基础写法。</p>
+<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp3.html">← 上一个：二维动态规划</a>

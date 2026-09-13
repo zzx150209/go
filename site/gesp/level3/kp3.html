@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,19 +449,316 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>&amp; 按位与：两位都为 1 结果才为 1；| 按位或：有一个为 1 就为 1。</li><li>^ 按位异或：两位不同为 1，相同为 0；~ 按位取反：0 变 1，1 变 0。</li><li>&lt;&lt; 左移：左移 n 位等于乘以 2^n；&gt;&gt; 右移 n 位等于除以 2^n（整数）。</li><li>常用技巧：x &amp; (x-1) 去掉最低位的 1，可用于统计二进制中 1 的个数。</li></ul>
+    <article class="article-body">
+    <h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 位运算先把整数补成相同位宽，再逐位计算；读取或修改第 <code>k</code> 位时，先用 <code>1u &lt;&lt; k</code> 生成只选中目标位的掩码。</li>
+<li><strong>常用语法：</strong> <code>a &amp; b</code>、<code>a | b</code>、<code>a ^ b</code>、<code>~a</code>、<code>a &lt;&lt; k</code>、<code>a &gt;&gt; k</code>；读、设、清、翻分别使用 <code>((value &gt;&gt; k) &amp; 1u)</code>、<code>value | mask</code>、<code>value &amp; (~mask)</code>、<code>value ^ mask</code>。</li>
+<li><strong>最小示例：</strong> <code>6=0110₂</code>、<code>3=0011₂</code>，所以 <code>6 &amp; 3=0010₂=2</code>。</li>
+<li><strong>关键易错点：</strong> 不混淆 <code>&amp;</code> 与 <code>&amp;&amp;</code>；最右位编号为 0；<code>~</code> 必须结合位宽；移动量必须小于类型位宽；混合表达式主动加括号。</li>
+</ul>
 
-    <div class="kp-code"><pre>int a = 5;   // 101
-int b = 3;   // 011
-a &amp; b        // 001 = 1
-a | b        // 111 = 7
-a ^ b        // 110 = 6
-a &lt;&lt; 1       // 1010 = 10（乘2）
-a &gt;&gt; 1       // 10 = 2（除2）</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>异或同一个数两次等于原值：a ^ b ^ b = a。</li><li>位运算优先级低于加减乘除，建议加括号。</li></ul>
+<h2 id="知识范围与使用边界">知识范围与使用边界</h2>
+<p>想象一个整数保存着一排开关：每一位是 <code>0</code> 或 <code>1</code>。我们既可能只想查看某个开关，也可能只改变一个开关而不影响其他位置。位运算就是直接处理这些二进制位的工具。</p>
+<p>本课只收束三个核心：先在固定位宽下计算按位与 <code>&amp;</code>、按位或 <code>|</code>、异或 <code>^</code> 和按位非 <code>~</code>；再追踪非负无符号数的左移 <code>&lt;&lt;</code> 与右移 <code>&gt;&gt;</code>；最后用 <code>1u &lt;&lt; k</code> 读取、设置、清除或翻转第 <code>k</code> 位。后面的位段拆合与异或恢复只是这三个核心的直接应用，不进入 Mastery 三核心。</p>
+<p>这里的“位宽”是统一规定用多少位二进制观察一个数。例如只观察低 8 位时，十进制 45 写成 <code>00101101</code>。本课示例使用非负整数和 <code>unsigned int</code>；在常见 32 位 GCC/OJ 环境中，<code>unsigned int</code> 通常表示 0 到 2³² - 1，实际位宽仍由平台决定。无符号常量 <code>1u</code> 中的 <code>u</code> 表示无符号类型，不会改变数字 1 的大小。</p>
+<p>类型名 unsigned int 表示无符号整数类型，字面量 1u 表示无符号整数 1。</p>
+<p>位编号从最右侧开始，最右位是第 <code>0</code> 位，向左依次是第 <code>1</code>、<code>2</code>、<code>3</code> 位。生成 <code>1u &lt;&lt; k</code> 前必须保证 <code>k</code> 小于 <code>unsigned int</code> 的位宽。本课不讨论负数移位，也不把可能丢失高位的左移当作无条件乘法技巧。</p>
+<h2 id="kp-01">01 六种位运算</h2>
+<h3 id="核心一固定位宽下逐位计算">核心一：固定位宽下逐位计算</h3>
+<p><code>&amp;</code>、<code>|</code>、<code>^</code> 都有左右两个整数。先把两数补成相同位宽，再让同一列的两位配对。<code>~</code> 只有一个整数，会把约定位宽内的每一位翻转。</p>
+<figure data-density="compact"><figcaption>按位与或异或真值表</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th><code>a</code></th>
+<th><code>b</code></th>
+<th><code>a &amp; b</code></th>
+<th><code>a | b</code></th>
+<th><code>a ^ b</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure><figure data-density="standard"><figcaption>六种位运算速查</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>运算</th>
+<th>规则</th>
+<th>本课用途</th>
+<th>安全边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;</code></td>
+<td>两位都是 1 才为 1</td>
+<td>保留或读取指定位置</td>
+<td>不等于逻辑与 <code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>至少一位是 1 就为 1</td>
+<td>把指定位置设为 1</td>
+<td>不等于逻辑或 <code>||</code></td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>两位不同时为 1</td>
+<td>翻转指定位置</td>
+<td>同一掩码异或两次会恢复</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>每一位都翻转</td>
+<td>配合固定位宽掩码取反</td>
+<td>不能脱离类型位宽解释</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>整体左移，右侧补 0</td>
+<td>在安全范围内按 2 的幂放大</td>
+<td><code>k</code> 小于位宽且检查高位</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>本课无符号数右移时左侧补 0</td>
+<td>把目标位移到最右</td>
+<td>本课不讨论负数右移</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>下面固定观察 4 位，取 <code>a=13=1101₂</code>、<code>b=10=1010₂</code>。每个竖式都使用同一组输入。</p>
+<p>把这组输入写成不依赖行内代码的可见定义：</p>
+<p>a = 13 = 1101₂</p>
+<p>b = 10 = 1010₂</p>
+<h4 id="按位与竖式">按位与竖式</h4>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">  </span></span><span style="--0:#d6deeb;--1:#403f53">1101</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">&amp; 1010</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">------</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">  </span></span><span style="--0:#d6deeb;--1:#403f53">1000</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>只有最左一列同时为 <code>1</code>，所以结果是 <code>1000₂=8</code>。</p>
+<h4 id="按位或竖式">按位或竖式</h4>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">  </span></span><span style="--0:#d6deeb;--1:#403f53">1101</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">| 1010</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">------</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">  </span></span><span style="--0:#d6deeb;--1:#403f53">1111</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>每一列至少出现一个 <code>1</code>，所以结果是 <code>1111₂=15</code>。</p>
+<h4 id="异或竖式">异或竖式</h4>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">  </span></span><span style="--0:#d6deeb;--1:#403f53">1101</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">^ 1010</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">------</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">  </span></span><span style="--0:#d6deeb;--1:#403f53">0111</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>后三列的两位不同，所以结果是 <code>0111₂=7</code>。</p>
+<h4 id="按位非竖式">按位非竖式</h4>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">~ 1101</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">------</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">  </span></span><span style="--0:#d6deeb;--1:#403f53">0010</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>纸面结果 <code>0010₂=2</code> 的前提是“只观察低 4 位”。在 C++ 中可以把这个前提写成 <code>((~13u) &amp; 15u)</code>：<code>15u</code> 的低 4 位全是 <code>1</code>，因此最后只保留低 4 位。不能脱离位宽直接把 <code>~13u</code> 写成 2。</p>
+<p>前三项双目运算可以压缩复算为：13&amp;10=1000₂=8、13|10=1111₂=15、13^10=0111₂=7。</p>
+<p>位运算和逻辑运算含义不同。<code>6 &amp; 3</code> 计算 <code>0110 &amp; 0011=0010</code>，结果为 2；<code>6 &amp;&amp; 3</code> 只判断两个数是否都非 0，结果为真。现象相似时仍要先看清符号。</p>
+<h3 id="核心二安全左移与右移">核心二：安全左移与右移</h3>
+<p>左移把所有位向左移动，右侧补 <code>0</code>；本课的非负无符号数右移时，左侧补 <code>0</code>，移出右端的低位被丢弃。</p>
+<figure><div tabindex="0" role="region"><table><caption>5 左移一位</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">操作</th><th scope="col">低 8 位</th><th scope="col">十进制值</th></tr></thead><tbody><tr><th scope="row">原值</th><td>value = 5u</td><td>00000101</td><td>5</td></tr><tr><th scope="row">左移一位</th><td>value &lt;&lt; 1</td><td>00001010</td><td>10</td></tr></tbody></table></div><figcaption>所有位左移一格，右侧补0；本例没有需要保留的高位移出，所以5左移一位得到10。</figcaption></figure>
+<p>同理，<code>10u &gt;&gt; 1</code> 把 <code>00001010</code> 变成 <code>00000101</code>，结果为 5。只有移动量合法、左移没有丢失需要保留的高位时，<code>x &lt;&lt; k</code> 才能解释为乘 <code>2^k</code>；右移非负整数时，移出的低位不会保留。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">5</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 本例只处理小范围非负无符号数</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> doubled </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 先确认移动量小于位宽且高位不会丢失</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>完成移位判断的成功标准是：先画出固定位宽，再标出移动方向和补入的 <code>0</code>，最后检查是否有需要保留的位被移出。</p>
+<h2 id="kp-02">02 判断第 k 位</h2>
+<h3 id="核心三用掩码读取目标位">核心三：用掩码读取目标位</h3>
+<p>为了只选择第 <code>k</code> 位，可以准备一个“只有目标位置为 <code>1</code>、其他位置都是 <code>0</code>”的二进制数，这个数叫掩码。表达式 <code>1u &lt;&lt; k</code> 会把最低位的 <code>1</code> 移到第 <code>k</code> 位。</p>
+<h3 id="安全读取第-k-位">安全读取第 k 位</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">45</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 低8位是00101101</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> k </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">4</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 从右侧第0位开始编号，并保证k小于类型位宽</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> bit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ((value </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> k) </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 目标位移到最右后只保留最低位</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>45u &gt;&gt; 4</code> 的低 8 位是 <code>00000010</code>，再与 <code>00000001</code> 做按位与，得到 <code>0</code>，所以 45 的第 4 位为 0。括号说明先移位，再只保留最低位。</p>
+<p>判断奇偶是读取第 0 位的特例。<code>(value &amp; 1u) == 0u</code> 表示最低位为 0，也就是非负偶数；最低位为 1 时是奇数。</p>
+<h2 id="kp-03">03 设置、清除与翻转第 k 位</h2>
+<p>同一个掩码还可以设置、清除或翻转目标位：</p>
+<figure data-density="standard"><figcaption>位掩码操作</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>目标</th>
+<th>表达式</th>
+<th>目标位为什么变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读取</td>
+<td><code>((value &gt;&gt; k) &amp; 1u)</code></td>
+<td>把目标位移到最右并只保留最低位</td>
+</tr>
+<tr>
+<td>设置为 1</td>
+<td><code>value | mask</code></td>
+<td>目标位与 1 做或一定得到 1</td>
+</tr>
+<tr>
+<td>清除为 0</td>
+<td><code>value &amp; (~mask)</code></td>
+<td>取反后只有目标位为 0，再做与</td>
+</tr>
+<tr>
+<td>翻转</td>
+<td><code>value ^ mask</code></td>
+<td>目标位与 1 异或会改变，其他位与 0 异或不变</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<h2 id="位掩码读取与修改过程">位掩码读取与修改过程</h2>
+<p>固定 <code>value=45</code>，低 8 位为 <code>00101101</code>；取 <code>k=4</code>，所以 <code>mask=1u&lt;&lt;4=00010000₂=16</code>。</p>
+<figure><div tabindex="0" role="region"><table><caption>value = 45、k = 4 的掩码操作</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">低 8 位或单个位</th><th scope="col">十进制</th><th scope="col">可观察结果</th></tr></thead><tbody><tr><th scope="row">原值 value</th><td>00101101</td><td>45</td><td>等待读取或修改</td></tr><tr><th scope="row">mask = 1u &lt;&lt; 4</th><td>00010000</td><td>16</td><td>只选中第4位</td></tr><tr><th scope="row">(value &gt;&gt; 4) &amp; 1u</th><td>0</td><td>0</td><td>读出第4位为0</td></tr><tr><th scope="row">value | mask</th><td>00111101</td><td>61</td><td>设置后为61</td></tr><tr><th scope="row">value &amp; (~mask)</th><td>00101101</td><td>45</td><td>原位已是0，清除后仍为45</td></tr><tr><th scope="row">value ^ mask</th><td>00111101</td><td>61</td><td>翻转后为61</td></tr></tbody></table></div><figcaption>掩码只有第4位为1，因此四种操作都不会误改其他七位。</figcaption></figure>
+<p>把这张过程表的结果压缩记录为：read=0、set=61、clear=45、flip=61。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">45</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 当前要读取或修改的非负整数</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> k </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">4</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 目标位编号，并保证k小于unsigned int位宽</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> mask </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> k);</span><span style="--0:#919F9F;--1:#5D6376"> // 只在第k位放置1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> setValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> mask);</span><span style="--0:#919F9F;--1:#5D6376"> // 设置目标位</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> clearValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">~</span><span style="--0:#D6DEEB;--1:#403F53">mask));</span><span style="--0:#919F9F;--1:#5D6376"> // 清除目标位</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> flipValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">^</span><span style="--0:#D6DEEB;--1:#403F53"> mask);</span><span style="--0:#919F9F;--1:#5D6376"> // 翻转目标位</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>不要用减法代替清除。如果目标位原本就是 0，减去 <code>1u &lt;&lt; k</code> 会改变其他位或得到错误数值；<code>value &amp; (~mask)</code> 无论目标位原来是 0 还是 1，都只会把该位清零。</p>
+<p>完成掩码操作的成功标准是：能先写出 <code>mask</code> 的位模式，再说明每个表达式只改变目标位，并用十进制结果反向核对。</p>
+<h2 id="kp-04">04 位段拆分与合并</h2>
+<p>这一节是三核心后的兼容应用，用于承接既有第 5 题，不进入 Mastery。上一课已经见过十六进制字面量：<code>0xABu</code> 的低 8 位是 <code>10101011</code>。<code>0x0Fu=00001111₂</code> 可以保留低四位，右移四位可以把高四位移到最右。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#FFEB95">0x</span><span style="--0:#F78C6C">AB</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 低8位是10101011</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> low </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#FFEB95">0x</span><span style="--0:#F78C6C">0F</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 保留低四位1011，得到11</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> high </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ((value </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">4</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#FFEB95">0x</span><span style="--0:#F78C6C">0F</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 高四位1010移到最右，得到10</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> combined </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ((high </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">4</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> low);</span><span style="--0:#919F9F;--1:#5D6376"> // 放回高四位并接回低四位</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>因此 <code>0xABu</code> 拆分为高四位 10、低四位 11，再合并会回到原值。既有第 5 题使用 <code>10101100₂</code>，同理得到高四位 10、低四位 12。</p>
+<figure data-density="standard"><figcaption>常用低位掩码</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>掩码</th>
+<th>低 8 位</th>
+<th>兼容应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x0Fu</code></td>
+<td><code>00001111</code></td>
+<td>保留低四位</td>
+</tr>
+<tr>
+<td><code>0xF0u</code></td>
+<td><code>11110000</code></td>
+<td>选中高四位</td>
+</tr>
+<tr>
+<td><code>1u &lt;&lt; k</code></td>
+<td>只有第 <code>k</code> 位为 1</td>
+<td>操作单独一位</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure><h2 id="kp-05">05 常见性质与异或恢复</h2>
+<p>这一节同样只作兼容应用，用于承接既有第 3 题，不进入 Mastery。根据异或“相同为 0、不同为 1”，同一个掩码连续异或两次会恢复：<code>(x ^ 12u) ^ 12u = x</code>。第一次翻转掩码选中的位，第二次再翻转同一批位置，每一位都回到原状态。</p>
+<figure data-density="standard"><figcaption>按位运算常见性质</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>性质</th>
+<th>结果</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x &amp; 0u</code></td>
+<td><code>0u</code></td>
+<td>所有位清零</td>
+</tr>
+<tr>
+<td><code>x | 0u</code></td>
+<td><code>x</code></td>
+<td>原值不变</td>
+</tr>
+<tr>
+<td><code>x ^ 0u</code></td>
+<td><code>x</code></td>
+<td>原值不变</td>
+</tr>
+<tr>
+<td><code>x ^ x</code></td>
+<td><code>0u</code></td>
+<td>相同位异或为0</td>
+</tr>
+<tr>
+<td><code>(x ^ y) ^ y</code></td>
+<td><code>x</code></td>
+<td>同一掩码翻转两次后恢复</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>日常交换两个变量仍优先使用临时变量，代码更直白；本课不把异或交换扩展为主教学技巧。</p>
+<h3 id="优先级不应成为陷阱">优先级不应成为陷阱</h3>
+<p>按位运算、移位和比较的优先级不同。自己写代码时主动加括号：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> odd </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ((value </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">!=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">0</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 先读取最低位，再判断是否为1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> bit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ((value </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> k) </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 先移动目标位，再保留最低位</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> cleared </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">~</span><span style="--0:#D6DEEB;--1:#403F53">mask));</span><span style="--0:#919F9F;--1:#5D6376"> // 先取反掩码，再清除目标位</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>不要写含义模糊的 <code>value &amp; mask == 0u</code>。括号既控制顺序，也把“先做哪一步”直接告诉读者。</p>
+<h2 id="typical-example">典型例题</h2>
+<p>前面的真值、移位和掩码追踪已经完成后，再把四个表达式放进一份完整程序。输入保证 <code>value</code> 是非负 <code>unsigned int</code>，<code>k</code> 小于 <code>unsigned int</code> 的位宽；本程序不处理非法移动量。</p>
+<h3 id="完成程序">完成程序</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> value;</span><span style="--0:#919F9F;--1:#5D6376"> // 保存要读取或修改的非负整数</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> k;</span><span style="--0:#919F9F;--1:#5D6376"> // 保存从右侧第0位开始的目标位编号</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> k;</span><span style="--0:#919F9F;--1:#5D6376"> // 题目保证k小于unsigned int位宽</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> mask </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> k);</span><span style="--0:#919F9F;--1:#5D6376"> // 生成只选中第k位的掩码</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> bit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ((value </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> k) </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">u</span></span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 读取目标位</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> setValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> mask);</span><span style="--0:#919F9F;--1:#5D6376"> // 把目标位设置为1</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> clearValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">~</span><span style="--0:#D6DEEB;--1:#403F53">mask));</span><span style="--0:#919F9F;--1:#5D6376"> // 把目标位清除为0</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">unsigned</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> flipValue </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (value </span><span style="--0:#C792EA;--1:#8844AE">^</span><span style="--0:#D6DEEB;--1:#403F53"> mask);</span><span style="--0:#919F9F;--1:#5D6376"> // 翻转目标位</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> bit </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> setValue </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> clearValue </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> flipValue </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 按读、设、清、翻输出</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>三组运行结果如下：</p>
+<figure data-density="standard"><figcaption>位运算测试案例</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>输入</th>
+<th>读、设、清、翻输出</th>
+<th>检查目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>45 4</code></td>
+<td><code>0 61 45 61</code></td>
+<td>目标位原来为0</td>
+</tr>
+<tr>
+<td><code>45 3</code></td>
+<td><code>1 45 37 37</code></td>
+<td>目标位原来为1</td>
+</tr>
+<tr>
+<td><code>0 0</code></td>
+<td><code>0 1 0 1</code></td>
+<td>零值与最低位边界</td>
+</tr>
+<tr>
+<td><code>5u &lt;&lt; 1</code></td>
+<td><code>10</code>，即 <code>00000101 → 00001010</code></td>
+<td>左移方向与补0</td>
+</tr>
+<tr>
+<td><code>10u &gt;&gt; 1</code></td>
+<td><code>5</code></td>
+<td>非负无符号数右移</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>完成这道典型例题的成功标准是：能在运行程序前独立写出四个表达式和预期结果，运行后四项都与手算一致，并能解释为什么其他位置没有被修改。</p>
+<h2 id="common-errors">常见错误</h2>
+<ol>
+<li><strong>现象：</strong> 把 <code>6 &amp; 3</code> 算成真假值。<strong>原因：</strong> 混淆了 <code>&amp;</code> 与 <code>&amp;&amp;</code>。<strong>修正：</strong> 补齐为 <code>0110 &amp; 0011</code> 后逐列计算。<strong>复验：</strong> 结果是 <code>0010₂=2</code>。</li>
+<li><strong>现象：</strong> 把最右位称为第 1 位。<strong>原因：</strong> 忘记本课从 0 编号。<strong>修正：</strong> 在位串下先写 <code>7…2、1、0</code>。<strong>复验：</strong> <code>45=00101101₂</code> 的第 4 位是 0。</li>
+<li><strong>现象：</strong> 直接写 <code>~13u=2</code>。<strong>原因：</strong> 忽略了 C++ 会翻转类型中的所有位。<strong>修正：</strong> 明确只观察低4位并计算 <code>((~13u)&amp;15u)</code>。<strong>复验：</strong> 低4位为 <code>0010₂=2</code>。</li>
+<li><strong>现象：</strong> 把任意 <code>x&lt;&lt;k</code> 都当作乘 <code>2^k</code>。<strong>原因：</strong> 没检查移动量和高位丢失。<strong>修正：</strong> 先确认 <code>k</code> 小于位宽并画出移动后的固定位宽。<strong>复验：</strong> <code>5u&lt;&lt;1=10</code> 的低8位没有高位丢失。</li>
+<li><strong>现象：</strong> 用 <code>value-(1u&lt;&lt;k)</code> 清除目标位。<strong>原因：</strong> 假定目标位原本一定为1。<strong>修正：</strong> 使用 <code>value&amp;(~mask)</code>。<strong>复验：</strong> 45 的第4位原本为0，清除后仍是45。</li>
+<li><strong>现象：</strong> 写 <code>value &amp; mask == 0u</code>。<strong>原因：</strong> 混合表达式没有明确分组。<strong>修正：</strong> 写成 <code>((value &amp; mask)==0u)</code>。<strong>复验：</strong> 先得到掩码结果，再与0比较。</li>
+</ol>
+<section><h3>判断目标位时先完成按位运算</h3><div><div><strong><span>×</span> 错误写法</strong><code>value &amp; mask == 0u</code></div><div><strong><span>✓</span> 正确写法</strong><code>((value &amp; mask) == 0u)</code></div></div><p><strong>原因：</strong>混合表达式省略括号后难以确认先做按位与还是相等判断，容易读错或写错。</p><p><strong>检查方法：</strong>内层括号得到掩码结果，外层比较它是否为0。</p></section>
+<h3 id="本课小结">本课小结</h3>
+<p>本课只掌握三个核心：固定位宽下按真值逐位计算 <code>&amp; | ^ ~</code>；在非负 <code>unsigned</code> 范围内安全追踪 <code>&lt;&lt; &gt;&gt;</code>；用 <code>1u &lt;&lt; k</code> 掩码读取、设置、清除和翻转一位。位段拆合与异或恢复只是承接既有题目的兼容应用。</p>
+<h2 id="core-check">核心内容检查</h2><h2 id="page-test-title">整页综合测试</h2>
+<p>下面五题是本课的独立自测。提交后按最近一次完整结果检查错因；完成自测不会自动把本页标记为已复习。</p>
+</div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp2.html">← 上一个：进制转换</a>

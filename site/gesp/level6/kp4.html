@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,25 +449,64 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>先序第一个元素是根，中序中根左边是左子树、右边是右子树。</li><li>递归地对左右子树重复此过程，即可还原整棵树。</li><li>同理，后序最后一个元素是根。</li><li>还原后可以推出第三种遍历序列。</li></ul>
-
-    <div class="kp-code"><pre>// 先序+中序还原（简述）
-TreeNode* build(int preL, int preR, int inL, int inR,
-                vector&lt;int&gt;&amp; pre, vector&lt;int&gt;&amp; in) {
-    if (preL &gt; preR) return nullptr;
-    int rootVal = pre[preL];
-    int k = inL;
-    while (in[k] != rootVal) k++;
-    int leftSize = k - inL;
-    TreeNode* node = new TreeNode(rootVal);
-    node-&gt;left = build(preL+1, preL+leftSize, inL, k-1, pre, in);
-    node-&gt;right = build(preL+leftSize+1, preR, k+1, inR, pre, in);
-    return node;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>注意计算左右子树大小的偏移量，这是最容易出错的地方。</li><li>元素必须互不相同，否则中序中找不到唯一位置。</li></ul>
+    <article class="article-body">
+    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“编码知识”，合并哈夫曼编码和格雷编码。哈夫曼树的权值合并与 WPL 已在上一页讲解；本页关注怎样由树得到前缀编码，以及怎样构造和识别格雷编码。</p><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-coding-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-coding-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">2 个子页</span></header><div><article><div><span class="astro-aidf4k4y">04</span><span data-course-status class="astro-aidf4k4y">未复习</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/coding/">编码知识</a></h3><p class="astro-aidf4k4y">理解哈夫曼前缀编码与格雷编码，能完成编码、译码和相邻一位变化判断。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/huffman-coding/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">哈夫曼编码</strong></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/coding/gray-code/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">格雷码</strong></a></li></ul></article></div></section></gesp-course-grid><h2 id="kp-01">01 哈夫曼编码</h2><p>字符放在哈夫曼树叶结点，约定向左写 <code>0</code>、向右写 <code>1</code>，根到叶的完整路径就是字符编码。因为字符只在叶结点，任何完整字符编码都不会成为另一个字符编码的前缀，可以从左到右无分隔译码：走到叶结点就输出字符并回到根。</p><p>字符出现频率越高，权值越大，通常越靠近根，因此编码越短；频率较低的字符可以使用更长编码。这样能减少整段消息的总编码长度，但不能只按频率直接指定编码，仍要先构造哈夫曼树并保证前缀条件。</p><p>若只有一种字符，根到自身路径为空，实际编码格式通常把唯一字符约定为 <code>0</code>，才能保留重复次数。交换左右孩子或改变相同权值的平局顺序，可能得到不同但仍有效的编码。</p><figure><div tabindex="0" role="region"><table><caption>A:5、B:2、C:1 的哈夫曼构造</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">选择</th><th scope="col">新集合或编码</th></tr></thead><tbody><tr><th scope="row">第 1 轮</th><td>合并 C:1 与 B:2</td><td>得到内部结点 3，集合为 3、A:5</td></tr><tr><th scope="row">第 2 轮</th><td>合并 3 与 A:5</td><td>根权值为 8</td></tr><tr><th scope="row">分配 0/1</th><td>A 直接连接根，B、C 再分一层</td><td>A 为 1 位，B、C 为 2 位</td></tr></tbody></table></div><figcaption>高频字符 A 的路径最短；左右交换会改变具体 0/1，但不会改变编码长度。</figcaption></figure><h2 id="kp-02">02 格雷编码</h2><p>格雷编码序列中，每对相邻编码恰好只有一个二进制位置不同。镜像反射法从短序列构造长序列：原序列正序前加 <code>0</code>，原序列反序前加 <code>1</code>，再连接两部分。3 位结果为：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">000, 001, 011, 010, 110, 111, 101, 100</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>二进制整数转格雷码可计算 <code>gray = binary ^ (binary &gt;&gt; 1)</code>。例如 <code>110 ^ 011 = 101</code>。还原时不能直接重复同一公式：最高二进制位等于最高格雷位，后续每个二进制位等于上一位已还原二进制位与当前格雷位异或。</p><p>格雷码还原示例 <code>101 → 110</code>：最高位直接得到 <code>b1=1</code>；下一位 <code>b2=b1^g2=1^0=1</code>；最后一位 <code>b3=b2^g3=1^1=0</code>，所以二进制为 <code>110</code>。每一步都要使用“上一位已经还原的二进制位”，不能使用上一位格雷码。</p><h2 id="quick-table">编码速查表</h2><figure data-density="standard"><figcaption>两类编码对比</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>核心规则</th>
+<th>检查方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>哈夫曼编码</td>
+<td>根到叶路径，左 0 右 1</td>
+<td>是否存在某编码是另一编码前缀</td>
+</tr>
+<tr>
+<td>格雷编码</td>
+<td>相邻编码只变一位</td>
+<td>相邻两项异或结果是否只有一个 1</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>编码表 <code>A=0、B=10、C=11</code>，译码 <code>01011</code>：先读 <code>0</code> 得 A，回根；读 <code>10</code> 得 B，回根；读 <code>11</code> 得 C，结果为 <code>ABC</code>。若最后只剩 <code>1</code>，它停在内部结点，说明编码串不完整。</p><h3 id="典型应用">典型应用</h3><p>二进制 <code>110</code> 转格雷码：右移得到 <code>011</code>，逐位异或得到 <code>101</code>。检查镜像序列连接处 <code>010 → 110</code>，异或为 <code>100</code>，只有一位为 1，因此连接合法。</p><h3 id="测试案例">测试案例</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>数据</th>
+<th>应得到的关键结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td><code>A=0、B=10、C=11</code>，译码 <code>01011</code></td>
+<td>结果为 <code>ABC</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td>只有一个字符 A</td>
+<td>实际编码约定为 <code>0</code>，两个 A 编成 <code>00</code></td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>只有两个字符 A、B</td>
+<td>两者都使用 1 位编码，例如 <code>A=0、B=1</code></td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>3 位格雷序列</td>
+<td>任意相邻两项都只有一位不同，包括 <code>010→110</code></td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>多个字符出现频率相同</td>
+<td>可能得到不同编码表，但都必须满足前缀条件</td>
+</tr>
+</tbody>
+</table><h2 id="common-errors">常见错误</h2><section><h3>在哈夫曼树内部结点提前结束</h3><div><div><strong><span>×</span> 错误写法</strong><code>走到路径 1 就直接输出字符</code></div><div><strong><span>✓</span> 正确写法</strong><code>只有到达叶结点才完成一个字符编码</code></div></div><p><strong>原因：</strong>内部结点下面仍有多个叶结点，路径还不能唯一确定字符。</p><p><strong>检查方法：</strong>译码后若停在内部结点，说明编码串不完整。</p></section><section><h3>只看格雷码中 0 和 1 的数量</h3><div><div><strong><span>×</span> 错误写法</strong><code>两项都含两个 1，所以它们一定相邻合法</code></div><div><strong><span>✓</span> 正确写法</strong><code>把相邻两项逐位比较，确认恰好一位不同</code></div></div><p><strong>原因：</strong>格雷码检查的是相同位置上有几位发生改变，与 1 的总数是否相同无关。</p><p><strong>检查方法：</strong>也可以异或两项，结果应只有一个二进制位为 1。</p></section><h2 id="related-learning">关联学习</h2><p>哈夫曼树的构造与 WPL 见“03 特殊二叉树”；格雷码转换会用到三级学习的异或和右移。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp3.html">← 上一个：层序遍历</a>

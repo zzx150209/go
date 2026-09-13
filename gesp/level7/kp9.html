@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,25 +449,171 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>unordered_map&lt;key,value&gt;：键值对存储，平均 O(1) 查找插入。</li><li>unordered_set：只存键不存值，O(1) 判断存在性。</li><li>map/set：有序（红黑树），O(log n) 查找，按键排序。</li><li>统计频率：用 map&lt;int,int&gt; 或 unordered_map&lt;int,int&gt;。</li></ul>
-
-    <div class="kp-code"><pre>#include &lt;unordered_map&gt;
-unordered_map&lt;string, int&gt; cnt;
-cnt[&quot;apple&quot;]++;
-cnt[&quot;banana&quot;]++;
-cout &lt;&lt; cnt[&quot;apple&quot;];  // 1
-
-unordered_set&lt;int&gt; seen;
-seen.insert(5);
-if (seen.count(5)) cout &lt;&lt; &quot;exists&quot;;
-
-// 遍历
-for (auto&amp; [key, val] : cnt)
-    cout &lt;&lt; key &lt;&lt; &quot;:&quot; &lt;&lt; val;</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>unordered_map 最坏 O(n)（哈希冲突），map 稳定 O(log n)。</li><li>自定义类型作为 key 需要定义哈希函数或比较函数。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方七级大纲要求掌握哈希表。哈希表通过哈希函数把键映射到存储位置，适合快速查找和计数。C++ 关联容器是常见实现工具，但必须理解有序与无序、键是否存在以及平均复杂度和最坏情况的区别。</p>
+<h2 id="kp-01">01 键、值与映射</h2>
+<p>键用于查找，值保存与键关联的信息。例如统计单词次数时，单词是键，出现次数是值。相同键对应同一个统计位置，不能把“键”和“出现次序”混为一谈。计数、去重、快速查找和建立映射关系，是关联容器最常见的四类应用。</p>
+<p><strong>具体推演：</strong> 依次读入 <code>apple、banana、apple</code>。第一次读取 <code>apple</code> 时建立 <code>apple→1</code>，读取 <code>banana</code> 后得到 <code>banana→1</code>，再次读取 <code>apple</code> 时找到原来的同一个键并更新为 <code>apple→2</code>。最终只有两个键，而不是三个“输入位置”。</p>
+<h2 id="kp-02">02 哈希函数、冲突与复杂度</h2>
+<p>不同键可能映射到相同位置，这称为哈希冲突，实际实现必须处理冲突。哈希表的查找、插入平均可视为 <code>O(1)</code>，但不能宣称任何情况下都绝对是 <code>O(1)</code>；数据分布和实现会影响最坏情况。</p>
+<p><strong>具体推演：</strong> 假设教学用哈希位置是 <code>key % 5</code>，键 <code>2</code> 和 <code>7</code> 都落到位置 <code>2</code>，这就是冲突。容器必须继续区分两个真实键；查找 <code>7</code> 时先定位这个位置，再核对键本身。多数位置分布均匀时检查很少，若许多键都冲突到同一位置，最坏就可能逐个检查。</p>
+<h2 id="kp-03">03 map 与 unordered_map</h2>
+<p><code>map</code> 按键有序，常见操作复杂度为 <code>O(log n)</code>；<code>unordered_map</code> 不保证遍历顺序，平均查找和插入为 <code>O(1)</code>。若题目要求按键从小到大输出，应使用 <code>map</code> 或另行排序，不能依赖 <code>unordered_map</code> 的显示顺序。</p>
+<p>访问 <code>count[key]</code> 时，如果键不存在，会插入默认值 <code>0</code>，很适合计数；若只想判断而不想插入，可使用 <code>find</code>。</p>
+<p><strong>具体推演：</strong> 插入键值 <code>3→30、1→10、2→20</code> 后，遍历 <code>map</code> 会按键输出 <code>1、2、3</code>；遍历 <code>unordered_map</code> 只能保证三组键值仍存在，不能预测顺序。若只执行 <code>count[5]</code> 查询，不存在的键 <code>5</code> 还会被创建并取默认值 <code>0</code>；使用 <code>find(5)</code> 则不会改变容器。</p>
+<h2 id="kp-04">04 set、unordered_set 与去重</h2>
+<p>集合只保存键，不保存对应值。<code>set</code> 中元素有序，<code>unordered_set</code> 不保证顺序。插入重复元素不会增加集合大小，因此可用于去重和存在性判断。</p>
+<p><strong>具体推演：</strong> 把 <code>5,2,5,3,2</code> 依次插入 <code>set</code>，集合大小变化为 <code>1,2,2,3,3</code>，最终元素按序为 <code>2,3,5</code>。换成 <code>unordered_set</code> 后大小仍是 <code>3</code>，存在性判断结果也相同，但遍历顺序不能作为答案的一部分。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>容器</th>
+<th>内容</th>
+<th>顺序</th>
+<th>常见操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map</code></td>
+<td>键值对</td>
+<td>按键有序</td>
+<td>有序统计</td>
+</tr>
+<tr>
+<td><code>unordered_map</code></td>
+<td>键值对</td>
+<td>不保证</td>
+<td>快速计数</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>唯一键</td>
+<td>有序</td>
+<td>有序去重</td>
+</tr>
+<tr>
+<td><code>unordered_set</code></td>
+<td>唯一键</td>
+<td>不保证</td>
+<td>快速存在性判断</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="基础例题">基础例题</h3>
+<p>依次读入 <code>1 2 2 3</code>。第一次看到一个键时，它的旧计数是 <code>0</code>；再次看到键 <code>2</code> 时，只更新同一个键对应的值。最后得到映射 <code>{1:1, 2:2, 3:1}</code>。哈希或映射结构解决的是“按键找到对应信息”，不是保存每次出现的独立副本。</p>
+<h3 id="典型应用例题">典型应用例题</h3>
+<p>统计输入整数的出现次数并按数值从小到大输出：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">map</span><span style="--0:#C792EA;--1:#8844AE">&lt;int</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">int&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> count;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 下标访问不存在的键会插入默认值 0，因此可以直接累加次数。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> value;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> value;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">count</span><span style="--0:#D6DEEB;--1:#403F53">[value]</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// map 按键有序遍历，所以输出自然按数值从小到大排列。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">auto</span><span style="--0:#D6DEEB;--1:#403F53"> item : count) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">item</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">first</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">item</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">second</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>使用 <code>map</code> 是因为输出要求有序。若只查询次数而不要求顺序，可按题目范围考虑 <code>unordered_map</code>。</p>
+<h3 id="映射追踪">映射追踪</h3>
+<p>对输入 <code>1 2 2 3</code>，每次读取后的键与当前计数如下：</p>
+<table>
+<thead>
+<tr>
+<th>输入的键</th>
+<th>操作前计数</th>
+<th>操作后当前计数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td><code>0</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td><code>0</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td><code>1</code></td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td><code>0</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>若使用 <code>map</code>，最终遍历顺序按键从小到大；若换成 <code>unordered_map</code>，计数结果相同，但不能据此预测输出顺序。</p>
+<h3 id="建议测试案例">建议测试案例</h3>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>输入或条件</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td><code>4</code> 个数：<code>1 2 2 3</code></td>
+<td>输出 <code>1 1</code>、<code>2 2</code>、<code>3 1</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td><code>n = 0</code></td>
+<td>不输出任何键值对</td>
+</tr>
+<tr>
+<td>易错</td>
+<td>使用 <code>unordered_map</code> 统计后直接遍历</td>
+<td>计数正确，但不能要求按键有序</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-errors">常见错误</h2>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>为什么错</th>
+<th>正确方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>依赖 <code>unordered_map</code> 或 <code>unordered_set</code> 的遍历顺序</td>
+<td>无序容器不承诺按键或插入顺序输出</td>
+<td>需要有序输出时使用 <code>map</code>、<code>set</code> 或另行排序</td>
+</tr>
+<tr>
+<td>只想查询却使用下标访问</td>
+<td>不存在的键会被插入并赋默认值</td>
+<td>使用 <code>find</code> 判断是否存在</td>
+</tr>
+<tr>
+<td>把平均 <code>O(1)</code> 写成最坏也一定 <code>O(1)</code></td>
+<td>冲突和实现会影响最坏情况</td>
+<td>准确表述为平均查找、插入 <code>O(1)</code></td>
+</tr>
+<tr>
+<td>需要保存“键对应次数”却使用 <code>set</code></td>
+<td>集合只保存唯一键，没有对应值</td>
+<td>使用 <code>map</code> 或 <code>unordered_map</code></td>
+</tr>
+<tr>
+<td>小范围整数也强行使用哈希</td>
+<td>增加实现复杂度和常数开销</td>
+<td>数据范围小时优先考虑直接计数数组</td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误反例推演">错误反例推演</h3>
+<p>容器初始为空，只想判断键 <code>"cat"</code> 是否存在。错误写法读取 <code>count["cat"]</code>，得到数值 <code>0</code> 的同时把 <code>"cat"</code> 插入容器，随后 <code>count.size()</code> 从 <code>0</code> 变成 <code>1</code>；程序会把“查询”变成“修改”。正确写法使用 <code>count.find("cat") == count.end()</code>，判断结果仍是不存在，容器大小保持 <code>0</code>。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>图顶点标签不是连续小整数时，哈希映射可帮助编号；但七级图遍历主示例仍优先使用连续编号和邻接表，保持流程清晰。</p>
+<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp8.html">← 上一个：网格搜索</a>

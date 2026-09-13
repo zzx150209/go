@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,28 +449,13 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>链表通过指针把节点串联，每个节点包含数据和指向下一节点的指针。</li><li>插入删除只需修改指针，不需要移动元素，但查找需从头遍历。</li><li>双向链表每个节点有前驱和后继指针。</li><li>数组模拟链表：用数组存数据和 next 指针，避免动态分配。</li></ul>
-
-    <div class="kp-code"><pre>struct Node {
-    int val;
-    Node* next;
-    Node(int v) : val(v), next(nullptr) {}
-};
-
-// 在头部插入
-Node* head = nullptr;
-void insertFront(int v) {
-    Node* p = new Node(v);
-    p-&gt;next = head;
-    head = p;
-}
-
-// 数组模拟链表
-int val[100005], nxt[100005], cnt = 0;</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>动态分配的节点要手动 delete，否则内存泄漏。</li><li>竞赛中推荐用数组模拟链表，更快更安全。</li></ul>
+    <article class="article-body">
+    <article id="top" data-level5-topic-hub="linked-list-structures"><p>位置 1、3、2 并不连续，却可以按 10、30、20 的顺序访问：链表用链接指出下一项。本页先用同一个小链表看懂共同模型、三种形态和实现选择，再进入子页学习完整操作。</p><div id="本课先记住"><section data-lesson-quick-review><h2><span></span>本课先记住</h2><dl><div data-review-kind="core"><dt>核心结论</dt><dd><p>链表的先后顺序由链接决定，不由结点所在的地址或数组下标决定；改链接前要先保存仍需访问的位置。</p></dd></div><div data-review-kind="syntax"><dt>常用语法</dt><dd><p>从 head 出发，沿当前结点的 next 前进；普通链遇到各自的空标记停止，循环链再次回到 head 停止。</p><pre tabindex="0"><code>current = current-&gt;next;
+current = nextIndex[current];</code></pre></dd></div><div data-review-kind="example"><dt>最小示例</dt><dd><p>head=1，位置链 1→3→2→0，对应数据顺序 10→30→20；这里的 0 只是数组模拟约定的空下标。</p><pre tabindex="0"><code>head = 1;
+nextIndex[1] = 3;
+nextIndex[3] = 2;
+nextIndex[2] = 0;</code></pre></dd></div><div data-review-kind="mistakes"><dt>关键易错点</dt><dd><ul><li>把下标加一当遍历、循环链仍等待空标记、双向只改一侧，或先覆盖旧后继，都会导致漏结点、无法停止或断链。</li></ul></dd></div></dl></section></div><h2 id="知识范围与官方定位" class="astro-c5eeuzv2">知识范围与官方定位</h2><p class="astro-c5eeuzv2">五级需要认识结点的数据域、链接域、head 与 tail，理解单向、双向、循环链表以及数组下标模拟，并能在子页完成创建、遍历、插入和删除。父页只建立共同模型、识别方法和选择路线；完整 C++ 写法、逐轮操作和容量管理留在两个子页。</p><p>本页先建立共同基础并比较各方法；完整过程、C++ 写法与复杂度请进入对应子知识点学习。</p><section aria-labelledby="共同基础"><h2 id="共同基础" class="astro-c5eeuzv2">共同基础</h2><ul><li class="astro-c5eeuzv2">K1｜一个结点由数据域和链接域组成：数据域保存内容，链接域保存下一结点的位置。head 是进入链表的入口，不是额外的数据结点；tail 表示尾部位置。</li><li class="astro-c5eeuzv2">K1｜统一状态 S1：head=1；位置 1 保存 10、next=3，位置 3 保存 30、next=2，位置 2 保存 20、next=0。位置虽然不连续，链接给出的逻辑顺序仍是 10→30→20。</li><li class="astro-c5eeuzv2">K1｜普通数组模拟链的观察过程：current=1，非空，访问 10 后到 3；current=3，访问 30 后到 2；current=2，访问 20 后到 0；current=0 是条件第一次不成立的停止行，不访问 value[0]。</li><li class="astro-c5eeuzv2">K1｜空标记随实现而变：指针链表常用 nullptr，数组模拟可约定 0。0 不是所有链表通用的空值；空链必须先判断 head，不能先访问结点。</li><li class="astro-c5eeuzv2">K2｜单向链只有 next，适合从头向后走，普通链遇空标记停止；双向链再有 prev，适合前后移动；循环链让尾部 next 回到 head，适合轮转。三者都从入口沿链接访问。</li><li class="astro-c5eeuzv2">K2｜在 S1 上识读双向链，只需补上 prev[1]=0、prev[3]=1、prev[2]=3，反向应得到 2→3→1→0；识读循环链，只把 next[2] 从 0 改为 head(1)，访问 1、3、2 后再次到 1 时停止。</li><li class="astro-c5eeuzv2">K2｜只需从头向后访问时选单向；需要从当前位置回到前一个结点时选双向；需要尾部之后自动回到开头时选循环。循环链应先处理空表，再以“再次到 head”为一整轮的结束。</li><li class="astro-c5eeuzv2">K3｜修改链接前先保存仍要使用的位置。例如从 1→2→0 形成 S1：先保存 oldNext=2，再令位置 3 的 next 指向 oldNext，最后才让位置 1 的 next 指向 3；每一步都不能让位置 2 从 head 不可达。</li><li class="astro-c5eeuzv2">K3｜双向链把 x 放在 a、b 之间时，必须让 x 的 prev/next 记住两侧，也让 a 的 next 与 b 的 prev 接回 x。中间状态还不是完成状态，最后要从前后两个方向检查相邻关系。</li><li class="astro-c5eeuzv2">K3｜边界检查：空链的 head、tail 都为空；单结点的 head=tail；头部没有前驱，尾部没有后继；删掉唯一结点后两者都要为空。普通链尾部指向空标记，循环链尾部指回 head。</li><li class="astro-c5eeuzv2">选择演示｜题目给出“最多 100 个结点、结点用整数编号、nextIndex 保存后继、0 是空下标”，因此应选数组模拟。对 S1 从 head=1 沿链接复核得到 1→3→2→0，而不是用 current++；只有题目要求动态结点、地址链接和释放时，才转到指针实现。</li><li class="astro-c5eeuzv2">空间口径｜两种实现都使用 O(n) 总存储。若 value、nextIndex、previousIndex 都是 int，槽位为 0..N，且常见环境中 int=4 字节，三个数组约为 12(N+1) 字节；平台不同时以 sizeof(int) 为准。指针结点大小受指针宽度和对齐影响，只能以 sizeof(Node) 为准。</li><li class="astro-c5eeuzv2">引导练习｜从 S1 写出 current 的变化并指出何时不再访问数据。答案：1→3→2→0，在 current=0 的首次失败判断停止。成功标准：只访问 1、3、2，且没有漏掉停止行。</li><li class="astro-c5eeuzv2">独立练习｜在 S1 的位置 3 后插入位置 4。答案：先保存 oldNext=next[3]=2，再令 next[4]=2，最后令 next[3]=4，结果为 1→3→4→2→0。成功标准：从 head 到达四个位置各一次，尾部仍到 0。</li><li class="astro-c5eeuzv2">迁移练习｜值班名单要从最后一人回到第一人。答案：选循环链，把 next[2] 改为 head(1)；空表先停，非空表访问 1、3、2 后在下一位置再次等于 head 时停。成功标准：一轮中每个结点恰访问一次。</li></ul></section><section aria-labelledby="方法对比"><h2 id="方法对比" class="astro-c5eeuzv2">方法对比</h2><div><section aria-labelledby="linked-list-structures-comparison-0" class="astro-c5eeuzv2"><h3 id="linked-list-structures-comparison-0" class="astro-c5eeuzv2">指针实现链表</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>题目需要动态创建结点，并用真实地址表示链接。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>进入指针子页学习 Node、nullptr、创建、遍历、插删、反转与释放；结点大小以 sizeof(Node) 为准。</p></section><section aria-labelledby="linked-list-structures-comparison-1" class="astro-c5eeuzv2"><h3 id="linked-list-structures-comparison-1" class="astro-c5eeuzv2">数组模拟链表</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>题目给出固定上限和整数编号，适合用 value、nextIndex、previousIndex 表示数据与链接。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>进入数组子页学习容量和下标管理；本章约定 0 为空下标，有效结点从 1 开始。</p></section><section aria-labelledby="linked-list-structures-comparison-2" class="astro-c5eeuzv2"><h3 id="linked-list-structures-comparison-2" class="astro-c5eeuzv2">纠错：把链表当连续数组</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>现象：在 S1 中写 current++ 会访问 1、2，漏掉位置 3 且顺序错误；原因：编号不表示后继关系。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>修正为读取当前结点的 next 或 nextIndex；复验应恰好得到 1→3→2，并在 0 的首次失败判断停止。</p></section><section aria-labelledby="linked-list-structures-comparison-3" class="astro-c5eeuzv2"><h3 id="linked-list-structures-comparison-3" class="astro-c5eeuzv2">纠错：循环链等待空标记</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>现象：访问 1、3、2 后又回到 1，一直重复；原因：尾链接回 head，链中不会出现 nullptr 或 0。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>先判断空表；非空表完整走一圈后，在 current 再次等于 head 时停止。复验一轮只访问 1、3、2 各一次。</p></section><section aria-labelledby="linked-list-structures-comparison-4" class="astro-c5eeuzv2"><h3 id="linked-list-structures-comparison-4" class="astro-c5eeuzv2">纠错：双向链只改一侧</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>现象：正向 1→3→2 看似正确，反向却不能从 2 回到 3；原因：next 与 prev 没有同步。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>让新结点记住前后两侧，并让两侧接回新结点；复验时分别正向、反向检查相邻结点是否互相指回。</p></section><section aria-labelledby="linked-list-structures-comparison-5" class="astro-c5eeuzv2"><h3 id="linked-list-structures-comparison-5" class="astro-c5eeuzv2">纠错：覆盖旧后继</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>现象：接入位置 3 后，位置 2 从 head 再也到不了；原因：把 next[1] 改成 3 前没有保存原来的 2。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>先保存 oldNext，再连接新结点，最后改前驱链接；复验从 head 应到达 1、3、2 各一次，并满足当前链表的终止规则。</p></section></div></section><section aria-labelledby="选择子知识点"><h2 id="选择子知识点" class="astro-c5eeuzv2">选择子知识点</h2><p class="astro-c5eeuzv2">根据当前要解决的问题进入对应页面；每个子知识点都可以直接访问，不设置完成门槛。</p><ul><li id="05-链表的插入删除与反转" class="astro-c5eeuzv2"><a href="/gesp/level5/linked-list-structures/pointer-implementation/" data-level5-child-link class="astro-c5eeuzv2"><span class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">指针实现链表</strong><small class="astro-c5eeuzv2">先学：用真实结点和指针安全完成创建、遍历、插删、反转与释放，并检查空指针和头尾边界。</small></span><span class="astro-c5eeuzv2">→</span></a></li><li class="astro-c5eeuzv2"><a href="/gesp/level5/linked-list-structures/array-simulation/" data-level5-child-link class="astro-c5eeuzv2"><span class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">数组模拟链表</strong><small class="astro-c5eeuzv2">再学：用 value、nextIndex、previousIndex 和 0 空下标维护链接，并检查固定容量与有效下标。</small></span><span class="astro-c5eeuzv2">→</span></a></li></ul></section><h2 id="核心内容检查" class="astro-c5eeuzv2">核心内容检查</h2><h2 id="整页综合测试" class="astro-c5eeuzv2">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></article></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp5.html">← 上一个：高精度运算</a>

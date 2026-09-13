@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,22 +449,191 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>if-else if-else 链从上到下判断，满足第一个就执行对应块并跳出。</li><li>分支嵌套：if 里面再写 if，注意 else 与最近的未配对 if 结合。</li><li>处理区间判断时要注意边界，分数 60 分及格不能写成 score&gt;60。</li><li>多分支用 switch 时表达式必须是整数或字符类型。</li></ul>
-
-    <div class="kp-code"><pre>int x;
-cin &gt;&gt; x;
-if (x &gt; 0) {
-    if (x &gt;= 100) cout &lt;&lt; &quot;大数&quot; &lt;&lt; endl;
-    else cout &lt;&lt; &quot;正数&quot; &lt;&lt; endl;
-} else if (x == 0) {
-    cout &lt;&lt; &quot;零&quot; &lt;&lt; endl;
-} else {
-    cout &lt;&lt; &quot;负数&quot; &lt;&lt; endl;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>嵌套 if 的 else 属于最近的 if，加括号明确逻辑更安全。</li><li>区间判断用 &gt;= 和 &lt;= 时注意不要漏掉边界值。</li></ul>
+    <article class="article-body">
+    <div data-gesp-level2-ui data-gesp-level2-detail></div>
+<h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 隐式转换由表达式规则触发，显式转换由程序员写出；转换发生在除法前才会改变除法类型，浮点数转整数按向零方向截断。</li>
+<li><strong>常用语法：</strong> 需要浮点除法时写 <code>double result = double(a) / b;</code>，浮点数转整数写 <code>int whole = int(value);</code>；还要能识别 <code>(double)(a)</code> 和 <code>(int)(value)</code>。</li>
+<li><strong>最小示例：</strong> <code>5 / 2</code> 得到 2，<code>double(5) / 2</code> 和 <code>(double)(5) / 2</code> 都得到 2.5，<code>int(-2.9)</code> 和 <code>(int)(-2.9)</code> 都得到 -2。</li>
+<li><strong>关键易错点：</strong> <code>double(a / b)</code> 或 <code>(double)(a / b)</code> 都转换得太晚，丢失的小数不能恢复；向零截断不是四舍五入。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>本页对应二级大纲中的数据类型转换：理解系统自动进行的隐式转换，能够进行显式转换，并正确处理整数除法、浮点数转整数和混合类型表达式。</p>
+<p>先看一个会直接影响答案的现象：<code>int a=5, b=2; double result=a/b;</code> 中，<code>result</code> 保存的不是 2.5，而是 2.0。右侧的两个操作数都是 <code>int</code>，所以程序先完成整数除法得到 2，最后才把 2 保存为 <code>double</code>。要保留小数，必须在除法发生前先转换一个操作数。</p>
+<p>类型转换决定一个值用哪种形式参与运算。最常见的错误不是“不会转换”，而是转换发生得太晚，整数除法已经丢掉了小数部分。</p>
+<p>本页区分系统自动完成的隐式转换和程序员明确写出的显式转换；重点比较“除法前转换”与“除法后转换”，并用正数、负数和接近 0 的数确认浮点数转整数采用向 0 截断而不是四舍五入。</p>
+<p><strong>数据类型</strong>规定一段数据怎样解释、能参与哪些运算以及通常怎样存储；<strong>类型转换</strong>是把一个值按另一种类型产生新结果。转换可能改变表示范围、计算规则或输出形式，但不会自动把原变量的声明类型永久改掉。例如把 <code>int</code> 值 5 转成 <code>double</code> 会得到 5.0 参与本次运算，原来的整数变量仍是 <code>int</code>。</p>
+<a id="01-implicit"></a>
+<h2 id="01-隐式类型转换">01 隐式类型转换</h2>
+<p>不同类型共同运算时，C++ 会按规则自动转换。例如 <code>int</code> 与 <code>double</code> 相加时，整数先转成 <code>double</code>，结果通常也是 <code>double</code>。</p>
+<p>隐式转换常出现在三个位置：赋值时，右边值要适应左边变量；混合运算时，参与运算的值会按规则调整到可以共同计算的类型，例如 <code>int</code> 与 <code>double</code> 相加时把整数值转为 <code>double</code>；函数调用时，实参要适应形参类型。二级重点分析前两种。每次都问两句：“转换发生在运算前还是运算后？”“最终结果保存进什么类型？”</p>
+<p>字符参与算术时也会转换成整数编码，这与 ASCII 页的规律相连：<code>'A' + 1</code> 先把 <code>'A'</code> 按编码 65 参与计算，得到整数 66；若把 66 保存到 <code>char</code>，才会按字符显示为 <code>B</code>。所以“同一个中间数值”可能因为最终保存类型不同而产生不同输出形式。</p>
+<p>例如 <code>int a = 10; double b = a;</code> 中，不需要手动写转换。赋值过程可以追踪为：<code>10（int） → 10.0（double）</code>。<code>a</code> 本身仍是整数 10，只有赋给 <code>b</code> 的值按 <code>double</code> 保存。</p>
+<p>把浮点结果赋给整数变量时，小数部分会向 0 截去：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">12.8</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> other </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">12.8</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 负数也向 0 截断，因此保存 -12</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> value </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> other </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>赋值过程分别是 <code>12.8 → 12</code> 和 <code>-12.8 → -12</code>，所以输出 <code>12 -12</code>。向 0 截断就是删去小数部分：正数向较小方向靠近 0，负数向较大方向靠近 0；它不是四舍五入。复合赋值 <code>a *= b</code> 也会把计算结果转换回左边变量 <code>a</code> 的类型。</p>
+<a id="02-explicit"></a>
+<h2 id="02-显式类型转换">02 显式类型转换</h2>
+<p>程序员明确要求改变类型叫显式转换。本页主教学使用 <code>目标类型(值)</code>，例如 <code>int(x)</code>、<code>double(a)</code>。这种写法看起来像函数调用，但这里的 <code>int</code>、<code>double</code> 是目标类型，圆括号里是要转换的值，整段表达式产生一个新值。</p>
+<p>还要能识别 C 风格的 <code>(目标类型)(值)</code>，例如 <code>(int)(x)</code>、<code>(double)(a)</code>。第一组括号写目标类型，第二组括号圈出要转换的值或表达式。两种写法都只产生本次计算使用的新值，不会修改原变量的声明类型。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">98.76</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">8</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n1 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">(x);</span><span style="--0:#919F9F;--1:#5D6376">  // 主教学写法：把 x 转成 int 新值</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n2 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">)(x);</span><span style="--0:#919F9F;--1:#5D6376">  // 识读写法：两组括号分别表示目标类型和值</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> y1 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53">(a) </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span><span style="--0:#919F9F;--1:#5D6376">  // 在除法前把 a 转成 double</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> y2 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53">)(a) </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span><span style="--0:#919F9F;--1:#5D6376">  // 与上一行转换时机相同</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n1 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n2 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> y1 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> y2 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>x</code> 约为 <code>-12.345</code>，所以 <code>n1</code>、<code>n2</code> 都是 -12；<code>y1</code>、<code>y2</code> 都是 2.5。本站主示例优先使用 <code>int(x)</code> 和 <code>double(a)</code>，C 风格写法用于识读。显式转换让意图更清楚，但不能恢复之前已经丢失的信息。</p>
+<p>转换表达式不会改写源变量。例如 <code>double value=-2.9; int whole=int(value);</code> 执行后，<code>value</code> 仍是 <code>double</code> 类型的 -2.9，只有 <code>whole</code> 保存整数 -2。把两者分别输出，看到 <code>-2.9</code> 和 <code>-2</code>，就是“原变量未改变”的复核标准。</p>
+<p>转换目标还必须装得下结果。把普通小数转成 <code>int</code> 时可以讨论向 0 截断，但若原值已经超出目标整数类型能表示的范围，就不能再把结果当作可靠答案。竞赛题通常会给出输入范围；做题前先核对范围，比事后猜测溢出结果更重要。</p>
+<a id="03-division"></a>
+<h2 id="03-整数除法与转换时机">03 整数除法与转换时机</h2>
+<p>两个整数相除执行整数除法，<code>5 / 2</code> 得到 2。要得到 2.5，必须让除法发生前至少一个操作数变成浮点数：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> x1 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53">(a) </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span><span style="--0:#919F9F;--1:#5D6376">  // 先转换，再做浮点除法</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> x2 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53">(a </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> b);</span><span style="--0:#919F9F;--1:#5D6376">  // 先做整数除法，再转换结果</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> x1 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> x2 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>把表达式拆开时，必须同时记录值和类型：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th><code>double(a) / b</code> 或 <code>(double)(a) / b</code></th>
+<th><code>double(a / b)</code> 或 <code>(double)(a / b)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读变量</td>
+<td><code>a=5(int)</code>、<code>b=2(int)</code></td>
+<td><code>a=5(int)</code>、<code>b=2(int)</code></td>
+</tr>
+<tr>
+<td>第一个实际运算</td>
+<td><code>a → 5.0(double)</code></td>
+<td><code>5/2 → 2(int)</code></td>
+</tr>
+<tr>
+<td>第二个实际运算</td>
+<td><code>5.0/2 → 2.5(double)</code></td>
+<td><code>2 → 2.0(double)</code></td>
+</tr>
+<tr>
+<td>保存</td>
+<td><code>x1=2.5(double)</code></td>
+<td><code>x2=2.0(double)</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>x1</code> 的转换发生在除法之前：先把 <code>a</code> 变成 <code>5.0</code>，再计算 <code>5.0 / 2</code>，得到 2.5；写成 <code>(double)(a) / b</code> 也是同一时机。<code>x2</code> 的转换发生在整数除法之后：先计算 <code>5 / 2</code> 得到 2，再把 2 转成 <code>double</code>，只能得到 2.0；写成 <code>(double)(a / b)</code> 也不能恢复小数。这就是“转换时机”。</p>
+<p>接收变量写成 <code>double</code> 并不会倒回右侧重算。转换发生的时机由右侧表达式的括号和操作数类型决定。</p>
+<h2 id="过程演示">过程演示</h2>
+<p>现在已经形成了隐式转换、<code>目标类型(值)</code>、<code>(目标类型)(值)</code> 和整数除法的规则，再把三种结果放进唯一一份完整程序。程序依次输出整数除法、除法前显式转换和浮点数向 0 截断的结果，共用同一组输入，便于比较转换发生在什么时刻。</p>
+<p>下面的程序约定 <code>b</code> 不等于 0，并且 <code>value</code> 向 0 截断后的结果在 <code>int</code> 可表示范围内；不满足这两个前提时，不能把输出当作本页规则的有效验证。</p>
+<h3 id="完成程序">完成程序</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a, b;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> value;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> value;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 两个操作数都是 int，执行整数除法</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> fixed </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">setprecision</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53">(a) </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 在除法前转换</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">(value) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 向 0 截断</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>7 2 -3.8</code> 时：第一行先做整数除法得到 3；第二行在除法前把 <code>a</code> 转成 <code>double</code>，得到 3.5；第三行把 -3.8 向 0 截断，得到 -3。三行分别验证“运算类型”“转换时机”和“截断方向”。</p>
+<p>其中 <code>fixed &lt;&lt; setprecision(1)</code> 只控制浮点结果显示一位小数，显示时可能发生舍入；它既不改变变量的声明类型，也不是类型转换规则。真正让第二行在除法前使用浮点运算的是 <code>double(a)</code>。</p>
+<a id="04-mixed"></a>
+<h2 id="04-混合运算与计算顺序">04 混合运算与计算顺序</h2>
+<p>混合运算仍遵守括号、乘除、加减等顺序。处理面值或余量问题时，要先算已经使用的总金额，再计算剩余量：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">28</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> count10 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> rest </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> count10 </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 余量要减去“数量 × 面值”</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> count3 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> rest </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> count1 </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> rest </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> count3 </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> count10 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> count3 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> count1 </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>这里先得到 2 个 10 元，剩余 8 元，再得到 2 个 3 元和 2 个 1 元。每次减去的是“数量 × 面值”。</p>
+<p>逐项状态为：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>计算</th>
+<th>当前结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>取 10 元</td>
+<td><code>28 / 10</code></td>
+<td><code>count10=2</code></td>
+</tr>
+<tr>
+<td>算余量</td>
+<td><code>28-2×10</code></td>
+<td><code>rest=8</code></td>
+</tr>
+<tr>
+<td>取 3 元</td>
+<td><code>8 / 3</code></td>
+<td><code>count3=2</code></td>
+</tr>
+<tr>
+<td>再算余量</td>
+<td><code>8-2×3</code></td>
+<td><code>count1=2</code></td>
+</tr>
+</tbody>
+</table>
+<p>这里每一步都是整数运算。若误写成 <code>count1 = n - count10 - count3</code>，会得到 <code>28-2-2=24</code>，因为减掉的是代币个数，不是已经使用的金额。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>5 / 2</code></td>
+<td>整数 2</td>
+</tr>
+<tr>
+<td><code>double(5) / 2</code>、<code>(double)(5) / 2</code></td>
+<td>浮点数 2.5</td>
+</tr>
+<tr>
+<td><code>double(5 / 2)</code>、<code>(double)(5 / 2)</code></td>
+<td>浮点数 2.0</td>
+</tr>
+<tr>
+<td><code>int(3.9)</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>(int)(-3.9)</code></td>
+<td>-3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<p>**题目：**执行 <code>int a=5; double b=2.5; a*=b;</code> 后，<code>a</code> 的值是多少？</p>
+<p><strong>推演：</strong></p>
+<ol>
+<li>右侧计算相当于先求 <code>a * b</code>；</li>
+<li>整数 5 与浮点数 2.5 运算时，5 隐式转成 5.0；</li>
+<li>得到浮点结果 <code>5.0 × 2.5 = 12.5</code>；</li>
+<li><code>a</code> 的类型仍是 <code>int</code>，复合赋值要把 12.5 转回整数；</li>
+<li>向 0 截去小数部分，得到 12。</li>
+</ol>
+<p><strong>结论：</strong><code>a</code> 最终为 12。判断复合赋值时既要看右侧怎样计算，也要看结果最后保存回什么类型。</p>
+<p>**引导练习：**设 <code>int sum=9, count=4; double value=-2.7;</code>，请分别计算 <code>double(sum) / count</code>、<code>(double)(sum) / count</code>、<code>double(sum / count)</code>、<code>int(value)</code> 和 <code>(int)(value)</code>。提示：每一步都写出“先发生的运算”和中间类型。核对结果应为 2.25、2.25、2.0、-2、-2；若第三项写成 2.25，说明把整数除法错误地推迟到了转换之后。</p>
+<p>**独立练习：**不看上面的过程，设 <code>int a=-7, b=2; double value=3.9;</code>，写出 <code>a / b</code>、<code>double(a) / b</code>、<code>(double)(a) / b</code>、<code>double(a / b)</code>、<code>(double)(a / b)</code>、<code>int(value)</code> 和 <code>(int)(value)</code> 的值与结果类型，并判断三个原变量是否被转换表达式改变。</p>
+<p>**成功标准：**七个结果依次为整数 -3、浮点数 -3.5、浮点数 -3.5、浮点数 -3.0、浮点数 -3.0、整数 3、整数 3；还应说明两个“晚转换”表达式都先算出整数 -3，并确认 <code>a</code>、<code>b</code>、<code>value</code> 的声明类型和值没有被转换表达式改写。</p>
+<a id="常见错误"></a>
+<h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
+<ul>
+<li>把向 0 截断误认为四舍五入；</li>
+<li>在整数除法完成后才转换为 <code>double</code>；</li>
+<li>只看变量接收类型，不看右侧表达式先怎样计算；</li>
+<li>复合赋值后忘记结果要转回左值类型；</li>
+<li>计算余量时只减数量，没有乘面值。</li>
+</ul>
+<p><strong>错误写法：</strong><code>double average = double(sum / count);</code></p>
+<p><strong>错误原因：</strong><code>sum / count</code> 先执行整数除法，小数部分已经丢失，之后转成 <code>double</code> 也不能恢复。</p>
+<p><strong>正确写法：</strong><code>double average = double(sum) / count;</code>；也可以识读为 <code>double average = (double)(sum) / count;</code>。</p>
+<p>**修正后复演：**令 <code>sum=9、count=4</code>。错误写法先得到整数 2，再变成 2.0；两种正确写法都先把 <code>sum</code> 变成 9.0，再计算得到 2.25。能同时说明这两个最早不同步骤和最终结果，才算定位并修正了转换时机。</p>
+<p>**错误写法：**认为 <code>int value = 3.9;</code> 会得到 4。</p>
+<p>**错误原因：**浮点数转整数是向 0 截去小数部分，不是四舍五入。</p>
+<p>**正确写法：**明确按截断结果理解，<code>3.9</code> 转成 <code>int</code> 得到 3，<code>-3.9</code> 转成 <code>int</code> 得到 -3。</p>
+<p>**错误认识：**执行 <code>int whole = int(value);</code> 后，原来的 <code>double value</code> 也会变成整数。</p>
+<p>**错误原因：**转换表达式只产生一个新的整数值，再把它保存到 <code>whole</code>；它不会改写 <code>value</code> 的声明类型或原值。</p>
+<p>**正确处理与复演：**令 <code>value=-2.9</code>，同时输出 <code>value</code> 和 <code>whole</code>，应分别看到 -2.9 和 -2。若原变量仍能输出小数，而新变量保存截断结果，就说明转换对象和保存位置已经分清。</p>
+<h2 id="本节总结">本节总结</h2>
+<p>隐式转换由 C++ 根据参与运算或赋值的类型自动完成，显式转换可以写成 <code>目标类型(值)</code>，也要能识别 <code>(目标类型)(值)</code>。整数除法一旦完成，小数部分就无法靠之后的转换恢复；浮点数转整数只向 0 截去小数部分。分析表达式时先按顺序算右侧，再检查结果保存到什么类型。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>ASCII 页面中的字符加减会发生字符到整数的提升；常用数学函数的返回值也可能是浮点类型，需要按本页规则处理。</p>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp4.html">← 上一个：数据类型转换</a>

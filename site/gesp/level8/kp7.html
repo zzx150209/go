@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,150 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>根据问题选算法：连通性→DFS/BFS，最短路→Dijkstra/SPFA/Floyd。</li><li>最小生成树→Prim（稠密图）或 Kruskal（稀疏图）。</li><li>边权正负决定算法：有负权用 SPFA，无负权用 Dijkstra。</li><li>顶点数小（n≤500）可用 Floyd O(n³)，顶点多用邻接表优化。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>先分析数据范围再选算法，不要套模板不思考。</li><li>建图时注意有向/无向、是否有权重。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级要求能够根据实际问题建立图模型，理解图的基本概念和性质，并综合运用已经学习的搜索、并查集、最小生成树和最短路算法。本页重点不是背算法名称，而是把题意中的对象、关系、费用和目标准确地翻译成图。</p>
+<h2 id="kp-01">01 图的基本元素</h2>
+<p>图由顶点和边组成。通常把“对象”看作顶点，把对象之间的“关系”看作边。例如城市是顶点，道路是边；学生是顶点，朋友关系是边。</p>
+<p>建模时先逐项确认：</p>
+<ol>
+<li>顶点代表什么，编号范围是什么；</li>
+<li>哪两个顶点之间有边；</li>
+<li>边是否有方向；</li>
+<li>边上是否带有距离、费用或时间等权值。</li>
+</ol>
+<p>同一段题意可能有不同模型。例如“课程先修关系”有方向，而“双向道路”没有方向。模型一旦建错，后面的算法即使写对也得不到正确答案。</p>
+<h2 id="kp-02">02 方向、权值与存储</h2>
+<p>无向边表示关系可以双向使用；有向边 <code>u → v</code> 只表示从 <code>u</code> 到 <code>v</code>。带权图的边还保存一个数值，如路程、费用或耗时；无权图只关心是否相连。</p>
+<ul>
+<li>邻接矩阵 <code>g[u][v]</code> 查询一条边方便，空间通常为 <code>O(n²)</code>，适合顶点较少或边很密的图。</li>
+<li>邻接表只保存实际存在的边，空间通常为 <code>O(n+m)</code>，适合边较少的图。</li>
+<li>边集直接保存每条边的两个端点和权值，适合 Kruskal 这类按边处理的算法。</li>
+</ul>
+<p>无向边写入邻接矩阵或邻接表时，通常要同时保存 <code>u → v</code> 和 <code>v → u</code>。</p>
+<h2 id="kp-03">03 从任务目标选择算法</h2>
+<p>算法由任务目标决定，而不是由“题目里出现了图”决定：</p>
+<table>
+<thead>
+<tr>
+<th>任务目标</th>
+<th>常见选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>遍历可达顶点、统计连通块</td>
+<td>DFS 或 BFS</td>
+</tr>
+<tr>
+<td>动态判断两个顶点是否连通</td>
+<td>并查集</td>
+</tr>
+<tr>
+<td>让所有顶点连通且总边权最小</td>
+<td>Kruskal 或 Prim</td>
+</tr>
+<tr>
+<td>一个起点到其他顶点的最短距离，边权非负</td>
+<td>Dijkstra</td>
+</tr>
+<tr>
+<td>多个起点、终点之间的最短距离，顶点较少</td>
+<td>Floyd</td>
+</tr>
+</tbody>
+</table>
+<p>选择前还要检查数据范围和边权条件。Dijkstra 不能直接处理负权边；Floyd 的 <code>O(n³)</code> 时间也不适合很大的 <code>n</code>。</p>
+<h2 id="kp-04">04 连通、路径与代价</h2>
+<p>“连通”只说明能否从一个顶点到达另一个顶点；“路径”是一串首尾相接的边；“路径代价”是路径上各边权值之和。三者不能混为一谈。</p>
+<p>如果题目只问是否可达，就不必计算最短距离；如果要求最低费用，就不能只找到任意一条路径。最小生成树求的是连接全部顶点的最小总边权，最短路求的是指定顶点之间的最小路径代价，两者目标不同。</p>
+<p><strong>问题 → 模型 → 算法的完整推理：</strong></p>
+<table>
+<thead>
+<tr>
+<th>实际问题</th>
+<th>顶点与边</th>
+<th>目标</th>
+<th>合适算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>校园路线中找教学楼 A 到食堂的最短步行距离</td>
+<td>地点为顶点，通道为带长度的无向边</td>
+<td>固定起点到终点最短路</td>
+<td>非负权时用 Dijkstra</td>
+</tr>
+<tr>
+<td>通信网络用最低总费用连通全部基站</td>
+<td>基站为顶点，可建线路为无向带权边</td>
+<td>全部连通且总费用最小</td>
+<td>Kruskal 或 Prim</td>
+</tr>
+<tr>
+<td>社交网络中统计互不相连的朋友圈</td>
+<td>用户为顶点，好友关系为无向边</td>
+<td>统计连通块</td>
+<td>DFS、BFS 或并查集</td>
+</tr>
+</tbody>
+</table>
+<p>建模后的自检顺序是：方向是否正确、重边如何处理、边权是否满足算法条件、数据规模是否允许该存储与复杂度。先完成这四项，再写算法。</p>
+<p><strong>逐段具体推演（对应 01—04）。</strong></p>
+<p><strong>01 先找对象和关系。</strong> 校园有地点 A、B、C、D，道路为 A—B、A—C、C—D。模型中的顶点是 <code>{A,B,C,D}</code>，边是这 3 条道路；“A 能否到 D”被转成“图中是否存在 A 到 D 的路径”，答案是 A—C—D。</p>
+<p><strong>02 决定方向、权值和存储。</strong> 若 A 到 B 只允许单向通行，就只建 <code>A→B</code>；双向道路要同时表达两个方向。道路长度分别为 5、2、4 时，权值保存这些长度。4 个点的示例可用邻接矩阵，点多边少时邻接表更节省空间。</p>
+<p><strong>03 根据目标选择算法。</strong> 同一张图若问“从 A 到 D 最少花费”，且边权非负，选择 Dijkstra；若问“修哪些道路让四地全部连通且总造价最低”，选择最小生成树；若问很多组任意两点最短路且点数较小，才考虑 Floyd。</p>
+<p><strong>04 把答案翻译回题意。</strong> 在 A—B、A—C、C—D 中，A 与 D 连通，路径 A—C—D 经过 2 条边；若边权为 2 和 4，路径代价是 6。连通、边数最少和权值和最小是三个不同目标，必须按题目要求输出。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>题意关键词</th>
+<th>先确认</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单向、先后、依赖</td>
+<td>有向边</td>
+</tr>
+<tr>
+<td>双向、互通</td>
+<td>无向边</td>
+</tr>
+<tr>
+<td>距离、费用、耗时</td>
+<td>边权</td>
+</tr>
+<tr>
+<td>全部连通且总费用最小</td>
+<td>最小生成树</td>
+</tr>
+<tr>
+<td>从固定起点出发的最低费用</td>
+<td>单源最短路</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>有 <code>n</code> 个城市和 <code>m</code> 条双向道路，每条道路有费用。若要求从城市 <code>1</code> 到城市 <code>n</code> 的最低费用，应把城市建成顶点、道路建成无向带权边，目标是固定起点到终点的最短路。若所有费用非负，可选择 Dijkstra；不能因为题目出现“连接城市”就误选最小生成树。</p>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>模型选错反例。</strong> 题目要求“用最低总造价连接所有村庄”，若误用 Dijkstra 从 1 号村求最短路树，在边 <code>(1,2,2)、(1,3,2)、(2,3,1)</code> 中会选两条代价 2 的边，总价 4；最小生成树应选权值 1 和 2，总价 3。两者目标不同，不能只因都出现“最小”就混用。</p>
+<ul>
+<li>把双向道路只存一次，导致只能单向到达。</li>
+<li>只看“最小费用”四个字，不区分最小生成树与最短路。</li>
+<li>忽略边权是否为负，直接使用 Dijkstra。</li>
+<li>顶点编号是 <code>1～n</code>，数组却只开到 <code>n-1</code>。</li>
+<li>没有结合 <code>n</code>、<code>m</code> 判断邻接矩阵、邻接表和算法复杂度是否可行。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/gesp/level8/minimum-spanning-tree/">最小生成树</a>：解决“全部连通且总边权最小”。</li>
+<li><a href="/gesp/level8/shortest-path/">单源最短路</a>：解决起点到其他顶点的最短距离。</li>
+<li><a href="/gesp/level8/time-efficiency/">时间效率分析</a>：用数据范围检验算法是否可行。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2><div id="page-test"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp6.html">← 上一个：几何计算</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,27 +449,16 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>DFS：一条路走到黑，走不通就回溯，用递归或栈实现。</li><li>连通性问题：从一个点出发 DFS，能到达的所有点在同一连通分量。</li><li>路径问题：记录当前路径，到达目标时处理。</li><li>visited 数组防止重复访问。</li></ul>
-
-    <div class="kp-code"><pre>vector&lt;int&gt; adj[100005];
-bool vis[100005];
-
-void dfs(int u) {
-    vis[u] = true;
-    for (int v : adj[u]) {
-        if (!vis[v]) dfs(v);
-    }
-}
-
-// 统计连通分量数
-int cnt = 0;
-for (int i = 1; i &lt;= n; i++) {
-    if (!vis[i]) { dfs(i); cnt++; }
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>DFS 递归深度不能太大，可能爆栈。</li><li>无向图 DFS 不需要记录父结点来避免走回去。</li></ul>
+    <article class="article-body">
+    <div data-level6-topic-hub="complex-dp"><gesp-course-grid data-status-idle="未复习" data-status-active="未复习" data-status-complete="已复习" class="astro-aidf4k4y gesp-level6-knowledge-grid"><section aria-labelledby="gesp-level6-complex-dp-children-title" class="astro-aidf4k4y"><header><div class="astro-aidf4k4y"><h2 id="gesp-level6-complex-dp-children-title" class="astro-aidf4k4y">本专题子知识点</h2><p class="astro-aidf4k4y">按建议顺序进入独立子页阅读。子页不创建复习状态或持久自测。</p></div><span class="astro-aidf4k4y">4 个子页</span></header><div><article><div><span class="astro-aidf4k4y">09</span><span>本站拓展</span></div><h3 class="astro-aidf4k4y"><a href="/gesp/level6/complex-dp/">复杂动态规划</a></h3><p class="astro-aidf4k4y">在二维状态基础上理解滚动数组、最长上升子序列和最长公共子序列。</p><ul class="astro-aidf4k4y"><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/complex-dp/two-dimensional-dp/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">01</span><strong class="astro-aidf4k4y">二维动态规划</strong><small class="astro-aidf4k4y">本站拓展</small></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/complex-dp/rolling-array/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">02</span><strong class="astro-aidf4k4y">动态规划空间优化（滚动数组）</strong><small class="astro-aidf4k4y">本站拓展</small></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/complex-dp/lis/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">03</span><strong class="astro-aidf4k4y">最长上升子序列 LIS</strong><small class="astro-aidf4k4y">本站拓展</small></a></li><li class="astro-aidf4k4y"><a data-level6-child-link href="/gesp/level6/complex-dp/lcs/" class="astro-aidf4k4y"><span class="astro-aidf4k4y">04</span><strong class="astro-aidf4k4y">最长公共子序列 LCS</strong><small class="astro-aidf4k4y">本站拓展</small></a></li></ul></article></div></section></gesp-course-grid><blockquote>
+<p>本站补充｜非 GESP 六级官方核心</p>
+</blockquote><p>本专题是本站六级教学体系的拓展阅读，不计入 GESP 六级官方核心进度，也不会创建复习状态或持久自测。</p><h2 id="学习前先确认">学习前先确认</h2><p>先能独立完成“状态含义、初值、转移、计算顺序、答案位置”五步，并理解二维数组下标。若这五步还不稳定，请先回到“动态规划基础”和“线性动态规划”。</p><h2 id="推荐顺序">推荐顺序</h2><ol>
+<li><strong>二维动态规划</strong>：先学会用两个下标描述子问题。</li>
+<li><strong>动态规划空间优化（滚动数组）</strong>：明确二维依赖后，再判断哪些旧状态可以丢弃。</li>
+<li><strong>最长上升子序列 LIS</strong>：练习“必须以某位置结尾”的一维状态。</li>
+<li><strong>最长公共子序列 LCS</strong>：回到两个前缀的二维状态，比较相等与不等两种转移。</li>
+</ol><p>滚动数组必须放在 LIS 前面：它不是一条孤立技巧，而是从二维依赖关系中推导出的空间优化方法。</p><h2 id="使用边界">使用边界</h2><p>这些页面帮助学生建立后续算法学习的完整框架，但不把本站补充描述成 GESP 六级官方核心。阅读任意子页不修改原 13 个父知识点的 <code>v1</code> 进度，也不会让原有 <code>13/13</code> 倒退。</p></div></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp8.html">← 上一个：路径枚举与回溯</a>

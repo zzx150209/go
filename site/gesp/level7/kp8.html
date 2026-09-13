@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,23 +449,139 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>把网格看成图，每个格子是一个结点，相邻格子是边。</li><li>方向数组 dx[] = {-1,1,0,0}, dy[] = {0,0,-1,1} 表示上下左右。</li><li>检查边界：坐标不能越出 0~n-1 和 0~m-1。</li><li>统计连通区域：DFS/BFS  flood fill 算法。</li></ul>
-
-    <div class="kp-code"><pre>int grid[105][105], n, m;
-int dx[] = {-1, 1, 0, 0};
-int dy[] = {0, 0, -1, 1};
-
-void floodFill(int x, int y, int oldColor, int newColor) {
-    if (x &lt; 0 || x &gt;= n || y &lt; 0 || y &gt;= m) return;
-    if (grid[x][y] != oldColor) return;
-    grid[x][y] = newColor;
-    for (int d = 0; d &lt; 4; d++)
-        floodFill(x+dx[d], y+dy[d], oldColor, newColor);
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>网格 BFS 求最短步数比 DFS 更可靠。</li><li>注意障碍物和边界的判断顺序。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>泛洪算法（Flood Fill）是七级大纲中的独立知识点。它把满足条件的网格格子看作顶点，把相邻关系看作边，再用 DFS 或 BFS 找出一个完整连通区域。</p>
+<h2 id="kp-01">01 把网格看作图</h2>
+<p>每个可通行格子是一个顶点，四方向相邻或八方向相邻由题目决定。区域计数、区域大小、染色和“岛屿”问题都可转化为连通分量问题。不同字符是否连通也必须按题意判断。</p>
+<p><strong>具体推演：</strong> 在网格 <code>10 / 01</code> 中，两个 <code>1</code> 只在对角线上接触。若题目规定四方向，它们之间没有边，是两个区域；若规定八方向，就存在一条对角相邻边，成为一个区域。建图时改变的只是“哪些格子相邻”，搜索框架本身不变。</p>
+<h2 id="kp-02">02 方向数组与边界</h2>
+<p>本项目二维数组示例使用 1 下标，方向数组命名为 <code>fx</code>、<code>fy</code>，下标 <code>0</code> 占位：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int fx[5] = {0, -1, 1, 0, 0};</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">int fy[5] = {0, 0, 0, -1, 1};</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>新位置 <code>(nx, ny)</code> 必须先检查 <code>1 &lt;= nx &lt;= n</code>、<code>1 &lt;= ny &lt;= m</code>，再访问数组；条件顺序不能颠倒。</p>
+<p><strong>具体推演：</strong> 在 <code>3 × 4</code> 网格的 <code>(1,1)</code> 向上尝试时，新位置是 <code>(0,1)</code>。先检查得到 <code>0 &lt; 1</code>，立即放弃这个方向；若先读取 <code>grid[0][1]</code>，就已经访问了约定范围外的格子。向右得到 <code>(1,2)</code>，四个边界条件都成立，才继续检查格子类型。</p>
+<h2 id="kp-03">03 标记、染色与区域统计</h2>
+<p>进入合法格子后立即标记，再扩展相邻方向。可以使用独立 <code>visited</code> 数组，也可以把原网格字符改成新的颜色作为已访问标记。统计区域数量时，主循环每发现一个未访问目标格就启动一次搜索并加一；统计区域大小时，在一次搜索内每访问一个合法格就把计数加一。地图搜索还可能要求找最大区域、替换整片颜色或判断两个位置是否同属一个区域。</p>
+<p><strong>具体推演：</strong> 一行网格 <code>11101</code> 中，外层扫描到第一个 <code>1</code>，区域数加一；搜索依次标记前三个格子，区域大小得到 <code>3</code>。扫描越过 <code>0</code> 后又遇到未标记的最后一个 <code>1</code>，区域数再加一，第二个区域大小是 <code>1</code>。最终“区域数量 <code>2</code>”与“最大区域大小 <code>3</code>”来自不同层次的计数。</p>
+<h2 id="kp-04">04 DFS 与 BFS 两种实现</h2>
+<p>DFS 写法短，适合规模允许递归的网格；BFS 使用队列，不依赖递归深度。两者只要相邻规则、标记时机相同，会找到同一连通区域。网格有 <code>n*m</code> 个格子时，时间复杂度为 <code>O(nm)</code>，标记空间为 <code>O(nm)</code>。</p>
+<p><strong>具体推演：</strong> 对 L 形区域 <code>(1,1)、(1,2)、(2,1)</code>，DFS 可能沿 <code>(1,1)→(1,2)</code> 深入，回溯后再访问 <code>(2,1)</code>；BFS 从 <code>(1,1)</code> 出队时会同时把后两个格子入队。两种顺序不同，但最终访问集合都是这三个格子，区域大小也都为 <code>3</code>。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<p>搜索一个区域：检查边界 → 检查格子类型 → 检查是否访问 → 立即标记 → 扩展相邻格。统计多个区域时，还需在外层枚举所有格子。</p>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="基础例题">基础例题</h3>
+<p>网格只有一行 <code>111</code>，按四方向相邻规则，三个 <code>1</code> 首尾连成一个区域。搜索从第一个 <code>1</code> 出发会依次覆盖其余两个格子，因此区域数量是 <code>1</code>，区域大小是 <code>3</code>。这两个统计量不能混淆。</p>
+<h3 id="典型应用例题">典型应用例题</h3>
+<p>统计由字符 <code>1</code> 组成的四连通区域：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n, m;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">grid</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">105</span><span style="--0:#D6DEEB;--1:#403F53">][</span><span style="--0:#F78C6C;--1:#AA0982">105</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">105</span><span style="--0:#D6DEEB;--1:#403F53">][</span><span style="--0:#F78C6C;--1:#AA0982">105</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">fx</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">};</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">fy</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">};</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">dfs</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--1:#403F53"><span style="--0:#D6DEEB"> </span><span style="--0:#D7DBE0">x</span><span style="--0:#D6DEEB">, </span></span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--1:#403F53"><span style="--0:#D6DEEB"> </span><span style="--0:#D7DBE0">y</span><span style="--0:#D6DEEB">) {</span></span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 合法目标格第一次进入 DFS 时立即标记，保证每个格子只处理一次。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[x][y] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 下标 1 到 4 依次表示上、下、左、右四个方向。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">4</span><span style="--0:#D6DEEB;--1:#403F53">; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> nx </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">fx</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> ny </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> y </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">fy</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// 必须先确认新坐标在网格内，再读取 grid 与 visited。</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (nx </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> nx </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> ny </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> ny </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> m</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">grid</span><span style="--0:#D6DEEB;--1:#403F53">[nx][ny] </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">1</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">!</span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[nx][ny]) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#82AAFF;--1:#3B61B0">dfs</span><span style="--0:#D6DEEB;--1:#403F53">(nx, ny);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> m;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> m; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">grid</span><span style="--0:#D6DEEB;--1:#403F53">[i][j];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> answer </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 外层扫描负责发现每个尚未访问的新区域。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> m; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">grid</span><span style="--0:#D6DEEB;--1:#403F53">[i][j] </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">1</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">!</span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[i][j]) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">answer</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#82AAFF;--1:#3B61B0">dfs</span><span style="--0:#D6DEEB;--1:#403F53">(i, j);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> answer </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<h3 id="扩散追踪">扩散追踪</h3>
+<p>对下面的 <code>3 × 3</code> 网格使用四连通：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">110</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">010</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">001</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<table>
+<thead>
+<tr>
+<th>扫描或搜索步骤</th>
+<th>新访问的格子</th>
+<th>区域数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>扫描到 <code>(1,1)</code>，启动第一次搜索</td>
+<td><code>(1,1)</code>、<code>(1,2)</code>、<code>(2,2)</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>继续扫描，前三个格子已标记</td>
+<td>无</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>扫描到 <code>(3,3)</code>，启动第二次搜索</td>
+<td><code>(3,3)</code></td>
+<td><code>2</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>(2,2)</code> 与 <code>(3,3)</code> 只在对角线上接触，四连通时不属于同一区域；如果题目明确使用八连通，结果才会改变。</p>
+<h3 id="建议测试案例">建议测试案例</h3>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>输入或条件</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td>一行 <code>111</code>，四连通</td>
+<td>区域数 <code>1</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td>网格全部为 <code>0</code></td>
+<td>区域数 <code>0</code></td>
+</tr>
+<tr>
+<td>易错</td>
+<td><code>10 / 01</code>，四连通</td>
+<td>区域数 <code>2</code>，对角线不连通</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-errors">常见错误</h2>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>为什么错</th>
+<th>正确方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访问数组后才检查边界</td>
+<td>可能先发生越界访问</td>
+<td>先检查坐标范围，再读网格和标记</td>
+</tr>
+<tr>
+<td>四连通问题加入对角线</td>
+<td>会把只在角上接触的区域错误合并</td>
+<td>严格按题意设置四方向或八方向</td>
+</tr>
+<tr>
+<td>搜索结束后才标记</td>
+<td>同一格子可能重复递归或入队</td>
+<td>第一次发现合法格子时立即标记</td>
+</tr>
+<tr>
+<td>只搜索第一个区域</td>
+<td>会漏掉与起点不连通的区域</td>
+<td>外层枚举全部格子</td>
+</tr>
+<tr>
+<td>在外层循环统计区域大小</td>
+<td>混淆区域数量与单个区域格子数</td>
+<td>启动搜索时计区域数，搜索内部计大小</td>
+</tr>
+<tr>
+<td>行列与 <code>fx</code>、<code>fy</code> 混用</td>
+<td>新坐标方向错误</td>
+<td>统一用 <code>nx = x + fx[i]</code>、<code>ny = y + fy[i]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误反例推演">错误反例推演</h3>
+<p>网格 <code>10 / 01</code> 按四方向应有两个区域。若错误地加入 <code>(1,1)</code> 到 <code>(2,2)</code> 的对角方向，第一次搜索会把两个 <code>1</code> 都标记，程序输出区域数 <code>1</code>。正确的四方向数组只产生上、下、左、右四个相邻位置，因此右下角的 <code>1</code> 要由外层扫描启动第二次搜索，答案为 <code>2</code>。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>图的遍历提供 DFS/BFS 框架；本页把邻接表换成方向数组，并增加网格边界和格子类型条件。</p>
+<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp7.html">← 上一个：图的遍历</a>

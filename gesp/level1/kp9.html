@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,18 +449,328 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>if (条件) { ... } 条件为真时执行大括号内的语句。</li><li>if-else 二选一：条件为真执行 if 块，否则执行 else 块。</li><li>else if 可以串联多个条件，从上到下依次判断，满足一个就执行。</li><li>switch 适合单值多分支判断，每个 case 后记得 break。</li></ul>
-
-    <div class="kp-code"><pre>int score;
-cin &gt;&gt; score;
-if (score &gt;= 90) cout &lt;&lt; &quot;A&quot; &lt;&lt; endl;
-else if (score &gt;= 80) cout &lt;&lt; &quot;B&quot; &lt;&lt; endl;
-else if (score &gt;= 60) cout &lt;&lt; &quot;C&quot; &lt;&lt; endl;
-else cout &lt;&lt; &quot;D&quot; &lt;&lt; endl;</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>if 后不要加分号，否则大括号内容不再受条件控制。</li><li>switch 中 case 不写 break 会继续执行后面的 case（穿透）。</li></ul>
+    <article class="article-body">
+    <h2 id="本章先记住">本章先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 分支结构先根据当前数据完成判断，再选择本次要走的路线；没有被选中的互斥路线不会执行。</li>
+<li><strong>常用结构：</strong> 范围、大小和复合条件用 <code>if</code>；一个整数或字符匹配多个固定值时可以用 <code>switch-case</code>。</li>
+<li><strong>最小示例：</strong> <code>score = 72 → score &gt;= 60 为 true → 进入“及格”路线</code>。</li>
+<li><strong>关键易错点：</strong> 写完条件还要检查边界、判断顺序和路线是否遗漏；只测一个普通数据，通常发现不了这些问题。</li>
+</ul>
+<p>前一章的顺序结构始终沿同一条路线向下执行。真实题目常常要求程序看数据办事：温度低于 0 才提示结冰，成绩落在哪个区间就输出哪个等级，菜单编号不同则完成不同操作。分支结构就是程序中的选择点。</p>
+<p>两个子课分别讲清 <code>if</code> 和 <code>switch-case</code> 的语法与真实执行。先按顺序学完它们，再用本章的选择与验证方法把知识连起来：看懂题目的判断方式，选对结构，用测试数据确认每条路线都正确。</p>
+<h2 id="从顺序执行到选择路线">从顺序执行到选择路线</h2>
+<p>分支不会取消顺序执行。程序到达选择点以前，普通语句仍按顺序完成；得到判断结果以后，只执行本次选中的路线；离开分支后，又从后续语句继续向下执行。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">前面的顺序语句</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">↓</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">读取变量当前值，完成条件判断或固定值匹配</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">↓</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">   </span></span><span style="--0:#d6deeb;--1:#403f53">选择本次路线</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">↙         ↘</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53"> </span></span><span style="--0:#d6deeb;--1:#403f53">路线 A      路线 B</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">↘         ↙</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">   </span></span><span style="--0:#d6deeb;--1:#403f53">回到共同的后续语句</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>读一段分支时，可以按五步追踪：</p>
+<ol>
+<li>记录到达分支前各变量的当前值；</li>
+<li>把当前值代入条件，或取得 <code>switch</code> 表达式的值；</li>
+<li>找到本次真正进入的路线；</li>
+<li>标出没有执行的互斥路线；</li>
+<li>确认分支结束后从哪条语句继续。</li>
+</ol>
+<p>这里的“一次只走一条”指同一条 <code>if-else-if-else</code> 链或设计成独立结果的 <code>switch</code>。多个彼此独立的 <code>if</code> 会各自判断，一次可能进入多个代码块。</p>
+<h2 id="两个子课怎样衔接">两个子课怎样衔接</h2>
+<p>建议按下面的顺序学习，再回到本页做综合测试：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">顺序</th>
+<th>子课</th>
+<th>学完后的可观察结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">1</td>
+<td><a href="/gesp/level1/branch/if/">if 条件分支</a></td>
+<td>给出一组实际数据，能算出条件真假，指出单分支、双分支或多分支会走哪条路线，并检查范围边界</td>
+</tr>
+<tr>
+<td style="text-align: right">2</td>
+<td><a href="/gesp/level1/branch/switch-case/">switch-case 分支</a></td>
+<td>给出一个整数或字符，能找到匹配入口，追踪 <code>break</code>、<code>default</code> 和贯穿带来的实际输出</td>
+</tr>
+<tr>
+<td style="text-align: right">3</td>
+<td>回到本页</td>
+<td>能从题目规则选择结构，列出全部结果路线，并设计覆盖边界与非法输入的测试数据</td>
+</tr>
+</tbody>
+</table>
+<p>本章只处理一级常见的单层选择。<code>if</code> 子课会说明大括号范围和 <code>else</code> 的归属，但不把多层嵌套分支当作一级主任务；<code>switch</code> 的嵌套也留到后续等级。简单三目运算符已经在<a href="/gesp/level1/operations/#07-%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6">基本运算</a>中用于认识二选一，一级主程序仍优先写更容易追踪的完整 <code>if-else</code>。</p>
+<h2 id="判断方式决定写法">判断方式决定写法</h2>
+<p>先问“题目怎样区分情况”，再决定语法。不要因为刚学过某种结构，就把所有题都改成同一种写法。</p>
+<table>
+<thead>
+<tr>
+<th>题目的判断方式</th>
+<th>推荐结构</th>
+<th style="text-align: right">一次可能执行几条路线</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件成立时才额外做一件事，条件不成立时不用替代处理</td>
+<td>单分支 <code>if</code></td>
+<td style="text-align: right">0 或 1 条</td>
+<td>温度低于 0 时提示结冰</td>
+</tr>
+<tr>
+<td>条件真假分别对应一种结果</td>
+<td><code>if-else</code></td>
+<td style="text-align: right">恰好 1 条</td>
+<td>整数是偶数还是奇数</td>
+</tr>
+<tr>
+<td>三个及以上互斥范围，要按顺序选择第一条成立路线</td>
+<td><code>if-else if-else</code></td>
+<td style="text-align: right">最多 1 条；有末尾 <code>else</code> 时恰好 1 条</td>
+<td>按成绩区间输出等级</td>
+</tr>
+<tr>
+<td>多个条件可以同时成立，每个条件都要单独处理</td>
+<td>多个独立 <code>if</code></td>
+<td style="text-align: right">0、1 或多条</td>
+<td>同时标记“及格”和“优秀”</td>
+</tr>
+<tr>
+<td>一个整数或字符与多个离散固定值比较</td>
+<td><code>switch-case</code></td>
+<td style="text-align: right">从一个入口开始执行</td>
+<td>菜单编号、星期编号</td>
+</tr>
+</tbody>
+</table>
+<p><code>switch</code> 适合列出 <code>1</code>、<code>2</code>、<code>3</code> 或 <code>'A'</code>、<code>'D'</code> 这样的固定值，不直接处理“至少 60 分”或“0 到 100 之间”的范围。范围、取余和多个逻辑条件交给 <code>if</code> 更直接。</p>
+<h2 id="先把题目整理成决策表">先把题目整理成决策表</h2>
+<p>代码只是把规则写给计算机。规则本身如果有重叠、缺口或顺序错误，语法正确也会得到错误结果。</p>
+<p>以“90 分及以上输出 A，60 分及以上输出 B，否则输出 C”为例。假设题目保证成绩在 0 到 100 之间，先写出每条路线真正负责的范围：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">判断顺序</th>
+<th>写出的条件</th>
+<th>实际负责范围</th>
+<th>命中后的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">1</td>
+<td><code>score &gt;= 90</code></td>
+<td>90 到 100</td>
+<td>A</td>
+</tr>
+<tr>
+<td style="text-align: right">2</td>
+<td><code>score &gt;= 60</code></td>
+<td>60 到 89，因为 90 以上已被第一条取走</td>
+<td>B</td>
+</tr>
+<tr>
+<td style="text-align: right">3</td>
+<td><code>else</code></td>
+<td>0 到 59</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
+<p>第二条虽然只写了下界，实际不会接到 90 分，因为程序找到第一条成立路线后就停止检查本链后面的条件。若把 <code>score &gt;= 60</code> 放在前面，90 分会先进入 B 路线，A 路线就失去入口。</p>
+<p>这张表也暴露了一个前提：输入范围由题目保证。如果题目还要求处理小于 0 或大于 100 的成绩，就要先增加“成绩非法”的路线，不能让非法值落入普通等级。</p>
+<h2 id="综合应用闰年与月份天数">综合应用：闰年与月份天数</h2>
+<p>月份天数把复合条件、互斥路线和非法输入放在同一个问题中，适合用来检查整章是否真正学会。先判断月份是否合法，再处理 2 月、30 天月份和剩余合法月份。</p>
+<p>2 月需要使用闰年规则：年份能被 400 整除，或者能被 4 整除但不能被 100 整除。写成条件是 <code>year % 400 == 0 || (year % 4 == 0 &amp;&amp; year % 100 != 0)</code>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">年份</th>
+<th style="text-align: center">能被 400 整除</th>
+<th style="text-align: center">能被 4 整除且不能被 100 整除</th>
+<th>年份结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">2000</td>
+<td style="text-align: center">true</td>
+<td style="text-align: center">false</td>
+<td>闰年</td>
+</tr>
+<tr>
+<td style="text-align: right">1900</td>
+<td style="text-align: center">false</td>
+<td style="text-align: center">false</td>
+<td>平年</td>
+</tr>
+<tr>
+<td style="text-align: right">2024</td>
+<td style="text-align: center">false</td>
+<td style="text-align: center">true</td>
+<td>闰年</td>
+</tr>
+</tbody>
+</table>
+<p>完整月份决策可以整理成四条互斥路线：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">判断顺序</th>
+<th>要检查的问题</th>
+<th>成立时的最终结果</th>
+<th>不成立时继续</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">1</td>
+<td>`month &lt; 1</td>
+<td></td>
+<td>month &gt; 12`</td>
+</tr>
+<tr>
+<td style="text-align: right">2</td>
+<td><code>month == 2</code></td>
+<td>闰年 29 天，平年 28 天</td>
+<td>检查 30 天月份</td>
+</tr>
+<tr>
+<td style="text-align: right">3</td>
+<td>`month == 4</td>
+<td></td>
+<td>month == 6</td>
+</tr>
+<tr>
+<td style="text-align: right">4</td>
+<td>已排除非法月份、2 月和 30 天月份</td>
+<td>31 天</td>
+<td>判断结束</td>
+</tr>
+</tbody>
+</table>
+<p>用实际输入走一遍，可以确认每条路线的含义：</p>
+<table>
+<thead>
+<tr>
+<th>输入 <code>year month</code></th>
+<th>选择过程</th>
+<th>最终结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2024 2</code></td>
+<td>月份合法 → 2 月 → 2024 是闰年</td>
+<td>29 天</td>
+</tr>
+<tr>
+<td><code>1900 2</code></td>
+<td>月份合法 → 2 月 → 1900 是平年</td>
+<td>28 天</td>
+</tr>
+<tr>
+<td><code>2024 4</code></td>
+<td>月份合法 → 不是 2 月 → 30 天月份</td>
+<td>30 天</td>
+</tr>
+<tr>
+<td><code>2024 12</code></td>
+<td>月份合法 → 不是 2 月 → 不是 30 天月份</td>
+<td>31 天</td>
+</tr>
+<tr>
+<td><code>2024 13</code></td>
+<td>第一条就判定月份非法</td>
+<td>非法，不能继续归入 31 天</td>
+</tr>
+</tbody>
+</table>
+<p>这道题适合使用 <code>if</code>，因为它包含范围、取余和复合逻辑条件。即使月份编号看起来像固定整数，也不能只用一个简单 <code>switch</code> 解决闰年 2 月的判断。</p>
+<h2 id="怎样验证分支路径">怎样验证分支路径</h2>
+<p>分支程序不能只用一个“看起来正常”的数据。可靠的测试要同时检查三件事：</p>
+<ol>
+<li><strong>路线覆盖：</strong> 每一种最终结果至少实际运行一次；</li>
+<li><strong>边界覆盖：</strong> 对 <code>&gt;、&gt;=、&lt;、&lt;=</code> 使用边界值和相邻值；</li>
+<li><strong>互斥与完整：</strong> 需要唯一结果时，每组输入只能得到一个结果，同时不能留下没有结果的合法输入。</li>
+</ol>
+<p>成绩分级至少测试 59、60、89、90：59 和 60 检查及格边界两侧，89 和 90 检查优秀边界两侧。月份天数至少覆盖非法月份、平年 2 月、闰年 2 月、30 天月份和 31 天月份。<code>switch</code> 任务则要覆盖每组固定值、共享处理的入口以及 <code>default</code>。</p>
+<p>运行自己的程序时，可以用同一张记录表对照预期：</p>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>条件或匹配的实际结果</th>
+<th>选中的路线</th>
+<th>明确跳过的路线</th>
+<th>预期结果</th>
+<th>实际结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一组具体数据</td>
+<td>逐项写出 <code>true</code>、<code>false</code> 或匹配值</td>
+<td>写路线名称</td>
+<td>写未执行路线</td>
+<td>手算得到</td>
+<td>运行后填写</td>
+</tr>
+</tbody>
+</table>
+<p>若预期与实际不一致，先看第一个不同点：条件算错通常是运算或边界问题；选中路线不对通常是判断顺序问题；一次出现多个互斥结果，通常是把一条 <code>else-if</code> 链写成了多个独立 <code>if</code>，或 <code>switch</code> 路线漏写了应有的 <code>break</code>。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>大主题</th>
+<th>先问自己的问题</th>
+<th>详细入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件与范围</td>
+<td>当前值代入后是真还是假，边界是否包含</td>
+<td><a href="/gesp/level1/branch/if/#%E6%9D%A1%E4%BB%B6%E6%80%8E%E6%A0%B7%E5%BE%97%E5%88%B0-true-%E6%88%96-false">if 条件分支</a></td>
+</tr>
+<tr>
+<td>单分支、双分支和多分支</td>
+<td>一次允许执行几条路线，是否需要兜底结果</td>
+<td><a href="/gesp/level1/branch/if/#%E4%B8%89%E7%A7%8D%E4%B8%BB%E8%A6%81%E5%BD%A2%E5%BC%8F">if 条件分支</a></td>
+</tr>
+<tr>
+<td>多个固定值选择</td>
+<td>是固定整数或字符吗，匹配后在哪里停止</td>
+<td><a href="/gesp/level1/branch/switch-case/#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8-switch">switch-case 分支</a></td>
+</tr>
+<tr>
+<td>常见综合问题</td>
+<td>规则怎样拆成互斥且完整的路线</td>
+<td>本页“闰年与月份天数”</td>
+</tr>
+<tr>
+<td>分支验证</td>
+<td>路线、边界、非法输入是否全部测试</td>
+<td>本页“怎样验证分支路径”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常见错误">常见错误</h2>
+<ol>
+<li>还没有划分路线就直接写代码，结果条件互相重叠或漏掉一类输入。</li>
+<li>互斥分类使用多个独立 <code>if</code>，一次输出了两个本应互斥的结果。</li>
+<li>多分支先写宽范围，后写严格范围，后面的路线永远无法到达。</li>
+<li>用 <code>switch</code> 硬写范围或复杂条件，没有先看题目的判断方式。</li>
+<li>只测试区间中间的普通数据，没有检查边界值、相邻值和非法输入。</li>
+<li>只确认“选中了什么”，没有确认其他互斥路线确实被跳过、分支结束后从哪里继续。</li>
+</ol>
+<p>具体语法错误、条件形成过程和代码块范围在 <code>if</code> 子课中检查；<code>case</code>、<code>break</code>、<code>default</code> 与贯穿问题在 <code>switch-case</code> 子课中检查。父页不重复两套语法，只把选择与验证方法合在一起。</p>
+<h2 id="关联学习">关联学习</h2>
+<p><a href="/gesp/level1/sequential/">顺序结构</a>提供分支前后仍要遵守的逐句执行规则。学完本章后，<a href="/gesp/level1/loop/">循环结构</a>会让一段语句在条件控制下重复执行；循环的“是否继续”同样要把变量当前值代入条件，但本章不提前展开循环过程。</p>
+<section aria-labelledby="related-knowledge-branch"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-branch" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/sequential/" class="astro-mkwt4ymd">顺序结构</a></li></ul></section>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp8.html">← 上一个：顺序结构</a>

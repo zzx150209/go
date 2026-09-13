@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,27 +449,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>贪心：每步选当前最优的选择，期望得到全局最优。</li><li>关键是证明贪心策略正确（交换论证：换一种选择不会更好）。</li><li>常见策略：按某关键字排序后依次选择，如区间调度、分数背包。</li><li>贪心不一定正确，必须证明或反例验证。</li></ul>
-
-    <div class="kp-code"><pre>// 区间调度：最多选多少个不重叠区间
-struct Interval { int l, r; };
-bool cmp(Interval a, Interval b) { return a.r &lt; b.r; }
-
-int maxIntervals(Interval v[], int n) {
-    sort(v, v+n, cmp);
-    int cnt = 0, lastEnd = -1e9;
-    for (int i = 0; i &lt; n; i++) {
-        if (v[i].l &gt;= lastEnd) {
-            cnt++;
-            lastEnd = v[i].r;
-        }
-    }
-    return cnt;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>贪心题先排序再决策，想清楚按什么关键字排序。</li><li>如果不确定贪心是否正确，考虑动态规划。</li></ul>
+    <article class="article-body">
+    <article id="top"><p>贪心算法会在每一步先作出一个当前选择，再继续处理剩余部分。关键不在“挑最大的或最小的”，而在于找到能够证明安全的选择标准。本课只围绕活动选择，学习怎样从冲突区间中选出尽量多的活动。</p><h2 id="知识范围与官方定位" class="astro-2i3ys3wc">知识范围与官方定位</h2><p class="astro-2i3ys3wc">对应五级大纲“贪心算法”：理解局部最优与全局最优的区别，能设计并检验贪心策略，并能说明一个局部选择为什么不会破坏整体最优。</p><p>本页只使用一级至五级已经学习的语法和能力；小知识点按页内编号连续查询，不设置前置完成门槛。</p><dl><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">是什么</dt><dd class="astro-2i3ys3wc">贪心算法每一步确定一个不再撤销的选择，再在剩余候选中重复同样动作；每一步都必须有安全依据。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">解决什么问题</dt><dd class="astro-2i3ys3wc">本课用它解决活动选择：从若干半开区间中挑出尽量多的互不重叠活动，只输出最大数量。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">什么时候使用</dt><dd class="astro-2i3ys3wc">只有当选择标准明确，并且能证明当前选择可以换进某个最优方案而不使答案变差时，才使用贪心。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">核心思想</dt><dd class="astro-2i3ys3wc">先按 finish 升序、同 finish 时 start 升序得到完整候选顺序，再用交换论证证明这一步安全，最后在剩余活动中重复选择。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">C++ 实现方法</dt><dd class="astro-2i3ys3wc">用 Activity 数组保存开始、结束时间；比较函数先比较 finish，同 finish 时比较 start，随后顺序扫描，start&gt;=lastEnd 时选择并更新状态。</dd></div></dl><section aria-labelledby="01-贪心思想与适用条件"><h2 id="01-贪心思想与适用条件" class="astro-2i3ys3wc">01 贪心思想与适用条件</h2><p class="astro-2i3ys3wc">有 n 个活动，每个活动占用半开区间 [start, finish)。半开区间不包含右端点；本题把“互不重叠”定义为所选活动按执行先后排列后，每个后续活动都满足 start≥前一个活动的 finish，所以 [1,3) 与 [3,5) 可以首尾相接。目标是选择尽量多的活动。</p><p class="astro-2i3ys3wc">本教学程序支持 0≤n≤1000、-10^9≤start≤finish≤10^9，只输出最多活动数，答案在 0 到 n 之间。输入允许 start=finish，这种活动仍按同一先后关系参加判断，不另设特殊规则。数组容量是 1005，n=1000 时实际使用下标 0 到 999，不会越界。</p><p class="astro-2i3ys3wc">主样例按 [6,8)、[2,5)、[1,3)、[4,6) 的乱序输入。若直接沿用输入顺序，先选 [6,8) 会失去前面三个可用活动；若先选“开始最早”的 [1,10)，又会挡住 [2,3)、[3,4)、[4,5)。输入顺序和开始得早都不是可靠依据。真正要保留的是后续可用时间：当前活动结束得越早，留给后面的时间越多。</p><div><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>主样例输入顺序为 [6,8)、[2,5)、[1,3)、[4,6)，目标是选择最多个互不重叠活动。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">如果只按输入顺序先选 [6,8)，前面的三个活动都会被浪费，所以输入顺序没有提供可靠信息。</li><li class="astro-2i3ys3wc">再看短反例 [1,10)、[2,3)、[3,4)、[4,5)：若先选开始最早的 [1,10)，只能得到 1 个活动；这条规则也不可靠。</li><li class="astro-2i3ys3wc">把候选按结束时间观察，最早结束的是 [1,3)；选它以后，从时刻 3 起仍有 [4,6)、[6,8) 可以继续选择。</li><li class="astro-2i3ys3wc">较早结束不会占用更多后续时间，由此先得到 finish 从小到大的主顺序；输入允许零长度活动，所以 finish 相同时还必须按 start 从小到大排列，完整顺序缺一不可。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>贪心规则必须来自题目目标与样例观察。本题要最大化活动数，所以每一步优先保留后续时间，而不是优先开始早、持续短或沿用输入顺序。</p><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp8.html">← 上一个：二分答案</a>

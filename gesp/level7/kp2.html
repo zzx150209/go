@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,170 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>DP 三步：定义状态、推导转移方程、确定初始值和遍历顺序。</li><li>状态维度增加：如同时记录是否选过、是否处于某种状态。</li><li>区间 DP：按区间长度从小到大枚举，dp[i][j] 表示区间 [i,j] 的最优解。</li><li>枚举断点 k 把区间分成 [i,k] 和 [k+1,j]。</li></ul>
-
-    <div class="kp-code"><pre>// 区间DP：石子合并（简述）
-int dp[305][305], sum[305];
-for (int len = 2; len &lt;= n; len++) {
-    for (int i = 1; i + len - 1 &lt;= n; i++) {
-        int j = i + len - 1;
-        dp[i][j] = INF;
-        for (int k = i; k &lt; j; k++) {
-            dp[i][j] = min(dp[i][j],
-                dp[i][k] + dp[k+1][j] + sum[j] - sum[i-1]);
-        }
-    }
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>区间 DP 必须按区间长度从小到大枚举。</li><li>注意初始化：dp[i][i] = 0，其他设为无穷大。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方七级大纲把复杂动态规划列为独立知识点。这里的“复杂”不是追求难写，而是指一个状态需要记录更多信息，或转移要按阶段、区间长度等特定顺序进行。本页在基础 DP 上继续扩展，每次都要说明状态含义、初始状态、状态转移、计算顺序和答案位置。</p>
+<p><strong>什么时候使用复杂 DP？</strong> 当一个下标不能完整描述问题、当前阶段只能依赖上一阶段，或者答案由区间内部的分割方式决定时，应考虑增加状态维度、分离阶段或使用区间 DP。先确认确实缺少必要信息，再增加维度，不能看到二维数组就直接套模板。</p>
+<h2 id="kp-01">01 复杂状态设计</h2>
+<p>当 <code>dp[i]</code> 无法区分后续会用到的情况时，需要增加一维状态。例如 <code>dp[i][0]</code> 与 <code>dp[i][1]</code> 可以分别表示处理到第 <code>i</code> 个位置且“未选择/已选择”某种状态。每一维都必须能用一句完整的话解释，不能先写数组再猜含义。</p>
+<p>状态设计的判断顺序是：答案需要什么信息；这些信息能否由更小问题得到；转移时是否还缺少条件。缺少的必要信息才进入状态，和未来无关的信息不应保留。</p>
+<p><strong>具体推演：</strong> 某条路线有一次“免付通行费”机会，到达位置 <code>i</code> 时即使总代价同为 <code>8</code>，仍要区分机会是否已经使用。可以令 <code>dp[i][0] = 8</code> 表示机会未用、<code>dp[i][1] = 8</code> 表示机会已用；下一段费用为 <code>5</code> 时，前者还能选择免费通过，后者只能变成 <code>13</code>。只记录一个 <code>dp[i] = 8</code> 会丢失影响后续选择的信息。</p>
+<h2 id="kp-02">02 分阶段转移</h2>
+<p>有些问题天然分成若干阶段。第 <code>i</code> 阶段的状态只能从已经完成的阶段转移，不能在同一轮错误读取刚更新、原本属于下一阶段的数据。</p>
+<p>常见写法使用两个数组：<code>previous</code> 保存上一阶段，<code>current</code> 计算当前阶段；一轮结束后再交换或复制。这样牺牲少量代码长度，却能清楚保证依赖关系。</p>
+<p><strong>具体推演：</strong> 假设上一阶段只有 <code>previous[0] = 1</code>、<code>previous[1] = 4</code>，当前阶段规定 <code>current[j] = previous[j] + previous[j - 1]</code>。先得到 <code>current[0] = 1</code>，再得到 <code>current[1] = 4 + 1 = 5</code>；整个计算始终读取旧数组。若直接原地把 <code>previous[0]</code> 改成别的当前值，后面的状态就可能读到“半新半旧”的数据。</p>
+<h2 id="kp-03">03 区间动态规划</h2>
+<p>区间 DP 用 <code>dp[left][right]</code> 表示闭区间 <code>[left, right]</code> 的答案。短区间是长区间的子问题，所以计算顺序必须按区间长度从小到大：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">for (int length = 2; length &lt;= n; length++) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">for (int left = 1; left + length - 1 &lt;= n; left++) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">int right = left + length - 1;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">for (int split = left; split &lt; right; split++) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">            </span></span><span style="--0:#d6deeb;--1:#403f53">// 用 [left, split] 和 [split + 1, right] 更新当前区间</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">        </span></span><span style="--0:#d6deeb;--1:#403f53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">    </span></span><span style="--0:#d6deeb;--1:#403f53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>分割点必须满足 <code>left &lt;= split &lt; right</code>，否则会产生空区间或重复当前区间。</p>
+<p><strong>具体推演：</strong> 区间 <code>[1,3]</code> 的长度为 <code>3</code>，合法分割点只有 <code>1</code> 和 <code>2</code>：分别拆成 <code>[1,1] + [2,3]</code>、<code>[1,2] + [3,3]</code>。必须先算长度为 <code>1、2</code> 的状态，才能比较这两个候选；若把 <code>split = 3</code> 也算进去，右段会变成空区间 <code>[4,3]</code>，已经不符合原问题。</p>
+<h2 id="kp-04">04 计算顺序、初值与不可达状态</h2>
+<p>动态规划不是“循环越多越复杂”，关键是每次读取的子状态已经算好。求最小值时，可把暂不可达状态初始化为足够大的 <code>INF</code>，但做加法前要确认它不是 <code>INF</code>，避免溢出。区间长度为 <code>1</code> 的边界通常单独初始化。</p>
+<p><strong>具体推演：</strong> 设 <code>INF = 1000000000</code>，状态 <code>dp[2]</code> 暂不可达，转移费用为 <code>7</code>。此时不能把 <code>INF + 7</code> 当作候选值，因为它不代表一条真实路线；程序应先判断 <code>dp[2] != INF</code>。若另一条可达路线代价为 <code>12</code>，当前最小值就应更新为 <code>12</code>，而不是让“不可达哨兵”参与比较。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>优先检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一个下标无法区分情况</td>
+<td>是否缺少必要状态维度</td>
+</tr>
+<tr>
+<td>同一轮更新互相污染</td>
+<td>是否应分开上一阶段和当前阶段</td>
+</tr>
+<tr>
+<td>左右端点共同决定答案</td>
+<td>是否适合区间状态</td>
+</tr>
+<tr>
+<td>正确转移却得到旧值</td>
+<td>计算顺序和初值是否正确</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="基础例题">基础例题</h3>
+<p>区间中只有两堆石子 <code>4 6</code> 时，只能把它们合并一次，代价就是 <code>4 + 6 = 10</code>。因此 <code>dp[1][1] = dp[2][2] = 0</code>，<code>dp[1][2] = 10</code>。这个最小例子能直接核对“长度为 1 不需要合并”和“长度为 2 只有一个分割点”两个边界。</p>
+<h3 id="典型应用例题">典型应用例题</h3>
+<p>石子合并的基础模型：每次合并相邻两堆，代价为区间石子总数，求最小总代价。设 <code>sum[i]</code> 为前缀和，<code>dp[left][right]</code> 为合并区间的最小代价：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">stone</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">205</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">sum</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">205</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">205</span><span style="--0:#D6DEEB;--1:#403F53">][</span><span style="--0:#F78C6C;--1:#AA0982">205</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">stone</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// sum[i] 保存前 i 堆石子的总重量，用来 O(1) 求区间重量。</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">sum</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">sum</span><span style="--0:#D6DEEB;--1:#403F53">[i </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">stone</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 长区间依赖更短区间，因此必须按区间长度从小到大计算。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> length </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">; length </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; length</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> left </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; left </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> length </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; left</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> right </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> left </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> length </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[left][right] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1000000000</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">            </span></span><span style="--0:#919F9F;--1:#5D6376">// 枚举最后一次合并的分割点，左右两段都必须非空。</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> split </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> left; split </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> right; split</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> cost </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[left][split] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[split </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">][right]</span></div></div><div class="ec-line"><div class="code"><span class="indent">                    </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">sum</span><span style="--0:#D6DEEB;--1:#403F53">[right] </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">sum</span><span style="--0:#D6DEEB;--1:#403F53">[left </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[left][right] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">min</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[left][right], cost);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 完整区间 [1,n] 的状态就是最终最小合并代价。</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">][n] </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>3</code> 和 <code>1 2 3</code> 时输出 <code>9</code>。外层按长度递增，保证两个子区间已经求出。三层循环的时间复杂度为 <code>O(n^3)</code>，空间复杂度为 <code>O(n^2)</code>。</p>
+<h3 id="状态追踪">状态追踪</h3>
+<p>对石子 <code>1 2 3</code>，先算短区间，再算长区间：</p>
+<table>
+<thead>
+<tr>
+<th>计算阶段</th>
+<th>候选计算</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>长度 1</td>
+<td>单堆不需要合并</td>
+<td><code>dp[1][1] = dp[2][2] = dp[3][3] = 0</code></td>
+</tr>
+<tr>
+<td>长度 2</td>
+<td><code>1 + 2 = 3</code></td>
+<td><code>dp[1][2] = 3</code></td>
+</tr>
+<tr>
+<td>长度 2</td>
+<td><code>2 + 3 = 5</code></td>
+<td><code>dp[2][3] = 5</code></td>
+</tr>
+<tr>
+<td>长度 3，分割点 1</td>
+<td><code>0 + 5 + 6 = 11</code></td>
+<td>候选值 <code>11</code></td>
+</tr>
+<tr>
+<td>长度 3，分割点 2</td>
+<td><code>3 + 0 + 6 = 9</code></td>
+<td><code>dp[1][3] = 9</code></td>
+</tr>
+</tbody>
+</table>
+<p>最后一次合并的区间重量总是 <code>1 + 2 + 3 = 6</code>，区别在于左右子区间此前已经付出的代价。</p>
+<h3 id="建议测试案例">建议测试案例</h3>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>输入或条件</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td><code>n = 2</code>，石子为 <code>4 6</code></td>
+<td>输出 <code>10</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td><code>n = 1</code>，石子为 <code>7</code></td>
+<td>输出 <code>0</code></td>
+</tr>
+<tr>
+<td>易错</td>
+<td><code>n = 3</code>，石子为 <code>1 2 3</code></td>
+<td>输出 <code>9</code>，不能按固定从左到右得到 <code>11</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-errors">常见错误</h2>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>为什么错</th>
+<th>正确方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>状态只写“前 <code>i</code> 个的答案”</td>
+<td>没有说明其余维度，转移无法核对</td>
+<td>用完整句子说明每一维和状态值的含义</td>
+</tr>
+<tr>
+<td>区间 DP 直接按左端点递增</td>
+<td>可能读取尚未计算的长区间</td>
+<td>按区间长度从小到大计算</td>
+</tr>
+<tr>
+<td>分割点写成 <code>split &lt;= right</code></td>
+<td>会产生空的右区间</td>
+<td>保证 <code>left &lt;= split &lt; right</code></td>
+</tr>
+<tr>
+<td>求最小值时把初值设为 <code>0</code></td>
+<td><code>0</code> 会被错误选成最小值</td>
+<td>初始化为足够大的合法上界</td>
+</tr>
+<tr>
+<td>对不可达的极大值继续相加</td>
+<td>可能溢出并产生伪答案</td>
+<td>转移前先判断来源状态可达</td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误反例推演">错误反例推演</h3>
+<p>石子 <code>1 2 3</code> 若错误地按左端点递增、在短区间尚未完成时就计算 <code>dp[1][3]</code>，读取到的 <code>dp[2][3]</code> 仍可能是初始 <code>0</code>，候选会被算成 <code>0 + 0 + 6 = 6</code>；真实的 <code>dp[2][3]</code> 是 <code>5</code>，正确两个候选为 <code>11</code> 和 <code>9</code>，答案应为 <code>9</code>。错误结果 <code>6</code> 比一次最终合并的重量还小，正好暴露了计算顺序问题。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>二维动态规划也使用二维数组，但两个下标不一定是区间端点；“二维”描述状态形状，“区间 DP”描述子问题结构。下一页会专门比较两者。</p>
+<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp1.html">← 上一个：数学库常用函数</a>

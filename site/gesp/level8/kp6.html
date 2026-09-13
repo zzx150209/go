@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,22 +449,91 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>两点距离：√((x2-x1)² + (y2-y1)²)，不开方用平方距离比较。</li><li>三角形面积：叉积公式 |(B-A)×(C-A)| / 2。</li><li>多边形面积： shoelace 公式，按顶点顺序累加叉积。</li><li>注意退化情况：三点共线面积为 0，点在边上。</li></ul>
-
-    <div class="kp-code"><pre>struct Point { double x, y; };
-double dist(Point a, Point b) {
-    return sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));
-}
-double cross(Point a, Point b, Point c) {
-    return (b.x-a.x)*(c.y-a.y) - (b.y-a.y)*(c.x-a.x);
-}
-double triangleArea(Point a, Point b, Point c) {
-    return fabs(cross(a,b,c)) / 2.0;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>浮点计算注意精度，用 epsilon 判断相等。</li><li>叉积正负表示方向（左转/右转）。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级平面几何包括长方形、正方形、三角形、圆的周长与面积，以及点坐标、欧几里得距离、曼哈顿距离和基础坐标移动。本页只处理平面上的基础计算，不扩展计算几何高级算法。</p>
+<h2 id="kp-01">01 常见图形的周长与面积</h2>
+<ul>
+<li>长方形：周长 <code>2(a+b)</code>，面积 <code>ab</code>；</li>
+<li>正方形：周长 <code>4a</code>，面积 <code>a²</code>；</li>
+<li>圆：周长 <code>2πr</code>，面积 <code>πr²</code>。</li>
+</ul>
+<p>题目给直径时先换成半径。使用 <code>double</code> 计算圆，并按题目要求设置输出精度；不要把圆周长与面积公式混淆。</p>
+<h2 id="kp-02">02 三角形面积</h2>
+<p>已知底和高时，面积为 <code>base×height/2</code>。已知三点坐标时，可计算两倍有向面积：</p>
+<p><code>cross=(x2-x1)(y3-y1)-(y2-y1)(x3-x1)</code></p>
+<p>普通面积是 <code>|cross|/2</code>。点的顺序可能改变符号，所以必须取绝对值。</p>
+<h2 id="kp-03">03 欧几里得距离与曼哈顿距离</h2>
+<p>两点 <code>(x1,y1)</code>、<code>(x2,y2)</code> 的欧几里得距离是：</p>
+<p><code>sqrt((x2-x1)²+(y2-y1)²)</code></p>
+<p>曼哈顿距离是：</p>
+<p><code>|x2-x1|+|y2-y1|</code></p>
+<p>前者表示直线距离，后者表示只能水平、竖直移动的最少路程。必须根据题目允许的移动方式选择。</p>
+<h2 id="kp-04">04 共线与退化边界</h2>
+<p>三点的叉积为 0，说明三点共线；点重合也是共线的特殊情况。此时“三角形”面积为 0，不是公式失效。</p>
+<p>浮点坐标经过运算后可用 <code>fabs(cross)&lt;EPS</code> 判断接近 0；整数坐标且范围安全时，可用整数叉积避免浮点误差。</p>
+<p><strong>几何计算追踪。</strong> 半径为 <code>2.5</code> 的圆，按“公式 → 代入 → 计算”处理：周长 <code>C=2πr=2×π×2.5=5π</code>，面积 <code>S=πr²=π×2.5×2.5=6.25π</code>。不要在中途把 <code>π</code> 或小数截成整数。</p>
+<p>几何题先做单位换算，再选择公式。若直径为 50 厘米而答案要求米，应先得到半径 <code>0.25</code> 米；坐标范围较大时，平方前要使用足够宽的类型；输出有精度要求时统一在最后设置位数，避免每一步舍入累积误差。</p>
+<p><strong>逐段具体推演（对应 01—04）。</strong></p>
+<p><strong>01 周长与面积。</strong> 长方形长 6、宽 4，周长是 <code>(6+4)×2=20</code>，面积是 <code>6×4=24</code>。两者一个是长度、一个是面积，不能因使用同样的边长就混用公式。</p>
+<p><strong>02 三角形面积。</strong> 底 6、高 4，先算 <code>6×4=24</code>，再除以 2，得到 <code>6×4÷2=12</code>。若题目没给高，不能把另一条边直接当高。</p>
+<p><strong>03 坐标距离。</strong> 从 <code>(1,2)</code> 到 <code>(4,6)</code>，横差 3、纵差 4。允许直线移动时距离是 <code>sqrt(3²+4²)=5</code>；只能横竖移动时是 <code>3+4=7</code>。</p>
+<p><strong>04 退化图形。</strong> 三点 <code>(0,0)、(1,1)、(2,2)</code> 的两倍面积为 <code>|1×2-1×2|=0</code>，说明三点共线。程序应按题意输出 0，而不是把它当作计算失败。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>圆周长</td>
+<td><code>2πr</code></td>
+</tr>
+<tr>
+<td>圆面积</td>
+<td><code>πr²</code></td>
+</tr>
+<tr>
+<td>两点直线距离</td>
+<td><code>sqrt(dx²+dy²)</code></td>
+</tr>
+<tr>
+<td>曼哈顿距离</td>
+<td>`</td>
+</tr>
+<tr>
+<td>坐标三角形面积</td>
+<td>`</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>输入三个点，输出前两点的欧几里得距离和三点组成的三角形面积。坐标绝对值不超过 <code>10^4</code>。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> x1, y1, x2, y2, x3, y3;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> x1 </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> y1 </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> x2 </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> y2 </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> x3 </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> y3;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> dx </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> x2 </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> x1;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> dy </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> y2 </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> y1;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> distance </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">sqrt</span><span style="--0:#D6DEEB;--1:#403F53">(dx </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> dx </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> dy </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> dy);</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 叉积绝对值是对应平行四边形面积。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> cross </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (x2 </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> x1) </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> (y3 </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> y1)</span></div></div><div class="ec-line"><div class="code"><span class="indent">                 </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> (y2 </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> y1) </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> (x3 </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> x1);</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> area </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">fabs</span><span style="--0:#D6DEEB;--1:#403F53">(cross) </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2.0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> fixed </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">setprecision</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">6</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> distance </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> area </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>程序时间与额外空间复杂度均为 <code>O(1)</code>。样例点 <code>(1,2)、(4,6)、(5,2)</code> 的前两点距离为 5，三角形面积为 8。</p>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>单位混用反例。</strong> 长方形长 2 米、宽 50 厘米，直接算 <code>2×50=100</code> 并写成平方米是错的。先把 50 厘米换成 0.5 米，面积才是 <code>2×0.5=1</code> 平方米。</p>
+<ul>
+<li>把直径直接代入半径公式。</li>
+<li>三角形底高公式忘记除以 2。</li>
+<li>坐标面积不取绝对值，点顺序改变后得到负面积。</li>
+<li>把曼哈顿距离与欧几里得距离混用。</li>
+<li>坐标差先用范围不足的整数平方，发生溢出。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/gesp/level8/algebra-basics/">代数基础</a>：检查公式括号、数据类型和浮点边界。</li>
+<li><a href="/gesp/level8/graph-modeling/">图论综合应用</a>：几何距离可以作为图的边权。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp5.html">← 上一个：数列与代数</a>

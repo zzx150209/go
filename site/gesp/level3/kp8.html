@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,28 +449,205 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>模拟法：按照题目描述的规则，一步一步模拟过程，保存状态变化。</li><li>关键是用变量保存当前状态，每一步按规则更新。</li><li>常见模拟：日期推算、排队过程、游戏规则、字符替换。</li><li>注意边界条件和循环终止条件。</li></ul>
+    <article class="article-body">
+    <h2 id="本课先记住">本课先记住</h2>
+<h3 id="核心结论">核心结论</h3>
+<p>模拟法把题目给出的过程按原顺序执行，并把下一步仍要使用的信息保存在状态变量中。只保存完成任务所需的最小状态，并给出明确初值；严格按照 <code>day++ → 上爬 → 立即判断 → 未到才下滑</code> 的顺序更新；先处理边界和停止条件，再从最终状态输出答案。</p>
+<h3 id="常用语法">常用语法</h3>
+<p>本课只使用三级已经学过的变量、分支、循环、<code>break</code>、一维数组、字符串、取模和位运算。典型的一轮写法是：先修改状态，再用 <code>if</code> 判断是否停止；只有未停止时，才执行本轮剩余操作。</p>
+<h3 id="最小示例">最小示例</h3>
+<p>青蛙清晨高度是 0，白天上爬 5 米后到达 5 米；因为 <code>5 &lt; 15</code>，夜晚才下滑 2 米，下一天从 3 米开始。这个小过程已经包含“读旧状态、更新、判断、决定下一步”。</p>
+<h3 id="关键易错点">关键易错点</h3>
+<ul>
+<li>最后一天到达井口后不再下滑，不能把每一天都简单写成 <code>up - down</code>。</li>
+<li>第一天已经到达时，即使 <code>up &lt;= down</code>，答案仍是 1，不能误判为 <code>Impossible</code>。</li>
+<li>候选状态必须先检查再写回；计分板累加、光标移动和字符串分割也遵守同一原则。</li>
+</ul>
 
-    <div class="kp-code"><pre>// 约瑟夫问题：n个人报数，数到3出列
-int n, k = 3;
-cin &gt;&gt; n;
-bool out[1005] = {false};
-int cnt = 0, cur = 0, num = 0;
-while (cnt &lt; n) {
-    if (!out[cur]) {
-        num++;
-        if (num == k) {
-            out[cur] = true;
-            cout &lt;&lt; cur+1 &lt;&lt; &quot; &quot;;
-            cnt++; num = 0;
-        }
-    }
-    cur = (cur + 1) % n;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>模拟题代码通常较长，注意分步写函数。</li><li>方向变化、边界折返等细节要仔细读题。</li></ul>
+<h2 id="知识范围与使用边界">知识范围与使用边界</h2>
+<p>模拟法不是背模板，而是把题目的每条规则变成可核对的一次动作。一次完整模拟可以概括为：<strong>读取当前状态 → 执行一次操作 → 更新状态 → 判断是否结束</strong>。本课只处理规则明确、状态数量少、能够用三级已学语法逐步执行的问题，不引入自定义函数、指针、二维数组、容器、排序、递归、搜索或状态机术语。</p>
+<p>贯穿全课的代表问题是<strong>青蛙爬井</strong>：一口井深 <code>target</code> 米，青蛙白天上爬 <code>up</code> 米；若已到达井口就立即结束，否则夜晚下滑 <code>down</code> 米。程序输出首次到达所需天数；永远无法到达时输出 <code>Impossible</code>。</p>
+<p>教学程序公开支持：<code>1 &lt;= target, up, down &lt;= 1000000</code>。最多只输出一个不超过 <code>target</code> 的正整数或单词 <code>Impossible</code>；循环中的高度小于 <code>target + up</code>，最大不超过 1999999，所以 <code>int</code> 安全。</p>
+<h2 id="kp-01">01 模拟思想</h2>
+<p>模拟时先问：下一步还需要知道什么？青蛙问题只需要井深 <code>target</code>、白天上爬量 <code>up</code>、夜晚下滑量 <code>down</code>、当前高度 <code>height</code> 和已经开始的天数 <code>day</code>。其中前三个量来自输入，后两个量会在执行中变化。</p>
+<p>主样例 S1 的输入是 <code>15 5 2</code>，输出是 <code>5</code>。第一天从高度 0 开始，上爬到 5，没有到达 15，才下滑到 3；后一天必须从 3 接着算，不能回到初值 0。</p>
+<p>这说明模拟法的关键不是循环写几层，而是后一轮必须读取前一轮完成后的真实状态。</p>
+<span id="kp-02"></span>
+<h2 id="枚举与模拟的区别">枚举与模拟的区别</h2>
+<p>枚举法和模拟法都可能使用循环，但每一轮含义不同。枚举法每轮检查一个候选，重点是不重不漏；模拟法每轮执行一条操作或一个时刻，重点是状态变量与更新顺序。青蛙问题的一轮表示“一天”，不是在猜一个答案。</p>
+<p>如果一道题先枚举候选、再对候选执行若干规则，要分别说清两部分职责，不能因为都使用循环就把它们混为一种方法。</p>
+<span id="kp-03"></span>
+<h2 id="状态变量与更新顺序">状态变量与更新顺序</h2>
+<p>只保存下一步确实需要的信息，叫作最小状态。<code>height</code> 只表示当前高度，初值为 0；<code>day</code> 只表示已经开始了几天，初值为 0。进入新一天时才执行 <code>day++</code>，白天上爬时才改变 <code>height</code>。</p>
+<p>当前分数、当前位置、当前字符，都是下一步还要继续使用的信息；在别的模拟题里，它们同样应由职责清楚的状态变量保存。</p>
+<figure data-density="standard"><figcaption>模拟过程的四个组成部分</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>组成部分</th>
+<th>青蛙爬井中的含义</th>
+<th>核对问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始状态</td>
+<td><code>height = 0</code>、<code>day = 0</code></td>
+<td>是否与题目开始时一致</td>
+</tr>
+<tr>
+<td>单步操作</td>
+<td>天数加一、上爬、判断、未到才下滑</td>
+<td>顺序是否与题意一致</td>
+</tr>
+<tr>
+<td>结束条件</td>
+<td>首次满足 <code>height &gt;= target</code></td>
+<td>是否停在真正到达的时刻</td>
+</tr>
+<tr>
+<td>最终结果</td>
+<td>输出 <code>day</code>，无解输出 <code>Impossible</code></td>
+<td>输出是否来自最终状态</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>三个核心必须连在一起理解：最小状态让我们知道保存什么；更新顺序让我们知道什么时候修改；停止条件让我们知道什么时候不再执行下一步。</p>
+<span id="kp-04"></span>
+<h2 id="边界处理与环形移动">边界处理与环形移动</h2>
+<p>先看青蛙问题的两个边界。若 <code>up &gt;= target</code>，第一天完成，夜晚是否下滑已经没有意义。若第一天还没到达，也就是 <code>up &lt; target</code>，并且 <code>up &lt;= down</code>，每个完整昼夜都没有正增长，以后也无法到达，因此准确的无解条件是 <code>up &lt; target &amp;&amp; up &lt;= down</code>。</p>
+<p>这个条件不能简写成 <code>up &lt;= down</code>。例如输入 <code>5 5 5</code>，白天已经到达 5 米，答案是 1，不是 <code>Impossible</code>。</p>
+<p>其他模拟题也要先按题意确定边界。普通光标越界时可能“无效即不动”，环形位置则可能回到另一端。只有题目明确规定首尾相连时，才使用取模；<code>Z</code> 向后移动 28 位，实际移动 <code>28 % 26 = 2</code> 位，过程是 <code>Z → A → B</code>。</p>
+<span id="kp-05"></span>
+<h2 id="模拟状态更新">模拟状态更新</h2>
+<h3 id="从错误直觉形成正确规则">从错误直觉形成正确规则</h3>
+<p>最自然的想法是把每一天都看成净增加 <code>up - down</code>。困难在于最后一天到达井口后不再下滑：若把最后一天也减去 <code>down</code>，就改变了题目规定的停止时机。</p>
+<p>在 S1 中，第 4 天清晨高度为 9，上爬后是 14，还没到 15，所以必须下滑到 12；第 5 天从 12 上爬到 17，已经到达，此时立即停止。这个具体动作告诉我们，判断必须放在上爬之后、下滑之前。</p>
+<p>因此每轮都重复同一条规则：<code>day++ → 上爬 → 立即判断 → 未到才下滑</code>。无解分支在循环前结束；进入循环的分支要么第一天到达，要么满足 <code>up &gt; down</code>，每个未完成昼夜都会取得正增长，所以程序一定停止。</p>
+<h3 id="八步执行方法">八步执行方法</h3>
+<ol>
+<li>读入 <code>target</code>、<code>up</code> 和 <code>down</code>。</li>
+<li>若 <code>up &lt; target &amp;&amp; up &lt;= down</code>，输出 <code>Impossible</code> 并结束。</li>
+<li>将 <code>height</code> 和 <code>day</code> 都初始化为 0。</li>
+<li>开始新一天，执行 <code>day++</code>。</li>
+<li>白天上爬，执行 <code>height = height + up</code>。</li>
+<li>若 <code>height &gt;= target</code>，立即 <code>break</code>，本日不再下滑。</li>
+<li>只有尚未到达时，执行 <code>height = height - down</code>，再进入下一天。</li>
+<li>循环停止后输出 <code>day</code> 和换行。</li>
+</ol>
+<figure data-density="standard"><figcaption>青蛙爬井测试案例</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>输入 <code>target up down</code></th>
+<th>输出</th>
+<th>检查目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正式样例</td>
+<td><code>15 5 2</code></td>
+<td><code>5</code></td>
+<td>多天连续更新，第 5 天到达</td>
+</tr>
+<tr>
+<td>边界：第一天完成</td>
+<td><code>5 5 3</code></td>
+<td><code>1</code></td>
+<td>到达后不再下滑</td>
+</tr>
+<tr>
+<td>特殊：无法到达</td>
+<td><code>10 3 3</code></td>
+<td><code>Impossible</code></td>
+<td>无正增长时提前结束</td>
+</tr>
+<tr>
+<td>易错：只差一步</td>
+<td><code>10 6 2</code></td>
+<td><code>2</code></td>
+<td>第二天上爬后立即判断</td>
+</tr>
+<tr>
+<td>精确最大值</td>
+<td><code>1000000 2 1</code></td>
+<td><code>999999</code></td>
+<td><code>int</code> 与循环停止边界</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<h3 id="用同一框架看五类迁移题">用同一框架看五类迁移题</h3>
+<p>下面只迁移“状态、更新、判断”的框架，不建立第二套完整算法。每个片段都依赖它自己的题意和公开范围。</p>
+<figure data-density="standard"><figcaption>模拟法迁移场景</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>状态与短片段</th>
+<th>必须保持的顺序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计分板</td>
+<td>玩家编号和数组位置的对应关系叫作映射；<code>score[player] += value</code></td>
+<td>读取当前分数后累加，不能用新分数覆盖历史分数</td>
+</tr>
+<tr>
+<td>时钟进位</td>
+<td><code>23:59:59 → 00:00:00</code></td>
+<td>秒加一并进位，再检查分钟，最后检查小时</td>
+</tr>
+<tr>
+<td>候选光标</td>
+<td><code>long long nextPosition = position + delta</code>；合法后才执行 <code>position = nextPosition</code></td>
+<td>候选位置先检查，正式状态后写回</td>
+</tr>
+<tr>
+<td>环形移动</td>
+<td>非负步数先算 <code>move % 26</code>，例如 <code>Z → A → B</code></td>
+<td>只有题目说明首尾相连时才回绕</td>
+</tr>
+<tr>
+<td>字符串分割</td>
+<td><code>str = str.substr(pos + delimiter.length())</code></td>
+<td>跳过已取得片段和整个分隔符，再处理剩余文本</td>
+</tr>
+<tr>
+<td>异或与数组</td>
+<td>先执行 <code>code ^= 2</code>，得到 <code>6 xor 2 → 4</code>；再执行 <code>score[1] += code</code>，得到 <code>4 → 8</code></td>
+<td>后一步必须读取异或更新后的 <code>code</code></td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>计分板中，<code>score[0]</code> 表示第 0 位玩家，数组下标约定必须始终一致。光标题目中，若候选越界，正式位置和字符都保持不变。字符串分割中，<code>pos</code> 指向分隔符开头，下一轮要同时跳过分隔符本身。这些都是“先读当前状态，再按题意决定是否写回”的具体应用。</p>
+<span id="kp-06"></span>
+<h2 id="状态更新顺序追踪">状态更新顺序追踪</h2>
+<p>下面是 C1 对 S1 的完整线性执行。每一行的“候选天”是操作级追踪；同一行中的清晨、上爬、判断、下滑和下一步是状态级追踪。</p>
+<figure><div tabindex="0" role="region"><table><caption>target = 15、up = 5、down = 2 的完整执行</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">day 与候选天</th><th scope="col">清晨 height</th><th scope="col">上爬后 height</th><th scope="col">立即判断</th><th scope="col">未到才下滑</th><th scope="col">下一步</th></tr></thead><tbody><tr><th scope="row">初始化</th><td>0，尚未开始</td><td>0</td><td>—</td><td>—</td><td>—</td><td>开始第 1 天</td></tr><tr><th scope="row">第 1 天</th><td>0 → 1</td><td>0</td><td>5</td><td>5 &gt;= 15 为假</td><td>3</td><td>开始第 2 天</td></tr><tr><th scope="row">第 2 天</th><td>1 → 2</td><td>3</td><td>8</td><td>8 &gt;= 15 为假</td><td>6</td><td>开始第 3 天</td></tr><tr><th scope="row">第 3 天</th><td>2 → 3</td><td>6</td><td>11</td><td>11 &gt;= 15 为假</td><td>9</td><td>开始第 4 天</td></tr><tr><th scope="row">第 4 天</th><td>3 → 4</td><td>9</td><td>14</td><td>14 &gt;= 15 为假</td><td>12</td><td>开始第 5 天</td></tr><tr><th scope="row">第 5 天</th><td>4 → 5</td><td>12</td><td>17</td><td>17 &gt;= 15 为真，break</td><td>不执行，不再下滑</td><td>输出 5；停止，不出现第 6 天</td></tr></tbody></table></div><figcaption>第 5 天上爬到 17 后立即停止，不执行夜晚下滑，也不会进入第 6 天。这是本样例的真实执行，不代替一般正确性证明。</figcaption></figure>
+<p>从任意一行都能预测下一行：判断为假，才用下滑后的高度开始下一天；判断为真，就直接输出并停止。形成推演回答“为什么这样排顺序”，这张账本回答“这个顺序实际怎样运行”，两者不能互相代替。</p>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="青蛙爬井输入输出与职责">青蛙爬井：输入、输出与职责</h3>
+<p>输入三个整数：<code>target</code> 是井深，<code>up</code> 是白天上爬高度，<code>down</code> 是未到达时夜晚下滑高度。<code>height</code> 从 0 开始保存当前高度，<code>day</code> 从 0 开始保存已经开始的天数；无解判断必须先于循环，循环内的到达判断必须先于下滑。</p>
+<h3 id="完成程序">完成程序</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> target, up, down;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> target </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> up </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> down;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 第一天未到达且完整昼夜没有正增长，才会永远无法到达。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (up </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> target </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> up </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> down) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Impossible</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> height </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> day </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">while</span><span style="--0:#D6DEEB;--1:#403F53"> (height </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> target) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">day</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">height </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> height </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> up;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// 白天到达后立即停止，不能继续执行本日夜晚下滑。</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (height </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> target) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">height </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> height </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> down;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> day </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>程序与八步方法逐项对应。首日到达不会进入无解分支；进入循环后，每轮要么到达并停止，要么在完整昼夜后取得正增长。因此合法输入不会无限循环，输出就是首次到达时的天数。</p>
+<h2 id="common-errors">常见错误</h2><div><ol>
+<li><strong>把每天都写成净增长。</strong> 现象：样例天数偏大或最后一天高度被再次减小。→原因：到达后仍计算 <code>up - down</code>。→修正：先上爬再判断，未到才下滑。→复验：<code>5 5 3</code> 必须输出 1。</li>
+<li><strong>把判断放在下滑之后。</strong> 现象：<code>15 5 2</code> 第 5 天上爬到 17 后又变成 15。→原因：没有在白天到达时立即停止。→修正：把 <code>if (height &gt;= target)</code> 放在下滑之前。→复验：追踪第 5 天的“未到才下滑”必须是不执行。</li>
+<li><strong>首日到达仍判无解。</strong> 现象：<code>5 5 5</code> 输出 <code>Impossible</code>。→原因：只检查 <code>up &lt;= down</code>。→修正：无解条件写成 <code>up &lt; target &amp;&amp; up &lt;= down</code>。→复验：<code>5 5 5</code> 输出 1。</li>
+<li><strong>无解不等号写错。</strong> 现象：<code>10 3 3</code> 进入死循环。→原因：把 <code>up &lt;= down</code> 错写成 <code>up &lt; down</code>。→修正：净增长为 0 也无法到达。→复验：<code>10 3 3</code> 输出 <code>Impossible</code>。</li>
+<li><strong>把累加写成覆盖。</strong> 现象：同一玩家后一次得分抹掉旧分数。→原因：写成 <code>score[player] = value</code>。→修正：读取当前分数后使用 <code>score[player] += value</code>。→复验：初值 4 再加 4 应得到 8。</li>
+<li><strong>候选状态未检查就写回。</strong> 现象：光标可能保存越界位置。→原因：先修改 <code>position</code>，再检查是否合法。→修正：先计算 <code>nextPosition</code>，检查通过后再执行 <code>position = nextPosition</code>。→复验：位置 4 再向后 1、有效范围 0 到 4 时仍保持 4。</li>
+<li><strong>后一步读取旧值。</strong> 现象：Q5 得到的分数不是 8。→原因：没有先完成 <code>code ^= 2</code>。→修正：严格按输入顺序写回每一步状态。→复验：<code>code</code> 为 6、分数为 4 时，先得到 4，再累计为 8。</li>
+</ol></div><section><h3>到达后仍下滑会破坏真实停止时机</h3><div><div><strong><span>×</span> 错误写法</strong><code>每一天都先执行 height = height + up - down</code></div><div><strong><span>✓</span> 正确写法</strong><code>day++，上爬，立即判断；只有未到达时才下滑</code></div></div><p><strong>原因：</strong>最后一天白天已经到达井口，题目规定立即结束；合并更新会多执行一次本不该发生的下滑。</p><p><strong>检查方法：</strong>把题目中的时间顺序写在代码旁，再逐项核对每个判断位于哪个动作之前。</p></section><h2 id="core-check">核心内容检查</h2><h2 id="page-test-title">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp7.html">← 上一个：枚举算法</a>

@@ -8,6 +8,7 @@ import os, io, html, shutil
 from site_data import (SITE_NAME, SITE_SUB, LEVELS, CSP, TEMPLATE_CATS,
                        COMMON_TEMPLATES, SOLUTION_STEPS, RESOURCE_GROUPS,
                        KP_DETAILS)
+from ref_content import REF_KP
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT  = os.path.join(ROOT, "site")
@@ -335,6 +336,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   font-size:13px;font-weight:700;padding:10px 12px;border-radius:6px;
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
+
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
 
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -869,16 +896,13 @@ def build_kp_page(n, kp_idx):
         f'<span class="n">{i:02d}</span><span>{E(k[0])}</span></a></li>'
         for i, k in enumerate(kps, 1))
 
-    # 核心要点
-    pts_html = "".join(f"<li>{E(p)}</li>" for p in det["points"])
-    # 代码
-    code_html = ""
-    if det.get("code"):
-        code_html = f'<div class="kp-code"><pre>{E(det["code"])}</pre></div>'
-    # 注意事项
-    tips_html = "".join(f"<li>{E(tp)}</li>" for tp in det["tips"])
     # 检索词
     tags_html = "".join(f"<span>{E(x)}</span>" for x in tags)
+
+    # 核心要点（从参考站抓取的完整内容）
+    ref_html = ""
+    if n in REF_KP and kp_idx <= len(REF_KP[n]):
+        ref_html = REF_KP[n][kp_idx - 1]
 
     # 上一个/下一个
     prev_link = next_link = ""
@@ -913,13 +937,9 @@ def build_kp_page(n, kp_idx):
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts">{pts_html}</ul>
-
-    {code_html}
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips">{tips_html}</ul>
+    <article class="article-body">
+    {ref_html}
+    </article>
 
     <div class="kp-nav-row">
       {prev_link}

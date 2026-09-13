@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,20 +449,92 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>滚动数组：DP 只依赖前一行/前一层时，用两个数组交替。</li><li>01 背包的一维数组本身就是空间优化（O(W)）。</li><li>图存储：链式前向星比邻接表数组更紧凑。</li><li>不必要的数组及时释放或用局部变量。</li></ul>
-
-    <div class="kp-code"><pre>// 滚动数组优化 DP
-int dp[2][MAXN];
-for (int i = 1; i &lt;= n; i++) {
-    int cur = i % 2, prev = 1 - cur;
-    for (int j = 1; j &lt;= m; j++) {
-        dp[cur][j] = max(dp[prev][j], dp[cur][j-1]) + a[i][j];
-    }
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>滚动数组时注意当前行和上一行的交替关系。</li><li>内存不够时考虑用 short 或 char 代替 int。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级要求理解算法的空间效率，能够估算变量、数组、递归栈等占用的空间，并结合内存限制判断方案是否可行。空间复杂度关注随输入规模增长而增加的存储量，通常记额外空间，不把程序代码本身机械地算进去。</p>
+<h2 id="kp-01">01 变量与一维数组</h2>
+<p>少量固定变量占用 <code>O(1)</code> 空间；长度与 <code>n</code> 成正比的一维数组占用 <code>O(n)</code> 空间。在常见 GCC/OJ 环境中，<code>int</code> 通常占 4 字节，<code>long long</code> 通常占 8 字节，但实际字节数仍以编译器和平台为准。</p>
+<p>例如 <code>int a[1000000]</code> 通常约占 <code>4,000,000</code> 字节，约为 <code>3.8 MiB</code>。估算时既要写复杂度，也要把字节数与题目的内存限制比较。</p>
+<h2 id="kp-02">02 二维数组与状态表</h2>
+<p><code>n×n</code> 的二维数组占用 <code>O(n²)</code> 空间。若 <code>n=10000</code>，一个 <code>int</code> 矩阵约需 400 MB，可能超过内存限制；这也是大规模稀疏图不宜使用邻接矩阵的原因。</p>
+<p>动态规划状态表也常占二维空间。若当前行只依赖上一行，就不必保留所有历史行，可以只保留两行或一行。</p>
+<h2 id="kp-03">03 图的存储空间</h2>
+<p>邻接矩阵占用 <code>O(n²)</code>；邻接表占用 <code>O(n+m)</code>，其中 <code>m</code> 是边数。对于边很少的稀疏图，邻接表通常节省大量空间；对于顶点少、边很密且需要频繁查询边的图，邻接矩阵可能更直接。</p>
+<p>无向图用邻接表存储时，每条无向边通常会保存两个方向，因此实际记录数约为 <code>2m</code>，但空间复杂度仍是 <code>O(n+m)</code>。</p>
+<h2 id="kp-04">04 递归调用栈</h2>
+<p>递归每深入一层，都要保存参数、局部变量和返回位置。递归深度为 <code>n</code> 时，调用栈空间通常为 <code>O(n)</code>。即使没有显式创建大数组，过深递归也可能造成栈溢出。</p>
+<p>分析递归空间时看“同时存在的调用层数”，不是总调用次数。二叉递归可能调用很多次，但某一时刻调用栈深度仍由最长路径决定。</p>
+<h2 id="kp-05">05 空间优化</h2>
+<p>常见方法包括：</p>
+<ul>
+<li>用滚动数组只保留仍会被使用的状态；</li>
+<li>稀疏图使用邻接表，不保存不存在的边；</li>
+<li>只保存必要信息，及时复用不再需要的数组；</li>
+<li>在递归过深时，评估能否改用显式队列或栈。</li>
+</ul>
+<p>空间优化不能破坏依赖关系。把二维状态压成一维时，要特别检查更新顺序，避免本轮新值覆盖本轮仍要读取的旧值。</p>
+<p><strong>内存估算追踪。</strong> <code>long long table[2000][2000]</code> 在常见环境中每个元素约 8 字节：</p>
+<ol>
+<li>元素数：<code>2000×2000=4,000,000</code>；</li>
+<li>字节数：<code>4,000,000×8=32,000,000</code>；</li>
+<li>字节 → MiB：<code>32,000,000÷1024÷1024≈30.5 MiB</code>。</li>
+</ol>
+<p>这还没有计入其他数组和运行开销。边界检查既要看静态数组大小，也要看递归深度；例如链式图上的递归 DFS 深度可能达到 <code>n</code>。滚动数组把空间降下来后，还必须用小样例验证更新顺序没有覆盖旧状态。</p>
+<p><strong>逐段具体推演（对应 01—05）。</strong></p>
+<p><strong>01 变量与一维数组。</strong> 在常见 OJ 环境中按 <code>int</code> 4 字节估算，1000000 个元素约 4000000 字节，约 3.8 MiB。几个固定变量无论 <code>n</code> 多大都只占常数空间，而长度随 <code>n</code> 增长的数组是 <code>O(n)</code>。</p>
+<p><strong>02 二维状态。</strong> <code>1000×1000</code> 个 <code>long long</code> 元素按每个 8 字节估算，需要 <code>1000×1000×8=8000000</code> 字节，约 7.6 MiB。若开成 <code>10000×10000</code>，就约 763 MiB，可能超过内存限制。</p>
+<p><strong>03 图存储。</strong> 10000 个点、20000 条无向边，邻接表保存点入口和约 40000 条方向记录，空间随 <code>n+m</code> 增长；邻接矩阵要保存一亿个位置，即使每格 1 字节也约 95 MiB。</p>
+<p><strong>04 递归栈。</strong> 链式 DFS 深度为 4 时，调用栈依次是 <code>[dfs(1)]</code>、<code>[dfs(1),dfs(2)]</code>，直到同时保存 4 层；返回时才逐层释放。若深度扩大到 100000，即使每层变量很少也可能栈溢出。</p>
+<p><strong>05 滚动数组。</strong> 若 <code>dp[i][j]</code> 只依赖上一行，计算第 3 行时只需要第 2 行，不再需要第 1 行。保留 <code>previous</code> 和 <code>current</code> 两行就能把 <code>n×m</code> 个状态降为约 <code>2m</code> 个；更新顺序必须保证旧值还没被覆盖。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>存储对象</th>
+<th>常见空间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定数量变量</td>
+<td><code>O(1)</code></td>
+</tr>
+<tr>
+<td>长度为 <code>n</code> 的数组</td>
+<td><code>O(n)</code></td>
+</tr>
+<tr>
+<td><code>n×n</code> 矩阵</td>
+<td><code>O(n²)</code></td>
+</tr>
+<tr>
+<td>邻接表</td>
+<td><code>O(n+m)</code></td>
+</tr>
+<tr>
+<td>深度为 <code>n</code> 的递归栈</td>
+<td><code>O(n)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>内存限制为 128 MiB，<code>n=10000</code>，图只有 <code>20000</code> 条边。邻接矩阵若使用 <code>int</code>，约需 <code>10000×10000×4</code> 字节，约 381 MiB，明显不可行；邻接表只保存顶点表和约 <code>40000</code> 条方向记录，更适合这个稀疏图。</p>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>只看变量名反例。</strong> <code>long long a[1000][1000]</code> 看起来只有一个变量名 <code>a</code>，但实际包含一百万个元素，约占 7.6 MiB。空间分析要数元素和字节，不能数源代码中写了几个名字。</p>
+<ul>
+<li>只写 <code>O(n²)</code>，不与实际内存限制比较。</li>
+<li>忘记 <code>long long</code> 通常比 <code>int</code> 占用更多字节。</li>
+<li>认为没有大数组就一定不会超内存，忽略递归栈。</li>
+<li>无向图邻接表只记录一个方向，造成遍历错误。</li>
+<li>滚动数组更新顺序错误，覆盖了仍要使用的旧状态。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/gesp/level8/graph-modeling/">图论综合应用</a>：按图的稀疏程度选择存储结构。</li>
+<li><a href="/gesp/level8/algorithm-optimization/">算法优化</a>：在保证正确性的前提下降低空间。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2><div id="page-test"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp10.html">← 上一个：复杂度分析</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,19 +449,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>欧几里得算法（辗转相除法）：gcd(a,b) = gcd(b, a%b)，直到 b=0。</li><li>最小公倍数 lcm(a,b) = a / gcd(a,b) * b（先除后乘防止溢出）。</li><li>分数约分：分子分母同除以 gcd。</li><li>C++17 有 std::gcd 和 std::lcm，需要 &lt;numeric&gt;。</li></ul>
-
-    <div class="kp-code"><pre>int gcd(int a, int b) {
-    return b == 0 ? a : gcd(b, a % b);
-}
-
-int lcm(int a, int b) {
-    return a / gcd(a, b) * b;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>a 和 b 顺序不影响结果，gcd(a,b)=gcd(b,a)。</li><li>用 long long 防止乘法溢出。</li></ul>
+    <article class="article-body">
+    <article id="top"><p>两个数很小时，我们还能从较小的数开始逐个试除；可输入接近 10^9 时，这样检查会很慢。欧几里得算法抓住“用余数替换后，公共约数不会改变”这一点，让第二个数不断变小，最后直接得到最大公约数。本课会把这个理由、循环过程和三个常见应用连成一条完整路线。</p><h2 id="知识范围与官方定位" class="astro-2i3ys3wc">知识范围与官方定位</h2><p class="astro-2i3ys3wc">对应 GESP 五级“欧几里得算法”：会用辗转相除法求最大公约数，并能在明确的整数范围与零边界下计算最小公倍数、完成分数约分和多个数的最大公约数。</p><p>本页只使用一级至五级已经学习的语法和能力；小知识点按页内编号连续查询，不设置前置完成门槛。</p><dl><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">是什么</dt><dd class="astro-2i3ys3wc">这是一节独立算法课：先证明余数替换为什么不改变答案，再把替换写成能处理负数和 0 的循环。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">解决什么问题</dt><dd class="astro-2i3ys3wc">学完后，你能求两个整数的非负 gcd 与 lcm，并把同一个 gcd 用到规范约分和多个数的公共因数计算。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">什么时候使用</dt><dd class="astro-2i3ys3wc">看到最大等长切分、分数约分、同时分组或多个整数的共同尺度时，可以先判断问题是否需要 gcd；遇到周期同时发生时还常会继续用 lcm。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">核心思想</dt><dd class="astro-2i3ys3wc">若 a=q×b+r，那么 (a,b) 与 (b,r) 的公共正约数集合双向相同；余数又严格小于正的 b，所以可以反复缩小直到第二个数为 0。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">C++ 实现方法</dt><dd class="astro-2i3ys3wc">先把输入归一为非负数；循环中先保存 remainder=a%b，再更新 a、b；求 lcm 时先保护零，再按 a/greatest*b 先除后乘。本课数据保证结果可放入 long long。</dd></div></dl><section aria-labelledby="01-最大公约数与欧几里得算法"><h2 id="01-最大公约数与欧几里得算法" class="astro-2i3ys3wc">01 最大公约数与欧几里得算法</h2><p class="astro-2i3ys3wc">先看固定例子 48 和 18。除法关系是 48=18×2+12，也就是余数 12 来自“48 减去 18 的 2 倍”。</p><p class="astro-2i3ys3wc">若正整数 d 同时整除 48 和 18，那么 d 也整除 48-18×2=12；所以原来每一个公共约数，也都是 18 和 12 的公共约数。反过来，若 d 同时整除 18 和 12，那么 d 也整除 18×2+12=48；所以 18 和 12 的每一个公共约数，也都是 48 和 18 的公共约数。两个方向都成立，公共正约数集合完全相同，最大者当然也相同。一般地，当 a=q×b+r 时，gcd(a,b)=gcd(b,r)，其中 r=a%b。</p><p class="astro-2i3ys3wc">这条关系可以重复使用：(48,18) 变成 (18,12)，再变成 (12,6)，最后变成 (6,0)。当 b&gt;0 时，余数满足 0&lt;=r&lt;b，因此新的第二个数严格变小，不会无限循环；当 b==0 时停止，当前 a 就是最大公约数。</p><p class="astro-2i3ys3wc">循环每轮必须按固定顺序做三件事：先计算并保存 remainder=a%b，再令 a=b，最后令 b=remainder。临时量 remainder 保住了旧 a 和旧 b 算出的余数，避免前一次赋值把旧值覆盖。while (b != 0) 还保证只有除数非零时才执行 %。</p><p class="astro-2i3ys3wc">本课输入允许负数和 0，所以 main 先把 a、b 归一为非负数。约定 gcd(0,b)=|b|、gcd(a,0)=|a|，教学程序把 gcd(0,0) 定义为 0；题目若另有定义，应以题面为准。数据范围排除了 LLONG_MIN，因此取相反数安全。</p><p class="astro-2i3ys3wc">当两数都为正时，欧几里得算法的时间复杂度是 O(log(min(|a|,|b|)))；含零边界直接结束，是 O(1)。若要统一写法，可记为 O(log(min(|a|,|b|)+1))。程序只使用几个 long long 变量，额外空间复杂度是 O(1)。</p><div><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>从“枚举公共约数”出发，用 48 和 18 亲手形成余数替换规则，再按程序顺序走到停止。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">自然想法是从 18 开始向下试除 48 和 18；数字接近 10^9 时，逐个尝试可能很慢，我们需要一次可靠的缩小。</li><li class="astro-2i3ys3wc">写出 48=18×2+12。若 d 同时整除 48 和 18，则 d 也整除 48-18×2=12，所以原来的公共约数不会丢。</li><li class="astro-2i3ys3wc">反过来，若 d 同时整除 18 和 12，则 d 也整除 18×2+12=48，所以替换后没有增加假的公共约数。</li><li class="astro-2i3ys3wc">两个方向合起来，gcd(48,18)=gcd(18,12)。一般地，a=q×b+r 时都有 gcd(a,b)=gcd(b,r)。</li><li class="astro-2i3ys3wc">程序从 (48,18) 开始：b!=0，先保存 remainder=48%18=12，再更新为 (18,12)。</li><li class="astro-2i3ys3wc">第二轮保存 18%12=6，更新为 (12,6)；第三轮保存 12%6=0，更新为 (6,0)。</li><li class="astro-2i3ys3wc">此时 b==0，循环停止，返回 a=6。只要 b&gt;0，新余数就在 0 到 b-1 之间，第二个数严格变小，因此过程一定结束。</li><li class="astro-2i3ys3wc">输入先取绝对值，零边界按 gcd(0,b)=|b|、gcd(a,0)=|a|、教学约定 gcd(0,0)=0 处理。两数为正时是 O(log(min(|a|,|b|)))，含零直接 O(1)，额外空间 O(1)。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>先证明替换前后公共正约数双向相同，再使用“判断 b、保存余数、更新 a、更新 b”的循环。固定样例必须走出 12、6、0 三个真实余数，最终 gcd=6。</p><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp1.html">← 上一个：初等数论基础</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,120 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>常见图算法复杂度：Dijkstra O((n+m)log n)，Floyd O(n³)，Kruskal O(m log m)。</li><li>根据 n 和 m 选算法：n≤500 可用 Floyd，m 大用 Kruskal。</li><li>优化常数：邻接表比矩阵快，优先队列比朴素实现快。</li><li>空间复杂度也要考虑：邻接矩阵 O(n²)，邻接表 O(n+m)。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>时间紧时先写正确的暴力版，再想优化。</li><li>注意递归 DFS 的栈空间限制。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级要求理解算法的时间效率，能够分析循环、递归和常见算法的时间复杂度，并根据数据规模判断程序是否可行。复杂度描述的是输入规模增大时操作次数的增长速度，不等于程序实际运行的秒数。</p>
+<h2 id="kp-01">01 常见时间复杂度</h2>
+<p>常见增长速度从慢到快大致为：</p>
+<p><code>O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(n³) &lt; O(2ⁿ) &lt; O(n!)</code></p>
+<p>分析时保留增长最快的项并省略常数。例如 <code>3n²+10n+5</code> 记为 <code>O(n²)</code>。这不是说低次项不存在，而是当 <code>n</code> 很大时，最高次项决定主要增长趋势。</p>
+<h2 id="kp-02">02 顺序、分支与循环</h2>
+<p>顺序执行的几段代码，复杂度取其中增长最快的一段；<code>if...else</code> 通常看最坏情况下较慢的分支。</p>
+<ul>
+<li>单层循环执行约 <code>n</code> 次，通常是 <code>O(n)</code>。</li>
+<li>两层循环都执行约 <code>n</code> 次，通常是 <code>O(n²)</code>。</li>
+<li>循环变量每次乘 2，如 <code>i = i * 2</code>，通常执行约 <code>log₂n</code> 次。</li>
+<li>嵌套循环不能只看层数，还要看每层的实际边界。例如内层执行 <code>i</code> 次，总次数是 <code>1+2+...+n</code>，仍为 <code>O(n²)</code>。</li>
+</ul>
+<h2 id="kp-03">03 数据范围与可行性</h2>
+<p>同一个算法在不同数据范围下结论不同。若 <code>n=1000</code>，<code>n²</code> 约为一百万，常常可以接受；若 <code>n=100000</code>，<code>n²</code> 达到一百亿，通常不可行。</p>
+<p>判断时还要考虑常数、输入输出、语言和评测环境，因此不能把某个操作次数当作绝对边界。稳妥做法是先估算数量级，再给速度较慢的操作留出余量。</p>
+<h2 id="kp-04">04 常见算法的复杂度</h2>
+<table>
+<thead>
+<tr>
+<th>算法或操作</th>
+<th>常见时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数组按下标访问</td>
+<td><code>O(1)</code></td>
+</tr>
+<tr>
+<td>扫描整个数组</td>
+<td><code>O(n)</code></td>
+</tr>
+<tr>
+<td>二分查找</td>
+<td><code>O(log n)</code></td>
+</tr>
+<tr>
+<td>常见高效排序</td>
+<td><code>O(n log n)</code></td>
+</tr>
+<tr>
+<td>邻接矩阵 Dijkstra</td>
+<td><code>O(n²)</code></td>
+</tr>
+<tr>
+<td>Floyd</td>
+<td><code>O(n³)</code></td>
+</tr>
+<tr>
+<td>枚举全部子集</td>
+<td><code>O(2ⁿ)</code></td>
+</tr>
+</tbody>
+</table>
+<p>表中的结果要结合具体实现使用。例如使用不同图存储结构时，Dijkstra 的复杂度也会不同。</p>
+<p><strong>操作次数追踪。</strong> 外层让 <code>i</code> 从 1 增加到 <code>n</code>，内层让 <code>j</code> 从 1 增加到当前的 <code>i</code>。内层次数依次为 <code>1、2、…、n</code>，总次数是 <code>n(n+1)/2</code>，所以是 <code>O(n²)</code>，不是看到两个循环就机械写 <code>n×n</code>。</p>
+<p>规模判断要落到数量级：<code>n=20</code> 时枚举全部子集约有 <code>2^20≈10^6</code> 个，可能可行；<code>n=100000</code> 时 <code>O(n²)</code> 约为 <code>10^10</code> 次，通常不可行。对同一张 <code>n=300</code> 的稠密图，朴素 Dijkstra 约按 <code>n²</code> 增长，而 Floyd 按 <code>n³</code> 增长，是否需要任意两点答案会直接影响选择。</p>
+<p><strong>逐段具体推演（对应 01—04）。</strong></p>
+<p><strong>01 增长速度。</strong> <code>n=5</code> 时，线性操作约 5 次，平方约 25 次，枚举子集约 <code>2⁵=32</code> 次，全排列约 <code>5!=120</code> 次。<code>n=10</code> 时 <code>10!=3628800</code>，阶乘增长很快，通常只适合很小的 <code>n</code>。</p>
+<p><strong>02 代码结构。</strong> 两个先后执行的循环各跑 <code>n</code> 次，总次数是 <code>n+n=2n</code>，所以为 <code>O(n)</code>；两层完整嵌套才是 <code>n×n=n²</code>。若内层只跑到 <code>i</code>，总次数为 <code>1+2+...+n=n(n+1)/2</code>，仍是 <code>O(n²)</code>。</p>
+<p><strong>03 数据范围。</strong> <code>n=1000</code> 时，<code>n²=10⁶</code>；<code>n=100000</code> 时，<code>n²=10¹⁰</code>。同一段双循环从可能可行变成通常不可行，判断依据是操作数量级，不是代码行数。</p>
+<p><strong>04 常见算法。</strong> 对 <code>n=300</code> 的稠密图，邻接矩阵 Dijkstra 约做 <code>300²=90000</code> 级别的扫描；Floyd 约做 <code>300³=27000000</code> 次状态检查。只求一个起点时前者更合适，需要任意两点答案时才考虑后者。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>代码结构</th>
+<th>估算方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多段顺序代码</td>
+<td>取增长最快的一段</td>
+</tr>
+<tr>
+<td>两个独立循环</td>
+<td>次数相加</td>
+</tr>
+<tr>
+<td>两层嵌套循环</td>
+<td>次数相乘或求和</td>
+</tr>
+<tr>
+<td>每次规模减半</td>
+<td>约 <code>log n</code> 层</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>下面程序中，第一段循环执行 <code>n</code> 次，第二段双重循环执行 <code>n²</code> 次，总次数约为 <code>n+n²</code>，所以时间复杂度为 <code>O(n²)</code>。若 <code>n=100000</code>，就应寻找只扫描一次或 <code>O(n log n)</code> 的方法。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> count </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 第一段独立循环执行 n 次。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 第二段是完整双重循环，共执行 n×n 次。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> count </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>顺序循环相乘反例。</strong> 先扫描 <code>n</code> 个数求和，再扫描 <code>n</code> 个数求最大值，两段各执行 n 次。错误写成 <code>O(n²)</code> 是把先后执行误当嵌套；实际总次数约 <code>2n</code>，省略常数后为 <code>O(n)</code>。</p>
+<ul>
+<li>只数循环层数，不检查循环边界和变量变化。</li>
+<li>把两个先后执行的循环复杂度相乘。</li>
+<li>认为 <code>O(n²)</code> 在任何数据范围下都一定超时。</li>
+<li>忽略递归分支数和递归深度。</li>
+<li>把复杂度写成实际运行秒数，或认为同复杂度的程序一定同样快。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/gesp/level8/space-efficiency/">空间效率分析</a>：同时检查内存是否足够。</li>
+<li><a href="/gesp/level8/algorithm-optimization/">算法优化</a>：定位瓶颈后选择优化方向。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2><div id="page-test"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp9.html">← 上一个：单源最短路</a>

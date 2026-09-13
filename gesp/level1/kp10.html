@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,257 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>for 循环适合已知次数：for(初始化; 条件; 更新) { ... }。</li><li>while 循环适合未知次数：while(条件) { ... }，条件为真时反复执行。</li><li>do-while 先执行一次再判断条件，至少执行一次。</li><li>break 跳出当前循环，continue 跳过本次循环直接进入下一次。</li></ul>
-
-    <div class="kp-code"><pre>// 计算 1 到 100 的和
-int sum = 0;
-for (int i = 1; i &lt;= 100; i++) {
-    sum += i;
-}
-cout &lt;&lt; sum &lt;&lt; endl;  // 5050
-
-// 累加输入直到输入0
-int x, total = 0;
-while (cin &gt;&gt; x &amp;&amp; x != 0) {
-    total += x;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>for 循环中循环变量建议在初始化处定义（for(int i=...）。</li><li>死循环：while(true) 需要用 break 退出，注意不要忘记出口。</li></ul>
+    <article class="article-body">
+    <h2 id="本章先记住">本章先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 循环让程序重复处理同一类任务；初始状态决定从哪里开始，条件决定是否继续，更新让状态逐步走向结束。</li>
+<li><strong>常用选择：</strong> 起点和终点明确时先考虑 <code>for</code>；次数不定但继续条件清楚时考虑 <code>while</code>；必须先做一次再判断时才考虑 <code>do-while</code>。</li>
+<li><strong>最小对照：</strong> 初值为 1 时，三种循环都能输出 1 到 5；初值改为 6 后，<code>for</code> 和 <code>while</code> 执行 0 次，<code>do-while</code> 仍先执行 1 次。</li>
+<li><strong>关键易错点：</strong> 不能只看已经输出的结果，还要找到更新后的状态、条件第一次为假的判断，以及 <code>break</code> 或 <code>continue</code> 真正改变的去向。</li>
+</ul>
+<p>前一章的分支结构让程序从多条路线中选择一条。本章继续使用条件判断，但条件现在负责决定一段任务是否还要再做一轮。循环并不是把代码“自动重复几次”，每一轮能否开始、怎样前进、何时停止，都由程序中的具体状态决定。</p>
+<p>这是一张章节地图。四个子课负责语法、过程表和完整程序；本页负责把它们排成学习路线，并帮助你在做题时找到合适入口。</p>
+<h2 id="从顺序执行到重复处理">从顺序执行到重复处理</h2>
+<p>顺序结构中的语句通常只执行一次。循环到达判断位置后，会读取变量的当前值：条件成立就完成本轮任务，再准备下一轮状态；条件不成立就离开循环，继续执行后面的语句。</p>
+<p>无论选择哪种循环，都要能回答四个问题：</p>
+<ol>
+<li><strong>初始状态：</strong> 第一次判断或第一次执行使用什么值；</li>
+<li><strong>继续条件：</strong> 当前状态满足什么要求才继续；</li>
+<li><strong>本轮任务：</strong> 条件允许后，这一轮具体处理什么；</li>
+<li><strong>状态更新：</strong> 哪条语句让下一轮使用新状态，并最终使条件变成 <code>false</code>。</li>
+</ol>
+<p><code>for</code>、<code>while</code> 和 <code>do-while</code> 没有改变这四项职责，只是把判断与更新放在了不同位置。<code>break</code> 和 <code>continue</code> 则在正常路径上增加了提前离开或跳过本轮的去向。</p>
+<h2 id="同一个任务怎样比较三种循环">同一个任务怎样比较三种循环</h2>
+<p>先固定任务：“从 1 开始，每行输出一个整数，直到输出 5。”正常初值为 1 时，三种循环的可观察结果相同，都是 1、2、3、4、5；真正需要比较的是每一步先去哪里。</p>
+<table>
+<thead>
+<tr>
+<th>结构</th>
+<th>控制信息放在哪里</th>
+<th>第一轮怎样开始</th>
+<th>一轮任务结束后</th>
+<th>初值改为 6 时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>for</code></td>
+<td>初始化、条件、更新集中在循环头</td>
+<td>初始化后先判断 <code>1 &lt;= 5</code></td>
+<td>先更新，再回到条件</td>
+<td><code>6 &lt;= 5</code> 为 false，执行 0 次</td>
+</tr>
+<tr>
+<td><code>while</code></td>
+<td>初始化在循环前，条件在循环头，更新在循环体内</td>
+<td>先判断 <code>1 &lt;= 5</code></td>
+<td>执行体内更新，再回到条件</td>
+<td><code>6 &lt;= 5</code> 为 false，执行 0 次</td>
+</tr>
+<tr>
+<td><code>do-while</code></td>
+<td>初始化在循环前，条件在循环体末尾</td>
+<td>不先判断，直接完成第一轮</td>
+<td>先更新，再判断末尾条件</td>
+<td>先处理 6，更新为 7，再由 <code>7 &lt;= 5</code> 为 false 离开</td>
+</tr>
+</tbody>
+</table>
+<p>初值为 1 时，三种写法都要在输出 5 后把状态更新为 6。<code>for</code> 和 <code>while</code> 接着判断 <code>6 &lt;= 5</code>；<code>do-while</code> 在本轮末尾判断同一个条件。正常结束一定能找到这次第一次为假的判断，不能在最后一次输出后直接说“循环结束”。</p>
+<h2 id="四个子课怎样衔接">四个子课怎样衔接</h2>
+<p>建议按表中顺序学习。每完成一课，都用“输出 1 到 5”重新走一遍，这样只改变控制位置，不会被新题目分散注意力。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">顺序</th>
+<th>子课与准确入口</th>
+<th>学完后的可观察结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">1</td>
+<td><a href="/gesp/level1/loop/for/#for-%E7%9A%84%E5%9B%9B%E4%B8%AA%E4%BD%8D%E7%BD%AE%E6%80%8E%E6%A0%B7%E9%85%8D%E5%90%88">for 循环：四个位置怎样配合</a></td>
+<td>能从初始化开始，按“判断、循环体、更新”追踪到第一次失败，并据此检查起点、终点和更新方向</td>
+</tr>
+<tr>
+<td style="text-align: right">2</td>
+<td><a href="/gesp/level1/loop/while/#%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%88%A4%E6%96%AD%E5%8F%AF%E8%83%BD%E7%9B%B4%E6%8E%A5%E5%A4%B1%E8%B4%A5">while 循环：第一次判断可能直接失败</a></td>
+<td>能说明为什么初始条件为假时执行 0 次，并确认循环体中的更新会让状态接近结束</td>
+</tr>
+<tr>
+<td style="text-align: right">3</td>
+<td><a href="/gesp/level1/loop/do-while/#%E5%88%9D%E5%A7%8B%E6%9D%A1%E4%BB%B6%E4%B8%8D%E6%88%90%E7%AB%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AC%A1">do-while 循环：初始条件不成立为什么仍执行一次</a></td>
+<td>能指出第一轮发生在首次判断之前，并用真实状态区分 0 次与至少 1 次</td>
+</tr>
+<tr>
+<td style="text-align: right">4</td>
+<td><a href="/gesp/level1/loop/break-continue/#%E5%90%8C%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%80%8E%E6%A0%B7%E5%BD%A2%E6%88%90%E4%B8%A4%E6%9D%A1%E7%89%B9%E6%AE%8A%E8%B7%AF%E5%BE%84">break 与 continue：同一程序的两条特殊路径</a></td>
+<td>能说清触发条件、被跳过或结束的语句、下一控制位置和最终输出</td>
+</tr>
+</tbody>
+</table>
+<p>学完四页后回到本页完成整章测试。子课可以直接访问，本页的推荐顺序只用于建立连续的理解路线，不是访问门槛。</p>
+<h2 id="先按题目特征选择入口">先按题目特征选择入口</h2>
+<p>不要因为三种循环能完成同一个输出，就认为它们在所有题目中都同样自然。先读题目怎样描述重复，再选择最容易核对的结构。</p>
+<table>
+<thead>
+<tr>
+<th>题目给出的线索</th>
+<th>优先考虑</th>
+<th>选择后立刻检查</th>
+<th>详细入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>起点、终点、次数或固定步长明确</td>
+<td><code>for</code></td>
+<td>两端是否包含，更新方向是否朝终点前进</td>
+<td><a href="/gesp/level1/loop/for/#%E6%80%8E%E6%A0%B7%E7%A1%AE%E5%AE%9A%E8%B5%B7%E7%82%B9%E7%BB%88%E7%82%B9%E5%92%8C%E6%9B%B4%E6%96%B0">怎样确定起点、终点和更新</a></td>
+</tr>
+<tr>
+<td>次数不容易预先算出，但“只要……就继续”的条件清楚</td>
+<td><code>while</code></td>
+<td>初始条件是否可能直接为假，所有能继续的路径是否更新状态</td>
+<td><a href="/gesp/level1/loop/while/#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%80%89%E6%8B%A9-while">什么时候选择 while</a></td>
+</tr>
+<tr>
+<td>每轮完成后才能知道是否继续，而且第一次任务必须发生</td>
+<td><code>do-while</code></td>
+<td>初值越界时先做一轮是否符合题意，末尾分号是否保留</td>
+<td><a href="/gesp/level1/loop/do-while/#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%80%82%E5%90%88-do-while">什么时候适合 do-while</a></td>
+</tr>
+<tr>
+<td>找到目标后不必继续，或某个特殊值本轮不处理</td>
+<td>在已有循环中加入 <code>break</code> 或 <code>continue</code></td>
+<td>是结束整个最近循环，还是只跳过本轮；下一步到底去哪</td>
+<td><a href="/gesp/level1/loop/break-continue/#continue-%E5%9C%A8%E4%B8%89%E7%A7%8D%E5%BE%AA%E7%8E%AF%E4%B8%AD%E5%88%86%E5%88%AB%E5%8E%BB%E5%93%AA%E9%87%8C">continue 在三种循环中的下一位置</a></td>
+</tr>
+</tbody>
+</table>
+<p><code>break</code> 和 <code>continue</code> 不是第四种循环。先选择 <code>for</code>、<code>while</code> 或 <code>do-while</code> 作为正常骨架，确实需要改变正常去向时再加入控制语句。</p>
+<h2 id="常见任务怎样找到子课">常见任务怎样找到子课</h2>
+<p>整章综合测试还会把循环用于累计、计数、求积、最值、枚举因数与质数、数位处理和简单过程模拟。本页不再给这些任务各写一套程序，只保留状态选择与学习入口。</p>
+<table>
+<thead>
+<tr>
+<th>任务类型</th>
+<th>需要保存的状态</th>
+<th>最合适的复习入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>累计、计数、求积或最值</td>
+<td>除循环变量外，还要保存“到目前为止的结果”</td>
+<td><a href="/gesp/level1/loop/for/#for-%E6%80%8E%E6%A0%B7%E6%9B%B4%E6%96%B0%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81">for 怎样更新任务状态</a></td>
+</tr>
+<tr>
+<td>枚举因数与质数</td>
+<td>当前候选、判断结果以及是否找到额外因数</td>
+<td><a href="/gesp/level1/loop/break-continue/#%E6%9E%9A%E4%B8%BE%E5%9B%A0%E6%95%B0%E4%B8%8E%E8%B4%A8%E6%95%B0">break 与 continue：枚举因数与质数</a></td>
+</tr>
+<tr>
+<td>十进制数位处理</td>
+<td>用工作副本逐位变化，必要时保留原输入</td>
+<td><a href="/gesp/level1/loop/while/#%E6%AC%A1%E6%95%B0%E4%B8%8D%E7%A1%AE%E5%AE%9A%E7%9A%84%E6%95%B0%E4%BD%8D%E5%A4%84%E7%90%86">while 的数位处理</a></td>
+</tr>
+<tr>
+<td>简单过程模拟</td>
+<td>题目中的状态、执行顺序以及到达目标的时机</td>
+<td><a href="/gesp/level1/loop/break-continue/#%E7%AE%80%E5%8D%95%E8%BF%87%E7%A8%8B%E6%A8%A1%E6%8B%9F">break 与 continue：简单过程模拟</a></td>
+</tr>
+</tbody>
+</table>
+<p>状态的初值必须符合任务含义：累计和与计数通常从 0 开始，求积从 1 开始，最大值或最小值要从第一个真实数据开始。详细原因和过程放在 <code>for</code> 子课；做综合测试时，先确认自己保存的是循环位置还是任务结果，不要让一个变量同时承担两种职责。</p>
+<h2 id="怎样验证一个循环">怎样验证一个循环</h2>
+<p>循环的输出正确一次，还不能证明边界和停止路径都正确。至少准备下面四类检查：</p>
+<table>
+<thead>
+<tr>
+<th>检查</th>
+<th>要记录的事实</th>
+<th>能发现的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一次执行</td>
+<td>初始值、第一次条件的实际值、是否进入循环体</td>
+<td>初值或判断位置错误</td>
+</tr>
+<tr>
+<td>终点附近</td>
+<td>终点值是否处理，更新后的下一个值是什么</td>
+<td><code>&lt;</code> 与 <code>&lt;=</code> 混淆，多一轮或少一轮</td>
+</tr>
+<tr>
+<td>第一次失败</td>
+<td>条件为什么第一次成为 false，离开后去哪</td>
+<td>只会输出，不会解释停止</td>
+</tr>
+<tr>
+<td>特殊路径</td>
+<td><code>break</code> 或 <code>continue</code> 是否触发，跳过了什么，下一步去哪</td>
+<td>把结束循环和跳过本轮混为一谈</td>
+</tr>
+</tbody>
+</table>
+<p>若循环可能不停止，不要故意运行。先在纸上写出连续两轮的状态：更新后没有变化，或变化方向让条件更难成为 false，就应先修正代码。实际运行时，再把预期输出与程序输出逐项对照；输出相同但停止原因不同，也要分别记录。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>大主题</th>
+<th>先问自己的问题</th>
+<th>详细入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>for</code> 的固定范围</td>
+<td>起点、终点和更新是否描述同一个范围</td>
+<td><a href="/gesp/level1/loop/for/#%E8%BE%93%E5%87%BA-1-%E5%88%B0-5">for 循环</a></td>
+</tr>
+<tr>
+<td><code>while</code> 的状态条件</td>
+<td>第一次能否进入，循环体内哪条语句改变条件所用状态</td>
+<td><a href="/gesp/level1/loop/while/#%E5%9B%9B%E9%A1%B9%E8%81%8C%E8%B4%A3%E5%88%86%E5%BC%80%E6%94%BE%E5%9C%A8%E5%93%AA%E9%87%8C">while 循环</a></td>
+</tr>
+<tr>
+<td><code>do-while</code> 的后判断</td>
+<td>第一轮为什么必定发生，末尾条件使用哪个更新后的值</td>
+<td><a href="/gesp/level1/loop/do-while/#%E4%B8%89%E7%A7%8D%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%88%A4%E6%96%AD%E4%BD%8D%E7%BD%AE">do-while 循环</a></td>
+</tr>
+<tr>
+<td><code>break</code> 与 <code>continue</code></td>
+<td>当前语句结束了什么、跳过了什么、下一步到哪里</td>
+<td><a href="/gesp/level1/loop/break-continue/#break-%E4%B8%8E-continue-%E7%9A%84%E6%9C%80%E8%BF%91%E4%B8%80%E5%B1%82%E8%BE%B9%E7%95%8C">循环控制</a></td>
+</tr>
+<tr>
+<td>循环验证</td>
+<td>首次判断、边界、更新、失败条件与特殊路径是否都有证据</td>
+<td>本页“怎样验证一个循环”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常见错误">常见错误</h2>
+<ol>
+<li>看到重复就立刻写循环，没有先确定初始状态、继续条件、本轮任务和更新。</li>
+<li>只凭“次数多或少”选择结构，没有看题目给的是固定范围、状态条件还是至少一次要求。</li>
+<li>更新没有改变条件使用的变量，或更新方向让状态离停止边界越来越远。</li>
+<li>过程只写成功轮次，漏掉正常结束时条件第一次为假的判断。</li>
+<li>把 <code>do-while</code> 当成先判断，错误地认为初始条件为假时执行 0 次。</li>
+<li>把 <code>break</code> 当成跳过本轮，或把 <code>continue</code> 当成结束整个循环。</li>
+<li>只测试一个普通数据，没有覆盖零次、终点、首次失败和特殊控制路径。</li>
+</ol>
+<p>具体语法、完整程序和逐轮状态表都在四个子课中。本页只负责选择、连接和验证，不把同一份叶子课内容再讲一遍。</p>
+<h2 id="本章边界与关联学习">本章边界与关联学习</h2>
+<p><a href="/gesp/level1/branch/">分支结构</a>提供了循环条件和循环体内的选择路线。本章在它的基础上学习单层循环、常见状态更新以及 <code>break</code>、<code>continue</code> 的基本去向；复杂嵌套循环、数组配合和新的算法方法暂不展开。</p>
+<p>整章测试会检查三种循环、边界、状态更新、控制语句和一级常见应用。遇到某个语法或过程不确定时，先从上面的深链回到对应子课，再回来完成综合测试。</p>
+<section aria-labelledby="related-knowledge-loop"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-loop" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/branch/" class="astro-mkwt4ymd">分支结构</a></li></ul></section>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp9.html">← 上一个：分支结构</a>

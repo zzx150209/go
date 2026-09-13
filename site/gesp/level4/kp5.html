@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,25 +449,18 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>struct 把不同类型的数据组合成一个新类型，如学生（姓名、年龄、成绩）。</li><li>定义结构体后，可以声明变量、数组和指针。</li><li>访问成员用 .（结构体变量）或 -&gt;（结构体指针）。</li><li>结构体数组适合存储多条记录，如全班学生信息。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">结构体把同一个对象的不同类型数据组合在一起。例如管理学生、图书或比赛记录时，可以把姓名、编号和成绩等相关数据放进一个整体。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">结构体先定义“一个对象有哪些字段”，再创建对象；对象用点访问成员，结构体指针用箭头访问成员。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">struct Student { // 开始定义学生这种新类型
+    string name; // 声明姓名成员
+    int score; // 声明分数成员
+}; // 结束类型定义，分号不可省略</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">Student student = {&quot;Alice&quot;, 90}; // 按成员声明顺序创建并初始化对象
+cout &lt;&lt; student.score; // 用点运算符读取该对象的 score 成员</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">定义结构体后忘记创建对象</li><li class="astro-e22r5uwj">对象使用 -&gt; 或指针使用 .</li><li class="astro-e22r5uwj">大括号初始化顺序与成员声明顺序不一致</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：把同一对象的相关字段组织成类型；沿“对象/下标—成员”准确访问数据；理解结构体对象、数组、指针和函数参数在内存中的关系。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">一份学生档案不能只放一个整数：它还要记录姓名、年龄和成绩。结构体像一个贴好字段标签的档案袋，把属于同一对象的不同数据装在一起。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握结构体类型和对象的定义、成员访问、结构体数组、结构体指针、嵌套结构以及结构体参数的基本使用。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 定义类型与对象</h2><p class="astro-e22r5uwj">`struct Student { ... };` 定义的是一种新类型，说明每名学生对象包含哪些成员；它像统一的档案格式，本身还不是某名学生的数据。右大括号后的分号属于类型定义，不能省略。</p><p class="astro-e22r5uwj">写 `Student student;` 才创建具体对象。两个 Student 对象会分别拥有自己的 name 和 score，修改一个对象的成员不会自动改变另一个对象。</p><p class="astro-e22r5uwj">一个结构体对象要为所有成员保存数据，但 `sizeof(Student)` 不保证等于各成员 sizeof 的简单相加：编译器可能为对齐加入填充，不同平台、编译器和标准库实现也可能不同。需要真实字节数时在目标环境使用 sizeof 实测，不背固定结论。</p><pre class="astro-e22r5uwj"><code class="language-cpp">struct Student { // 定义一种包含姓名与分数的新类型
+    string name; // 每个 Student 对象各自拥有一个姓名成员
+    int score; // 每个 Student 对象各自拥有一个分数成员
+}; // 完成类型定义，末尾必须写分号
 
-    <div class="kp-code"><pre>struct Student {
-    string name;
-    int age;
-    double score;
-};
-
-Student s;
-cin &gt;&gt; s.name &gt;&gt; s.age &gt;&gt; s.score;
-
-Student cls[50];
-for (int i = 0; i &lt; n; i++) {
-    cin &gt;&gt; cls[i].name &gt;&gt; cls[i].score;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>结构体定义末尾的分号不能漏。</li><li>结构体可以嵌套，如学生里包含出生日期结构体。</li></ul>
+Student student; // 根据 Student 类型创建一个具体对象</code></pre><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp4.html">← 上一个：引用与参数传递</a>

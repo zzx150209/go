@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,23 +449,12 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>任何大于 1 的整数都可以唯一分解为素数的乘积：n = p1^e1 × p2^e2 × ...。</li><li>分解方法：从最小素数开始试除，记录每个素因子的指数。</li><li>约数个数：(e1+1)(e2+1)...，每个质因子可取 0 到 ei 次。</li><li>约数和：(1+p1+...+p1^e1)(1+p2+...+p2^e2)...。</li></ul>
-
-    <div class="kp-code"><pre>map&lt;int,int&gt; factorize(int n) {
-    map&lt;int,int&gt; factors;
-    for (int i = 2; i*i &lt;= n; i++) {
-        while (n % i == 0) {
-            factors[i]++;
-            n /= i;
-        }
-    }
-    if (n &gt; 1) factors[n]++;
-    return factors;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>试除到 √n，如果最后 n&gt;1 说明 n 本身是素数。</li><li>约数个数可能很大，用 long long。</li></ul>
+    <article class="article-body">
+    <article id="top"><p>一个整数可以有许多乘法拆法，但继续拆到质数并合并相同质因数后，会得到唯一的标准形式。本课从 360 的具体拆分出发，推导升序试除、重复相除和最后剩余因子的处理规则。得到各质因数的指数后，还能直接计算约数个数，并理解约数和与完全平方数等基础应用。</p><section class="uf-quick-card" aria-labelledby="本课先记住"><h2 id="本课先记住">本课先记住</h2><div class="uf-quick-card__grid"><div class="uf-quick-card__core"><h3>核心结论</h3><p>每个大于 1 的正整数，都能唯一分解为素数幂的乘积（不计排列顺序）。</p><p class="uf-quick-card__formula">360 = 2<sup>3</sup> × 3<sup>2</sup> × 5</p></div><div class="uf-quick-card__syntax"><h3>常用语法</h3><p>用 <code>while</code> 除尽同一质因数。</p><pre><code>while (n % p == 0) {
+    n = n / p;
+    count++;
+}</code></pre><p class="uf-quick-card__caption">p 是当前试除因子；count 提前设为 0，用来累计它的指数。</p></div><div class="uf-quick-card__example"><h3>最小示例</h3><p class="uf-quick-card__small-formula">12 = 2<sup>2</sup> × 3</p><p>指数是 2 和 1。</p><p>约数个数：<br>(2 + 1) × (1 + 1) = <strong>6</strong></p></div><div class="uf-quick-card__warning"><h3>关键易错点</h3><ul><li>同一质因数要连续除尽。</li><li>循环后别漏掉剩余的大质因数。</li><li>约数个数是“指数加一”后相乘。</li></ul></div></div></section><details class="uf-mobile-toc"><summary>本页目录 <span>定位知识、例题与自测</span></summary></details><section aria-labelledby="01-唯一分解定理"><h2 id="01-唯一分解定理" class="astro-2i3ys3wc">01 唯一分解定理</h2><p class="astro-2i3ys3wc">先看 360：它可以写成 36×10，也可以写成 8×45。把这些合数继续拆开并合并相同质因数，都会整理成 360=2³×3²×5。</p><p class="astro-2i3ys3wc">唯一分解定理准确地说：每个大于 1 的整数都能写成 n=p₁^a₁×p₂^a₂×…×pₖ^aₖ，其中 p₁&lt;p₂&lt;…&lt;pₖ 是互不相同的质数，a₁、a₂、…、aₖ 是正整数；这样的质数和指数唯一。“唯一”忽略乘法因子的书写顺序，但不允许把 4、9 等合数留作底数。</p><p class="astro-2i3ys3wc">1 不在定理“大于 1”的范围内。1 没有质因数，后面会把它作为单独边界处理。</p><div><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>有人沿着 360=36×10 分解，另一个人沿着 360=8×45 分解，他们最后会不会得到不同答案？</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">沿 36×10 拆：36=2²×3²，10=2×5，合并后是 2³×3²×5。</li><li class="astro-2i3ys3wc">沿 8×45 拆：8=2³，45=3²×5，合并后仍是 2³×3²×5。</li><li class="astro-2i3ys3wc">两条路径的先后顺序不同，但只要继续拆到质数、合并相同质数并按升序整理，质数底数和指数就完全相同。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>算术基本定理保证：每个大于 1 的整数都能写成质数幂的乘积，而且除因子排列顺序外，这种写法唯一。</p><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp3.html">← 上一个：素数筛法</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,590 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>硬件是计算机的实体部分，包括 CPU、内存、硬盘、主板、输入输出设备等，看得见摸得着。</li><li>软件是指挥硬件工作的程序和数据，分为系统软件（操作系统）和应用软件（浏览器、编辑器等）。</li><li>CPU 负责运算和控制，内存临时保存正在运行的程序和数据，硬盘长期保存文件。</li><li>输入设备把外部信息送入计算机（键盘、鼠标、麦克风），输出设备把结果呈现出来（显示器、打印机、扬声器）。</li><li>计算机内部用二进制（0 和 1）表示所有信息，因为电子元件只有通电和断电两种稳定状态。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>触摸屏既是输入设备也是输出设备，判断时看信息流向。</li><li>改文件扩展名不会改变文件内容，.cpp 源文件必须编译后才能运行。</li></ul>
+    <article class="article-body">
+    <h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 计算机系统依靠硬件和软件共同完成信息的输入、存储、处理与输出；判断设备职责时要看信息流向，判断文件身份时要看内容和用途。</li>
+<li><strong>常用判断：</strong> 用“CPU 负责处理、内存临时保存、外部存储长期保存”区分核心部件；用箭头方向区分输入与输出；用路径定位文件所在位置。</li>
+<li><strong>最小示例：</strong> 键盘输入数据 → 程序装入内存并由 CPU 执行 → 屏幕输出结果；保存的 <code>.cpp</code> 源文件仍需编译才能得到可执行程序。</li>
+<li><strong>关键易错点：</strong> 改扩展名不会改变文件内容，程序也不是一直直接在硬盘上运行；触摸屏等设备还可能同时承担输入和输出。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>计算机不只是桌面上的主机和显示器。手机、自助挂号机、汽车导航和学校成绩系统也在接收、保存、处理和输出信息。要看懂它们怎样工作，可以先记住一条主线：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">外部信息 → 输入 → 存储与处理 → 输出 → 外部</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>本页对应 GESP C++ 一级大纲中的“计算机基础知识”，重点回答六个问题：</p>
+<ol>
+<li>计算机为什么从专门的计算工具发展成了通用信息处理工具？</li>
+<li>硬件和软件怎样配合，CPU、内存和硬盘各做什么？</li>
+<li>怎样根据信息流向判断输入设备和输出设备？</li>
+<li>为什么计算机内部使用 0 和 1 表示信息？</li>
+<li>操作系统与普通应用软件有什么区别？</li>
+<li>文件、目录、路径和扩展名分别说明什么？</li>
+</ol>
+<p>这是一页纯概念知识，不需要用 C++ 程序来证明。后文会用一个贯穿场景把概念落到具体过程：<code>answer.cpp</code> 保存在磁盘中；编译后得到可执行程序；运行时，可执行程序被装入内存，CPU 执行指令，键盘提供输入，屏幕显示输出。一级不学习硬件电路、复杂进制转换或操作系统内部算法。</p>
+<h2 id="01-计算机的发展与应用">01 计算机的发展与应用</h2>
+<h3 id="从计算数字到处理信息">从“计算数字”到“处理信息”</h3>
+<p>早期电子计算机体积大、耗电多，主要承担科学计算等专门任务。随着电子器件变小、速度提高、成本下降，计算机逐渐进入学校、家庭、医院、工厂和交通系统。它能处理的内容也从数字扩展到文字、图片、声音和网络数据。</p>
+<p>按主要电子器件粗略划分，可以看到这样的变化：</p>
+<table>
+<thead>
+<tr>
+<th>大致阶段</th>
+<th>主要电子器件或形态</th>
+<th>带来的变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>早期电子计算机</td>
+<td>电子管</td>
+<td>机器庞大、耗电高，主要处理专门计算</td>
+</tr>
+<tr>
+<td>晶体管计算机</td>
+<td>晶体管</td>
+<td>体积缩小，可靠性和速度提高</td>
+</tr>
+<tr>
+<td>集成电路计算机</td>
+<td>集成电路</td>
+<td>更多元件集中到芯片中，应用范围扩大</td>
+</tr>
+<tr>
+<td>微处理器与网络时代</td>
+<td>大规模、超大规模集成电路</td>
+<td>个人计算机、移动设备和网络服务普及</td>
+</tr>
+</tbody>
+</table>
+<p>1946 年公开运行的 ENIAC 是著名的早期电子数字计算机。一级不要求背诵大量年份或机器型号，理解发展方向更重要：电子器件越来越小，处理速度和可靠性不断提高，计算机能承担的任务也越来越多。</p>
+<h3 id="判断计算机应用要看信息过程">判断“计算机应用”要看信息过程</h3>
+<p>医院自助挂号机的外形不像普通台式电脑，但它会完成下面的工作：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">顺序</th>
+<th>正在发生的事情</th>
+<th>信息处理作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">1</td>
+<td>读取证件，接收患者选择的科室</td>
+<td>输入</td>
+</tr>
+<tr>
+<td style="text-align: right">2</td>
+<td>查找科室和号源</td>
+<td>处理</td>
+</tr>
+<tr>
+<td style="text-align: right">3</td>
+<td>保存挂号结果</td>
+<td>存储</td>
+</tr>
+<tr>
+<td style="text-align: right">4</td>
+<td>显示结果并打印凭条</td>
+<td>输出</td>
+</tr>
+</tbody>
+</table>
+<p>它能按照程序自动完成一组信息处理任务，因此属于计算机应用。判断时不要只看设备有没有键盘、机箱或大屏幕，要看它是否在程序控制下接收、保存、处理或输出信息。</p>
+<p>学校成绩系统、导航软件和工厂自动控制也遵循相同思路。它们的任务不同，处理的信息不同，但都离不开“输入—存储与处理—输出”这条主线。</p>
+<h2 id="02-计算机的组成">02 计算机的组成</h2>
+<h3 id="计算机系统需要硬件和软件共同工作">计算机系统需要硬件和软件共同工作</h3>
+<p><strong>硬件</strong>是组成计算机的实体设备，能看见或触摸到；<strong>软件</strong>是指挥硬件完成任务的程序和相关数据。只有硬件没有软件，设备不知道要完成什么任务；只有软件没有硬件，程序也没有实际运行的地方。</p>
+<p>计算机硬件常按五种基本作用来认识：</p>
+<table>
+<thead>
+<tr>
+<th>基本组成</th>
+<th>主要作用</th>
+<th>常见例子或位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运算器</td>
+<td>完成算术运算和逻辑判断</td>
+<td>CPU 内部的重要部分</td>
+</tr>
+<tr>
+<td>控制器</td>
+<td>控制指令按要求执行</td>
+<td>CPU 内部的重要部分</td>
+</tr>
+<tr>
+<td>存储器</td>
+<td>保存程序和数据</td>
+<td>内存、硬盘、固态硬盘</td>
+</tr>
+<tr>
+<td>输入设备</td>
+<td>把外部信息送进计算机</td>
+<td>键盘、鼠标、麦克风</td>
+</tr>
+<tr>
+<td>输出设备</td>
+<td>把处理结果送到外部</td>
+<td>显示器、扬声器、打印机</td>
+</tr>
+</tbody>
+</table>
+<p>CPU，也就是中央处理器，通常包含运算器和控制器。它负责取出并执行程序指令、完成主要运算和控制工作。CPU 很重要，但它不是整台计算机，也不负责长期保存所有文件。</p>
+<h3 id="cpu内存和外部存储各有职责">CPU、内存和外部存储各有职责</h3>
+<p>“存储器”是一个大类。一级最容易混淆的是内存与硬盘、固态硬盘等外部存储设备：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>内存</th>
+<th>硬盘、固态硬盘等外部存储</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主要用途</td>
+<td>暂时放置正在运行的程序和数据</td>
+<td>长期保存文件和程序</td>
+</tr>
+<tr>
+<td>断电后的常见情况</td>
+<td>内容通常丢失</td>
+<td>已保存内容通常仍在</td>
+</tr>
+<tr>
+<td>与运行的关系</td>
+<td>CPU 执行程序时会频繁读取内存中的指令和数据</td>
+<td>程序运行前通常先从这里加载到内存</td>
+</tr>
+<tr>
+<td>能否代替 CPU 运算</td>
+<td>不能</td>
+<td>不能</td>
+</tr>
+</tbody>
+</table>
+<p>“电脑有 16 GB 内存”和“电脑有 1 TB 固态硬盘”说的是两种不同的存储用途。内存像运行时展开材料的工作台，外部存储像长期存放材料的文件柜；这个比喻只帮助区分职责，不表示它们的内部结构真的相同。</p>
+<h3 id="一个程序真正怎样运行">一个程序真正怎样运行</h3>
+<p>假设磁盘中已经保存了源文件 <code>answer.cpp</code>，编译后得到了可执行程序。运行时会经历下面的过程：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">步骤</th>
+<th>发生的事情</th>
+<th>主要负责者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">1</td>
+<td><code>answer.cpp</code> 和编译得到的可执行程序保存在磁盘中</td>
+<td>外部存储设备</td>
+</tr>
+<tr>
+<td style="text-align: right">2</td>
+<td>操作系统把可执行程序和运行需要的数据装入内存</td>
+<td>操作系统、内存</td>
+</tr>
+<tr>
+<td style="text-align: right">3</td>
+<td>CPU 从内存中取得指令和数据</td>
+<td>CPU、内存</td>
+</tr>
+<tr>
+<td style="text-align: right">4</td>
+<td>CPU 按指令完成计算或判断，结果暂时放回内存</td>
+<td>CPU、内存</td>
+</tr>
+<tr>
+<td style="text-align: right">5</td>
+<td>结果通过显示器等设备交给用户</td>
+<td>输出设备</td>
+</tr>
+</tbody>
+</table>
+<p>源文件里保存的是人写的 C++ 代码，可执行程序才是编译后供计算机运行的程序。程序也不是一直直接在硬盘上执行：运行前通常要先装入内存，再由 CPU 取出指令并执行。</p>
+<p>可以用三个问题检查自己有没有混淆：谁负责执行和运算？CPU。谁暂时保存正在运行的程序和数据？内存。谁适合在断电后继续保存文件？硬盘、固态硬盘等外部存储设备。</p>
+<h2 id="03-输入设备与输出设备">03 输入设备与输出设备</h2>
+<h3 id="以计算机为中心看信息方向">以计算机为中心看信息方向</h3>
+<p>设备的名称和外形不一定能直接说明类别。更可靠的方法是先把“计算机系统”放在中间，再画信息箭头：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">外部世界 ──信息进入──&gt; 计算机    输入</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">外部世界 &lt;──信息离开── 计算机    输出</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>信息怎样流动</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>键盘</td>
+<td>按键内容进入计算机</td>
+<td>输入设备</td>
+</tr>
+<tr>
+<td>鼠标</td>
+<td>移动和点击信息进入计算机</td>
+<td>输入设备</td>
+</tr>
+<tr>
+<td>麦克风</td>
+<td>声音进入计算机</td>
+<td>输入设备</td>
+</tr>
+<tr>
+<td>扫描仪</td>
+<td>纸面图像进入计算机</td>
+<td>输入设备</td>
+</tr>
+<tr>
+<td>显示器</td>
+<td>图像从计算机送给用户</td>
+<td>输出设备</td>
+</tr>
+<tr>
+<td>扬声器</td>
+<td>声音从计算机送给用户</td>
+<td>输出设备</td>
+</tr>
+<tr>
+<td>打印机</td>
+<td>文字或图像从计算机送到纸上</td>
+<td>输出设备</td>
+</tr>
+</tbody>
+</table>
+<p>这也解释了综合测试中的判断：麦克风负责采集声音，信息方向是“外部到计算机”，所以它不是输出设备。</p>
+<h3 id="同一设备可能承担两种作用">同一设备可能承担两种作用</h3>
+<p>触摸屏显示题目时，信息从计算机到用户，是输出；学生点击答案时，触摸位置进入计算机，是输入。同一块触摸屏可以同时具有输入和输出功能。</p>
+<p>多功能打印机也要按具体动作判断：扫描纸张时承担输入，打印文件时承担输出。题目只描述其中一步，就按照这一步的信息流向作答。</p>
+<p>硬盘负责存储，不要因为它既能读取又能写入，就在“计算机五大组成”的题目中机械地归为输入或输出设备。先看题目采用的是哪种分类标准，再根据设备在该过程中的主要职责判断。</p>
+<h2 id="04-信息表示与二进制">04 信息表示与二进制</h2>
+<h3 id="为什么使用-0-和-1">为什么使用 0 和 1</h3>
+<p>计算机的电子器件适合区分两种稳定状态。人们用 <code>0</code> 和 <code>1</code> 表示这两种状态，并规定怎样把它们组合起来表示数字、文字、图片和声音。二进制中的每一位只能是 0 或 1；这样的一个二进制位常称为一个“位”。</p>
+<p>这并不表示计算机只会处理数字 0 和 1。屏幕上的汉字、照片中的颜色和扬声器播放的声音，都会按照相应规则转换成二进制数据，再由计算机保存和处理。不同类型的信息使用不同的表示规则，具体编码方法会在后续知识中学习。</p>
+<h3 id="相同字符不一定表示相同数值">相同字符不一定表示相同数值</h3>
+<p>二进制采用“逢二进一”。例如二进制 <code>101</code> 可以按位置拆开：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">二进制 101 = 1 × 4 + 0 × 2 + 1 × 1 = 十进制 5</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>二进制 <code>101</code> 与十进制 <code>101</code> 看起来都由字符 1、0、1 组成，数值却不同：前者表示十进制 5，后者表示一百零一。因此，读一个数时除了看写了哪些数字，还要确认它采用什么进制。</p>
+<p>一级只要求理解二进制由 0 和 1 组成，并能看懂这种简单的位置意义，不需要进行复杂进制转换。遇到 <code>10201</code> 这样的写法，可以立刻判断它不是合法的二进制数，因为其中出现了数字 2。</p>
+<h2 id="05-软件与操作系统">05 软件与操作系统</h2>
+<h3 id="系统软件与应用软件解决的问题不同">系统软件与应用软件解决的问题不同</h3>
+<p>软件让硬件按照确定的步骤完成任务。按主要用途，可以先分成两类：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>主要职责</th>
+<th>常见例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统软件</td>
+<td>管理计算机资源，为其他软件提供运行环境</td>
+<td>Windows、Linux 等操作系统</td>
+</tr>
+<tr>
+<td>应用软件</td>
+<td>帮助用户完成某项具体任务</td>
+<td>浏览器、文字处理软件、编程 IDE、游戏</td>
+</tr>
+</tbody>
+</table>
+<p>操作系统属于系统软件。它不是输入设备、输出设备或编程语言。浏览器和 IDE 虽然功能很多，仍然是帮助用户完成具体任务的应用软件。</p>
+<h3 id="操作系统站在应用与硬件之间">操作系统站在应用与硬件之间</h3>
+<p>双击浏览器图标后，并不是浏览器自己直接接管整台计算机。操作系统先找到程序文件，把运行所需内容装入内存，分配处理时间，管理窗口和设备；浏览器再完成打开网页、显示内容等具体任务。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">用户操作 → 应用软件 → 操作系统 → 硬件</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<table>
+<thead>
+<tr>
+<th>操作系统承担的工作</th>
+<th>在实际使用中的表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管理文件和目录</td>
+<td>创建、复制、移动、重命名和删除文件</td>
+</tr>
+<tr>
+<td>管理程序</td>
+<td>启动程序、安排运行、结束无响应程序</td>
+</tr>
+<tr>
+<td>管理内存</td>
+<td>为正在运行的程序分配和回收空间</td>
+</tr>
+<tr>
+<td>管理设备</td>
+<td>让键盘、鼠标、显示器等能被程序使用</td>
+</tr>
+</tbody>
+</table>
+<p>判断软件类别时，可以问：“它主要是在管理整台计算机的共同资源，还是在帮助用户完成某项具体任务？”前者通常属于系统软件，后者通常属于应用软件。</p>
+<h2 id="06-文件目录与扩展名">06 文件、目录与扩展名</h2>
+<h3 id="文件保存内容目录组织文件路径说明位置">文件保存内容，目录组织文件，路径说明位置</h3>
+<p>这三个概念解决的是不同问题：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>回答的问题</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件</td>
+<td>保存的内容是什么</td>
+<td><code>answer.cpp</code></td>
+</tr>
+<tr>
+<td>目录（文件夹）</td>
+<td>文件放在哪一组中</td>
+<td><code>gesp</code> 文件夹</td>
+</tr>
+<tr>
+<td>路径</td>
+<td>怎样找到这个文件</td>
+<td><code>D:\gesp\answer.cpp</code></td>
+</tr>
+</tbody>
+</table>
+<p>在路径 <code>D:\gesp\answer.cpp</code> 中：</p>
+<ul>
+<li><code>D:</code> 表示盘符；</li>
+<li><code>gesp</code> 是目录名；</li>
+<li><code>answer.cpp</code> 是文件名；</li>
+<li><code>.cpp</code> 是扩展名，<code>answer</code> 是扩展名前的主文件名。</li>
+</ul>
+<p>目录本身不是一份源代码，路径也不是文件内容。路径只是对位置的描述，就像地址帮助我们找到房间，但地址本身不是房间里的物品。</p>
+<h3 id="扩展名是线索不是变身开关">扩展名是线索，不是“变身开关”</h3>
+<table>
+<thead>
+<tr>
+<th>扩展名</th>
+<th>常见含义</th>
+<th>里面通常保存什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.cpp</code></td>
+<td>C++ 源代码文件</td>
+<td>人能阅读和编辑的 C++ 代码文字</td>
+</tr>
+<tr>
+<td><code>.exe</code></td>
+<td>Windows 中常见的可执行文件</td>
+<td>编译后可由系统加载运行的程序</td>
+</tr>
+<tr>
+<td><code>.txt</code></td>
+<td>文本文件</td>
+<td>普通文字</td>
+</tr>
+<tr>
+<td><code>.png</code></td>
+<td>图片文件</td>
+<td>按 PNG 格式组织的图像数据</td>
+</tr>
+</tbody>
+</table>
+<p>扩展名能帮助操作系统和用户判断文件类型，但改名不会自动改变文件内部的数据。把 <code>notes.txt</code> 改成 <code>notes.cpp</code>，里面仍然是原来的文字；只有内容符合 C++ 语法，编译器才可能把它当作正确源代码处理。把图片改名为 <code>.txt</code>，也不会让图片内容自动变成文章。</p>
+<h3 id="c-源文件与可执行程序不是同一个文件">C++ 源文件与可执行程序不是同一个文件</h3>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>C++ 源文件</th>
+<th>可执行程序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常见名称</td>
+<td><code>answer.cpp</code></td>
+<td>Windows 中常见 <code>answer.exe</code></td>
+</tr>
+<tr>
+<td>内容作用</td>
+<td>保存程序员写的 C++ 代码</td>
+<td>保存编译后供计算机运行的程序</td>
+</tr>
+<tr>
+<td>主要操作</td>
+<td>阅读、编辑、保存、编译</td>
+<td>由操作系统加载并运行</td>
+</tr>
+<tr>
+<td>修改后怎样生效</td>
+<td>修改源文件后需要重新编译</td>
+<td>运行的是最近一次成功生成的版本</td>
+</tr>
+</tbody>
+</table>
+<p>在 Windows 中，可执行文件常用 <code>.exe</code>；在 Linux 中，可执行文件不一定有固定扩展名，所以不能把“所有可执行程序都必须以 <code>.exe</code> 结尾”当成通用规则。</p>
+<p>还有一个常见现象：你改了 <code>answer.cpp</code>，却没有保存或重新编译，运行结果仍然和以前一样。原因是旧的可执行程序没有自动变成新版本。下一页“集成开发环境”会继续讲编辑、保存、编译和运行之间的区别。</p>
+<h2 id="判断计算机基础概念的统一顺序">判断计算机基础概念的统一顺序</h2>
+<p>概念题看起来很零散，其实可以按下面的顺序逐步判断：</p>
+<ol>
+<li><strong>先找信息方向。</strong> 外部信息进入计算机是输入，计算机把结果送到外部是输出。</li>
+<li><strong>再找当前职责。</strong> 执行和运算看 CPU，运行时临时保存看内存，长期保存文件看硬盘等外部存储。</li>
+<li><strong>检查软件在管什么。</strong> 管理硬件、文件和程序的是操作系统；完成浏览网页、编辑代码等具体任务的是应用软件。</li>
+<li><strong>确认对象和位置。</strong> 文件保存内容，目录组织文件，路径描述位置，扩展名提示常见类型。</li>
+<li><strong>最后检查表示规则。</strong> 二进制只能出现 0 和 1；同样的字符采用不同进制时，数值可能不同。</li>
+</ol>
+<p>遇到陌生设备或新场景时，不必死记名称。把题目中的动作放回这五步，通常就能找到判断依据。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>查询词</th>
+<th>直接结论</th>
+<th>最快自查方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机应用</td>
+<td>在程序控制下接收、保存、处理或输出信息</td>
+<td>找完整的信息处理过程</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>主要负责执行指令和运算</td>
+<td>问“谁在处理”</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>临时保存正在运行的程序和数据</td>
+<td>问“断电后通常还在不在”</td>
+</tr>
+<tr>
+<td>外部存储</td>
+<td>适合长期保存文件</td>
+<td>找硬盘、固态硬盘等设备</td>
+</tr>
+<tr>
+<td>输入设备</td>
+<td>把外部信息送进计算机</td>
+<td>画指向计算机的箭头</td>
+</tr>
+<tr>
+<td>输出设备</td>
+<td>把结果送到外部</td>
+<td>画离开计算机的箭头</td>
+</tr>
+<tr>
+<td>操作系统</td>
+<td>管理硬件、文件和程序</td>
+<td>区分“管理资源”和“完成任务”</td>
+</tr>
+<tr>
+<td>二进制</td>
+<td>每一位只能是 0 或 1</td>
+<td>检查是否出现其他数字</td>
+</tr>
+<tr>
+<td>路径</td>
+<td>描述文件或目录的位置</td>
+<td>逐段找到盘符、目录和文件名</td>
+</tr>
+<tr>
+<td><code>.cpp</code></td>
+<td>C++ 源代码文件</td>
+<td>与编译后的可执行程序分开</td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<p>一名学生在 Windows 电脑上完成下面的操作：</p>
+<ol>
+<li>在 IDE 中编辑 <code>D:\gesp\answer.cpp</code> 并保存；</li>
+<li>编译后得到 <code>answer.exe</code>；</li>
+<li>运行程序，用键盘输入数据；</li>
+<li>程序完成处理，并把结果显示在屏幕上。</li>
+</ol>
+<p>请判断每一步涉及的主要概念。</p>
+<h3 id="先沿过程找证据">先沿过程找证据</h3>
+<table>
+<thead>
+<tr>
+<th>场景线索</th>
+<th>判断</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>D:\gesp\answer.cpp</code></td>
+<td>路径指向一个 C++ 源文件</td>
+<td><code>D:</code> 是盘符，<code>gesp</code> 是目录，<code>.cpp</code> 提示源文件类型</td>
+</tr>
+<tr>
+<td>点击“保存”</td>
+<td>文件内容被写入外部存储</td>
+<td>需要在断电后继续保留</td>
+</tr>
+<tr>
+<td>得到 <code>answer.exe</code></td>
+<td>产生 Windows 中常见的可执行文件</td>
+<td>它与人编辑的 <code>.cpp</code> 源文件职责不同</td>
+</tr>
+<tr>
+<td>运行 <code>answer.exe</code></td>
+<td>程序先装入内存，再由 CPU 执行</td>
+<td>内存提供运行空间，CPU 负责指令和运算</td>
+</tr>
+<tr>
+<td>键盘输入数据</td>
+<td>输入</td>
+<td>信息从学生进入计算机</td>
+</tr>
+<tr>
+<td>屏幕显示结果</td>
+<td>输出</td>
+<td>信息从计算机送给学生</td>
+</tr>
+<tr>
+<td>分配内存、管理文件和设备</td>
+<td>操作系统的工作</td>
+<td>这些是整台计算机的共同资源</td>
+</tr>
+</tbody>
+</table>
+<h3 id="再换条件验证">再换条件验证</h3>
+<ul>
+<li>把键盘换成麦克风，仍然是输入，因为信息方向没有变。</li>
+<li>把显示器换成扬声器，仍然是输出，因为结果仍由计算机送向外部。</li>
+<li>关闭电脑后，已经保存的 <code>answer.cpp</code> 通常仍在磁盘中；运行时没有另行保存的内存数据通常会丢失。</li>
+<li>只把 <code>answer.cpp</code> 改名为 <code>answer.exe</code>，不会得到真正的可执行程序，因为改名没有改变文件内部内容。</li>
+</ul>
+<p>这个例子可以同时核对硬件职责、输入输出方向、操作系统作用和文件身份。判断依据来自实际过程，不依赖设备名称的死记。</p>
+<h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
+<p>观察“手机语音助手回答天气”这一过程，先按“输入 → 处理/存储 → 输出”填写三步：麦克风接收语音属于输入，程序和 CPU 完成识别与查询属于处理，扬声器播报属于输出。再判断查询结果若要下次继续使用，应保存到内存还是外部存储。</p>
+<p><strong>成功标准：</strong> 能为每一步写出信息方向和部件职责，并说明长期保留应使用外部存储。完成后不看本段提示，独立完成页末“整页综合测试”；提交后逐题核对答案与解析，错题必须能重新用信息流向、部件职责或文件身份说明原因。</p>
+<h2 id="常见错误">常见错误</h2>
+<ol>
+<li><strong>把计算机应用理解成“使用一台台式电脑”。</strong> 自助机、导航和自动控制也能完成信息处理。检查时找输入、存储、处理和输出，不看外壳。</li>
+<li><strong>把 CPU、内存和硬盘混为一谈。</strong> CPU 负责执行和运算，内存负责运行时临时保存，硬盘等外部存储负责长期保存。用“谁处理、谁临时放、谁长期留”逐项核对。</li>
+<li><strong>认为程序一直直接在硬盘上运行。</strong> 可执行程序通常先从外部存储装入内存，再由 CPU 取出指令执行。</li>
+<li><strong>只按设备名称判断输入输出。</strong> 触摸屏、多功能打印机可能同时具有两种功能；把题目中的具体动作画成信息箭头再判断。</li>
+<li><strong>把 Windows、Linux 当成应用软件或编程语言。</strong> 它们是操作系统，负责管理硬件、文件和程序。</li>
+<li><strong>认为二进制 <code>101</code> 就是十进制 101。</strong> 进制不同，位置代表的数值不同；先确认采用什么进制。</li>
+<li><strong>认为改扩展名就能改变文件内容。</strong> 扩展名只是类型线索，改名不会完成编译，也不会把图片变成文字。</li>
+<li><strong>把 <code>.cpp</code> 源文件和可执行程序当成同一个文件。</strong> 源文件供人编辑，编译后的程序供系统加载运行；修改源文件后还要保存并重新编译。</li>
+</ol>
+<h2 id="关联学习">关联学习</h2>
+<p>下一页的<a href="/gesp/level1/ide/">集成开发环境</a>会继续使用源文件、可执行程序和操作系统中的文件操作，并讲清编辑、保存、编译、运行与调试的区别。</p>
+<section aria-labelledby="related-knowledge-computer-basics"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-computer-basics" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><p>暂无前置知识</p></section>
+    </article>
 
     <div class="kp-nav-row">
       

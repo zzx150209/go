@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,11 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>超过 long long 范围的大整数用数组（或 string）逐位存储。</li><li>加法：从低位到高位逐位相加，处理进位。</li><li>乘法：大数乘以一位数，逐位乘加进位；大整数相乘用双重循环。</li><li>存储时通常低位在前（a[0] 存个位），方便进位。</li></ul>
-
-    <div class="kp-code"><pre>// 大数加法（低位在前）
-vector&lt;int&gt; add(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b) {
-    vector&lt;int&gt; c;
-    int carry = 0;
-    for (int i = 0; i &lt; max(a.size(), b.size()) || carry; i++) {
-        if (i &lt; a.size()) carry += a[i];
-        if (i &lt; b.size()) carry += b[i];
-        c.push_back(carry % 10);
-        carry /= 10;
-    }
-    return c;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>低位在前存储，输出时倒序打印。</li><li>注意前导零问题和负数处理。</li></ul>
+    <article class="article-body">
+    <article id="top" data-level5-topic-hub="big-integer-add-subtract"><p>同一份仓库记录可能提出四种问题：两批货物合计多少、发出一部分后还剩多少、相同数量装了很多箱共多少、按固定容量能装几箱并余多少。数很大时，先别急着套某段代码；本页先带你看懂共同表示，再根据题意关系、要维护的状态和扫描方向选择正确子页。</p><div id="本课先记住"><section data-lesson-quick-review><h2><span></span>本课先记住</h2><dl><div data-review-kind="core"><dt>核心结论</dt><dd><p>高精度运算先把超大非负整数保存为十进制数位，再按题意关系、维护状态和扫描方向选择加、减、乘或除。</p></dd></div><div data-review-kind="syntax"><dt>常用语法</dt><dd><p>字符串负责完整读入，普通数组负责逐位保存；下面只展示表示方法，不是完整运算程序。</p><pre tabindex="0"><code>string number;
+int digit[1005];
+digit[0] = number[number.size() - 1] - &#39;0&#39;;</code></pre></dd></div><div data-review-kind="example"><dt>最小示例</dt><dd><p>507 逆序保存后，数组从下标 0 开始依次是 7、0、5；这样加、减、乘可以先处理个位。</p><pre tabindex="0"><code>507 -&gt; digit[0..2] = {7, 0, 5}</code></pre></dd></div><div data-review-kind="mistakes"><dt>关键易错点</dt><dd><ul><li>不能只看数字位数选运算</li><li>加、减、乘通常从低位开始，除法从高位开始</li><li>输出时要删除无效前导零，但零必须保留一个 0。</li></ul></dd></div></dl></section></div><h2 id="知识范围与官方定位" class="astro-c5eeuzv2">知识范围与官方定位</h2><p class="astro-c5eeuzv2">五级高精度运算包括大整数表示、加法、可出现负结果的减法、高精度乘普通整数、高精度乘高精度整数、高精度除普通正整数，以及阶乘中的高精度应用。本页只建立共同模型和选择路线；各运算的完整过程、程序与复杂度由四个子页分别讲解。</p><p>本页先建立共同基础并比较各方法；完整过程、C++ 写法与复杂度请进入对应子知识点学习。</p><section aria-labelledby="共同基础"><h2 id="共同基础" class="astro-c5eeuzv2">共同基础</h2><ul><li class="astro-c5eeuzv2">常见 long long 也有固定范围，位数继续增加就不能把整个数一次放进去。高精度运算改为先用 string 完整读入，再把每个十进制数字转换成普通 int 数组中的一个元素。</li><li class="astro-c5eeuzv2">十进制数位序列保留了个位、十位、百位等位值。把 507 逆序保存为 [7, 0, 5] 后，下标 0 就是个位；加法、减法和乘法通常可以按下标从小到大处理。</li><li class="astro-c5eeuzv2">除法的商位由已经读过的高位前缀决定，所以要从最高位向最低位扫描。方向不是固定模板，要由当前运算中信息传递的方向决定。</li><li class="astro-c5eeuzv2">不同运算要维护不同状态：加法跟踪进位，减法跟踪借位，乘法累加数位贡献并处理进位，除法跟踪余数。这些状态在父页只用来帮助选择，具体更新规则留给子页。</li><li class="astro-c5eeuzv2">无论选择哪种运算，最后都要得到规范十进制结果：删除无效前导零，但结果为零时仍保留一个 0；数组容量还要覆盖可能出现的全部结果数位。</li><li class="astro-c5eeuzv2">选择演示 1：仓库原有 123456789012345678901 件零件，发出 987654321 件，题目要求剩余量。第一个数已经超出常见 long long 的十进制范围，所以先确定要按十进制数位保存。</li><li class="astro-c5eeuzv2">选择演示 2：题目动作是“原有量去掉发出量”，关系是求差，不是求总和、若干倍或平均分配，因此应选择减法。</li><li class="astro-c5eeuzv2">选择演示 3：计算前要比较两个数的大小，确定结果符号；逐位计算时要从低位向高位跟踪借位。这些正是高精度减法子页要解决的状态和方向。</li><li class="astro-c5eeuzv2">选择演示 4：因此下一步进入“高精度减法”子页，而不是在总览页展开逐位借位；本页也不计算这个大数减法的最终结果。</li><li class="astro-c5eeuzv2">选择演示 5：学完后可用“非负差 + 987654321 = 123456789012345678901”复核。若还原失败，先检查运算选择、大小关系和借位。</li><li class="astro-c5eeuzv2">本页到“会选择并会检查”为止。逐位进位、借位与符号、乘法数位贡献与阶乘、逐位商和余数的完整实现，都在对应子页中展开。</li></ul></section><section aria-labelledby="方法对比"><h2 id="方法对比" class="astro-c5eeuzv2">方法对比</h2><div><section aria-labelledby="big-integer-add-subtract-comparison-0" class="astro-c5eeuzv2"><h3 id="big-integer-add-subtract-comparison-0" class="astro-c5eeuzv2">合计：高精度加法</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>题目把两个非负大数量合在一起，关系是求和；从低位向高位处理并跟踪进位，应进入“高精度加法”子页。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>交换两个加数后总和应保持不变；不同长度也仍是加法，不能只看位数改选别的结构。</p></section><section aria-labelledby="big-integer-add-subtract-comparison-1" class="astro-c5eeuzv2"><h3 id="big-integer-add-subtract-comparison-1" class="astro-c5eeuzv2">剩余：高精度减法</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>题目从原有大数量中去掉一部分，关系是求差；先比较大小，再从低位向高位跟踪借位，应进入“高精度减法”子页。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>被减数不小于减数时，用“差 + 减数 = 被减数”复核；若不成立，检查大小关系、符号和借位。</p></section><section aria-labelledby="big-integer-add-subtract-comparison-2" class="astro-c5eeuzv2"><h3 id="big-integer-add-subtract-comparison-2" class="astro-c5eeuzv2">相同数量重复：高精度乘法</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>每箱数量相同，求很多箱的总量，关系是相同数量重复；累加数位贡献并从低位处理进位，应进入“高精度乘法”子页。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>错误现象是只把每箱数量加一次，结果只代表两箱；原因是把重复次数漏掉了。改选乘法后，可先用小箱数重复相加复核，例如每箱 7 件、3 箱应与 7 + 7 + 7 的 21 件一致。</p></section><section aria-labelledby="big-integer-add-subtract-comparison-3" class="astro-c5eeuzv2"><h3 id="big-integer-add-subtract-comparison-3" class="astro-c5eeuzv2">平均分配：高精度除普通整数</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>把超大总量按一个正的普通容量平均分配，要求份数和余数，关系是除法；从高位向低位扫描并跟踪余数，应进入“高精度除普通整数”子页。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>错误现象是看到“有剩余”就只做一次减法，无法回答能装几箱；原因是忽略了平均分配。改选除法后，用“商 × 除数 + 余数 = 被除数”且“余数小于正除数”复核。</p></section><section aria-labelledby="big-integer-add-subtract-comparison-4" class="astro-c5eeuzv2"><h3 id="big-integer-add-subtract-comparison-4" class="astro-c5eeuzv2">方向纠错：除法不能照搬低位扫描</h3><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">主要用途：</strong>若除法从个位开始，当前商位缺少更高位前缀，无法正确确定；原因是把加、减、乘的信息方向机械套给了除法。</p><p class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">使用提醒：</strong>修正为从最高位向最低位扫描并维护余数；每处理一位，都检查当前余数小于正除数，最后再用商和余数还原被除数。</p></section></div></section><section aria-labelledby="选择子知识点"><h2 id="选择子知识点" class="astro-c5eeuzv2">选择子知识点</h2><p class="astro-c5eeuzv2">根据当前要解决的问题进入对应页面；每个子知识点都可以直接访问，不设置完成门槛。</p><ul><li class="astro-c5eeuzv2"><a href="/gesp/level5/big-integer-add-subtract/addition/" data-level5-child-link class="astro-c5eeuzv2"><span class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">高精度加法</strong><small class="astro-c5eeuzv2">已完成：能处理不同长度和连续进位，并输出规范的非负十进制总和。</small></span><span class="astro-c5eeuzv2">→</span></a></li><li class="astro-c5eeuzv2"><a href="/gesp/level5/big-integer-add-subtract/subtraction/" data-level5-child-link class="astro-c5eeuzv2"><span class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">高精度减法</strong><small class="astro-c5eeuzv2">下一步：能比较大小、判断符号、完成逐位借位，并用加法还原被减数。</small></span><span class="astro-c5eeuzv2">→</span></a></li><li id="04-高精度乘法" class="astro-c5eeuzv2"><a href="/gesp/level5/big-integer-add-subtract/multiply-by-integer/" data-level5-child-link class="astro-c5eeuzv2"><span class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">高精度乘法</strong><small class="astro-c5eeuzv2">之后：能区分高乘低与高乘高，说明数位贡献位置，并把阶乘识别为连续的高乘低。</small></span><span class="astro-c5eeuzv2">→</span></a></li><li class="astro-c5eeuzv2"><a href="/gesp/level5/big-integer-add-subtract/divide-by-integer/" data-level5-child-link class="astro-c5eeuzv2"><span class="astro-c5eeuzv2"><strong class="astro-c5eeuzv2">高精度除普通整数</strong><small class="astro-c5eeuzv2">最后：能从高位确定商位，得到商和余数，并用商、除数和余数还原被除数。</small></span><span class="astro-c5eeuzv2">→</span></a></li></ul></section><h2 id="核心内容检查" class="astro-c5eeuzv2">核心内容检查</h2><h2 id="整页综合测试" class="astro-c5eeuzv2">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></article></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp4.html">← 上一个：质因数分解</a>

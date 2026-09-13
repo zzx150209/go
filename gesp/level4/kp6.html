@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,24 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>二维数组 int a[m][n] 表示 m 行 n 列，a[i][j] 访问第 i 行第 j 列。</li><li>内存中按行存储，第一维可以省略（初始化时），第二维不能省略。</li><li>常用操作：行列遍历、矩阵加法/转置、按行/列求和、找最值。</li><li>作为函数参数时，第二维必须指定大小。</li></ul>
-
-    <div class="kp-code"><pre>int a[105][105], m, n;
-cin &gt;&gt; m &gt;&gt; n;
-for (int i = 0; i &lt; m; i++)
-    for (int j = 0; j &lt; n; j++)
-        cin &gt;&gt; a[i][j];
-
-// 按行求和
-for (int i = 0; i &lt; m; i++) {
-    int rowSum = 0;
-    for (int j = 0; j &lt; n; j++) rowSum += a[i][j];
-    cout &lt;&lt; rowSum &lt;&lt; endl;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>二维数组下标都是从 0 开始，注意行列不要搞反。</li><li>大二维数组建议定义为全局变量，避免栈溢出。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">二维数组把同一类型的数据排成“行×列”的表格，矩阵、棋盘、座位表和字符地图都可以这样保存。学会它的关键不是多写一层中括号，而是始终说清：两个下标各表示什么、循环现在走到哪个格子、这个格子在内存中的真实位置怎样计算。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">二维数组先看行、再看列；元素总数等于各维长度相乘，字节数还要乘 `sizeof(元素类型)`；访问任何格子前，两个下标都必须合法。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int grid[105][105] = {}; // 声明固定容量并把所有元素清零
+for (int row = 1; row &lt;= rows; row++) { // 从第 1 行遍历到实际最后一行
+    for (int column = 1; column &lt;= columns; column++) { // 遍历当前行的所有实际列
+        cin &gt;&gt; grid[row][column]; // 把数据存入“当前行、当前列”
+    } // 当前行的列全部读完
+} // 所有实际行全部读完</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int score[2][3] = {{1, 7, 3}, {4, 2, 9}}; // 创建 2 行 3 列的成绩表
+cout &lt;&lt; score[0][1] &lt;&lt; &#39;\n&#39;; // 0 下标下输出第 0 行第 1 列的 7</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">把声明容量当成实际使用量</li><li class="astro-e22r5uwj">把 0 下标与 1 下标写法混在一起</li><li class="astro-e22r5uwj">用实际列数 m 代替声明时第二维长度计算内存位置</li><li class="astro-e22r5uwj">先访问邻格，再检查它是否越界</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课只建立三个核心：用两个下标表示和定位表格；用双重循环按坐标安全遍历；用声明的各维长度解释连续存储、内存大小、函数传参和更多维数组。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">先看同一张 2×3 成绩表：第一行是 1、7、3，第二行是 4、2、9。问“数字 7 在哪里”，必须回答第 1 行第 2 列；问“所有数之和”，必须让程序按顺序访问 6 个格子。后面的定义、遍历、内存和转置都继续使用这张表，不在每一步更换问题。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握二维及多维数组的定义、初始化、存储和遍历，能够把二维数组传入函数，完成行列、对角线、转置、字符地图、坐标边界、四方向和简单三维数组等基础处理。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 二维数组定义与初始化</h2><p class="astro-e22r5uwj">一维数组像一排抽屉，只用一个下标；二维数组像一张表格，要用“行下标”和“列下标”共同确定一个格子。`int score[2][3]` 中，`int` 是每个元素的类型，`score` 是数组名，第一个长度 2 表示行数，第二个长度 3 表示每行有 3 列，因此一共有 2×3=6 个 `int` 元素。</p><p class="astro-e22r5uwj">按照 C++ 原生的 0 下标，`score[0][0]` 是左上角，合法行下标是 0..1，合法列下标是 0..2；`score[0][1]` 对应第一行中间的 7。两个下标必须分别合法，只要一个越界，访问就不合法。</p><p class="astro-e22r5uwj">初始化有三种常见形式：完整初始化给出每个值；部分初始化只写前面若干值，没写到的元素自动补 0；`={}` 或 `={0}` 会把全部元素置 0。花括号按“每一行一组”书写，最容易看出表格结构。</p><p class="astro-e22r5uwj">要特别区分“声明后未初始化”和“部分初始化”：函数内部的普通局部数组 `int a[3][4];` 不会自动清零，读取尚未赋值的元素没有可靠结果；写成 `int a[3][4] = {};` 才明确全部为 0。全局数组和静态数组会自动初始化为 0，但初学阶段仍建议把意图写清楚。</p><p class="astro-e22r5uwj">本站处理行列编号时常使用 1 下标：例如实际要用 1..4 行、1..5 列，就声明 `int table[5][6] = {};`，把第 0 行和第 0 列留空。这样更接近题目坐标，但数组实际仍分配 5×6=30 个元素，不是 4×5=20 个。</p><p class="level4-dictionary-article__code-label">完整、部分、全零和 1 下标容量的写法</p><pre class="astro-e22r5uwj"><code class="language-cpp">int score[2][3] = { // 开始完整初始化 2 行 3 列的成绩表
+    {1, 7, 3}, // 给第 0 行的 3 个元素依次赋值
+    {4, 2, 9} // 给第 1 行的 3 个元素依次赋值
+}; // 完成 score 的全部初始化
+int partial[3][4] = { // 开始部分初始化 3 行 4 列的数组
+    {1, 2}, // 第 0 行成为 1、2、0、0
+    {3} // 第 1 行成为 3、0、0、0，第 2 行全部补 0
+}; // 完成 partial 的部分初始化
+int zeroed[3][4] = {}; // 把 3 行 4 列的全部元素初始化为 0
+int table[5][6] = {}; // 分配 30 个元素，逻辑上使用第 1..4 行和第 1..5 列</code></pre><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp5.html">← 上一个：结构体</a>

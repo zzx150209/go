@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,211 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>根据数据范围选择算法：n≤20 可用 O(2ⁿ) 枚举，n≤1000 可用 O(n²)，n≤10⁶ 用 O(n log n)。</li><li>空间复杂度也要考虑：数组大小不能超过内存限制（通常 256MB）。</li><li>long long 比 int 占一倍空间，注意数组大小。</li><li>常数因子也重要：O(n) 的沉重实现可能比 O(n log n) 慢。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>1秒时限：O(n) 可到 10⁷，O(n²) 可到 10000，O(n³) 可到 500。</li><li>内存 256MB 约可开 3×10⁷ 个 int 数组。</li></ul>
+    <article class="article-body">
+    <article id="top"><section data-lesson-quick-review><h2><span></span>本课先记住</h2><dl><div data-review-kind="core"><dt>核心结论</dt><dd><p>先确定输入规模 n 和关键操作，数出操作次数怎样随 n 增长，再用 O 表示增长数量级；最后还要检查额外空间和数据范围。</p></dd></div><div data-review-kind="syntax"><dt>常用语法</dt><dd><p>顺序段次数相加，独立嵌套次数相乘；规模每轮减半时，轮数通常是对数级。</p><pre tabindex="0"><code>while (remaining &gt; 1) {
+    remaining /= 2;
+}</code></pre></dd></div><div data-review-kind="example"><dt>最小示例</dt><dd><p>n=8 时，每轮除以 2 的轨迹是 8→4→2→1，共执行 3 轮，因此是 O(log n)。</p><pre tabindex="0"><code>8 -&gt; 4 -&gt; 2 -&gt; 1
+3 rounds</code></pre></dd></div><div data-review-kind="mistakes"><dt>关键易错点</dt><dd><ul><li>不能按代码行数猜复杂度</li><li>前后相邻的循环次数相加，不是相乘</li><li>O 表示增长趋势，不是精确秒数</li><li>只看时间而漏掉数组和递归栈仍可能失败</li></ul></dd></div></dl></section><h2 id="从同样很快到差距巨大">从同样很快到差距巨大</h2><p>输入规模只有 <code>n=8</code> 时，扫描一次、两层循环甚至三层循环都能很快结束。可是当 <code>n</code> 增长到 <code>100000</code>，不同写法的工作量会拉开巨大差距：一次扫描约十万次，两层各跑 <code>n</code> 次的循环却会达到一百亿次。</p><p>因此，判断程序能不能完成，不能只看代码短不短，也不能只在自己的电脑上试一个小数据。本课只新增三项能力：</p><ol>
+<li>**K1：**确定输入规模 <code>n</code> 和关键操作，先数实际次数，再写复杂度。</li>
+<li>**K2：**根据顺序、嵌套、减半和二叉分支，判断常见增长数量级。</li>
+<li>**K3：**把时间、额外空间和数据范围放在一起检查。</li>
+</ol><p>循环、数组、函数、递归、二分和分治都已经学过。本课只借这些已学结构观察工作量，不重新讲算法本身，也不展开大 O 的严格数学证明、主定理、摊还分析、NP 问题或六级以上内容。</p><p>现行官方材料有两个呈现层级：总表列出“多项式、指数、对数复杂度”，另一处详述与知识块表重点展开多项式和对数。本站按两处内容的并集讲清三类增长，不把指数内容扩大成新的算法教学；其中 <code>O(1)</code> 用作比较的起点，<code>O(n log n)</code> 用来连接已经学过的分治过程。</p><h2 id="01-输入规模与基本操作">01 输入规模与基本操作</h2><h3 id="k1先确定-n再选择要数的操作">K1：先确定 <code>n</code>，再选择要数的操作</h3><p><strong>输入规模</strong>是会随输入变大的数量，通常记作 <code>n</code>。处理长度为 <code>n</code> 的数组时，<code>n</code> 是元素个数，不是数组中某个元素的数值。</p><p>接着选择最能代表工作量、并且会重复执行的<strong>关键操作</strong>，例如一次比较、一次赋值或一次递归分支。代码行数不能代替执行次数：循环体里只有一行，这一行仍可能执行 <code>n</code> 次、<code>n^2</code> 次，甚至更多。</p><p>下面的局部代码把 <code>count++</code> 当作关键操作：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> count </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>循环变量依次是 <code>0, 1, ..., n - 1</code>，所以关键操作执行 <code>n</code> 次。我们先得到“实际次数是 <code>n</code>”，再说它的时间复杂度是 <code>O(n)</code>。</p><h3 id="从次数表达式得到-o">从次数表达式得到 O</h3><p>大 O 记录的是：<code>n</code> 继续增长时，工作量属于哪一种增长数量级。化简时保留增长最快的部分，并忽略固定倍数。</p><table>
+<thead>
+<tr>
+<th>实际次数表达式</th>
+<th>观察</th>
+<th>数量级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>5</code></td>
+<td>不随 <code>n</code> 改变</td>
+<td><code>O(1)</code></td>
+</tr>
+<tr>
+<td><code>3n + 5</code></td>
+<td>主导增长的是 <code>n</code></td>
+<td><code>O(n)</code></td>
+</tr>
+<tr>
+<td><code>n^2 + 2n</code></td>
+<td><code>n</code> 很大时，<code>n^2</code> 增长更快</td>
+<td><code>O(n^2)</code></td>
+</tr>
+</tbody>
+</table><p>这不表示常数永远不重要，也不表示 <code>O(n)</code> 一定在任意小数据上比 <code>O(n^2)</code> 快。它只让我们比较输入继续变大时的增长趋势，不是某台机器上的精确秒数，更不是一定通过的保证。</p><h2 id="02-从程序结构判断增长">02 从程序结构判断增长</h2><h3 id="k2顺序相加独立嵌套相乘">K2：顺序相加，独立嵌套相乘</h3><p>两个循环前后执行时，先做 <code>n</code> 次，再做 <code>n</code> 次，总次数是 <code>n + n = 2n</code>，化简为 <code>O(n)</code>：</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>如果第二个循环在第一个循环里面，并且每一层都独立跑满 <code>n</code> 次，才是 <code>n * n = n^2</code>。三层独立循环同理是 <code>n^3</code>。所以不能看见两个或三个 <code>for</code> 就直接相乘，必须先看它们是前后关系还是包含关系，以及每层实际循环多少次。</p><h3 id="每轮减半olog-n">每轮减半：<code>O(log n)</code></h3><p>当剩余规模每轮除以 <code>2</code>，只需很少的轮数就会缩到 <code>1</code>。正式样例取 <code>n=8</code>，最终程序真实运行的减半过程如下。</p><table>
+<thead>
+<tr>
+<th>判断</th>
+<th style="text-align: right">判断前 <code>remaining</code></th>
+<th><code>remaining &gt; 1</code></th>
+<th>本轮动作</th>
+<th style="text-align: right">累计 <code>logarithmic</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 次</td>
+<td style="text-align: right">8</td>
+<td>成立</td>
+<td><code>remaining = 8 / 2 = 4</code></td>
+<td style="text-align: right">1</td>
+</tr>
+<tr>
+<td>第 2 次</td>
+<td style="text-align: right">4</td>
+<td>成立</td>
+<td><code>remaining = 4 / 2 = 2</code></td>
+<td style="text-align: right">2</td>
+</tr>
+<tr>
+<td>第 3 次</td>
+<td style="text-align: right">2</td>
+<td>成立</td>
+<td><code>remaining = 2 / 2 = 1</code></td>
+<td style="text-align: right">3</td>
+</tr>
+<tr>
+<td>停止判断</td>
+<td style="text-align: right">1</td>
+<td>第一次不成立</td>
+<td>不再执行循环体</td>
+<td style="text-align: right">3</td>
+</tr>
+</tbody>
+</table><p>轨迹是 <code>8 -&gt; 4 -&gt; 2 -&gt; 1</code>，共执行 <code>3</code> 轮。因为 <code>2^3 = 8</code>，这种每轮按固定比例缩小的轮数随 <code>n</code> 呈对数增长，记作 <code>O(log n)</code>。在复杂度中，若底数是固定常数，通常不必专门写底数。</p><p>如果每个减半层还完整扫描 <code>n</code> 项，总次数就是“约 <code>log n</code> 层 × 每层约 <code>n</code> 次”，得到 <code>O(n log n)</code>。不能因为外层会减半，就漏掉每层的线性工作。</p><h3 id="二叉分支o2n">二叉分支：<code>O(2^n)</code></h3><p>当 <code>n</code> 个位置都各有两种选择时，完整方案数为 <code>2^n</code>。最终程序中的递归在深度达到 <code>n</code> 时返回 <code>1</code>，表示找到一个叶子方案；否则进入两个 <code>depth + 1</code> 分支，并把两边的叶子数相加。</p><p><code>n=8</code> 时叶子数是 <code>2^8 = 256</code>。这里的 <code>256</code> 只表示叶子数，不是整棵递归树的总调用数；总调用数虽然不是恰好 <code>2^n</code>，增长数量级仍是 <code>O(2^n)</code>。如果还要在每个叶子输出最多 <code>n</code> 项内容，输出量可能达到 <code>O(n * 2^n)</code>。</p><h2 id="03-七种次数放到同一个输入中">03 七种次数放到同一个输入中</h2><p>下面七段结构彼此独立，每一段只数自己的关键操作。它们是一个“操作次数实验室”，不能把七项相加后说成某个真实解法同时具有七种复杂度。</p><table>
+<thead>
+<tr>
+<th>增长数量级</th>
+<th><code>n=8</code> 时的真实结构</th>
+<th style="text-align: right">精确次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>O(1)</code></td>
+<td>固定执行一次</td>
+<td style="text-align: right">1</td>
+</tr>
+<tr>
+<td><code>O(log n)</code></td>
+<td><code>8 -&gt; 4 -&gt; 2 -&gt; 1</code></td>
+<td style="text-align: right">3</td>
+</tr>
+<tr>
+<td><code>O(n)</code></td>
+<td>扫描 8 项</td>
+<td style="text-align: right">8</td>
+</tr>
+<tr>
+<td><code>O(n log n)</code></td>
+<td>3 层，每层扫描 8 项</td>
+<td style="text-align: right">24</td>
+</tr>
+<tr>
+<td><code>O(n^2)</code></td>
+<td>两层各执行 8 次</td>
+<td style="text-align: right">64</td>
+</tr>
+<tr>
+<td><code>O(n^3)</code></td>
+<td>三层各执行 8 次</td>
+<td style="text-align: right">512</td>
+</tr>
+<tr>
+<td><code>O(2^n)</code></td>
+<td>8 个位置各有两种选择，统计叶子</td>
+<td style="text-align: right">256</td>
+</tr>
+</tbody>
+</table><p>这个表说明三种不同的判断方法：前后执行先相加，独立嵌套才相乘，每轮减半先数层数。七项按常见增长速度排列，但这仍是“大数据增长趋势”的顺序，不保证任意小数据的真实耗时严格照此排序。</p><h2 id="04-用程序真实计数">04 用程序真实计数</h2><p>先建立每一段自己的计数变量。减半段用 <code>remaining</code> 保存当前剩余规模；每完成一轮，计数加 <code>1</code>，再把规模除以 <code>2</code>。指数段只统计递归叶子，避免把叶子数和总调用数混在一起。</p><p>下面的教学程序只接受 <code>1 &lt;= n &lt;= 12</code>。上界设得小，是为了让三层循环和二叉递归都能在实验中安全、快速地真实执行；这不表示实际题目的 <code>n</code> 只能到 <code>12</code>。计数统一使用 <code>long long</code>。</p><h3 id="完成程序">完成程序</h3><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">countExponentialLeaves</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--1:#403F53"><span style="--0:#D6DEEB"> </span><span style="--0:#D7DBE0">depth</span><span style="--0:#D6DEEB">, </span></span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--1:#403F53"><span style="--0:#D6DEEB"> </span><span style="--0:#D7DBE0">n</span><span style="--0:#D6DEEB">) {</span></span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (depth </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> n) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">countExponentialLeaves</span><span style="--0:#D6DEEB;--1:#403F53">(depth </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, n) </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">countExponentialLeaves</span><span style="--0:#D6DEEB;--1:#403F53">(depth </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, n);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (n </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">||</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">12</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">invalid</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> constantCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">constantCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> logarithmicCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> remaining </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">while</span><span style="--0:#D6DEEB;--1:#403F53"> (remaining </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">remaining </span><span style="--0:#C792EA;--1:#8844AE">/=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">logarithmicCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> linearCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">linearCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> linearLogCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">remaining </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">while</span><span style="--0:#D6DEEB;--1:#403F53"> (remaining </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">linearLogCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">remaining </span><span style="--0:#C792EA;--1:#8844AE">/=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> quadraticCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">quadraticCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> cubicCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> k </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; k </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; k</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">cubicCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> exponentialCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">countExponentialLeaves</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, n);</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">constant </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> constantCount </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">logarithmic </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> logarithmicCount </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">linear </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> linearCount </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">linear_log </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> linearLogCount </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">quadratic </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> quadraticCount </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">cubic </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> cubicCount </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">exponential </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> exponentialCount </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><h3 id="样例输入">样例输入</h3><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">8</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><h3 id="样例输出">样例输出</h3><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">constant 1</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">logarithmic 3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">linear 8</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">linear_log 24</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">quadratic 64</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">cubic 512</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">exponential 256</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>样例输入、减半过程表、七项对比表和程序输出使用同一个 <code>n=8</code>。程序整体顺序执行七段，所以若把它当成一个程序分析，运行量由增长最快的指数计数段主导；本课观察的是每一段各自的增长方式。</p><h2 id="05-时间空间与数据范围">05 时间、空间与数据范围</h2><h3 id="k3时间和额外空间分开检查">K3：时间和额外空间分开检查</h3><p><strong>时间复杂度</strong>看累计执行量怎样增长。<strong>额外空间复杂度</strong>看程序为了处理问题又使用了多少存储，例如辅助数组和同时存在的递归调用层。输入数组本身是否计入空间，要看题目采用的口径；无论采用哪种口径，都应把输入存储和新增辅助空间分开说清。</p><p>递归不是“调用过多少次，就同时占多少层栈”。栈空间看的是某一时刻最多有多少层调用没有返回。每层还会保存参数、局部变量和返回位置，所以真实字节数受编译器、平台与函数内容影响；如果最大同时调用深度随 <code>n</code> 线性增长，栈空间数量级通常是 <code>O(n)</code>。</p><h3 id="用-n100000-做粗略判断">用 <code>n=100000</code> 做粗略判断</h3><table>
+<thead>
+<tr>
+<th>方案</th>
+<th style="text-align: right">关键操作的粗略量级</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>O(n)</code></td>
+<td style="text-align: right">约 <code>100000</code> 次</td>
+<td>十万级</td>
+</tr>
+<tr>
+<td><code>O(n log n)</code></td>
+<td style="text-align: right"><code>log2(100000)</code> 约为 17，因此不到 <code>2000000</code> 次</td>
+<td>约两百万级以内</td>
+</tr>
+<tr>
+<td><code>O(n^2)</code></td>
+<td style="text-align: right"><code>100000 * 100000 = 10000000000</code> 次</td>
+<td>一百亿级，通常明显不可行</td>
+</tr>
+</tbody>
+</table><p>这些数只用于比较数量级，不能据此承诺固定运行秒数。还要看测试组数、每次关键操作的常数、时间限制以及实际实现。</p><h3 id="把数组换算成近似字节数">把数组换算成近似字节数</h3><p>在常见 GCC/OJ 环境中，<code>int</code> 通常占 <code>4</code> 字节：</p><ul>
+<li><code>int a[100000]</code> 约占 <code>100000 * 4 = 400000</code> 字节，约 <code>390.6 KiB</code>；</li>
+<li><code>int grid[1000][1000]</code> 约占 <code>1000 * 1000 * 4 = 4000000</code> 字节，约 <code>3.81 MiB</code>。</li>
+</ul><p>这只是常见环境的估算，实际大小以编译器、平台和评测环境为准。还要另算其他数组、递归栈和对象开销，并检查计数或乘法结果是否会超出整数范围。</p><p>统一的判断顺序是：<strong>先看最大输入规模和测试组数，再估关键操作次数；随后估主要数组、递归栈和整数范围。三者都符合题目限制，方案才有通过的可能。</strong></p><h2 id="常见错误怎样改正">常见错误怎样改正</h2><table>
+<thead>
+<tr>
+<th>错误判断</th>
+<th>最早原因与实际后果</th>
+<th>修正方法</th>
+<th>重新检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“代码只有几行，所以是 <code>O(1)</code>”</td>
+<td>把源代码行数当成运行次数，漏掉循环和递归的重复执行</td>
+<td>先确定 <code>n</code>，再挑关键操作并写出实际次数</td>
+<td>单循环的 <code>count++</code> 应数出 <code>n</code> 次</td>
+</tr>
+<tr>
+<td>“两个 <code>for</code> 一定是 <code>O(n^2)</code>”</td>
+<td>没看循环的包含关系，前后两个循环被错误相乘</td>
+<td>前后执行次数相加；内层每轮独立跑满时才相乘</td>
+<td>两个相邻 <code>n</code> 次循环应得到 <code>2n -&gt; O(n)</code></td>
+</tr>
+<tr>
+<td>“循环体只有一次比较，所以二分是 <code>O(1)</code>”</td>
+<td>只数一轮，漏掉规模反复减半的轮数</td>
+<td>列出完整减半轨迹，并保留第一次条件不成立</td>
+<td><code>8 -&gt; 4 -&gt; 2 -&gt; 1</code> 应记录 3 轮和停止判断</td>
+</tr>
+<tr>
+<td>“<code>2n</code> 和 <code>2^n</code> 都有 2，增长差不多”</td>
+<td>没分清固定倍数与指数位置</td>
+<td>代入相邻的 <code>n</code> 比较：<code>2n</code> 每次加 2，<code>2^n</code> 每次翻倍</td>
+<td><code>n=8</code> 时分别是 16 和 256</td>
+</tr>
+<tr>
+<td>“时间能过，内存一定能过”</td>
+<td>忽略辅助数组和最大递归深度，可能超内存或爆栈</td>
+<td>分开估算时间、数组字节数和递归栈深度</td>
+<td>写出主要数组元素数 × 单个元素字节数，并说明最大同时递归层数</td>
+</tr>
+<tr>
+<td>“写出 <code>O(n log n)</code> 就能保证通过”</td>
+<td>把增长数量级当成精确秒数，漏掉测试组数、常数和限制</td>
+<td>用最大数据粗算次数，再核对时间、空间和整数范围</td>
+<td>结论中必须带数据范围和评测限制，而不是只写一个 O 符号</td>
+</tr>
+</tbody>
+</table><h2 id="练习与答案">练习与答案</h2><h3 id="引导练习顺序还是相乘">引导练习：顺序还是相乘</h3><p>有两个前后相邻的循环，每个都执行 <code>n</code> 次。写出总次数和复杂度。</p><p>**答案：**总次数是 <code>n + n = 2n</code>，忽略固定倍数后为 <code>O(n)</code>。它们没有相互包含，所以不能写成 <code>n * n</code>。</p><h3 id="独立练习改变内层结构">独立练习：改变内层结构</h3><p>先判断外层、内层都独立执行 <code>n</code> 次的两层循环；再把内层改成每轮把 <code>remaining</code> 除以 <code>2</code>。</p><p>**答案：**第一种每个外层轮次都完成 <code>n</code> 次内层操作，总量为 <code>n * n = n^2</code>，即 <code>O(n^2)</code>。第二种外层有 <code>n</code> 轮，每轮内层约执行 <code>log n</code> 次，总量为 <code>n * log n</code>，即 <code>O(n log n)</code>。</p><h3 id="迁移练习为十万规模选方案">迁移练习：为十万规模选方案</h3><p>当 <code>n=100000</code> 时，在 <code>O(n log n)</code> 和 <code>O(n^2)</code> 两个方案中选择更可行的一项，并给出数量比较。</p><p>**答案：**优先选择 <code>O(n log n)</code>：按 <code>log2(100000)</code> 约为 17 粗算，不到两百万次；<code>O(n^2)</code> 达到 <code>10000000000</code> 次，即一百亿级。最终仍需结合实际限制测试。</p><h3 id="空间练习数量级和-mib-都要会说">空间练习：数量级和 MiB 都要会说</h3><p>常见 GCC/OJ 环境中按一个 <code>int</code> 为 <code>4</code> 字节估算，<code>int a[200000]</code> 约占多少字节、多少 MiB？数组空间的数量级是什么？</p><p>**答案：**约 <code>200000 * 4 = 800000</code> 字节，约 <code>0.76 MiB</code>；元素个数随 <code>n</code> 线性增长时，数组空间是 <code>O(n)</code>。<code>O(n)</code> 回答增长趋势，<code>0.76 MiB</code> 回答这个具体规模下的近似占用，两者不能互相替代。</p>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp11.html">← 上一个：递归</a>

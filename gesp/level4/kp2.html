@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,24 +449,20 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>形参是函数定义中的变量，实参是调用时传入的值。</li><li>值传递：形参是实参的副本，函数内修改不影响外部变量。</li><li>局部变量在函数内定义，函数结束后销毁；全局变量在所有函数外定义。</li><li>同名局部变量会遮蔽全局变量，使用 :: 可访问全局变量。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">参数负责把数据送进函数，作用域决定一个名字在程序的哪些位置有效。调用函数、阅读同名变量或排查“变量未定义”时，要先找参数，再看局部变量和外层变量。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">实参在调用处提供数据，形参在函数内接收数据；查找同名变量时，从使用位置向外找最近的声明。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int add(int left, int right) { // left、right 是本次调用的形参
+    int sum = left + right; // sum 是只在函数体内有效的局部变量
+    return sum; // 返回结果并结束本次调用
+} // 离开函数体后，本次形参和局部变量的生命周期结束</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">int value = 10; // 定义外层 value，值为 10
+{ // 进入一个新的内层作用域
+    int value = 3; // 定义内层同名变量并暂时遮蔽外层 value
+    cout &lt;&lt; value; // 最近声明是内层 value，因此输出 3
+} // 内层 value 的作用域和生命周期在此结束</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">把值参数当成调用处的原变量</li><li class="astro-e22r5uwj">离开大括号后仍使用其中的局部变量</li><li class="astro-e22r5uwj">看到同名变量就默认它是全局变量</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：分清实参与形参；同时判断名字的作用域和对象的生命周期；遇到同名变量时从使用位置向外找到真正对象。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">学校里可以同时有“全校积分”“班级积分”和“小组积分”三个同名概念。程序里的名字也有自己的有效范围：站在不同的大括号里，看到的可能不是同一个变量。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要掌握形参与实参、局部变量、全局变量、作用域和生命周期，并能判断同名变量的遮蔽关系。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 形参与实参</h2><p class="astro-e22r5uwj">函数定义中用于接收数据的变量叫形参，调用表达式中真正提供数据的值、变量或表达式叫实参。`add(3, 5)` 里的 3、5 是实参，函数体里的 left、right 是形参。</p><p class="astro-e22r5uwj">一次调用开始时，程序先计算实参，再按位置把结果交给形参：第一个实参给第一个形参，第二个给第二个；并不是按名字对应。</p><p class="astro-e22r5uwj">每次调用都会重新创建一组形参。第一次 add(3,5) 的 left 与第二次 add(8,2) 的 left 名字相同，却是两次调用中的不同对象。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int add(int left, int right) { // 定义接收两个整数形参的加法函数
+    return left + right; // 返回本次调用中两个形参之和
+} // 本次调用结束时，left 和 right 随之销毁
 
-    <div class="kp-code"><pre>int x = 10;  // 全局变量
-
-void func(int a) {
-    a = 20;      // 修改的是形参副本
-    int x = 5;   // 局部x遮蔽全局x
-    cout &lt;&lt; x;   // 5
-}
-
-int main() {
-    func(x);
-    cout &lt;&lt; x;   // 仍然是10
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>值传递不会改变实参，想改变实参要用引用传递。</li><li>尽量少用全局变量，避免不同函数互相干扰。</li></ul>
+int result = add(3, 5); // 3、5 是实参，按位置创建 left=3、right=5</code></pre><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp1.html">← 上一个：函数基础</a>

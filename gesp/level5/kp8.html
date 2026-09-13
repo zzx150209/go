@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,27 +449,9 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>二分答案适用于：答案具有单调性（满足条件后更大/更小也满足）。</li><li>二分范围 [l, r]，取 mid 判断 check(mid)，根据结果收缩区间。</li><li>求最小可行值：check(mid) 为真时尝试更小（r=mid-1），否则 l=mid+1。</li><li>check 函数是核心，要正确实现判定逻辑。</li></ul>
-
-    <div class="kp-code"><pre>bool check(int x) { /* 判断 x 是否可行 */ }
-
-int binaryAnswer(int lo, int hi) {
-    int ans = lo;
-    while (lo &lt;= hi) {
-        int mid = (lo + hi) / 2;
-        if (check(mid)) {
-            ans = mid;
-            hi = mid - 1;  // 尝试更小
-        } else {
-            lo = mid + 1;
-        }
-    }
-    return ans;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>上下界要根据题目确定好，答案可能是浮点型（浮点二分）。</li><li>mid = (l+r)/2 可能溢出，用 l+(r-l)/2。</li></ul>
+    <article class="article-body">
+    <article id="top"><p>二分答案不是在数组里找某个元素，而是在一段候选答案中寻找可行与不可行的分界。它先用 check 判断一个候选值，再利用真假结果的单调变化排除一半范围。本课用木材切段完整学习“最大可行答案”，同时用一个短对照辨清“最小可行答案”的相反方向。</p><h2 id="知识范围与官方定位" class="astro-2i3ys3wc">知识范围与官方定位</h2><p class="astro-2i3ys3wc">对应五级大纲“二分答案”：理解答案域的单调性与判定函数，能区分最小可行值和最大可行值，并在正整数答案范围内正确处理边界、类型与复杂度。</p><p>本页只使用一级至五级已经学习的语法和能力；小知识点按页内编号连续查询，不设置前置完成门槛。</p><dl><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">是什么</dt><dd class="astro-2i3ys3wc">二分答案把每个可能答案看成一个候选，用 check(x) 标记它可行还是不可行，再寻找真假分界。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">解决什么问题</dt><dd class="astro-2i3ys3wc">当最优数值难以直接计算、逐个尝试又太慢，但一个候选容易判断时，它能快速找到最小可行值或最大可行值。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">什么时候使用</dt><dd class="astro-2i3ys3wc">必须同时具备明确的整数上下界和单调真假序列；“候选是整数”本身不够。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">核心思想</dt><dd class="astro-2i3ys3wc">先从具体数据证明单调性，再建立只负责判定的 check，最后按目标选择真时向左或向右。</dd></div><div class="astro-2i3ys3wc"><dt class="astro-2i3ys3wc">C++ 实现方法</dt><dd class="astro-2i3ys3wc">本课沿用闭区间 left&lt;=right；木材长度候选从 1 到 maxLength，最大可行时 true 记录并向右，false 向左。</dd></div></dl><section aria-labelledby="01-从查找位置到查找答案"><h2 id="01-从查找位置到查找答案" class="astro-2i3ys3wc">01 从查找位置到查找答案</h2><p class="astro-2i3ys3wc">上一页的二分查找在有序数组里找位置，本页继续沿用闭区间、取中点和用 mid±1 排除已检查候选的写法；新问题是怎样在“答案范围”里找到最优数值。</p><p class="astro-2i3ys3wc">主问题：有 4 根长度分别为 8、7、6、5 的木材，要切出至少 7 段等长木材，每段长度必须是正整数，求最大的段长。依次尝试 1、2、3、4 时，最多可切 26、12、7、5 段，所以真假依次为真、真、真、假；最大可行长度是 3。</p><p class="astro-2i3ys3wc">本教学程序支持 1≤n≤100000、1≤length[i]≤10^9、1≤k≤所有木材长度之和。若从 1 一直试到 10^9，每个候选又扫描 n 根木材，会做太多重复检查；我们要先证明真假只有一个分界，才有理由二分。</p><div><h3 class="astro-2i3ys3wc">具体样例与推演</h3><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">场景：</strong>四根木材长度为 8、7、6、5，需要至少 7 段，先逐个检查正整数段长。</p><ol class="astro-2i3ys3wc"><li class="astro-2i3ys3wc">段长 1 时可切 26 段，段长 2 时可切 12 段，段长 3 时可切 7 段，这三个候选都可行。</li><li class="astro-2i3ys3wc">段长 4 时只能切 5 段，不可行；段长继续增大时，每根木材能切出的段数都不会增加。</li><li class="astro-2i3ys3wc">因此候选 1～8 的真假是 true、true、true、false、false、false、false、false，目标是最右侧的 true，也就是 3。</li><li class="astro-2i3ys3wc">若逐个检查最多 10^9 个候选，每次再扫描最多 100000 根木材，重复工作太多；真假只有一个分界才允许每轮排除一半。</li></ol><p class="astro-2i3ys3wc"><strong class="astro-2i3ys3wc">适用结论：</strong>二分答案不是因为“答案是整数”就能使用，而是因为 check 真假具有单调分界；先证明分界，再二分。</p><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp7.html">← 上一个：顺序查找</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,18 +449,213 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>编译错误：语法不对，编译器给出行号和原因，逐条修改。</li><li>运行时错误：程序崩溃，常见原因是数组越界、除零、死递归。</li><li>逻辑错误：程序能运行但结果不对，需要输出中间变量排查。</li><li>常用调试方法：在关键位置插入 cout 输出变量值，对比预期结果。</li></ul>
-
-    <div class="kp-code"><pre>// 调试：输出中间值
-int sum = 0;
-for (int i = 1; i &lt;= n; i++) {
-    sum += i;
-    cout &lt;&lt; &quot;i=&quot; &lt;&lt; i &lt;&lt; &quot; sum=&quot; &lt;&lt; sum &lt;&lt; endl;  // 追踪
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>先修第一个编译错误，后面的错误可能是它引起的连锁反应。</li><li>运行超时通常是死循环或算法复杂度太高。</li></ul>
+    <article class="article-body">
+    <div data-gesp-level2-ui data-gesp-level2-detail></div>
+<h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> <code>abs</code>、<code>sqrt</code>、<code>min</code>、<code>max</code> 要核对参数范围与返回结果；<code>rand() % n</code> 的范围是 0 到 <code>n - 1</code>，<code>srand</code> 只设置序列起点，通常在一组取数开始前调用一次。</li>
+<li><strong>常用语法：</strong> 先选函数，再检查参数、返回类型和随机范围：<code>abs(x)</code>、<code>sqrt(x)</code>、<code>min(a, b)</code> / <code>max(a, b)</code>、<code>srand(seed)</code>、<code>rand() % n + start</code>。</li>
+<li><strong>最小示例：</strong> 确定随机范围时，先列出取余结果，再整体平移：<code>abs(-6) = 6</code>，<code>sqrt(49.0) = 7.0</code>，<code>rand() % 5 + 3</code> 的范围为 <code>[3, 7]</code>。</li>
+<li><strong>关键易错点：</strong> 不要对负实数直接求 <code>sqrt</code>；不要把 <code>sqrt</code> 结果一概当成 <code>int</code>；<code>% n</code> 从 0 开始；不要在每次 <code>rand</code> 前用同一种子重新 <code>srand</code>。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>本页对应二级大纲中的常用数学函数：掌握 <code>abs</code>、<code>sqrt</code>、<code>max</code>、<code>min</code> 的基本用途，并认识 <code>rand</code>、<code>srand</code> 以及简单随机整数范围的构造。</p>
+<p>数学函数把常见计算封装成标准写法。使用前先明确函数需要什么参数、返回什么类型，再把结果放入后续表达式。</p>
+<p>本页用 <code>abs</code> 求距离，用 <code>sqrt</code> 求非负数的算术平方根，用 <code>min</code>、<code>max</code> 比较两个值；再从取余范围推导 <code>rand()</code> 生成的整数区间，并理解 <code>srand</code> 只设置伪随机序列的起点。</p>
+<p><strong>函数</strong>是一段已经封装好的操作。调用表达式 <code>sqrt(value)</code> 可以拆成三部分：<code>sqrt</code> 是函数名，圆括号里的 <code>value</code> 是传入的实参，函数计算后产生一个返回值。返回值可以直接输出、参与更大的表达式，也可以先保存到类型合适的变量中；调用函数不会因为名字像数学公式就自动忽略参数范围和返回类型。</p>
+<a id="01-abs"></a>
+<h2 id="01-abs-绝对值函数">01 abs 绝对值函数</h2>
+<p><code>abs(x)</code> 返回 <code>x</code> 的绝对值，也就是它到 0 的距离。<code>abs(-15)</code> 为 15，<code>abs(8)</code> 为 8。</p>
+<p>在整数主教学中，参数和返回值都按整数理解：负数去掉负号，正数和 0 保持不变。绝对值不是“总把符号改成正号”，因为 <code>abs(0)</code> 仍是 0；做减法距离题时还要确保参与计算的整数没有超出题目给定范围。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> difference </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">12</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">20</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">abs</span><span style="--0:#D6DEEB;--1:#403F53">(difference) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 取到 0 的距离</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输出 8。求两个整数的距离时，先相减再取绝对值即可。</p>
+<p>例如输入 <code>-9 25</code>，如果要算两点在数轴上的距离，先求 <code>-9-25=-34</code>，再计算 <code>abs(-34)=34</code>。<code>abs</code> 接收的是括号内表达式已经算出的结果，不会分别处理两个数。</p>
+<a id="02-sqrt"></a>
+<h2 id="02-sqrt-平方根函数">02 sqrt 平方根函数</h2>
+<p><code>sqrt(x)</code> 计算非负数 <code>x</code> 的算术平方根，返回浮点类型。<code>sqrt(49.0)</code> 的数值为 7，但结果类型不是 <code>int</code>。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> side </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">sqrt</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">81.0</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376">  // sqrt 返回浮点结果</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> side </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>sqrt</code> 的实数参数必须满足 <code>x &gt;= 0</code>。它返回浮点值，即使 <code>sqrt(81.0)</code> 数值恰好是 9，也不应据此把所有平方根结果都当作整数；例如 <code>sqrt(2.0)</code> 是不能用有限小数精确写完的近似值。</p>
+<p>实数范围内不能对负数求平方根。若结果要保存到整数变量，还要考虑类型转换和可能的浮点误差，不能默认所有平方根都是整数。</p>
+<a id="03-minmax"></a>
+<h2 id="03-max-与-min">03 max 与 min</h2>
+<p><code>max(a, b)</code> 返回两者中的较大值，<code>min(a, b)</code> 返回较小值。两个参数应使用容易比较的相同类型。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">8</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> c </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">6</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">min</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#82AAFF;--1:#3B61B0">max</span><span style="--0:#D6DEEB;--1:#403F53">(a, b), c) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 先求 max(8,3)=8，再求 min(8,6)=6</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>max(a, b)</code> 和 <code>min(a, b)</code> 都接收两个可比较的同类值，并返回其中一个值；它们不会自动修改 <code>a</code> 或 <code>b</code>。需要比较三个数时，可以嵌套调用，但每次仍只比较两个，例如 <code>max(max(a, b), c)</code>，计算顺序从最内层开始。</p>
+<p>这里的中间结果可以写成：</p>
+<ol>
+<li>先进入最内层 <code>max(a,b)</code>，得到 <code>max(8,3)=8</code>；</li>
+<li>外层表达式变成 <code>min(8,c)</code>；</li>
+<li>代入 <code>c=6</code>，得到 <code>min(8,6)=6</code>。</li>
+</ol>
+<p>如果误从外层开始猜答案，就容易把三个数中的最大值 8 当作最终结果。嵌套调用和带括号的普通表达式一样，从最里面开始。</p>
+<h2 id="过程演示">过程演示</h2>
+<p>现在已经分别形成了 <code>abs</code>、<code>sqrt</code>、<code>min</code> 和 <code>max</code> 的参数、返回值与边界，再把它们放进唯一一份完整程序。程序读取两个整数和一个非负实数，依次输出第一个整数的绝对值、两整数的较小值与较大值、实数的算术平方根。</p>
+<h3 id="完成程序">完成程序</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a, b;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> value;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> value;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">abs</span><span style="--0:#D6DEEB;--1:#403F53">(a) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">min</span><span style="--0:#D6DEEB;--1:#403F53">(a, b) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">max</span><span style="--0:#D6DEEB;--1:#403F53">(a, b) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> fixed </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">setprecision</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">sqrt</span><span style="--0:#D6DEEB;--1:#403F53">(value) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 平方根按一位小数显示</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>-7 3 81</code> 时，<code>abs(-7)=7</code>；<code>min(-7,3)=-7</code>、<code>max(-7,3)=3</code>；<code>sqrt(81)=9</code>，按一位小数输出为 <code>9.0</code>。每一行都先算函数参数，再使用返回值。<code>fixed &lt;&lt; setprecision(1)</code> 只负责把浮点结果显示为一位小数，不改变 <code>sqrt</code> 返回 <code>double</code> 的事实。</p>
+<p>**跟着做：先选函数，再核对结果。**设 <code>a=-6</code>、<code>b=4</code>、<code>value=49</code>，请分别写出“<code>a</code> 到 0 的距离”“<code>a</code>、<code>b</code> 中的较大值”和 <code>value</code> 的算术平方根所用表达式，并计算结果。然后不用运行代码，推导 <code>rand() % 5 + 3</code> 的最小值和最大值。提示：先列出 <code>% 5</code> 的余数范围。你的四项结果应依次为 6、4、7.0，以及闭区间 <code>[3, 7]</code>；若随机范围从 4 开始，回看余数是否漏掉了 0。</p>
+<a id="04-random"></a>
+<h2 id="04-rand-与-srand">04 rand 与 srand</h2>
+<p><code>rand()</code> 产生伪随机整数。<code>rand() % 6</code> 的余数范围是 0 到 5，所以 <code>rand() % 6 + 1</code> 的范围是 1 到 6。</p>
+<p><code>srand(seed)</code> 设置伪随机序列的种子。相同种子通常产生相同序列；种子不同，序列通常不同。<code>srand</code> 不负责直接产生随机数，也不改变取余表达式规定的范围。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">srand</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">7</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376">  // 一组取数前只设置一次种子</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> dice </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">rand</span><span style="--0:#D6DEEB;--1:#403F53">() </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">6</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 把 0 到 5 平移到 1 到 6</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> dice </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输出的具体数值依赖实现，但一定在 1 到 6 之间。二级题目重点是范围计算，不把伪随机数当作真正不可预测的随机数。</p>
+<p>范围推导不要跳步：<code>rand()</code> 返回的非负整数除以 6，余数只可能是 <code>0、1、2、3、4、5</code>，所以 <code>rand() % 6</code> 只能落在 0 到 5；每个可能值再加 1，就变为 <code>1、2、3、4、5、6</code>。加 1 是整体平移，不会多出 7。</p>
+<p>构造闭区间 <code>[left, right]</code> 时，可以先数清区间内有多少个整数：<code>count = right-left+1</code>，再写成 <code>rand() % count + left</code>。例如 5 到 9 有 <code>9-5+1=5</code> 个整数，所以使用 <code>rand()%5+5</code>。这个公式要求 <code>right &gt;= left</code>，且 <code>count</code> 必须大于 0；如果范围端点本身不合法，就不能直接套公式。</p>
+<p>若要连续模拟多次掷骰子，通常只在循环开始前设置一次种子，再在循环内重复调用 <code>rand()</code>。如果每轮都用同一个种子重新执行 <code>srand(7)</code>，伪随机序列会从同一位置重新开始，反而可能反复得到同样的第一个结果。</p>
+<p>可以把规则记成“<strong>只播种一次，多次取数</strong>”：程序开始产生这一组伪随机数前调用一次 <code>srand(seed)</code>，之后按需要多次调用 <code>rand()</code>。随机数的具体值不适合写成跨环境固定答案，应该检查范围性质，例如 <code>rand() % 6 + 1</code> 每次结果都满足 1 到 6。</p>
+<p>若使用完整的标准头文件，<code>rand</code>、<code>srand</code> 来自 <code>&lt;cstdlib&gt;</code>，时间值 <code>time(0)</code> 来自 <code>&lt;ctime&gt;</code>；本站完整程序使用的 <code>&lt;bits/stdc++.h&gt;</code> 会在常见 G++ 环境中统一引入这些内容。用当前时间作种子通常能让不同运行时的序列起点不同，但它仍是<strong>伪随机</strong>，不适合密码或安全用途。二级只讨论范围构造与播种位置。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>主要实参</th>
+<th>常见返回结果</th>
+<th>必查边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abs(x)</code></td>
+<td>一个数</td>
+<td>与 0 的非负距离</td>
+<td>0 仍返回 0，整数运算不越界</td>
+</tr>
+<tr>
+<td><code>sqrt(x)</code></td>
+<td>一个非负数</td>
+<td><code>double</code> 平方根</td>
+<td><code>x &gt;= 0</code></td>
+</tr>
+<tr>
+<td><code>max(a,b)</code></td>
+<td>两个同类型值</td>
+<td>较大者</td>
+<td>参数能用同一类型比较</td>
+</tr>
+<tr>
+<td><code>min(a,b)</code></td>
+<td>两个同类型值</td>
+<td>较小者</td>
+<td>参数能用同一类型比较</td>
+</tr>
+<tr>
+<td><code>rand()</code></td>
+<td>无实参</td>
+<td>非负伪随机整数</td>
+<td>具体序列依赖实现</td>
+</tr>
+<tr>
+<td><code>srand(seed)</code></td>
+<td>一个种子</td>
+<td>不直接产生随机数</td>
+<td>一组取数前通常只调用一次</td>
+</tr>
+</tbody>
+</table>
+<p>先按问题场景选函数，再检查参数和返回值：</p>
+<table>
+<thead>
+<tr>
+<th>使用场景</th>
+<th>常用写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两个位置相差多远</td>
+<td><code>abs(a - b)</code></td>
+</tr>
+<tr>
+<td>求正方形边长等平方根问题</td>
+<td><code>sqrt(x)</code></td>
+</tr>
+<tr>
+<td>从两个数中选择较大或较小值</td>
+<td><code>max(a, b)</code> / <code>min(a, b)</code></td>
+</tr>
+<tr>
+<td>模拟骰子等指定整数范围</td>
+<td><code>rand() % n + start</code></td>
+</tr>
+</tbody>
+</table>
+<p>其中随机范围写法还要根据题目计算 <code>n</code> 和 <code>start</code>，不能原样套用。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>用途</th>
+<th>关键提醒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abs(x)</code></td>
+<td>绝对值</td>
+<td>结果非负</td>
+</tr>
+<tr>
+<td><code>sqrt(x)</code></td>
+<td>算术平方根</td>
+<td>参数应非负，结果为浮点类型</td>
+</tr>
+<tr>
+<td><code>max(a,b)</code></td>
+<td>较大值</td>
+<td>从内向外算嵌套调用</td>
+</tr>
+<tr>
+<td><code>min(a,b)</code></td>
+<td>较小值</td>
+<td>参数类型应便于比较</td>
+</tr>
+<tr>
+<td><code>rand()</code></td>
+<td>伪随机整数</td>
+<td>取余后先从 0 开始</td>
+</tr>
+<tr>
+<td><code>srand(seed)</code></td>
+<td>设置种子</td>
+<td>不直接返回随机数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<p>**题目：**怎样写出一个可能产生 5 到 9 的伪随机整数表达式，并说明范围？</p>
+<p><strong>推演：</strong></p>
+<ol>
+<li>5 到 9 一共有 <code>9-5+1=5</code> 个整数；</li>
+<li><code>rand() % 5</code> 的余数可能是 0、1、2、3、4；</li>
+<li>每个结果加 5 后，依次变成 5、6、7、8、9；</li>
+<li>因而表达式可写为 <code>rand() % 5 + 5</code>；</li>
+<li><code>srand(seed)</code> 在产生这一串数之前设置种子，不直接返回其中某个数。</li>
+</ol>
+<p><strong>结论：</strong><code>rand() % 5 + 5</code> 的范围是 5 到 9。构造 <code>[start, end]</code> 时，先计算整数个数，再把从 0 开始的余数整体平移到 <code>start</code>。</p>
+<a id="常见错误"></a>
+<h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
+<ul>
+<li>认为 <code>sqrt</code> 返回 <code>int</code>；</li>
+<li>对负数直接调用实数平方根；</li>
+<li>嵌套 <code>min</code>、<code>max</code> 时不从内向外计算；</li>
+<li>把 <code>% n</code> 的范围误写为 1 到 n；</li>
+<li>认为 <code>srand</code> 本身会产生随机数；</li>
+<li>把伪随机结果的具体值当作跨环境固定答案。</li>
+</ul>
+<p><strong>错误写法：</strong><code>double answer = sqrt(-4.0);</code></p>
+<p>**错误原因：**在实数范围内，负数没有算术平方根，不能把结果当作普通实数继续计算。</p>
+<p>**正确写法：**调用 <code>sqrt(x)</code> 前先确认 <code>x &gt;= 0</code>。</p>
+<p>**错误写法：**用 <code>rand() % 6</code> 表示骰子的 1 到 6。</p>
+<p>**错误原因：**余数范围是 0 到 5，既可能出现 0，也不会出现 6。</p>
+<p>**正确写法：**使用 <code>rand() % 6 + 1</code> 得到 1 到 6。<code>srand(seed)</code> 只负责设置种子，通常在产生随机数前设置一次，不需要每次调用 <code>rand()</code> 前都重新设置。</p>
+<h2 id="本节总结">本节总结</h2>
+<p>选择数学函数时先看任务，再检查参数范围和返回类型：<code>abs</code> 得到非负距离，<code>sqrt</code> 的实数参数应非负且结果为浮点类型，<code>min</code>、<code>max</code> 从内到外计算嵌套调用。随机整数先由 <code>% n</code> 得到 0 到 <code>n-1</code>，再整体平移；只播种一次，验证范围性质而不是固定某次结果。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>数据类型转换页面解释 <code>sqrt</code> 浮点结果怎样保存；多层循环可多次调用随机函数或用 <code>min</code>、<code>max</code> 维护当前结果，但应先明确每轮更新顺序。</p>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp7.html">← 上一个：常用数学函数</a>

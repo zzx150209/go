@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,16 +449,284 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>隐式转换：小类型自动转大类型，如 int 转 double，不丢失精度。</li><li>强制转换：(double)a 把 a 当 double 处理，(int)3.14 得到 3（截断小数）。</li><li>整数除法问题：7/2=3，要得到 3.5 需要写成 7.0/2 或 (double)7/2。</li><li>字符与整数互转：char 本质是 ASCII 码，&#x27;A&#x27;+1 得到 &#x27;B&#x27;。</li></ul>
-
-    <div class="kp-code"><pre>int a = 7, b = 2;
-double c = (double)a / b;  // 3.5（先转a再除）
-int x = (int)3.99;         // 3（截断，不是四舍五入）
-char ch = &#x27;A&#x27; + 1;          // &#x27;B&#x27;</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>强制转换是截断不是四舍五入，3.99 转 int 是 3 不是 4。</li><li>混合运算时 int 和 double 一起计算，int 自动提升为 double。</li></ul>
+    <article class="article-body">
+    <div data-gesp-level2-ui data-gesp-level2-detail></div>
+<p>先观察一个现象：<code>cout &lt;&lt; ('C' + 2);</code> 会输出整数 <code>69</code>，把同一个计算结果保存到 <code>char</code> 后却会输出字符 <code>E</code>。两个结果为什么不同？这正是本页要解决的问题。</p>
+<h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> ASCII 中空格为 32、<code>'0'</code> 为 48、<code>'A'</code> 为 65、<code>'a'</code> 为 97，数字、大写字母和小写字母各自连续；字符参与运算时先按编码值计算。</li>
+<li><strong>常用语法：</strong> 转换前先检查字符范围，再明确结果要保存成整数还是字符：<code>int code = static_cast&lt;int&gt;(ch);</code>、<code>char ch = static_cast&lt;char&gt;(code);</code>；数字字符判断写成 <code>ch &gt;= '0' &amp;&amp; ch &lt;= '9'</code>。</li>
+<li><strong>最小示例：</strong> 数字字符和字母转换都建立在各自连续的编码范围上：<code>'7' - '0' == 7</code>，<code>char upper = lower - 'a' + 'A';</code>。</li>
+<li><strong>关键易错点：</strong> 不要把字符 <code>'7'</code> 当成整数 <code>7</code>；不要写 <code>'0' &lt;= ch &lt;= '9'</code>；字符相减的结果是整数，不会自动按字符显示。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>本页要认识 ASCII 编码的基本原理、常用字符编码和连续区间，并能在字符与整数编码之间转换。</p>
+<p>本页只建立三个新核心：</p>
+<ol>
+<li>记住空格、<code>'0'</code>、<code>'A'</code>、<code>'a'</code> 对应的编号，用连续区间推导其他编码；</li>
+<li>在字符与编码之间双向转换，并追踪当前值、类型和输出形式；</li>
+<li>先判断范围，再完成数字字符和 ASCII 英文字母大小写的基础转换。</li>
+</ol>
+<p>开始前，只需要已经认识 <code>char</code>、<code>int</code>、<code>cin/cout</code>、比较、<code>&amp;&amp;</code> 和 <code>if/else</code>。完整的类型转换规则会在下一页系统学习。</p>
+<p>计算机用整数编码保存字符。二级不要求背完整 ASCII 表，但要记住常用字符的编号、连续区间和字符参与运算时的结果。</p>
+<p>本页先记住空格、<code>'0'</code>、<code>'A'</code>、<code>'a'</code> 四个常用 ASCII 字符的编号，再利用数字、大写字母、小写字母各自连续排列的规律，完成字符与编码、数字字符与整数、大小写字母之间的基础转换。</p>
+<p>数字字符与整数的转换、ASCII 英文字母的大小写转换，是利用连续区间完成的两个小任务。完成它们，才算真正把编码规律用起来。</p>
+<h2 id="过程演示">过程演示</h2>
+<p>分析字符运算时，依次记录四件事：<strong>当前值、当前类型、执行的操作、最终怎样输出</strong>。先看开头问题的最小过程：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">C</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> letter </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">C</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> letter </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>运算后的值与类型</th>
+<th>输出时的类型</th>
+<th>屏幕结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'C' + 2</code></td>
+<td><code>69</code>，<code>int</code></td>
+<td><code>int</code></td>
+<td><code>69</code></td>
+</tr>
+<tr>
+<td><code>char letter = 'C' + 2</code></td>
+<td>把整数 69 保存为 <code>char</code></td>
+<td><code>char</code></td>
+<td><code>E</code></td>
+</tr>
+</tbody>
+</table>
+<p>计算的中间值相同，显示不同，是因为输出时的类型不同。下面再解释 69 是怎样得到的。</p>
+<a id="01-ascii"></a>
+<h2 id="01-ascii-编码与常用字符">01 ASCII 编码与常用字符</h2>
+<p>先记住下面四个常用字符的编号：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th style="text-align: right">ASCII 编码</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空格</td>
+<td style="text-align: right">32</td>
+<td>认识空白字符的编码</td>
+</tr>
+<tr>
+<td><code>'0'</code></td>
+<td style="text-align: right">48</td>
+<td>推导数字字符</td>
+</tr>
+<tr>
+<td><code>'A'</code></td>
+<td style="text-align: right">65</td>
+<td>推导大写英文字母</td>
+</tr>
+<tr>
+<td><code>'a'</code></td>
+<td style="text-align: right">97</td>
+<td>推导小写英文字母</td>
+</tr>
+</tbody>
+</table>
+<p>先区分三个概念：<strong>字符</strong>是 <code>'A'</code> 这样的符号；<strong>编码</strong>是计算机为字符规定的整数编号，例如 65；<strong>字形</strong>是屏幕或纸上画出的具体样子。ASCII 规定字符与整数怎样对应，不规定字体怎样画字母。</p>
+<details><summary>补充了解：为什么说 ASCII 是 7 位？</summary><p>标准 ASCII 使用 7 个二进制位，编码范围是 0 到 127。C++ 规定 <code>sizeof(char)</code> 等于 1 Byte；在本项目常用的 G++ / OJ 环境中，一个 Byte 是 8 bit，因此一个 <code>char</code> 能保存本页使用的 ASCII 编码。<strong>ASCII 的 7 位范围</strong>和<strong>本环境中 <code>char</code> 占 1 Byte</strong>是两件相关但不同的事。</p></details>
+<p>数字字符 <code>'0'</code> 到 <code>'9'</code> 连续排列，大写字母 <code>'A'</code> 到 <code>'Z'</code> 连续排列，小写字母 <code>'a'</code> 到 <code>'z'</code> 也连续排列。遇到同一段中的其他字符，可以从已经记住的字符开始往后数：</p>
+<ul>
+<li><code>'3'</code> 在 <code>'0'</code> 后面 3 格，所以编码是 <code>48 + 3 = 51</code>；</li>
+<li><code>'C'</code> 在 <code>'A'</code> 后面 2 格，所以编码是 <code>65 + 2 = 67</code>。</li>
+</ul>
+<p>不需要背完整 ASCII 表，但不能跨不同区间随意推算。</p>
+<p>字符常量用单引号，如 <code>'A'</code>；双引号 <code>"A"</code> 表示字符串，不是单个 <code>char</code>。</p>
+<p>字符 <code>'1'</code> 与整数 <code>1</code> 看起来相似，含义却不同：<code>'1'</code> 是编码为 49 的字符，<code>1</code> 是数值一。<code>cout &lt;&lt; '1'</code> 和 <code>cout &lt;&lt; 1</code> 都能在屏幕上显示 1，但 <code>'1' + 1</code> 得到整数 50，<code>1 + 1</code> 得到整数 2。判断类型不能只看屏幕上的符号。</p>
+<a id="02-operation"></a>
+<h2 id="02-字符编码与整数运算">02 字符编码与整数运算</h2>
+<p><code>char</code> 参与加减运算时，会先提升为整数再计算。<code>'C'</code> 的编码是 67，所以 <code>'C' + 2</code> 得到 <code>int</code> 类型的 69。只有把这个结果保存或转换成 <code>char</code>，才会按编码 69 显示字符 <code>E</code>。</p>
+<p>本页使用两个固定工具：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#7FDBCA;--1:#096E72">static_cast</span><span style="--0:#C792EA;--1:#8844AE">&lt;int&gt;</span><span style="--0:#D6DEEB;--1:#403F53">(ch)</span><span style="--0:#919F9F;--1:#5D6376">    // 得到字符 ch 对应的整数编码</span></div></div><div class="ec-line"><div class="code"><span style="--0:#7FDBCA;--1:#096E72">static_cast</span><span style="--0:#C792EA;--1:#8844AE">&lt;char&gt;</span><span style="--0:#D6DEEB;--1:#403F53">(code)</span><span style="--0:#919F9F;--1:#5D6376"> // 得到整数 code 对应的字符</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>static_cast&lt;目标类型&gt;(值)</code> 会产生本次使用的新结果，不会永久改变原变量的声明类型。先会用这两个固定写法即可；隐式转换、显式转换和更多类型组合留到<a href="/gesp/level2/type-conversion/">数据类型转换</a>页面学习。</p>
+<p><code>cin &gt;&gt; ch</code> 默认跳过空格、换行和制表符等空白，所以不能用下面的完整程序把键盘输入的空格直接读入第一项 <code>ch</code>。如果只想验证空格编码，可以在代码中保存字符常量：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> space </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">static_cast</span><span style="--0:#C792EA;--1:#8844AE">&lt;int&gt;</span><span style="--0:#D6DEEB;--1:#403F53">(space) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376"> // 输出 32</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>ASCII 中 0 到 31 是控制代码，127 是 DEL；32 到 126 通常作为可打印范围，其中 32 是显示为空白的空格。</p>
+<p>下面唯一一份完整程序<strong>约定</strong>第一项是非空白可打印 ASCII 字符，第二项是 32 到 126 的编码。程序本身不检查输入范围；只有输入满足约定时，转换结果才是本课准备观察的字符。</p>
+<h3 id="完成程序">完成程序</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> ch;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> code;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> ch </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> code;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">static_cast</span><span style="--0:#C792EA;--1:#8844AE">&lt;int&gt;</span><span style="--0:#D6DEEB;--1:#403F53">(ch) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 字符转成整数编码</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">static_cast</span><span style="--0:#C792EA;--1:#8844AE">&lt;char&gt;</span><span style="--0:#D6DEEB;--1:#403F53">(code) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span><span style="--0:#919F9F;--1:#5D6376">  // 编码转成可显示字符</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><strong>输入样例：</strong></p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">A 66</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><strong>输出样例：</strong></p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">65</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">B</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>执行过程如下：</p>
+<table>
+<thead>
+<tr>
+<th>输入值与类型</th>
+<th>操作</th>
+<th>新结果与类型</th>
+<th>屏幕输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ch='A'</code>，<code>char</code></td>
+<td><code>static_cast&lt;int&gt;(ch)</code></td>
+<td><code>65</code>，<code>int</code></td>
+<td><code>65</code></td>
+</tr>
+<tr>
+<td><code>code=66</code>，<code>int</code></td>
+<td><code>static_cast&lt;char&gt;(code)</code></td>
+<td><code>'B'</code>，<code>char</code></td>
+<td><code>B</code></td>
+</tr>
+</tbody>
+</table>
+<p>两次转换都只产生新的表达式结果：<code>ch</code> 仍是 <code>char</code>，<code>code</code> 仍是 <code>int</code>。如果第二项输入 32，第二行会输出一个空格，看起来像一行空白；本程序不把控制代码作为需要观察字形的输入。</p>
+<p>**引导练习：**先尝试自己写出输入 <code>0 57</code> 时的两行输出，再逐格核对“当前值—类型—操作—新类型—输出”。</p>
+<details><summary>完成后展开核对</summary><p>第一项 <code>ch='0'</code> 是 <code>char</code>，转换成 <code>int</code> 后得到 48，第一行输出 <code>48</code>。第二项 <code>code=57</code> 是 <code>int</code>，转换成 <code>char</code> 后得到 <code>'9'</code>，第二行输出 <code>9</code>；两个原变量的声明类型都没有改变。</p></details>
+<a id="03-digits"></a>
+<h2 id="03-数字字符的判断与转换">03 数字字符的判断与转换</h2>
+<p>先观察：<code>'8' - '0'</code> 得到整数 8；<code>':' - '0'</code> 也能算出整数 10，但 <code>':'</code> 并不是数字字符。<strong>能算出差值，不等于输入合法</strong>，所以第一步必须判断字符是否落在连续的数字区间：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (ch </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">0</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> ch </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">9</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 两个边界必须同时满足</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">digit</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">not digit</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>确认范围后，利用与 <code>'0'</code> 的距离完成双向转换：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>具体计算</th>
+<th style="text-align: right">中间整数</th>
+<th>最终结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字符 <code>'7'</code> 转数值</td>
+<td><code>'7' - '0'</code></td>
+<td style="text-align: right"><code>55 - 48 = 7</code></td>
+<td>整数 7</td>
+</tr>
+<tr>
+<td>整数 7 转字符</td>
+<td><code>'0' + 7</code></td>
+<td style="text-align: right"><code>48 + 7 = 55</code></td>
+<td>保存到 <code>char</code> 后为 <code>'7'</code></td>
+</tr>
+</tbody>
+</table>
+<p>整数转数字字符前，必须保证整数在 0 到 9 之间。若 <code>x=12</code>，<code>'0' + x</code> 得到编码 60，对应的不是字符 <code>'12'</code>；一个 <code>char</code> 也不能同时保存两个字符。</p>
+<p>不能写 <code>'0' &lt;= ch &lt;= '9'</code>。C++ 会先计算 <code>'0' &lt;= ch</code>，得到 0 或 1，再把这个结果与 <code>'9'</code> 比较，并不是数学中的连续不等式。正确写法是 <code>ch &gt;= '0' &amp;&amp; ch &lt;= '9'</code>。</p>
+<a id="04-case"></a>
+<h2 id="04-英文字母大小写转换">04 英文字母大小写转换</h2>
+<p>在 ASCII 中，对应的英文字母大小写编码相差 <code>'a' - 'A'</code>，结果是 32。这个规律只用于 ASCII 英文字母：如果不判断范围就给 <code>'?'</code> 加 32，会得到字符 <code>'_'</code>，这不是大小写转换。因此，转换前必须先检查字符属于哪一段。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (ch </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> ch </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">Z</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">ch </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ch </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (ch </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> ch </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">z</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">ch </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> ch </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> ch </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>b</code> 时：</p>
+<ol>
+<li>大写区间判断为假，小写区间判断为真；</li>
+<li><code>'b'</code> 的编码 98 减去 32，得到整数 66；</li>
+<li>66 保存回 <code>char ch</code>，对应字符 <code>'B'</code>；</li>
+<li><code>cout &lt;&lt; ch</code> 输出 <code>B</code>。</li>
+</ol>
+<p>输入 <code>?</code> 时，两个范围判断都不成立，程序不会加减 32，仍输出 <code>?</code>。范围判断不是装饰，它防止数字和标点被错误移动到其他编码位置。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>前提</th>
+<th>写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查看字符编码</td>
+<td><code>ch</code> 是本页讨论的 ASCII 字符</td>
+<td><code>static_cast&lt;int&gt;(ch)</code></td>
+</tr>
+<tr>
+<td>编码转字符</td>
+<td><code>code</code> 已确认在目标 ASCII 范围</td>
+<td><code>static_cast&lt;char&gt;(code)</code></td>
+</tr>
+<tr>
+<td>判断数字字符</td>
+<td>无</td>
+<td><code>ch &gt;= '0' &amp;&amp; ch &lt;= '9'</code></td>
+</tr>
+<tr>
+<td>数字字符转整数</td>
+<td>已确认 <code>'0'</code> 到 <code>'9'</code></td>
+<td><code>ch - '0'</code></td>
+</tr>
+<tr>
+<td>0—9 转数字字符</td>
+<td><code>x</code> 在 0 到 9</td>
+<td><code>'0' + x</code>，再保存到 <code>char</code></td>
+</tr>
+<tr>
+<td>大写转小写</td>
+<td>已确认 <code>'A'</code> 到 <code>'Z'</code></td>
+<td><code>upper + ('a' - 'A')</code></td>
+</tr>
+<tr>
+<td>小写转大写</td>
+<td>已确认 <code>'a'</code> 到 <code>'z'</code></td>
+<td><code>lower - ('a' - 'A')</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<p>**题目：**比较 <code>char ch='4'; ch=ch+2; cout&lt;&lt;ch;</code> 与 <code>cout&lt;&lt;('4'+2);</code> 的输出。</p>
+<p><strong>推演：</strong></p>
+<ol>
+<li><code>'4'</code> 的编码是 52，加 2 后中间结果都是 <code>int</code> 类型的 54；</li>
+<li>第一段把 54 保存回 <code>char ch</code>，编码 54 对应字符 <code>'6'</code>，所以输出 <code>6</code>；</li>
+<li>第二段直接输出整数表达式，没有转回 <code>char</code>，所以输出数值 <code>54</code>。</li>
+</ol>
+<p>**结论：**两段计算的中间整数相同，最终显示不同，是因为保存或输出时的类型不同。</p>
+<p>**引导练习：**字符 <code>ch='8'</code> 的编码是 56。请分别计算 <code>ch-'0'</code>、<code>ch+1</code> 直接交给 <code>cout</code>、以及 <code>char next=ch+1; cout&lt;&lt;next;</code> 的结果。提示：先写出中间整数，再看输出时是 <code>int</code> 还是 <code>char</code>。核对结果依次是整数 8、整数 57、字符 <code>9</code>；若把第二项也写成字符 9，说明漏看了表达式结果类型。</p>
+<a id="常见错误"></a>
+<h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
+<ul>
+<li>**把字符 <code>'7'</code> 当成整数 <code>7</code>：**计算会相差 48。先确认范围，再用 <code>'7' - '0'</code> 得到数值 7；回看 <a href="#03-digits">03 数字字符</a>。</li>
+<li>**只算编码，不追踪类型：**整数 54 可能输出 <code>54</code>，保存为 <code>char</code> 后却会输出 <code>6</code>。每一步都写清结果类型；回看 <a href="#02-operation">02 字符编码与整数运算</a>。</li>
+<li>**写连续不等式 <code>'0' &lt;= c &lt;= '9'</code>：**左边比较会先变成 0 或 1。立即改成 <code>c &gt;= '0' &amp;&amp; c &lt;= '9'</code>；回看 <a href="#03-digits">03 数字字符</a>。</li>
+<li>**不检查范围就转 <code>char</code> 或直接加减 32：**可能把标点变成另一个无关字符。先检查目标编码、数字或字母区间；回看 <a href="#03-digits">03 数字字符</a> 和 <a href="#04-case">04 大小写转换</a>。</li>
+<li>**写 <code>char c = "A";</code>：**双引号表示字符串，不能保存到单个 <code>char</code>。立即改成单引号 <code>char c = 'A';</code>；回看 <a href="#01-ascii">01 ASCII 编码与常用字符</a>。</li>
+</ul>
+<p>**修正后复演：**依次代入 <code>'/'</code>、<code>'0'</code>、<code>'9'</code>、<code>':'</code>。只有 <code>'0'</code> 和 <code>'9'</code> 同时满足上下边界，前后的标点都应进入 <code>else</code>；这四个结果正好检查两个等号和两个区间外边界。</p>
+<p>输出编码时也要明确类型：<code>cout &lt;&lt; c;</code> 输出字符本身，<code>cout &lt;&lt; static_cast&lt;int&gt;(c);</code> 才输出对应整数编码。</p>
+<h2 id="本节总结">本节总结</h2>
+<p>ASCII 用整数给字符编号。记住空格、<code>'0'</code>、<code>'A'</code>、<code>'a'</code> 对应的编号，再利用数字、大写字母和小写字母各自连续的规律，就能推导常用编码。字符参与算术时先得到整数结果；之后是显示整数还是字符，要看结果最终以 <code>int</code> 还是 <code>char</code> 保存和输出。数字与大小写转换都必须先检查范围。</p>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li>如果还分不清当前值和当前类型，先回看<a href="/gesp/level1/data-types/">基本数据类型</a>；</li>
+<li>如果想系统理解 <code>static_cast</code> 和混合类型运算，继续学习<a href="/gesp/level2/type-conversion/">数据类型转换</a>；</li>
+<li>如果执行步骤容易跳步，可以回看<a href="/gesp/level2/flowcharts/">流程图基础</a>。</li>
+</ul>
+<h2 id="进入综合测试前">进入综合测试前</h2>
+<p>达到下面三项，才算真正学会：</p>
+<ol>
+<li>不查完整表，能从一个已知字符的编号推导另一个数字字符或英文字母的编码；算错时回看 <a href="#01-ascii">01 ASCII 编码与常用字符</a>；</li>
+<li>能解释 <code>A → 65</code>、<code>66 → B</code> 的每一步值和类型；混淆输出时回看 <a href="#02-operation">02 字符编码与整数运算</a>；</li>
+<li>能先判断范围，并分别完成一次数字字符双向转换和一次 ASCII 英文字母大小写转换；数字边界回看 <a href="#03-digits">03 数字字符</a>，字母边界回看 <a href="#04-case">04 大小写转换</a>。</li>
+</ol>
+<h3 id="三个核心自检">三个核心自检</h3>
+<ol>
+<li>不查表，从 <code>'A'=65</code> 推导 <code>'G'</code> 的编码；</li>
+<li>写出完整程序输入 <code>B 97</code> 时的两行输出，并说出两次转换后的类型；</li>
+<li>先写范围判断，再分别完成：字符 <code>'8'</code> 转整数、整数 3 转字符、字符 <code>'d'</code> 转大写；同时说明为什么标点 <code>'?'</code> 不应加减 32。</li>
+</ol>
+<details><summary>三题都完成后展开核对</summary><ol>
+<li><code>'G'</code> 在 <code>'A'</code> 后 6 格，编码是 <code>65 + 6 = 71</code>。</li>
+<li>第一行是 <code>66</code>，结果类型为 <code>int</code>；第二行是 <code>a</code>，结果类型为 <code>char</code>。</li>
+<li><code>'8' - '0'</code> 得整数 8；<code>'0' + 3</code> 的整数结果保存为 <code>char</code> 后得到 <code>'3'</code>；<code>'d'</code> 在 <code>'a'</code> 到 <code>'z'</code> 内，减去 32 后得到 <code>'D'</code>。<code>'?'</code> 不在两个英文字母区间内，直接加减 32 只会把它变成无关标点。</li>
+</ol></details>
+<p>下面 8 道题是本页唯一的综合巩固入口。做错后回看题目对应的知识部分，再重新解释原因，不只记答案。</p>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp3.html">← 上一个：流程图</a>

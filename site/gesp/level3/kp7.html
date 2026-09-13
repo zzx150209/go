@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,26 +449,347 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>枚举法：把所有可能的情况逐一列举，逐个检查是否满足条件。</li><li>关键是确定枚举范围和判断条件，范围不能太大导致超时。</li><li>常见枚举：枚举数字、枚举位置、枚举选择（是/否）。</li><li>优化枚举范围：利用数学性质缩小上下界，减少不必要的情况。</li></ul>
+    <article class="article-body">
+    <h2 id="本课先记住">本课先记住</h2>
+<h3 id="核心结论">核心结论</h3>
+<p>枚举法适合候选数量有限、每个候选都能逐个判断的问题。先确定要枚举的对象、完整范围和尝试顺序，再由题目条件判断当前候选是否合法。最后按题意统计、输出或维护答案，做到不重复、不遗漏，并保证循环一定结束。</p>
+<h3 id="常用语法">常用语法</h3>
+<p>常用写法是用 <code>for</code> 循环依次生成候选，在 <code>if</code> 中判断合法性；只找第一个答案时，可以在命中后用 <code>break</code> 停止。若一个量能由另一个量直接推出，例如 <code>rabbit = heads - chicken</code>，就不必再为它增加一重循环。</p>
+<h3 id="最小示例">最小示例</h3>
+<p>寻找 <code>0</code> 到 <code>5</code> 中的偶数时，让 <code>x</code> 从 <code>0</code> 逐个增加到 <code>5</code>，每轮检查 <code>x % 2 == 0</code>；通过判断的候选依次是 <code>0、2、4</code>。</p>
+<h3 id="关键易错点">关键易错点</h3>
+<ul>
+<li>把 <code>&lt;</code> 和 <code>&lt;=</code> 写混，漏掉上界或下界。</li>
+<li>能直接推导第二个量时仍写双重循环，造成重复候选。</li>
+<li>候选还没通过全部条件就计数，或没有依据就提前 <code>break</code>。</li>
+<li>只写循环而不先估算候选总数，可能让枚举次数过大。</li>
+</ul>
 
-    <div class="kp-code"><pre>// 找出 1 到 n 中所有能被 3 整除的数
-int n;
-cin &gt;&gt; n;
-for (int i = 1; i &lt;= n; i++) {
-    if (i % 3 == 0) cout &lt;&lt; i &lt;&lt; &quot; &quot;;
-}
-
-// 百钱百鸡
-for (int x = 0; x &lt;= 20; x++)
-    for (int y = 0; y &lt;= 33; y++) {
-        int z = 100 - x - y;
-        if (5*x + 3*y + z/3 == 100 &amp;&amp; z % 3 == 0)
-            cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; z &lt;&lt; endl;
-    }</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>枚举范围要算好上界，太大可能超时。</li><li>枚举时注意题目是否要求去重或顺序。</li></ul>
+<h2 id="知识范围与使用边界">知识范围与使用边界</h2>
+<p>枚举法把<strong>有限范围</strong>内的候选按确定顺序逐个生成，再用同一组条件判断是否合法，并按题意处理答案。本课只处理范围能够证明、候选数量可以接受的问题；若没有可靠上界，不能写无限尝试的循环。</p>
+<p>基本路线是：<strong>确定范围 → 逐个尝试 → 判断条件 → 处理答案</strong>。写循环前必须说清五件事：枚举对象是什么、范围两端在哪里、尝试顺序怎样、合法条件是什么、命中后如何处理。</p>
+<p>本课使用三级已经学过的变量、分支、循环、字符串与一维数组，不引入函数封装、指针、递归、二维数组、排序、搜索、动态规划或新的容器。</p>
+<h2 id="kp-01">01 枚举思想与适用条件</h2>
+<p>枚举不是“随便试几个数”，而是让每一轮循环都对应一个明确候选。只要候选范围有限、判断规则明确，并且逐个检查的次数能够接受，就可以考虑枚举。</p>
+<p>第一个课程核心是：<strong>先确定对象、有限范围与尝试顺序</strong>。对象决定“每轮在试什么”，范围保证“不漏端点且一定结束”，顺序则决定候选怎样依次出现。</p>
+<figure data-density="standard"><figcaption>单重、双重与多重枚举</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>形式</th>
+<th>每个候选包含什么</th>
+<th>典型结构</th>
+<th style="text-align: right">候选次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单重枚举</td>
+<td>一个数或一个下标 x</td>
+<td>一层循环</td>
+<td style="text-align: right">最多 A 次</td>
+</tr>
+<tr>
+<td>双重枚举</td>
+<td>两个独立变化的量</td>
+<td>两层循环</td>
+<td style="text-align: right">最多 A × B 次</td>
+</tr>
+<tr>
+<td>多重枚举</td>
+<td>三个或更多独立变化的量</td>
+<td>对应层数的循环</td>
+<td style="text-align: right">各层次数相乘</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>循环层数取决于“有几个量必须独立尝试”。如果第二个量能由第一个量直接推出，它就不是独立选择，不应机械增加一重循环。</p>
+<p>候选次数要用乘法估算。例如 x 有 5 种取值、y 有 4 种取值，双重枚举最多检查 5 × 4 = 20 个候选；若 z 还有 3 种取值，三重枚举最多检查 5 × 4 × 3 = 60 个候选。不能只看每一层都不大，却忽略相乘后的总量。</p>
+<h3 id="三重枚举短片段">三重枚举短片段</h3>
+<p>若 x、y、z 都只能取 0 或 1，并且三个量都要独立选择，可以用三层循环检查 8 个三元组：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; x </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; x</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> y </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; y </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; y</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> z </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; z </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; z</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> y </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> z </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>最内层的 z 变化最快；固定一组 (x, y) 后，z = 0、1 都会被检查。三层范围都有限，所以恰好生成 2 × 2 × 2 = 8 个候选并正常结束。</p>
+<span id="kp-02"></span>
+<h2 id="枚举对象与范围">枚举对象与范围</h2>
+<p>枚举对象常见有两种：<strong>数值</strong>和<strong>下标</strong>。枚举数值时，循环变量本身就是候选；枚举下标时，循环变量表示位置，要通过 a[i] 或 s[i] 取得该位置的内容。</p>
+<figure data-density="standard"><figcaption>数值、下标与范围</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>枚举对象</th>
+<th>循环变量表示什么</th>
+<th>范围示例</th>
+<th>判断时使用什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值</td>
+<td>一个候选整数 x</td>
+<td><code>0 &lt;= x &lt;= 100</code></td>
+<td>直接检查 x</td>
+</tr>
+<tr>
+<td>数组下标</td>
+<td>数组中的位置 i</td>
+<td><code>0 &lt;= i &lt; n</code></td>
+<td>检查 a[i]</td>
+</tr>
+<tr>
+<td>字符串下标</td>
+<td>字符串中的位置 i</td>
+<td><code>0 &lt;= i &lt; length</code></td>
+<td>检查 s[i]</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>边界要从题意推导。允许 0 时必须从 0 开始；上界也可能成为合法候选时应使用 <code>&lt;=</code>。枚举下标则通常使用 <code>&lt; n</code>，因为长度为 n 时最后一个合法下标是 n - 1。</p>
+<p>从数组中选择两个<strong>不同位置</strong>，且交换顺序后仍算同一种选择时，内层从 j = i + 1 开始：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// 当前候选是位置对 (i, j)</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>这样既不会选择同一位置，也不会在 (i, j) 之后再次生成反向的 (j, i)。如果题目区分先后顺序，范围必须重新设计，不能照搬这一写法。</p>
+<p>尝试顺序也要与题意一致。寻找最小合法值时，通常从小到大枚举；只要范围完整，顺序不会改变“有哪些合法候选”，却会影响“第一个找到的是谁”。</p>
+<h2 id="kp-03">03 候选、范围、判断与处理</h2>
+<p>第二个课程核心是：<strong>由条件推导候选，再判断它是否合法</strong>。先把题目中的量分成“需要尝试的量”和“可以计算出来的量”，能直接计算的就不再枚举。</p>
+<p>以鸡兔同笼为例，已知总头数 heads 和总腿数 legs。自然想法是同时尝试鸡数和兔数，再检查头数、腿数两个条件；但只要鸡数确定，兔数就由总头数唯一推出：</p>
+<p>rabbit = heads - chicken</p>
+<p>因此只需让 chicken 从 0 到 heads，每轮计算 rabbit，再检查 chicken * 2 + rabbit * 4 == legs。这种形成过程把双变量尝试收束成单重枚举：没有漏掉任何可能的鸡数，也不会为同一个鸡数重复生成兔数。</p>
+<p>同样地，寻找满足 x + y = target 的非负整数对时，可以枚举 x，再计算 y = target - x。如果交换顺序算不同方案，就让 x 从 0 到 target；如果交换顺序算同一种方案，可以再证明并限制 <code>x &lt;= y</code>，但不能凭感觉把范围砍半。</p>
+<p>写任何枚举前，都用下面五问完成规则：</p>
+<ol>
+<li><strong>对象：</strong> 每轮候选是什么，例如一个数、一个下标或一对位置。</li>
+<li><strong>范围：</strong> 每个需要尝试的量从哪里到哪里，端点是否包含。</li>
+<li><strong>顺序：</strong> 候选按什么次序出现，顺序是否影响首解或去重。</li>
+<li><strong>判断：</strong> 当前候选必须通过哪些题目条件。</li>
+<li><strong>处理：</strong> 合法时是计数、输出、记录首解，还是更新最优答案。</li>
+</ol>
+<p>这里“推导”只负责生成当前候选的一部分，“判断”才决定整个候选是否合法。即使 rabbit = heads - chicken 能保证头数正确，仍要检查腿数；不能把“算得出来”误当成“已经合法”。</p>
+<h2 id="kp-04">04 合法性判断</h2>
+<p>生成候选之后，要把题目条件逐条翻译成判断。只有通过<strong>全部条件</strong>的候选，才能计数、输出或用于更新答案；少检查一个条件，就可能把不合法候选当成答案。</p>
+<p>例如“寻找第一个能同时被 2 和 3 整除的整数”，当前候选 x 必须同时满足 x % 2 == 0 和 x % 3 == 0。若只检查其中一个条件，答案就不再符合原题。</p>
+<p>判断与处理要分开理解：</p>
+<ol>
+<li>先计算由候选得到的中间量。</li>
+<li>再检查所有合法条件。</li>
+<li>只有判断为真时才处理答案。</li>
+<li>判断为假时跳过本轮，继续尝试下一个候选。</li>
+</ol>
+<p>条件剪枝是“提前排除已经能证明不合法的候选”。例如要求 x + y = 8 且 x、y 都是非负整数时，若已经算出 <code>y &lt; 0</code>，就能直接跳过；但不能因为“看起来不像答案”而停止整个循环。</p>
+<h3 id="计数最优答案与首解停止">计数、最优答案与首解停止</h3>
+<figure data-density="standard"><figcaption>计数、首解、全部与最优答案维护</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>题目目标</th>
+<th>初始状态</th>
+<th>合法候选出现时</th>
+<th>没有合法候选时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>统计方案数</td>
+<td>count = 0</td>
+<td>通过全部条件后加 1</td>
+<td>count 保持 0</td>
+</tr>
+<tr>
+<td>判断存在或记录首解</td>
+<td>found = false</td>
+<td>记录当前候选；只需首解时 break</td>
+<td>found 保持 false</td>
+</tr>
+<tr>
+<td>输出全部方案</td>
+<td>尚未输出</td>
+<td>每个唯一合法候选输出一次，并继续循环</td>
+<td>不产生方案输出</td>
+</tr>
+<tr>
+<td>求最大值或最小值</td>
+<td>首个合法候选，或配合 found</td>
+<td>仅在当前候选更优时更新</td>
+<td>不能输出凭空设定的 0</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>只找首解时，break 必须放在候选已经通过全部条件之后。若题目要求全部方案、方案总数或最优答案，就不能在第一次命中后无依据 break。</p>
+<p>最优值不能随意初始化为 0，因为合法候选可能全部为负数。稳妥做法是用首个合法候选初始化，或者先用 found 记录“是否已经有答案”，以后再比较更新。</p>
+<p>官方真题中可能出现压缩写法 out[cnt++] = x;，它表示先用当前 cnt 写入，再让 cnt 增加。三级主教学优先拆成“先写入、再 cnt++”两步。写法 count += height[i] &gt; 135 ? 1 : 0; 表示条件成立加 1，否则加 0；本课只要求能识别，日常编程仍优先使用完整 if。</p>
+<h2 id="kp-05">05 枚举次数与复杂度</h2>
+<p>枚举能否使用，不只看代码有几行，还要估算候选总数。单重循环的次数看区间长度；多重循环的次数通常是各层次数相乘。</p>
+<p>若 n = 5，完整枚举五个下标只检查 5 次；枚举所有有序下标对最多检查 5 × 5 = 25 次。若 n = 100000，两层完整循环接近一百亿次，就不再是“小范围逐个检查”。</p>
+<p>估算时按下面顺序：</p>
+<ol>
+<li>计算每一层候选个数，注意两端是否包含。</li>
+<li>将独立循环层的次数相乘。</li>
+<li>再考虑直接推导、范围缩小或条件剪枝能否减少实际检查。</li>
+<li>确认即使走到最大边界，循环也会在有限步后结束。</li>
+</ol>
+<p>例如 heads 满足 <code>0 &lt;= heads &lt;= 100</code> 时，chicken 从 0 到 heads 最多只有 101 个候选。由 chicken 直接推出 rabbit 后，不需要再乘一次 101；这正是先辨认独立变量的价值。</p>
+<span id="kp-06"></span>
+<h2 id="枚举范围与去重">枚举范围与去重</h2>
+<p>缩小范围之前必须给出证明。可靠方法包括：</p>
+<ul>
+<li><strong>范围证明：</strong> 根据非负、上下界或数量关系排除不可能的值。</li>
+<li><strong>直接推导：</strong> 用已经枚举的量唯一算出另一个量，例如 y = target - x。</li>
+<li><strong>条件剪枝：</strong> 当前候选已经违反必要条件时，跳过剩余判断。</li>
+<li><strong>统一表示：</strong> 当交换顺序仍是同一方案时，只保留一种顺序。</li>
+</ul>
+<p>从数组中选两个不同位置且不区分顺序时，使用 j = i + 1，让每一对位置只出现一次。这里的去重依据是 j 永远大于 i，不是凭经验删掉一半候选。</p>
+<p>目标和 target = 8、x 和 y 都为非负整数，且 (x, y) 与 (y, x) 算同一种方案时，可以统一要求 <code>x &lt;= y</code>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right">x</th>
+<th style="text-align: right">y = 8 - x</th>
+<th>是否保留</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right">0</td>
+<td style="text-align: right">8</td>
+<td>是</td>
+<td><code>x &lt;= y</code></td>
+</tr>
+<tr>
+<td style="text-align: right">1</td>
+<td style="text-align: right">7</td>
+<td>是</td>
+<td><code>x &lt;= y</code></td>
+</tr>
+<tr>
+<td style="text-align: right">2</td>
+<td style="text-align: right">6</td>
+<td>是</td>
+<td><code>x &lt;= y</code></td>
+</tr>
+<tr>
+<td style="text-align: right">3</td>
+<td style="text-align: right">5</td>
+<td>是</td>
+<td><code>x &lt;= y</code></td>
+</tr>
+<tr>
+<td style="text-align: right">4</td>
+<td style="text-align: right">4</td>
+<td>是</td>
+<td><code>x &lt;= y</code></td>
+</tr>
+<tr>
+<td style="text-align: right">5</td>
+<td style="text-align: right">3</td>
+<td>否</td>
+<td>与 (3, 5) 重复</td>
+</tr>
+<tr>
+<td style="text-align: right">6</td>
+<td style="text-align: right">2</td>
+<td>否</td>
+<td>与 (2, 6) 重复</td>
+</tr>
+<tr>
+<td style="text-align: right">7</td>
+<td style="text-align: right">1</td>
+<td>否</td>
+<td>与 (1, 7) 重复</td>
+</tr>
+<tr>
+<td style="text-align: right">8</td>
+<td style="text-align: right">0</td>
+<td>否</td>
+<td>与 (0, 8) 重复</td>
+</tr>
+</tbody>
+</table>
+<p>因此只枚举 x 从 0 到 target / 2，就能保留五种无序方案。若题目区分顺序，后四个候选也有独立意义，此时不能使用这一范围。</p>
+<span id="kp-07"></span>
+<h2 id="枚举范围与去重追踪">枚举范围与去重追踪</h2>
+<p>追踪枚举时，不要只抄变量值，要记录“本轮候选怎样得到、判断是否通过、答案是否变化、下一步去哪里”。这样才能检查范围是否漏端点、候选是否重复，以及 break 是否有依据。</p>
+<p>鸡兔同笼主样例会完整追踪 chicken = 0 到 5。阅读追踪时重点核对：</p>
+<ol>
+<li>初始化时还没有合法方案。</li>
+<li>每轮先由 heads - chicken 推出 rabbit。</li>
+<li>再计算实际腿数并判断。</li>
+<li>命中后输出和计数，但因为题目要检查完整范围，所以继续循环。</li>
+<li>chicken 增加到 6 时，循环条件失败，程序停止。</li>
+<li>若整个范围都没有命中，才输出“没有满足条件的候选”所对应的 No。</li>
+</ol>
+<p>这份追踪只解释输入 5 14 的真实执行，不把一个样例误写成对所有输入的证明。范围完整性、去重与必然停止仍要由前面的规则单独说明。</p>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="鸡兔同笼从两个未知量收束为一次枚举">鸡兔同笼：从两个未知量收束为一次枚举</h3>
+<h3 id="d1-数据边界与程序接口">D1 数据边界与程序接口</h3>
+<p>程序读入两个整数 heads 和 legs，分别表示总头数与总腿数，约束为：</p>
+<ul>
+<li><code>0 &lt;= heads &lt;= 100</code></li>
+<li><code>0 &lt;= legs &lt;= 400</code></li>
+</ul>
+<p>鸡数只能从 0 到 heads，因此最多检查 101 个候选。鸡数、兔数、腿数与 solutionCount 的最大值都远小于 int 的表示范围，使用 int 安全。</p>
+<p>固定头数和腿数后，若有解，鸡数和兔数只能组成一组答案；程序最大输出是一组数对，否则输出 No。输出的数对顺序是“鸡数 兔数”。</p>
+<p>把 rabbit = heads - chicken 代入腿数式，可得 <code>actualLegs = 4*heads - 2*chicken</code>。chicken 每增加 1，actualLegs 就减少 2，因此同一个 legs 在完整枚举中至多命中一次，这也说明程序不会输出两组不同答案。</p>
+<h3 id="s1-主样例">S1 主样例</h3>
+<p>输入：5 14</p>
+<p>输出：3 2</p>
+<p>这表示共有 5 个头、14 条腿时，有 3 只鸡和 2 只兔。</p>
+<h3 id="算法形成链">算法形成链</h3>
+<p>最自然的想法是同时尝试 chicken 和 rabbit，再检查头数与腿数。但这会把两个量都当成独立选择，产生许多头数本来就不对的候选。</p>
+<p>观察头数等式：</p>
+<p>chicken + rabbit = heads</p>
+<p>只要 chicken 已经确定，就能唯一推出：</p>
+<p>rabbit = heads - chicken</p>
+<p>于是只枚举 chicken，从 0 到 heads，也就是枚举鸡的数量；每轮先算 rabbit，再计算实际腿数 actualLegs，最后判断 actualLegs 是否等于 legs，也就是总腿数符合题意。一般枚举题可能得到无解、唯一解和多种方案；本题固定一组 heads 和 legs 时，由于 <code>actualLegs = 4 * heads - 2 * chicken</code>，chicken 每增加 1，实际腿数就减少 2，所以至多命中一次。这样每个可能的鸡数恰好出现一次，对应的兔数也唯一，因此不会漏、不会重；chicken 超过 heads 后循环条件失败，程序一定停止。</p>
+<h3 id="八步执行方法">八步执行方法</h3>
+<ol>
+<li>读入 heads 和 legs。</li>
+<li>将 solutionCount 初始化为 0，表示还没有合法方案。</li>
+<li>让 chicken 从 0 开始，逐个尝试到 heads。</li>
+<li>用 rabbit = heads - chicken 推出当前兔数。</li>
+<li>计算 actualLegs = chicken * 2 + rabbit * 4。</li>
+<li>若 actualLegs == legs，输出当前 chicken 和 rabbit，并让 solutionCount 增加 1。</li>
+<li>命中后仍继续检查剩余鸡数，验证完整范围。</li>
+<li>循环结束后，若 solutionCount 仍为 0，输出 No。</li>
+</ol>
+<h3 id="完成程序">完成程序</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> heads, legs;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> heads </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> legs;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> solutionCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> chicken </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; chicken </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> heads; chicken</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> rabbit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> heads </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> chicken;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> actualLegs </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> chicken </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> rabbit </span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">4</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (actualLegs </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> legs) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> chicken </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> rabbit </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">solutionCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (solutionCount </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">No</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>程序只有 chicken 是独立枚举量。rabbit 和 actualLegs 都由当前候选计算得到；只有腿数完全相等时才输出和计数。若所有候选都失败，solutionCount 保持 0，最后输出 No。</p>
+<figure><div tabindex="0" role="region"><table><caption>鸡兔同笼：输入 5 14 的完整执行</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">chicken / 循环条件</th><th scope="col">rabbit</th><th scope="col">actualLegs</th><th scope="col">判断与动作</th><th scope="col">solutionCount</th><th scope="col">下一步去哪里</th></tr></thead><tbody><tr><th scope="row">初始化</th><td>尚未进入循环</td><td>尚未计算</td><td>尚未计算</td><td>还没有检查候选</td><td>0</td><td>进入 chicken = 0 的循环条件判断</td></tr><tr><th scope="row">候选 1</th><td>0，0 &lt;= 5 为真</td><td>5</td><td>20</td><td>20 == 14 为假，跳过</td><td>0</td><td>chicken++，判断 chicken = 1</td></tr><tr><th scope="row">候选 2</th><td>1，1 &lt;= 5 为真</td><td>4</td><td>18</td><td>18 == 14 为假，跳过</td><td>0</td><td>chicken++，判断 chicken = 2</td></tr><tr><th scope="row">候选 3</th><td>2，2 &lt;= 5 为真</td><td>3</td><td>16</td><td>16 == 14 为假，跳过</td><td>0</td><td>chicken++，判断 chicken = 3</td></tr><tr><th scope="row">候选 4</th><td>3，3 &lt;= 5 为真</td><td>2</td><td>14</td><td>14 == 14 为真，输出 3 2；继续循环</td><td>0 → 1</td><td>chicken++，判断 chicken = 4</td></tr><tr><th scope="row">候选 5</th><td>4，4 &lt;= 5 为真</td><td>1</td><td>12</td><td>12 == 14 为假，跳过</td><td>1</td><td>chicken++，判断 chicken = 5</td></tr><tr><th scope="row">候选 6</th><td>5，5 &lt;= 5 为真</td><td>0</td><td>10</td><td>10 == 14 为假，跳过</td><td>1</td><td>chicken++，判断 chicken = 6</td></tr><tr><th scope="row">循环结束</th><td>6，6 &lt;= 5 为假</td><td>不再计算</td><td>不再计算</td><td>退出循环</td><td>1</td><td>检查 solutionCount == 0</td></tr><tr><th scope="row">最终判断</th><td>循环外</td><td>—</td><td>—</td><td>solutionCount == 0 为假，不输出 No；程序停止</td><td>1</td><td>程序结束</td></tr></tbody></table></div><figcaption>输入 5 14 时，六个候选按顺序全部检查；只有 chicken = 3 命中并输出 3 2。这个追踪说明本样例的真实执行，不代替一般正确性证明。</figcaption></figure>
+<h3 id="只找首解时使用-break">只找首解时使用 break</h3>
+<p>若题目明确只要第一个答案，可以在候选通过全部条件、答案已经记录之后停止：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> found </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">false</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; x </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> limit; x</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (x </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">answer </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> x;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">found </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>不能在条件尚未全部检查时 break；求全部方案、计数或最优答案时也不能照搬首解停止。</p>
+<h3 id="官方真题少见写法">官方真题少见写法</h3>
+<p>官方题中可能写出 out[cnt++] = x;。它的直白等价写法是：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">out</span><span style="--0:#D6DEEB;--1:#403F53">[cnt] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> x;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cnt</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>也可能写出 count += height[i] &gt; 135 ? 1 : 0;。它的直白等价写法是：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">height</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">135</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>这两种压缩写法只用于识别。三级日常编程优先采用分步写法，先看清写入、判断与累计各自发生在什么时候。</p>
+<h2 id="common-errors">常见错误</h2><div><ol>
+<li>
+<p><strong>范围漏掉端点。</strong> 现象：上界恰好是答案时程序找不到。→ 原因：没有先判断端点是否属于合法范围，把 <code>&lt;=</code> 误写成 <code>&lt;</code>，或忘记从 0 开始。→ 修正：从题意写出闭区间或下标区间，再翻译成循环条件。→ 复验：分别用下界合法、上界合法和空范围附近的数据检查。</p>
+</li>
+<li>
+<p><strong>能推导第二个量时仍用双重枚举。</strong> 现象：同一个鸡数配出很多不满足头数的兔数，候选数量明显增多。→ 原因：没有利用 rabbit = heads - chicken。→ 修正：只枚举 chicken，由头数等式唯一推出 rabbit，再检查腿数。→ 复验：确认每个 chicken 只生成一个 rabbit，候选最多为 heads + 1 个。</p>
+</li>
+<li>
+<p><strong>计数位置错误。</strong> 现象：solutionCount 等于循环次数，或不合法候选也被算入。→ 原因：在合法性判断之前执行了 solutionCount++。→ 修正：只有候选通过全部条件时才输出并计数。→ 复验：使用一个无解输入，结果必须保持 0 并输出 No。</p>
+</li>
+<li>
+<p><strong>没有依据就 break。</strong> 现象：找到第一个候选后立即停止，漏掉后面的合法方案或更优答案。→ 原因：没有区分首解、全部方案、计数和最优值任务。→ 修正：只有题目明确要首个答案时，才在完整判断和记录之后 break。→ 复验：准备一个有多个合法候选的输入，确认全部方案题仍会检查到范围末端。</p>
+</li>
+<li>
+<p><strong>同一方案正反各记一次。</strong> 现象：不区分顺序的 (2, 6) 和 (6, 2) 同时出现。→ 原因：候选没有统一表示，仍完整枚举两个顺序。→ 修正：证明交换顺序等价后，限制 <code>x &lt;= y</code>，或让位置对使用 j = i + 1。→ 复验：逐项检查输出，任意两项都不能只交换顺序就完全相同。</p>
+</li>
+<li>
+<p><strong>最优值错误地初始化为 0。</strong> 现象：所有合法候选都为负数时，程序却输出不存在的 0。→ 原因：初值不是来自合法候选，也没有记录是否已经找到答案。→ 修正：用首个合法候选初始化，或用 found 区分“还没有答案”和“已有最优值”。→ 复验：使用全负候选和完全无解两类数据，二者必须得到不同且正确的处理。</p>
+</li>
+<li>
+<p><strong>忽略多层循环次数相乘。</strong> 现象：每一层范围看似不大，程序整体却运行很久。→ 原因：只看单层次数，没有计算 A × B 或 A × B × C。→ 修正：编码前先算候选总数，再寻找直接推导、可靠缩界或条件剪枝。→ 复验：代入最大输入估算最坏候选数，确认在题目限制内可以完成。</p>
+</li>
+</ol></div><section><h3>去重范围必须来自题意</h3><div><div><strong><span>×</span> 错误写法</strong><code>只因为两个数能交换，就随手把循环范围减半</code></div><div><strong><span>✓</span> 正确写法</strong><code>先确认交换顺序是否仍是同一方案，再用 x &lt;= y 或 j = i + 1 保留唯一表示</code></div></div><p><strong>原因：</strong>题目可能区分顺序；即使不区分，也要说明保留哪一种统一表示。</p><p><strong>检查方法：</strong>用 target = 8 列出全部候选，检查缩小范围后是否既无重复又无遗漏。</p></section><h2 id="core-check">核心内容检查</h2><h2 id="page-test-title">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp6.html">← 上一个：字符串处理</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,316 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>存储单位：1 Byte = 8 bit，1 KB = 1024 B，1 MB = 1024 KB，1 GB = 1024 MB。</li><li>内存是临时存储（断电丢失），硬盘/SSD 是永久存储（断电保留）。</li><li>网络中数据通过协议传输，常见协议 HTTP/HTTPS 用于网页，TCP 用于可靠传输。</li><li>IP 地址标识网络中的设备，域名便于记忆，DNS 将域名解析为 IP。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>换算时注意 1024 而不是 1000，存储容量厂商常用 1000。</li><li>bit 是最小单位（0或1），Byte 是基本寻址单位。</li></ul>
+    <article class="article-body">
+    <div data-gesp-level2-ui data-gesp-level2-detail></div>
+<h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> RAM 保存运行时临时数据，ROM 断电后通常仍保留内容，Cache 用小容量高速空间缓和 CPU 与内存的速度差；容量按 1024 逐级换算；LAN、MAN、WAN 按覆盖范围分类，协议各负其责，只有题目明确给出 <code>/24</code> 时才按 <code>/24</code> 判断网段。</li>
+<li><strong>常用语法：</strong> 先写单位或掩码规则，再代入数值：<code>1 B = 8 bit</code>、<code>1 KB = 1024 B</code>、<code>1 MB = 1024 KB</code>、<code>/24 = 255.255.255.0</code>。</li>
+<li><strong>最小示例：</strong> 先完成单位换算；只有题目给出掩码时，才按对应掩码判断网段：<code>8192 bit = 1024 B = 1 KB</code>；<code>10.0.3.7/24</code> 与 <code>10.0.3.80/24</code> 属于同一网段。</li>
+<li><strong>关键易错点：</strong> 不要把 RAM 当作长期存储；不要混淆 bit 与 Byte；未给出 <code>/24</code> 时不能机械比较前三个字节。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>本页对应 GESP 二级“计算机的存储与网络”。存储部分重点是认识 RAM、ROM、Cache、内存和外存，理解常见存储层次，并完成 bit、Byte、KB、MB、GB、TB 的基础换算与容量计算；网络部分重点是认识 LAN、MAN、WAN、网络分层与常见协议，理解域名和 IP 地址的关系，并按题目给出的子网掩码完成基础同网段判断。</p>
+<p>“计算机存储与网络”包含两个紧密相关的方向：存储关注数据放在哪里、容量怎样表示；网络关注设备怎样连接、数据怎样传输。本页把这两个方向放在同一条学习路径中，复习状态和综合测试继续沿用原来的 <code>storage</code> 记录。</p>
+<p>本页先用“用途、断电后是否保留、速度与容量”比较 RAM、ROM、Cache 和外存，再完成 bit、Byte、KB、MB、GB、TB 的逐级换算。随后按覆盖范围区分 LAN、MAN、WAN：先由 DNS 解析域名，发出网页请求时由 HTTP / HTTPS 形成请求内容、TCP 负责可靠传输、IP 负责寻址和路由、网络接口层实际发送数据。最后在题目明确给出 <code>/24</code> 时判断两个 IPv4 地址是否同网段。</p>
+<p>先把两个核心概念说准确：<strong>存储</strong>是把数据保存在某种介质中，供现在或以后读取；<strong>网络</strong>是把多台设备连接起来，并按共同规则交换数据。存储解决“数据放在哪里”，网络解决“数据怎样从一台设备到另一台设备”。两者经常连续出现：浏览器先通过网络取得网页数据，运行时把数据放在 RAM，下载后又可以把文件长期保存在外存。</p>
+<a id="01-memory"></a>
+<h2 id="01-ramrom-与-cache">01 RAM、ROM 与 Cache</h2>
+<p>**RAM（随机存取存储器）**通常就是日常所说的运行内存。程序运行时，正在使用的代码和数据会放入 RAM；断电后其中内容通常会丢失。电脑“内存不足”时，通常是 RAM 可用空间不足。</p>
+<p>**ROM（只读存储器）**常用于保存较固定的启动信息，断电后仍能保留。**Cache（高速缓存）**容量较小但速度很快，位于 CPU 与主存之间，用来保存近期常用的数据，减少 CPU 等待时间。</p>
+<p>RAM 名称中的“随机存取”不是“随机保存数据”，而是指访问不同位置时不必像磁带那样从头顺序寻找。ROM 的“只读”描述的是它主要承担的稳定存储用途；实际设备可以采用不同技术更新内容，二级题目仍按“较固定、断电保留”理解。Cache 也不是一块专门给用户保存文件的硬盘，它由硬件自动配合 CPU 工作。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>主要作用</th>
+<th>断电后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAM</td>
+<td>运行程序时临时保存代码和数据</td>
+<td>通常丢失</td>
+</tr>
+<tr>
+<td>ROM</td>
+<td>保存较固定的启动信息</td>
+<td>通常保留</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>暂存 CPU 近期常用数据，加快访问</td>
+<td>通常丢失</td>
+</tr>
+</tbody>
+</table>
+<p>易错点是把三者只按容量判断。更可靠的比较顺序是：先看用途，再看断电后是否保留，最后比较速度与容量。</p>
+<a id="02-storage"></a>
+<h2 id="02-内存外存与存储层次">02 内存、外存与存储层次</h2>
+<p>内存直接服务于正在运行的程序，速度快、容量相对小；硬盘、固态硬盘、U 盘、光盘等属于外存，适合长期保存文件，容量通常更大。光盘主要依靠光学方式读写，机械硬盘和磁带属于磁性存储介质。</p>
+<p>常见存储层次可以简化理解为：<strong>寄存器 → Cache → RAM → 外存</strong>。越靠左通常越快、容量越小、单位成本越高。</p>
+<p>例如打开安装在固态硬盘中的游戏时，可以把主要过程简化为：<strong>外存 → RAM → CPU</strong>。游戏文件长期保存在外存；运行时需要的代码和数据先载入 RAM，再由 CPU 处理。Cache 会在 CPU 与 RAM 之间加快近期常用数据的访问，但不能代替大容量外存。</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>速度</th>
+<th>容量</th>
+<th>断电后的数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>寄存器</td>
+<td>最快</td>
+<td>最小</td>
+<td>通常丢失</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>很快</td>
+<td>很小</td>
+<td>通常丢失</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>较快</td>
+<td>较大</td>
+<td>通常丢失</td>
+</tr>
+<tr>
+<td>外存（如固态硬盘、机械硬盘）</td>
+<td>较慢</td>
+<td>很大</td>
+<td>通常保留</td>
+</tr>
+</tbody>
+</table>
+<a id="03-units"></a>
+<h2 id="03-存储单位与容量计算">03 存储单位与容量计算</h2>
+<p>小写 <code>b</code> 常表示 bit（比特），大写 <code>B</code> 表示 Byte（字节），通常 <code>1 Byte = 8 bit</code>。二级题目若没有另外说明，通常按下列关系换算：</p>
+<table>
+<thead>
+<tr>
+<th>单位关系</th>
+<th>换算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 KB</td>
+<td>1024 B</td>
+</tr>
+<tr>
+<td>1 MB</td>
+<td>1024 KB</td>
+</tr>
+<tr>
+<td>1 GB</td>
+<td>1024 MB</td>
+</tr>
+<tr>
+<td>1 TB</td>
+<td>1024 GB</td>
+</tr>
+</tbody>
+</table>
+<p>例如 <code>6 GB = 6 × 1024 MB = 6144 MB</code>。若一张未压缩灰度图有 <code>800 × 600</code> 个像素，每像素占 1 B，总容量为 <code>480000 B</code>。计算时先求元素个数，再乘每个元素占用的字节数，最后按题目要求换单位。</p>
+<p>从较小单位换到相邻的较大单位要除以 1024。例如：<code>2048 KB ÷ 1024 = 2 MB</code>。这个过程与 <code>2 MB × 1024 = 2048 KB</code> 正好互为反向换算。</p>
+<p>以 <code>1 KB</code> 为例：先从 KB 换成 B，得到 <code>1024 B</code>；再乘 8，得到 <code>8192 bit</code>。反过来把 <code>8192 bit</code> 换成 KB，就依次除以 8、再除以 1024。</p>
+<p>若一张黑白图有 <code>128 × 64 = 8192</code> 个像素，每个像素占 1 bit，总量是 <code>8192 bit = 1024 B = 1 KB</code>。不能把像素个数直接当作字节数。</p>
+<p>容量题可以统一成一个公式：</p>
+<p><strong>总容量 = 元素个数 × 每个元素占用量</strong></p>
+<p>先让“元素个数”和“每个元素占用量”的单位对应，再换算最终单位。例如在常见 G++ / OJ 环境中，一个 <code>int</code> 通常占 4 B，100 个 <code>int</code> 保存的数据量可按 <code>100 × 4 B = 400 B</code> 估算；若有 20 行、30 列这样的整数数据，元素个数是 <code>20 × 30 = 600</code>，容量是 <code>600 × 4 B = 2400 B</code>。这里是在练习容量公式，不要求本课使用尚未讲解的数组语法；若题目明确给出其他字节数，应以题目为准。</p>
+<p>多级换算时不要把 8 和 1024 混在一起：bit 与 Byte 之间用 8，Byte、KB、MB、GB、TB 相邻两级之间用 1024。例如 <code>3 MB</code> 换成 bit 要依次计算 <code>3 × 1024 × 1024 × 8 = 25165824 bit</code>，不能只乘一次 1024。</p>
+<a id="01-network-types"></a><a id="04-network"></a>
+<h2 id="04-lanman-与-wan">04 LAN、MAN 与 WAN</h2>
+<p>按覆盖范围，常见网络分为：</p>
+<ul>
+<li><strong>LAN（局域网）</strong>：家庭、机房、同一教学楼等较小范围；</li>
+<li><strong>MAN（城域网）</strong>：覆盖一座城市或相近城区；</li>
+<li><strong>WAN（广域网）</strong>：跨城市、国家甚至大洲，Internet 具有广域网特征。</li>
+</ul>
+<p>判断时看实际覆盖范围，不只看联网设备数量。同一栋楼有很多电脑，仍更接近局域网。学校机房的 60 台电脑只覆盖同一栋楼，仍是 LAN；覆盖城区的教育网络更接近 MAN；跨城市连接的两个机房更接近 WAN。</p>
+<a id="02-protocols"></a>
+<h2 id="05-分层模型与常见协议">05 分层模型与常见协议</h2>
+<p>网络分层让不同任务由不同层负责。OSI 模型有七层；实际学习中常用 TCP/IP 模型理解网络通信。二级重点是认识分层思想和常见协议用途，不要求实现协议。</p>
+<p>可以把两个模型按职责对应起来。OSI 七层从上到下是应用层、表示层、会话层、传输层、网络层、数据链路层、物理层；TCP/IP 常简化为应用层、传输层、网际层、网络接口层。二级只需识别“分层是为了分工”，不需要背每一层的内部实现。</p>
+<table>
+<thead>
+<tr>
+<th>TCP/IP 四层</th>
+<th>大致对应的 OSI 层</th>
+<th>本页代表任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>应用层、表示层、会话层</td>
+<td>DNS 解析名称，HTTP / HTTPS 交换网页数据</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>传输层</td>
+<td>TCP 组织可靠、有顺序的传输</td>
+</tr>
+<tr>
+<td>网际层</td>
+<td>网络层</td>
+<td>IP 按地址转发数据</td>
+</tr>
+<tr>
+<td>网络接口层</td>
+<td>数据链路层、物理层</td>
+<td>在具体网络介质上传送数据</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>主要用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP / HTTPS</td>
+<td>浏览网页、传输网页数据</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>把域名转换为 IP 地址</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>提供可靠、有顺序的数据传输</td>
+</tr>
+<tr>
+<td>IP</td>
+<td>按地址在网络间转发数据</td>
+</tr>
+</tbody>
+</table>
+<p>HTTP 和 HTTPS 都用于浏览器与服务器之间的网页数据传输。HTTPS 在 HTTP 的基础上增加加密和身份验证，通常能更安全地保护传输内容；二级只需理解这个基本区别，不要求学习具体加密过程。</p>
+<p>域名从右向左逐级细分。例如 <code>gesp.ccf.org.cn</code> 最右侧的 <code>cn</code> 是顶级域名，<code>gesp</code> 不是顶级域名。</p>
+<p>在浏览器输入网址后，要把“先找到地址”和“分层发送数据”分开理解：</p>
+<ol>
+<li><strong>地址解析</strong>：浏览器把域名交给 DNS，得到目标服务器的 IP 地址；</li>
+<li><strong>形成请求</strong>：浏览器按 HTTP 或 HTTPS 规则组织网页请求；</li>
+<li><strong>分层传输</strong>：TCP 负责把应用层数据可靠、有顺序地传送，IP 负责寻址和路由，网络接口层把数据送入具体网络；</li>
+<li><strong>接收处理</strong>：接收方按相反方向逐层处理数据，服务器读到网页请求并准备响应；</li>
+<li><strong>响应返回</strong>：响应数据也经过各层传回，浏览器取得内容后再显示网页。</li>
+</ol>
+<p>这里的 HTTP、TCP、IP 不是轮流完成三次互不相关的发送，而是同一份数据在不同层获得不同职责。二级只需说清每层“负责什么”，不要求展开报文格式。</p>
+<p>例如输入 <code>https://xdzoi.com</code>，DNS 的任务是把 <code>xdzoi.com</code> 解析为可通信的 IP；它不负责直接显示网页。</p>
+<a id="03-ip"></a>
+<h2 id="06-ipv4-与基础子网">06 IPv4 与基础子网</h2>
+<p>IPv4 地址常写成四段点分十进制数，例如 <code>192.168.1.8</code>。每段对应 8 位二进制数，所以范围是 <strong>0 到 255</strong>，0 并没有被禁止。</p>
+<p>四段一共是 <code>4 × 8 = 32 bit</code>，也就是 4 B 的地址信息。点分十进制只是为了便于人阅读，网络设备处理的仍是 32 位模式。<code>/24</code> 表示前 24 位属于网络部分，剩下 <code>32-24=8</code> 位是主机部分；因此在这一基础情形下，前三段决定网络，最后一段区分该网络中的地址。</p>
+<p>子网掩码用来区分网络部分和主机部分。基础题常给出 <code>255.255.255.0</code>：这时前三段相同的地址通常属于同一子网。例如 <code>192.168.1.8</code> 与 <code>192.168.1.20</code> 在该掩码下同网段，而 <code>192.168.2.8</code> 不在同一网段。</p>
+<table>
+<thead>
+<tr>
+<th>地址 A</th>
+<th>地址 B</th>
+<th>前三段</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>10.0.3.7</code></td>
+<td><code>10.0.3.80</code></td>
+<td>都是 <code>10.0.3</code></td>
+<td>同一子网</td>
+</tr>
+<tr>
+<td><code>10.0.3.7</code></td>
+<td><code>10.0.4.7</code></td>
+<td>第三段不同</td>
+<td>不同子网</td>
+</tr>
+</tbody>
+</table>
+<p>在掩码明确为 <code>255.255.255.0</code> 时，可以先<strong>只比较前三段</strong>。这个简便规则只适用于当前掩码；掩码改变时，不能继续机械使用。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>查询词</th>
+<th>先检查什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>断电后是否保留</td>
+<td>RAM 通常丢失，ROM 与外存通常保留</td>
+</tr>
+<tr>
+<td>内存不足</td>
+<td>通常指 RAM</td>
+</tr>
+<tr>
+<td>bit 与 Byte</td>
+<td>先确认是否需要乘或除以 8</td>
+</tr>
+<tr>
+<td>GB 与 MB</td>
+<td>先确认题目是否按 1024 换算</td>
+</tr>
+<tr>
+<td>LAN / MAN / WAN</td>
+<td>看覆盖范围</td>
+</tr>
+<tr>
+<td>域名与 IP</td>
+<td>DNS 负责名称解析</td>
+</tr>
+<tr>
+<td>HTTP / HTTPS</td>
+<td>负责网页请求与传输</td>
+</tr>
+<tr>
+<td>是否同一子网</td>
+<td>按子网掩码比较网络部分</td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<h3 id="例题一文件保存与容量换算">例题一：文件保存与容量换算</h3>
+<p>**题目：**某电脑有 8 GB RAM 和 512 GB 固态硬盘。一个 2 GB 的程序文件长期放在哪里？启动后主要加载到哪里？<code>2 GB</code> 等于多少 MB？</p>
+<p><strong>推演：</strong>“长期保存”对应外存，所以文件放在固态硬盘中；“正在运行”对应 RAM，所以所需代码和数据会加载到 RAM；<code>2 × 1024 = 2048 MB</code>。</p>
+<p>**结论：**外存负责长期保存，RAM 服务正在运行的程序；<code>2 GB = 2048 MB</code>。</p>
+<h3 id="例题二网络分类与同网段判断">例题二：网络分类与同网段判断</h3>
+<p>**题目：**同一教学楼的教室与机房组成一个网络。两台设备地址分别为 <code>10.0.3.7</code> 和 <code>10.0.3.80</code>，掩码是 <code>255.255.255.0</code>。这个网络属于哪一类？两台设备是否在同一子网？</p>
+<p>**推演：**覆盖范围只在同一教学楼，所以属于 LAN。掩码是 <code>255.255.255.0</code>，比较前三段，两台设备都是 <code>10.0.3</code>。</p>
+<p>**结论：**这个网络属于 LAN，两台设备在当前掩码下属于同一子网。</p>
+<p>**引导练习：**一台电脑从校园网下载了一个 <code>3072 KB</code> 的程序文件，下载完成后长期保存在固态硬盘中，启动时再把需要的代码和数据载入 RAM。请你先完成三步：把文件容量换成 MB；判断只覆盖同一教学楼的校园网属于 LAN、MAN 还是 WAN；说明“长期保存”和“正在运行”分别对应哪一类存储。提示：KB 换成 MB 要除以 1024，网络分类看覆盖范围，不看电脑数量。核对结果应为 <code>3072 ÷ 1024 = 3 MB</code>、LAN、长期保存对应外存、正在运行对应 RAM；四项都一致才算完成。</p>
+<h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
+<ul>
+<li>把 ROM 当作扩充运行内存的内存条；</li>
+<li>混淆 bit 与 Byte，漏乘或漏除 8；</li>
+<li>换算多个单位时少乘一个 1024；</li>
+<li>认为 IPv4 每段只能是 1 到 255；</li>
+<li>认为 DNS 直接负责显示网页；</li>
+<li>仅凭 IP 地址“看起来相近”就判断同网段。</li>
+</ul>
+<p><strong>错误判断一：</strong>“Cache 容量最大，所以最适合长期保存文件。”</p>
+<p>**错误原因：**Cache 的主要优势是速度快，容量通常比 RAM 小，而且断电后通常丢失。比较存储器时要分别核对用途、速度、容量和断电特性，不能用一个特点推出其他特点。</p>
+<p><strong>错误判断二：</strong>“两个 IP 地址前三段相同，所以在任何情况下都属于同一子网。”</p>
+<p>**错误原因：**这个判断忽略了子网掩码。只比较前三段只适用于题目明确给出 <code>255.255.255.0</code> 的基础情形；掩码改变时，必须重新确定网络部分。</p>
+<p><strong>错误换算：</strong>“<code>8192 bit = 8192 B = 8 KB</code>。”</p>
+<p>**错误原因：**bit 与 Byte 之间漏除了 8，把两种不同单位当成了同一种单位。</p>
+<p>**重新换算：**先算 <code>8192 bit ÷ 8 = 1024 B</code>，再算 <code>1024 B ÷ 1024 = 1 KB</code>。</p>
+<p>**单位核对：**每次向更大的单位换算，数值应变小；最终写成 <code>1 KB</code>，再反向计算 <code>1 × 1024 × 8 = 8192 bit</code>，能够回到原值才说明单位链正确。</p>
+<h2 id="本节总结">本节总结</h2>
+<p>运行中的代码和数据主要放在 RAM，较固定的启动信息常保存在 ROM，Cache 用来缩短 CPU 等待近期常用数据的时间，外存负责长期保存。容量换算先看单位方向：向小单位乘 1024，向大单位除以 1024；bit 与 Byte 之间还要单独乘或除以 8。</p>
+<p>LAN、MAN、WAN 的关键是覆盖范围；DNS、IP、TCP、HTTP / HTTPS 各自承担不同任务。判断同网段必须先看掩码：只有题目明确给出 <code>/24</code> 或 <code>255.255.255.0</code> 时，才可以直接比较前三段。</p>
+    </article>
 
     <div class="kp-nav-row">
       

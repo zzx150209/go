@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,23 +449,116 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>倍增：把区间长度按 2 的幂次分解，预处理跳 2^k 步的结果。</li><li>经典应用：快速求 LCA（最近公共祖先）、ST 表求区间最值。</li><li>预处理 O(n log n)，查询 O(log n)。</li><li>二进制拆分：任何数都可表示为若干 2 的幂之和。</li></ul>
-
-    <div class="kp-code"><pre>// ST表求区间最大值（简述）
-int st[18][100005];
-for (int i = 1; i &lt;= n; i++) st[0][i] = a[i];
-for (int k = 1; (1&lt;&lt;k) &lt;= n; k++)
-    for (int i = 1; i + (1&lt;&lt;k) - 1 &lt;= n; i++)
-        st[k][i] = max(st[k-1][i], st[k-1][i+(1&lt;&lt;(k-1))]);
-
-int queryMax(int l, int r) {
-    int k = log2(r - l + 1);
-    return max(st[k][l], st[k][r-(1&lt;&lt;k)+1]);
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>ST 表适用于静态数组（不修改）的区间查询。</li><li>log2 用 __lg() 或循环计算，精度问题注意。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级要求掌握倍增思想、二进制拆分、倍增预处理和倍增查询。本页使用“一维后继快速跳转”讲清状态，不把 LCA 作为核心专题；树上祖先只是同一状态含义的应用。</p>
+<h2 id="kp-01">01 倍增思想</h2>
+<p>若每次只向后走一步，多次询问“走 <code>k</code> 步到哪里”会重复大量相同跳转。倍增预先保存走 <code>1、2、4、8……</code> 步的结果，再用少量长跳转组合答案。</p>
+<p>当 <code>k=13</code> 时，不必走 13 次一步跳转，因为 <code>13=8+4+1</code>。只需使用预处理好的三段跳转。</p>
+<h2 id="kp-02">02 状态含义与转移</h2>
+<p>定义 <code>jump[i][j]</code> 为从位置 <code>i</code> 出发走 <code>2^j</code> 步后的到达位置。第 0 层就是题目给出的下一位置。</p>
+<p>走 <code>2^j</code> 步可拆成两段 <code>2^(j-1)</code> 步，因此：</p>
+<p><code>jump[i][j] = jump[jump[i][j-1]][j-1]</code></p>
+<p>若前半段已经到达哨兵 <code>0</code>，完整跳转也记为 <code>0</code>。写转移前必须先用一句话固定状态含义，否则很容易交换“起点”和“层数”下标。</p>
+<h2 id="kp-03">03 二进制拆分查询步数</h2>
+<p>任何非负整数都能写成若干不同的 2 的幂之和。查询时检查 <code>k</code> 的每个二进制位：第 <code>j</code> 位为 1，就执行一次 <code>2^j</code> 步跳转。</p>
+<p>例如 <code>13</code> 的二进制为 <code>1101</code>，对应第 <code>3、2、0</code> 位。各段跳转前后衔接，步数之和恰好为 13。</p>
+<h2 id="kp-04">04 倍增预处理与查询</h2>
+<p>下面处理一维后继关系。<code>next[i]=0</code> 表示离开有效范围，<code>0 &lt;= k &lt;= 10^9</code>，因此保存第 0 到 30 层。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> MAX_N </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">100000</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> LOG </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">31</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">jumpTable</span><span style="--0:#D6DEEB;--1:#403F53">[MAX_N][LOG];</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n, q;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> q;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> position </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; position </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; position</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">jumpTable</span><span style="--0:#D6DEEB;--1:#403F53">[position][</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 两个连续的 2^(bit-1) 步合成一次 2^bit 步。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> bit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; bit </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> LOG; bit</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> position </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; position </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; position</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> middle </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">jumpTable</span><span style="--0:#D6DEEB;--1:#403F53">[position][bit </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (middle </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C5E478;--1:#3B61B0">jumpTable</span><span style="--0:#D6DEEB;--1:#403F53">[position][bit] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C5E478;--1:#3B61B0">jumpTable</span><span style="--0:#D6DEEB;--1:#403F53">[position][bit] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">jumpTable</span><span style="--0:#D6DEEB;--1:#403F53">[middle][bit </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> query </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; query </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> q; query</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> position;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> steps;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> position </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> steps;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// 第 bit 位为 1 时，使用对应的长跳转。</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> bit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; bit </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> LOG </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> position </span><span style="--0:#C792EA;--1:#8844AE">!=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; bit</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> ((steps </span><span style="--0:#C792EA;--1:#8844AE">&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">LL</span></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> bit)) </span><span style="--0:#C792EA;--1:#8844AE">!=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">position </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">jumpTable</span><span style="--0:#D6DEEB;--1:#403F53">[position][bit];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> position </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>预处理时间和空间都是 <code>O(n log K)</code>，单次查询时间为 <code>O(log K)</code>。<code>LOG</code> 必须覆盖最大步数的最高二进制位。</p>
+<h2 id="kp-05">05 与快速幂的联系</h2>
+<p>快速幂同样把指数拆成二进制位。若当前 <code>base</code> 表示 <code>a^(2^j)</code>，执行 <code>base=base×base</code> 后得到 <code>a^(2^(j+1))</code>。这里是“所代表的指数翻倍”，不是数值简单乘 2。</p>
+<p>倍增跳转保存位置，快速幂保存乘法贡献；两者共同思想都是预先准备二的幂次结果，再按二进制位组合。</p>
+<p><strong>13 步查询追踪。</strong> 设从起点 <code>x</code> 出发，预处理表已经保存走 <code>1、2、4、8</code> 步的位置。因为 <code>13=(1101)₂=8+4+1</code>，查询依次使用第 3、2、0 层：</p>
+<table>
+<thead>
+<tr>
+<th>当前累计步数</th>
+<th>使用层</th>
+<th>本次跳跃</th>
+<th>跳后位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>3</td>
+<td>8 步</td>
+<td><code>jump[x][3]</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>2</td>
+<td>4 步</td>
+<td>从上一位置再查第 2 层</td>
+</tr>
+<tr>
+<td>12</td>
+<td>0</td>
+<td>1 步</td>
+<td>从上一位置再查第 0 层</td>
+</tr>
+</tbody>
+</table>
+<p>基础边界中，<code>k=0</code> 不使用任何层，答案仍是起点；<code>k=1</code> 只查第 0 层。面对最大 <code>k</code>，先确认 <code>LOG</code> 能覆盖它的最高二进制位，并检查跳转中途到达哨兵 <code>0</code> 后是否立即停止。</p>
+<p><strong>逐段具体推演（对应 01—05）。</strong></p>
+<p><strong>01 二的幂跳跃。</strong> 走 13 步若逐步更新要 13 次；准备 1、2、4、8 步跳转后，只需组合 <code>8+4+1</code> 三段。任何非负整数都能这样拆分。</p>
+<p><strong>02 状态转移。</strong> 链为 <code>1→2→3→4→5→0</code> 时，<code>jump[1][0]=2</code>；走 2 步先到 2 再到 3，所以 <code>jump[1][1]=3</code>；走 4 步是两个 2 步，得到 <code>jump[1][2]=5</code>。</p>
+<p><strong>03 查询。</strong> 从 1 出发走 3 步，<code>3=2+1</code>。先用 2 步表从 1 到 3，再用 1 步表从 3 到 4，最终是 4；走 0 步时不执行跳转，答案仍是 1。</p>
+<p><strong>04 层数。</strong> 最大 <code>k=13</code> 时必须有 8 步层，因为 13 的最高位是 8。每层先检查中间位置是否为 0，0 表示已经不能继续。</p>
+<p><strong>05 快速幂。</strong> 求 <code>3¹³</code> 时依次准备 <code>3¹、3²、3⁴、3⁸</code>，只把指数位为 1 的 <code>3¹、3⁴、3⁸</code> 乘入答案，得到 <code>3¹³</code>。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jump[i][0]</code></td>
+<td>从 i 走 1 步</td>
+</tr>
+<tr>
+<td><code>jump[i][j]</code></td>
+<td>从 i 走 <code>2^j</code> 步</td>
+</tr>
+<tr>
+<td>层数</td>
+<td>覆盖最大查询步数的最高二进制位</td>
+</tr>
+<tr>
+<td>查询</td>
+<td>只使用 k 的二进制位为 1 的层</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>后继关系为 <code>1→2→3→4→0</code>。从 1 走 3 步到 4；走 4 步到 0；走 0 步仍在 1。最后一种边界提醒我们：查询初始答案必须是起点本身，不能先无条件走一步。</p>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>层数不足反例。</strong> 最大查询为 13 步，却只预处理 1、2、4 步三层。执行到二进制的 8 位时没有表项，程序会漏掉 8 步并错误地只走 5 步。正确做法是让预处理覆盖最大 <code>k</code> 的最高位。</p>
+<ul>
+<li>没有先说明 <code>jump[i][j]</code> 的含义，导致转移下标颠倒。</li>
+<li><code>LOG</code> 太小，最大查询的最高位没有被处理。</li>
+<li>到达 <code>0</code> 后仍把它当作普通位置继续查表。</li>
+<li>查询 <code>k=0</code> 时仍执行一步跳转。</li>
+<li>把快速幂的平方写成数值乘 2。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/template/data-structure/doubling/">倍增程序模板</a>：查看倍增表的可复用结构。</li>
+<li><a href="/template/math/quick-pow/">快速幂程序模板</a>：比较相同的二进制拆分思想。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp3.html">← 上一个：杨辉三角</a>

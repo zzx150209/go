@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,19 +449,414 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>C++ 中 string 类型存储字符串，s.length() 或 s.size() 获取长度。</li><li>s[i] 访问第 i 个字符，下标从 0 开始。</li><li>substr(pos, len) 截取子串，find() 查找子串位置。</li><li>字符串比较直接用 &lt; &gt; ==，按字典序比较。</li></ul>
+    <article class="article-body">
+    <h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 一个字符也没有、长度为 0 的字符串，叫作空串。原字符串中连续的一段字符，叫作子串。字符数组中有效文本最后一个字符后面的 <code>\0</code> 用来告诉程序字符串在哪里结束，因此它叫作结束标记。</li>
+<li><strong>常用语法：</strong> 用 <code>getline(cin, s)</code> 读取包含空格的一整行；用 <code>s.length()</code> 得到字符个数；合法下标是 <code>0</code> 到 <code>s.length() - 1</code>；用 <code>find</code>、<code>substr</code> 和 <code>replace</code> 处理连续文本。</li>
+<li><strong>最小示例：</strong> <code>string s = "aB2";</code> 中，<code>s[0]</code> 是 <code>'a'</code>。把小写字母逐个改成大写后得到 <code>"AB2"</code>，原来的大写字母和数字保持不变。</li>
+<li><strong>关键易错点：</strong> 空串不能访问 <code>s[0]</code>；<code>find</code> 返回 0 也表示在开头找到，失败才返回 <code>string::npos</code>；字符数组容量为 <code>N</code> 时最多保存 <code>N - 1</code> 个普通字符，最后要留给 <code>\0</code>。</li>
+</ul>
 
-    <div class="kp-code"><pre>string s;
-cin &gt;&gt; s;
-cout &lt;&lt; s.length() &lt;&lt; endl;     // 长度
-cout &lt;&lt; s[0] &lt;&lt; endl;           // 第一个字符
-cout &lt;&lt; s.substr(0, 3) &lt;&lt; endl; // 前3个字符
-int p = s.find(&quot;abc&quot;);          // 查找位置，找不到返回 string::npos
-string t = s + &quot;!&quot;;             // 拼接</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>cin &gt;&gt; s 遇到空格就停止，读整行用 getline(cin, s)。</li><li>下标越界同样危险，s.length() 是长度，最后一个字符下标是 length()-1。</li></ul>
+<h2 id="知识范围与使用边界">知识范围与使用边界</h2>
+<p>字符串用来保存和处理文本。本课先区分一个字符、一串字符和固定容量字符数组，再学习输入、长度、下标、拼接、查找和替换。</p>
+<h2 id="核心概念">核心概念</h2>
+<p>本课只解决三个核心问题：<strong>核心一：文本表示与安全输入</strong>，先判断数据是一个字符、一段文本还是固定容量字符数组，再选择不会丢失空格的输入方式；<strong>核心二：按下标遍历、修改与比较</strong>，只访问合法位置并解释每轮怎样改变文本；<strong>核心三：连接、截取、查找、替换与分割</strong>，根据位置、数量和修改后的新长度检查边界。八个知识章节完整保留，但都服务于这三个核心。</p>
+<p>学完本课，你需要会：</p>
+<ul>
+<li>使用 <code>char</code> 保存一个字符，使用 <code>string</code> 保存一段文本；</li>
+<li>根据文本是否包含空格选择 <code>cin &gt;&gt;</code> 或 <code>getline</code>；</li>
+<li>使用长度和下标遍历字符串，并在访问前检查边界；</li>
+<li>使用 <code>+</code>、<code>find</code>、<code>substr</code> 和 <code>replace</code> 处理文本；</li>
+<li>为字符数组保留 <code>\0</code> 结束标记，避免写出缓冲区。</li>
+</ul>
+<p>本课不使用指针、函数、递归、文件、异常处理或更高等级的字符串算法。</p>
+<figure data-density="standard"><figcaption>什么时候使用这些字符串操作</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>想完成的任务</th>
+<th>适合的操作</th>
+<th>使用时要注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>统计字符数量</td>
+<td><code>size()</code> 或 <code>length()</code></td>
+<td>得到的是字符个数，不是最后一个下标</td>
+</tr>
+<tr>
+<td>统一大小写后再比较</td>
+<td>逐个字符使用 <code>tolower()</code> 或 <code>toupper()</code></td>
+<td>转换函数返回新字符，要把结果保存回来</td>
+</tr>
+<tr>
+<td>判断是否包含一段文本</td>
+<td><code>find()</code></td>
+<td>找不到时返回 <code>string::npos</code>，位置 0 也表示找到</td>
+</tr>
+<tr>
+<td>修改已经找到的内容</td>
+<td><code>replace()</code></td>
+<td>先确认查找成功，再使用合法位置</td>
+</tr>
+<tr>
+<td>按分隔符拆成几段</td>
+<td>遍历字符并累积当前片段</td>
+<td>C++14 的 <code>string</code> 没有 <code>split()</code> 成员函数</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p><strong>核心一：文本表示与安全输入</strong></p>
+<h2 id="kp-01">01 字符、string 与字符数组</h2>
+<h3 id="字符string-与字符数组">字符、string 与字符数组</h3>
+<p><code>char</code> 只保存一个字符，字符常量使用单引号：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> letter </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 letter 保存单个英文字母字符；当前值由 'A' 得到</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> digit </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">7</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 digit 保存字符形式的数字 7，而不是整数 7；当前值由 '7' 得到</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>string</code> 保存一串字符，字符串使用双引号：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string word </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Apple</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 word 保存不含空格的单词文本；当前值由 "Apple" 得到</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string sentence </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">I like C++</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 sentence 保存可能包含空格的一整行文本；当前值由 "I like C++" 得到</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>'A'</code> 是一个字符，<code>"A"</code> 是长度为 1 的字符串。比较当前位置的单个字符时写 <code>text[i] == 'A'</code>；查找一段文本时写 <code>text.find("cat")</code>。</p>
+<p>字符数组也能保存文本，但它的容量在声明时已经固定：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">word</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">10</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">go</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 字符串字面量依次写入 'g'、'o'、'\0'，其余位置补 0</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>数组中依次保存 <code>'g'</code>、<code>'o'</code> 和 <code>\0</code>。<code>\0</code> 是数值为 0 的结束标记，不是可显示的字符 <code>'0'</code>。</p>
+<p>在 C++ 中，<code>sizeof(char)</code> 规定为 1 字节，所以 <code>char word[10]</code> 一共占 10 字节。用 <code>"go"</code> 初始化后，前 3 个位置依次是 <code>'g'</code>、<code>'o'</code>、<code>'\0'</code>，其余位置也会被初始化为 0。这里要分清三个量：数组容量是 10，文本长度是 2，为文本和结束标记实际用到的位置数是 3。</p>
+<p>对这个完整字符数组，<code>sizeof(word)</code> 得到固定容量 10；<code>strlen(word)</code> 需要 <code>&lt;cstring&gt;</code>，它从开头数到第一个 <code>\0</code>，结果是文本长度 2。若使用 <code>string text = "go";</code>，应写 <code>text.size()</code> 或 <code>text.length()</code> 得到 2，不能用 <code>sizeof(text)</code> 当作字符个数，因为 <code>string</code> 对象还要保存自己的管理信息。</p>
+<p>容量为 10 的字符数组若要保存以 <code>\0</code> 结尾的普通文本，最多只能放 9 个可显示字符。<code>word[9]</code> 是最后一个存储位置，不能在已经放满 10 个可显示字符后再把 <code>\0</code> 写到 <code>word[10]</code>，因为下标 10 已经越界。</p>
+<table>
+<thead>
+<tr>
+<th>表示方式</th>
+<th>保存内容</th>
+<th>示例</th>
+<th>主要边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>char</code></td>
+<td>一个字符</td>
+<td><code>char c = 'x';</code></td>
+<td>使用单引号</td>
+</tr>
+<tr>
+<td><code>string</code></td>
+<td>可变长度文本</td>
+<td><code>string s = "cat";</code></td>
+<td>空串不能访问首尾字符</td>
+</tr>
+<tr>
+<td><code>char s[105]</code></td>
+<td>固定容量字符序列</td>
+<td><code>char s[105] = {};</code></td>
+<td>最后要为 <code>\0</code> 留一个位置</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kp-02">02 字符串输入</h2>
+<h3 id="字符串输入">字符串输入</h3>
+<p><code>cin &gt;&gt; text</code> 读到空格、制表符或换行时停止，适合读取一个不含空格的单词：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string word;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 word 保存不含空格的单词文本；值将在紧接着的输入或判断分支中确定</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> word;</span><span style="--0:#919F9F;--1:#5D6376"> // 依次读入 word（不含空格的单词文本）</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>getline(cin, text)</code> 会读取一整行，空格也是文本的一部分：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string sentence;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 sentence 保存可能包含空格的一整行文本；值将在紧接着的输入或判断分支中确定</span></div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">getline</span><span style="--0:#D6DEEB;--1:#403F53">(cin, sentence);</span><span style="--0:#919F9F;--1:#5D6376"> // 读取一整行文本（包括中间的空格）并保存到 sentence</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>如果前面刚使用 <code>cin &gt;&gt; n</code> 读过数据，输入流中通常还留着一个换行符。在题目保证数字后立即换行时，可以先忽略这个换行，再读取下一整行：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 n 保存数字输入，用来演示 getline 前的换行处理；值将在紧接着的输入或判断分支中确定</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span><span style="--0:#919F9F;--1:#5D6376"> // 依次读入 n（数字输入，用来演示 getline 前的换行处理）</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">cin</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">ignore</span><span style="--0:#D6DEEB;--1:#403F53">();</span><span style="--0:#919F9F;--1:#5D6376"> // 忽略数字后留下的一个换行符，避免 getline 立即读到空行</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string sentence;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 sentence 保存可能包含空格的一整行文本；值将在紧接着的输入或判断分支中确定</span></div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">getline</span><span style="--0:#D6DEEB;--1:#403F53">(cin, sentence);</span><span style="--0:#919F9F;--1:#5D6376"> // 读取一整行文本（包括中间的空格）并保存到 sentence</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>这里 <code>ignore()</code> 只处理紧跟在数字后的一个字符，因此这段写法依赖“数字后立即换行”的输入格式。若题目输入格式不同，要按题意处理分隔字符。</p>
+<h2 id="kp-03">03 长度、空串与下标</h2>
+<h3 id="字符串长度空串和下标">字符串长度、空串和下标</h3>
+<p><code>size()</code> 和 <code>length()</code> 都返回字符串中的字符个数。本站示例统一使用 <code>length()</code>；官方题中看到 <code>size()</code> 时，要知道它们在这里作用相同。</p>
+<p><code>empty()</code> 用来判断字符串是否为空：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">empty</span><span style="--0:#D6DEEB;--1:#403F53">()) {</span><span style="--0:#919F9F;--1:#5D6376"> // empty() 为 true 表示长度为 0，此时没有任何字符可访问</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Empty</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 输出提示 Empty，表示当前判断分支的结果</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span><span style="--0:#919F9F;--1:#5D6376"> // 条件“text.empty()”不成立时，改走这一条处理路径</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">];</span><span style="--0:#919F9F;--1:#5D6376"> // 字符串非空，输出下标 0 的首字符</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 条件“text.empty()”不成立时的替代动作到此完成</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>如果要读取首个字符，也要先保护空串：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string s;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 s 保存本例正在遍历或修改的字符串；值将在紧接着的输入或判断分支中确定</span></div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">getline</span><span style="--0:#D6DEEB;--1:#403F53">(cin, s);</span><span style="--0:#919F9F;--1:#5D6376"> // 读取一整行文本（包括中间的空格）并保存到 s</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">!</span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">empty</span><span style="--0:#D6DEEB;--1:#403F53">()) {</span><span style="--0:#919F9F;--1:#5D6376"> // 只有字符串非空时才能安全访问下标 0</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> first </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">];</span><span style="--0:#919F9F;--1:#5D6376"> // 用 first 保存字符串的第一个字符；当前值由 s[0] 得到</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> first;</span><span style="--0:#919F9F;--1:#5D6376"> // 输出非空字符串的首字符</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 空串不会访问 s[0]；非空时 first 已保存首字符</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>字符串位置和长度使用 <code>string::size_type</code> 保存。这是 <code>string</code> 专门提供的非负整数类型，<code>length()</code> 的返回值也是这个类型。先了解它，再用它遍历字符串，就不会把普通 <code>int</code> 和字符串长度混在一起比较。</p>
+<p>长度为 5 的字符串，有效下标是 0、1、2、3、4。不存在下标 5。访问首项 <code>text[0]</code> 或末项 <code>text[text.length() - 1]</code> 前，必须先确认字符串不是空串。</p>
+<p><strong>核心二：按下标遍历、修改与比较</strong></p>
+<h2 id="kp-04">04 字符串遍历</h2>
+<h3 id="字符串遍历">字符串遍历</h3>
+<p>下面的片段读取一整行，并统计字符 <code>'a'</code> 出现的次数。它复用本课的合法下标循环，但不是另一份完整程序：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string text;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">getline</span><span style="--0:#D6DEEB;--1:#403F53">(cin, text);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> count </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (string::size_type i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">length</span><span style="--0:#D6DEEB;--1:#403F53">(); i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">count</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>空格和标点也各占一个位置。空串的长度为 0，循环第一次判断就不成立，因此不会访问 <code>text[0]</code>。</p>
+<figure><div tabindex="0" role="region"><table><caption>aB2 逐字符转成大写</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">循环条件</th><th scope="col">当前字符</th><th scope="col">是否为小写字母</th><th scope="col">本轮后的 s</th></tr></thead><tbody><tr><th scope="row">初始化</th><td>尚未判断</td><td>—</td><td>—</td><td>aB2</td></tr><tr><th scope="row">i = 0</th><td>0 &lt; 3，为真</td><td>a</td><td>是，改为 A</td><td>AB2</td></tr><tr><th scope="row">i = 1</th><td>1 &lt; 3，为真</td><td>B</td><td>否，保持不变</td><td>AB2</td></tr><tr><th scope="row">i = 2</th><td>2 &lt; 3，为真</td><td>2</td><td>否，保持不变</td><td>AB2</td></tr><tr><th scope="row">i = 3，停止</th><td>3 &lt; 3，为假</td><td>不访问 s[3]</td><td>不执行循环体</td><td>AB2</td></tr></tbody></table></div><figcaption>循环停止时 s 为 AB2；最后保留 3 &lt; 3 的失败判断，说明程序不会访问 s[3]。</figcaption></figure>
+<p>这张账本只说明输入 <code>aB2</code> 怎样运行，不能单独证明所有输入都正确；还要用空串、全小写、全大写、带空格、数字和特殊字符复验。</p>
+<h2 id="kp-05">05 大小写转换</h2>
+<h3 id="字符串大小写转换">字符串大小写转换</h3>
+<p>字符串大小写转换的实际做法，是先从左到右遍历字符串，再逐个转换当前位置的字符，而不是把整个 <code>string</code> 一次交给某个函数。</p>
+<p>tolower() 和 toupper() 都是把<strong>一个字符</strong>转换后再返回。它们不会自动改掉原来的字符，所以要把返回值赋回去：<code>s[i] = tolower(s[i]);</code>。islower() 和 isupper() 用来判断一个英文字符是否分别是小写或大写。</p>
+<p>下面的写法假定输入只含英文字符、空格和基本 ASCII 标点；在这个题目范围内，逐个字符调用这些函数是安全的。遇到数字、空格或 <code>.</code> 等不分大小写的字符时，转换后仍是原字符。</p>
+<p>单个字符可以这样转换：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> lower </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">tolower</span><span style="--0:#D6DEEB;--1:#403F53">(ch);</span><span style="--0:#919F9F;--1:#5D6376"> // 用 lower 保存把当前字符转换成小写后的结果；当前值由 tolower(ch) 得到</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> upper </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">toupper</span><span style="--0:#D6DEEB;--1:#403F53">(ch);</span><span style="--0:#919F9F;--1:#5D6376"> // 用 upper 保存把当前字符转换成大写后的结果；当前值由 toupper(ch) 得到</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>例如，字符串已经保存在 <code>s</code> 中时，可以用下面的局部片段统一改成小写：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (string::size_type i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">size</span><span style="--0:#D6DEEB;--1:#403F53">(); i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // 从下标 0 开始逐个处理有效字符</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">tolower</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i]);</span><span style="--0:#919F9F;--1:#5D6376"> // 接住转换后的字符，再写回原来的位置</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>如果只想判断而不转换，可以写 <code>if (islower(ch))</code> 或 <code>if (isupper(ch))</code>。它们回答的是“这个字符是不是英文小写/大写字母”，不是比较两个字符串。</p>
+<p><h2 id="kp-06">06 通过下标修改字符</h2>
+字符串下标不仅可以读取字符，也可以直接修改合法位置上的字符。下面的完整程序把一行文本中的小写英文字母改成大写：</p>
+<h3 id="完整程序逐字符转成大写">完整程序：逐字符转成大写</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#919F9F;--1:#5D6376">// 引入输入输出和 string，供本例按下标修改字符</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span><span style="--0:#919F9F;--1:#5D6376"> // 后续直接使用 cin、cout 和 string，避免重复书写 std 前缀</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span><span style="--0:#919F9F;--1:#5D6376"> // 程序从这里开始，把字符串中的小写字母改成大写</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">string s;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 s 保存本例正在遍历或修改的字符串；值将在紧接着的输入或判断分支中确定</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#82AAFF;--1:#3B61B0">getline</span><span style="--0:#D6DEEB;--1:#403F53">(cin, s);</span><span style="--0:#919F9F;--1:#5D6376"> // 读取一整行文本（包括中间的空格）并保存到 s</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 从下标 0 到最后一个有效位置，逐个检查并修改小写英文字母。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (string::size_type i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">size</span><span style="--0:#D6DEEB;--1:#403F53">(); i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // 让下标覆盖每个有效字符：继续条件是 i &lt; s.size()，每轮结束执行 i++</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">z</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 当前字符是小写字母，把它改成对应大写字母</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 保持字母序号不变，把当前小写字母映射到对应大写字母</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 小写字母已经转成对应大写，其他字符保持原样</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // s[i] 是否需要转成大写已处理，i++ 后继续下一字符</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> s </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 输出修改后的完整字符串并换行</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 修改后的大写文本已输出，向运行环境返回成功状态 0</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 通过下标原地修改字符串的完整过程结束</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>表达式 <code>s[i] - 'a'</code> 得到当前小写字母与 <code>'a'</code> 的编码距离，再加上 <code>'A'</code> 就得到对应的大写字母。这个转换依据英文字母编码连续排列的特点；字符编码基础可回看<a href="/gesp/level2/ascii/">二级 ASCII 编码课程</a>。</p>
+<p>长度为 <code>s.size()</code> 的字符串，最后一个合法下标是 <code>s.size() - 1</code>。<code>s[s.size()]</code> 已经越过最后一个字符，不能读取也不能修改。空串没有任何合法下标，所以访问前仍要先检查 <code>s.empty()</code>。</p>
+<h3 id="两端交换完成字符串反转">两端交换完成字符串反转</h3>
+<p>字符串反转和数组反转使用同一过程：左下标从 0 开始，右下标从最后一个字符开始，每轮交换一对字符后同时向中间移动。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> left </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 左下标从字符串首字符开始</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> right </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">)</span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">length</span><span style="--0:#D6DEEB;--1:#403F53">() </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 先把长度转成 int 再减 1，空串时得到 -1 而不会访问字符</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">while</span><span style="--0:#D6DEEB;--1:#403F53"> (left </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> right) {</span><span style="--0:#919F9F;--1:#5D6376"> // 左右下标尚未相遇时，继续交换一对字符</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> temporary </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[left];</span><span style="--0:#919F9F;--1:#5D6376"> // 暂存左侧字符，避免下一行覆盖后丢失</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[left] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[right];</span><span style="--0:#919F9F;--1:#5D6376"> // 把右侧字符写到当前左侧位置</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[right] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> temporary;</span><span style="--0:#919F9F;--1:#5D6376"> // 把原左侧字符写到当前右侧位置</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">left</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 左下标向中间移动一格</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">right</span><span style="--0:#7FDBCA;--1:#096E72">--</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 右下标向中间移动一格</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 左右下标相遇或交错时，整个字符串已经反转</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>对 <code>"abcd"</code>，第一次交换下标 0 和 3 得到 <code>"dbca"</code>，第二次交换下标 1 和 2 得到 <code>"dcba"</code>，然后 <code>left = 2</code>、<code>right = 1</code>，条件不成立并停止。空串或长度为 1 的字符串一开始就不满足 <code>left &lt; right</code>，不会访问不存在的位置。</p>
+<h3 id="简单密码转换每个小写字母后移一位">简单密码转换：每个小写字母后移一位</h3>
+<p>简单密码题通常会明确给出字符映射规则。下面只处理常见 GCC/OJ 的 ASCII 小写英文字母：<code>a</code> 变成 <code>b</code>，……，<code>y</code> 变成 <code>z</code>，<code>z</code> 回到 <code>a</code>。输入若含空格、数字或大写字母，必须另按题意决定是否保留，不能擅自套用这段规则。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (string::size_type i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">size</span><span style="--0:#D6DEEB;--1:#403F53">(); i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // 从左到右处理每个待加密字符</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">z</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // z 已在小写字母末尾，后移一位要回到 a</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 按首尾相接规则把 z 替换成 a</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">a</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">y</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // a 到 y 都有紧邻的下一个小写字母</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 利用 ASCII 连续编码，把当前字符后移一位</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 其他字符不满足两个分支，因此保持原样</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 所有字符处理完后，s 保存完整密码转换结果</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>例如 <code>"az by"</code> 依次变为 <code>"ba cz"</code>：<code>a → b</code>、<code>z → a</code>、空格保持、<code>b → c</code>、<code>y → z</code>。这类题的关键不是背代码，而是先把“哪些字符会变、怎样变、边界字符怎样回绕”写成完整规则。</p>
+<p>片段 <code>s[1] = 'd';</code> 会让 abc 修改为 adc：下标 1 是第二个字符，赋值只改变这个位置，原来的 <code>a</code> 和 <code>c</code> 保持不变。</p>
+<h2 id="kp-07">07 字符串比较与字典序</h2>
+<h3 id="字符串比较与字典序">字符串比较与字典序</h3>
+<p>两个字符串可以使用 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code>、<code>&gt;=</code> 比较。<code>==</code> 和 <code>!=</code> 判断整段文本是否相同；大小关系按字典序比较，也就是从左到右找到第一对不同字符，再比较它们的字符编码。若前面的字符都相同，较短的字符串排在前面。</p>
+<figure data-density="standard"><figcaption>字符串比较速查</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>问题</th>
+<th>示例结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a == b</code></td>
+<td>两个字符串是否完全相同</td>
+<td><code>"cat" == "cat"</code> 为真</td>
+</tr>
+<tr>
+<td><code>a != b</code></td>
+<td>两个字符串是否不同</td>
+<td><code>"cat" != "car"</code> 为真</td>
+</tr>
+<tr>
+<td><code>a &lt; b</code></td>
+<td><code>a</code> 是否按字典序排在 <code>b</code> 前面</td>
+<td><code>"car" &lt; "cat"</code> 为真</td>
+</tr>
+<tr>
+<td><code>a &lt;= b</code></td>
+<td><code>a</code> 是否在 <code>b</code> 前面或与它相同</td>
+<td><code>"cat" &lt;= "cat"</code> 为真</td>
+</tr>
+<tr>
+<td><code>a &gt; b</code></td>
+<td><code>a</code> 是否按字典序排在 <code>b</code> 后面</td>
+<td><code>"dog" &gt; "cat"</code> 为真</td>
+</tr>
+<tr>
+<td><code>a &gt;= b</code></td>
+<td><code>a</code> 是否在 <code>b</code> 后面或与它相同</td>
+<td><code>"dog" &gt;= "dog"</code> 为真</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure>
+<p>字典序不是比较字符串长度。例如 <code>"banana" &lt; "cat"</code> 为真，因为第一个不同位置已经是 <code>'b'</code> 与 <code>'c'</code>，无需再看后面有多少字符。大小写字符的编码也不同，混合大小写比较前要先根据题意决定是否统一大小写。</p>
+<p><h2 id="kp-08">08 连接、截取、查找与替换</h2>
+<strong>核心三：连接、截取、查找、替换与分割。</strong> 先确认起点、长度或查找结果，再执行改变文本的操作；操作后要使用新长度。</p>
+<p>下面四个成员操作用于读题识别，不作为本课必须套用的核心模板。它们都会改变字符串，后续下标检查必须使用修改后的新长度。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>基本作用</th>
+<th>使用边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s.insert(pos, text)</code></td>
+<td>在下标 <code>pos</code> 前插入文本</td>
+<td>先确认插入位置不超过当前长度</td>
+</tr>
+<tr>
+<td><code>s.erase(pos, count)</code></td>
+<td>从 <code>pos</code> 开始删除至多 <code>count</code> 个字符</td>
+<td>先确认起点是合法位置</td>
+</tr>
+<tr>
+<td><code>s.push_back(ch)</code></td>
+<td>在末尾追加一个字符</td>
+<td>参数是单个字符，例如 <code>'A'</code></td>
+</tr>
+<tr>
+<td><code>s.pop_back()</code></td>
+<td>删除最后一个字符</td>
+<td>空串不能执行，先检查 <code>!s.empty()</code></td>
+</tr>
+</tbody>
+</table>
+<p>例如 <code>s = "ACE"</code> 时，<code>s.insert(1, "B")</code> 得到 <code>"ABCE"</code>；随后 <code>s.erase(2, 1)</code> 得到 <code>"ABE"</code>；<code>s.push_back('!')</code> 得到 <code>"ABE!"</code>；确认字符串非空后执行 <code>s.pop_back()</code>，又回到 <code>"ABE"</code>。日常主示例仍优先使用下标修改、拼接和直白分步写法。</p>
+<h3 id="字符串拼接">字符串拼接</h3>
+<p><code>+</code> 可以按顺序拼接两段字符串：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string firstName </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Xiao</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 firstName 保存名字的前半部分；当前值由 "Xiao" 得到</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string lastName </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Dengzi</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 lastName 保存名字的后半部分；当前值由 "Dengzi" 得到</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string fullName </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> firstName </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> lastName;</span><span style="--0:#919F9F;--1:#5D6376"> // 用 fullName 保存加入空格后拼接成的完整名字；当前值由 firstName + " " + lastName 得到</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>结果是 <code>"Xiao Dengzi"</code>。中间的空格也要明确写入，不能假定程序会自动添加。</p>
+<h3 id="字符串截取-substr">字符串截取 substr()</h3>
+<p><code>substr(position, count)</code> 从下标 <code>position</code> 开始，截取至多 <code>count</code> 个字符。</p>
+<h2 id="substr-截取位置示意">substr() 截取位置示意</h2>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string text </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">ABCDE123</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 原字符串共 8 个字符，下面将从下标 2 开始截取</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string part </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">substr</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 从下标 2 开始连续截取 3 个字符，part 得到 "CDE"</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>下标 2 对应字符 <code>'C'</code>，向后取 3 个字符，<code>part</code> 得到 <code>"CDE"</code>。本课只在已经确认起点不超过字符串长度时使用 <code>substr</code>，不讨论非法起点引发的异常。</p>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="字符串查找-find">字符串查找 find()</h3>
+<p><code>find(target)</code> 查找目标字符串第一次出现的位置。找到时返回起始下标，找不到时返回特殊标记 <code>string::npos</code>。</p>
+<p>前面已经用 <code>string::size_type</code> 保存长度和下标。<code>find</code> 还会在失败时返回同一类型的特殊标记 <code>string::npos</code>，所以查找位置也继续使用这个类型。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string text </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">red blue red</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 原文本中 red 出现两次，find 默认只返回第一次的位置</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string::size_type position </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">find</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">red</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 查找 red 第一次出现的位置；找不到时保存 string::npos</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>这里第一次出现的位置是 0。位置 0 仍然表示查找成功，所以不能把 <code>find</code> 的结果直接当成真假值。</p>
+<h3 id="字符串替换-replace">字符串替换 replace()</h3>
+<p><code>replace(position, count, newText)</code> 从 <code>position</code> 开始，替换 <code>count</code> 个字符。使用前必须先确认已经找到目标：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (position </span><span style="--0:#C792EA;--1:#8844AE">!=</span><span style="--0:#D6DEEB;--1:#403F53"> string::npos) {</span><span style="--0:#919F9F;--1:#5D6376"> // position 不是 npos，说明 find 确实找到了目标词</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">replace</span><span style="--0:#D6DEEB;--1:#403F53">(position, </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">green</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 从找到的位置开始删去 3 个字符，再写入 green</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span><span style="--0:#919F9F;--1:#5D6376"> // 找到时已完成首次替换；未找到时不进入分支，原文本保持不变</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>替换后 <code>text</code> 变成 <code>"green blue red"</code>。新文本可能比旧文本更长或更短，后续访问必须根据替换后的新长度判断。</p>
+<p>下面的局部片段把查找、截取、替换和拼接连在一起，并且只替换第一次出现的目标词：</p>
+<h3 id="查找并替换片段">查找并替换片段</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string oldWord </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">cat</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // oldWord 是待查找的旧词</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string newWord </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">dog</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // newWord 是替换后写入的新词</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string::size_type position </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">find</span><span style="--0:#D6DEEB;--1:#403F53">(oldWord);</span><span style="--0:#919F9F;--1:#5D6376"> // 保存第一次出现的位置</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (position </span><span style="--0:#C792EA;--1:#8844AE">!=</span><span style="--0:#D6DEEB;--1:#403F53"> string::npos) {</span><span style="--0:#919F9F;--1:#5D6376"> // 只有确实找到时才能使用这个位置</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">string piece </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">substr</span><span style="--0:#D6DEEB;--1:#403F53">(position, </span><span style="--0:#C5E478;--1:#3B61B0">oldWord</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">length</span><span style="--0:#D6DEEB;--1:#403F53">());</span><span style="--0:#919F9F;--1:#5D6376"> // 截取被替换的旧片段</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">replace</span><span style="--0:#D6DEEB;--1:#403F53">(position, </span><span style="--0:#C5E478;--1:#3B61B0">oldWord</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">length</span><span style="--0:#D6DEEB;--1:#403F53">(), newWord);</span><span style="--0:#919F9F;--1:#5D6376"> // 在原位置写入新词</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">string result </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">Result: </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> text;</span><span style="--0:#919F9F;--1:#5D6376"> // 用修改后的文本完成拼接</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<h3 id="字符串分割">字符串分割</h3>
+<p>C++14 的 <code>string</code> 没有 split() 成员函数。字符串分割是按一个分隔字符把原字符串拆成若干片段。</p>
+<p>例如把 club.code.org 按 <code>.</code> 分割。开始时 <code>part</code> 为空；依次读到 <code>c</code>、<code>l</code>、<code>u</code>、<code>b</code> 后，<code>part</code> 变成 <code>club</code>。读到第一个 <code>.</code> 时输出 <code>club</code> 并清空 <code>part</code>；随后同样得到并输出 <code>code</code>；循环结束时 <code>part</code> 里还剩 <code>org</code>，最后再输出一次。</p>
+<table>
+<thead>
+<tr>
+<th>当前读到的字符</th>
+<th><code>part</code> 的变化</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c</code>、<code>l</code>、<code>u</code>、<code>b</code></td>
+<td>逐个累积为 <code>club</code></td>
+<td>暂不输出</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>输出后清空</td>
+<td><code>club</code></td>
+</tr>
+<tr>
+<td><code>c</code>、<code>o</code>、<code>d</code>、<code>e</code></td>
+<td>逐个累积为 <code>code</code></td>
+<td>暂不输出</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>输出后清空</td>
+<td><code>code</code></td>
+</tr>
+<tr>
+<td><code>o</code>、<code>r</code>、<code>g</code></td>
+<td>逐个累积为 <code>org</code></td>
+<td>循环后输出 <code>org</code></td>
+</tr>
+</tbody>
+</table>
+<p>下面的局部片段会保留空片段：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string part </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">""</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // part 保存当前正在累积的片段</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (string::size_type i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">size</span><span style="--0:#D6DEEB;--1:#403F53">(); i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // 从左到右检查每个字符</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">.</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // 遇到分隔符时，一个片段结束</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> part </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 空片段也会输出一个空行</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">part </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">""</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 清空后开始收集下一段</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">part </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> part </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span><span style="--0:#919F9F;--1:#5D6376"> // 普通字符接到当前片段末尾</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> part </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 循环后别漏掉最后一个片段</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>因此开头分隔符、末尾分隔符或连续分隔符都会输出空行。例如 <code>.a</code> 的第一段为空，<code>a.</code> 的最后一段为空，<code>a..b</code> 的中间一段为空。空片段应不应该保留，必须按照题目要求决定，不能自己悄悄丢掉或保留。</p>
+<h3 id="字符数组与结束标记">字符数组与结束标记</h3>
+<p>字符数组容量固定，而且文本末尾必须保留 <code>\0</code>。<code>char text[105]</code> 的下标是 0 到 104，因此最多安全保存 104 个普通字符。</p>
+<p><code>cin.getline(text, CAPACITY)</code> 会读取一整行，最多写入 <code>CAPACITY - 1</code> 个普通字符，并在后面补上 <code>\0</code>。下面的局部片段统计数字字符：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> CAPACITY </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">105</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 最后一个位置留给结束标记</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">char</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">[CAPACITY] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span><span style="--0:#919F9F;--1:#5D6376"> // 先把字符数组全部初始化为 0</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">cin</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">getline</span><span style="--0:#D6DEEB;--1:#403F53">(text, CAPACITY);</span><span style="--0:#919F9F;--1:#5D6376"> // 最多读入 CAPACITY - 1 个普通字符</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> digitCount </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 从还没有统计到数字开始</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">!=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\0</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376"> // 遇到结束标记时停止</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">0</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&amp;&amp;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">text</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#ECC48D;--1:#984E4D">9</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">digitCount</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // 当前字符是数字，计数增加 1</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>循环遇到 <code>\0</code> 时停止，因此不会把结束标记当成普通文本。若输入可能超过 104 个字符，题目必须另外说明如何处理过长输入；程序不能把字符写到数组外面。</p>
+<h3 id="官方真题少见写法append-的三个参数">官方真题少见写法：append 的三个参数</h3>
+<p>官方题中可能出现：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">s</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">append</span><span style="--0:#D6DEEB;--1:#403F53">(other, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 取 other 从下标 0 开始的 2 个字符，追加到 s 末尾</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>先用本课已经学过的操作写成直白等价形式：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">string piece </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">other</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">substr</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376"> // 用 piece 保存从原字符串截取出的局部文本；当前值由 other.substr(0, 2) 得到</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">s </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> s </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> piece;</span><span style="--0:#919F9F;--1:#5D6376"> // 把截取出的 piece 接到 s 末尾，形成新的字符串内容</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>它的作用是取出 <code>other</code> 从下标 0 开始的两个字符，再追加到 <code>s</code> 末尾。原写法把“从哪个字符串取、从哪里开始、取几个字符”压进一次 <code>append</code> 调用中，是官方真题少见写法。</p>
+<p>容易误读的地方是把第二个参数 0 当成“追加 0 个字符”，或把第三个参数 2 当成结束下标。实际上 0 是起始下标，2 是字符个数。日常编程和本站主示例优先使用上面的两句直白写法。</p>
+<h3 id="字符串常用函数速查表">字符串常用函数速查表</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+<th>关键参数、返回值或常见错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>size()</code> / <code>length()</code></td>
+<td>得到字符个数</td>
+<td>首尾访问前先确认非空；两者这里作用相同</td>
+</tr>
+<tr>
+<td><code>empty()</code></td>
+<td>判断是否为空串</td>
+<td>空串时不要访问 <code>s[0]</code></td>
+</tr>
+<tr>
+<td><code>substr(pos, count)</code></td>
+<td>从 <code>pos</code> 开始截取</td>
+<td>先确认起点不超过长度</td>
+</tr>
+<tr>
+<td><code>find(target)</code></td>
+<td>查找第一次出现的位置</td>
+<td>与 <code>string::npos</code> 比较，位置 0 也表示找到</td>
+</tr>
+<tr>
+<td><code>replace(pos, count, text)</code></td>
+<td>替换指定范围</td>
+<td>先确认已经找到合法位置</td>
+</tr>
+<tr>
+<td><code>islower(ch)</code> / <code>isupper(ch)</code></td>
+<td>判断英文字符是否为小写/大写</td>
+<td>返回判断结果，不会转换字符</td>
+</tr>
+<tr>
+<td><code>tolower(ch)</code> / <code>toupper(ch)</code></td>
+<td>转换一个英文字符的大小写</td>
+<td>要接住返回值，例如 <code>ch = tolower(ch)</code></td>
+</tr>
+</tbody>
+</table>
+<figure data-density="standard"><figcaption>字符串示例测试案例</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>示例输入</th>
+<th>应重点核对</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础：普通字符串</td>
+<td><code>cat and cat</code></td>
+<td><code>find("cat")</code> 返回 0，只替换第一次出现的位置</td>
+</tr>
+<tr>
+<td>边界：空字符串</td>
+<td>空行</td>
+<td>长度为 0，遍历不执行，也不能访问 <code>s[0]</code></td>
+</tr>
+<tr>
+<td>特殊：大小写混合与特殊字符</td>
+<td><code>HeLLo 2026!</code></td>
+<td>转成大写后为 <code>HELLO 2026!</code>，数字、空格和 <code>!</code> 等标点保持不变</td>
+</tr>
+<tr>
+<td>易错：查找失败</td>
+<td><code>blue sky</code> 中查找 <code>cat</code></td>
+<td>结果等于 <code>string::npos</code>，不能继续对该位置调用 <code>replace</code></td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure><section><h3>find 返回 0 也表示找到了</h3><div><div><strong><span>×</span> 错误写法</strong><code>if (text.find(&quot;cat&quot;)) 认为条件为真才找到 cat</code></div><div><strong><span>✓</span> 正确写法</strong><code>先保存位置，再判断 position != string::npos；成功后才对这个位置使用 substr 或 replace。</code></div></div><p><strong>原因：</strong>目标位于开头时 find 返回 0，而 0 在条件中会被当作假；找不到时返回的才是 string::npos。</p><p><strong>检查方法：</strong>把 find 的结果当作下标处理，不要直接当成真假答案。</p></section><h2 id="common-errors">常见错误</h2><div><ol>
+<li>混用字符和字符串。单个字符写 <code>'a'</code>，一段文本写 <code>"a"</code> 或 <code>"cat"</code>。</li>
+<li>用 <code>cin &gt;&gt; text</code> 读取带空格句子。它在第一个空白处停止，整行文本应使用 <code>getline</code>。</li>
+<li>前一次 <code>cin &gt;&gt;</code> 后直接 <code>getline</code>。输入流中的换行可能被立即读走，要按输入格式先处理分隔字符。</li>
+<li>空串仍访问首尾字符。访问 <code>text[0]</code> 或 <code>text[text.length() - 1]</code> 前先检查 <code>empty()</code>。</li>
+<li>把 <code>find</code> 返回的 0 当成失败。0 是第一个合法下标，失败标记是 <code>string::npos</code>。</li>
+<li>未确认查找成功就调用 <code>replace</code>。必须先判断位置不等于 <code>string::npos</code>。</li>
+<li>替换后仍使用旧长度。替换可能改变字符个数，后续访问要按新长度判断。</li>
+<li>访问 <code>s[s.size()]</code>。字符串最后一个合法下标是 <code>s.size() - 1</code>，空串则没有合法下标。</li>
+<li>把字典序误认为长度比较。字符串从左到右比较第一对不同字符，只有一方是另一方前缀时才由长度决定先后。</li>
+<li>把 <code>char text[105]</code> 当作能保存 105 个普通字符。必须为末尾的 <code>\0</code> 留一个位置。</li>
+<li>以为 <code>string</code> 自带 <code>split()</code>。C++14 的 <code>string</code> 没有这个成员函数；本课按分隔字符遍历、累积并在合适的位置输出片段。</li>
+<li>调用 <code>tolower()</code> 或 <code>toupper()</code> 后不保存返回值。这两个函数返回转换后的字符，要写成 <code>ch = tolower(ch)</code> 或 <code>s[i] = toupper(s[i])</code>。</li>
+<li>没有判断空串就访问 <code>s[0]</code>。先写 <code>if (!s.empty())</code>，确认存在首个字符后再访问。</li>
+<li>分割时没有阅读题意就丢弃或保留空片段。开头、末尾和连续分隔字符都可能产生空片段，输出规则由题目决定。</li>
+</ol></div><h2 id="core-check">核心内容检查</h2><h2 id="page-test-title">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp5.html">← 上一个：一维数组</a>

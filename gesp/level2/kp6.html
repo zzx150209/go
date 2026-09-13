@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,19 +449,278 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>双重循环：外层循环控制行，内层循环控制列，常用于输出图形和枚举。</li><li>外层每执行一次，内层完整执行一遍。</li><li>内层循环的 break 只跳出内层，不影响外层。</li><li>注意循环变量不要同名，避免互相覆盖。</li></ul>
-
-    <div class="kp-code"><pre>// 输出九九乘法表
-for (int i = 1; i &lt;= 9; i++) {
-    for (int j = 1; j &lt;= i; j++) {
-        cout &lt;&lt; j &lt;&lt; &quot;*&quot; &lt;&lt; i &lt;&lt; &quot;=&quot; &lt;&lt; i*j &lt;&lt; &quot;\t&quot;;
-    }
-    cout &lt;&lt; endl;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>双重循环总次数是外层次数乘以内层次数，数据量大时会很慢。</li><li>输出图形时注意每行末尾要换行。</li></ul>
+    <article class="article-body">
+    <div data-gesp-level2-ui data-gesp-level2-detail></div>
+<h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> 嵌套分支先走外层再决定是否进入内层；<code>else</code> 与最近的未配对 <code>if</code> 结合；<code>else if</code> 只执行第一条成立分支，<code>switch</code> 从匹配 <code>case</code> 开始并由 <code>break</code> 停止。</li>
+<li><strong>常用语法：</strong> 用大括号标清层次，并把更严格的 <code>else if</code> 条件放在前面：<code>if (...) { ... } else if (...) { ... } else { ... }</code>；固定值分支写成 <code>case value: ...; break;</code>。</li>
+<li><strong>最小示例：</strong> 分数判断先经过外层有效范围，再进入从严格到宽松的等级分支；<code>score = 90</code> 时，<code>score &gt;= 90</code> 为真，输出 A，后续条件不再检查。</li>
+<li><strong>关键易错点：</strong> 省略大括号容易误判悬空 <code>else</code>；宽条件放在严格条件前会挡住后者；<code>switch</code> 漏写 <code>break</code> 会继续落入后续 <code>case</code>。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>本页对应二级大纲中的多层分支结构：掌握 <code>if</code>、<code>if-else</code> 和 <code>switch</code> 的嵌套或组合，能够追踪执行路径，并正确处理条件顺序、边界和 <code>break</code>。</p>
+<p>多层分支用于“先判断一层，再根据结果继续细分”的问题。读代码时先确定外层路径，再进入对应内层，不能把所有条件同时执行。</p>
+<p>本页从外层条件开始逐层追踪嵌套 <code>if</code>，理解 <code>else</code> 与最近未配对 <code>if</code> 的关系；再比较 <code>else if</code> 条件顺序和 <code>switch</code> 固定值分支，最后用 59、60、89、90 以及非法分数检查所有边界。</p>
+<p><strong>分支</strong>是根据条件只选择某条执行路径；<strong>多层分支</strong>是在已经选择的路径中继续判断。它与一串彼此独立的 <code>if</code> 不同：独立 <code>if</code> 可能有多项同时执行，<code>if ... else if ... else</code> 只进入第一个成立分支，嵌套 <code>if</code> 则要求先进入外层路径，内层判断才有机会执行。</p>
+<a id="01-nested-if"></a>
+<h2 id="01-嵌套-if-与配对规则">01 嵌套 if 与配对规则</h2>
+<p>当第二个判断只在第一个条件成立后才有意义，可以把 <code>if</code> 放进另一个 <code>if</code>：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">60</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 外层决定能否进入及格后的细分</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">90</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">pass and excellent</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span><span style="--0:#919F9F;--1:#5D6376">  // 已及格但未达到 90</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">pass</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span><span style="--0:#919F9F;--1:#5D6376">  // 外层为假时，内层完全不执行</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">not pass</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>这段语法可以拆成“外层条件、外层真分支、内层条件、内层两条路径、外层假分支”。缩进帮助阅读，但真正决定范围的是大括号。二级主代码始终保留大括号，避免仅靠缩进猜测 <code>else</code> 属于哪一层。</p>
+<p>大括号明确了层次。没有大括号时，<code>else</code> 与前面最近且尚未配对的 <code>if</code> 配对，容易看错，因此二级主代码应保留完整大括号。</p>
+<p>对输入 95、75、50 分别追踪：</p>
+<table>
+<thead>
+<tr>
+<th><code>score</code></th>
+<th>外层 <code>score&gt;=60</code></th>
+<th>内层 <code>score&gt;=90</code></th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>95</td>
+<td>真，进入内层</td>
+<td>真</td>
+<td><code>pass and excellent</code></td>
+</tr>
+<tr>
+<td>75</td>
+<td>真，进入内层</td>
+<td>假</td>
+<td><code>pass</code></td>
+</tr>
+<tr>
+<td>50</td>
+<td>假，不进入内层</td>
+<td>不检查</td>
+<td><code>not pass</code></td>
+</tr>
+</tbody>
+</table>
+<p>输入 50 时，内层条件不是“假”，而是根本没有执行到。嵌套分支必须先取得外层路径，才能判断下一层。</p>
+<h2 id="过程演示">过程演示</h2>
+<p>已经形成嵌套结构后，再看唯一完整程序。外层先把输入分成“非法”和“合法”两条路径；只有进入合法路径，内层才继续把成绩分成 A、B、C。追踪时要区分“条件为假”和“根本没有执行到”。</p>
+<h3 id="完成程序">完成程序</h3>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> score;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">||</span><span style="--0:#D6DEEB;--1:#403F53"> score </span><span style="--0:#C792EA;--1:#8844AE">&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">100</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 外层先排除非法范围</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">invalid</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">90</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 合法后从最严格条件开始</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">60</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">B</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">C</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>外层非法判断</th>
+<th>内层 <code>score&gt;=90</code></th>
+<th>内层 <code>score&gt;=60</code></th>
+<th>输出</th>
+<th>未执行分支</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>真</td>
+<td>不检查</td>
+<td>不检查</td>
+<td><code>invalid</code></td>
+<td>A、B、C</td>
+</tr>
+<tr>
+<td>59</td>
+<td>假，进入合法路径</td>
+<td>假</td>
+<td>假</td>
+<td><code>C</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>60</td>
+<td>假，进入合法路径</td>
+<td>假</td>
+<td>真</td>
+<td><code>B</code></td>
+<td>C</td>
+</tr>
+<tr>
+<td>89</td>
+<td>假，进入合法路径</td>
+<td>假</td>
+<td>真</td>
+<td><code>B</code></td>
+<td>C</td>
+</tr>
+<tr>
+<td>90</td>
+<td>假，进入合法路径</td>
+<td>真</td>
+<td>不检查</td>
+<td><code>A</code></td>
+<td>B、C</td>
+</tr>
+<tr>
+<td>101</td>
+<td>真</td>
+<td>不检查</td>
+<td>不检查</td>
+<td><code>invalid</code></td>
+<td>A、B、C</td>
+</tr>
+</tbody>
+</table>
+<p>例如输入 90，先得到外层非法判断为假，进入合法路径后，内层 <code>score&gt;=90</code> 才为真并输出 A。这正是“先选择外层，再执行内层”，不是一条平铺的四分支链。</p>
+<a id="02-conditions"></a>
+<h2 id="02-多条件与-else-if">02 多条件与 else if</h2>
+<p>一组互斥区间常用 <code>if ... else if ... else</code>。程序从上到下检查，遇到第一个为真的条件后执行对应分支，其余分支跳过。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">90</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 从最严格条件开始</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">80</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">B</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">60</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">C</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span><span style="--0:#919F9F;--1:#5D6376">  // 接住前面条件都不满足的剩余区间</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">D</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>条件要从更严格到更宽松排列。若先写 <code>score &gt;= 60</code>，90 分也会提前进入该分支。</p>
+<p>输入 <code>score = 75</code> 时，程序按顺序追踪如下：</p>
+<table>
+<thead>
+<tr>
+<th>检查条件</th>
+<th>结果</th>
+<th>下一步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>score &gt;= 90</code></td>
+<td>假</td>
+<td>继续检查下一项</td>
+</tr>
+<tr>
+<td><code>score &gt;= 80</code></td>
+<td>假</td>
+<td>继续检查下一项</td>
+</tr>
+<tr>
+<td><code>score &gt;= 60</code></td>
+<td>真</td>
+<td>输出 <code>C</code>，停止检查</td>
+</tr>
+</tbody>
+</table>
+<p>第三个条件成立后，后面的 <code>else</code> 不再执行。<code>else if</code> 链只会进入第一个满足条件的分支。</p>
+<a id="03-switch"></a>
+<h2 id="03-switchcase-与-break">03 switch、case 与 break</h2>
+<p>当一个整数或字符要与若干固定值比较时，可以使用 <code>switch</code>：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">switch</span><span style="--0:#D6DEEB;--1:#403F53"> (month) {</span><span style="--0:#919F9F;--1:#5D6376">  // 从匹配的固定 case 位置开始执行</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">February</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 离开 switch，防止继续贯穿</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">4</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">April</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">default</span><span style="--0:#D6DEEB;--1:#403F53">:</span><span style="--0:#919F9F;--1:#5D6376">  // 没有 case 匹配时进入</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">other</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p><code>switch (month)</code> 中圆括号里的内容叫<strong>选择表达式</strong>，它通常得到整数或字符值；<code>case 2</code>、<code>case 4</code> 是互不重复的固定常量入口；<code>default</code> 是没有匹配项时的可选入口。<code>case</code> 只决定“从哪里开始”，不会自动决定“在哪里停止”，所以通常需要 <code>break</code>。</p>
+<p>匹配某个 <code>case</code> 后从该位置继续执行，直到遇到 <code>break</code> 或离开 <code>switch</code>。遗漏 <code>break</code> 会继续执行后面的 <code>case</code>，叫作贯穿。题目可能专门考查贯穿，但日常代码若不需要贯穿，应写清 <code>break</code>。</p>
+<h3 id="if-与-switch-组合"><code>if</code> 与 <code>switch</code> 组合</h3>
+<p>当一个范围条件成立后，还要比较若干固定值，可以先用 <code>if</code>，再在它内部使用 <code>switch</code>：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (type </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 外层决定内层 switch 是否执行</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">switch</span><span style="--0:#D6DEEB;--1:#403F53"> (month) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">6</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">summer</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">12</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">winter</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">default</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">other month</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">other type</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>2 6</code> 时，先检查 <code>type==2</code> 为真，才进入 <code>switch</code>；<code>month</code> 匹配 <code>case 6</code>，输出 <code>summer</code>，随后 <code>break</code> 只结束 <code>switch</code>。输入 <code>1 6</code> 时外层条件为假，整个 <code>switch</code> 都不执行，输出 <code>other type</code>。<code>if</code> 和 <code>switch</code> 的大括号都不能省略，否则层次和作用范围会难以辨认。</p>
+<p>反过来，也可以先由 <code>switch</code> 选中固定类别，再在某个 <code>case</code> 内用 <code>if</code> 判断范围：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">switch</span><span style="--0:#D6DEEB;--1:#403F53"> (type) {</span><span style="--0:#919F9F;--1:#5D6376">  // 外层先选择固定类别</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (score </span><span style="--0:#C792EA;--1:#8844AE">&gt;=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">60</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // case 内再判断范围</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">pass</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">not pass</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 离开外层 switch</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">default</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">other type</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>两个 <code>switch</code> 也可以嵌套。下面先选组别，再在组别 1 内选择代码：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">switch</span><span style="--0:#D6DEEB;--1:#403F53"> (group) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">switch</span><span style="--0:#D6DEEB;--1:#403F53"> (code) {</span><span style="--0:#919F9F;--1:#5D6376">  // 只有外层选中组别 1 才进入</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">A</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 只结束最近的内层 switch</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">default</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">B</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 再结束外层 switch</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">default</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">other</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">break</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>group=1、code=2</code> 时，内层 <code>break</code> 只离开内层 <code>switch</code>，随后仍会执行外层 <code>case 1</code> 末尾的第二个 <code>break</code>。两层 <code>break</code> 各管最近的一层，不能用一个内层 <code>break</code> 同时结束两层选择。</p>
+<p>无论是哪一种组合，都先执行外层选择，再看是否能到达内层。<code>break</code> 在上例中结束的是它所在的 <code>switch</code>，不会像 <code>return</code> 那样直接结束整个程序。</p>
+<a id="04-boundary"></a>
+<h2 id="04-条件顺序与边界">04 条件顺序与边界</h2>
+<p>边界值要逐一代入。例如“0 到 100 分”通常包含 0 和 100；区间 <code>80—89</code> 可写 <code>score &gt;= 80 &amp;&amp; score &lt; 90</code>。多个条件组合时先确认每个比较，再看 <code>&amp;&amp;</code> 或 <code>||</code>。</p>
+<p>处理年份、票价、分段收费等问题时，先在纸上列出互不重叠的区间，再按顺序写分支。这样能避免一个值同时符合多段或没有任何分支接住。</p>
+<p>例如规则是“90 分及以上优秀，60—89 分及格，其余不及格”，把 59、60、89、90 逐个代入：</p>
+<table>
+<thead>
+<tr>
+<th>分数</th>
+<th><code>&gt;=90</code></th>
+<th><code>&gt;=60</code></th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>59</td>
+<td>假</td>
+<td>假</td>
+<td>不及格</td>
+</tr>
+<tr>
+<td>60</td>
+<td>假</td>
+<td>真</td>
+<td>及格</td>
+</tr>
+<tr>
+<td>89</td>
+<td>假</td>
+<td>真</td>
+<td>及格</td>
+</tr>
+<tr>
+<td>90</td>
+<td>真</td>
+<td>不再检查</td>
+<td>优秀</td>
+</tr>
+</tbody>
+</table>
+<p>如果第二个条件误写成 <code>score&gt;60</code>，60 会掉进“不及格”；若优秀条件误写成 <code>score&gt;90</code>，90 会被分到“及格”。边界题必须实际代入等号两侧检查。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>常用结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件成立后继续细分</td>
+<td>嵌套 <code>if</code></td>
+</tr>
+<tr>
+<td>多个互斥区间</td>
+<td><code>if ... else if ... else</code></td>
+</tr>
+<tr>
+<td>与多个固定值比较</td>
+<td><code>switch</code></td>
+</tr>
+<tr>
+<td>防止 case 继续向下执行</td>
+<td><code>break</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<p>**题目：**一个 <code>switch</code> 在 <code>case 1</code> 输出 <code>A</code> 后没有 <code>break</code>，紧接的 <code>case 2</code> 输出 <code>B</code> 后才 <code>break</code>。输入 1 时输出什么？</p>
+<p><strong>推演：</strong></p>
+<ol>
+<li><code>switch</code> 的值为 1，从 <code>case 1</code> 开始执行；</li>
+<li>先输出 <code>A</code>；</li>
+<li>当前分支末尾没有 <code>break</code>，所以不会重新匹配，而是直接继续向下执行；</li>
+<li>到达 <code>case 2</code> 的语句并输出 <code>B</code>；</li>
+<li>随后遇到 <code>break</code>，离开 <code>switch</code>。</li>
+</ol>
+<p>**结论：**连续输出 <code>AB</code>。<code>case</code> 负责确定开始位置，<code>break</code> 才负责在需要的位置停止。</p>
+<p>**引导练习：**把合法成绩分成“90—100 为 A、60—89 为 B、0—59 为 C”，范围外输出 <code>invalid</code>。请先在纸上写外层合法性条件，再写内层两个条件，并用 <code>-1、59、60、89、90、101</code> 逐个走路径。提示：外层只负责合法/非法，内层从严格条件向宽条件检查。核对输出依次应为 <code>invalid、C、B、B、A、invalid</code>，而且 <code>-1</code> 和 <code>101</code> 都不应执行任何内层条件。</p>
+<a id="常见错误"></a>
+<h2 id="容易混淆的几个问题">容易混淆的几个问题</h2>
+<ul>
+<li>忽略外层条件，直接进入内层分支；</li>
+<li>不写大括号，误判 <code>else</code> 的配对对象；</li>
+<li>把宽条件放在严格条件之前；</li>
+<li>忘记 <code>switch</code> 中的 <code>break</code>；</li>
+<li>用 <code>=</code> 代替 <code>==</code>，或遗漏边界等号。</li>
+</ul>
+<p>**错误写法：**先写 <code>if (score &gt;= 60)</code>，后写 <code>else if (score &gt;= 90)</code>。</p>
+<p>**错误原因：**90 分先满足较宽的 <code>score &gt;= 60</code>，后面的优秀分支永远没有机会执行。</p>
+<p>**正确写法：**先判断 <code>score &gt;= 90</code>，再判断 <code>score &gt;= 60</code>，最后用 <code>else</code> 接住不及格情况。</p>
+<p><strong>错误写法：</strong><code>if (score = 90)</code></p>
+<p>**错误原因：**单个 <code>=</code> 是赋值，不是判断相等；它还会修改 <code>score</code>。</p>
+<p>**正确写法：**相等比较使用 <code>if (score == 90)</code>。若判断分数段，使用 <code>score &gt;= 90</code>。</p>
+<p>**修正后复演：**假设输入原本是 50。错误写法 <code>score = 90</code> 会先把变量改成 90，条件又因非零而成立；改成 <code>score == 90</code> 后，50 与 90 比较为假，<code>score</code> 仍保持 50。检查“变量值没有被条件修改”就是修正成功的标准。</p>
+<p><code>switch</code> 中也要逐个检查 <code>case</code> 后是否需要 <code>break</code>；只有题目明确要求贯穿时才故意省略。</p>
+<h2 id="本节总结">本节总结</h2>
+<p>多层分支先走外层，再决定是否进入内层；没有走到的条件属于未执行分支。<code>else if</code> 从上到下只进入第一个成立分支，因此严格条件应放在宽松条件之前。<code>switch</code> 从匹配的 <code>case</code> 开始，通常用 <code>break</code> 停止；所有结构都要用边界值逐一验证。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>流程图可以把多层条件画成清晰路径；多层循环中也会在循环体内使用分支控制计数、<code>break</code> 和 <code>continue</code>。</p>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp5.html">← 上一个：多分支判断</a>

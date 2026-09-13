@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,96 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>等差数列：a_n = a_1 + (n-1)d，和 S_n = n(a_1+a_n)/2。</li><li>等比数列：a_n = a_1 * q^(n-1)，和 S_n = a_1(1-q^n)/(1-q)（q≠1）。</li><li>常见求和公式：Σi = n(n+1)/2，Σi² = n(n+1)(2n+1)/6。</li><li>代数化简：先化简表达式再计算，避免大数中间结果。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>等比数列求和 q=1 时单独处理，就是 n*a1。</li><li>取模除法要用乘法逆元。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方八级代数基础包括一元一次方程、二元一次方程的基础求解、表达式化简、公式转程序、等差数列和等比数列入门。本页侧重把已知数学关系准确翻译成程序，不引入高斯消元。</p>
+<h2 id="kp-01">01 方程与退化情况</h2>
+<p>对 <code>ax+b=0</code>，先判断 <code>a</code>：</p>
+<ul>
+<li><code>a≠0</code>：唯一解 <code>x=-b/a</code>；</li>
+<li><code>a=0,b≠0</code>：无解；</li>
+<li><code>a=0,b=0</code>：无数解。</li>
+</ul>
+<p>使用浮点数时，可按题目精度设置 <code>EPS</code>，用 <code>fabs(value)&lt;EPS</code> 判断结果是否接近 0。二元一次方程也要先检查分母对应的行列式是否为 0，再决定唯一解或退化情况。</p>
+<h2 id="kp-02">02 表达式与公式转程序</h2>
+<p>翻译公式时要保留括号、运算顺序和数据类型。例如 <code>s=(a+b)h/2</code> 应写成 <code>(a+b)*h/2.0</code> 或让参与运算的数据使用 <code>double</code>，避免整数除法提前截断。</p>
+<p>平方可写为 <code>x*x</code>；不要用 <code>^</code> 表示乘方，因为 C++ 中 <code>^</code> 是按位异或。长公式可以先计算有明确含义的中间量，使检查更容易。</p>
+<h2 id="kp-03">03 等差数列</h2>
+<p>首项为 <code>a1</code>、公差为 <code>d</code>：</p>
+<ul>
+<li>第 <code>n</code> 项：<code>an=a1+(n-1)d</code>；</li>
+<li>前 <code>n</code> 项和：<code>Sn=n(a1+an)/2</code>。</li>
+</ul>
+<p>例如首项 3、公差 2，第 5 项是 <code>3+4×2=11</code>。公差只增加 <code>n-1</code> 次，这是最常见的下标错误。</p>
+<h2 id="kp-04">04 等比数列入门</h2>
+<p>首项为 <code>a1</code>、公比为 <code>q</code>，第 <code>n</code> 项是 <code>an=a1×q^(n-1)</code>。例如首项 2、公比 3，第 4 项为 <code>2×3^3=54</code>。</p>
+<p>当指数较大时，数值增长很快，要先估算整数范围；需要取模时可关联倍增思想下的快速幂，但本页不把复杂数列求和公式作为核心。</p>
+<p><strong>公式代入追踪。</strong> 梯形上底 3、下底 7、高 4，按“公式 → 代入 → 计算”完成：</p>
+<ol>
+<li>写公式 <code>S=(a+b)h/2</code>；</li>
+<li>代入为 <code>S=(3+7)×4÷2</code>；</li>
+<li>先算括号，再乘高，最后除以 2，得到 <code>20</code>。</li>
+</ol>
+<p>若长度中同时出现米和厘米，单位必须统一后才能代入。方程类案例还要先做退化判断：分母为 0 时不能继续除法；输入系数很大时，要检查乘法和中间结果是否越界；需要小数时，要明确精度与输出格式。</p>
+<p><strong>逐段具体推演（对应 01—04）。</strong></p>
+<p><strong>01 方程。</strong> 一元方程 <code>2x-6=0</code> 得 <code>x=3</code>，代回后 <code>2×3-6=0</code>。二元一次方程组 <code>x+y=3、x-y=1</code> 两式相加得 <code>2x=4</code>，所以 <code>x=2，y=1</code>；代回两式分别得到 3 和 1。两式相同或矛盾时不能硬算唯一解。</p>
+<p><strong>02 公式转程序。</strong> 梯形上底 3、下底 5、高 4，先算括号 <code>3+5=8</code>，再乘高得 32，最后除以 2 得 16。写成 <code>a+b*h/2</code> 会先算乘除，已经改变原公式。</p>
+<p><strong>03 等差数列。</strong> 首项 3、公差 2，第 5 项经历 4 次增加：<code>3→5→7→9→11</code>，所以是 <code>3+(5-1)×2=11</code>；前 5 项和是 <code>(3+11)×5÷2=35</code>。</p>
+<p><strong>04 等比数列。</strong> 首项 2、公比 3，第 4 项过程是 <code>2→6→18→54</code>，共乘 3 次，所以指数是 <code>4-1</code>。<code>q=1</code> 时每项都等于首项。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>公式或检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一元一次方程</td>
+<td>先判断 a 是否为 0</td>
+</tr>
+<tr>
+<td>公式转程序</td>
+<td>保留括号，检查整数除法</td>
+</tr>
+<tr>
+<td>等差第 n 项</td>
+<td><code>a1+(n-1)d</code></td>
+</tr>
+<tr>
+<td>等差前 n 项和</td>
+<td><code>n(a1+an)/2</code></td>
+</tr>
+<tr>
+<td>等比第 n 项</td>
+<td><code>a1×q^(n-1)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<p>输入一元一次方程 <code>ax+b=0</code> 的系数，输出解的类型和唯一解。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> EPS </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">1</span><span style="--0:#FFEB95">e</span></span><span style="--0:#7FDBCA;--1:#096E72">-</span><span style="--0:#F78C6C;--1:#AA0982">9</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> a, b;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 先处理 a 为 0 的退化情况，避免直接除以 0。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#82AAFF;--1:#3B61B0">fabs</span><span style="--0:#D6DEEB;--1:#403F53">(a) </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> EPS) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#82AAFF;--1:#3B61B0">fabs</span><span style="--0:#D6DEEB;--1:#403F53">(b) </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> EPS) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">many</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">no</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// 只有 a 不为 0 时，方程才有唯一解 -b/a。</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">double</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53">b </span><span style="--0:#C792EA;--1:#8844AE">/</span><span style="--0:#D6DEEB;--1:#403F53"> a;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> fixed </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">setprecision</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">6</span><span style="--0:#D6DEEB;--1:#403F53">) </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>程序只做固定次数运算，时间和额外空间复杂度均为 <code>O(1)</code>。</p>
+<h2 id="common-errors">常见错误</h2>
+<p><strong>整数除法反例。</strong> 用 <code>int</code> 计算 <code>1/2*3</code>，程序先得到 <code>1/2=0</code>，再算出 0，但数学结果应为 1.5。正确做法是使用 <code>double</code>，例如 <code>1.0/2*3</code>，并让结果变量也能保存小数。</p>
+<ul>
+<li>没有判断 <code>a</code> 就计算 <code>-b/a</code>，产生除零。</li>
+<li>把 <code>^</code> 当乘方运算符；应使用乘法或逐次计算幂。</li>
+<li>忽略括号，改变原公式运算顺序。</li>
+<li>在需要小数时仍使用整数除法。</li>
+<li>等差、等比第 <code>n</code> 项误写成增加或相乘 <code>n</code> 次。</li>
+</ul>
+<h2 id="关联学习">关联学习</h2>
+<ul>
+<li><a href="/gesp/level8/binary-lifting/">倍增法</a>：理解快速幂中的二进制拆分。</li>
+<li><a href="/gesp/level8/algorithm-optimization/">算法优化</a>：用公式替代重复循环。</li>
+</ul>
+<h2 id="core-check">核心内容检查</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp4.html">← 上一个：倍增</a>

@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,28 +449,182 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>DFS 遍历图：从起点出发，递归访问未访问的邻居。</li><li>BFS 遍历图：用队列逐层扩展。</li><li>非连通图需要枚举所有起点，visited 数组标记。</li><li>遍历顺序不同但都能访问所有可达结点。</li></ul>
-
-    <div class="kp-code"><pre>vector&lt;int&gt; adj[100005];
-bool vis[100005];
-
-void dfs(int u) {
-    vis[u] = true;
-    for (int v : adj[u])
-        if (!vis[v]) dfs(v);
-}
-
-int components = 0;
-for (int i = 1; i &lt;= n; i++) {
-    if (!vis[i]) {
-        dfs(i);
-        components++;
-    }
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>有向图的连通性要分强连通和弱连通。</li><li>遍历顺序影响具体结果，但不影响连通性判定。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方七级大纲要求掌握图的遍历。深度优先遍历（DFS）沿一条分支尽量深入，广度优先遍历（BFS）按与起点的边数分层扩展。两者都必须使用访问标记避免在环中重复处理。</p>
+<h2 id="kp-01">01 遍历目标与访问标记</h2>
+<p>遍历是从起点出发，系统访问所有可达顶点。顶点第一次被发现时就应标记，后续遇到它直接跳过。无向图的一条边存了两个方向，如果没有标记，程序会在两个端点之间往返。</p>
+<p><strong>具体推演：</strong> 无向边只有 <code>1—2</code> 时，从 <code>1</code> 出发先标记 <code>1</code>，再发现并标记 <code>2</code>；处理 <code>2</code> 时又看到邻点 <code>1</code>，因为 <code>visited[1]=true</code>，所以直接跳过。若没有访问标记，程序会沿 <code>1→2→1→2……</code> 不断往返。</p>
+<h2 id="kp-02">02 深度优先遍历 DFS</h2>
+<p>DFS 访问顶点后，依次递归访问尚未访问的相邻点：</p>
+<p>进入 <code>dfs(u)</code> 后先执行 <code>visited[u] = true</code>，再枚举 <code>graph[u]</code> 中的相邻点；只有 <code>visited[v]</code> 为假时才递归。DFS 适合连通性、连通分量和需要沿路径深入的路径搜索。若只需判断能否到达目标，发现目标后可以结束当前搜索；若要记录一条具体路径，还需保存每个顶点从哪个前驱到达。</p>
+<p><strong>具体推演：</strong> 图有边 <code>1—2</code>、<code>1—3</code>、<code>2—4</code>，邻点按编号递增。DFS 从 <code>1</code> 先进入 <code>2</code>，再进入 <code>4</code>；<code>4</code> 没有新邻点后回溯到 <code>2</code>、再回到 <code>1</code>，最后访问 <code>3</code>。首次访问顺序是 <code>1,2,4,3</code>，递归路径的“进入—回溯”解释了为什么不是按层访问。</p>
+<h2 id="kp-03">03 广度优先遍历 BFS</h2>
+<p>BFS 使用队列。起点入队时距离为 <code>0</code>；每次取出队首，把未访问邻点的距离设为当前距离加 <code>1</code>，并立即标记、入队。无权图中第一次到达顶点时的距离，就是起点到它的最少边数。</p>
+<p>执行顺序是：起点入队并标记；反复取出队首；把每个未访问邻点标记，令它的距离等于当前距离加 <code>1</code>，再入队。标记必须发生在入队时。</p>
+<p><strong>具体推演：</strong> 对同一张图，从 <code>1</code> 开始时队列 <code>[1]</code>、<code>dist[1]=0</code>；取出 <code>1</code> 后把 <code>2、3</code> 入队，队列变为 <code>[2,3]</code>，距离都为 <code>1</code>；取出 <code>2</code> 后发现 <code>4</code>，队列变为 <code>[3,4]</code>，<code>dist[4]=2</code>。第一次到达 <code>4</code> 经过两条边，因此最少边数为 <code>2</code>。</p>
+<h2 id="kp-04">04 非连通图与连通分量</h2>
+<p>从一个起点只能访问同一连通分量。要遍历整张非连通图，应从 <code>1</code> 到 <code>n</code> 检查每个未访问顶点，每启动一次 DFS 或 BFS，连通分量数加 <code>1</code>。</p>
+<p><strong>具体推演：</strong> <code>n=5</code>，边为 <code>1—2</code>、<code>2—3</code>、<code>4—5</code>。外层遇到顶点 <code>1</code> 时计数变为 <code>1</code>，一次遍历标记 <code>1、2、3</code>；继续检查到 <code>4</code> 时仍未访问，计数变为 <code>2</code>，第二次遍历标记 <code>4、5</code>。最终所有顶点都被处理，连通分量数为 <code>2</code>。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>核心结构</th>
+<th>常见用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFS</td>
+<td>递归或栈</td>
+<td>深入搜索、连通性、连通分量</td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>队列</td>
+<td>分层遍历、无权图最少边数</td>
+</tr>
+</tbody>
+</table>
+<p>两种方法在邻接表上完整遍历时，时间复杂度均为 <code>O(n+m)</code>，访问标记和队列/递归空间为 <code>O(n)</code>。</p>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="基础例题">基础例题</h3>
+<p>无向图有边 <code>1—2</code>、<code>1—3</code>。若邻接点按 <code>2,3</code> 的顺序保存，从 1 开始 DFS 会访问 <code>1,2,3</code>；BFS 也会先访问 1，再发现同一层的 2 和 3。这个例子中顺序可能相同，但原因不同：DFS 沿分支深入，BFS 按距离分层。</p>
+<h3 id="典型应用例题">典型应用例题</h3>
+<p>统计无向图连通分量：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">vector</span><span style="--0:#C792EA;--1:#8844AE">&lt;int&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">graph</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1005</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1005</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">dfs</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--1:#403F53"><span style="--0:#D6DEEB"> </span><span style="--0:#D7DBE0">u</span><span style="--0:#D6DEEB">) {</span></span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 顶点第一次进入 DFS 时立即标记，避免在无向边或环上重复递归。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[u] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">graph</span><span style="--0:#D6DEEB;--1:#403F53">[u].</span><span style="--0:#82AAFF;--1:#3B61B0">size</span><span style="--0:#D6DEEB;--1:#403F53">(); i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> v </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">graph</span><span style="--0:#D6DEEB;--1:#403F53">[u][i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">        </span></span><span style="--0:#919F9F;--1:#5D6376">// 只沿尚未访问的邻点继续深入。</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">!</span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[v]) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#82AAFF;--1:#3B61B0">dfs</span><span style="--0:#D6DEEB;--1:#403F53">(v);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n, m;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> m;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 无向图的每条边要存入两个方向。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> m; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> u, v;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> u </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> v;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">graph</span><span style="--0:#D6DEEB;--1:#403F53">[u].</span><span style="--0:#82AAFF;--1:#3B61B0">push_back</span><span style="--0:#D6DEEB;--1:#403F53">(v);</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">graph</span><span style="--0:#D6DEEB;--1:#403F53">[v].</span><span style="--0:#82AAFF;--1:#3B61B0">push_back</span><span style="--0:#D6DEEB;--1:#403F53">(u);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> answer </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 每遇到一个未访问顶点，就发现了一个新的连通分量。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> u </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; u </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; u</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">!</span><span style="--0:#C5E478;--1:#3B61B0">visited</span><span style="--0:#D6DEEB;--1:#403F53">[u]) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">answer</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#82AAFF;--1:#3B61B0">dfs</span><span style="--0:#D6DEEB;--1:#403F53">(u);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> answer </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>5 3</code>，边为 <code>1 2</code>、<code>2 3</code>、<code>4 5</code> 时输出 <code>2</code>。一次 DFS 会标记一个完整分量，因此不会重复计数。时间复杂度为 <code>O(n+m)</code>，空间复杂度为 <code>O(n+m)</code>。</p>
+<h3 id="dfs-与-bfs-过程追踪">DFS 与 BFS 过程追踪</h3>
+<p>对边 <code>1—2</code>、<code>1—3</code>、<code>2—4</code>，从顶点 1 出发：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>当前操作</th>
+<th>待处理状态</th>
+<th>已标记顶点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFS</td>
+<td>进入 1，再递归到 2</td>
+<td>递归路径 <code>1 → 2</code></td>
+<td><code>1,2</code></td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>从 2 递归到 4</td>
+<td>递归路径 <code>1 → 2 → 4</code></td>
+<td><code>1,2,4</code></td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>回到 1，再访问 3</td>
+<td>递归路径 <code>1 → 3</code></td>
+<td><code>1,2,3,4</code></td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>1 入队并出队，发现 2、3</td>
+<td>队列变化：<code>[1] → [2,3]</code></td>
+<td><code>1,2,3</code></td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>2 出队，发现 4</td>
+<td>队列变化：<code>[2,3] → [3,4]</code></td>
+<td><code>1,2,3,4</code></td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>3、4 依次出队</td>
+<td><code>[3,4] → [4] → []</code></td>
+<td><code>1,2,3,4</code></td>
+</tr>
+</tbody>
+</table>
+<p>BFS 在顶点入队时立即标记，因此即使另一个顶点也连接到 4，顶点 4 也不会重复入队。</p>
+<h3 id="建议测试案例">建议测试案例</h3>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>输入或条件</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td><code>5</code> 个顶点，边为 <code>1 2</code>、<code>2 3</code>、<code>4 5</code></td>
+<td>连通分量数为 <code>2</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td><code>n = 1, m = 0</code></td>
+<td>连通分量数为 <code>1</code></td>
+</tr>
+<tr>
+<td>易错</td>
+<td>三角形 <code>1—2—3—1</code></td>
+<td>每个顶点只访问一次，不发生无限递归</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-errors">常见错误</h2>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>为什么错</th>
+<th>正确方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BFS 出队时才标记</td>
+<td>同一顶点可能被多个前驱重复入队</td>
+<td>顶点入队时立即标记</td>
+</tr>
+<tr>
+<td>DFS 不检查访问标记就递归</td>
+<td>在无向边或环上会反复递归</td>
+<td>只递归访问尚未标记的邻点</td>
+</tr>
+<tr>
+<td>只从顶点 1 出发就结束</td>
+<td>非连通图中会漏掉其他分量</td>
+<td>枚举所有未访问顶点并启动新遍历</td>
+</tr>
+<tr>
+<td>在带权图上直接用 BFS 求最小权值和</td>
+<td>BFS 只保证无权图的最少边数</td>
+<td>使用与边权条件匹配的算法</td>
+</tr>
+<tr>
+<td>把 DFS 首次找到的路径称为最短路</td>
+<td>DFS 不按边数分层</td>
+<td>无权图最少边数使用 BFS</td>
+</tr>
+<tr>
+<td>认为 DFS 访问顺序固定</td>
+<td>顺序受邻接表排列影响</td>
+<td>只依赖“全部可达点会被访问”等稳定性质</td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误反例推演">错误反例推演</h3>
+<p>在菱形图 <code>1—2、1—3、2—4、3—4</code> 中，若 BFS 等到出队才标记顶点，处理 <code>2</code> 时会把 <code>4</code> 入队，处理 <code>3</code> 时又会把尚未出队、仍未标记的 <code>4</code> 再入队，队列出现两个 <code>4</code>。改为发现 <code>4</code> 时立即标记，第二次遇到它就会跳过，既避免重复处理，也保留第一次到达的最少边数。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>泛洪算法本质上是在网格图上执行 DFS 或 BFS；区别只是相邻点由方向数组现场计算，而不是预先存入邻接表。</p>
+<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp6.html">← 上一个：图的存储</a>

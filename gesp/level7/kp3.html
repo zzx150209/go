@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,23 +449,218 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>网格 DP：dp[i][j] 表示从起点到 (i,j) 的最优值，从左/上转移。</li><li>最长公共子序列（LCS）：dp[i][j] 表示 A 前 i 个和 B 前 j 个的 LCS。</li><li>编辑距离：插入、删除、替换三种操作的最小编辑次数。</li><li>转移方程根据题目具体分析。</li></ul>
-
-    <div class="kp-code"><pre>// LCS
-int dp[1005][1005];
-for (int i = 1; i &lt;= n; i++) {
-    for (int j = 1; j &lt;= m; j++) {
-        if (a[i] == b[j])
-            dp[i][j] = dp[i-1][j-1] + 1;
-        else
-            dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-    }
-}
-// dp[n][m] 就是 LCS 长度</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>网格 DP 注意第一行第一列的初始化。</li><li>LCS 不要求连续，子串才要求连续。</li></ul>
+    <article class="article-body">
+    <h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>官方七级大纲要求掌握二维动态规划。二维状态常用两个位置共同描述子问题：可以是网格的行列，也可以是两个序列各自的前缀长度。重点仍是状态含义、边界、转移和计算顺序。</p>
+<p><strong>什么时候使用二维 DP？</strong> 当答案同时由两个位置决定，例如网格中的行与列、两个字符串各自的前缀长度，单个下标无法区分所有子问题时，可以设计 <code>dp[i][j]</code>。两维各表示什么必须先写清楚，再判断上、左、左上等依赖是否已经算好。</p>
+<h2 id="kp-01">01 二维状态与依赖方向</h2>
+<p><code>dp[i][j]</code> 只是存储形式，必须补全含义。例如“从 <code>(1,1)</code> 到 <code>(i,j)</code> 的路径数”或“两个序列前 <code>i</code>、<code>j</code> 项的最长公共子序列长度”。填表顺序应保证转移所依赖的位置已经求出。</p>
+<p><strong>具体推演：</strong> 在 <code>2 × 3</code> 网格中，<code>dp[2][3]</code> 若定义为“到达第 2 行第 3 列的路径数”，两个下标分别固定了行和列；它依赖已经算好的 <code>dp[1][3]</code> 与 <code>dp[2][2]</code>。若只写成一维 <code>dp[3]</code> 却没有说明当前保存的是哪一行，就无法判断读取的是上一行旧值还是当前行新值。</p>
+<h2 id="kp-02">02 网格路径计数</h2>
+<p>若只能向右或向下移动，到达 <code>(i,j)</code> 的最后一步来自 <code>(i-1,j)</code> 或 <code>(i,j-1)</code>：</p>
+<p><code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code></p>
+<p>使用 1 下标时，可以令 <code>dp[1][1] = 1</code>，再按行、列递增计算。边界外状态不能被读取。</p>
+<p><strong>具体推演：</strong> 无障碍 <code>2 × 3</code> 网格先得到第一行 <code>1,1,1</code>、第一列 <code>1,1</code>；随后 <code>dp[2][2] = 1 + 1 = 2</code>，<code>dp[2][3] = dp[1][3] + dp[2][2] = 1 + 2 = 3</code>。中间值说明每个状态恰好汇总“从上来”和“从左来”两类互不重复的路径。</p>
+<h2 id="kp-03">03 障碍与网格最优值</h2>
+<p>遇到障碍格时，路径数应直接设为 <code>0</code>，表示不可达。求最大路径和时从合法来源取 <code>max</code>，求最小路径时从合法来源取 <code>min</code>；若权值可能为负，不能用 <code>0</code> 代表不可达。路径数量使用相加，最大路径和或最小路径使用比较，不能混用转移与初值。</p>
+<p><strong>具体推演：</strong> 在 <code>2 × 3</code> 网格中若 <code>(1,2)</code> 是障碍，第一行路径数变为 <code>1,0,0</code>；第二行依次为 <code>1</code>、<code>1</code>、<code>1</code>。到 <code>(2,3)</code> 的唯一合法路线是先向下再一直向右。若仍让障碍格沿用普通转移，<code>dp[1][2]</code> 会错误变成 <code>1</code>，后面就会凭空多出一条穿过障碍的路线。</p>
+<h2 id="kp-04">04 最长公共子序列 LCS</h2>
+<p>设 <code>dp[i][j]</code> 表示字符串 <code>a</code> 的前 <code>i</code> 个字符与 <code>b</code> 的前 <code>j</code> 个字符的 LCS 长度：</p>
+<ul>
+<li><code>a[i - 1] == b[j - 1]</code>：<code>dp[i][j] = dp[i - 1][j - 1] + 1</code>；</li>
+<li>不相等：<code>dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])</code>。</li>
+</ul>
+<p>字符串使用 <code>0</code> 下标，所以长度为 <code>i</code>、<code>j</code> 的前缀末尾分别是 <code>a[i - 1]</code>、<code>b[j - 1]</code>。子序列可以不连续，但相对顺序不能改变。空前缀边界 <code>dp[0][j]</code> 与 <code>dp[i][0]</code> 都为 <code>0</code>。</p>
+<p><strong>具体推演：</strong> 对 <code>a = "abc"</code>、<code>b = "ac"</code>，先匹配 <code>a</code> 得到长度 <code>1</code>；字符 <code>b</code> 在第二个字符串当前前缀中没有匹配，长度仍为 <code>1</code>；最后两个 <code>c</code> 相等，从左上状态加一得到 <code>2</code>。最终公共子序列是 <code>"ac"</code>，它在 <code>a</code> 中不连续，却保持了先 <code>a</code> 后 <code>c</code> 的相对顺序。</p>
+<h2 id="kp-05">05 编辑距离入门</h2>
+<p>编辑距离表示把字符串 <code>a</code> 的前 <code>i</code> 个字符变成字符串 <code>b</code> 的前 <code>j</code> 个字符，最少需要多少次单字符操作。允许的三种操作是插入、删除、替换。</p>
+<p>设 <code>dp[i][j]</code> 为两个前缀间的最少编辑次数。空串变成长度为 <code>j</code> 的前缀需要插入 <code>j</code> 次，所以 <code>dp[0][j] = j</code>；长度为 <code>i</code> 的前缀变成空串需要删除 <code>i</code> 次，所以 <code>dp[i][0] = i</code>。若 <code>a[i - 1] == b[j - 1]</code>，末尾不用操作，从 <code>dp[i - 1][j - 1]</code> 转移；否则在插入、删除、替换三个来源的最小值上加 <code>1</code>。</p>
+<p><strong>具体推演：</strong> 把 <code>"cat"</code> 变成 <code>"cut"</code> 时，首字符 <code>c</code> 与末字符 <code>t</code> 都可保留，只需把中间的 <code>a</code> 替换成 <code>u</code>，总代价为 <code>1</code>。若只允许插入和删除，就要先删 <code>a</code> 再插 <code>u</code>，代价为 <code>2</code>；同时比较三种操作后取最小值，才能得到正确编辑距离 <code>1</code>。</p>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>状态</th>
+<th>典型前驱</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网格路径数</td>
+<td>到达 <code>(i,j)</code> 的方案数</td>
+<td>上方、左方</td>
+</tr>
+<tr>
+<td>网格最大/最小路径</td>
+<td>到达 <code>(i,j)</code> 的最优值</td>
+<td>可达的上方、左方</td>
+</tr>
+<tr>
+<td>LCS</td>
+<td>两个前缀的公共子序列长度</td>
+<td>左上、上方、左方</td>
+</tr>
+<tr>
+<td>编辑距离</td>
+<td>两个前缀间的最少编辑次数</td>
+<td>插入、删除、替换</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-example">典型例题</h2>
+<h3 id="基础例题">基础例题</h3>
+<p>在没有障碍的 <code>2 × 2</code> 网格中，从左上角出发，只能向右或向下走到右下角。令 <code>dp[i][j]</code> 表示到达 <code>(i,j)</code> 的路径数，则状态表为：</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>路径数</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(1,1)</code></td>
+<td><code>1</code></td>
+<td>起点</td>
+</tr>
+<tr>
+<td><code>(1,2)</code></td>
+<td><code>1</code></td>
+<td>只能从左边来</td>
+</tr>
+<tr>
+<td><code>(2,1)</code></td>
+<td><code>1</code></td>
+<td>只能从上边来</td>
+</tr>
+<tr>
+<td><code>(2,2)</code></td>
+<td><code>2</code></td>
+<td><code>1 + 1</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="典型应用例题">典型应用例题</h3>
+<p>计算两个字符串的 LCS 长度：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">string a, b;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">size</span><span style="--0:#D6DEEB;--1:#403F53">();</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> m </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">b</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">size</span><span style="--0:#D6DEEB;--1:#403F53">();</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">205</span><span style="--0:#D6DEEB;--1:#403F53">][</span><span style="--0:#F78C6C;--1:#AA0982">205</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// dp[i][j] 表示 a 的前 i 个字符与 b 的前 j 个字符的 LCS 长度。</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> j </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; j </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> m; j</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">            </span></span><span style="--0:#919F9F;--1:#5D6376">// 两个前缀的末尾字符下标分别是 i-1 和 j-1。</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[i </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">b</span><span style="--0:#D6DEEB;--1:#403F53">[j </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">]) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i][j] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">][j </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">                </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i][j] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">max</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">][j], </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[i][j </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">]);</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5D6376">    </span></span><span style="--0:#919F9F;--1:#5D6376">// 两个完整字符串对应状态 dp[n][m]。</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">dp</span><span style="--0:#D6DEEB;--1:#403F53">[n][m] </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>输入 <code>abcde ace</code>，输出 <code>3</code>。时间复杂度为 <code>O(nm)</code>，空间复杂度为 <code>O(nm)</code>。</p>
+<h3 id="状态追踪">状态追踪</h3>
+<p>以 <code>a = "ab"</code>、<code>b = "ac"</code> 为例，空前缀所在的第 0 行和第 0 列都是 <code>0</code>：</p>
+<table>
+<thead>
+<tr>
+<th><code>dp[i][j]</code></th>
+<th>比较的字符</th>
+<th>转移</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dp[1][1]</code></td>
+<td><code>a</code> 与 <code>a</code></td>
+<td><code>dp[0][0] + 1</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>dp[1][2]</code></td>
+<td><code>a</code> 与 <code>c</code></td>
+<td><code>max(dp[0][2], dp[1][1])</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>dp[2][1]</code></td>
+<td><code>b</code> 与 <code>a</code></td>
+<td><code>max(dp[1][1], dp[2][0])</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>dp[2][2]</code></td>
+<td><code>b</code> 与 <code>c</code></td>
+<td><code>max(dp[1][2], dp[2][1])</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>两个完整字符串的 LCS 长度是 <code>dp[2][2] = 1</code>，可以选择公共子序列 <code>"a"</code>。</p>
+<h3 id="建议测试案例">建议测试案例</h3>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>输入或条件</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td>LCS 输入 <code>abcde ace</code></td>
+<td>输出 <code>3</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td>单行网格，从 <code>(1,1)</code> 走到 <code>(1,5)</code></td>
+<td>路径数为 <code>1</code></td>
+</tr>
+<tr>
+<td>易错</td>
+<td>起点就是障碍格</td>
+<td>路径数为 <code>0</code>，不能先固定为 <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-errors">常见错误</h2>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>为什么错</th>
+<th>正确方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不解释两个下标分别代表什么</td>
+<td>状态与转移无法核对</td>
+<td>先写出 <code>dp[i][j]</code> 的完整含义</td>
+</tr>
+<tr>
+<td>访问 <code>i-1</code>、<code>j-1</code> 却不设空前缀边界</td>
+<td>第一个字符处会越界或使用错误初值</td>
+<td>明确初始化第 0 行和第 0 列</td>
+</tr>
+<tr>
+<td>把子序列当成必须连续的子串</td>
+<td>LCS 允许跳过字符</td>
+<td>只保持相对顺序，不要求连续</td>
+</tr>
+<tr>
+<td>障碍格仍沿用普通转移</td>
+<td>不存在的路径会被继续传递</td>
+<td>障碍状态直接设为 <code>0</code></td>
+</tr>
+<tr>
+<td>字符串写成 <code>a[i]</code>、<code>b[j]</code></td>
+<td>前缀长度与字符串下标错一位</td>
+<td>比较 <code>a[i - 1]</code> 与 <code>b[j - 1]</code></td>
+</tr>
+<tr>
+<td>编辑距离只考虑替换</td>
+<td>漏掉插入和删除可能更优的情况</td>
+<td>比较插入、删除、替换三个来源</td>
+</tr>
+</tbody>
+</table>
+<h3 id="错误反例推演">错误反例推演</h3>
+<p>在 <code>2 × 3</code> 网格中把 <code>(1,2)</code> 设为障碍。错误写法仍执行普通转移，会得到第一行 <code>1,1,1</code>、最终 <code>dp[2][3] = 3</code>；正确写法先把障碍状态设为 <code>0</code>，状态表变为第一行 <code>1,0,0</code>、第二行 <code>1,1,1</code>，答案只有 <code>1</code>。多出的两条路线都穿过了不可走格，说明障碍必须在转移前截断。</p>
+<h2 id="关联学习">关联学习</h2>
+<p>复杂动态规划强调状态结构和计算阶段；本页聚焦二维状态。空间压缩属于优化问题，只有明确每一行依赖哪些旧状态后才能进行。</p>
+<div id="core-check"></div></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp2.html">← 上一个：复杂动态规划</a>

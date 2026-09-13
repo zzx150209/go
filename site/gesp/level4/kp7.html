@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,21 +449,49 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>递推：从已知的初始条件出发，按固定关系逐步推出结果。</li><li>关键是找到递推公式和初始条件。</li><li>经典例子：斐波那契数列 f(n)=f(n-1)+f(n-2)，f(1)=f(2)=1。</li><li>递推用循环实现，从小到大计算，避免重复计算。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">递推先给出初始状态，再用已经算出的状态推出后面的状态。遇到序列、台阶方案数或按天增长等“当前结果依赖较早结果”的问题时，要先确定“先算谁、依赖谁”。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">递推必须先定义状态，再找初值和从小状态到大状态的关系；公式中的依赖项必须先算好。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">ways[0] = 1; // 到第 0 级视为有一种“什么也不做”的方案
+ways[1] = 1; // 到第 1 级只有走一步这一种方案
+for (int i = 2; i &lt;= n; i++) { // 从第一个能由前两项推出的状态开始
+    ways[i] = ways[i - 1] + ways[i - 2]; // 按最后一步的两种来源合并方案
+} // 完成下标 2 到 n 的递推</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">sequence[1] = 2; // 给出不能继续向前推的首项
+for (int i = 2; i &lt;= n; i++) { // 按从小到大的依赖顺序计算
+    sequence[i] = sequence[i - 1] + 3; // 用已知前一项推出当前项
+} // 完成第 2 项到第 n 项</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">状态含义没有写清就直接套公式</li><li class="astro-e22r5uwj">初始值与递推式不一致</li><li class="astro-e22r5uwj">计算当前状态时依赖的前项还没有得到</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">学完后，你能用“状态含义—初始状态—最后一步—递推式—计算顺序”五步独立写出简单递推。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">爬到第 i 级台阶的最后一步不可能凭空出现：要么从 i-1 走 1 级，要么从 i-2 走 2 级。把所有方案按最后一步分类，就能从已经算出的较小答案推出当前答案。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要根据问题确定递推状态、初始条件和递推关系，按依赖顺序计算，能够处理斐波那契型、台阶型等基础递推。</p><section aria-labelledby="algorithm-formation" class="astro-e22r5uwj"><h2 id="algorithm-formation" class="astro-e22r5uwj">算法是怎样形成的</h2><ol class="level4-dictionary-article__formation"><li class="astro-e22r5uwj">定义状态：ways[i] 表示“恰好到达第 i 级台阶”的方案数，不能只写成含义模糊的“第 i 项”。</li><li class="astro-e22r5uwj">确定初始状态：到第 1 级只有 1 种走法，到第 2 级有 1+1 和 2 两种走法，所以 ways[1]=1、ways[2]=2。</li><li class="astro-e22r5uwj">分析最后一步：到 i 的方案分成“从 i-1 走 1 级”和“从 i-2 走 2 级”两类，两类不重不漏。</li><li class="astro-e22r5uwj">写出关系并确定顺序：ways[i]=ways[i-1]+ways[i-2]，因此必须从小到大计算。</li><li class="astro-e22r5uwj">最后核对边界与数值：n=1 时应直接使用初值，n=2 才第一次使用两来源公式；方案数增长很快，还要让数组容量和整数类型覆盖题目范围。</li></ol></section><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 状态、初始值与递推关系</h2><p class="astro-e22r5uwj">状态要说明下标代表什么、数值代表什么。初始值是不能再由更早状态推出的起点。</p><p class="astro-e22r5uwj">递推关系写清当前状态依赖哪些已知状态；三者缺一，递推就无法正确开始。</p><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">先定义 f[i] 的含义</li><li class="astro-e22r5uwj">写出所有必要初始值</li><li class="astro-e22r5uwj">确认右侧状态在计算当前项前已经得到</li></ul></section><section class="level4-dictionary-topic" aria-labelledby="topic-02"><h2 id="topic-02" class="astro-e22r5uwj">02 斐波那契型递推</h2><p class="astro-e22r5uwj">若每一项等于前两项之和，就要准备两个初始值，再从第三项开始。这里的“像斐波那契”只描述依赖形状，初值仍必须由题意确定。</p><p class="astro-e22r5uwj">数组最大合法下标要覆盖 n，数值类型也要覆盖结果。增长很快的序列即使下标不大也可能超过 int；本页完整程序把 n 限制为 90 并使用 long long。</p><pre class="astro-e22r5uwj"><code class="language-cpp">f[1] = 1; // 设置第一项初值
+f[2] = 1; // 设置第二项初值
+for (int i = 3; i &lt;= n; i++) { // 从第三项开始按依赖顺序计算
+    f[i] = f[i - 1] + f[i - 2]; // 当前项等于前两项之和
+} // 完成第 3 项到第 n 项</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-03"><h2 id="topic-03" class="astro-e22r5uwj">03 台阶型递推</h2><p class="astro-e22r5uwj">每次走 1 级或 2 级时，到达第 i 级的最后一步只能来自 i-1 或 i-2；两类最后一步不同，互不重复，且覆盖所有方案，所以方案数相加。</p><p class="astro-e22r5uwj">把 ways[0] 定义为 1 种空方案后，ways[1]=1，统一关系可从 i=2 开始。若换一种状态定义，初值也会跟着变，不能脱离含义只背公式。</p><pre class="astro-e22r5uwj"><code class="language-cpp">ways[0] = 1; // 空台阶只有一种不移动方案
+ways[1] = 1; // 到第 1 级只有走 1 级的方案
+for (int i = 2; i &lt;= n; i++) { // 从第 2 级开始合并两个来源
+    ways[i] = ways[i - 1] + ways[i - 2]; // 最后走 1 级或 2 级
+} // 完成到第 n 级的全部状态</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-04"><h2 id="topic-04" class="astro-e22r5uwj">04 存储与计算顺序</h2><p class="astro-e22r5uwj">数组可以保存每个状态，便于输出中间值或让后续多次使用。</p><p class="astro-e22r5uwj">循环方向必须满足依赖关系。若 f[i] 依赖 f[i-1]，通常按 i 递增计算；倒序会读取尚未得到的值。</p><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">已知 f[1]=2，关系为 f[i]=f[i-1]+i</li><li class="astro-e22r5uwj">必须先算 f[2]=4，才能算 f[3]=7，再算 f[4]=11</li><li class="astro-e22r5uwj">第一次填表若从 i=4 倒推，会读取尚未计算的 f[3]，结果没有依据</li></ul></section><section class="level4-dictionary-topic" aria-labelledby="topic-05"><h2 id="topic-05" class="astro-e22r5uwj">05 常见递推序列</h2><p class="astro-e22r5uwj">等差型可写成前一项加固定差；前缀和可写成前一段和加当前数；增长过程也可根据上一时刻状态推下一时刻。它们共同点是当前状态依赖已经算出的较早状态。</p><p class="astro-e22r5uwj">简单路径也能递推：只能向右或向下走时，到达 `(row, column)` 的最后一步只能来自上方或左方，所以两个来源相加。</p><p class="astro-e22r5uwj">杨辉三角的两个边界数先设为 1，内部数字由上一行左上方与右上方相加。它与网格路径都是“两来源合并”，但状态含义和边界初值不同，不能只看公式相似就混用。</p><p class="astro-e22r5uwj">下面只演示固定 2×3 小网格，结果都在 long long 范围内。更大网格的方案数增长很快，不能因为数组开得下就默认数值也不会溢出。</p><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">2×3 网格第一行和第一列都只有 1 种走法</li><li class="astro-e22r5uwj">ways[2][2]=1+1=2，ways[2][3]=1+2=3</li><li class="astro-e22r5uwj">因此从左上角到右下角共有 3 条简单路径；每个右侧状态都来自已经算出的上方和左方</li></ul><pre class="astro-e22r5uwj"><code class="language-cpp">long long ways[3][4] = {}; // 为 1 下标的 2 行 3 列小网格分配空间
+for (int row = 1; row &lt;= 2; row++) { // 遍历第一列的两个位置
+    ways[row][1] = 1; // 第一列只能一直向下到达
+} // 完成第一列边界初始化
+for (int column = 1; column &lt;= 3; column++) { // 遍历第一行的三个位置
+    ways[1][column] = 1; // 第一行只能一直向右到达
+} // 完成第一行边界初始化
+for (int row = 2; row &lt;= 2; row++) { // 从第 2 行开始填内部状态
+    for (int column = 2; column &lt;= 3; column++) { // 从第 2 列填到第 3 列
+        ways[row][column] = ways[row - 1][column] + ways[row][column - 1]; // 合并上方和左方来源
+    } // 结束当前行内部状态计算
+} // 完成整个 2×3 网格递推</code></pre></section><section aria-labelledby="quick-table" class="astro-e22r5uwj"><h2 id="quick-table" class="astro-e22r5uwj">知识点速查表</h2><div class="level4-dictionary-article__table-wrap"><table class="astro-e22r5uwj"><thead class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><th class="astro-e22r5uwj">项目</th><th class="astro-e22r5uwj">含义</th><th class="astro-e22r5uwj">检查重点</th></tr></thead><tbody class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">状态</td><td class="astro-e22r5uwj">f[i] 表示什么</td><td class="astro-e22r5uwj">下标和数值含义明确</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">初始值</td><td class="astro-e22r5uwj">递推起点</td><td class="astro-e22r5uwj">覆盖所有无法继续向前推的情况</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">关系式</td><td class="astro-e22r5uwj">当前项怎样由旧项得到</td><td class="astro-e22r5uwj">右侧状态已计算</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">顺序</td><td class="astro-e22r5uwj">填表方向</td><td class="astro-e22r5uwj">满足依赖方向</td></tr></tbody></table></div></section><section aria-labelledby="algorithm-trace" class="astro-e22r5uwj"><h2 id="algorithm-trace" class="astro-e22r5uwj">算法实际怎样执行</h2><h3 class="astro-e22r5uwj">n = 5 时的真实计算过程</h3><div class="level4-dictionary-article__table-wrap"><table class="astro-e22r5uwj"><thead class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><th class="astro-e22r5uwj">i</th><th class="astro-e22r5uwj">来自 i-1</th><th class="astro-e22r5uwj">来自 i-2</th><th class="astro-e22r5uwj">ways[i]</th></tr></thead><tbody class="astro-e22r5uwj"><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">0</td><td class="astro-e22r5uwj">初始状态</td><td class="astro-e22r5uwj">—</td><td class="astro-e22r5uwj">1</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">1</td><td class="astro-e22r5uwj">初始状态</td><td class="astro-e22r5uwj">—</td><td class="astro-e22r5uwj">1</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">2</td><td class="astro-e22r5uwj">ways[1] = 1</td><td class="astro-e22r5uwj">ways[0] = 1</td><td class="astro-e22r5uwj">2</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">3</td><td class="astro-e22r5uwj">ways[2] = 2</td><td class="astro-e22r5uwj">ways[1] = 1</td><td class="astro-e22r5uwj">3</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">4</td><td class="astro-e22r5uwj">ways[3] = 3</td><td class="astro-e22r5uwj">ways[2] = 2</td><td class="astro-e22r5uwj">5</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">5</td><td class="astro-e22r5uwj">ways[4] = 5</td><td class="astro-e22r5uwj">ways[3] = 3</td><td class="astro-e22r5uwj">8</td></tr><tr class="astro-e22r5uwj"><td class="astro-e22r5uwj">6</td><td class="astro-e22r5uwj">检查 6≤5 为假</td><td class="astro-e22r5uwj">不再读取</td><td class="astro-e22r5uwj">循环结束</td></tr></tbody></table></div></section><section aria-labelledby="examples" class="astro-e22r5uwj"><h2 id="examples" class="astro-e22r5uwj">典型例题</h2><h3 class="astro-e22r5uwj">计算爬到第 n 级台阶的方案数</h3><p class="astro-e22r5uwj">教学程序约定 1≤n≤90，每次走 1 级或 2 级，求恰好到达第 n 级台阶的方案数。</p><h3 class="astro-e22r5uwj">完成程序</h3><pre class="astro-e22r5uwj"><code class="language-cpp">#include &lt;bits/stdc++.h&gt; // 引入本程序需要的标准库
+using namespace std; // 允许直接使用 cin、cout、string 等标准库名称
 
-    <div class="kp-code"><pre>// 斐波那契数列
-long long f[100];
-f[1] = f[2] = 1;
-for (int i = 3; i &lt;= 90; i++) {
-    f[i] = f[i-1] + f[i-2];
-}
-
-// 爬楼梯：每次走1或2步，到第n阶有几种走法
-// f(n) = f(n-1) + f(n-2), f(1)=1, f(2)=2</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>数据增长快时用 long long 防止溢出。</li><li>递推方向要对：从已知推向未知，不要倒着算。</li></ul>
+int main() { // 主函数是程序的入口
+    int n; // 定义目标台阶编号
+    cin &gt;&gt; n; // 读入需要到达的台阶数
+    long long ways[105] = {}; // 创建递推数组并初始化为 0
+    ways[0] = 1; // 设置第 0 级为一种什么也不做的空方案
+    ways[1] = 1; // 到第 1 级只有直接走 1 级这一种方案
+    for (int i = 2; i &lt;= n; i++) { // 从第一个能由前两项推出的位置开始
+        ways[i] = ways[i - 1] + ways[i - 2]; // 按最后一步分类并合并两类方案
+    } // 结束递推填表循环
+    cout &lt;&lt; ways[n] &lt;&lt; &#39;\n&#39;; // 输出恰好到达第 n 级的方案数
+    return 0; // 返回 0，表示程序正常结束
+} // 结束 main 函数</code></pre><div class="level4-dictionary-article__io"><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输入</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">5</code></pre></div><div class="astro-e22r5uwj"><strong class="astro-e22r5uwj">示例输出</strong><pre class="astro-e22r5uwj"><code class="astro-e22r5uwj">8</code></pre></div></div><h3 class="astro-e22r5uwj">解题与执行过程</h3><ol class="astro-e22r5uwj"><li class="astro-e22r5uwj">先定义状态：ways[i] 表示恰好到达第 i 级的方案数；空台阶有一种不移动方案，所以 ways[0]=1，ways[1]=1。</li><li class="astro-e22r5uwj">i=2 时按最后一步分类，ways[2]=ways[1]+ways[0]=2；这也对应 1+1 和 2 两种走法。</li><li class="astro-e22r5uwj">随后依次得到 ways[3]=3、ways[4]=5、ways[5]=8，每一步只读取已经算好的两个较小下标。</li><li class="astro-e22r5uwj">i 增加到 6 时条件 6≤5 首次失败，循环停止并输出 ways[5]；n=1 时循环一开始就失败，仍能正确输出初值 1。</li></ol></section><section aria-labelledby="practice" class="astro-e22r5uwj"><h2 id="practice" class="astro-e22r5uwj">分层练习</h2><p class="astro-e22r5uwj">先独立完成，再展开提示核对思路。三题分别练基本识别、完整应用和换情境迁移。</p><div class="level4-dictionary-article__practice-grid"><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">基础</p><h3 class="astro-e22r5uwj">补全等差递推</h3><p class="astro-e22r5uwj">首项为 4，每项比前一项多 3，写出初值、递推式和前 5 项。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">state[i] 只依赖 state[i-1]。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">巩固</p><h3 class="astro-e22r5uwj">改成走 1 或 3 级</h3><p class="astro-e22r5uwj">每次只能走 1 级或 3 级，定义状态并写出合法的初值与递推关系。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">先处理 i 小于 3 的边界，再按最后一步分类。</p></details></article><article class="level4-dictionary-article__practice-card"><p class="level4-dictionary-article__practice-level">迁移</p><h3 class="astro-e22r5uwj">网格路径递推</h3><p class="astro-e22r5uwj">只能向右或向下时，解释 path[row][column] 的两个来源。</p><details class="astro-e22r5uwj"><summary class="astro-e22r5uwj">查看提示</summary><p class="astro-e22r5uwj">最后一步来自上方或左方，边界行列需要单独初始化。</p></details></article></div></section><section aria-labelledby="mistakes" class="astro-e22r5uwj"><h2 id="mistakes" class="astro-e22r5uwj">常见错误</h2><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">初始值不足</h3><p class="astro-e22r5uwj">错误写法：f[i] 依赖前两项，却只设置 f[1]。原因：计算 f[3] 时缺少 f[2]。正确写法：写全所有不能由关系式继续向前推出的初始状态。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">循环起点错误</h3><p class="astro-e22r5uwj">错误写法：已经给出 f[1]、f[2]，循环仍从 i = 2 开始套用前两项关系。原因：会访问 f[0] 或覆盖初值。正确写法：从第一个能由关系式推出的位置开始。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">下标越界</h3><p class="astro-e22r5uwj">错误写法：数组只开到 f[100]，却计算并访问 f[100]。原因：0 下标数组最后位置是 f[99]。正确写法：按最大下标多开足够空间。</p></div><div class="level4-dictionary-article__mistake"><h3 class="astro-e22r5uwj">计算方向违背依赖</h3><p class="astro-e22r5uwj">错误写法：f[i] 依赖 f[i-1] 却从大下标向小下标首次计算。原因：右侧状态尚未得到。正确写法：先画依赖关系，再按小下标到大下标填表。</p></div></section><section aria-labelledby="related-learning" class="astro-e22r5uwj"><h2 id="related-learning" class="astro-e22r5uwj">关联学习</h2><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj"><a href="/gesp/level4/complexity/" class="astro-e22r5uwj">程序复杂度分析</a>：可以估算递推填表所需的时间和空间。</li></ul></section><section aria-labelledby="core-check" class="astro-e22r5uwj"><h2 id="core-check" class="astro-e22r5uwj">核心内容检查</h2><gesp-dictionary-review class="dictionary-review-check" data-level="4" data-lesson-id="recurrence" data-progress-event="xdz:gesp-level4-progress"><section class="astro-l37rdmqc"></section></gesp-dictionary-review></section><section aria-labelledby="test" class="astro-e22r5uwj"><h2 id="test" class="astro-e22r5uwj">整页综合测试</h2><gesp-dictionary-test class="dictionary-test" data-level="4" data-lesson-id="recurrence" data-progress-event="xdz:gesp-level4-progress"><p class="dictionary-test__intro">请完成全部 8 道单选题后统一提交。测试记录与“已复习”状态相互独立。</p><div class="dictionary-test__questions"></div><div class="dictionary-test__result" data-test-result hidden aria-live="polite"></div><div class="dictionary-test__actions"></div></gesp-dictionary-test></section><nav class="dictionary-lesson-pager"><a href="/gesp/level4/multidimensional-arrays/" rel="prev" class="astro-hl664apc"><span class="astro-hl664apc">上一知识点</span><strong class="astro-hl664apc">二维与多维数组</strong></a><a href="/gesp/level4/sorting/" rel="next" class="astro-hl664apc"><span class="astro-hl664apc">下一知识点</span><strong class="astro-hl664apc">排序算法</strong></a></nav></article></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp6.html">← 上一个：二维数组</a>

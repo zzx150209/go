@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,25 +449,66 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>层序遍历按从上到下、从左到右顺序访问，用队列实现。</li><li>根入队，每次出队一个结点并访问，把它的左右孩子入队。</li><li>层序遍历可用来按层统计结点数、求树的宽度。</li><li>每次处理一层时记录当前队列大小，可以逐层处理。</li></ul>
-
-    <div class="kp-code"><pre>#include &lt;queue&gt;
-void levelOrder(TreeNode* root) {
-    if (!root) return;
-    queue&lt;TreeNode*&gt; q;
-    q.push(root);
-    while (!q.empty()) {
-        TreeNode* node = q.front();
-        q.pop();
-        cout &lt;&lt; node-&gt;val;
-        if (node-&gt;left) q.push(node-&gt;left);
-        if (node-&gt;right) q.push(node-&gt;right);
-    }
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>层序遍历必用队列，不是栈。</li><li>求深度可以在每层处理时计数。</li></ul>
+    <article class="article-body">
+    <h2 id="official-position" class="astro-shsevxoi">知识范围与官方定位</h2><p>本页对应六级大纲“特殊二叉树”，把三类结构放在一个大知识点中比较。这里只讲结构性质；二叉排序树的查找与插入算法集中在“二叉树搜索”，哈夫曼编码放在“编码知识”。</p><h2 id="kp-01">01 完全二叉树</h2><p>完全二叉树除最后一层外每层都满，最后一层结点从左到右连续。满二叉树一定是完全二叉树，完全二叉树不一定满。按 1 下标连续存入数组时，结点 <code>i</code> 的左孩子候选为 <code>2*i</code>，右孩子为 <code>2*i+1</code>，父结点为 <code>i/2</code>；访问孩子前必须检查候选下标不超过 <code>n</code>。</p><h2 id="kp-02">02 二叉排序树</h2><p>本页采用严格规则：每个结点左子树所有值小于当前值，右子树所有值大于当前值，重复值不插入。中序遍历会得到严格递增序列。这个结构性质是下一页查找与插入方向的依据。</p><figure><div tabindex="0" role="region"><table><caption>依次插入 5、3、8</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">比较过程</th><th scope="col">插入结果</th></tr></thead><tbody><tr><th scope="row">插入 5</th><td>当前为空</td><td>5 成为根</td></tr><tr><th scope="row">插入 3</th><td>3 &lt; 5，向左</td><td>3 成为 5 的左孩子</td></tr><tr><th scope="row">插入 8</th><td>8 &gt; 5，向右</td><td>8 成为 5 的右孩子</td></tr></tbody></table></div><figcaption>每次都从根开始比较，直到找到空位置；中序结果为 3、5、8。</figcaption></figure><h2 id="kp-03">03 哈夫曼树</h2><p>叶结点的“权值 × 根到叶经过的边数”叫带权路径长度，全部叶结点之和记作 <code>WPL</code>。哈夫曼树让给定权值下的 WPL 最小：每轮找出当前最小的两个权值，合并为它们之和，再把新权值放回集合。每轮合并值的总和就等于最终 WPL。</p><figure><div tabindex="0" role="region"><table><caption>权值 2、3、7、9 的哈夫曼合并</caption><thead><tr><th scope="col">执行步骤</th><th scope="col">本轮选择</th><th scope="col">合并值</th><th scope="col">新集合</th></tr></thead><tbody><tr><th scope="row">第 1 轮</th><td>2、3</td><td>5</td><td>5、7、9</td></tr><tr><th scope="row">第 2 轮</th><td>5、7</td><td>12</td><td>9、12</td></tr><tr><th scope="row">第 3 轮</th><td>9、12</td><td>21</td><td>21</td></tr></tbody></table></div><figcaption>WPL = 5 + 12 + 21 = 38；新产生的权值必须参加下一轮比较。</figcaption></figure><h2 id="quick-table">特殊二叉树速查</h2><figure data-density="standard"><figcaption>三类特殊二叉树对比</figcaption><div tabindex="0" role="region"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>核心条件</th>
+<th>常见用途或结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全二叉树</td>
+<td>按层从左连续</td>
+<td>适合数组存储</td>
+</tr>
+<tr>
+<td>二叉排序树</td>
+<td>左小右大</td>
+<td>中序有序，可按比较搜索</td>
+</tr>
+<tr>
+<td>哈夫曼树</td>
+<td>每轮合并最小两项</td>
+<td>给定权值时 WPL 最小</td>
+</tr>
+</tbody>
+</table></div><p>横向滑动查看完整表格</p></figure><h2 id="typical-example">典型例题</h2><h3 id="基础示例">基础示例</h3><p>判断三棵树时先问约束对象：结点位置按层连续，检查完全二叉树；结点值满足左小右大，检查二叉排序树；给出叶子权值并要求最小 WPL，构造哈夫曼树。三类树可能同时满足其中多类性质，不能仅凭外形猜名称。</p><h3 id="典型应用">典型应用</h3><p>下面不用未列入六级大纲的优先队列，而用数组反复寻找两个最小权值。输入 <code>1 &lt;= n &lt;= 1000</code>，权值不超过 <code>10^6</code>。</p><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">#include</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">&lt;</span><span style="--0:#ECC48D;--1:#984E4D">bits/stdc++.h</span><span style="--0:#D9F5DD;--1:#111111">&gt;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">using</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">namespace</span><span style="--0:#D6DEEB;--1:#403F53"> std;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">() {</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> n </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">2005</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">used</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">2005</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> {};</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> n; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 读入每个叶结点的权值</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">cin </span><span style="--0:#C792EA;--1:#8844AE">&gt;&gt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[i];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">long</span><span style="--0:#D6DEEB;--1:#403F53"> wpl </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> total </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> n;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> round </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; round </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> n; round</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span><span style="--0:#919F9F;--1:#5D6376">  // 每轮合并当前最小的两个权值</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> first </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> second </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C792EA;--1:#8844AE">for</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> i </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">; i </span><span style="--0:#C792EA;--1:#8844AE">&lt;=</span><span style="--0:#D6DEEB;--1:#403F53"> total; i</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">) {</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (</span><span style="--0:#C5E478;--1:#3B61B0">used</span><span style="--0:#D6DEEB;--1:#403F53">[i]) </span><span style="--0:#C792EA;--1:#8844AE">continue</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">  // 已经被合并的结点不再参与选择</span></div></div><div class="ec-line"><div class="code"><span class="indent">            </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (first </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">||</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[first]) {</span><span style="--0:#919F9F;--1:#5D6376">  // 当前权值成为新的最小值</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">second </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> first;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">first </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> i;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">} </span><span style="--0:#C792EA;--1:#8844AE">else</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> (second </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">||</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[i] </span><span style="--0:#C792EA;--1:#8844AE">&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[second]) {</span><span style="--0:#919F9F;--1:#5D6376">  // 更新第二小值</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">                </span></span><span style="--0:#D6DEEB;--1:#403F53">second </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> i;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">            </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">used</span><span style="--0:#D6DEEB;--1:#403F53">[first] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">used</span><span style="--0:#D6DEEB;--1:#403F53">[second] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">total</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">        </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[total] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[first] </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[second];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">        </span></span><span style="--0:#D6DEEB;--1:#403F53">wpl </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> wpl </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">weight</span><span style="--0:#D6DEEB;--1:#403F53">[total];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> wpl </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#F78C6C;--1:#AA0982">\n</span><span style="--0:#D9F5DD;--1:#111111">'</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div><p>每轮扫描当前全部权值，时间复杂度 <code>O(n²)</code>，数组空间 <code>O(n)</code>。若只有一个叶结点，不发生合并，WPL 为 0。</p><h3 id="测试案例">测试案例</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>数据或结构</th>
+<th>应得到的关键结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础</td>
+<td>二叉排序树依次插入 5、3、8</td>
+<td>根为 5，左孩子 3，右孩子 8，中序为 <code>3 5 8</code></td>
+</tr>
+<tr>
+<td>边界</td>
+<td>哈夫曼树只有一个权值 7</td>
+<td>不发生合并，WPL 为 0</td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>完全二叉树最后一层只有最左两个位置</td>
+<td>仍是完全二叉树；若中间空缺则不是</td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>哈夫曼权值 2、3、7、9</td>
+<td>合并值为 5、12、21，WPL 为 38</td>
+</tr>
+</tbody>
+</table><h2 id="common-errors">常见错误</h2><section><h3>把三类树的条件混在一起</h3><div><div><strong><span>×</span> 错误写法</strong><code>完全二叉树一定满足左小右大</code></div><div><strong><span>✓</span> 正确写法</strong><code>先辨认题目问位置、大小关系还是权值合并</code></div></div><p><strong>原因：</strong>完全性约束结点位置，排序性约束结点值，两者是不同维度。</p><p><strong>检查方法：</strong>为每类树只抓住一条核心条件，再判断应用。</p></section><section><h3>哈夫曼合并后丢掉新权值</h3><div><div><strong><span>×</span> 错误写法</strong><code>合并 2 和 3 后，下一轮仍只在原来的 7、9 中选择</code></div><div><strong><span>✓</span> 正确写法</strong><code>每轮执行“取出两个最小值 → 求和 → 把和放回”</code></div></div><p><strong>原因：</strong>新结点权值 5 代表刚形成的子树，必须放回集合继续比较。</p><p><strong>检查方法：</strong>把每轮的新集合完整写出来，再进入下一轮。</p></section><h2 id="related-learning">关联学习</h2><p>二叉排序树的查找与插入见“07 二叉树搜索”；从哈夫曼树生成字符编码见“04 编码知识”。</p><h2 id="core-check" class="astro-shsevxoi">核心内容检查</h2><h2 id="page-test-title" class="astro-shsevxoi">整页综合测试</h2></div><div></div><div hidden data-group-result aria-live="polite"><strong data-group-result-title></strong><p>只保留本页最近一次完整提交结果；重新测试不会改变“已复习”状态。</p></div></gesp-course-question-group></div><footer
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp2.html">← 上一个：树的构造与遍历</a>

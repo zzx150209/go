@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,27 +449,27 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>引用是变量的别名，int&amp; r = x; r 和 x 代表同一变量。</li><li>引用传递：函数参数用引用类型，函数内修改会影响实参。</li><li>数组作为参数时自动退化为指针，函数内不知道数组长度。</li><li>const 引用可以避免拷贝大对象，同时防止修改。</li></ul>
-
-    <div class="kp-code"><pre>void swap(int&amp; a, int&amp; b) {
-    int t = a; a = b; b = t;
-}
-
-int main() {
-    int x = 3, y = 5;
-    swap(x, y);  // x=5, y=3
-}
-
-// 数组参数：长度需要额外传入
-int sum(int a[], int n) {
-    int s = 0;
-    for (int i = 0; i &lt; n; i++) s += a[i];
-    return s;
-}</pre></div>
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>引用必须在定义时初始化，不能事后更改引用对象。</li><li>值传递适合小数据，引用传递适合大数据或需要修改实参。</li></ul>
+    <article class="article-body">
+    <article class="level4-dictionary-article"><div id="page-top" class="astro-e22r5uwj"></div><p class="level4-dictionary-article__intro">参数传递方式决定函数得到的是数据副本，还是能够直接访问调用处的对象。设计修改、交换或只读函数时，要先确定是否需要改变原变量，再选择值、引用或指针。</p><section class="level4-quick-review" aria-labelledby="quick-review-title"><h2 id="quick-review-title" class="astro-e22r5uwj">本课先记住</h2><div class="level4-quick-review__grid"><article class="level4-quick-review__card level4-quick-review__card--conclusion"><h3 class="astro-e22r5uwj">核心结论</h3><p class="astro-e22r5uwj">值传递改副本，引用传递改原对象，指针传递通过地址改对象；数组传参还必须单独给出长度。</p></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">常用语法</h3><pre class="astro-e22r5uwj"><code class="language-cpp">void byValue(int value); // 值参数接收一个新副本
+void byReference(int&amp; value); // 引用参数成为实参的别名
+void byPointer(int* pointer); // 指针参数接收实参地址</code></pre></article><article class="level4-quick-review__card"><h3 class="astro-e22r5uwj">最小示例</h3><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int&amp; value) { // value 直接代表调用处的整数对象
+    value = value + 1; // 修改引用也就修改了原对象
+} // 函数结束后，修改结果保留在实参中</code></pre></article><article class="level4-quick-review__card level4-quick-review__card--mistakes"><h3 class="astro-e22r5uwj">关键易错点</h3><ul class="astro-e22r5uwj"><li class="astro-e22r5uwj">想修改实参却使用值传递</li><li class="astro-e22r5uwj">指针参数未判空就解引用</li><li class="astro-e22r5uwj">在函数内用 sizeof 推算数组参数长度</li></ul></article></div></section><section class="level4-lesson-opening" aria-labelledby="learning-goal"><h2 id="learning-goal" class="astro-e22r5uwj">这节课要会什么</h2><p class="astro-e22r5uwj">本课建立三个核心：用同一组数据对照值、引用和指针传递；追踪调用前、函数内、返回后的对象变化；为数组和只读大对象选择边界清楚的接口。</p><h3 class="astro-e22r5uwj">从这个场景开始</h3><p class="astro-e22r5uwj">值传递像把资料复印件交给别人，引用像允许对方直接在原件上修改，指针像把原件的存放地址交出去。三种方式都能传信息，但修改结果完全不同。</p></section><h2 id="knowledge-range" class="astro-e22r5uwj">知识范围与官方定位</h2><p class="astro-e22r5uwj">四级需要比较值传递、引用传递和指针传递，理解数组作为参数时的特点，并根据是否需要修改实参选择方式。</p><section class="level4-dictionary-topic" aria-labelledby="topic-01"><h2 id="topic-01" class="astro-e22r5uwj">01 值传递</h2><p class="astro-e22r5uwj">值参数得到实参当前值的副本。调用 addOne(number) 时，先创建新的形参 value，再把 number 的值复制进去；两者数值可能相同，但属于不同对象。</p><p class="astro-e22r5uwj">函数内修改 value 只改变副本。返回后副本销毁，number 保持原值。它适合 int 等较小数据的只读计算，或本来就只想在副本上处理的任务。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int value) { // 创建形参副本并接收实参当前值
+    value = value + 1; // 只修改函数内部的副本
+} // 副本销毁，调用处原变量不变</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-02"><h2 id="topic-02" class="astro-e22r5uwj">02 引用传递</h2><p class="astro-e22r5uwj">引用参数不是新副本，而是调用处对象的另一个名字。`int&amp; value` 中的 &amp; 表示引用类型；调用时直接写 addOne(number)，不写 &amp;number。</p><p class="astro-e22r5uwj">函数内给 value 赋值就是给 number 赋值，所以接口应让读者一眼看出它可能修改实参。引用必须绑定有效对象，不能用 nullptr 表示“没有对象”。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int&amp; value) { // 让 value 成为调用处整数对象的别名
+    value = value + 1; // 通过别名直接修改原对象
+} // 引用结束，但原对象的新值仍然保留</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-03"><h2 id="topic-03" class="astro-e22r5uwj">03 指针传递</h2><p class="astro-e22r5uwj">指针参数自身仍是值传递：函数得到一份地址副本。虽然修改这个指针副本的指向不会自动改调用处指针，但解引用它可以访问地址对应的原对象。</p><p class="astro-e22r5uwj">调用时用 &amp;number 取得地址，函数内先检查 pointer 是否为 nullptr，再用 *pointer 读写。指针适合接口确实需要表示“可能没有对象”的情况。</p><pre class="astro-e22r5uwj"><code class="language-cpp">void addOne(int* pointer) { // 接收一个 int 对象的地址副本
+    if (pointer != nullptr) { // 解引用前确认地址不是空指针
+        *pointer = *pointer + 1; // 沿地址读取、加一并写回原对象
+    } // 结束非空指针处理分支
+} // 结束指针参数函数</code></pre></section><section class="level4-dictionary-topic" aria-labelledby="topic-04"><h2 id="topic-04" class="astro-e22r5uwj">04 数组作为参数</h2><p class="astro-e22r5uwj">一维数组作为实参时，函数参数接收首元素地址，原数组不会被整体复制；因此修改 values[i] 会修改调用处对应元素。</p><p class="astro-e22r5uwj">首地址本身不带元素个数。`const int values[]` 与 `const int* values` 在函数参数位置表达同类接口，`sizeof(values)` 只反映参数本身，不是原数组总字节数。</p><p class="astro-e22r5uwj">长度必须单独传入，并让循环严格满足 0≤i&lt;length。const 表示本函数只读取元素，既保护数据，也清楚表达职责。</p><pre class="astro-e22r5uwj"><code class="language-cpp">int sumArray(const int values[], int length) { // 接收只读首地址和明确长度
+    int sum = 0; // 初始化累计和
+    for (int i = 0; i &lt; length; i++) { // 只遍历下标 0 到 length-1
+        sum = sum + values[i]; // 把当前合法元素加入累计和
+    } // 结束数组遍历
+    return sum; // 返回全部元素之和
+} // 结束数组求和函数</code></pre><aside
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp3.html">← 上一个：指针基础</a>

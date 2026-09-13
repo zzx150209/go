@@ -315,6 +315,32 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
   background:var(--brand-soft);color:var(--brand);text-decoration:none;margin-bottom:6px}
 .side-h span{font-size:11px;color:var(--text-3);font-weight:500}
 
+/* 文章正文样式 */
+.article-body{font-size:14.5px;line-height:1.8;color:var(--text)}
+.article-body h2{font-size:22px;font-weight:700;margin:32px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--line)}
+.article-body h3{font-size:17px;font-weight:700;margin:24px 0 10px}
+.article-body h4{font-size:15px;font-weight:600;margin:18px 0 8px}
+.article-body p{margin:0 0 14px}
+.article-body ul,.article-body ol{margin:0 0 14px;padding-left:22px}
+.article-body li{margin-bottom:6px}
+.article-body strong{font-weight:600}
+.article-body code{background:var(--bg-2);padding:2px 6px;border-radius:4px;
+  font-family:"SF Mono",Monaco,Menlo,Consolas,monospace;font-size:13px;
+  color:var(--accent)}
+.article-body pre{background:#0f172a;border-radius:6px;padding:14px 16px;
+  overflow-x:auto;margin:14px 0}
+.article-body pre code{background:none;padding:0;color:#c9d1d9;font-size:13px;
+  line-height:1.7;display:block}
+.article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.article-body th,.article-body td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+.article-body th{background:var(--bg-2);font-weight:600}
+.article-body blockquote{border-left:3px solid var(--brand);margin:16px 0;
+  padding:8px 16px;background:var(--bg-2);border-radius:0 6px 6px 0;color:var(--text-2)}
+.article-body .code-block{margin:14px 0}
+.article-body a{color:var(--brand)}
+.article-body a:hover{text-decoration:underline}
+
 /* 阶段卡 */
 .stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
@@ -423,13 +449,460 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 30px}
       </div>
     </div>
 
-    <h2 class="kp-h2">本课先记住</h2>
-    <ul class="kp-pts"><li>IDE（集成开发环境）把编辑、编译、运行、调试四个功能整合在一个软件中。</li><li>写代码用编辑器，保存后编译器把 .cpp 源文件翻译成可执行程序（.exe），再由运行环境执行。</li><li>常见错误有：语法错误（编译时报错）、链接错误（找不到函数）、运行时错误（程序崩溃）、逻辑错误（结果不对）。</li><li>调试时可以在关键位置打断点，逐行执行并查看变量值，定位逻辑问题。</li></ul>
-
-    
-
-    <h2 class="kp-h2">注意事项</h2>
-    <ul class="kp-tips"><li>编译错误看行号和提示，先改第一个错误，后面的可能是连锁反应。</li><li>程序运行结果不对时，用 cout 输出中间变量值来追踪。</li></ul>
+    <article class="article-body">
+    <h2 id="本课先记住">本课先记住</h2>
+<ul>
+<li><strong>核心结论：</strong> IDE 把编辑、保存、编译、运行和调试工具放在一起，但每一步仍有独立结果；修改源码后必须保存并重新编译，运行结果才来自新版本。</li>
+<li><strong>常用流程：</strong> 编辑源码 → 保存 <code>.cpp</code> → 编译并先处理首条有效报错 → 运行代表数据 → 对照预期 → 定位并复验。</li>
+<li><strong>最小示例：</strong> 把输出从 <code>1</code> 改成 <code>2</code> 后，先保存并编译；若直接运行旧程序仍看到 <code>1</code>，说明执行的不是最新构建结果。</li>
+<li><strong>关键易错点：</strong> “能运行”不等于答案正确；不要从最后一条连锁报错开始改，也不要同时随机修改多处而失去因果证据。</li>
+</ul>
+<h2 id="知识范围与官方定位">知识范围与官方定位</h2>
+<p>本页对应 GESP C++ 一级大纲中的“集成开发环境”。这里不要求记住某一款软件的所有按钮，而是要学会一套换到其他 IDE 也能使用的工作方法。</p>
+<p>学完本页，你应当能回答三个问题：</p>
+<ol>
+<li><strong>IDE 的各个区域分别在处理什么？</strong></li>
+<li><strong>编辑、保存、编译和运行为什么不能互相代替？</strong></li>
+<li><strong>程序出错时，怎样根据现象找到下一步检查位置？</strong></li>
+</ol>
+<p>上一页已经介绍过源文件和可执行程序：源文件保存人写的 C++ 代码，可执行程序是编译器翻译后的结果。本页把它们放进一次真实的开发过程。下一页再具体学习 C++ 程序由哪些部分组成。</p>
+<h2 id="01-编辑与保存">01 编辑与保存</h2>
+<h3 id="ide-把开发工具放在同一个环境里">IDE 把开发工具放在同一个环境里</h3>
+<p><strong>IDE</strong> 是 Integrated Development Environment 的缩写，中文叫“集成开发环境”。“集成”的意思是：它把编写、编译、运行和调试程序时常用的工具集中在一个界面里，让我们不用频繁切换软件。</p>
+<p>常见 IDE 通常包含下面几个区域。不同软件的名称和位置可能不同，但它们承担的工作相近。</p>
+<table>
+<thead>
+<tr>
+<th>常见区域</th>
+<th>主要作用</th>
+<th>在哪里找证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件或项目区</td>
+<td>查看、新建和切换源文件</td>
+<td>文件名、文件夹位置、<code>.cpp</code> 后缀</td>
+</tr>
+<tr>
+<td>代码编辑区</td>
+<td>输入和修改源代码</td>
+<td>光标所在行、行号、尚未保存的修改标记</td>
+</tr>
+<tr>
+<td>编译信息区</td>
+<td>显示编译是否成功以及错误信息</td>
+<td>第一条错误、行号、错误附近的提示</td>
+</tr>
+<tr>
+<td>运行窗口或终端</td>
+<td>向程序输入数据，查看实际输出</td>
+<td>输入内容、输出内容、程序是否正常结束</td>
+</tr>
+<tr>
+<td>调试区</td>
+<td>暂停程序并观察变量等运行状态</td>
+<td>当前执行位置、变量当时的值</td>
+</tr>
+</tbody>
+</table>
+<p>IDE 只是把工具放到了一起，并没有把几个动作变成同一件事。按下“保存”不会自动证明程序正确；看到编辑器里有新代码，也不代表正在运行的已经是新版本。</p>
+<h3 id="编辑状态和磁盘文件不是同一个状态">编辑状态和磁盘文件不是同一个状态</h3>
+<p>在编辑器里敲下文字，先改变的是<strong>编辑区中的内容</strong>。执行保存后，这些内容才写入磁盘中的 <code>.cpp</code> 源文件。</p>
+<p>可以把它理解成写作业：</p>
+<ul>
+<li>编辑，是在草稿上改字；</li>
+<li>保存，是把当前内容正式写进文件；</li>
+<li>编译，是让编译器读取文件并检查、翻译；</li>
+<li>运行，是执行最近一次成功编译得到的程序。</li>
+</ul>
+<p>这四步处理的对象不同：</p>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>主要处理什么</th>
+<th>成功后得到什么</th>
+<th>不能代替什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编辑</td>
+<td>编辑器中的代码文字</td>
+<td>一次尚待保存的修改</td>
+<td>不能代替保存</td>
+</tr>
+<tr>
+<td>保存</td>
+<td>当前编辑内容</td>
+<td>磁盘中的最新源文件</td>
+<td>不能检查程序逻辑</td>
+</tr>
+<tr>
+<td>编译</td>
+<td>已保存的源文件</td>
+<td>新的可执行程序，或编译错误</td>
+<td>不能证明答案正确</td>
+</tr>
+<tr>
+<td>运行</td>
+<td>最近一次成功编译的可执行程序</td>
+<td>实际输出或运行现象</td>
+<td>不能自动修改源代码</td>
+</tr>
+</tbody>
+</table>
+<h3 id="为什么改了代码结果却可能没变">为什么改了代码，结果却可能没变</h3>
+<p>假设 <code>answer.cpp</code> 原来会输出 3。你在编辑器中把它改成输出 5，却忘了保存。编译器读取磁盘时，看到的仍可能是旧文件，于是新编译的程序仍输出 3。</p>
+<p>还有另一种情况：你已经保存，却没有重新编译，直接运行了旧的可执行程序，结果也可能还是 3。</p>
+<p>所以，“代码明明改了，结果怎么没变”不能只盯着代码。先检查这两个问题：</p>
+<ol>
+<li>修改是否已经保存到源文件？</li>
+<li>保存后是否重新编译成功？</li>
+</ol>
+<h2 id="02-编译">02 编译</h2>
+<h3 id="编译器做了什么">编译器做了什么</h3>
+<p>编译器读取源代码，检查它是否符合 C++ 的规则，并把能够通过检查的代码翻译成可执行程序。</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">已保存的 .cpp 源文件</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">          </span></span><span style="--0:#d6deeb;--1:#403f53">↓ 编译器读取、检查和翻译</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">编译成功：得到新的可执行程序</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">编译失败：得到错误信息，不会得到这次的新程序</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>编译失败时，旧的可执行程序可能还留在电脑里。此时如果 IDE 仍允许运行，你看到的可能是旧版本结果。因此，不能把“运行窗口弹出来了”误当成“刚才的修改已经编译成功”。</p>
+<p>C++ 主要采用“先编译，再运行”的方式。有些语言会使用解释器边读取边执行；一级只需知道两者的基本区别，不需要研究解释器内部怎样工作。</p>
+<h3 id="怎样阅读编译错误">怎样阅读编译错误</h3>
+<p>少写分号、括号不配对、名字拼错、使用没有定义的变量，都可能让编译失败。面对多条报错时，可以按这个顺序检查：</p>
+<ol>
+<li>先确认编译的是自己刚刚保存的文件。</li>
+<li>从<strong>第一条错误</strong>开始看，不要急着追最后一条。</li>
+<li>根据提示找到对应行，同时检查它的上一行。</li>
+<li>只修正一个明确的问题，再重新编译。</li>
+</ol>
+<p>为什么还要看上一行？编译器按顺序读取代码。有时上一行已经出错，但它读到下一行时才确定前面的结构无法成立。</p>
+<p>下面只观察“漏写分号”怎样影响编译，不要求现在掌握两条语句的完整含义：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>第一行末尾缺少 <code>;</code>。编译器可能在读取第二行时才报告错误，所以提示位置不一定就是真正需要修改的位置。正确写法是：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="cpp"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">cout </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> number </span><span style="--0:#C792EA;--1:#8844AE">&lt;&lt;</span><span style="--0:#D6DEEB;--1:#403F53"> endl;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>语句、分号和完整程序结构会在下一页详细学习。本页先记住：<strong>错误提示是线索，不是替你直接给出的答案。</strong></p>
+<h3 id="编译成功说明了什么">编译成功说明了什么</h3>
+<p>编译成功说明编译器没有发现阻止本次翻译继续进行的错误，并且生成了新的可执行程序。它不保证：</p>
+<ul>
+<li>计算公式符合题意；</li>
+<li>所有输入都能得到正确答案；</li>
+<li>输出的空格、换行和小数位数符合要求；</li>
+<li>程序运行时一定不会出现问题。</li>
+</ul>
+<p>因此，编译成功只是进入运行验证的起点。</p>
+<h2 id="03-运行与重新编译">03 运行与重新编译</h2>
+<h3 id="运行的是可执行程序">运行的是可执行程序</h3>
+<p>运行时，操作系统加载最近一次成功编译得到的可执行程序。程序再按代码规定读取输入、进行计算并产生输出。</p>
+<p>这里有一条很重要的版本关系：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">源文件版本 A ──编译成功──→ 可执行程序版本 A</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">源文件改成版本 B ──只保存──→ 可执行程序仍是版本 A</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">源文件版本 B ──重新编译成功──→ 可执行程序才变成版本 B</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>假设旧程序计算 <code>3 + 4</code>，输出 7。你把运算改成乘法并保存，但没有重新编译，运行的仍是旧可执行程序，所以仍可能输出 7。只有重新编译成功后，新程序才会输出 12。</p>
+<p>这正是修改代码后必须重复“保存 → 编译 → 运行”的原因。</p>
+<h3 id="运行时要保存三份证据">运行时要保存三份证据</h3>
+<p>验证程序时，不要只记一句“好像不对”。至少记录：</p>
+<table>
+<thead>
+<tr>
+<th>证据</th>
+<th>要记录什么</th>
+<th>有什么用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本次输入</td>
+<td>实际输入的每一个数据</td>
+<td>保证能够重复同一次测试</td>
+</tr>
+<tr>
+<td>期望输出</td>
+<td>根据题意手算的正确结果</td>
+<td>给实际输出一个判断标准</td>
+</tr>
+<tr>
+<td>实际输出</td>
+<td>程序真正显示的内容</td>
+<td>判断数值和格式哪里不一致</td>
+</tr>
+</tbody>
+</table>
+<p>例如，任务要求输入两个整数并输出它们的和：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">输入：3 4</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">期望输出：7</span></div></div><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">实际输出：12</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>只看 12，无法判断它为什么错；把输入和期望结果放在旁边，就能提出更具体的检查方向：程序是否误做了乘法？两个输入变量是否读反或被改动？</p>
+<h3 id="重新编译前后怎样确认版本">重新编译前后怎样确认版本</h3>
+<p>每次修改后都执行同一条短流程：</p>
+<figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="code"><span style="--0:#d6deeb;--1:#403f53">修改代码 → 保存文件 → 重新编译</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#d6deeb;--1:#403f53">       </span></span><span style="--0:#d6deeb;--1:#403f53">→ 确认编译成功 → 用同一组输入运行 → 对照期望输出</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div></div></figure></div>
+<p>如果编译失败，就先处理编译错误，不要拿旧程序的运行结果判断刚才的修改。只有出现“本次编译成功”的证据，运行结果才属于当前源代码。</p>
+<h2 id="04-错误类型与调试">04 错误类型与调试</h2>
+<h3 id="先按现象判断错误发生在哪个阶段">先按现象判断错误发生在哪个阶段</h3>
+<p>程序出错时，先判断它停在“编译前、运行中，还是结果核对”哪个阶段。分类的目的不是背名称，而是缩小检查范围。</p>
+<table>
+<thead>
+<tr>
+<th>错误类型</th>
+<th>常见现象</th>
+<th>首先检查</th>
+<th>一个边界提醒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编译错误</td>
+<td>本次编译失败，没有生成新程序</td>
+<td>第一条错误、错误行和上一行、分号、括号、拼写、变量定义</td>
+<td>后面的多条错误可能由第一处错误连带产生</td>
+</tr>
+<tr>
+<td>运行错误</td>
+<td>已经开始运行，但异常结束或长时间不能结束</td>
+<td>输入是否符合要求、除数是否可能为 0、循环能否结束</td>
+<td>除以 0 等问题的具体表现可能因环境而异</td>
+</tr>
+<tr>
+<td>逻辑错误</td>
+<td>程序正常结束，但计算结果不符合题意</td>
+<td>公式、条件、执行顺序、变量变化、边界情况</td>
+<td>编译器通常不知道题目真正要求什么</td>
+</tr>
+<tr>
+<td>格式错误</td>
+<td>主要数值可能正确，但输出形式不符合要求</td>
+<td>多余文字、空格、换行、小数位数</td>
+<td>给人看着相近，不代表在线评测认为相同</td>
+</tr>
+</tbody>
+</table>
+<p>同一个现象背后可能有不止一个原因。例如“没有看到结果”，既可能是程序还在等待输入，也可能是循环没有结束，还可能是程序异常终止。调试时要继续收集证据，不能只凭第一感觉下结论。</p>
+<h3 id="wa-不是一种编译错误">WA 不是一种编译错误</h3>
+<p>在线评测中的 <strong>WA（Wrong Answer，答案错误）</strong> 表示程序已经运行并提交了输出，但输出没有通过评测。它是评测结果，不是 C++ 编译器给出的语法错误名称。</p>
+<p>WA 常见原因包括：</p>
+<ul>
+<li>公式或条件写错，属于逻辑问题；</li>
+<li>漏考虑 0、相等值等边界情况；</li>
+<li>输入理解错误；</li>
+<li>输出了多余提示文字，或空格、换行不符合要求。</li>
+</ul>
+<p>遇到 WA 时，应回到具体失败数据，比较“输入—期望输出—实际输出”，而不是再次盲目点击编译。</p>
+<h2 id="05-调试方法">05 调试方法</h2>
+<h3 id="调试不是随便改代码">调试不是随便改代码</h3>
+<p><strong>调试</strong>是根据现象收集证据、提出原因、修改并重新验证的过程。一级常用的方法有：</p>
+<ol>
+<li>用简单数据手算期望结果。</li>
+<li>逐步记录关键变量的变化。</li>
+<li>在关键位置临时输出变量值。</li>
+<li>检查 0、1、相等值和临界值等边界数据。</li>
+<li>修正后保存、重新编译，再用原数据复查。</li>
+</ol>
+<p>调试按钮只是工具之一。即使暂时不会使用断点和变量窗口，也能通过手算、变量记录和临时输出来定位许多一级程序的问题。</p>
+<h3 id="从假设到验证一次只检查一件事">从假设到验证，一次只检查一件事</h3>
+<p>仍看这个现象：输入 <code>3 4</code>，期望输出 7，实际输出 12。</p>
+<p>可以按下面的顺序调查：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+<th>得到的证据或结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>手算 <code>3 + 4</code></td>
+<td>期望结果确实是 7</td>
+</tr>
+<tr>
+<td>2</td>
+<td>确认本次输入</td>
+<td>两个输入分别是 3 和 4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>观察输入变量</td>
+<td>变量中保存的也是 3 和 4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>检查运算表达式</td>
+<td>发现误把加法写成乘法，<code>3 × 4</code> 正好是 12</td>
+</tr>
+<tr>
+<td>5</td>
+<td>只修正这个运算符</td>
+<td>修改目标明确，不同时改无关代码</td>
+</tr>
+<tr>
+<td>6</td>
+<td>保存并重新编译</td>
+<td>生成包含修正的新程序</td>
+</tr>
+<tr>
+<td>7</td>
+<td>再用 <code>3 4</code> 运行</td>
+<td>实际输出变为 7，与期望相同</td>
+</tr>
+<tr>
+<td>8</td>
+<td>再测 <code>0 5</code></td>
+<td>实际输出应为 5，补充检查边界情况</td>
+</tr>
+</tbody>
+</table>
+<p>这个过程比“看到错就同时改很多行”可靠。一次修改太多，即使结果碰巧正确，也很难知道真正起作用的是哪一处。</p>
+<h3 id="临时输出用完要清理">临时输出用完要清理</h3>
+<p>为了观察变量，可以暂时把变量值输出到运行窗口。但这些文字也会成为程序实际输出的一部分。</p>
+<p>如果题目只要求输出一个答案，提交时却多了一行“当前变量是……”，在线评测可能给出 WA。因此：</p>
+<ol>
+<li>调试时用临时输出收集证据；</li>
+<li>确认原因并修正；</li>
+<li>删除临时输出；</li>
+<li>重新编译；</li>
+<li>最后按题目格式再运行一次。</li>
+</ol>
+<p>注释的具体写法会在下一页“程序基本结构”中讲解。现在只需知道，调试信息不能混进最终答案。</p>
+<h2 id="第一次开发的完整闭环">第一次开发的完整闭环</h2>
+<p>第一次独立编写程序时，可以照着下面的顺序操作。它既包含成功路线，也包含出错后的返回路线。</p>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>要做什么</th>
+<th>通过什么证据继续</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>新建或打开正确的 <code>.cpp</code> 文件</td>
+<td>文件名、保存位置和后缀正确</td>
+</tr>
+<tr>
+<td>2</td>
+<td>在编辑区输入或修改代码</td>
+<td>修改内容与当前任务一致</td>
+</tr>
+<tr>
+<td>3</td>
+<td>保存源文件</td>
+<td>未保存标记消失，磁盘中是最新版本</td>
+</tr>
+<tr>
+<td>4</td>
+<td>执行编译</td>
+<td>明确看到本次编译成功或第一条错误</td>
+</tr>
+<tr>
+<td>5A</td>
+<td>如果编译失败，检查第一条错误及其附近</td>
+<td>修正后回到第 3 步</td>
+</tr>
+<tr>
+<td>5B</td>
+<td>如果编译成功，运行新程序</td>
+<td>运行窗口开始接收输入或显示输出</td>
+</tr>
+<tr>
+<td>6</td>
+<td>输入自己记录好的测试数据</td>
+<td>输入数量和顺序符合任务要求</td>
+</tr>
+<tr>
+<td>7</td>
+<td>比较期望输出与实际输出</td>
+<td>完全相同则继续测其他数据，不同则进入调试</td>
+</tr>
+<tr>
+<td>8</td>
+<td>根据错误类型收集证据并只修正明确问题</td>
+<td>修正后回到第 3 步，重新走完整闭环</td>
+</tr>
+</tbody>
+</table>
+<p>可以把它压缩成一句操作口令：</p>
+<blockquote>
+<p><strong>改完先保存，保存后编译，编译成功再运行；结果不对留证据，修正以后从保存重新开始。</strong></p>
+</blockquote>
+<h2 id="知识点速查表">知识点速查表</h2>
+<table>
+<thead>
+<tr>
+<th>看到的现象</th>
+<th>先判断什么</th>
+<th>下一步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编辑区有新内容，运行结果没变</td>
+<td>是否忘记保存</td>
+<td>保存后重新编译</td>
+</tr>
+<tr>
+<td>已保存，但仍是旧结果</td>
+<td>是否运行了旧可执行程序</td>
+<td>确认本次重新编译成功</td>
+</tr>
+<tr>
+<td>出现许多编译错误</td>
+<td>第一条错误是否引发后续错误</td>
+<td>查第一条错误、当前行和上一行</td>
+</tr>
+<tr>
+<td>能运行，但答案数值不对</td>
+<td>逻辑或边界是否错误</td>
+<td>手算期望值，记录变量变化</td>
+</tr>
+<tr>
+<td>数值正确却评测不通过</td>
+<td>输出格式是否精确匹配</td>
+<td>删除提示文字，检查空格和换行</td>
+</tr>
+<tr>
+<td>调试后本地正确，提交仍错</td>
+<td>临时输出是否还在</td>
+<td>清理后重新编译、复查</td>
+</tr>
+</tbody>
+</table>
+<h2 id="典型例题">典型例题</h2>
+<p>小灯完成了一个“输入两个整数，输出它们的和”的程序。他输入 <code>3 4</code>，程序成功编译并正常结束，但输出是 <code>12</code>。他应该怎样判断和处理？</p>
+<p>分析：</p>
+<ol>
+<li>编译已经成功，所以这不是编译错误。</li>
+<li>程序能正常结束，却没有得到题目要求的 7，首先判断为逻辑错误。</li>
+<li>记录输入 <code>3 4</code>、期望输出 7、实际输出 12。</li>
+<li>检查输入变量后，继续检查运算表达式；12 与 <code>3 × 4</code> 相符，很可能把加法误写成了乘法。</li>
+<li>修正后要保存、重新编译，并再次用 <code>3 4</code> 验证，不能直接运行旧程序。</li>
+<li>再用 <code>0 5</code> 等数据复查，确认结果仍符合题意。</li>
+</ol>
+<p>结论：判断错误类型只是起点，真正完成调试还要找到证据、修正原因并重新验证。</p>
+<h2 id="引导练习不记录进度">引导练习（不记录进度）</h2>
+<p>把程序输出从 <code>Hello</code> 改成 <code>Hi</code>，运行后仍看到 <code>Hello</code>。按顺序检查：编辑区是否已保存、本次编译是否成功、运行的可执行程序是否来自本次编译。每完成一步只记录一个结论，不同时随机改代码。</p>
+<p><strong>成功标准：</strong> 最终运行结果必须是 <code>Hi</code>，并能指出旧结果出现在哪一步。随后不看提示独立完成页末“整页综合测试”；提交后根据解析把每个错误归入编辑/保存、编译、运行、逻辑或格式阶段。</p>
+<h2 id="常见错误">常见错误</h2>
+<h3 id="把-ide-当成会自动完成一切的工具">把 IDE 当成会自动完成一切的工具</h3>
+<p><strong>错误做法：</strong> 代码改完后直接看运行结果，默认 IDE 已经保存和重新编译。</p>
+<p><strong>为什么错：</strong> 编辑、保存、编译、运行分别处理不同对象，具体 IDE 的自动行为也可能不同。</p>
+<p><strong>怎样检查：</strong> 主动执行保存和编译，并确认本次编译成功后再运行。</p>
+<h3 id="从最后一条编译错误开始修改">从最后一条编译错误开始修改</h3>
+<p><strong>错误做法：</strong> 看到十几条错误，从列表最下面逐条修改。</p>
+<p><strong>为什么错：</strong> 第一处结构错误可能让编译器误解后续代码，从而产生连带提示。</p>
+<p><strong>怎样检查：</strong> 从第一条错误开始，同时看错误行和上一行；修正后重新编译，观察其余提示是否消失。</p>
+<h3 id="只凭能运行判断程序正确">只凭“能运行”判断程序正确</h3>
+<p><strong>错误做法：</strong> 程序没有报错就立即提交。</p>
+<p><strong>为什么错：</strong> 逻辑错误和格式错误不会一定阻止程序运行。</p>
+<p><strong>怎样检查：</strong> 先手算期望输出，再用普通数据和边界数据比较实际结果。</p>
+<h3 id="随机同时改很多处">随机同时改很多处</h3>
+<p><strong>错误做法：</strong> 不记录输入和现象，一次修改多个变量、公式和输出语句。</p>
+<p><strong>为什么错：</strong> 即使结果变化，也无法确认哪一处是根因，还可能引入新错误。</p>
+<p><strong>怎样检查：</strong> 根据证据提出一个具体原因，一次只修正与它有关的位置，再用同一组数据复查。</p>
+<h3 id="忘记删除调试输出">忘记删除调试输出</h3>
+<p><strong>错误做法：</strong> 调试时输出了变量值，提交前没有清理。</p>
+<p><strong>为什么错：</strong> 在线评测会把调试文字也当作正式答案的一部分。</p>
+<p><strong>怎样检查：</strong> 清理临时输出，重新编译，再逐字核对最终输出格式。</p>
+<h2 id="关联学习">关联学习</h2>
+<p><a href="/gesp/level1/program-structure/">程序基本结构</a>会继续解释头文件、<code>main</code>、语句、分号、代码块和注释。学会这些结构后，你就能读懂编译器经常指出的具体位置。</p>
+<section aria-labelledby="related-knowledge-ide"><div><p class="astro-mkwt4ymd">继续查字典</p><h2 id="related-knowledge-ide" class="astro-mkwt4ymd">关联知识与资源</h2><div><section><h3 class="astro-mkwt4ymd">前置知识</h3><ul class="astro-mkwt4ymd"><li class="astro-mkwt4ymd"><a href="/gesp/level1/computer-basics/" class="astro-mkwt4ymd">计算机基础</a></li></ul></section>
+    </article>
 
     <div class="kp-nav-row">
       <a class="kp-nav" href="kp1.html">← 上一个：计算机基础知识</a>
